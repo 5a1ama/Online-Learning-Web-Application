@@ -1,12 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from 'react'
+import {Navbar} from './components/navbar/Navbar'
+import {Bgvid} from './components/bgvid/Bgvid'
 function App() {
   return (
-    <div className="App">
-      
-          Learn React
-        
+    <div >
+      <Navbar />
+      <Bgvid />
     </div>
   );
 }
