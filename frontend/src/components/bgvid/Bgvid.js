@@ -8,7 +8,7 @@ export {default as Bgvid} from './Bgvid';
 
 function Bgvid() {
   return (
-    <div className="Bgvid">
+    <div Name='home' className="Bgvid">
         <video autoPlay loop muted id='video'>
         <source src={video} type='video/mp4' />
         </video>

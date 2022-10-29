@@ -5,7 +5,7 @@ import {HiOutlineMenuAlt4} from 'react-icons/hi'
 import {AiOutlineClose} from 'react-icons/ai'
 import './navbar.css'
 import {FaFacebook,FaInstagram,FaTwitter,FaPinterest,FaYoutube} from 'react-icons/fa'
-
+import {Link} from 'react-scroll'
 export {default as Navbar} from './Navbar';
 
 function Navbar() {
@@ -17,11 +17,10 @@ function Navbar() {
             <h2>Learn.</h2>
         </div>
         <ul className="nav-menu">
-            <li>Home</li>
-            <li>Courses</li>
-            <li>Projects</li>
-            <li>Pricing</li>
-            <li>About us</li>
+            <Link to='home' smooth={true} duration="500"><li>Home</li></Link>
+            <Link to='courses' smooth={true} duration="500"><li>Courses</li></Link>
+            <Link to='' smooth={true} duration="500"><li>Calendar</li></Link>
+            <Link to='' smooth={true} duration="500"><li>About Us</li></Link>
         </ul>
         <div className="nav-icons">
             <BiSearch className="icon" style={{marginRight: '1rem'}}/>
@@ -33,11 +32,10 @@ function Navbar() {
 
             <div className={nav? 'mobile-menu active' : "mobile-menu"}>
                 <ul className="mobile-nav">
-                <li>Home</li>
-                <li>Courses</li>
-                <li>Projects</li>
-                <li>Pricing</li>
-                <li>About us</li>
+                <Link to='home' smooth={true} duration="500" ><li>Home</li></Link>
+            <Link to='courses' smooth={true} duration="500"><li>Courses</li></Link>
+            <Link to='' smooth={true} duration="500"><li>Calendar</li></Link>
+            <Link to='' smooth={true} duration="500"><li>About Us</li></Link>
                 </ul>
                 <div className='mobile-menu-bottom'> 
                     <div className="menu-icons">
