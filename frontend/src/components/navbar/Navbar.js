@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import {useNavigate} from 'react-router-dom';
 
 import {BiSearch} from 'react-icons/bi'
 import {BsPerson} from 'react-icons/bs'
@@ -18,6 +19,7 @@ function Navbar() {
     const handleNav = () => setNav(!nav)
     const [searchBar,setSearchBar] = useState(false)
     const handleSearchBar = () => setSearchBar(!searchBar)
+    const navigate = useNavigate();
 
   return (
     <div className={nav? 'navbar navbar-bg' : 'navbar'}>
@@ -32,7 +34,7 @@ function Navbar() {
         </ul>
         <div className="nav-icons">
             <BiSearch className="icon" onClick={handleSearchBar} style={{marginRight: '1rem'}}/>
-            <BsPerson className="icon" style={{marginRight: '1rem'}} />
+            <BsPerson className="icon" style={{marginRight: '1rem'}} onClick={()=> navigate('/courses')} />
         </div>
             <div className="hamburger" onClick={handleNav}>
                 {!nav ? (<HiOutlineMenuAlt4 className="icon" />):(<AiOutlineClose className="icon" style={{color:"#000"}} />)}
@@ -60,6 +62,8 @@ function Navbar() {
                 </div>
             </div>
             <div className={searchBar? 'SearchDiv' : 'nonSearchDiv'}>
+                <div className="searchBarForm">
+
             <form className="form">
             <div>
                 <input type="text" placeholder="Enter Course name"/>
@@ -69,6 +73,8 @@ function Navbar() {
         </div>
         </form>
                 </div>
+                </div>
+
     </div>
     
   )
