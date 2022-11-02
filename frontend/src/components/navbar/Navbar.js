@@ -1,9 +1,12 @@
 import React,{useState} from 'react'
+import {useNavigate} from 'react-router-dom';
 
 import {BiSearch} from 'react-icons/bi'
 import {BsPerson} from 'react-icons/bs'
 import {HiOutlineMenuAlt4} from 'react-icons/hi'
 import {AiOutlineClose} from 'react-icons/ai'
+import {AiOutlineSearch} from 'react-icons/ai'
+
 import {FaFacebook,FaInstagram,FaTwitter,FaPinterest,FaYoutube} from 'react-icons/fa'
 
 import './navbar.css'
@@ -14,6 +17,10 @@ export {default as Navbar} from './Navbar';
 function Navbar() {
     const [nav,setNav] = useState(false)
     const handleNav = () => setNav(!nav)
+    const [searchBar,setSearchBar] = useState(false)
+    const handleSearchBar = () => setSearchBar(!searchBar)
+    const navigate = useNavigate();
+
   return (
     <div className={nav? 'navbar navbar-bg' : 'navbar'}>
         <div className={nav? 'logo dark' : 'logo'}>
@@ -26,8 +33,8 @@ function Navbar() {
             <Link to='' smooth={true} duration="500"><li>About Us</li></Link>
         </ul>
         <div className="nav-icons">
-            <BiSearch className="icon" style={{marginRight: '1rem'}}/>
-            <BsPerson className="icon" style={{marginRight: '1rem'}} />
+            <BiSearch className="icon" onClick={handleSearchBar} style={{marginRight: '1rem'}}/>
+            <BsPerson className="icon" style={{marginRight: '1rem'}} onClick={()=> navigate('/courses')} />
         </div>
             <div className="hamburger" onClick={handleNav}>
                 {!nav ? (<HiOutlineMenuAlt4 className="icon" />):(<AiOutlineClose className="icon" style={{color:"#000"}} />)}
@@ -54,7 +61,22 @@ function Navbar() {
                     </div>
                 </div>
             </div>
+            <div className={searchBar? 'SearchDiv' : 'nonSearchDiv'}>
+                <div className="searchBarForm">
+
+            <form className="form">
+            <div>
+                <input type="text" placeholder="Enter Course name"/>
+            </div>
+        <div>
+            <button><AiOutlineSearch className='icon'/></button>
+        </div>
+        </form>
+                </div>
+                </div>
+
     </div>
+    
   )
 }
 

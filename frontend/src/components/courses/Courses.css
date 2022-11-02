@@ -1,5 +1,7 @@
+
+
 .heading{
-   color :rgb(0, 157, 255);
+   color :rgb(10, 138, 218);
    margin: 2rem 2rem ;
 }
 
@@ -9,9 +11,13 @@
     width :900px ;
     height: 150px ;
     color:aliceblue;
-    background-color:rgb(0, 157, 255);
+    /* background-color:linear-gradient(90deg, rgba(10, 138, 222, 1) 0%, rgba(216, 149, 255, 1) 100%); */
+    /* background-color:rgb(10, 138, 218); */
+    background:-webkit-linear-gradient(360deg, rgba(10, 138, 222, 1) 0%, rgb(195, 139, 227) 86%);
+
     display: flex; 
     justify-content: space-between;
+    border-radius : 20px ;
     
 }
 
