@@ -13,6 +13,16 @@ export const getAllCourses=async()=>{
   const j=await result.json();
   return j
 }
+export const getCoursesBySubjectRating=async (subject,rating)=>{
+  const result=await fetch(`http://localhost:8000/course/${rating}/${subject}`)
+  const j=await result.json();
+  return j
+}
+export const getCourseByPrice= async (price)=>{
+  const result=await fetch("http://localhost:8000/course/rating/s")
+  const j=await result.json();
+  return j
+}
 export const createUser=()=>{
   fetch(`${api}/user/addAdministrator`, {
     method: 'POST',

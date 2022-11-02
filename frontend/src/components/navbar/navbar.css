@@ -6,6 +6,10 @@
     align-items: center; 
     padding : 0 1rem;
     z-index: 2;
+    color: #fff;
+    position: fixed;
+    top:0px;
+    background-color: rgba(0, 132, 255, 100);
     position: fixed;
     color: #fff;
     background-color:rgb(10, 138, 218)

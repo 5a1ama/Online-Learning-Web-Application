@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Courses.css'
+import { getAllCourses } from '../../API/CourseAPI'
+import CourseDiv from '../CourseDiv'
 export {default as Courses} from './Courses'
 function Courses() {
   
