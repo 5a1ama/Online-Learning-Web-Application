@@ -1,4 +1,4 @@
-import React from 'react'
+import {React,useState} from 'react'
 import './bgvid.css'
 import {AiOutlineSearch} from 'react-icons/ai'
 
@@ -9,6 +9,7 @@ export {default as Bgvid} from './Bgvid';
 function Bgvid() {
   return (
     <div Name='home' className="Bgvid">
+     
         <video autoPlay loop muted id='video'>
         <source src={video} type='video/mp4' />
         </video>

@@ -6,10 +6,6 @@ import {getCoursesBySubjectRating} from "./API/CourseAPI"
 function App() {
   
   
-  const x=async()=>{
-    alert((await getCoursesBySubjectRating(".",5)).map((course)=>course.id))
-  }
-  x()
   return (
     <div >
       <Navbar />

@@ -9,7 +9,6 @@
     color: #fff;
     position: fixed;
     top:0px;
-    background-color: rgba(0, 132, 255, 100);
     position: fixed;
     color: #fff;
     background-color:rgb(10, 138, 218)
@@ -38,7 +37,49 @@ li {
     cursor: pointer;
     /* margin-left: 1rem;     */
 }
+.SearchDiv{
+    /* display:block;  */
+    position: absolute;
+    width:100%;
+    height:50vh;
+    display: flex;
+    flex-direction: column; 
+    background-color:rgb(5, 28, 42);
+    top:60px;
+    left:0;
+    transition: 0.3s
+}
+.nonSearchDiv{
+    position:absolute;
+    top:-200vh;
 
+}
+.form{
+    display: flex;
+    background-color: #ffffffcc;
+    color:#000;
+    justify-content:space-between;
+    align-items:center;
+    border: 1px solid #ccc ;
+    padding: 4px ; 
+    border-radius: 8px;
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto ;
+}
+
+.form input[type=text] {
+    background-color: transparent;
+    border:transparent;
+    border:none ;
+    width: 500px ;
+    height:50px;
+    font-size:1.2rem ;
+    font-family: 'Poppins' sans-serif;
+}
+.form input[type=text]:focus{
+    outline: none;
+}
 @media screen and (max-width: 940px){
     .mobile-menu{
         display: flex;
