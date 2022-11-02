@@ -61,6 +61,9 @@ function Navbar() {
             </div>
             <div className={searchBar? 'SearchDiv' : 'nonSearchDiv'}>
             <form className="form">
+              <button className="filterButton">
+                Filter
+              </button>
             <div>
                 <input type="text" placeholder="Enter Course name"/>
             </div>

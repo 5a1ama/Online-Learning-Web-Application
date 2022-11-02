@@ -54,6 +54,13 @@ li {
     top:-200vh;
 
 }
+.filterButton{
+    position:absolute;
+    font-size: 1.5rem;
+    cursor: pointer;
+    left: 1115px;
+
+}
 .form{
     display: flex;
     background-color: #ffffffcc;
