@@ -2,6 +2,7 @@ import React from 'react'
 import './Courses.css'
 export {default as Courses} from './Courses'
 function Courses() {
+  
   const Newcourse = (props) => (
     <>
      <div className="newCourse">

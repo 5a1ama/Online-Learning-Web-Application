@@ -1,5 +1,5 @@
 .heading{
-   color :rgb(0, 157, 255);
+   color :rgb(10, 138, 218);
    margin: 2rem 2rem ;
 }
 
@@ -9,7 +9,7 @@
     width :900px ;
     height: 150px ;
     color:aliceblue;
-    background-color:rgb(0, 157, 255);
+    background-color:rgb(10, 138, 218);
     display: flex; 
     justify-content: space-between;
     
