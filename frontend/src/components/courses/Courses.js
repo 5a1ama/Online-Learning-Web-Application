@@ -4,16 +4,35 @@ import { getAllCourses } from '../../API/CourseAPI'
 import CourseDiv from '../CourseDiv'
 export {default as Courses} from './Courses'
 function Courses() {
-  const [course,setCourse]=useState([])
-  const initial =async()=>{
-    setCourse(await getAllCourses())
-  }
-  initial();
-  
+  const Newcourse = (props) => (
+    <>
+     <div className="newCourse">
+      <h2>{props.course.title}</h2>
+      <h2 className='price'>{props.course.price}</h2>
+    </div>
+    </>
+  );
   return (
-    <div name='courses'>
-        Courses
-        {course.map((course)=><CourseDiv info={course}/>)}
+    <div name="courses">
+
+      <h1 className="heading">My Courses</h1>
+
+    <Newcourse course={{title:"CSEN103" , price:"100 $"}}/>
+
+    <div className="newCourse">
+      <h2>CSEN 102</h2>
+      <h2 className='price'>100$</h2>
+    </div>
+
+     <div className="newCourse">
+      <h2>CSEN 102</h2>
+      <h2 className='price'>100$</h2>
+    </div> 
+    <div className="newCourse">
+      <h2>CSEN 102</h2>
+      <h2 className='price'>100$</h2>
+    </div>
+
     </div>
   )
 }
