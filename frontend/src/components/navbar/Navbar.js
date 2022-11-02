@@ -19,7 +19,7 @@ function Navbar() {
         <div className={nav? 'logo dark' : 'logo'}>
             <h2>Learn.</h2>
         </div>
-        <ul className="nav-menu">
+        <ul className="nav-menu">            
             <Link to='home' smooth={true} duration="500"><li>Home</li></Link>
             <Link to='courses' smooth={true} duration="500"><li>Courses</li></Link>
             <Link to='' smooth={true} duration="500"><li>Calendar</li></Link>

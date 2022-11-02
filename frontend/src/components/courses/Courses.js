@@ -5,8 +5,10 @@ function Courses() {
   return (
     <div name="courses">
       <h1 className="heading">My Courses</h1>
+
     <div classname="newCourse">
       <h2>CSEN 102</h2>
+      <h3>100$</h3>
     </div>
     </div>
   )
