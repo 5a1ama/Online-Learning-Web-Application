@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import './Courses.css'
 import { getAllCourses } from '../../API/CourseAPI'
-import CourseDiv from '../CourseDiv'
 export {default as Courses} from './Courses'
 function Courses() {
-  
+  const [courses,setCourses] = useState([]);
+  const getCourses = async () =>{
+    setCourses (await getAllCourses());
+  }
   const Newcourse = (props) => (
     <>
      <div className="newCourse">
@@ -13,27 +15,13 @@ function Courses() {
     </div>
     </>
   );
+  getCourses();
   return (
     <div name="courses">
 
       <h1 className="heading">My Courses</h1>
-
-    <Newcourse course={{title:"CSEN103" , price:"100 $"}}/>
-
-    <div className="newCourse">
-      <h2>CSEN 102</h2>
-      <h2 className='price'>100$</h2>
-    </div>
-
-     <div className="newCourse">
-      <h2>CSEN 102</h2>
-      <h2 className='price'>100$</h2>
-    </div> 
-    <div className="newCourse">
-      <h2>CSEN 102</h2>
-      <h2 className='price'>100$</h2>
-    </div>
-
+    {courses.map((course) => <Newcourse course={course}/>)}
+    
     </div>
   )
 }
