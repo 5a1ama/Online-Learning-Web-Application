@@ -5,7 +5,7 @@ export {default as Courses} from './Courses'
 function Courses() {
   const [courses,setCourses] = useState([]);
   const getCourses = async () =>{
-    setCourses (await getAllCourses());
+    setCourses ((await getAllCourses()).slice(1,4));
   }
   const Newcourse = (props) => (
     <>
@@ -19,7 +19,7 @@ function Courses() {
   return (
     <div name="courses">
 
-      <h1 className="heading">My Courses</h1>
+      <h1 className="heading">Popular Courses</h1>
     {courses.map((course) => <Newcourse course={course}/>)}
     
     </div>

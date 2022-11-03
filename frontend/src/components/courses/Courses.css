@@ -13,7 +13,7 @@
     color:aliceblue;
     /* background-color:linear-gradient(90deg, rgba(10, 138, 222, 1) 0%, rgba(216, 149, 255, 1) 100%); */
     /* background-color:rgb(10, 138, 218); */
-    background:-webkit-linear-gradient(360deg, rgba(10, 138, 222, 1) 0%, rgb(195, 139, 227) 86%);
+    background: linear-gradient(90deg, rgba(10,138,218,1) 0%, rgb(182, 109, 250) 100%);
 
     display: flex; 
     justify-content: space-between;
