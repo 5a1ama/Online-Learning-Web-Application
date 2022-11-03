@@ -57,16 +57,6 @@ li {
     width:100%;
 
 }
-.searchBarForm{
-    display:flex;
-    flex-direction: column; 
-    width:1500px;
-    position: absolute;
-    z-index: 2;
-    justify-content: space-between;
-    align-self: center;
-    top:50%;
-}
 .form{
     display: flex;
     background-color: #ffffffcc;
