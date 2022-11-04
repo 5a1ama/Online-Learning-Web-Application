@@ -6,6 +6,8 @@ import {Courses} from './components/courses/Courses'
 import { BiLogIn } from 'react-icons/bi';
 import { InstructorCourse } from './components/Instructor/InstructorCourses';
 import {Instructor} from './components/Instructor/Instructor';
+import { InstructorCourse } from './components/Instructor/InstructorCourses';
+import {Instructor} from './components/Instructor/Instructor';
 
 export default function App() {
   const navigate = useNavigate();
@@ -25,8 +27,8 @@ export default function App() {
 }
 
 function Home() {
-  return <div>
-    <Navbar items={["Home","About","Caleneder"]} select="Home" nav={["","",""]} scroll={["home","courses"]}  />
+  return <div className="Home">
+    <Navbar items={["Home","About","Caleneder"]} select="Home" nav={["","",""]} scroll={["Home","Courses","ss"]}  />
   <Bgvid />
   <Courses />
     </div>
