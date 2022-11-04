@@ -3,6 +3,8 @@ import {Navbar} from './components/navbar/Navbar'
 import {Bgvid} from './components/bgvid/Bgvid'
 import {Courses} from './components/courses/Courses'
 import { BiLogIn } from 'react-icons/bi';
+import { InstructorCourse } from './components/Instructor/InstructorCourses';
+import {Instructor} from './components/Instructor/Instructor';
 
 export default function App() {
   const navigate = useNavigate();
@@ -14,8 +16,9 @@ export default function App() {
         <Routes>
           <Route path="/courses" element={<Navbar />} />
           <Route path="/" element={<Home />} />
+          <Route path="/instructor" element={<Instructor/>}/>
         </Routes>
-      </div>
+      </div> 
     </div>
   );
 }

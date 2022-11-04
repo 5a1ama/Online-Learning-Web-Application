@@ -33,7 +33,7 @@ function Navbar(props) {
         <ul className="nav-menu">      
         {props.items.map((item)=>{
             if(item==props.select)
-             return <Link to='home' style={{color:"red"}} smooth={true} duration="500"><li>{item}</li></Link>
+             return <Link to='home' style={{color:"blue"}} smooth={true} duration="500"><li>{item}</li></Link>
             else
              return <Link to='home' smooth={true} duration="500"><li>{item}</li></Link>
 
