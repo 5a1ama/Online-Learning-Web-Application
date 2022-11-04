@@ -33,11 +33,11 @@ function Navbar(props) {
             <h2>Learn.</h2>
         </div>
         <ul className="nav-menu">      
-        {props.items.map((item,names)=>{
+        {props.items.map((item,i)=>{
             if(item==props.select)
-             return <Link to={names} style={{color:"Blue"}} smooth={true} duration="500"><li>{item}</li></Link>
+             return <Link to='home' style={{color:"red"}} smooth={true} duration="500"><li>{item}</li></Link>
             else
-             return <Link to={names} smooth={true} duration="500"><li>{item}</li></Link>
+             return <Link to={"/"+props.nav[i]} onClick={()=>navigate(props.nav[i])} smooth={true} duration="500"><li>{item}</li></Link>
 
         })}      
             {/* <Link to='home' smooth={true} duration="500"><li>Home</li></Link>
