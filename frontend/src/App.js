@@ -12,7 +12,7 @@ export default function App() {
     <div>
       <div>
         <Routes>
-          <Route path="/courses" element={<Navbar items={["Home"]} select="Home" nav={["/home"]}/>} />
+          <Route path="/courses" element={<Navbar items={["Home"]} select="Home" scroll={["home"]} nav={["/home"]}/>} />
           <Route path="/" element={<Home />} />
         </Routes>
       </div>
