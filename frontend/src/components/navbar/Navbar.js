@@ -26,14 +26,16 @@ function Navbar(props) {
     const navigate = useNavigate();
 
   return (
+    
     <div className={nav? 'navbar navbar-bg' : 'navbar'}>
+    
         <div className={nav? 'logo dark' : 'logo'}>
             <h2>Learn.</h2>
         </div>
         <ul className="nav-menu">      
         {props.items.map((item,i)=>{
             if(item==props.select)
-             return <Link to={"/"+props.nav[i]} onClick={()=>navigate(props.nav[i])} style={{color:"red"}} smooth={true} duration="500"><li>{item}</li></Link>
+             return <Link to='home' style={{color:"red"}} smooth={true} duration="500"><li>{item}</li></Link>
             else
              return <Link to={"/"+props.nav[i]} onClick={()=>navigate(props.nav[i])} smooth={true} duration="500"><li>{item}</li></Link>
 
@@ -54,9 +56,9 @@ function Navbar(props) {
             <div className={nav? 'mobile-menu active' : "mobile-menu"}>
                 <ul className="mobile-nav">
                 <Link to='home' smooth={true} duration="500" ><li>Home</li></Link>
-            <Link to='courses' smooth={true} duration="500"><li>Courses</li></Link>
-            <Link to='' smooth={true} duration="500"><li>Calendar</li></Link>
-            <Link to='' smooth={true} duration="500"><li>About Us</li></Link>
+                 <Link to='courses' smooth={true} duration="500"><li>Courses</li></Link>
+                <Link to='' smooth={true} duration="500"><li>Calendar</li></Link>
+                <Link to='' smooth={true} duration="500"><li>About Us</li></Link>
                 </ul>
                 <div className='mobile-menu-bottom'> 
                     <div className="menu-icons">
