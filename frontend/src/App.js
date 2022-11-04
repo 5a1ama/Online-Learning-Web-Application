@@ -2,6 +2,7 @@ import {Routes, Route, useNavigate} from 'react-router-dom';
 import {Navbar} from './components/navbar/Navbar'
 import {Bgvid} from './components/bgvid/Bgvid'
 import {Courses} from './components/courses/Courses'
+import {AllCourses} from './components/courses/AllCourses'
 import { BiLogIn } from 'react-icons/bi';
 
 export default function App() {
@@ -12,7 +13,7 @@ export default function App() {
     <div>
       <div>
         <Routes>
-          <Route path="/courses" element={<Navbar />} />
+          <Route path="/courses" element={<AllCourses />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </div>
@@ -22,7 +23,7 @@ export default function App() {
 
 function Home() {
   return <div>
-    <Navbar items={["Home","Courses","About Us"]}  />
+    <Navbar items={["Home","Courses","About Us"]} names={["Home","Courses","About"]} />
   <Bgvid />
   <Courses />
     </div>
