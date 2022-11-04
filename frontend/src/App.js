@@ -12,7 +12,7 @@ export default function App() {
     <div>
       <div>
         <Routes>
-          <Route path="/courses" element={<Navbar items={["Home"]} select="Home" scroll={["home"]} nav={["/home"]}/>} />
+          <Route path="/courses" element={<Navbar items={["Home"]} select="Home" scroll={["home"]} nav={[""]}/>} />
           <Route path="/" element={<Home />} />
         </Routes>
       </div>
@@ -22,7 +22,7 @@ export default function App() {
 
 function Home() {
   return <div>
-    <Navbar items={["Home","About","Caleneder"]} select="Home" nav={["/home","/courses"]} />
+    <Navbar items={["Home","About","Caleneder"]} select="Home" nav={["","",""]} scroll={["courses",""]}  />
   <Bgvid />
   <Courses />
     </div>
