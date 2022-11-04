@@ -6,7 +6,7 @@ export function InstructorHome(){
 <div className = "divcenter">
 <div>
 
-        <Navbar items = {["HOME","My Courses"]} select = "HOME" nav={["/home","/courses"]} />
+        <Navbar items = {["HOME","My Courses"]} select = "HOME" />
         </div>
 </div>
     );

@@ -1,5 +1,6 @@
 .divcenter{
-    background-color: aliceblue;
+   /* background-image: url("C:\Users\Peter\Downloads\instBackGr.jpg")} */
+    background-position: 100%;
     width: 100%;
     height:90%;
     position: absolute;
@@ -8,7 +9,6 @@
 
 .FilterButton{
     position: absolute;
-
-    top : 100%;
+    top : 50%;
     left: 70%;
 }
