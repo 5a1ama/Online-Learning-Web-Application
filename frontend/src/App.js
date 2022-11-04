@@ -22,7 +22,7 @@ export default function App() {
 
 function Home() {
   return <div>
-    <Navbar items={["Home","About","Caleneder"]} select="Home" />
+    <Navbar items={["Home","Courses","About Us"]}  />
   <Bgvid />
   <Courses />
     </div>
