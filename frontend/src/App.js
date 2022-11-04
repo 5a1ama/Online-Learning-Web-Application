@@ -22,8 +22,8 @@ export default function App() {
 }
 
 function Home() {
-  return <div>
-    <Navbar items={["Home","About","Caleneder"]} select="Home" nav={["","",""]} scroll={["courses",""]}  />
+  return <div className="Home">
+    <Navbar items={["Home","About","Caleneder"]} select="Home" nav={["","",""]} scroll={["Home","Courses","ss"]}  />
   <Bgvid />
   <Courses />
     </div>

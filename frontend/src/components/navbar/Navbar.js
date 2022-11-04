@@ -36,9 +36,9 @@ function Navbar(props) {
         {props.items.map((item,i)=>{
             if(item==props.select){
                 if(props.nav[i]!="")
-                return <Link to={props.scroll[i]} style={{color:"red"}} onClick={()=>navigate(props.nav[i])} smooth={true} duration="500"><li>{item}</li></Link>
+                return <Link to={props.scroll[i]} style={{color:"blue"}} onClick={()=>navigate(props.nav[i])} smooth={true} duration="500"><li>{item}</li></Link>
                 else
-                return <Link to={props.scroll[i]} style={{color:"red"}}  smooth={true} duration="500"><li>{item}</li></Link>
+                return <Link to={props.scroll[i]} style={{color:"blue"}}  smooth={true} duration="500"><li>{item}</li></Link>
 
             }
             else{
