@@ -9,12 +9,12 @@ import {AiOutlineSearch} from 'react-icons/ai'
 
 import {FaFacebook,FaInstagram,FaTwitter,FaPinterest,FaYoutube} from 'react-icons/fa'
 
-import './navbar.css'
+import './NavBarInstructor.css'
 
 import {Link} from 'react-scroll'
-export {default as Navbar} from './Navbar';
+export {default as NavBarInstructor} from './NavBarInstructor';
 
-function Navbar(props) {
+function NavBarInstructor() {
     const [nav,setNav] = useState(false)
     const handleNav = () => setNav(!nav)
     const [searchBar,setSearchBar] = useState(false)
@@ -26,18 +26,11 @@ function Navbar(props) {
         <div className={nav? 'logo dark' : 'logo'}>
             <h2>Learn.</h2>
         </div>
-        <ul className="nav-menu">      
-        {props.items.map((item)=>{
-            if(item==props.select)
-             return <Link to='home' style={{color:"red"}} smooth={true} duration="500"><li>{item}</li></Link>
-            else
-             return <Link to='home' smooth={true} duration="500"><li>{item}</li></Link>
-
-        })}      
-            {/* <Link to='home' smooth={true} duration="500"><li>Home</li></Link>
-            <Link to='courses' smooth={true} duration="500"><li>Courses</li></Link>
-            <Link to='' smooth={true} duration="500"><li>Calendar</li></Link>
-            <Link to='' smooth={true} duration="500"><li>About Us</li></Link> */}
+        <ul className="nav-menu">            
+            <Link to='home' smooth={true} duration="500"><li>Home</li></Link>
+            <Link to='instCourses' smooth={true} duration="500" onClick = {()=> navigate("/InstructorCourse")}><li>My Courses</li></Link>
+            {/* <Link to='' smooth={true} duration="500"><li>Calendar</li></Link> */}
+            <Link to='' smooth={true} duration="500"><li>About Us</li></Link>
         </ul>
         <div className="nav-icons">
             <BiSearch className="icon" onClick={handleSearchBar} style={{marginRight: '1rem'}}/>
@@ -50,8 +43,8 @@ function Navbar(props) {
             <div className={nav? 'mobile-menu active' : "mobile-menu"}>
                 <ul className="mobile-nav">
                 <Link to='home' smooth={true} duration="500" ><li>Home</li></Link>
-            <Link to='courses' smooth={true} duration="500"><li>Courses</li></Link>
-            <Link to='' smooth={true} duration="500"><li>Calendar</li></Link>
+            <Link to='instCourses' smooth={true} duration="500"><li>Courses</li></Link>
+            {/* <Link to='' smooth={true} duration="500"><li>Calendar</li></Link> */}
             <Link to='' smooth={true} duration="500"><li>About Us</li></Link>
                 </ul>
                 <div className='mobile-menu-bottom'> 
@@ -84,10 +77,11 @@ function Navbar(props) {
         </form>
                 </div>
                 </div>
+              
 
     </div>
     
   )
 }
 
-export default Navbar
+export default NavBarInstructor

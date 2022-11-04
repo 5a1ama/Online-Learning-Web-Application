@@ -1,0 +1,158 @@
+.navbar{
+    width: 100%;
+    height: 60px; 
+    display: flex; 
+    justify-content: space-between;
+    align-items: center; 
+    padding : 0 1rem;
+    z-index: 2;
+    color: #fff;
+    position: fixed;
+    top:0px;
+    color: #fff;
+    background-color:rgb(10, 138, 218)
+}
+.navbar-bg{
+    background-color:#f5f5f5;
+}
+.nav-menu{
+    display: flex;
+}
+li {
+    padding : 0 2rem;
+    font-size:large;
+    cursor: pointer;
+}
+.hamburger{
+    display: none; 
+    /*padding 1rem; */
+
+}
+.mobile-menu{
+    display: none;
+}
+.icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    /* margin-left: 1rem;     */
+}
+.SearchDiv{
+    /* display:block;  */
+    position: absolute;
+    width:100%;
+    height:50vh;
+    display: flex;
+    flex-direction: column; 
+    background-color:rgb(5, 28, 42);
+    top:60px;
+    left:0;
+    transition: 0.5s
+}
+.nonSearchDiv{
+    position:absolute;
+    top:-200vh;
+    width:100%;
+
+}
+.form{
+    display: flex;
+    background-color: #ffffffcc;
+    color:#000;
+    justify-content:space-between;
+    align-items:center;
+    border: 1px solid #ccc ;
+    padding: 4px ; 
+    border-radius: 8px;
+    max-width: 1500px;
+    margin: 0 auto ;
+}
+
+.form input[type=text] {
+    background-color: transparent;
+    border:transparent;
+    border:none ;
+    width: 1200px ;
+    height:50px;
+    font-size:1.2rem ;
+    font-family: 'Poppins' sans-serif;
+}
+.form input[type=text]:focus{
+    outline: none;
+}
+@media screen and (max-width: 940px){
+    .mobile-menu{
+        display: flex;
+        flex-direction: column;
+        width:100%;
+        top:-100vh;
+        left: 0;
+        position: absolute;
+        justify-content: space-between;
+        /* color: rgba(255,255,255,.95); */
+        background-color: #f5f5f5;
+        transition: 0.3s;
+        color:#000;
+        
+    }
+    .dark{
+        color:#000;
+    }
+
+    .active{
+        top:60px ; 
+    }
+    .mobile-menu li{
+        padding: 1.2rem 1rem;
+        margin : 0 1rem ;
+        border-bottom: 1px solid #ccc;
+
+    }
+    .mobile-nav{
+        margin : 1rem 0 ; 
+    }
+    .mobile-menu-bottom {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+    }
+    .social-icons{
+        display: flex;
+        justify-content: space-around;
+        margin: 2rem 0 ;
+    }
+    .social-icons .icon:hover{
+        transform: scale(1.5);
+        transition: 0.3s;
+    }
+    .mobile-menu button{
+        margin: 1rem;
+        width: 90%;
+    }
+    .nav-menu{
+        display: none;
+    }
+    .nav-icons{
+        display: none;
+    }
+    .hamburger{
+        display:block; 
+    }
+    .SearchDiv{
+        /* display:block;  */
+        position: absolute;
+        width:100%;
+        height:50vh;
+        display: flex;
+        flex-direction: column; 
+        background-color:rgb(5, 28, 42);
+        top:60px;
+        left:0;
+        transition: 0.5s
+    }
+    .nonSearchDiv{
+        position:absolute;
+        top:-200vh;
+        width:100%;
+    
+    }
+}

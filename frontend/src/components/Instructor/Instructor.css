@@ -1,0 +1,14 @@
+.divcenter{
+    background-color: aliceblue;
+    width: 100%;
+    height:90%;
+    position: absolute;
+    top:9%;
+}
+
+.FilterButton{
+    position: absolute;
+
+    top : 100%;
+    left: 70%;
+}
