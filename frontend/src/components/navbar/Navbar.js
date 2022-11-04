@@ -17,6 +17,10 @@ export {default as Navbar} from './Navbar';
 function Navbar(props) {
     const [nav,setNav] = useState(false)
     const handleNav = () => setNav(!nav)
+
+    const [filter,setFilter] = useState(false)
+    const handleFilter = () => setFilter(!filter)
+
     const [searchBar,setSearchBar] = useState(false)
     const handleSearchBar = () => setSearchBar(!searchBar)
     const navigate = useNavigate();
@@ -41,7 +45,7 @@ function Navbar(props) {
         </ul>
         <div className="nav-icons">
             <BiSearch className="icon" onClick={handleSearchBar} style={{marginRight: '1rem'}}/>
-            <BsPerson className="icon" style={{marginRight: '1rem'}} onClick={()=> navigate('/courses')} />
+            <BsPerson className="icon" style={{marginRight: '1rem'}}  />
         </div>
             <div className="hamburger" onClick={handleNav}>
                 {!nav ? (<HiOutlineMenuAlt4 className="icon" />):(<AiOutlineClose className="icon" style={{color:"#000"}} />)}
@@ -68,13 +72,23 @@ function Navbar(props) {
                     </div>
                 </div>
             </div>
+
             <div className={searchBar? 'SearchDiv' : 'nonSearchDiv'}>
+                
                 <div className="searchBarForm">
 
             <form className="form">
-              <button className="filterButton">
+              <button className="filterButton" onClick={handleFilter}>
                 Filter
               </button>
+              <div className={filter? "Filters" : "NoFilters"}>
+
+              <input type="checkbox" text="by subject"/>
+              <input type="checkbox" text="by rating"/>
+              <input type="checkbox" text="by price"/>
+
+              </div>
+              
             <div>
                 <input type="text" placeholder="Enter Course name"/>
             </div>

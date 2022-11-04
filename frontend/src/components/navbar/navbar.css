@@ -10,7 +10,10 @@
     position: fixed;
     top:0px;
     color: #fff;
-    background-color:rgb(10, 138, 218)
+    background-color:rgb(10, 138, 218);
+    box-shadow:0px 6px 10px rgb(0,0,0,0.3);
+    
+    
 }
 .navbar-bg{
     background-color:#f5f5f5;
@@ -47,12 +50,34 @@ li {
     top:60px;
     left:0;
     transition: 0.5s
+    
 }
 .nonSearchDiv{
     position:absolute;
     top:-200vh;
     width:100%;
 
+}
+.searchBarForm{
+    position:absolute;
+    top:30%;
+    left:10%;
+}
+
+.Filters{
+    display: flex;
+    flex-direction: row;
+    background-color:white;
+    width:500px;
+    height :100px;
+    top:60%;
+    position:absolute;
+    /* transition: 0.5s; */
+}
+.NoFilters{
+    position:absolute;
+    top:-200vh;
+    
 }
 .form{
     display: flex;

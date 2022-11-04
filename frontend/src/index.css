@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Condensed:wght@300;400;700&display=swap');
 
 :root {
-  --primary-dark : #5651e5;
-  --primary-light: #709dff;
+  --primary-dark : rgb(6, 60, 78);
+  --primary-light: rgb(10,138,218);
 }
 *{
   box-sizing: border-box;
@@ -36,13 +36,19 @@ h2 {
 }
 
 button {
-  background-image: linear-gradient(45deg,var(--primary-dark) 0%, var(--primary-light) 100%);
-  border: 1px solid var(--primary-dark);
+  /* background-image: linear-gradient(90deg,var(--primary-dark) 0%, var(--primary-light) 100%); */
+  background-color: var(--primary-light);
+  border: 0px solid var(--primary-dark);
   color: #fff ;
   padding : .7rem 1.5rem; 
-  border-radius: 8px;
+  border-radius: 20px;
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
+}
+button:hover{
+  background-color: rgb(38, 159, 234);
+  transition:0.3s;
+
 }
 
 
