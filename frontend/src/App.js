@@ -14,7 +14,7 @@ export default function App() {
     <div>
       <div>
         <Routes>
-          <Route path="/courses" element={<Navbar />} />
+          <Route path="/courses" element={<Navbar items={["Home"]} select="Home" scroll={["home"]} nav={["/home"]}/>} />
           <Route path="/" element={<Home />} />
           <Route path="/instructor" element={<Instructor/>}/>
         </Routes>
@@ -25,7 +25,7 @@ export default function App() {
 
 function Home() {
   return <div>
-    <Navbar items={["Home","About","Caleneder"]} select="Home" />
+    <Navbar items={["Home","About","Caleneder"]} select="Home" nav={["/home","/courses"]} />
   <Bgvid />
   <Courses />
     </div>
