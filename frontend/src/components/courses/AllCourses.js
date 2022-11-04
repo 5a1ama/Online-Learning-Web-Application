@@ -1,10 +1,12 @@
 import React from 'react'
+import Navbar from "../navbar/Navbar";
 export {default as AllCourses} from './AllCourses'
 function AllCourses() {
   return (
     <div>AllCourses
-        sadsadas
-        sadsadassda
+            <div>
+                <Navbar items = {["Home","My courses"]} />
+            </div>
 
     </div>
   )
