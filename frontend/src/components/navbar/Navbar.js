@@ -30,7 +30,10 @@ function Navbar(props) {
     <div className={nav? 'navbar navbar-bg' : 'navbar'}>
     
         <div className={nav? 'logo dark' : 'logo'}>
-            <h2>Learn.</h2>
+
+            <a href="/">
+                    <h2>Learn.</h2>
+                </a>
         </div>
         <ul className="nav-menu">      
         {props.items.map((item,i)=>{
