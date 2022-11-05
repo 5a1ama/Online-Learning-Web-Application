@@ -21,7 +21,7 @@ function Bgvid() {
             <div>
                 <input type="text" placeholder="Enter Course name"/>
             </div>
-        <div>
+        <div className="SearchButton">
             <button><AiOutlineSearch className='icon'/></button>
         </div>
         </form>
