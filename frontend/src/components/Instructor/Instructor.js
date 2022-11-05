@@ -1,8 +1,8 @@
 import Navbar from "../navbar/Navbar";
-import NavBarInstructor from './NavBarInstructor/NavBarInstructor';
+
 import "./Instructor.css"
-import { InstructorCourse } from "./InstructorCourses";
 import {InstructorHome} from "./InstructorHome"
+
 export function Instructor(){
     const Newcourse = (props) => (
         <>
@@ -14,10 +14,8 @@ export function Instructor(){
       );
     return(
     <div>
-        <div>
+        <h2></h2>
             <InstructorHome/>
-        </div>
-        
     </div>
     )
 }
