@@ -23,4 +23,3 @@ router.get("/myCourses-subject/:subject",async function(req,res){
 
 
 })
-console.log(123)
