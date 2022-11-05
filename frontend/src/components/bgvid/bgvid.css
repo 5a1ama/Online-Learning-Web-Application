@@ -5,6 +5,8 @@
     height: 100%;
     top: 0;
     left: 0;
+    margin: 0px 0px ;
+
 }
 
 #video {
@@ -12,6 +14,8 @@
     height: 100%;
     object-fit: cover;
     z-index: -1;
+    margin: 0px 0px ;
+
 }
 
 .Bgvid .content{
@@ -23,8 +27,8 @@
     flex-direction: column;
     text-align: center;
     width: 60%;
-    left: 20%;
-    margin: 0px 0px ;
+    left: 19%;
+    margin: 0rem 0rem ;
 }
 .Bgvid {
     width: 100%;
@@ -42,14 +46,15 @@
     border: 1px solid #ccc ;
     padding: 4px ; 
     border-radius: 8px;
-    max-width: 300px;
+    max-width: 500px;
+    width: 95%;
     margin: 0px 0px ;
 }
 .form input[type=text] {
     background-color: transparent;
     border:transparent;
     border:none ;
-    width: 100px ;
+    width: 500px ;
     height:50px;
     font-size:1.2rem ;
     color:#fff;

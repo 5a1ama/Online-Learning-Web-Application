@@ -18,6 +18,9 @@
 .navbar-bg{
     background-color:#f5f5f5;
 }
+a{
+    color:white;
+}
 .nav-menu{
     display: flex;
 }
