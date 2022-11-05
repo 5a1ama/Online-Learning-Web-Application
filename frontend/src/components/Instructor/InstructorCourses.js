@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from "../navbar/Navbar";
-import "./Courses.css";
+import "./InstCourses.css";
 import {useNavigate} from 'react-router-dom';
 import { getAllCourses } from '../../API/CourseAPI'
 import starImg from "../../assets/goldStar.png"
@@ -69,7 +69,7 @@ export function InstructorCourses(){
             <button className="AddButton" onClick={()=> navigate('/addCourse')}>
                  Add Course
             </button>
-            <div className="buttonCourse">
+            <div className="Inst-buttonCourse">
     <button  className="AllCourses" onClick={()=> navigate('/courses')}>All Courses‎ ‎ ‎  ‎   ‎   {">>>"} </button>
     </div>
                 </div>

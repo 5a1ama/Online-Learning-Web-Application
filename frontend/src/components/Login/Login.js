@@ -10,7 +10,9 @@ function Login() {
 div className = "login" >
 
         <div className = { 'logo' } >
-             <h1 color = "white" > Learn. </h1> 
+            <a href="/">
+            <h1 color = "white" > Learn. </h1> 
+            </a>
         </div>
          <div className = "LoginBox" >
              <Link> <h2> Login Here </h2> </Link>

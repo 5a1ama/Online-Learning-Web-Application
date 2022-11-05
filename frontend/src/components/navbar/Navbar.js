@@ -60,7 +60,7 @@ function Navbar(props) {
         </ul>
         <div className="nav-icons">
             <BiSearch className="icon" onClick={handleSearchBar} style={{marginRight: '1rem'}}/>
-            <BsPerson className="icon" style={{marginRight: '1rem'}}  />
+            <BsPerson className="icon" onClick={()=> navigate('/login')} style={{marginRight: '1rem'}}  />
         </div>
             <div className="hamburger" onClick={handleNav}>
                 {!nav ? (<HiOutlineMenuAlt4 className="icon" />):(<AiOutlineClose className="icon" style={{color:"#000"}} />)}
