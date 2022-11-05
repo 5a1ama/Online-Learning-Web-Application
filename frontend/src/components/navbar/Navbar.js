@@ -48,7 +48,7 @@ function Navbar(props) {
                 if(props.nav[i]!="")
                 return <Link to={props.scroll[i]} onClick={()=>navigate(props.nav[i])} smooth={true} duration="500"><li>{item}</li></Link>
                 else
-                return <Link to={props.scroll[i]}  smooth={true} duration="500"><li>{item}</li></Link>
+                return <Link to={props.scroll[i]} smooth={true} duration="500"><li>{item}</li></Link>
 
             }
 
