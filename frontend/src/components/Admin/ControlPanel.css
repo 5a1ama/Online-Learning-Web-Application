@@ -21,11 +21,31 @@ justify-content: space-between;
 }
 .ControlPanel_Func{
     width :20% ;
-    height:50vh ;
+    height:40vh ;
     background-color: white;
     box-shadow:0px 6px 10px rgb(0,0,0,0.3);
     border-radius: 15px;
     margin: 2rem 2rem;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    align-content: center;
+}
+.ControlPanel_Func h3{
+    color:rgb(10, 138, 218);
+    font-size: 25px;
+    text-align: center;
+    align-items: center;
+
+}
+.ControlPanel_Func h4{
+    color:rgb(10, 138, 218);
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    margin-top:1rem;
+
 }
 .ControlPanel_Func5{
     width :93% ;
@@ -34,4 +54,38 @@ justify-content: space-between;
     box-shadow:0px 6px 10px rgb(0,0,0,0.3);
     border-radius: 15px;
     margin: 2rem 2rem;
+}
+
+.ControlPanel_Func form{
+    background-color: transparent;
+    color:#000;
+    justify-content:space-between;
+    align-items:center;
+    border-radius: 8px;
+    /* margin: 1rem 1.5rem; */
+    
+    position: absolute;
+    top:15%;
+    align-self: center;
+    max-width: 270px;
+    height: 200px;
+}
+.ControlPanel_Func input {
+    background-color: #ccc;
+    border:transparent;
+    border: 0px solid rgba(204, 204, 204, 0.268) ;
+    border-radius: 15px;
+    width: 250px ;
+    height:50px;
+    font-size:1rem ;
+    font-family: 'Poppins' sans-serif;
+    margin:1rem 1rem;
+}
+.ControlPanel_Func input:focus{
+    outline: none;
+}
+.ControlPanel_Func button{
+    position: absolute;
+    top:90%;
+    left:28%;
 }

@@ -13,8 +13,6 @@ import { TraineeHome } from './components/Trainee/TraineeHome';
 import { TraineeCourses } from './components/Trainee/TraineeCourses';
 import {InstAllCourses} from './components/Instructor/InstAllCourses';
 import {Admin} from './components/Admin/Admin'
-import { TraineeAllCourses } from './components/Trainee/TraineeAllCourses';
-
 import React from 'react';
 import ControlPanel from './components/Admin/ControlPanel';
 export default function App() {
@@ -37,7 +35,9 @@ export default function App() {
           <Route path="/TraineeHome" element={<TraineeHome/>}/>
           <Route path="/TraineeCourses" element={<TraineeCourses/>}/> 
           <Route path="/InstAllCourses" element={<InstAllCourses/>}/>
-          <Route path="/TraineeAllCourses" element={<TraineeAllCourses/>}/>
+          <Route path="/AdminHome" element={<Admin/>}/>
+          <Route path="/AdminControlPanel" element={<ControlPanel/>}/>
+                    <Route path="/TraineeAllCourses" element={<TraineeAllCourses/>}/>
 
         </Routes>
       </div> 

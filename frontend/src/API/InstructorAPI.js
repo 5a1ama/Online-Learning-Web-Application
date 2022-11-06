@@ -1,3 +1,4 @@
+const api="http://localhost:8000"
 export const getMycourses=async (token)=>{
     const response=await fetch(`http://localhost:8000/instructor/myCourses/${token}`);
     const j=await response.json();
@@ -8,4 +9,17 @@ export const SearchMyCourse=async(token,search)=>{
     const j=await response.json();
     return j;
 
+}
+export const FilterAllCourse=async(min,max,subject)=>{
+    if(subject==""){
+        
+        const response=await fetch(`${api}/instructor/Courses-price-subject/${min}/${max}/-1`)
+        const j=await response.json();
+        
+        return j
+    }else{
+        const response=await fetch(`${api}/instructor/Courses-price-subject/${min}/${max}/${subject}`)
+        const j=await response.json();
+        return j
+    }
 }
