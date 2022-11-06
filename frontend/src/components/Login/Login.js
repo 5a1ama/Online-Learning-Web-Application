@@ -14,7 +14,14 @@ function Login() {
     const handleEmail = (event) => { setEmail(event.target.value)}
     const [password,setPassword] = useState("");
     const handlePassword = (event) => { setPassword(event.target.value)}
-    
+    const navigate=useNavigate();
+    const init=async()=>{
+        const x=await LoginUser(email,password)
+        const type=(await verify(x)).job;
+        if(type=="Admin"){
+            navigate("/instructor")
+        }
+    }
     return(<
         div className = "login" >
         <div className = { 'logo' } >
@@ -28,7 +35,7 @@ function Login() {
          <h3> Enter Your Email: </h3> 
          <form className = "Login-form" >
          <div>
-         <input type = "email" placeholder = "Ex: John@gmail.com" onChange={handleEmail} required={true}/ >
+         <input type = "email"  placeholder = "Ex: John@gmail.com" onChange={handleEmail} required={true}/ >
          </div>
               </form>
                     
@@ -39,7 +46,7 @@ function Login() {
                     </form>
                     
                     <div className = "SearchButtons" >
-            <button> Login</button>
+            <button onClick={()=>init()}> Login</button>
          </div> 
          <div className="Login-RegisterHere">
          <h3 className="Login-NotReg">Not Registered yet?</h3>
