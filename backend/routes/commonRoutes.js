@@ -19,6 +19,7 @@ router.post("/login",async function(req,res){
         expiresIn: "2h",
       })
     // @ts-ignore
+    console.log("123")
     req.session.token=token;
     res.json(token)
     }else{
