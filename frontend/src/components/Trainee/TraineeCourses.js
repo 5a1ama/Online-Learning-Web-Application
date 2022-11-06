@@ -2,12 +2,25 @@ import Navbar from "../navbar/Navbar";
 import "./TraineeCourses.css";
 import {AiOutlineSearch} from 'react-icons/ai'; 
 import {useNavigate} from 'react-router-dom';
-import { Slider } from '../courses/Slider';
+// import { Slider } from '../courses/Slider';
+import Slider from '@mui/material/Slider';
+import Box from '@mui/material/Box';
+import { useState } from "react";
+
+
 
 
 
 export function TraineeCourses() {
     const navigate = useNavigate(); 
+    const [value,setValue]=useState([1000,5000]);
+    const valuetext=(value)=> {
+        return `${value}°C`;
+      }
+      const handleChange = (event, newValue) => {
+        setValue(newValue);
+        
+      };
 return(
     <div>
 
@@ -42,7 +55,16 @@ return(
         Reset Filter
       </button>
       <div className='TraineeSliderfilterCourse'>
-      <Slider/>
+      <Box sx={{ width: 300 }}>
+              <Slider getAriaLabel={() => 'Price Range'}
+        value={value}
+        onChange={handleChange}
+        valueLabelDisplay="auto"
+        getAriaValueText={valuetext}
+        min={0}
+        max={10000} />
+
+              </Box>
       </div>
       
 
