@@ -3,8 +3,8 @@ import { useState } from "react";
 import { getAllCourses } from "../../API/CourseAPI";
 import AllCoursesSearch from "../courses/AllCoursesSearch";
 import NewCourse from "../courses/NewCourse";
-import { Slider } from "../courses/Slider";
-
+import { Slider } from "@mui/material";
+// import "InstAllCourses.css"
 export function InstAllCourses(){
     const [courses,setCourses] = useState([]);
     const getCourses = async () =>{
