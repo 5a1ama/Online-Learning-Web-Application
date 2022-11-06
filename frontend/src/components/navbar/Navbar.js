@@ -30,7 +30,7 @@ function Navbar(props) {
     <div className={nav? 'navbar navbar-bg' : 'navbar'}>
     
         <div className={nav? 'logo dark' : 'logo'}>
-
+        
             <a href="/">
                     <h2>Learn.</h2>
                 </a>

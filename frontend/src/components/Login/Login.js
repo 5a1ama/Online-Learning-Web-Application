@@ -5,6 +5,8 @@ import './Login.css'
 import {Link} from 'react-scroll'
 import LoginUser from '../../API/LoginAPI'
 import { verify } from '../../API/LoginAPI'
+import isVisible from './../../../node_modules/dom-helpers/esm/isVisible';
+import { visibility } from './../../../node_modules/@mui/system/legacy/display';
 
 export { default as Login } from './Login'
 
@@ -18,7 +20,7 @@ function Login() {
     const init=async()=>{
         const x=await LoginUser(email,password)
         const type=(await verify(x)).job;
-        if(type=="Admin"){
+        if(type==="Admin"){
             navigate("/instructor")
         }
     }
@@ -33,25 +35,35 @@ function Login() {
          <div className="LoginBox-content">
          <Link> <h2> Login Here </h2> </Link>
          <h3> Enter Your Email: </h3> 
-         <form className = "Login-form" >
+         <form>
+         <div className = "Login-form" >
          <div>
          <input type = "email"  placeholder = "Ex: John@gmail.com" onChange={handleEmail} required={true}/ >
          </div>
-              </form>
-                    
-                    <h3> Enter Your Password: </h3> 
-                    <form className = "Login-form" >
+         </div>
+         
+         <h3> Enter Your Password: </h3> 
+         <div className = "Login-form" >
+         
+         <input type = "password" placeholder = "**********" inputMode='password' onChange={handlePassword} required={true}  / >
+         </div>
+         
+         <div className="Login-WrongData" >
+         <h4>Email not found. </h4>
+         <a href='/signUp'>Do you want to Register?</a>
+         </div>
 
-                    <input type = "password" placeholder = "**********" inputMode='password' onChange={handlePassword} required={true}  / >
-                    </form>
-                    
-                    <div className = "SearchButtons" >
-            <button onClick={()=>init()}> Login</button>
+         <div className="Login-WrongData" >
+         <h4>Wrong Password. </h4>
+         </div>
+         <div className = "SearchButtons" >
+         <button onClick={()=>init()}> Login</button>
          </div> 
          <div className="Login-RegisterHere">
          <h3 className="Login-NotReg">Not Registered yet?</h3>
          <a href="/signUp"> Sign Up</a>
          </div>
+         </form>
          
          </div> 
          </div>

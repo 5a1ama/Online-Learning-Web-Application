@@ -29,7 +29,7 @@ export default function App() {
 
 function Home() {
   return <div className="Home">
-    <Navbar items={["Home","Courses","About Us"]} select="Home" nav={["","",""]} scroll={["Home","Courses","ss"]}  />
+    <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Home" nav={["","",""]} scroll={["Home","Courses","ss"]}  />
   <Bgvid />
   <Courses />
     </div>

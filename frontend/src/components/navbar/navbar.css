@@ -21,6 +21,11 @@
 a{
     color:white;
 }
+
+.logo h2:hover{
+    transform: scale(1.1);
+    transition: 0.5s;
+}
 .nav-menu{
     display: flex;
 }
