@@ -7,6 +7,9 @@ import {Instructor} from './components/Instructor/Instructor';
 import {Login} from './components/Login/Login'
 import {AddCourse} from './components/Instructor/AddCourse'
 import {AllCourses} from './components/courses/AllCourses';
+import { TraineeHome } from './components/Trainee/TraineeHome';
+import { TraineeCourses } from './components/Trainee/TraineeCourses';
+import { InstructorAllCourses } from './components/Instructor/InstructorAllCourses';
 
 import React from 'react';
 export default function App() {
@@ -25,6 +28,9 @@ export default function App() {
           <Route path="/InstructorCourses" element={<InstructorCourses/>}/>
           <Route path="/addCourse" element={<AddCourse/>}></Route>
           <Route path="/AllCourses" element={<AllCourses/>}/>
+          <Route path="/TraineeHome" element={<TraineeHome/>}/>
+          <Route path="/TraineeCourses" element={<TraineeCourses/>}/> 
+          <Route path="/InstructorAllCourses" element={<InstructorAllCourses/>}/>
 
         </Routes>
       </div> 

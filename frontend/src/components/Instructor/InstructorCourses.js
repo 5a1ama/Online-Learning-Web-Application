@@ -78,7 +78,7 @@ export function InstructorCourses(){
                  Add Course
             </button>
             <div className="Inst-buttonCourse">
-    <button  className="InstructorAllCourses" onClick={()=> navigate('/courses')}>All Courses‎ ‎ ‎  ‎   ‎   {">>>"} </button>
+    <button  className="InstructorAllCourses" onClick={()=> navigate('/AllCourses')}>All Courses‎ ‎ ‎  ‎   ‎   {">>>"} </button>
     </div>
 
 
