@@ -8,11 +8,20 @@ import {AiOutlineSearch} from 'react-icons/ai'
 import { TextField } from '@mui/material';
 import { getMycourses } from '../../API/InstructorAPI';
 import { Slider } from '../courses/Slider';
-
+import { SearchMyCourse } from '../../API/InstructorAPI';
 import NewCourse from '../courses/NewCourse';
 export function InstructorCourses(){
   const [search,setSearch]=useState("");
-    const navigate = useNavigate();
+  const[first,setFirst]=useState(0);
+  const handleSearch=async(event)=>{
+    setSearch(event.target.value);
+  }
+  const changeSearch=async (event)=>{
+    event.preventDefault();
+    setCourses((await SearchMyCourse(localStorage.getItem("token"),search)))
+    setFirst(1);
+  }
+  const navigate = useNavigate();
   const [courses,setCourses] = useState([]);
   const getCourses = async () =>{
     setCourses ((await getMycourses(localStorage.getItem("token"))));
@@ -26,7 +35,9 @@ export function InstructorCourses(){
     return array
   
   }
-  getCourses();
+  if(search=="" && first==0){
+    getCourses();
+  }
     
     return(
         <div>
@@ -39,10 +50,10 @@ export function InstructorCourses(){
                 <div>
                 <form className="search-instrutor-courses">
             <div>
-                <input type="text" placeholder="Enter Course name"/>
+                <input type="text" onChange={handleSearch} placeholder="Enter Course name"/>
             </div>
         <div>
-            <button><AiOutlineSearch className='icon'/></button>
+            <button onClick={changeSearch}><AiOutlineSearch className='icon'/></button>
         </div>
         </form>
 
