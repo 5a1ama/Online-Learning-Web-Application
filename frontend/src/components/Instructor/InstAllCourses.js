@@ -4,7 +4,7 @@ import { getAllCourses } from "../../API/CourseAPI";
 import AllCourses from "../courses/AllCourses";
 import NewCourse from "../courses/NewCourse";
 import { Slider } from "@mui/material";
-
+// import "InstAllCourses.css"
 export function InstAllCourses(){
     const [courses,setCourses] = useState([]);
     const getCourses = async () =>{
