@@ -13,15 +13,27 @@ const app = express();
 const port = process.env.PORT || "8000";
 const user = require('./Models/User');
 const cors=require("cors")
+const cookieParser = require("cookie-parser");
+const sessions = require('express-session');
 const courseRouter=require("./routes/course")
 const userRouter=require("./routes/addUsers")
+const instructorRouter=require("./routes/instructor")
 // #Importing the userController
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(cookieParser());
+app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false 
+}));
 app.set('view engine', 'ejs')
 app.use(cors())
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 app.use("/course",courseRouter)
 app.use("/user",userRouter)
+app.use("/instructor",instructorRouter)
 // configurations
 // Mongo DB
 mongoose.connect(MongoURI)
