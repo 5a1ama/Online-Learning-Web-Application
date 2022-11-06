@@ -23,7 +23,11 @@ export {default as Navbar} from './Navbar';
 function Navbar(props) {
     const [nav,setNav] = useState(false)
     const handleNav = () => setNav(!nav)
-
+    const[search,setSearch]=useState("");
+    const handlesearchChange=(event)=>{
+        setSearch(event.target.value);
+        
+    }
     const [filter,setFilter] = useState(false)
     const handleFilter = () => setFilter(!filter)
 
@@ -130,9 +134,9 @@ function Navbar(props) {
                     <h1>Search for courses</h1>
                 <div className="searchBarForm">
                   <form className="form2">
-                <input type="text" placeholder="Enter Course name / title / instructor" required={true}/>
+                <input type="text" onChange={handlesearchChange} placeholder="Enter Course name / title / instructor" required={true}/>
     
-         <button  onClick={()=> navigate('/AllCourses',)}>
+         <button  onClick={()=> navigate('/AllCourses',{state:{search:search}})}>
              <AiOutlineSearch className='icon' />
             </button>
         

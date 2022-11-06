@@ -7,6 +7,10 @@ const headers = {
   Accept: "application/json",
   Authorization: token,
 };
+export const SearchCourse=async(search)=>{
+  const result=await fetch(`${api}/course/${search}`);
+  return await result.json()
+}
 export const getAllCourses=async()=>{
   
   const result=await fetch("http://localhost:8000/course")
