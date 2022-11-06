@@ -76,7 +76,7 @@ router.get("/search/:search",async function(req,res){
         id=query2[0].id;
     }
     for(var i=0;i<query.length;i++){
-        console.log(query[i].title)
+        // console.log(query[i].title)
         if(query[i].title.toLowerCase().includes(search.toLowerCase()) || query[i].subject.includes(search.toLowerCase()) ||
         query[i].instructors.includes(id)){
             array=array.concat([query[i]])

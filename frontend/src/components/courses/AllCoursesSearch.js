@@ -35,6 +35,7 @@ function AllCoursesSearch() {
             </div>
             <div className='AllCourses'>
             <h1 className="heading">Our Courses</h1>
+            <h3 style={{fontSize:"20px",transform:"translate(15px,0px)",fontWeight:"500",color:"black"}}>Showing Search Results for : {location.state.search}</h3>
             {courses.map((course) => <NewCourse course={course}/>)}
             </div>
     
