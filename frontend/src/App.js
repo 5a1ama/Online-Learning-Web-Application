@@ -16,7 +16,6 @@ import {TraineeAllCourses} from './components/Trainee/TraineeAllCourses'
 import {Admin} from './components/Admin/Admin'
 import React from 'react';
 import ControlPanel from './components/Admin/ControlPanel';
-import { TraineeAllCourses } from './components/Trainee/TraineeAllCourses';
 export default function App() {
   const navigate = useNavigate();
 
