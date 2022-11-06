@@ -18,6 +18,7 @@ const sessions = require('express-session');
 const courseRouter=require("./routes/course")
 const userRouter=require("./routes/addUsers")
 const instructorRouter=require("./routes/instructor")
+const commonRouter=require("./routes/commonRoutes")
 // #Importing the userController
 const oneDay = 1000 * 60 * 60 * 24;
 app.use(cookieParser());
@@ -34,6 +35,7 @@ app.use(bodyParser.json())
 app.use("/course",courseRouter)
 app.use("/user",userRouter)
 app.use("/instructor",instructorRouter)
+app.use("/",commonRouter)
 // configurations
 // Mongo DB
 mongoose.connect(MongoURI)
@@ -45,20 +47,3 @@ mongoose.connect(MongoURI)
   })
 })
 .catch(err => console.log(err));
-/*
-                                                    Start of your code
-*/
-app.get("/home", (req, res) => {
-    
-    res.status(200).send("123");
-  });
-
-// #Routing to userController here
-
-
-
-
-/*
-                                                    End of your code
-*/
-
