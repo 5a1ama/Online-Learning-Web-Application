@@ -33,9 +33,10 @@ export function NewCourse(props) {
                     <br />
           <div>
               <h2 className='price'>{props.course.price}$</h2>
-              <h2 className='price2'>{props.course.discount}%</h2>
-
+              <h2 className='price2'>   {props.course.discount}    %</h2>
+              <div className="starImgDiv">
               {stars(props.course.rating).map((num)=> <img className="starImg" src={starImg} alt="."/>)}
+              </div>
           </div>
 
         <div className={courseDetails?"Large-NewData-NewCourse":"nonNewData-NewCourse"}>
