@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
+
 import './Courses.css'
 import {useNavigate} from 'react-router-dom';
-import { getAllCourses } from '../../API/CourseAPI'
-import CoursesVid from '../../assets/Courses.mp4';
+import { getAllCourses } from '../../API/CourseAPI';
+import CoursesVid from "../../assets/Courses.mp4";
 import starImg from "../../assets/goldStar.png"
+
 export {default as Courses} from './Courses'
+
 function Courses() {
   const navigate = useNavigate();
   const [courses,setCourses] = useState([]);
@@ -54,7 +56,7 @@ function Courses() {
     </video>
     </div>
     <div className="buttonCourse">
-    <button  className="AllCourses" onClick={()=> navigate('/courses')}>all courses‎ ‎ ‎  ‎   ‎   {">>>"} </button>
+    <button  className="AllCourses" onClick={()=> navigate('/AllCourses')}>all courses‎ ‎ ‎  ‎   ‎   {">>>"} </button>
     </div>
     </div>
   )

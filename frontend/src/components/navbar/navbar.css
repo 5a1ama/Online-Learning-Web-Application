@@ -15,6 +15,10 @@
     
     
 }
+.nav-icons{
+    display: flex;
+    flex-direction: row;
+}
 .navbar-bg{
     background-color:#f5f5f5;
 }
@@ -65,6 +69,43 @@ li {
     top:-200vh;
     width:100%;
 
+}
+.CountryBar{
+    /* display:block;  */
+    position: absolute;
+    width:3%;
+    height:30vh;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; 
+    background-color:rgb(255, 255, 255);
+    top:10px;
+    left:88.1%;
+    transition: 0.5s;
+    z-index:-2;
+    padding: 3.2rem 0rem;
+}
+.nonCountryBar{
+    position:absolute;
+    height:0vh;
+    width:3%;
+
+}
+.nonCountryBar img{
+    position:absolute;
+    height:0vh;
+    width:0;
+    display: none;
+}
+.CountryBar-content img{
+    /* display:block;  */
+    display: flex;
+    flex-direction: column; 
+    margin: 0.5rem .5rem;
+}
+.CountryBar-content img:hover{
+    transform: scale(1.1);
+    transition: 0.5s;
 }
 .searchBarForm{
     position:absolute;
