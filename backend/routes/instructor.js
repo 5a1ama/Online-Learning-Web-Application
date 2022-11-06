@@ -1,3 +1,4 @@
+// @ts-nocheck
 const express=require("express");
 const Course = require("../Models/Course");
 const router=express.Router();
@@ -6,7 +7,20 @@ const jwt=require("jsonwebtoken")
 const dotenv=require("dotenv")
 dotenv.config()
 
-
+router.get("/myCourses",async function(req,res){
+    // @ts-ignore
+    // var user=jwt.verify(req.session.token,process.env.ACCESSTOKEN);
+    var user=req.session.user
+    var id=user.id ;
+    var result=await Course.find({});
+    var array=[];
+    for(var i=0;i<result.length;i++){
+        if(result[i].instructors.includes(id)){
+            array=array.concat([result[i]]);
+        }
+    }
+    res.json(array)
+})
 router.get("/myCourses-Titles",async function(req,res){
     var id=req.body.id;
     var result=await Course.find({});
@@ -39,8 +53,9 @@ router.get("/myCourses-subject/:subject",async function(req,res){
 
 
 })
-router.get("/myCourses-price/:price",async function(req,res){
-    var price=req.params.price;
+router.get("/myCourses-price/:minprice/:maxprice",async function(req,res){
+    var minprice=req.params.minprice;
+    var maxprice=req.params.maxprice;
     var id=req.body.instructorID;
     var result =await Course.find({});
     var array=[];
@@ -52,7 +67,7 @@ router.get("/myCourses-price/:price",async function(req,res){
     }
     var final=[];
     for(var i=0;i<array.length;i++){
-        if(array[i].price==price){
+        if(array[i].price>=minprice && array[i].price<=maxprice ){
             final=final.concat([array[i]])
         }
     }
@@ -60,8 +75,10 @@ router.get("/myCourses-price/:price",async function(req,res){
 
 
 })
-router.get("/myCourses-price-subject/:price/:subject",async function(req,res){
-    var price=req.params.price;
+router.get("/myCourses-price-subject/:minprice/:maxprice/:subject",async function(req,res){
+    var minprice=req.params.minprice;
+    var maxprice=req.params.maxprice;
+
     var subject=req.params.subject.toLocaleLowerCase();
     var id=req.body.instructorID;
     var result =await Course.find({});
@@ -73,7 +90,7 @@ router.get("/myCourses-price-subject/:price/:subject",async function(req,res){
     }
     var final=[];
     for(var i=0;i<array.length;i++){
-        if(array[i].price==price && array[i].subject.includes(subject)){
+        if(array[i].price>=minprice && array[i].price<=maxprice && array[i].subject.includes(subject)){
             final=final.concat([array[i]])
         }
     }

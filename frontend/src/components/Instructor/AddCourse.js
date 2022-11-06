@@ -11,29 +11,49 @@ export function AddCourse(){
     <div className="AddCours">
 
          <div>
-        <Navbar items={["Home"]} select="Home" nav={[""]} scroll={[""]}  /> 
+         <Navbar items={["Home","My Courses","Caleneder"]} select="" nav={["/instructor","/InstructorCourses",""]} scroll={["","",""]}  />
         </div> 
+
+        <div className="Add-Course-Label">
+        <h2>
+        Add New Course :
+        </h2>
+ 
+        </div>
+       
         <div className="Boxes">
-            <TextField id = "filled-basic" className="text1-AddCourse"
+    
+
+     <TextField id = "filled-basic" className="text1-AddCourse"
      label="Course Title" 
-     color="secondary" 
+     color="primary" 
      variant="filled"
-     style={{color:'green'}}
      />
+     
+     
+     
            <TextField id = "filled-basic" className="text2-AddCourse"
      label="Course Subtitle" 
-     color="secondary" 
+     color="primary" 
      variant="filled"
      />
            <TextField id = "filled-basic" className="text3-AddCourse"
      label="Price" 
-     color="secondary" 
+     color="primary" 
      variant="filled"
      />
-
+      <TextField className="text4-AddCourse"
+          id="outlined-multiline-flexible"
+          label="Course Summary"
+          variant="filled"
+          multiline
+          maxRows={4}
+        />
 
     </div>
-
+    <button className="Submit-button">
+        Add
+            </button>
 </div>
     );
 }

@@ -7,11 +7,11 @@ export function InstructorHome(){
 <div className = "divcenter">
 <div>
 
-<Navbar items={["Home","My Courses","Caleneder"]} select="Home" nav={["","/InstructorCourses",""]} scroll={["","",""]}  />
+<Navbar items={["Home","My Courses","Caleneder"]} select="Home" nav={["/instructor","/InstructorCourses",""]} scroll={["","",""]}  />
 
         </div>
-        <div>
-      
+        <div className="">
+        
         </div>
 </div>
     );

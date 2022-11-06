@@ -7,11 +7,11 @@ import LoginUser from '../../API/LoginAPI'
 import { verify } from '../../API/LoginAPI'
 import isVisible from './../../../node_modules/dom-helpers/esm/isVisible';
 import { visibility } from './../../../node_modules/@mui/system/legacy/display';
-
 export { default as Login } from './Login'
 
 function Login() {
-    
+    const[wrongemail,setWrongEmail]=useState(null)
+    const[wrongpass,setWrongPass]=useState(null)
     const [email,setEmail] = useState("");
     const handleEmail = (event) => { setEmail(event.target.value)}
     const [password,setPassword] = useState("");
@@ -20,10 +20,23 @@ function Login() {
     const init=async()=>{
         const x=await LoginUser(email,password)
         const type=(await verify(x)).job;
-        if(type==="Admin"){
-            navigate("/instructor")
+        if(type){
+            if(type==="Instructor"){
+                navigate("/instructor")
+            }
+            // other cases
+        }else{
+            setWrongEmail(x.user);
+            setWrongPass(x.pass)
         }
+        
     }
+    const handleLogin=(event)=>{
+        
+    event.preventDefault();
+    init();
+   }
+    
     return(<
         div className = "login" >
         <div className = { 'logo' } >
@@ -33,7 +46,7 @@ function Login() {
         </div>
          <div className = "LoginBox" >
          <div className="LoginBox-content">
-         <Link> <h2> Login Here </h2> </Link>
+         <Link to=""> <h2> Login Here </h2> </Link>
          <h3> Enter Your Email: </h3> 
          <form>
          <div className = "Login-form" >
@@ -45,19 +58,22 @@ function Login() {
          <h3> Enter Your Password: </h3> 
          <div className = "Login-form" >
          
-         <input type = "password" placeholder = "**********" inputMode='password' onChange={handlePassword} required={true}  / >
+         <input type = "password" placeholder = "**********" 
+// @ts-ignore
+         inputMode='password' onChange={handlePassword} required={true}  / >
          </div>
          
          <div className="Login-WrongData" >
-         <h4>Email not found. </h4>
-         <a href='/signUp'>Do you want to Register?</a>
+         
+        { wrongemail && <h4>Email not found. </h4>}
+        { wrongemail && <a href='/signUp'>Do you want to Register?</a>}
          </div>
 
          <div className="Login-WrongData" >
-         <h4>Wrong Password. </h4>
+         {wrongpass && <h4>Wrong Password. </h4>}
          </div>
          <div className = "SearchButtons" >
-         <button onClick={()=>init()}> Login</button>
+         <button onClick={handleLogin}> Login</button>
          </div> 
          <div className="Login-RegisterHere">
          <h3 className="Login-NotReg">Not Registered yet?</h3>
