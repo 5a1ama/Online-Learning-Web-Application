@@ -58,6 +58,7 @@ height:30px;
 .buttonCourse Button{
     font-size:20px;
     background-color:rgb(10,138,218);
+    color: aliceblue;
     width:30%;
     height:50px;
     position: absolute;

@@ -1,0 +1,100 @@
+
+ .AllCourses{
+    color :rgb(10, 138, 218);
+    position: absolute;
+    top: 70px;
+ }
+
+
+
+ .AllCourses-FilterBarButton{
+     position: absolute;
+    color :#e4ebef;
+    width: 22%;
+    height:5%;
+    top : 20%;
+    left: 72%;
+    font-weight:400;
+    font-size: 20px;
+    padding: 0rem 0rem;
+
+ }
+
+ .AllCourses-FilterDiv{
+    background-color :rgba(16, 16, 16, 0.921);
+    position: absolute;
+    border-radius : 20px ;
+    width: 22%;
+    height: 65vh;
+    color :#f0f3f5;
+    top : 30%;
+    left: 72%;
+    padding: 0rem 0rem;
+ }
+
+ .AllCourses-Slider{
+    
+    position: absolute;
+    top : 43%;
+    left: 1%;
+
+ }
+
+
+ .AllCourses-Subject{
+    font-weight:600;
+    font-size: 30px;
+    position: absolute;
+    top : 4%;
+    left: 2%;
+ 
+
+ }
+
+ .AllCourses-TextField{
+    position: relative;
+    top : 5%;
+    left: 2%;
+    background-color: #f0f3f5;
+    border-radius : 10px ;
+
+ }
+
+ .AllCourses-Price{
+    position: relative;
+    top : 33%;
+    left: 2%;
+    font-weight:600;
+    font-size: 30px;
+ 
+ }
+
+ .AllCourses-Apply{
+    position: relative;
+    top : 75%;
+    left: 0%;
+
+ }
+
+ .AllCourses-Rate{
+
+    position: relative;
+    top : 33%;
+    left: 2%;
+    font-weight:600;
+    font-size: 30px;
+
+ }
+
+ .AllCourses-Rating{
+    position: relative;
+    top : 35%;
+    left: 2%;
+
+ }
+
+ .AllCourses-nonFilterDiv{
+    top : -300%;
+    left: -300%;
+    
+ }
