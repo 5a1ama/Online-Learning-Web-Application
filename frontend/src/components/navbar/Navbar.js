@@ -8,7 +8,6 @@ import {BsPerson} from 'react-icons/bs'
 import {HiOutlineMenuAlt4} from 'react-icons/hi'
 import {AiOutlineClose} from 'react-icons/ai'
 import {AiOutlineSearch} from 'react-icons/ai'
-import {Country} from "../Country"
 import {FaFacebook,FaInstagram,FaTwitter,FaPinterest,FaYoutube} from 'react-icons/fa'
 import EgyFlag from "../../assets/Egy.jpg"
 import GerFlag from "../../assets/Ger.jpg"
