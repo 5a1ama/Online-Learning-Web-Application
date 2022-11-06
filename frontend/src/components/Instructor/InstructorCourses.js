@@ -5,6 +5,8 @@ import {useNavigate} from 'react-router-dom';
 import { getAllCourses } from '../../API/CourseAPI'
 import starImg from "../../assets/goldStar.png"
 import { AddCourse } from './AddCourse';
+import {AiOutlineSearch} from 'react-icons/ai'
+import { TextField } from '@mui/material';
 
 
 export function InstructorCourses(){
@@ -56,21 +58,46 @@ export function InstructorCourses(){
     return(
         <div>
             <div>
-            <Navbar items={["Home","My Courses","Caleneder"]} select="Home" nav={["","",""]} scroll={["","",""]}  />
+            <Navbar items={["Home","My Courses","Caleneder"]} select="My Courses" nav={["/instructor","/InstructorCourses",""]} scroll={["","",""]}  />
             </div>
              <div className="InstCourses" name = 'instCourses'>
             {courses.map((course)=><Newcourse course={course}/>)}
                 </div>
                 <div>
-                <button className="FilterButton">
-                Filter
-            </button>
+                <form className="search-instrutor-courses">
+            <div>
+                <input type="text" placeholder="Enter Course name"/>
+            </div>
+        <div>
+            <button><AiOutlineSearch className='icon'/></button>
+        </div>
+        </form>
 
-            <button className="AddButton" onClick={()=> navigate('/addCourse')}>
+            <button className="Add-Course-Button" onClick={()=> navigate('/addCourse')}>
                  Add Course
             </button>
             <div className="Inst-buttonCourse">
     <button  className="AllCourses" onClick={()=> navigate('/courses')}>All Courses‎ ‎ ‎  ‎   ‎   {">>>"} </button>
+    </div>
+
+
+    <div className='Filter-Box'>
+      <h2 className='Filter-by-label-instcourse'>
+        Filter
+      </h2>
+      <h3 className='Filter-by-label-instcourse-price'>
+        Price :
+      </h3>
+      <h3 className='Filter-by-label-instcourse-subject'>
+        Subject :
+      </h3>
+      <input type="text" placeholder="Enter Subject Name" 
+      className='SubjectNameFilter'/>
+
+      <button className='ReatFilterButton'>
+        Reset Filter
+      </button>
+
     </div>
                 </div>
         </div>
