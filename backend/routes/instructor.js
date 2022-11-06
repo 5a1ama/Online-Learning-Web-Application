@@ -112,7 +112,7 @@ router.get("/Courses-price-subject/:minprice/:maxprice/:subject",async function(
     
     for(var i=0;i<array.length;i++){
         
-        if((subject!="." && array[i].price>=minprice && array[i].price<=maxprice && array[i].subject.includes(subject)) || (subject=="." &&
+        if((subject!="-1" && array[i].price>=minprice && array[i].price<=maxprice && array[i].subject.includes(subject)) || (subject=="-1" &&
         array[i].price>=minprice && array[i].price<=maxprice )){
             final=final.concat([array[i]])
         }

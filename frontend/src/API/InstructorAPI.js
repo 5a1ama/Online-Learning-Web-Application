@@ -12,8 +12,10 @@ export const SearchMyCourse=async(token,search)=>{
 }
 export const FilterAllCourse=async(min,max,subject)=>{
     if(subject==""){
-        const response=await fetch(`${api}/instructor/Courses-price-subject/${min}/${max}/.`)
+        
+        const response=await fetch(`${api}/instructor/Courses-price-subject/${min}/${max}/-1`)
         const j=await response.json();
+        
         return j
     }else{
         const response=await fetch(`${api}/instructor/Courses-price-subject/${min}/${max}/${subject}`)

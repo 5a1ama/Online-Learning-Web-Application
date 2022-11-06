@@ -16,6 +16,7 @@ export function InstAllCourses(){
       return `${value}°C`;
     }
     const handleFilter2=async()=>{
+    
       setCourses((await FilterAllCourse(value[0],value[1],subject) ))
       setFirst(1)
     }
