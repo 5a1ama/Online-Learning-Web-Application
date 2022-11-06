@@ -6,7 +6,10 @@ import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 export function AddCourse(){
-
+    const [title,setTitle]=useState("");
+    const [subtitle,setSubtitle]=useState("");
+    const [price,setPrice]=useState("");
+    const [summary,setSummary]=useState("")
     return(
     <div className="AddCours">
 
@@ -24,7 +27,7 @@ export function AddCourse(){
         <div className="Boxes">
     
 
-     <TextField id = "filled-basic" className="text1-AddCourse"
+     <TextField id = "filled-basic" onChange= {handleTitle} className="text1-AddCourse"
      label="Course Title" 
      color="primary" 
      variant="filled"
@@ -32,17 +35,17 @@ export function AddCourse(){
      
      
      
-           <TextField id = "filled-basic" className="text2-AddCourse"
+           <TextField id = "filled-basic" onChange={handleSub} className="text2-AddCourse"
      label="Course Subtitle" 
      color="primary" 
      variant="filled"
      />
-           <TextField id = "filled-basic" className="text3-AddCourse"
+           <TextField id = "filled-basic" onChange={handlePrice} className="text3-AddCourse"
      label="Price" 
      color="primary" 
      variant="filled"
      />
-      <TextField className="text4-AddCourse"
+      <TextField onChange={handleSummary} className="text4-AddCourse"
           id="outlined-multiline-flexible"
           label="Course Summary"
           variant="filled"
@@ -51,7 +54,7 @@ export function AddCourse(){
         />
 
     </div>
-    <button className="Submit-button">
+    <button onClick={()=>handleCreate()} className="Submit-button">
         Add
             </button>
 </div>

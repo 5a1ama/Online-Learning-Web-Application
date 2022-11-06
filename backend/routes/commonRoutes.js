@@ -53,22 +53,17 @@ router.post("/verifyToken",function(req,res){
 
 })
 // @ts-ignore
-router.post("/selectCountry/:x",function(req,res){
-    // @ts-ignore
-    if(req.session.token){
-           // @ts-ignore
- 
-        const user=jwt.verify(req.session.token,process.env.ACCESSTOKEN);
-                   // @ts-ignore
-
-        req.session.country=req.params.x;
-        res.json(req.params.x)
-
-    }else{
-                           // @ts-ignore
-
-        req.session.country=req.params.x;
-        res.json(req.params.x)
-    }
+router.post("/selectCountry/:x/:token",function(req,res){
+        var country=req.params.x;
+        if(token!="-1"){
+            const user=jwt.verify(req.params.token,process.env.ACCESSTOKEN)
+            user.country=country;
+            const token=jwt.sign(user,process.env.ACCESSTOKEN);
+            res.json(token)
+        }else{
+            const user={country:country};
+            const token=jwt.sign(user,process.env.ACCESSTOKEN);
+            res.json(token)
+        }
 })
 module.exports=router;

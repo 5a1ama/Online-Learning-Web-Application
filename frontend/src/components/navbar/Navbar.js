@@ -14,9 +14,8 @@ import GerFlag from "../../assets/Ger.jpg"
 import UaeFlag from "../../assets/Uae.jpg"
 import UkFlag from "../../assets/UK.jpg"
 import UsaFlag from "../../assets/Usa.jpg"
-
+import selectCountry from "../../API/LoginAPI"
 import './navbar.css'
-
 import {Link} from 'react-scroll'
 export {default as Navbar} from './Navbar';
 
