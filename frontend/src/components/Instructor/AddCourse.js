@@ -1,3 +1,4 @@
+import React,{useState} from 'react';
 import Navbar from "../navbar/Navbar";
 import "./AddCourse.css"
 import {TextField} from "@mui/material";
@@ -5,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
-import { useState } from "react";
+
 export function AddCourse(){
     const [title,setTitle]=useState("");
     const handleTitle=(event)=>{
