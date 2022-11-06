@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import {BiDownArrow} from 'react-icons/bi';
 import starImg from "../../assets/goldStar.png"
 
+
 export function NewCourse(props) {
     const navigate = useNavigate();
     
@@ -52,6 +53,9 @@ export function NewCourse(props) {
             <div className="Course-subTitles">
                  {props.course.subtitles.map((sub,i)=>  <h4 > {sub.hours} Hours</h4>)}
             </div>
+            <div class="vl"></div>
+
+
             <div className="Course-subTitles">
                  {props.course.excercises.map((exe,i)=>  <h4 > {exe} </h4>)}
             </div>
@@ -59,8 +63,8 @@ export function NewCourse(props) {
         </div>
           </div>
         </div>
-        <BiDownArrow className="icon" style={{marginRight: '1rem' ,position:'absloute' ,left:"50px", top:"100px" }} onClick={handleCourseDetails}></BiDownArrow>
-
+        <BiDownArrow className="icon" style={{marginRight: '1rem' }} onClick={handleCourseDetails}></BiDownArrow>
+      <button className="NewCourse-button-OpenCourse" style={{marginRight: '1rem' ,width:"100px",height:"60px",transform:"translate(1rem,1.7rem)" }} onClick={()=>navigate("/course")}>Open Course</button>
     </div>  
   )
 }
