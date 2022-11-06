@@ -10,7 +10,7 @@ export function InstructorHome(){
 <Navbar items={["Home","My Courses","Caleneder"]} select="Home" nav={["/instructor","/InstructorCourses",""]} scroll={["","",""]}  />
 
         </div>
-        <div className="">
+        <div>
         
         </div>
 </div>
