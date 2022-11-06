@@ -41,3 +41,6 @@ export const createUser=()=>{
     return response.json();
   });
 }
+export const createCourse=()=>{
+  
+}
