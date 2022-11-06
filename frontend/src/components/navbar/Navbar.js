@@ -132,7 +132,7 @@ function Navbar(props) {
                   <form className="form2">
                 <input type="text" placeholder="Enter Course name / title / instructor" required={true}/>
     
-         <button  onClick={()=> navigate('/AllCourses')}>
+         <button  onClick={()=> navigate('/AllCourses',)}>
              <AiOutlineSearch className='icon' />
             </button>
         
