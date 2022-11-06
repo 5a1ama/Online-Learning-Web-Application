@@ -121,3 +121,8 @@
 .ReatFilterButton:hover{
     background-color: rgb(216, 214, 214);
 }
+.SliderfilterCourse{
+    position: absolute;
+    top:68%;
+    left: 20%;
+}

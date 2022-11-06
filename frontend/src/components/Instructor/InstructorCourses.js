@@ -7,6 +7,7 @@ import { AddCourse } from './AddCourse';
 import {AiOutlineSearch} from 'react-icons/ai'
 import { TextField } from '@mui/material';
 import { getMycourses } from '../../API/InstructorAPI';
+import { Slider } from '../courses/Slider';
 
 
 export function InstructorCourses(){
@@ -77,7 +78,7 @@ export function InstructorCourses(){
                  Add Course
             </button>
             <div className="Inst-buttonCourse">
-    <button  className="AllCourses" onClick={()=> navigate('/courses')}>All Courses‎ ‎ ‎  ‎   ‎   {">>>"} </button>
+    <button  className="InstructorAllCourses" onClick={()=> navigate('/courses')}>All Courses‎ ‎ ‎  ‎   ‎   {">>>"} </button>
     </div>
 
 
@@ -97,6 +98,10 @@ export function InstructorCourses(){
       <button className='ReatFilterButton'>
         Reset Filter
       </button>
+      <div className='SliderfilterCourse'>
+      <Slider/>
+      </div>
+      
 
     </div>
                 </div>
