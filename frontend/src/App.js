@@ -6,13 +6,17 @@ import { InstructorCourses } from './components/Instructor/InstructorCourses';
 import {Instructor} from './components/Instructor/Instructor';
 import {Login} from './components/Login/Login'
 import {AddCourse} from './components/Instructor/AddCourse'
+import {AllCoursesSearch} from './components/courses/AllCoursesSearch';
 import {AllCourses} from './components/courses/AllCourses';
+
 import { TraineeHome } from './components/Trainee/TraineeHome';
 import { TraineeCourses } from './components/Trainee/TraineeCourses';
 import {InstAllCourses} from './components/Instructor/InstAllCourses';
+import {Admin} from './components/Admin/Admin'
 import { TraineeAllCourses } from './components/Trainee/TraineeAllCourses';
 
 import React from 'react';
+import ControlPanel from './components/Admin/ControlPanel';
 export default function App() {
   const navigate = useNavigate();
 
@@ -28,11 +32,12 @@ export default function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/InstructorCourses" element={<InstructorCourses/>}/>
           <Route path="/addCourse" element={<AddCourse/>}></Route>
+          <Route path="/AllCoursesSearch" element={<AllCoursesSearch/>}/>
           <Route path="/AllCourses" element={<AllCourses/>}/>
           <Route path="/TraineeHome" element={<TraineeHome/>}/>
           <Route path="/TraineeCourses" element={<TraineeCourses/>}/> 
           <Route path="/InstAllCourses" element={<InstAllCourses/>}/>
-          <Route path="/TraineeAllCourses" element={<TraineeAllCourses/>}/>
+
         </Routes>
       </div> 
     </div>

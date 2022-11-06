@@ -8,7 +8,7 @@ const headers = {
   Authorization: token,
 };
 export const SearchCourse=async(search)=>{
-  const result=await fetch(`${api}/course/${search}`);
+  const result=await fetch(`${api}/course/search/${search}`);
   return await result.json()
 }
 export const getAllCourses=async()=>{

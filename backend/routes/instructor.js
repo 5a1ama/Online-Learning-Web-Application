@@ -12,7 +12,7 @@ router.get("/myCourses/:token",async function(req,res){
     // var user=jwt.verify(req.session.token,process.env.ACCESSTOKEN);
     var token=req.params.token;
     var user=jwt.verify(token,process.env.ACCESSTOKEN)
-    console.log(user.id)
+    
     var id=user.id ;
     var result=await Course.find({});
     var array=[];
@@ -100,9 +100,11 @@ router.get("/myCourses-price-subject/:minprice/:maxprice/:subject",async functio
 
 
 })
-router.get("/myCourses-search/:search",async function(req,res){
+router.get("/myCourses-search/:search/:token",async function(req,res){
     var search=req.params.search;
-    var id=req.body.instructorID;
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN)
+    var id=user.id
     var result =await Course.find({});
     var array=[];
     for(var i=0;i<result.length;i++){
@@ -113,9 +115,12 @@ router.get("/myCourses-search/:search",async function(req,res){
     }
     var final=[];
     var query2=await User.find({Name:search,Job:"Instructor"})
-    var id2=query2[0].id;
+    id2=-1;
+    if(query2.length!=0){
+      var id2=query2[0].id;
+    }
     for(var i=0;i<array.length;i++){
-        if(array[i].title.toLocaleLowerCase()==search.toLocaleLowerCase() || array[i].subject.includes(search.toLocaleLowerCase()) ||
+        if(search=="" || array[i].title.toLocaleLowerCase().includes(search.toLocaleLowerCase()) || array[i].subject.includes(search.toLocaleLowerCase()) ||
         array[i].instructors.includes(id2)){
             final=final.concat([array[i]])
         }
