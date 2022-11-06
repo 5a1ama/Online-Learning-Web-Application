@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Navbar from "../navbar/Navbar";
 import "./InstCourses.css";
 import {useNavigate} from 'react-router-dom';
-import { getAllCourses } from '../../API/CourseAPI'
 import starImg from "../../assets/goldStar.png"
 import { AddCourse } from './AddCourse';
 import {AiOutlineSearch} from 'react-icons/ai'
 import { TextField } from '@mui/material';
-
+import { getMycourses } from '../../API/InstructorAPI';
 
 
 export function InstructorCourses(){
@@ -23,7 +22,7 @@ export function InstructorCourses(){
     const navigate = useNavigate();
   const [courses,setCourses] = useState([]);
   const getCourses = async () =>{
-    setCourses ((await getAllCourses()));
+    setCourses ((await getMycourses()));
   }
 
   const stars = (starNumber) => {

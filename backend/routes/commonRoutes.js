@@ -20,6 +20,8 @@ router.post("/login",async function(req,res){
       })
     // @ts-ignore
     req.session.token=token;
+    req.session.user=user;
+    console.log("logged")
     res.json(token)
     }else{
         

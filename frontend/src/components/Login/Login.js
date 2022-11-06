@@ -21,7 +21,7 @@ function Login() {
         const x=await LoginUser(email,password)
         const type=(await verify(x)).job;
         if(type){
-            if(type==="Admin"){
+            if(type==="Instructor"){
                 navigate("/instructor")
             }
             // other cases

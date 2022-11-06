@@ -9,7 +9,8 @@ dotenv.config()
 
 router.get("/myCourses",async function(req,res){
     // @ts-ignore
-    var user=jwt.verify(req.session.token,process.env.ACCESSTOKEN);
+    // var user=jwt.verify(req.session.token,process.env.ACCESSTOKEN);
+    var user=req.session.user
     var id=user.id ;
     var result=await Course.find({});
     var array=[];
