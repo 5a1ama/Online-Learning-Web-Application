@@ -54,7 +54,7 @@ function Courses() {
     </video>
     </div>
     <div className="buttonCourse">
-    <button  className="AllCourses" onClick={()=> navigate('/courses')}>all courses‎ ‎ ‎  ‎   ‎   {">>>"} </button>
+    <button  className="AllCourses" onClick={()=> navigate('/AllCourses')}>all courses‎ ‎ ‎  ‎   ‎   {">>>"} </button>
     </div>
     </div>
   )
