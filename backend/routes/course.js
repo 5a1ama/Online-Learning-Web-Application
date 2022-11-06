@@ -1,4 +1,5 @@
 const Course=require("../Models/Course");
+const User=require("../Models/User")
 const express=require("express");
 const router=express.Router();
 router.get("/allTitles",function(req,res){
@@ -51,5 +52,19 @@ router.get("/:id",function(req,res){
     query.exec(function(err,result){
         res.json(result)
     })
+})
+router.get("/:search",async function(req,res){
+    var search=req.params.search;
+    var query=await Course.find({});
+    var array=[];
+    var query2=await User.find({Name:search,Job:"Instructor"})
+    var id=query2[0].id;
+    for(var i=0;i<query.length;i++){
+        if(query[i].title.toLocaleLowerCase()==search.toLocaleLowerCase() || query[i].subject.includes(search.toLocaleLowerCase()) ||
+        query[i].instructors.includes(id)){
+            array=array.concat([query[i]])
+        }
+    }
+    res.json(array)
 })
 module.exports=router

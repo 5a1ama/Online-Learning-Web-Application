@@ -1,0 +1,32 @@
+.FilterButton{
+    font-size:20px;
+    background-color:rgb(10,138,218);
+    width:15%;
+    height:50px;
+    position: absolute;
+    top : 15%;
+    left: 66%;
+}
+.InstCourses{
+    position: absolute;
+    top:10%;
+}
+.AddButton{
+    font-size:20px;
+    background-color:rgb(10,138,218);
+    width:15%;
+    height:50px;
+    position: absolute;
+    top : 15%;
+    left: 82%;
+}
+.Inst-buttonCourse Button{
+    font-size:20px;
+    background-color:rgb(10,138,218);
+    width:31%;
+    height:50px;
+    position: absolute;
+   left:66%;
+   top:25%;
+}
+

@@ -30,7 +30,10 @@ function Navbar(props) {
     <div className={nav? 'navbar navbar-bg' : 'navbar'}>
     
         <div className={nav? 'logo dark' : 'logo'}>
-            <h2>Learn.</h2>
+        
+            <a href="/">
+                    <h2>Learn.</h2>
+                </a>
         </div>
         <ul className="nav-menu">      
         {props.items.map((item,i)=>{
@@ -45,7 +48,7 @@ function Navbar(props) {
                 if(props.nav[i]!="")
                 return <Link to={props.scroll[i]} onClick={()=>navigate(props.nav[i])} smooth={true} duration="500"><li>{item}</li></Link>
                 else
-                return <Link to={props.scroll[i]}  smooth={true} duration="500"><li>{item}</li></Link>
+                return <Link to={props.scroll[i]} smooth={true} duration="500"><li>{item}</li></Link>
 
             }
 
@@ -57,7 +60,7 @@ function Navbar(props) {
         </ul>
         <div className="nav-icons">
             <BiSearch className="icon" onClick={handleSearchBar} style={{marginRight: '1rem'}}/>
-            <BsPerson className="icon" style={{marginRight: '1rem'}}  />
+            <BsPerson className="icon" onClick={()=> navigate('/login')} style={{marginRight: '1rem'}}  />
         </div>
             <div className="hamburger" onClick={handleNav}>
                 {!nav ? (<HiOutlineMenuAlt4 className="icon" />):(<AiOutlineClose className="icon" style={{color:"#000"}} />)}

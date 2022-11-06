@@ -44,6 +44,9 @@ const courseschema=new Schema({
     },
     summary:{
         type:String
+    },
+    country:{
+        type:String
     }
 })
 const Course = mongoose.model('course', courseschema);
