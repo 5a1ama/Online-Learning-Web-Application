@@ -93,6 +93,14 @@
     top: 0;
     left:55%;
 }
+.vl {
+    border-left: 2px solid rgb(255, 255, 255);
+    height: 250px;
+    position: absolute;
+    left: 50%;
+    margin-left: -3px;
+    top: 0;
+  }
 .price2{
     font-weight:600;
     font-size: 20px;
@@ -118,6 +126,9 @@ height:30px;
     /* background:radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 1) 0%, rgba(218, 218, 218, 1) 100%); */
     background-color:aliceblue; 
     
+}
+.NewCourse-button-OpenCourse{
+    font-size: 13px;
 }
 
 .buttonCourse Button{

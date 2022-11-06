@@ -8,15 +8,16 @@ import './AllCourses.css'
 import Slider from './Slider';
 import { TextField } from '@mui/material';
 import NewCourse from './NewCourse';
-
+import { useLocation } from 'react-router-dom';
+import { SearchCourse } from '../../API/CourseAPI';
 export {default as AllCourses} from './AllCourses'
 
 
 function AllCourses() {
- 
+  const location=useLocation();
     const [courses,setCourses] = useState([]);
     const getCourses = async () =>{
-      setCourses ((await getAllCourses()));
+      setCourses ((await SearchCourse(location.state.search)));
     }
 
     const [FilterBar,setFilterBar] = useState(false)
