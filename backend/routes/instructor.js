@@ -1,3 +1,4 @@
+// @ts-nocheck
 const express=require("express");
 const Course = require("../Models/Course");
 const router=express.Router();
@@ -6,7 +7,19 @@ const jwt=require("jsonwebtoken")
 const dotenv=require("dotenv")
 dotenv.config()
 
-
+router.get("/myCourses",async function(req,res){
+    // @ts-ignore
+    var user=jwt.verify(req.session.token,process.env.ACCESSTOKEN);
+    var id=user.id ;
+    var result=await Course.find({});
+    var array=[];
+    for(var i=0;i<result.length;i++){
+        if(result[i].instructors.includes(id)){
+            array=array.concat([result[i]]);
+        }
+    }
+    res.json(array)
+})
 router.get("/myCourses-Titles",async function(req,res){
     var id=req.body.id;
     var result=await Course.find({});
