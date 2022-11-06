@@ -13,7 +13,7 @@ return(
 
     
     <div>
-        <Navbar items={["Home","My Courses","Caleneder"]} select="My Courses" nav={["/TraineeHome","/TraineeCourses",""]} scroll={["","",""]}  />
+        <Navbar items={["Home","My Courses","All Courses"]} select="My Courses" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
 
     </div>
     <div>
@@ -25,10 +25,6 @@ return(
             <button><AiOutlineSearch className='icon'/></button>
         </div>
         </form>
-            <div className="Trainee-buttonCourse">
-    <button  className="TraineeAllCourses" onClick={()=> navigate('/InstAllCourses')}>All Courses‎ ‎ ‎  ‎   ‎   {">>>"} </button>
-    </div>
-    
     <div className='Trainee-Filter-Box'>
       <h2 className='Filter-by-label-Traineecourse'>
         Filter

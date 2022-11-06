@@ -37,7 +37,8 @@ export default function App() {
           <Route path="/InstAllCourses" element={<InstAllCourses/>}/>
           <Route path="/AdminHome" element={<Admin/>}/>
           <Route path="/AdminControlPanel" element={<ControlPanel/>}/>
-          
+                    <Route path="/TraineeAllCourses" element={<TraineeAllCourses/>}/>
+
         </Routes>
       </div> 
     </div>

@@ -1,9 +1,16 @@
 import Navbar from "../navbar/Navbar";
+import {useNavigate} from 'react-router-dom';
+import "./TraineeHome.css";
+
 
 export function TraineeHome(){
+    const navigate = useNavigate(); 
     return(
         <div>
-            <Navbar items={["Home","My Courses","Caleneder"]} select="Home" nav={["/TraineeHome","/TraineeCourses",""]} scroll={["","",""]}  />
+  
+        <div>
+            <Navbar items={["Home","My Courses","All Courses"]} select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
+        </div>
         </div>
     );
 }
