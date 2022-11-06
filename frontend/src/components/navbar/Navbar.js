@@ -8,7 +8,7 @@ import {BsPerson} from 'react-icons/bs'
 import {HiOutlineMenuAlt4} from 'react-icons/hi'
 import {AiOutlineClose} from 'react-icons/ai'
 import {AiOutlineSearch} from 'react-icons/ai'
-
+import {Country} from "../Country"
 import {FaFacebook,FaInstagram,FaTwitter,FaPinterest,FaYoutube} from 'react-icons/fa'
 import EgyFlag from "../../assets/Egy.jpg"
 import GerFlag from "../../assets/Ger.jpg"
@@ -42,7 +42,7 @@ function Navbar(props) {
   return (
     
     <div className={nav? 'navbar navbar-bg' : 'navbar'}>
-    
+
         <div className={nav? 'logo dark' : 'logo'}>
         
             <a href="/">
@@ -79,7 +79,9 @@ function Navbar(props) {
             <BiDownArrow className="icon" style={{marginRight: '1rem'}} onClick={handleCountryBar}></BiDownArrow>
             
             </div>
-            <BiSearch className="icon" onClick={handleSearchBar} style={{marginRight: '1rem'}}/>
+            {/* <Country className="country"></Country> */}
+
+            <BiSearch className="icon" onClick={ handleSearchBar} style={{marginRight: '1rem'}}/>
             <BsPerson className="icon" onClick={()=> navigate('/login')} style={{marginRight: '1rem'}}  />
         </div>
             <div className="hamburger" onClick={handleNav}>
@@ -124,28 +126,19 @@ function Navbar(props) {
              </div>
             </div>
             <div className={searchBar? 'SearchDiv' : 'nonSearchDiv'}>
-                
+                <div className="SearchDiv-content">
+
+                    <h1>Search for courses</h1>
                 <div className="searchBarForm">
-
-            <form className="form">
-              <button className="filterButton" onClick={handleFilter}>
-                Filter
-              </button>
-              <div className={filter? "Filters" : "NoFilters"}>
-
-              <input type="checkbox" text="by subject"/>
-              <input type="checkbox" text="by rating"/>
-              <input type="checkbox" text="by price"/>
-
-              </div>
-              
-            <div>
-                <input type="text" placeholder="Enter Course name"/>
-            </div>
-        <div>
-            <button><AiOutlineSearch className='icon'/></button>
-        </div>
+                  <form className="form2">
+                <input type="text" placeholder="Enter Course name / title / instructor" required={true}/>
+    
+         <button  onClick={()=> navigate('/AllCourses')}>
+             <AiOutlineSearch className='icon' />
+            </button>
+        
         </form>
+                </div>
                 </div>
                 </div>
 
