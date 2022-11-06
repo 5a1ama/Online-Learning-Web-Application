@@ -22,6 +22,9 @@
     left:5%;
     position :absolute;
 }
+.LoginBox-content{
+    transform: translate(0 1rem);
+}
 .LoginBox h2{
     align-items: center;
     text-align:center;
@@ -44,18 +47,18 @@ h3{
     max-width: 400px;
     margin: 0px 1.5rem ;
 }
-.Login-form input[type=text] {
+.Login-form input {
     background-color: transparent;
     border:transparent;
     border:none ;
     width: 320px ;
     height:50px;
     font-size:1.2rem ;
-    color:#fff;
+    color:rgb(0, 0, 0);
     padding : 0rem 0rem;
     font-family: 'Poppins' sans-serif;
 }
-.Login-form input[type=text]:focus{
+.Login-form input:focus{
     outline: none;
 }
 .SearchButtons button{
@@ -63,7 +66,30 @@ h3{
     height : 7vh;
     left:0%;
     padding: 1rem 1rem;
-    margin: 2rem 1rem;
+    margin: 1rem 1rem;
     font-size: 15px
 
+}
+.Login-RegisterHere{
+    display: flex;
+    flex-direction: row;
+}
+.Login-NotReg {
+    color:#eeeaea;
+    padding :0rem 1.5rem;
+    font-weight: 500;
+}
+
+.Login-RegisterHere a{
+    color:rgb(10, 223, 88);
+    
+    margin: 0rem 0rem;
+    padding: 0rem 0rem;
+    transform: translate(-0.8rem, 0.1rem);
+
+}
+.Login-RegisterHere a:hover{
+    transition: 0.5s;
+    color:rgb(0, 255, 94);
+    text-decoration: underline;
 }
