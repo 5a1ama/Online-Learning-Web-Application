@@ -12,6 +12,7 @@ import {AllCourses} from './components/courses/AllCourses';
 import { TraineeHome } from './components/Trainee/TraineeHome';
 import { TraineeCourses } from './components/Trainee/TraineeCourses';
 import {InstAllCourses} from './components/Instructor/InstAllCourses';
+import {TraineeAllCourses} from './components/Trainee/TraineeAllCourses'
 import {Admin} from './components/Admin/Admin'
 import React from 'react';
 import ControlPanel from './components/Admin/ControlPanel';
