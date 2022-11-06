@@ -16,6 +16,7 @@ import {TraineeAllCourses} from './components/Trainee/TraineeAllCourses'
 import {Admin} from './components/Admin/Admin'
 import React from 'react';
 import ControlPanel from './components/Admin/ControlPanel';
+import { TraineeAllCourses } from './components/Trainee/TraineeAllCourses';
 export default function App() {
   const navigate = useNavigate();
 
@@ -38,7 +39,7 @@ export default function App() {
           <Route path="/InstAllCourses" element={<InstAllCourses/>}/>
           <Route path="/AdminHome" element={<Admin/>}/>
           <Route path="/AdminControlPanel" element={<ControlPanel/>}/>
-                    <Route path="/TraineeAllCourses" element={<TraineeAllCourses/>}/>
+          <Route path="/TraineeAllCourses" element={<TraineeAllCourses/>}/>
 
         </Routes>
       </div> 
