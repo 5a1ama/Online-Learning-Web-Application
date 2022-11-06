@@ -9,6 +9,7 @@ import {AddCourse} from './components/Instructor/AddCourse'
 import {AllCourses} from './components/courses/AllCourses';
 import { TraineeHome } from './components/Trainee/TraineeHome';
 import { TraineeCourses } from './components/Trainee/TraineeCourses';
+import {InstAllCourses} from './components/Instructor/InstAllCourses';
 
 import React from 'react';
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="/AllCourses" element={<AllCourses/>}/>
           <Route path="/TraineeHome" element={<TraineeHome/>}/>
           <Route path="/TraineeCourses" element={<TraineeCourses/>}/> 
+          <Route path="/InstAllCourses" element={<InstAllCourses/>}/>
 
         </Routes>
       </div> 
