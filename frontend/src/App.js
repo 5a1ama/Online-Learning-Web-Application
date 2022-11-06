@@ -37,6 +37,7 @@ export default function App() {
           <Route path="/TraineeHome" element={<TraineeHome/>}/>
           <Route path="/TraineeCourses" element={<TraineeCourses/>}/> 
           <Route path="/InstAllCourses" element={<InstAllCourses/>}/>
+          <Route path="/TraineeAllCourses" element={<TraineeAllCourses/>}/>
 
         </Routes>
       </div> 
