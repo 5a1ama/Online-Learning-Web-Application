@@ -7,6 +7,7 @@ import { InstructorCourses } from './components/Instructor/InstructorCourses';
 import {Instructor} from './components/Instructor/Instructor';
 import {Login} from './components/Login/Login'
 import {AddCourse} from './components/Instructor/AddCourse'
+import React from 'react';
 export default function App() {
   const navigate = useNavigate();
 
