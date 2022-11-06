@@ -107,7 +107,7 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     position: absolute;
     top: 5px;
-    left:65%;
+    left:70%;
     color:rgb(255, 0, 0);
 }
 .starImg{
@@ -115,6 +115,11 @@ transform: translate(0,80px);
 width: 40px;
 height:30px;
 
+}
+.starImgDiv{
+    position:absolute;
+    left:50%;
+    top:0%;
 }
 .Courses{
     width: 100%;

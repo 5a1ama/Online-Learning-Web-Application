@@ -30,7 +30,7 @@ function AllCourses() {
     <div>
       
     <div>
-      <Navbar items={["Home","Courses","About Us"]} select="Courses" scroll={["","",""]} nav={["/","/AllCourses",""]}/>
+    <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Home" nav={["/","/","/","/signUp"]} scroll={["Home","Courses","AboutUs"]}  />
     </div>
     <div className='AllCourses'>
     <h1 className="heading">Our Courses</h1>
