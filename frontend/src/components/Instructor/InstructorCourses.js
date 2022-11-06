@@ -11,6 +11,7 @@ import { Slider } from '../courses/Slider';
 
 import NewCourse from '../courses/NewCourse';
 export function InstructorCourses(){
+  const [search,setSearch]=useState("");
     const navigate = useNavigate();
   const [courses,setCourses] = useState([]);
   const getCourses = async () =>{

@@ -25,6 +25,7 @@ function AllCourses() {
     // const navigate2 = useNavigate();
 
         getCourses();
+        
   
   return (
     <div>
