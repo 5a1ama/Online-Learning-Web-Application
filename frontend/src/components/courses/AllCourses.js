@@ -7,12 +7,13 @@ import starImg from "../../assets/goldStar.png"
 import './AllCourses.css'
 import Slider from './Slider';
 import { TextField } from '@mui/material';
+import NewCourse from './NewCourse';
+
 export {default as AllCourses} from './AllCourses'
 
 
 function AllCourses() {
-  
-    const navigate = useNavigate();
+ 
     const [courses,setCourses] = useState([]);
     const getCourses = async () =>{
       setCourses ((await getAllCourses()));
@@ -22,38 +23,7 @@ function AllCourses() {
     const handleFilterBar = () => setFilterBar(!FilterBar)
     // const navigate2 = useNavigate();
 
-
-    
-  
-    const stars = (starNumber) => {
-      var array=[];
-      for(var i=0;i<starNumber;i++){
-        array=array.concat([0])
-      }
-      return array
-    
-    }
-     
-    const Newcourse = (props) => (
-      <>
-         <div className="newCourse"  >
-        <button className="newCourseButton" onClick={()=> navigate('/courses')}>
-        <div>
-        <h2 >{props.course.title}</h2>
-         <h2 className='totalhours'>{props.course.hours} Hours</h2>
-        </div>
-        <br/>
-        <br />
-  
-        <div>
-        <h2 className='price'>{props.course.price}$</h2>
-        {stars(props.course.rating).map((num)=> <img className="starImg" src={starImg} alt="."/>)}
-        </div>
-        </button>
-        </div>
-      </>
-    );
-    getCourses();
+        getCourses();
   
   return (
     <div>
@@ -63,7 +33,7 @@ function AllCourses() {
             </div>
             <div className='AllCourses'>
             <h1 className="heading">Our Courses</h1>
-            {courses.map((course) => <Newcourse course={course}/>)}
+            {courses.map((course) => <NewCourse course={course}/>)}
             </div>
     
             <button className='AllCourses-FilterBarButton' onClick={handleFilterBar}>Filter Courses</button>

@@ -32,6 +32,7 @@ function Login() {
         
     }
     const handleLogin=(event)=>{
+        
     event.preventDefault();
     init();
    }
@@ -45,7 +46,7 @@ function Login() {
         </div>
          <div className = "LoginBox" >
          <div className="LoginBox-content">
-         <Link> <h2> Login Here </h2> </Link>
+         <Link to=""> <h2> Login Here </h2> </Link>
          <h3> Enter Your Email: </h3> 
          <form>
          <div className = "Login-form" >
@@ -57,7 +58,9 @@ function Login() {
          <h3> Enter Your Password: </h3> 
          <div className = "Login-form" >
          
-         <input type = "password" placeholder = "**********" inputMode='password' onChange={handlePassword} required={true}  / >
+         <input type = "password" placeholder = "**********" 
+// @ts-ignore
+         inputMode='password' onChange={handlePassword} required={true}  / >
          </div>
          
          <div className="Login-WrongData" >

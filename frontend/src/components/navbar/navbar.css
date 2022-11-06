@@ -6,7 +6,6 @@
     align-items: center; 
     padding : 0 1rem;
     z-index: 2;
-    color: #fff;
     position: fixed;
     top:0px;
     color: #fff;
@@ -58,15 +57,45 @@ li {
     height:50vh;
     display: flex;
     flex-direction: column; 
-    background-color:rgb(5, 28, 42);
+    background-color:rgb(3, 35, 46);
     top:60px;
     left:0;
+    align-items: center;
     transition: 0.5s
     
 }
+.SearchDiv-content{
+   align-items: center;
+}
+.SearchDiv-content h1{
+    padding: 1rem 0rem;
+ }
+.searchBarForm form{
+    display: flex;
+    background-color: #ffffffcc;
+    color:#000;
+    justify-content:space-between;
+    align-items:center;
+    border: 1px solid #ccc ;
+    border-radius: 8px;
+    margin: 0rem 14rem;
+    max-width: 1500px;
+}
+.form2 input[type=text] {
+    background-color: transparent;
+    border:transparent;
+    border:none ;
+    width: 700px ;
+    height:50px;
+    font-size:1.2rem ;
+    font-family: 'Poppins' sans-serif;
+}
+.form2 input[type=text]:focus{
+    outline: none;
+}
 .nonSearchDiv{
     position:absolute;
-    top:-200vh;
+    top:-50vh;
     width:100%;
 
 }
@@ -145,13 +174,17 @@ li {
     background-color: transparent;
     border:transparent;
     border:none ;
-    width: 1200px ;
+    width: 1500px ;
     height:50px;
     font-size:1.2rem ;
     font-family: 'Poppins' sans-serif;
 }
 .form input[type=text]:focus{
     outline: none;
+}
+Country{
+    color: black;
+    background-color:blue;
 }
 @media screen and (max-width: 940px){
     .mobile-menu{

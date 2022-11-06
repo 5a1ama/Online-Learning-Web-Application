@@ -15,6 +15,7 @@ const LoginUser =async(email,password)=>{
         })
       });
       const j = await response.json();
+      localStorage.setItem("token",j)
       return j
         
 }
