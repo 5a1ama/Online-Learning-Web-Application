@@ -5,11 +5,27 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
+import { useState } from "react";
 export function AddCourse(){
     const [title,setTitle]=useState("");
+    const handleTitle=(event)=>{
+        setTitle(event.target.value);
+    }
     const [subtitle,setSubtitle]=useState("");
+    const handleSub=(event)=>{
+        setSubtitle(event.target.value);
+    }
     const [price,setPrice]=useState("");
+    const handlePrice=(event)=>{
+        setPrice(event.target.value)
+    }
     const [summary,setSummary]=useState("")
+    const handleSummary=(event)=>{
+        setSummary(event.target.value)
+    }
+    const handleCreate=async()=>{
+
+    }
     return(
     <div className="AddCours">
 
