@@ -6,7 +6,7 @@ export {default as Admin} from './Admin'
 function Admin() {
   return (
     <div className="Admin">
-    <Navbar items={["Home","Control Panel","Reports"]} select="Home" nav={["","/AdminControlPanel",""]} scroll={["","",""]}  />
+    <Navbar items={["Home","Control Panel","Reports"]} select="Home" nav={["/AdminHome","/AdminControlPanel",""]} scroll={["","",""]}  />
     <div className="Admin-Content">
 
     </div>
