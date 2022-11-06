@@ -7,10 +7,12 @@ const jwt=require("jsonwebtoken")
 const dotenv=require("dotenv")
 dotenv.config()
 
-router.get("/myCourses",async function(req,res){
+router.get("/myCourses/:token",async function(req,res){
     // @ts-ignore
     // var user=jwt.verify(req.session.token,process.env.ACCESSTOKEN);
-    var user=req.session.user
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN)
+    console.log(user.id)
     var id=user.id ;
     var result=await Course.find({});
     var array=[];
