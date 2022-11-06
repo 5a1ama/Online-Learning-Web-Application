@@ -9,7 +9,12 @@ function ControlPanel() {
             <div className="controlPanel_content4horizontal">
                 
             <div className="ControlPanel_Func">
-                <h3 ></h3>
+                <h3>Add Admin</h3>
+                <form>
+                    <input type="email" placeholder="Enter new Administrator Email"></input>
+                    <input type="password" placeholder="Enter new Administrator password"></input>
+                    <button>Add Administrator</button>
+                </form>
             </div>
             <div className="ControlPanel_Func">
 

@@ -26,6 +26,13 @@ justify-content: space-between;
     box-shadow:0px 6px 10px rgb(0,0,0,0.3);
     border-radius: 15px;
     margin: 2rem 2rem;
+    align-items: center;
+}
+.ControlPanel_Func h3{
+    color:rgb(10, 138, 218);
+    font-size: 25px;
+    text-align: center;
+    
 }
 .ControlPanel_Func5{
     width :93% ;
@@ -35,3 +42,4 @@ justify-content: space-between;
     border-radius: 15px;
     margin: 2rem 2rem;
 }
+
