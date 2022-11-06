@@ -1,13 +1,20 @@
 import React,{useState} from 'react'
 import {useNavigate} from 'react-router-dom';
 
-import {BiSearch} from 'react-icons/bi'
+import {BiDownArrow, BiSearch} from 'react-icons/bi'
 import {BsPerson} from 'react-icons/bs'
+
+
 import {HiOutlineMenuAlt4} from 'react-icons/hi'
 import {AiOutlineClose} from 'react-icons/ai'
 import {AiOutlineSearch} from 'react-icons/ai'
 
 import {FaFacebook,FaInstagram,FaTwitter,FaPinterest,FaYoutube} from 'react-icons/fa'
+import EgyFlag from "../../assets/Egy.jpg"
+import GerFlag from "../../assets/Ger.jpg"
+import UaeFlag from "../../assets/Uae.jpg"
+import UkFlag from "../../assets/UK.jpg"
+import UsaFlag from "../../assets/Usa.jpg"
 
 import './navbar.css'
 
@@ -23,6 +30,13 @@ function Navbar(props) {
 
     const [searchBar,setSearchBar] = useState(false)
     const handleSearchBar = () => setSearchBar(!searchBar)
+
+    const [countryBar,setCountryBar] = useState(false)
+    const handleCountryBar = () => setCountryBar(!countryBar)
+
+    const [chosenCountry,setChosenCountry] = useState(EgyFlag)
+    const handleChosenCountry = (x) => setChosenCountry(x);
+
     const navigate = useNavigate();
 
   return (
@@ -30,7 +44,7 @@ function Navbar(props) {
     <div className={nav? 'navbar navbar-bg' : 'navbar'}>
     
         <div className={nav? 'logo dark' : 'logo'}>
-
+        
             <a href="/">
                     <h2>Learn.</h2>
                 </a>
@@ -59,6 +73,12 @@ function Navbar(props) {
             <Link to='' smooth={true} duration="500"><li>About Us</li></Link> */}
         </ul>
         <div className="nav-icons">
+            <div className="nav-Country-icons">
+            <img src={chosenCountry} alt="." width="30px" height="20px" onClick={handleCountryBar}
+             style={{borderRadius:'5px',marginRight:'0.5rem',cursor:'pointer'}} ></img>
+            <BiDownArrow className="icon" style={{marginRight: '1rem'}} onClick={handleCountryBar}></BiDownArrow>
+            
+            </div>
             <BiSearch className="icon" onClick={handleSearchBar} style={{marginRight: '1rem'}}/>
             <BsPerson className="icon" onClick={()=> navigate('/login')} style={{marginRight: '1rem'}}  />
         </div>
@@ -87,7 +107,22 @@ function Navbar(props) {
                     </div>
                 </div>
             </div>
+            <div className={countryBar?"CountryBar":"nonCountryBar"}>
+                <div className="CountryBar-content">
 
+            <img src={EgyFlag} alt="." width="30px" height="20px" onClick={ () => {handleChosenCountry(EgyFlag);handleCountryBar()}   }
+             style={{borderRadius:'5px',marginRight:'0.5rem' ,cursor:'pointer'}} ></img>
+              <img src={UsaFlag} alt="." width="30px" height="20px" onClick={ () => {handleChosenCountry(UsaFlag);handleCountryBar()}   }
+             style={{borderRadius:'5px',marginRight:'0.5rem',cursor:'pointer'}} ></img>
+              <img src={UaeFlag} alt="." width="30px" height="20px" onClick={ () => {handleChosenCountry(UaeFlag);handleCountryBar()}   }
+             style={{borderRadius:'5px',marginRight:'0.5rem',cursor:'pointer'}} ></img>
+              <img src={UkFlag} alt="." width="30px" height="20px" onClick={ () => {handleChosenCountry(UkFlag);handleCountryBar()}   }
+             style={{borderRadius:'5px',marginRight:'0.5rem',cursor:'pointer'}} ></img>
+              <img src={GerFlag} alt="." width="30px" height="20px" onClick={ () => {handleChosenCountry(GerFlag);handleCountryBar()}   }
+             style={{borderRadius:'5px',marginRight:'0.5rem',cursor:'pointer'}} ></img>
+             
+             </div>
+            </div>
             <div className={searchBar? 'SearchDiv' : 'nonSearchDiv'}>
                 
                 <div className="searchBarForm">

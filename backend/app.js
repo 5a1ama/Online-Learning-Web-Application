@@ -13,15 +13,29 @@ const app = express();
 const port = process.env.PORT || "8000";
 const user = require('./Models/User');
 const cors=require("cors")
+const cookieParser = require("cookie-parser");
+const sessions = require('express-session');
 const courseRouter=require("./routes/course")
 const userRouter=require("./routes/addUsers")
+const instructorRouter=require("./routes/instructor")
+const commonRouter=require("./routes/commonRoutes")
 // #Importing the userController
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(cookieParser());
+app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false 
+}));
 app.set('view engine', 'ejs')
 app.use(cors())
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 app.use("/course",courseRouter)
 app.use("/user",userRouter)
+app.use("/instructor",instructorRouter)
+app.use("/",commonRouter)
 // configurations
 // Mongo DB
 mongoose.connect(MongoURI)
@@ -33,20 +47,3 @@ mongoose.connect(MongoURI)
   })
 })
 .catch(err => console.log(err));
-/*
-                                                    Start of your code
-*/
-app.get("/home", (req, res) => {
-    
-    res.status(200).send("123");
-  });
-
-// #Routing to userController here
-
-
-
-
-/*
-                                                    End of your code
-*/
-
