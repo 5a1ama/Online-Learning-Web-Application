@@ -4,7 +4,6 @@ import "./Instructor.css"
 import {InstructorHome} from "./InstructorHome"
 
 export function Instructor(){
-  alert(localStorage.getItem("token"))
     const Newcourse = (props) => (
         <>
          <div className="newCourse">

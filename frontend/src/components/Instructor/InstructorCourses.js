@@ -9,21 +9,12 @@ import { TextField } from '@mui/material';
 import { getMycourses } from '../../API/InstructorAPI';
 import { Slider } from '../courses/Slider';
 
-
+import NewCourse from '../courses/NewCourse';
 export function InstructorCourses(){
-    // const[course , setcourse]=useState([{title:"csen19",price:"12344"}])
-    // const Newcourse = (props) => (
-    //     <>
-    //      <div className="newCourse">
-    //       <h2>{props.course.title}</h2>
-    //       <h2 className='price'>{props.course.price}</h2>
-    //     </div>
-    //     </>
-    //   );
     const navigate = useNavigate();
   const [courses,setCourses] = useState([]);
   const getCourses = async () =>{
-    setCourses ((await getMycourses()));
+    setCourses ((await getMycourses(localStorage.getItem("token"))));
   }
 
   const stars = (starNumber) => {
@@ -34,26 +25,6 @@ export function InstructorCourses(){
     return array
   
   }
-   
-  const Newcourse = (props) => (
-    <>
-       <div className="newCourse"  >
-      <button className="newCourseButton" onClick={()=> navigate('/courses')}>
-      <div>
-      <h2 >{props.course.title}</h2>
-       <h2 className='totalhours'>{props.course.hours} Hours</h2>
-      </div>
-      <br/>
-      <br />
-
-      <div>
-      <h2 className='price'>{props.course.price}$</h2>
-      {stars(props.course.rating).map((num)=> <img className="starImg" src={starImg} alt="."/>)}
-      </div>
-      </button>
-      </div>
-    </>
-  );
   getCourses();
     
     return(
@@ -62,7 +33,7 @@ export function InstructorCourses(){
             <Navbar items={["Home","My Courses","Caleneder"]} select="My Courses" nav={["/instructor","/InstructorCourses",""]} scroll={["","",""]}  />
             </div>
              <div className="InstCourses" name = 'instCourses'>
-            {courses.map((course)=><Newcourse course={course}/>)}
+            {courses.map((course)=><NewCourse course={course}/>)}
                 </div>
                 <div>
                 <form className="search-instrutor-courses">
