@@ -20,7 +20,7 @@ function AllCourses() {
 
     const [FilterBar,setFilterBar] = useState(false)
     const handleFilterBar = () => setFilterBar(!FilterBar)
-    const navigate2 = useNavigate();
+    // const navigate2 = useNavigate();
 
 
     
@@ -77,7 +77,7 @@ function AllCourses() {
             <Slider/>
             </div>
             <h1 className='AllCourses-Subject'>By Subject:</h1>
-            <TextField className = 'AllCourses-TextField' label = 'Enter Subject'/>
+            <input className = 'AllCourses-TextField' placeholder='Enter Subject'/>
             <button className ='AllCourses-Apply'>Apply</button>
             <h1 className='AllCourses-Rate'>By Rate:</h1>
             <div className = 'AllCourses-Rating'>
