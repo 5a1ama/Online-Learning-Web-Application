@@ -50,7 +50,7 @@
 }
 
 .Course-subTitles{
-    width: 20%;
+    width: 30%;
     display: flex;
     flex-direction :column;
     position:relative;
@@ -74,7 +74,7 @@
 }
 .Large-NewData-NewCourse{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     position: relative;
     top:0%;
     left:0%;
@@ -92,6 +92,15 @@
     position: absolute;
     top: 0;
     left:55%;
+}
+.price2{
+    font-weight:600;
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: absolute;
+    top: 5px;
+    left:65%;
+    color:rgb(255, 0, 0);
 }
 .starImg{
 transform: translate(0,80px);
