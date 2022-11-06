@@ -3,16 +3,38 @@ import { useState } from "react";
 import { getAllCourses } from "../../API/CourseAPI";
 import AllCoursesSearch from "../courses/AllCoursesSearch";
 import NewCourse from "../courses/NewCourse";
-import { Slider } from "../courses/Slider";
+import Slider from '@mui/material/Slider';
+import Box from '@mui/material/Box';
+import { FilterAllCourse } from "../../API/InstructorAPI";
 
 export function InstAllCourses(){
+  const [first,setFirst]=useState(0);
     const [courses,setCourses] = useState([]);
+    const [value,setValue]=useState([1000,5000]);
+    const [subject,setSubject]=useState(".");
+    const valuetext=(value)=> {
+      return `${value}°C`;
+    }
+    const handleFilter2=async()=>{
+      setCourses((await FilterAllCourse(value[0],value[1],subject) ))
+      setFirst(1)
+    }
+    const handleChange = (event, newValue) => {
+      setValue(newValue);
+      
+    };
+    const handleSubject=(event)=>{
+      setSubject(event.target.value)
+    }
     const getCourses = async () =>{
       setCourses ((await getAllCourses()));
     }
     const [FilterBar,setFilterBar] = useState(false)
     const handleFilterBar = () => setFilterBar(!FilterBar)
-    getCourses();
+    if(first==0){
+      getCourses();
+
+    }
 
     return(
         <div>
@@ -30,18 +52,21 @@ export function InstAllCourses(){
             <div className={FilterBar? 'AllCourses-FilterDiv' : 'AllCourses-nonFilterDiv'}>
             <h1 className = 'AllCourses-Price'>By Price:</h1>
             <div className ='AllCourses-Slider'>
-            <Slider/>
+              <Box sx={{ width: 300 }}>
+              <Slider getAriaLabel={() => 'Price Range'}
+        value={value}
+        onChange={handleChange}
+        valueLabelDisplay="auto"
+        getAriaValueText={valuetext}
+        min={0}
+        max={10000} />
+
+              </Box>
             </div>
             <h1 className='AllCourses-Subject'>By Subject:</h1>
-            <input className = 'AllCourses-TextField' placeholder='Enter Subject'/>
-            <button className ='AllCourses-Apply'>Apply</button>
-            <h1 className='AllCourses-Rate'>By Rate:</h1>
-            <div className = 'AllCourses-Rating'>
-              <button>≤2★</button>
-              <button>3★</button>
-              <button>4★</button>
-              <button>5≤★</button>
-            </div>
+            <input onChange={handleSubject} className = 'AllCourses-TextField' placeholder='Enter Subject'/>
+            <button onClick={handleFilter2} className ='AllCourses-Apply'>Apply</button>
+           
 
             </div>
             
