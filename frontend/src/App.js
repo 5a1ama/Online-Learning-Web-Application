@@ -8,6 +8,7 @@ import {Login} from './components/Login/Login'
 import {AddCourse} from './components/Instructor/AddCourse'
 import {AllCoursesSearch} from './components/courses/AllCoursesSearch';
 import {AllCourses} from './components/courses/AllCourses';
+import {WhatHegza} from './components/whatHegza/WhatHegza'
 
 import { TraineeHome } from './components/Trainee/TraineeHome';
 import { TraineeCourses } from './components/Trainee/TraineeCourses';
@@ -16,6 +17,7 @@ import {TraineeAllCourses} from './components/Trainee/TraineeAllCourses'
 import {Admin} from './components/Admin/Admin'
 import React from 'react';
 import ControlPanel from './components/Admin/ControlPanel';
+import Footer from './components/footer/Footer';
 export default function App() {
   const navigate = useNavigate();
 
@@ -48,9 +50,12 @@ export default function App() {
 
 function Home() {
   return <div className="Home">
-    <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Home" nav={["","","","/signUp"]} scroll={["Home","Courses","AboutUs"]}  />
+    <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Home" nav={["","","","/signUp"]} scroll={["Home","Courses","WhatHegza"]}  />
   <Bgvid />
   <Courses />
-    </div>
+  <WhatHegza />
+  <Footer/>
+
+   </div>
 }
 
