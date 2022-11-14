@@ -30,7 +30,7 @@
     /* border: 1px solid #fff; */
     text-align: center;
 
-    margin-bottom: 10rem;
+    margin-bottom: 8rem;
     cursor: pointer;
 }
 
@@ -58,7 +58,6 @@
     align-items: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
-
     width: 100%;
     text-align: left;
 }
@@ -76,6 +75,7 @@
 .gpt3__footer-links_logo2{
     transform: translate(-54vh, 0);
 }
+
 .gpt3__footer-links_logo2 p {
     color:#fff;
     width: 518px;

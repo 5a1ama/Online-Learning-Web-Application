@@ -10,6 +10,8 @@ const Footer = () => (
     <div className="gpt3__footer-btn">
       <button>Register Now</button>
     </div>
+
+
     <div className="gpt3__footer-links_logo2">
 
 <p  href="/">Learn.</p>
