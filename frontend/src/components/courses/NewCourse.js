@@ -64,7 +64,11 @@ export function NewCourse(props) {
         </div>
           </div>
         </div>
-        <BiDownArrow className="icon" style={{marginRight: '1rem' }} onClick={handleCourseDetails}></BiDownArrow>
+          <div className="ViewMoreH5">
+
+          <h5 onClick={handleCourseDetails}>view details</h5>
+          </div>
+        <BiDownArrow className="icon" style={{marginRight: '1rem' , transform:'translate(0 ,-1px)'}} onClick={handleCourseDetails}></BiDownArrow>
       <button className="NewCourse-button-OpenCourse" style={{marginRight: '1rem' ,width:"100px",height:"60px",transform:"translate(1rem,1.7rem)" }} onClick={()=>navigate("/course")}>Open Course</button>
     </div>  
   )

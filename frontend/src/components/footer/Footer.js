@@ -1,14 +1,19 @@
 import React from 'react';
+import {useNavigate} from 'react-router-dom';
 import './footer.css';
 export {default as Footer} from './Footer'
-const Footer = () => (
-  <div className="gpt3__footer section__padding">
+
+function Footer () {
+  
+  const navigate = useNavigate();
+  return (
+    <div className="gpt3__footer section__padding">
     <div className="gpt3__footer-heading">
-      <h1 className="gradient__text">Do you want to step in to the future before others ?</h1>
+      <h1 className="gradient__text">Do you want to step into the future before others ?</h1>
     </div>
 
     <div className="gpt3__footer-btn">
-      <button>Register Now</button>
+      <button onClick={()=>navigate("/signUp")}>Register Now</button>
     </div>
 
 
@@ -47,5 +52,6 @@ const Footer = () => (
     </div>
   </div>
 );
+} 
 
 export default Footer;

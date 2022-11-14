@@ -43,6 +43,19 @@
     justify-content: space-between;
     border-radius : 20px ;    
 }
+.ViewMoreH5{
+    width: 130px;
+}
+.newCourse h5{
+   
+    font-weight: 300;
+    cursor: pointer;
+}
+.newCourse-After h5{
+    font-weight: 300;
+    cursor: pointer;
+}
+
 .newCourse-After-Content{
     position:relative;
     width: 900px;
