@@ -41,6 +41,13 @@ export const createUser=()=>{
     return response.json();
   });
 }
-export const createCourse=()=>{
-  
+export const createCourse=async (title,subtitle,price,summary)=>{
+  const response=await fetch(`${api}/course`,{method: "POST",
+  headers: {
+      "Content-type": "application/json; charset=UTF-8"
+  },
+  body:JSON.stringify({title:title,subtitles:subtitle,price:price,summary:summary})
+  });
+  const j=await response.json()
+  return j
 }
