@@ -29,6 +29,7 @@ export default function App() {
           <Route path="/courses" element={<Navbar items={["Home"]} select="Home" scroll={["home"]} nav={[""]}/>} />
 
           <Route path="/" element={<Home />} />
+          {/* <Route path="/" element={<CoursePage/>}/> */}
           <Route path="/instructor" element={<Instructor/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/InstructorCourses" element={<InstructorCourses/>}/>

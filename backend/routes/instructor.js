@@ -149,4 +149,37 @@ router.get("/myCourses-search/:search/:token",async function(req,res){
     }
     res.json(final)
 })
+router.post("/uploadCourseVideo", async function(req,res){
+    var token=req.body.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var courseid=req.body.courseID;
+    var link=req.body.link; 
+    await Course.findOneAndUpdate({id:courseid},{previewVideo:link})
+})
+router.post("/uploadSubtitleVideo",async function(req,res){
+    var token=req.body.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var courseid=req.body.courseID;
+    var link=req.body.link;
+    var description=req.body.description;
+    var subtitle=req.body.subtitle;
+    var result=await Course.findOne({id:courseid}) ;
+    var array=result.subtitles;
+    for(var i=0;i<array.length;i++){
+        if(array[i].title==subtitle){
+            array[i].video=link;
+            array[i].description=description;
+        }
+    }
+    await Course.findOneAndUpdate({id:courseid},{subtitles:array});
+})
+router.post("/coursePromotion",async function(req,res){
+    var token=req.body.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var courseid=req.body.courseID;
+    var amount=req.body.amount;
+    var duration=req.body.duration;
+    await Course.findOneAndUpdate({id:courseid},{discount:{amount:amount,duration:duration
+    }})
+})
 module.exports=router
