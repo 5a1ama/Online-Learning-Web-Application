@@ -42,14 +42,14 @@ export function NewCourse(props) {
         <div className={courseDetails?"Large-NewData-NewCourse":"nonNewData-NewCourse"}>
             <div style={{display:"flex" , flexDirection:"row"}}>
 
-            <h3 style={{fontSize:"30px"}}>Course Content :</h3>
-            <h3 style={{fontSize:"30px", marginLeft:"8rem"}}>Excercises :</h3>
+            <h3 style={{fontSize:"20px"}}>Course Content :</h3>
+            <h3 style={{fontSize:"20px", marginLeft:"8rem"}}>Excercises:</h3>
 
             </div>
         <div className={courseDetails?"NewData-NewCourse":"nonNewData-NewCourse"}>
 
             <div className="Course-subTitles">
-                 {props.course.subtitles.map((sub,i)=>  <h4 >{i+1}  -  {sub.name}</h4>)}
+                 {props.course.subtitles.map((sub,i)=>  <h4 >{i+1}  -  {sub.title}</h4>)}
             </div>
             <div className="Course-subTitles">
                  {props.course.subtitles.map((sub,i)=>  <h4 > {sub.hours} Hours</h4>)}
@@ -58,7 +58,7 @@ export function NewCourse(props) {
 
 
             <div className="Course-subTitles">
-                 {props.course.excercises.map((exe,i)=>  <h4 > {exe} </h4>)}
+                  {props.course.excercises.map((exe,i)=>  <h4 >Exercise {exe} </h4>)}
             </div>
             
         </div>
