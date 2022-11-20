@@ -46,9 +46,9 @@ function Login() {
         </div>
          <div className = "LoginBox" >
          <div className="LoginBox-content">
+         <form>
          <Link to=""> <h2> Login Here </h2> </Link>
          <h3> Enter Your Email: </h3> 
-         <form>
          <div className = "Login-form" >
          <div>
          <input type = "email"  placeholder = "Ex: John@gmail.com" onChange={handleEmail} required={true}/ >

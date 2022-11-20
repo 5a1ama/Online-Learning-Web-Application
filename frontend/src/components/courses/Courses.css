@@ -5,7 +5,7 @@
 .newCourse{
     margin:2rem 2rem;
     padding:1rem 2rem;
-    width :900px ;
+    width : 58.59375vw ;
     height: 150px ;
     color:aliceblue;
     /* background-color:linear-gradient(90deg, rgba(10, 138, 222, 1) 0%, rgba(216, 149, 255, 1) 100%); */
@@ -124,15 +124,15 @@
     color:rgb(255, 0, 0);
 }
 .starImg{
-transform: translate(0,80px);
+/* transform: translate(0px,90px); */
 width: 40px;
 height:30px;
 
 }
 .starImgDiv{
     position:absolute;
-    left:50%;
-    top:0%;
+    left:2vw;
+    top:60%;
 }
 .Courses{
     width: 100%;
@@ -189,3 +189,4 @@ text-align: center;
     font-weight:300;
     font-size: 25px;
 }
+
