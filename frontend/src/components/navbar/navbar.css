@@ -109,7 +109,7 @@ li {
     flex-direction: column; 
     background-color:rgb(255, 255, 255);
     top:10px;
-    left:88.1%;
+    left:89.1%;
     transition: 0.5s;
     z-index:-2;
     padding: 3.2rem 0rem;
@@ -120,6 +120,50 @@ li {
     width:3%;
 
 }
+.SettingMenu{
+    /* display:block;  */
+    position: absolute;
+    
+    width:12%;
+    height:30vh;
+    transition: 0.5s;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; 
+    background-color:rgb(255, 255, 255);
+    top:50px;
+    left:87.5%;
+    z-index:0;
+    
+    /* padding: 3.2rem 0rem; */
+}
+.nonSettingMenu{
+    position:absolute;
+    height:0vh;
+    width:0vh;
+    display: none;
+    transition:0.5s;
+    
+}
+.SettingItem{
+    width: 100%;
+    height:100%;
+}
+.SettingItem button{
+    margin-bottom: 5px;
+    width: 100%;
+    height:100%;
+    border-radius: 10px;
+    background-color:white; 
+    color:var(--primary-light);
+    font-size: 20px;
+    font-family: Roboto;
+    text-align: left;
+}
+.SettingItem button:hover{
+    background-color:rgb(240, 240, 240); 
+}
+
 .nonCountryBar img{
     position:absolute;
     height:0vh;
@@ -195,11 +239,14 @@ Country{
         left: 0;
         position: absolute;
         justify-content: space-between;
+        color:#000;
         /* color: rgba(255,255,255,.95); */
         background-color: #f5f5f5;
         transition: 0.3s;
-        color:#000;
         
+    }
+    .mobile-menu li{
+        color:#000;
     }
     .dark{
         color:#000;
