@@ -1,0 +1,86 @@
+.CourseContent{
+    width: 100%;
+    height: 100%; 
+    align-items: center;
+}
+.CourseContent_Content{ 
+    margin: 1rem 1rem;
+    padding: 1rem 1rem;
+}
+.CourseContent_Video{
+    width: 100%;
+    height: 95vh;
+    position: relative;
+    top:60px;
+}
+.CourseContent_overlay{
+    background-color: rgba(0, 18, 28, 0.401);
+    position: absolute;
+    width: 100%;
+    height: 94%;
+    top: 0;
+    left: 0;
+    margin: 0px 0px ;
+
+}
+
+.CourseContent_button_Enroll{
+    background-color: rgba(0,0,0,0);
+    /* background-image:  linear-gradient(90deg, rgb(0, 187, 255) -100%, rgba(174, 0, 255, 0.1)40% ); */
+    border-radius: 40px;
+    position: absolute;
+    height:6vw;
+    width:20vw;
+    border-color: rgb(120, 120, 120);
+    border: solid 3px;
+    z-index: 1;
+    top:400px;
+    left:41%;
+    font-size: 20px;
+}
+.CourseContent_button_Enroll:hover{
+    transition: 1s;
+    transition-delay: 50ms;
+    background-color: rgba(0,0,0,0);
+
+    background-image:  linear-gradient(90deg, rgb(0, 187, 255) -80%, rgba(174, 0, 255, 0.1)40% );
+
+    transform: scale(1.4);
+    
+}
+
+  .CourseContent_button_Enroll::before {
+    position: absolute;
+    background-image:  linear-gradient(90deg, rgb(0, 187, 255) -100%, rgba(174, 0, 255, 0.1)0% );
+    z-index: -1;
+
+    transition: opacity 0.5s ease;
+    opacity: 0;
+  }
+  .CourseContent_button_Enroll:hover::before {
+    opacity: 1;
+  }
+
+  .CourseContent_button_Play{
+    position: absolute;
+    top: 100px;
+    left:47.9%;
+    color: #fff;
+    z-index: 1;
+    width: 50px;
+    height:50px;    
+  }
+
+  .CourseContent_Video {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+  }
+
+  .CourseContent_Video iframe {
+    position: absolute;
+    top: 0;
+    left: 0%;
+    width:100%;
+    height: 100%;
+  }

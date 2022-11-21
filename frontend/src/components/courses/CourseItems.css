@@ -1,0 +1,32 @@
+.CourseItems{
+    width: 100%;
+    height: 100%; 
+    align-items: center;
+}
+.CourseItems_Content{ 
+    margin: 1rem 1rem;
+    padding: 1rem 1rem;
+}
+.CourseItems_Video{
+    width: 100%;
+    height: 50vh;
+    position: absolute;
+    top:60px;
+}
+.CourseItems_overlay{
+    background-image: linear-gradient(90deg,rgba(11, 74, 96, 0.9),rgba(3, 35, 46, 0.9));
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0px 0px ;
+
+}
+.CourseItems_Content h1{
+    color:black;
+    position:absolute;
+    top:80%;
+}
+
+

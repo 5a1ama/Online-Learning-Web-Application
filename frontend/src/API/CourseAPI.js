@@ -51,3 +51,8 @@ export const createCourse=async (title,subtitle,price,summary)=>{
   const j=await response.json()
   return j
 }
+export const getCourseDetails=async (id)=>{
+  const result=await fetch(`http://localhost:8000/course/CourseItems/${id}`)
+  const j=await result.json();
+  return j
+}

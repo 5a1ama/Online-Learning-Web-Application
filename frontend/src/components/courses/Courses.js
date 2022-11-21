@@ -13,7 +13,7 @@ function Courses() {
   const [courses,setCourses] = useState([]);
   const getCourses = async () =>{
     setCourses ((await getAllCourses()).slice(1,4));
-    alert(courses);
+    // alert(courses);
   }
 
   const stars = (starNumber) => {

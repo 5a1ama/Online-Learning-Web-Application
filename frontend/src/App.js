@@ -18,6 +18,8 @@ import {Admin} from './components/Admin/Admin'
 import React from 'react';
 import ControlPanel from './components/Admin/ControlPanel';
 import Footer from './components/footer/Footer';
+import CourseContent from './components/courses/CourseContent';
+import CourseItems from './components/courses/CourseItems';
 export default function App() {
   const navigate = useNavigate();
 
@@ -40,6 +42,8 @@ export default function App() {
           <Route path="/AdminHome" element={<Admin/>}/>
           <Route path="/AdminControlPanel" element={<ControlPanel/>}/>
           <Route path="/TraineeAllCourses" element={<TraineeAllCourses/>}/>
+          <Route path="/CourseContent" element={<CourseContent/>}/>
+          <Route path="/CourseItems" element={<CourseItems/>}/>
 
         </Routes>
       </div> 

@@ -84,4 +84,13 @@ router.get("/search/:search",async function(req,res){
     }
     res.json(array)
 })
+router.get("/CourseItems/:id",async function(req,res)
+{
+    var id2 = req.params.id;
+    var query = Course.find({id:id2});
+    query.exec(function(err,result){
+        res.json(result)
+    })
+    }
+)
 module.exports=router
