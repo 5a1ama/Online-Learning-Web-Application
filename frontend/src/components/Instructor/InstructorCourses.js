@@ -6,13 +6,32 @@ import starImg from "../../assets/goldStar.png"
 import { AddCourse } from './AddCourse';
 import {AiOutlineSearch} from 'react-icons/ai'
 import { TextField } from '@mui/material';
-import { getMycourses } from '../../API/InstructorAPI';
-import { Slider } from '../courses/Slider';
+import { FilterMyCourse, getMycourses } from '../../API/InstructorAPI';
 import { SearchMyCourse } from '../../API/InstructorAPI';
 import NewCourse from '../courses/NewCourse';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
 export function InstructorCourses(){
   const [search,setSearch]=useState("");
+  const [searchSubject,setSearchSubject]=useState("");
   const[first,setFirst]=useState(0);
+  const [value,setValue]=useState([1000,5000]);
+  const handleFilter2=async()=>{
+    setFirst(1)
+    
+    setCourses((await FilterMyCourse(value[0],value[1],searchSubject) ))
+   
+  }
+  const valuetext=(value)=> {
+    return `${value}°C`;
+  }
+  const handleSearch2 =(event)=>{
+    setSearchSubject(event.target.value);
+  }
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    
+  };
   const handleSearch=async(event)=>{
     setSearch(event.target.value);
   }
@@ -26,7 +45,9 @@ export function InstructorCourses(){
   const getCourses = async () =>{
     setCourses ((await getMycourses(localStorage.getItem("token"))));
   }
-
+  const handleReset= ()=>{
+    setSearchSubject("");
+  }
   const stars = (starNumber) => {
     var array=[];
     for(var i=0;i<starNumber;i++){
@@ -35,8 +56,9 @@ export function InstructorCourses(){
     return array
   
   }
-  if(search=="" && first==0){
+  if(first==0){
     getCourses();
+    setFirst(1);
   }
     
     return(
@@ -75,14 +97,23 @@ export function InstructorCourses(){
       <h3 className='Filter-by-label-instcourse-subject'>
         Subject :
       </h3>
-      <input type="text" placeholder="Enter Subject Name" 
-      className='SubjectNameFilter'/>
-
-      <button className='ReatFilterButton'>
+      <input type="text" onChange={handleSearch2} placeholder="Enter Subject Name" 
+      className='SubjectNameFilter' value={searchSubject}/>
+      <button onClick={handleFilter2}  className ='InstructorCourses-Apply'>Apply</button>
+      <button onClick={handleReset} className='ReatFilterButton'>
         Reset Filter
       </button>
       <div className='SliderfilterCourse'>
-      <Slider/>
+      <Box sx={{ width: 300 }}>
+              <Slider getAriaLabel={() => 'Price Range'}
+        value={value}
+        onChange={handleChange}
+        valueLabelDisplay="auto"
+        getAriaValueText={valuetext}
+        min={0}
+        max={10000} />
+
+              </Box>
       </div>
       
 

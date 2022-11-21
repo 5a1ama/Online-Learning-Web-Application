@@ -77,12 +77,16 @@ router.get("/myCourses-price/:minprice/:maxprice",async function(req,res){
 
 
 })
-router.get("/myCourses-price-subject/:minprice/:maxprice/:subject",async function(req,res){
+router.get("/myCourses-price-subject/:minprice/:maxprice/:subject/:token",async function(req,res){
     var minprice=req.params.minprice;
     var maxprice=req.params.maxprice;
 
     var subject=req.params.subject.toLocaleLowerCase();
-    var id=req.body.instructorID;
+    var token=req.params.token;
+    
+    var user=jwt.verify(token,process.env.ACCESSTOKEN)
+    
+    var id=user.id ;
     var result =await Course.find({});
     var array=[];
     for(var i=0;i<result.length;i++){
@@ -92,7 +96,8 @@ router.get("/myCourses-price-subject/:minprice/:maxprice/:subject",async functio
     }
     var final=[];
     for(var i=0;i<array.length;i++){
-        if(array[i].price>=minprice && array[i].price<=maxprice && array[i].subject.includes(subject)){
+        if((subject!="-1" && array[i].price>=minprice && array[i].price<=maxprice && array[i].subject.includes(subject)) || (subject=="-1" &&
+        array[i].price>=minprice && array[i].price<=maxprice )){
             final=final.concat([array[i]])
         }
     }
