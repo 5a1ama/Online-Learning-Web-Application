@@ -23,10 +23,15 @@ export const getAllCourses=async()=>{
 //   return j
 // }
 // export const getCourseByPrice= async (price)=>{
-//   const result=await fetch("http://localhost:8000/course/rating/s")
-//   const j=await result.json();
-//   return j
-// }
+  //   const result=await fetch("http://localhost:8000/course/rating/s")
+  //   const j=await result.json();
+  //   return j
+  // }
+  export const getCourseDetails=async (id)=>{
+    const result=await fetch(`http://localhost:8000/course/CourseItems/${id}`)
+    const j=await result.json();
+    return j
+  }
 export const FilterAllCourse2= async (rating,subject,minprice,maxprice)=>{
   
   if(subject != ""){
@@ -101,10 +106,5 @@ export const createCourse=async (title,subtitle,price,summary)=>{
   body:JSON.stringify({title:title,subtitles:subtitle,price:price,summary:summary})
   });
   const j=await response.json()
-  return j
-}
-export const getCourseDetails=async (id)=>{
-  const result=await fetch(`http://localhost:8000/course/CourseItems/${id}`)
-  const j=await result.json();
   return j
 }

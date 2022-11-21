@@ -2,20 +2,25 @@ import {React,useState} from 'react'
 import './CourseItems.css';
 import video from '../../assets/ItemsBack.mov';
 import Navbar from './../navbar/Navbar';
-import { AiOutlinePlayCircle } from 'react-icons/ai';
-import { getCourseDetails } from './../../API/CourseAPI';
+import { getAllCourses } from './../../API/CourseAPI';
 import { useLocation } from 'react-router-dom';
 
-function CourseItems(props) {
+function CourseItems() {
+    const [first,setFirst] = useState(0);
     const location=useLocation();
-
+    
     const [details,setDetails] = useState([]);
-    const getDetails = async () => {
-        setDetails((await getCourseDetails(location.state.id)));
-    }
-    getDetails();
-    alert(details[0].id);
 
+    const getDetails = async () => {
+        setDetails((await getAllCourses()));
+        setFirst(1);
+    }
+    if(first===0){
+        getDetails();
+    }
+    const HTag = (props) => {
+        return <h1>{props.title}</h1>
+    }
   return (
     
     <div className="CourseItems">
@@ -32,9 +37,7 @@ function CourseItems(props) {
                     
 
         <div className="CourseItems_Content">
-           <h1 style={{color:"#000"}}>
-             Details :{details}
-            </h1>
+            {/* <HTag title={details[0].title}/> */}
         </div>
     </div>
   )
