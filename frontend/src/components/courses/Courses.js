@@ -12,8 +12,8 @@ function Courses() {
   const navigate = useNavigate();
   const [courses,setCourses] = useState([]);
   const getCourses = async () =>{
+    
     setCourses ((await getAllCourses()).slice(1,4));
-    alert(courses);
   }
 
   const stars = (starNumber) => {

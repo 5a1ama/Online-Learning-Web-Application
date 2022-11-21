@@ -17,15 +17,67 @@ export const getAllCourses=async()=>{
   const j=await result.json();
   return j
 }
-export const getCoursesBySubjectRating=async (subject,rating)=>{
-  const result=await fetch(`http://localhost:8000/course/${rating}/${subject}`)
-  const j=await result.json();
-  return j
-}
-export const getCourseByPrice= async (price)=>{
-  const result=await fetch("http://localhost:8000/course/rating/s")
-  const j=await result.json();
-  return j
+// export const getCoursesBySubjectRating=async (subject,rating)=>{
+//   const result=await fetch(`http://localhost:8000/course/${rating}/${subject}`)
+//   const j=await result.json();
+//   return j
+// }
+// export const getCourseByPrice= async (price)=>{
+//   const result=await fetch("http://localhost:8000/course/rating/s")
+//   const j=await result.json();
+//   return j
+// }
+export const FilterAllCourse2= async (rating,subject,minprice,maxprice)=>{
+  
+  if(subject != ""){
+    
+
+   const result = await fetch(`http://localhost:8000/course/filter-sub/${rating}/${subject}`);
+   const j1=await result.json();
+  const result2= await fetch(`http://localhost:8000/course/filter-price/${minprice}/${maxprice}`)
+  const j2=await result2.json();
+  var array=[];
+  for(var i=0;i<j1.length;i++){
+    var found=false;
+    for(var j=0;j<j2.length;j++){
+      if(j2[j].id==j1[i].id){
+        found=true;
+        break;
+      }
+    }
+    if(found){
+      array=array.concat(j1[i]);
+    }
+  }
+  return array;
+
+  }else{
+    
+    const result = await fetch(`http://localhost:8000/course/filter-sub/${rating}/-1`);
+    const j1=await result.json();
+  const result2= await fetch(`http://localhost:8000/course/filter-price/${minprice}/${maxprice}`)
+  const j2=await result2.json();
+  var array=[];
+  
+  for(var i=0;i<j1.length;i++){
+    var found=false;
+    for(var j=0;j<j2.length;j++){
+      
+      if(j2[j].id==j1[i].id){
+        found=true;
+        
+        break;
+      }
+    }
+    if(found){
+      array=array.concat(j1[i]);
+    }
+  }
+  return array;
+    
+  }
+  
+  
 }
 export const createUser=()=>{
   fetch(`${api}/user/addAdministrator`, {

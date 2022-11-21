@@ -28,13 +28,20 @@ router.get("/filter-sub/:ratings/:subject",async function(req,res){
     var array=[];
     for(var i=0;i<query.length;i++){
         // @ts-ignore
-        if(((subject!="." && query[i].subject==subject) && (rating!="." && query[i].rating==rating))
-        // @ts-ignore
-        || (subject=="." && rating!="." && query[i].rating==rating ) || (rating=="." && subject!="." && query[i].subject==subject ) ){
-            array=array.concat([query[i]])
+        if(rating=="0"){
+            if(subject != "-1" && query[i].subject.includes(subject)){
+                array=array.concat([query[i]])
+            }
+        }else{
+            if(subject != "-1" && query[i].subject.includes(subject) && query[i].rating.value==rating){
+                array=array.concat([query[i]])
+            }else if(query[i].rating.value==rating && subject=="-1"){
+                array=array.concat([query[i]])
+            }
         }
     }
-    res.send(array);
+    console.log(array)
+    res.json(array);
 })
 router.get("/filter-price/:minprice/:maxprice",async function(req,res){
     var minprice=req.params.minprice;
@@ -42,7 +49,14 @@ router.get("/filter-price/:minprice/:maxprice",async function(req,res){
     var query=await Course.find({})
     
     // @ts-ignore
-    res.send(query.filter(course=>course.price>=minprice && course.price<=maxprice))
+    var array=[];
+    for(var i=0;i<query.length;i++){
+        console.log(query[i].price)
+        if(query[i].price>=minprice && query[i].price<=maxprice){
+            array=array.concat([query[i]])
+        }
+    }
+    res.json(array)
 })
 router.post("/",function(req,res){
     var query=Course.find({});
@@ -54,7 +68,7 @@ router.post("/",function(req,res){
         object.save(function(req,res){
             
         })
-        res.send(object)
+        res.json(object)
     })
 })
 router.get("/:id",function(req,res){

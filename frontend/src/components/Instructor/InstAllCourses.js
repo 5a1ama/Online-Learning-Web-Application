@@ -16,9 +16,9 @@ export function InstAllCourses(){
       return `${value}°C`;
     }
     const handleFilter2=async()=>{
-    
-      setCourses((await FilterAllCourse(value[0],value[1],subject) ))
       setFirst(1)
+      setCourses((await FilterAllCourse(value[0],value[1],subject) ))
+     
     }
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -34,7 +34,7 @@ export function InstAllCourses(){
     const handleFilterBar = () => setFilterBar(!FilterBar)
     if(first==0){
       getCourses();
-
+      setFirst(1);
     }
 
     return(
