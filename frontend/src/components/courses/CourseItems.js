@@ -1,25 +1,29 @@
-import {React,useState} from 'react'
+import {React,useEffect,useState} from 'react'
 import './CourseItems.css';
 import video from '../../assets/ItemsBack.mov';
 import Navbar from './../navbar/Navbar';
-import { getAllCourses } from './../../API/CourseAPI';
+import { getAllCourses, getCourseDetails } from './../../API/CourseAPI';
 import { useLocation } from 'react-router-dom';
 
 function CourseItems() {
     const [first,setFirst] = useState(0);
     const location=useLocation();
-    
     const [details,setDetails] = useState([]);
 
     const getDetails = async () => {
-        setDetails((await getAllCourses()));
+        setDetails((await getCourseDetails(location.state.id)));
         setFirst(1);
     }
-    if(first===0){
-        getDetails();
-    }
+    useEffect(()=>{
+        if(first==0){
+            getDetails();
+        }
+           
+    })
     const HTag = (props) => {
-        return <h1>{props.title}</h1>
+        return <div>
+            <h1>{props.course.id +" "+props.course.title+" "+props.course.price}</h1>
+        </div>
     }
   return (
     
@@ -37,7 +41,7 @@ function CourseItems() {
                     
 
         <div className="CourseItems_Content">
-            {/* <HTag title={details[0].title}/> */}
+            {details[0] && <HTag course={details[0]}/>}
         </div>
     </div>
   )
