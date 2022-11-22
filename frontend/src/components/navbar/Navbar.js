@@ -5,7 +5,7 @@ import {BiDownArrow, BiLogOutCircle, BiSearch} from 'react-icons/bi'
 import {BsPerson} from 'react-icons/bs'
 
 
-import {HiOutlineMenuAlt1, HiOutlineMenuAlt2, HiOutlineMenuAlt3, HiOutlineMenuAlt4} from 'react-icons/hi'
+import {HiOutlineMenuAlt4} from 'react-icons/hi'
 import {FiHelpCircle} from 'react-icons/fi'
 import {AiOutlineClose,AiOutlineMenu, AiOutlineSetting} from 'react-icons/ai'
 import {AiOutlineSearch} from 'react-icons/ai'
@@ -15,9 +15,9 @@ import GerFlag from "../../assets/Ger.jpg"
 import UaeFlag from "../../assets/Uae.jpg"
 import UkFlag from "../../assets/UK.jpg"
 import UsaFlag from "../../assets/Usa.jpg"
-import selectCountry from "../../API/LoginAPI"
 import './navbar.css'
 import {Link} from 'react-scroll'
+
 export {default as Navbar} from './Navbar';
 
 function Navbar(props) {

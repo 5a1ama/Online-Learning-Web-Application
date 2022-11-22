@@ -8,6 +8,7 @@ root.render(
   <Router>
     <App />
   </Router>
+ 
 );
 
       // import {getCoursesBySubjectRating} from "./API/CourseAPI" 

@@ -36,6 +36,7 @@ li {
     padding : 0 2rem;
     font-size:large;
     cursor: pointer;
+    
 }
 .hamburger{
     display: none; 
@@ -226,10 +227,7 @@ li {
 .form input[type=text]:focus{
     outline: none;
 }
-Country{
-    color: black;
-    background-color:blue;
-}
+
 @media screen and (max-width: 940px){
     .mobile-menu{
         display: flex;

@@ -96,7 +96,6 @@
   }
 }
 
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -113,9 +112,9 @@ a {
   text-decoration: none;
 }
 
+
 .gradient__bg {
   background: rgb(217, 237, 255);
- 
 }
 
 .gradient__text {
