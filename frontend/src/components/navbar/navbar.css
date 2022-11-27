@@ -6,14 +6,17 @@
     align-items: center; 
     padding : 0 1rem;
     z-index: 2;
-    color: #fff;
     position: fixed;
     top:0px;
     color: #fff;
-    background-color:rgb(10, 138, 218);
+    background:radial-gradient(circle at 30% -100%,rgba(9, 117, 185, 0.95) 25%,rgba(3, 35, 46, 0.95) 85%, rgba(5, 50, 65, 0.95) 100%);
     box-shadow:0px 6px 10px rgb(0,0,0,0.3);
     
     
+}
+.nav-icons{
+    display: flex;
+    flex-direction: row;
 }
 .navbar-bg{
     background-color:#f5f5f5;
@@ -33,6 +36,7 @@ li {
     padding : 0 2rem;
     font-size:large;
     cursor: pointer;
+    
 }
 .hamburger{
     display: none; 
@@ -54,17 +58,128 @@ li {
     height:50vh;
     display: flex;
     flex-direction: column; 
-    background-color:rgb(5, 28, 42);
+    background-color:rgb(3, 35, 46);
     top:60px;
     left:0;
+    align-items: center;
     transition: 0.5s
     
 }
+.SearchDiv-content{
+   align-items: center;
+}
+.SearchDiv-content h1{
+    padding: 1rem 0rem;
+ }
+.searchBarForm form{
+    display: flex;
+    background-color: #ffffffcc;
+    color:#000;
+    justify-content:space-between;
+    align-items:center;
+    border: 1px solid #ccc ;
+    border-radius: 8px;
+    margin: 0rem 14rem;
+    max-width: 1500px;
+}
+.form2 input[type=text] {
+    background-color: transparent;
+    border:transparent;
+    border:none ;
+    width: 700px ;
+    height:50px;
+    font-size:1.2rem ;
+    font-family: 'Poppins' sans-serif;
+}
+.form2 input[type=text]:focus{
+    outline: none;
+}
 .nonSearchDiv{
     position:absolute;
-    top:-200vh;
+    top:-50vh;
     width:100%;
 
+}
+.CountryBar{
+    /* display:block;  */
+    position: absolute;
+    width:3%;
+    height:30vh;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; 
+    background-color:rgb(255, 255, 255);
+    top:10px;
+    left:89.1%;
+    transition: 0.5s;
+    z-index:-2;
+    padding: 3.2rem 0rem;
+}
+.nonCountryBar{
+    position:absolute;
+    height:0vh;
+    width:3%;
+
+}
+.SettingMenu{
+    /* display:block;  */
+    position: absolute;
+    
+    width:12%;
+    height:30vh;
+    transition: 0.5s;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; 
+    background-color:rgb(255, 255, 255);
+    top:50px;
+    left:87.5%;
+    z-index:0;
+    
+    /* padding: 3.2rem 0rem; */
+}
+.nonSettingMenu{
+    position:absolute;
+    height:0vh;
+    width:0vh;
+    display: none;
+    transition:0.5s;
+    
+}
+.SettingItem{
+    width: 100%;
+    height:100%;
+}
+.SettingItem button{
+    margin-bottom: 5px;
+    width: 100%;
+    height:100%;
+    border-radius: 10px;
+    background-color:white; 
+    color:var(--primary-light);
+    font-size: 20px;
+    font-family: Roboto;
+    text-align: left;
+}
+.SettingItem button:hover{
+    background-color:rgb(240, 240, 240); 
+}
+
+.nonCountryBar img{
+    position:absolute;
+    height:0vh;
+    width:0;
+    display: none;
+}
+.CountryBar-content img{
+    /* display:block;  */
+    display: flex;
+    flex-direction: column; 
+    margin: 0.5rem .5rem;
+}
+.CountryBar-content img:hover{
+    transform: scale(1.1);
+    transition: 0.5s;
 }
 .searchBarForm{
     position:absolute;
@@ -104,7 +219,7 @@ li {
     background-color: transparent;
     border:transparent;
     border:none ;
-    width: 1200px ;
+    width: 1500px ;
     height:50px;
     font-size:1.2rem ;
     font-family: 'Poppins' sans-serif;
@@ -112,6 +227,7 @@ li {
 .form input[type=text]:focus{
     outline: none;
 }
+
 @media screen and (max-width: 940px){
     .mobile-menu{
         display: flex;
@@ -121,11 +237,14 @@ li {
         left: 0;
         position: absolute;
         justify-content: space-between;
+        color:#000;
         /* color: rgba(255,255,255,.95); */
         background-color: #f5f5f5;
         transition: 0.3s;
-        color:#000;
         
+    }
+    .mobile-menu li{
+        color:#000;
     }
     .dark{
         color:#000;

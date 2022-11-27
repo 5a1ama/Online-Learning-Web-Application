@@ -1,3 +1,4 @@
+const { Double } = require('mongodb');
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
@@ -13,40 +14,50 @@ mongoose.connect(MongoURI)
 const courseschema=new Schema({
     id:{
         type:Number,
-        required:true
+    
       },
     title:{
         type:String
     },
+    previewVideo:{
+        type:String
+    },
     hours:{
         type:Number,
-        required:true
+        
     },
     rating:{
-        type:Number
+        type:{value:Number,count:Number}
     },
+    reviews:{
+        type:[String]
+    },
+   
     price:{
         type:Number,
-        required:true
+        
     },
     subject:{
-        type:Array
+        type:[String]
     }
     ,
     instructors:{
-        type:Array
+        type:[Number]
     },
     subtitles:{
-        type:Array
+        type:[{video:String,description:String,title:String,hours:Number}]
     },
     excercises:{
-        type:Array
+        type:[Number]
     },
     summary:{
         type:String
     },
     country:{
         type:String
+    },
+    discount:{
+        type:{amount:Number,duration:Number}
     }
 })
 const Course = mongoose.model('course', courseschema);

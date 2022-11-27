@@ -2,27 +2,52 @@ import React, { useEffect, useState } from 'react';
 import Navbar from "../navbar/Navbar";
 import "./InstCourses.css";
 import {useNavigate} from 'react-router-dom';
-import { getAllCourses } from '../../API/CourseAPI'
 import starImg from "../../assets/goldStar.png"
 import { AddCourse } from './AddCourse';
-
-
+import {AiOutlineSearch} from 'react-icons/ai'
+import { TextField } from '@mui/material';
+import { FilterMyCourse, getMycourses } from '../../API/InstructorAPI';
+import { SearchMyCourse } from '../../API/InstructorAPI';
+import NewCourse from '../courses/NewCourse';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
 export function InstructorCourses(){
-    // const[course , setcourse]=useState([{title:"csen19",price:"12344"}])
-    // const Newcourse = (props) => (
-    //     <>
-    //      <div className="newCourse">
-    //       <h2>{props.course.title}</h2>
-    //       <h2 className='price'>{props.course.price}</h2>
-    //     </div>
-    //     </>
-    //   );
-    const navigate = useNavigate();
+  const [search,setSearch]=useState("");
+  const [searchSubject,setSearchSubject]=useState("");
+  const[first,setFirst]=useState(0);
+  const [value,setValue]=useState([1000,5000]);
+  const handleFilter2=async()=>{
+    setFirst(1)
+    
+    setCourses((await FilterMyCourse(value[0],value[1],searchSubject) ))
+   
+  }
+  const valuetext=(value)=> {
+    return `${value}°C`;
+  }
+  const handleSearch2 =(event)=>{
+    setSearchSubject(event.target.value);
+  }
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    
+  };
+  const handleSearch=async(event)=>{
+    setSearch(event.target.value);
+  }
+  const changeSearch=async (event)=>{
+    event.preventDefault();
+    setCourses((await SearchMyCourse(localStorage.getItem("token"),search)))
+    setFirst(1);
+  }
+  const navigate = useNavigate();
   const [courses,setCourses] = useState([]);
   const getCourses = async () =>{
-    setCourses ((await getAllCourses()));
+    setCourses ((await getMycourses(localStorage.getItem("token"))));
   }
-
+  const handleReset= ()=>{
+    setSearchSubject("");
+  }
   const stars = (starNumber) => {
     var array=[];
     for(var i=0;i<starNumber;i++){
@@ -31,46 +56,67 @@ export function InstructorCourses(){
     return array
   
   }
-   
-  const Newcourse = (props) => (
-    <>
-       <div className="newCourse"  >
-      <button className="newCourseButton" onClick={()=> navigate('/courses')}>
-      <div>
-      <h2 >{props.course.title}</h2>
-       <h2 className='totalhours'>{props.course.hours} Hours</h2>
-      </div>
-      <br/>
-      <br />
-
-      <div>
-      <h2 className='price'>{props.course.price}$</h2>
-      {stars(props.course.rating).map((num)=> <img className="starImg" src={starImg} alt="."/>)}
-      </div>
-      </button>
-      </div>
-    </>
-  );
-  getCourses();
+  if(first==0){
+    getCourses();
+    setFirst(1);
+  }
     
     return(
         <div>
             <div>
-            <Navbar items={["Home","My Courses","Caleneder"]} select="Home" nav={["","",""]} scroll={["","",""]}  />
+            <Navbar items={["Home","My Courses","Caleneder"]} select="My Courses" nav={["/instructor","/InstructorCourses",""]} scroll={["","",""]}  />
             </div>
              <div className="InstCourses" name = 'instCourses'>
-            {courses.map((course)=><Newcourse course={course}/>)}
+            {courses.map((course)=><NewCourse course={course}/>)}
                 </div>
                 <div>
-                <button className="FilterButton">
-                Filter
-            </button>
+                <form className="search-instrutor-courses">
+            <div>
+                <input type="text" onChange={handleSearch} placeholder="Enter Course name"/>
+            </div>
+        <div>
+            <button onClick={changeSearch}><AiOutlineSearch className='icon'/></button>
+        </div>
+        </form>
 
-            <button className="AddButton" onClick={()=> navigate('/addCourse')}>
+            <button className="Add-Course-Button" onClick={()=> navigate('/addCourse')}>
                  Add Course
             </button>
             <div className="Inst-buttonCourse">
-    <button  className="AllCourses" onClick={()=> navigate('/courses')}>All Courses‎ ‎ ‎  ‎   ‎   {">>>"} </button>
+    <button  className="InstructorAllCourses" onClick={()=> navigate('/InstAllCourses')}>All Courses‎ ‎ ‎  ‎   ‎   {">>>"} </button>
+    </div>
+
+
+    <div className='Filter-Box'>
+      <h2 className='Filter-by-label-instcourse'>
+        Filter
+      </h2>
+      <h3 className='Filter-by-label-instcourse-price'>
+        Price :
+      </h3>
+      <h3 className='Filter-by-label-instcourse-subject'>
+        Subject :
+      </h3>
+      <input type="text" onChange={handleSearch2} placeholder="Enter Subject Name" 
+      className='SubjectNameFilter' value={searchSubject}/>
+      <button onClick={handleFilter2}  className ='InstructorCourses-Apply'>Apply</button>
+      <button onClick={handleReset} className='ReatFilterButton'>
+        Reset Filter
+      </button>
+      <div className='SliderfilterCourse'>
+      <Box sx={{ width: 300 }}>
+              <Slider getAriaLabel={() => 'Price Range'}
+        value={value}
+        onChange={handleChange}
+        valueLabelDisplay="auto"
+        getAriaValueText={valuetext}
+        min={0}
+        max={10000} />
+
+              </Box>
+      </div>
+      
+
     </div>
                 </div>
         </div>

@@ -1,32 +1,135 @@
-.FilterButton{
-    font-size:20px;
-    background-color:rgb(10,138,218);
-    width:15%;
-    height:50px;
-    position: absolute;
-    top : 15%;
-    left: 66%;
-}
+
 .InstCourses{
     position: absolute;
     top:10%;
 }
-.AddButton{
+.Add-Course-Button{
     font-size:20px;
     background-color:rgb(10,138,218);
-    width:15%;
+    width:32%;
     height:50px;
     position: absolute;
-    top : 15%;
-    left: 82%;
+    top : 80%;
+    left: 65%;
 }
 .Inst-buttonCourse Button{
     font-size:20px;
     background-color:rgb(10,138,218);
-    width:31%;
+    width:32%;
     height:50px;
     position: absolute;
-   left:66%;
-   top:25%;
+   left:65%;
+   top:70%;
+}
+.search-instrutor-courses{
+    position: absolute;
+    top: 15%;
+    left: 65%;
+        display: flex;
+        background-color: #ccc;
+        color:#000;
+        justify-content:space-between;
+        align-items:center;
+        border: 1px solid #ccc ;
+        padding: 4px ; 
+        border-radius: 8px;
+        max-width: 1200px;
+        margin: 0px 0px ;
+} 
+.search-instrutor-courses input[type=text] {
+        background-color: transparent;
+        border:transparent;
+        border:none ;
+        width: 400px ;
+        height:50px;
+        font-size:1.2rem ;
+        font-family: 'Poppins' sans-serif;
+    }
+    
+.search-instrutor-courses input[type=text]:focus{
+        outline: none;
+    }
+.Filter-Box{
+    position: absolute;
+    width: 486px;
+    height: 300px;
+    background: transparent;
+    border: 1px solid #fff;
+    border-top-left-radius: 20px ;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px ;
+    border-bottom-right-radius: 20px;
+    top: 24.5%;
+    left: 65%;
+    display: flex;
+    flex-direction: column;
+}
+.Filter-Box:before{ 
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: rgb(6, 73, 115);
+    border-top-left-radius: 20px ;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px ;
+    border-bottom-right-radius: 20px;
+}
+.Filter-by-label-instcourse{
+    position: absolute;
+    color: #fff;
+    left: 40%;
+    top: 3%;
+}
+.Filter-by-label-instcourse-price{
+    position: absolute;
+    color: #fff;
+    left: 0%;
+    top: 55%;
+}
+.Filter-by-label-instcourse-subject{
+    position: absolute;
+    color: #fff;
+    left: 0%;
+    top: 20%;
+
+}
+.SubjectNameFilter{
+    position:absolute;
+    width: 70%;
+    height: 15%;
+    top: 35%;
+    left: 17%;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-color: transparent;
+    color: #000;
+    background-color: #ccc;
+
+}
+.Filter-Box input[type=text]:focus{
+    outline: none;
+}
+.ReatFilterButton{
+    position: absolute;
+    top: 80%;
+    left: 70%;
+    background-color: #ccc;
+}
+.ReatFilterButton:hover{
+    background-color: rgb(216, 214, 214);
+}
+.SliderfilterCourse{
+    position: absolute;
+    top:68%;
+    left: 20%;
 }
 
+.InstructorCourses-Apply{
+    position: relative;
+    top : 80%;
+    left: 30%;
+    width:30%;
+}

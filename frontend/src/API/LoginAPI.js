@@ -15,6 +15,7 @@ const LoginUser =async(email,password)=>{
         })
       });
       const j = await response.json();
+      localStorage.setItem("token",j)
       return j
         
 }
@@ -29,5 +30,24 @@ export const verify =async(token)=>{
         })
       })
       return await response.json()
+}
+export const selectCountry= async (country)=>{
+    if(! localStorage.getItem("token")){
+        const response=await fetch(`${api}/selectCountry/${country}/-1`,{method: "POST",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+        })
+        const j=await response.json();
+        localStorage.setItem("token",j)
+    }else{
+        const response=await fetch(`${api}/selectCountry/${country}/${localStorage.getItem("token")}`,{method: "POST",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+        })
+        const j=await response.json();
+        localStorage.setItem("token",j)
+    }
 }
 export default LoginUser
