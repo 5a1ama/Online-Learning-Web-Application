@@ -26,7 +26,7 @@ export function AddCourse(){
         setSubtitle(event.target.value)
     }
     const handleSub2=(index,value)=>{
-        setArr(arr => [...arr.splice(0,index),value,...arr.splice(index+1,arr.length)])
+        setArr(Subarr => [...Subarr.splice(0,index),value,...Subarr.splice(index+1,Subarr.length)])
         
     }
     const handleHours=(event)=>{
@@ -62,8 +62,8 @@ export function AddCourse(){
                 
         //     }
         // }
-        setArr(arr.concat([""]));
-        alert(arr)
+        setArr(Subarr.concat([""]));
+        alert(Subarr)
         
 
        
@@ -114,7 +114,7 @@ export function AddCourse(){
      <br></br>
      <br></br>
      <br></br>
-     <NewDiv handleSub2={handleSub2} arr={arr}/>
+     <NewDiv handleSub2={handleSub2} arr={Subarr}/>
     
      
      
