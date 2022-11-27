@@ -5,7 +5,7 @@ import { FilterAllCourse2, getAllCourses } from '../../API/CourseAPI'
 // @ts-ignore
 import starImg from "../../assets/goldStar.png";
 import './AllCourses.css'
-import { TextField } from '@mui/material';
+import { TextField } from '@mui/material';   
 import NewCourse from './NewCourse';
 import { useLocation } from 'react-router-dom';
 import { SearchCourse } from '../../API/CourseAPI';
