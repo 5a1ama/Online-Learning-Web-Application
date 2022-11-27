@@ -18,7 +18,9 @@ const sessions = require('express-session');
 const courseRouter=require("./routes/course")
 const userRouter=require("./routes/addUsers")
 const instructorRouter=require("./routes/instructor")
-const commonRouter=require("./routes/commonRoutes")
+const commonRouter=require("./routes/commonRoutes");
+const TraineeRout = require("./routes/Trainee");
+
 // #Importing the userController
 const oneDay = 1000 * 60 * 60 * 24;
 app.use(cookieParser());
@@ -36,6 +38,7 @@ app.use("/course",courseRouter)
 app.use("/user",userRouter)
 app.use("/instructor",instructorRouter)
 app.use("/",commonRouter)
+app.use("/Trainee",TraineeRout)
 // configurations
 // Mongo DB
 mongoose.connect(MongoURI)
