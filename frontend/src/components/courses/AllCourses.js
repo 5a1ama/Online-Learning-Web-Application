@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {Navbar} from "../navbar/Navbar";
 import {useNavigate} from 'react-router-dom';
 import { FilterAllCourse2, getAllCourses } from '../../API/CourseAPI'
+// @ts-ignore
 import starImg from "../../assets/goldStar.png";
 import './AllCourses.css'
 import { TextField } from '@mui/material';

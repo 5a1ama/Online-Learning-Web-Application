@@ -4,7 +4,8 @@ const Course = require("../Models/Course");
 const router=express.Router();
 const User=require("../Models/User")
 const jwt=require("jsonwebtoken")
-const dotenv=require("dotenv")
+const dotenv=require("dotenv");
+const Instructor = require("../Models/Instructor");
 dotenv.config()
 
 router.get("/myCourses/:token",async function(req,res){
@@ -186,5 +187,10 @@ router.post("/coursePromotion",async function(req,res){
     var duration=req.body.duration;
     await Course.findOneAndUpdate({id:courseid},{discount:{amount:amount,duration:duration
     }})
+})
+router.get("/getInstructor/:id",async function(req,res){
+    var id = req.params.id
+    var query = await Instructor.findOne({id:id})
+    res.json(query)
 })
 module.exports=router

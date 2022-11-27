@@ -9,47 +9,22 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 
 export function AddCourse(){
-    const subtitles=[];
-    const changeTitle=(arr,index,val)=>{
-        arr[index]=val;
-        alert(arr)
-        return arr;
-    }
+    
+    
     const [title,setTitle]=useState("");
     const [arr,setArr]=useState([])
     const handleTitle=(event)=>{
         setTitle(event.target.value);
     }
-    const [subtitle,setSubtitle]=useState([""]);
+    const [subtitle,setSubtitle]=useState("");
     const [hours,setHours]=useState([""]);
     
     const handleSub=(event)=>{
-        var x=event.target.getAttribute("id");
-        x=x.substring(3);
-        var index=Number(x);
-        
-        if(index<=subtitle.length-1){
-           // var arr=subtitle;
-        //     arr[index]=event.target.value;
-        //    setSubtitle(arr);
-        //     var arr=subtitle;
-            
-        //    arr[index]=event.target.value
-        // var x=subtitle.values;
-        // x[index]=event.target.value;
-        // setSubtitle({values:x})
-           
-           setSubtitle((subtitle)=> [...subtitle.splice(0,index),event.target.value,...subtitle.splice(index)])
-           
-            
-            
-        }else{
-            // var x=subtitle.values;
-            // x=x.concat([event.target.value]);
-            // setSubtitle({values:x});
-            setSubtitle((subtitle) => [...subtitle,event.target.value]);
-
-        }
+        setSubtitle(event.target.value)
+    }
+    const handleSub2=(event)=>{
+        var index=Number(event.target.getAttribute("id").substring(3));
+        setArr(arr => [...arr.splice(0,index),[event.target.value],...arr.splice(index+1,arr.length)])
     }
     const handleHours=(event)=>{
         if(event.target.identify<hours.length){
@@ -72,11 +47,11 @@ export function AddCourse(){
     const Newdiv=(props)=>{
         return (
         <div className='bigAddSub'>
-            {props.arr.map((num,i)=><div className='subtitledivadd'> <TextField onChange={handleSub} value={subtitle[i+1]} id={"Sub"+(i+1)}  className="text4-AddCourse"
+            {props.arr.map((num,i)=><div className='subtitledivadd'> <TextField   id={"Sub"+(i)}   className="text4-AddCourse"
      label="Course Subtitle" 
      color="primary" 
      variant="filled"
-     /> <TextField id={"hour"+(i+1)} onChange={handleHours} value={hours[i+1]}  className='addedHours'
+     /> <TextField id={"hour"+(i)} onChange={handleHours}   className='addedHours'
      label="Hours" 
      color="primary" 
      variant="filled"
@@ -85,8 +60,12 @@ export function AddCourse(){
     }
     const handleAdd = (event)=>{
     
-        // alert(123)
-        setArr(arr.concat([0]));
+        //alert(document.getElementsByClassName("subtitledivadd")[0].childNodes)
+
+        setArr(arr.concat([""]));
+
+        
+
        
     }
 
@@ -118,12 +97,12 @@ export function AddCourse(){
      variant="filled"
      />
 
-            <TextField id = {"sub"+0}  onChange={handleSub} value={subtitle[0]} className="text4-AddCourse"
+            <TextField id = {"sub"+0}  className="text4-AddCourse"
      label="Course Subtitle" 
      color="primary" 
      variant="filled"
      />
-                           <TextField identify={0} id ={"hour"+0} onChange={handleHours} value={hours[0]} className="text5-AddCourse"
+    <TextField identify={0} id ={"hour"+0} onChange={handleHours} value={hours[0]} className="text5-AddCourse"
      label="Hours" 
      color="primary" 
      variant="filled"
@@ -135,7 +114,9 @@ export function AddCourse(){
      <br></br>
      <br></br>
      <br></br>
-     <Newdiv arr={arr}/>
+     <Newdiv  arr={arr}/>
+    
+     
      
 
 <TextField onChange={handleSummary} className="text3-AddCourse"

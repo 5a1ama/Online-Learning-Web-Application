@@ -25,6 +25,9 @@ function Login() {
             if(type==="Instructor"){
                 navigate("/instructor")
             }
+            if(type=="Trainee"){
+                navigate("/TraineeHome")
+            }
             // other cases
         }else{
             setWrongEmail(x.user);
