@@ -44,6 +44,8 @@
     top:10%;
     left:22%;
     width: 50%;
+    height: 1
+    0%;
     border-top-left-radius: 20px;
     border-bottom-right-radius:20px ; 
     background-color: #ffffffcc; 
@@ -55,25 +57,9 @@
     font-family: 'Poppins' sans-serif;
 
 } 
-/* .InstAddCourse-TextDiv{
-    position: relative;
-    top:10%;
-    left:22%;
-    width: 50%;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius:20px ;
-    background-color: #ffffffcc; 
-    border:transparent;
-    font-size:1.2rem ;
-    color:#fff;
-    text-decoration-color: #fff;
-    padding : 0rem 0rem;
-    font-family: 'Poppins' sans-serif;
-} */
-
 .text2-AddCourse{
     position: relative;
-    top:15%;
+    top:17%;
     left:22%;
     width: 50%;
     border-top-left-radius: 20px;
@@ -87,24 +73,23 @@
 }
 .text3-AddCourse{
     position: relative;
-    top:20%;
+    top:8%;
     left:22%;
     width: 50%;
-
     border-top-left-radius: 20px;
     border-bottom-right-radius:20px ;
     background-color: #ffffffcc;
     border:transparent;
     font-size:1.2rem ;
     color:#fff;
-    padding : 0rem 0rem;
+
     font-family: 'Poppins' sans-serif;
 }
 .text4-AddCourse{
     position: relative;
     top:25%;
     left:22%;
-    width: 50%;
+    width: 35%;
     border-color: transparent;
     border-top-left-radius: 20px;
     border-bottom-right-radius:20px ;
@@ -116,11 +101,36 @@
     font-family: 'Poppins' sans-serif;
 
 }
-.Submit-button{
+.text5-AddCourse{
+    position: relative;
+    top: 14%;
+    left: 62%;
+    width: 10%;
+    border-color: transparent;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius:20px ;
+    background-color: #ffffffcc;
+    border:transparent;
+    font-size:1.2rem ;
+    color:#fff;
+    padding : 0rem 0rem;
+    font-family: 'Poppins' sans-serif;
+}
+.add_textField{
     position: absolute;
+    top: 42%;
+    left: 72%;
+    width:8%;
+    height :10%;
+    margin: 2rem 1rem;
+    font-weight: bolder;
+    font-size: 20px;
+}
+.Submit-button{
+    position: fixed;
     top: 80%;
-    left: 63%;
-    width:20%;
+    left: 67%;
+    width:15%;
     height :7%;
     padding: 1rem 1rem;
     margin: 2rem 1rem;
@@ -137,7 +147,7 @@
 
 
 
-.subtitleDiv{
+/* .subtitleDiv{
     position: absolute;
     top:30%;
     left:0%;
@@ -146,6 +156,39 @@
     display: flex;
     flex-grow: 1 1 0;
 }
+
 .subtitleDiv > TextField{
     width:40%;
+} */
+
+/* .CourseSub_div{
+ position: absolute;   
+ width: 1000px;
+ top: 43%;
+} */
+.subtitledivadd{
+    /* width: 50%; */
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1 1 0;
+    column-gap: 20%;
+    row-gap: 5%;
+}
+.addedHours{
+    left:7%;
+    top:17%;
+    width: 10%;
+    border-color: transparent;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius:20px ;
+    background-color: #ffffffcc;
+    border:transparent;
+    font-size:1.2rem ;
+    color:#fff;
+    font-family: 'Poppins' sans-serif;
+}
+.bigAddSub{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5vw;
 }
