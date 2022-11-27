@@ -1,5 +1,7 @@
 const Course=require("../Models/Course");
-const User=require("../Models/User")
+const User=require("../Models/User");
+const Instructor = require("../Models/Instructor");
+
 const express=require("express");
 const router=express.Router();
 // @ts-ignore
@@ -107,4 +109,15 @@ router.get("/CourseItems/:id",async function(req,res)
     })
     }
 )
+router.get("/InstructorOfCourse/:InstId",async function(req,res)
+{
+    var InstId = req.params.InstId;
+    var query = Instructor.find({id:InstId});
+    query.exec(function(err,result){
+        res.json({name:result[0].Name});
+    })
+    }
+)
+
+
 module.exports=router
