@@ -48,7 +48,6 @@ export default function App() {
           <Route path="/TraineeAllCourses" element={<TraineeAllCourses/>}/>
           <Route path="/CourseContent" element={<CourseContent/>}/>
           <Route path="/CourseItems" element={<CourseItems/>}/>
-
         </Routes>
       </div> 
     </div>

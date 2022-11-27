@@ -26,7 +26,6 @@ const instructorSchema=new Schema(
           },
           Password: {
             type: String,
-            
         
           },
           rating:{
@@ -34,6 +33,9 @@ const instructorSchema=new Schema(
           },
           reviews:{
             type:[String]
+          },
+          specialization:{
+            type:String
           }
     }
 )

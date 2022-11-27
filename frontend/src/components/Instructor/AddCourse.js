@@ -7,49 +7,27 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
+import { NewDiv } from './NewDiv';
+import { HiArrowCircleDown, HiOutlineChartSquareBar } from 'react-icons/hi';
 
 export function AddCourse(){
-    const subtitles=[];
-    const changeTitle=(arr,index,val)=>{
-        arr[index]=val;
-        alert(arr)
-        return arr;
-    }
+    
+    
     const [title,setTitle]=useState("");
-    const [arr,setArr]=useState([])
+    const [Subarr,setArr]=useState([])
+    const [har,setHarr]=useState([]);
     const handleTitle=(event)=>{
         setTitle(event.target.value);
     }
-    const [subtitle,setSubtitle]=useState([""]);
+    const [subtitle,setSubtitle]=useState("");
     const [hours,setHours]=useState([""]);
     
     const handleSub=(event)=>{
-        var x=event.target.getAttribute("id");
-        x=x.substring(3);
-        var index=Number(x);
+        setSubtitle(event.target.value)
+    }
+    const handleSub2=(index,value)=>{
+        setArr(arr => [...arr.splice(0,index),value,...arr.splice(index+1,arr.length)])
         
-        if(index<=subtitle.length-1){
-           // var arr=subtitle;
-        //     arr[index]=event.target.value;
-        //    setSubtitle(arr);
-        //     var arr=subtitle;
-            
-        //    arr[index]=event.target.value
-        // var x=subtitle.values;
-        // x[index]=event.target.value;
-        // setSubtitle({values:x})
-           
-           setSubtitle((subtitle)=> [...subtitle.splice(0,index),event.target.value,...subtitle.splice(index)])
-           
-            
-            
-        }else{
-            // var x=subtitle.values;
-            // x=x.concat([event.target.value]);
-            // setSubtitle({values:x});
-            setSubtitle((subtitle) => [...subtitle,event.target.value]);
-
-        }
     }
     const handleHours=(event)=>{
         if(event.target.identify<hours.length){
@@ -69,24 +47,25 @@ export function AddCourse(){
     const handleCreate=async()=>{
 
     }
-    const Newdiv=(props)=>{
-        return (
-        <div className='bigAddSub'>
-            {props.arr.map((num,i)=><div className='subtitledivadd'> <TextField onChange={handleSub} value={subtitle[i+1]} id={"Sub"+(i+1)}  className="text4-AddCourse"
-     label="Course Subtitle" 
-     color="primary" 
-     variant="filled"
-     /> <TextField id={"hour"+(i+1)} onChange={handleHours} value={hours[i+1]}  className='addedHours'
-     label="Hours" 
-     color="primary" 
-     variant="filled"
-     /> </div>)}
-        </div>)
-    }
+    
     const handleAdd = (event)=>{
     
-        // alert(123)
-        setArr(arr.concat([0]));
+       // alert(document.getElementsByClassName("subtitledivadd")[0].childNodes.length)
+        // alert(x.length)
+        
+        // var x=document.getElementsByClassName("text4-AddCourse");
+        // for(var i=0;i<x.length;i++){
+        
+        //     for(var j=0;j<x[i].children.length;j++){
+        //         var y=x[i].children[j].ariaValueText;
+        //         alert(y)
+                
+        //     }
+        // }
+        setArr(arr.concat([""]));
+        alert(arr)
+        
+
        
     }
 
@@ -118,12 +97,12 @@ export function AddCourse(){
      variant="filled"
      />
 
-            <TextField id = {"sub"+0}  onChange={handleSub} value={subtitle[0]} className="text4-AddCourse"
+            <TextField id = {"sub"+0}  className="text4-AddCourse"
      label="Course Subtitle" 
      color="primary" 
      variant="filled"
      />
-                           <TextField identify={0} id ={"hour"+0} onChange={handleHours} value={hours[0]} className="text5-AddCourse"
+    <TextField identify={0} id ={"hour"+0} onChange={handleHours} value={hours[0]} className="text5-AddCourse"
      label="Hours" 
      color="primary" 
      variant="filled"
@@ -135,7 +114,9 @@ export function AddCourse(){
      <br></br>
      <br></br>
      <br></br>
-     <Newdiv arr={arr}/>
+     <NewDiv handleSub2={handleSub2} arr={arr}/>
+    
+     
      
 
 <TextField onChange={handleSummary} className="text3-AddCourse"

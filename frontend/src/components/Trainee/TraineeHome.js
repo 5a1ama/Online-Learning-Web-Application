@@ -9,7 +9,7 @@ import "./TraineeHome.css";
 
 
     
-export function TraineeHome(){
+export function TraineeHome (){
     const navigate = useNavigate();
   const [courses,setCourses] = useState([]);
   const getCourses = async () =>{
@@ -25,7 +25,10 @@ export function TraineeHome(){
         {courses.map((course) => <NewCourse course={course}/>)}
     
         <div>
-            <Navbar items={["Home","My Courses","All Courses"]} select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
+             <Navbar items={["Home","My Courses","All Courses"]} select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
+        </div>
+        <div className="profileDetails">
+        
         </div>
 
         </div>

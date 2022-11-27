@@ -64,7 +64,7 @@ export function InstructorCourses(){
     return(
         <div>
             <div>
-            <Navbar items={["Home","My Courses","Caleneder"]} select="My Courses" nav={["/instructor","/InstructorCourses",""]} scroll={["","",""]}  />
+            <Navbar items={["Home","My Courses","Caleneder"]} select="My Courses" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
             </div>
              <div className="InstCourses" name = 'instCourses'>
             {courses.map((course)=><NewCourse course={course}/>)}

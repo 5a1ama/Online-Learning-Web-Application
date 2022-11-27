@@ -33,7 +33,7 @@ router.post("/addCorporateTrainee",function(req,res){
     
     User.find({}).exec(function(err,result){
         var c=result.length;
-        var object=new User({id:c+1,Email:req.body.email,Password:req.body.password,Job:"CorporateTrainee"})
+        var object=new User({id:c+1,Email:req.body.email,Password:req.body.password,Job:"Trainee"})
         var object2=new Trainee({id:c+1,Email:req.body.email,Password:req.body.password,type:"Corporate"});
         object.save(function(err,result1){
             object2.save(function(err,result){})
@@ -46,7 +46,7 @@ router.post("/addIndividualTrainee",function(req,res){
     
     User.find({}).exec(function(err,result){
         var c=result.length;
-        var object=new User({id:c+1,Email:req.body.email,Password:req.body.password,Job:"IndividualTrainee"})
+        var object=new User({id:c+1,Email:req.body.email,Password:req.body.password,Job:"Trainee"})
         var object2=new Trainee({id:c+1,Email:req.body.email,Password:req.body.password,type:"Individual"});
         object.save(function(err,result1){
             object2.save(function(err,result){})
