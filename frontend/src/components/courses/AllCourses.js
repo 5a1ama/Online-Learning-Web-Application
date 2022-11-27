@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import {Navbar} from "../navbar/Navbar";
 import {useNavigate} from 'react-router-dom';
 import { getAllCourses } from '../../API/CourseAPI'
+// @ts-ignore
 import starImg from "../../assets/goldStar.png"
 import './AllCourses.css'
 import Slider from './Slider';
