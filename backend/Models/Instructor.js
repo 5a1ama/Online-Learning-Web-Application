@@ -26,7 +26,6 @@ const instructorSchema=new Schema(
           },
           Password: {
             type: String,
-            
         
           },
           rating:{

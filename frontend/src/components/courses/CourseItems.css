@@ -14,6 +14,7 @@
 .CourseItems_Content{ 
     width: 100%;
     height: 100vh;
+
     position: relative;
     display: flex;
     flex-direction: column;
@@ -57,7 +58,8 @@
     font-size: 50px;
 }
 .CourseItems_Content_Progress{
-    top:60%;
+    position: absolute;
+    top:30vh;
     width:70%;
     align-self: center;
     text-align: center;
@@ -118,7 +120,8 @@
 }
 
 .CourseItems_Content_Stars{
-    top:45%;
+    
+    top:90%;
     left:45%;
     display:flex;
     flex-direction:row;
@@ -129,7 +132,78 @@
 }
 .CourseItems_Content_InstNames{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     position: absolute;
     left:20vh;
+    width:60vh;
+    
+    /* background:#fff; */
 }
+
+/* Second Part */
+
+
+.CourseItems_Content__SecondPart{
+    display: flex;
+    flex-direction: row;
+    position:relative;
+    top:40%;
+    width:100%;
+    height: 100vh;
+}
+.CourseItems_Content__Views{
+    /* position:absolute; */
+    width:60%;
+    height: 100%;
+    margin-left: 2rem;
+    margin-right: 1rem;
+    padding: 0 0;
+    
+}
+
+.CourseItems_Content__Continue{
+    /* position:absolute; */
+    width:35%;
+    height: 100%;
+    background-color: rgba(200,200,200,0.5);
+    border-radius: 10px;
+}
+.CourseItems_Content__Views__Buttons{
+    position: absolute;
+    left: 4.5vh;
+    top:0vh;
+}
+.CourseItems_Content__Views__Buttons button{
+    background-color: transparent ;
+    border-radius: 0px;
+    width:20vh;
+    color:var(--primary-light)
+}
+
+.CourseItems_Content__Views__Buttons button:hover{
+    background-color: rgba(229, 229, 229, 0.5) ;
+    transition:0s;
+    border-bottom:  4px solid rgba(200,200,200,1);
+
+}
+.CourseItems_Content__Views__Buttons button:focus{
+    background-color: rgba(200,200,200,0.5) ;
+    border-bottom:  4px solid var(--primary-light);
+        width:20vh;
+        font-weight: bold;
+    color:var(--primary-light)
+
+}
+.vl3 {
+    border-bottom: 2px solid rgb(206, 206, 206);
+    width: 115vh;
+    position: absolute;
+    left: 0.3%;
+    margin-left: 4vh;
+    top: 6.2vh;
+  }
+  .CourseItems_Content__Views_Content{
+    position: absolute;
+    top:10vh;
+    /* background-color: #000; */
+  }

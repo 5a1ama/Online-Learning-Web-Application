@@ -16,6 +16,12 @@ function CourseItems() {
     const [first,setFirst] = useState(0);
     const location=useLocation();
     const [details,setDetails] = useState([]);
+   
+    const [view , setView] = useState("");
+    const handleView = (view) => {
+        setView(view);
+    } 
+    
     const now = 90 ;
     const getDetails = async () => {
         setDetails((await getCourseDetails(location.state.id)));
@@ -24,7 +30,14 @@ function CourseItems() {
     if(first==0){
         getDetails();
     }
-
+    const InstNamesLen = () =>
+    {
+        if(instNames.length>3){
+            return true;
+        }else{
+            return false;
+        }
+    }
     const [instNames,setInstNames] = useState([])
 
     const handleInstNames = async () => {
@@ -66,15 +79,23 @@ function CourseItems() {
             <div className="CourseItems_Content_title">
             {details[0]&&<h1>{details[0].title}</h1>}
             </div>
+
             <div className="CourseItems_Content_Stars">
+                
                 <div className="CourseItems_Content_InstNames">
-                <img alt="." src={InstImg} style={{width:"40px"}}></img>
-                <a href="/InstructorProfile"><h3>{instNames[0]&&instNames[0]}</h3></a>
-                    
+                    {instNames[0]&&instNames.slice(0,3).map( (name)=>
+                        <div style={{display:"flex" ,flexDirection:"row",width:"70vh" ,padding:".5rem"}}>
+                            <a href="/InstructorProfile" style={{display:"flex" ,flexDirection:"row",width:"70vh"}} >
+                                <img alt="." src={InstImg} style={{width:"40px"}}></img> 
+                                <h3>{name}</h3>
+                            </a>                
+                            </div>
+                    )}
                 </div>
                     
-            {details[0]&&stars(details[0].rating.value).map((num)=> <img className="starImg2" src={starImg} alt="."/>)}
-            </div>
+                 {details[0]&&stars(details[0].rating.value).map((num)=> <img className="starImg2" src={starImg} alt="."/>)}
+                </div>
+            
                 <h2>Course Progress</h2>
             <div className='CourseItems_Content_Progress'>
                 <div style={{display:"flex",flexDirection:"row"}}>
@@ -83,8 +104,39 @@ function CourseItems() {
                 </div>
 
             </div>
+                {/* The part after the progress */}
+            <div className="CourseItems_Content__SecondPart">
+                
+            <div className="CourseItems_Content__Views">
+                <div className="CourseItems_Content__Views__Buttons">
+                        <button onClick={()=>handleView("Overview")} >Overview</button>
+                        <button onClick={()=>handleView("Syllabus")}>Syllabus</button>
+                        <button onClick={()=>handleView("Reviews")}>Reviews</button>
+                        
+                </div>
+                <div className="vl3"></div>
+                <div className="CourseItems_Content__Views_Content">
 
+                {view==="Overview" && <div >
+                        Overview
+                </div>}
+
+                {view==="Syllabus" && <div >
+                        syllabus
+                </div>}
+                
+                {view==="Reviews" && <div >
+                        reviews
+                </div>}
+                </div>
+            </div>
+            <div className="CourseItems_Content__Continue">
+      
+            </div>
+     
+            </div>
         </div>
+
     </div>
   )
 }
