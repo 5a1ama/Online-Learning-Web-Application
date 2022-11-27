@@ -1,5 +1,8 @@
 import Navbar from "../navbar/Navbar";
 import {useNavigate} from 'react-router-dom';
+import { NewCourse } from './NewCourse';
+import { getAllCourses } from '../../API/CourseAPI';
+
 import "./TraineeHome.css";
 
 
