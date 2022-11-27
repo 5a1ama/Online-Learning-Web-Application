@@ -1,4 +1,7 @@
+import { verify } from "./LoginAPI";
+
 const api="http://localhost:8000"
+
 export const getMycourses=async (token)=>{
     const response=await fetch(`http://localhost:8000/instructor/myCourses/${token}`);
     const j=await response.json();
@@ -37,4 +40,13 @@ export const FilterMyCourse=async(min,max,subject)=>{
         const j=await response.json();
         return j
     }
+    
+}
+export const getInstructorDetails= async()=>{
+    var user =await verify(localStorage.getItem("token"))
+    
+    var result = await fetch(`http://localhost:8000/instructor/getInstructor/${user.id}`)
+    var j=await result.json();
+    return j;
+
 }

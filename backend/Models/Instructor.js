@@ -34,6 +34,9 @@ const instructorSchema=new Schema(
           },
           reviews:{
             type:[String]
+          },
+          specialization:{
+            type:String
           }
     }
 )
