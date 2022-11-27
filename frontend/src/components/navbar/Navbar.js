@@ -17,11 +17,12 @@ import UkFlag from "../../assets/UK.jpg"
 import UsaFlag from "../../assets/Usa.jpg"
 import './navbar.css'
 import {Link} from 'react-scroll'
+import { selectCountry } from '../../API/CommonAPI';
+
 
 export {default as Navbar} from './Navbar';
 
 function Navbar(props) {
-    // alert(localStorage.getItem("token"));
     const [nav,setNav] = useState(false)
     const handleNav = () => setNav(!nav)
     const[search,setSearch]=useState("");
@@ -40,7 +41,10 @@ function Navbar(props) {
     const handleCountryBar = () => setCountryBar(!countryBar)
 
     const [chosenCountry,setChosenCountry] = useState(EgyFlag)
-    const handleChosenCountry = (x) => setChosenCountry(x);
+    const handleChosenCountry = (x) => {
+        selectCountry(x);
+        setChosenCountry(x);
+    }
 
     const [settingMenu,setSettingMenu] = useState(false)
     const handleSettingMenu = () => setSettingMenu(!settingMenu);

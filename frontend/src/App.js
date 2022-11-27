@@ -15,15 +15,19 @@ import { TraineeCourses } from './components/Trainee/TraineeCourses';
 import {InstAllCourses} from './components/Instructor/InstAllCourses';
 import {TraineeAllCourses} from './components/Trainee/TraineeAllCourses'
 import {Admin} from './components/Admin/Admin'
-import React from 'react';
+import React, { useState } from 'react';
 import ControlPanel from './components/Admin/ControlPanel';
 import Footer from './components/footer/Footer';
 import CourseContent from './components/courses/CourseContent';
 import CourseItems from './components/courses/CourseItems';
 export default function App() {
   const navigate = useNavigate();
-
-
+  const [first,setFirst]=useState(0);
+  if(first==0){
+    localStorage.clear();
+    setFirst(1);
+  }
+  
   return (
     <div>
       <div>
