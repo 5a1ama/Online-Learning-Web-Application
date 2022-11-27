@@ -25,27 +25,36 @@ export function NewCourse(props) {
     <div className={courseDetails? "newCourse-After":"newCourse"}  >
         <div className={courseDetails? "newCourse-After-Content":"newCourse-content"}>
 
-          <div>
-              <h2 >{props.course.title}</h2>
-              <h2 className='totalhours'>{props.course.hours} Hours</h2>
+          <div className="newCourse_title">
+              <h3 >{props.course.title}</h3>
           </div>
-                    <br/>
-                    <br />
-          <div>
-              <h2 className='price'>{props.course.price}$</h2>
-              <h2 className='price2'>   {props.course.discount.amount}    %</h2>
-              <div className="starImgDiv">
-              {stars(props.course.rating).map((num)=> <img className="starImg" src={starImg} alt="."/>)}
+                <div className="NewCourse_Prices">
+                  <h2 className='NewCourse_price'>{props.course.price}$</h2>
+                  <h2 className='NewCourse_price2'>   {props.course.discount.amount}%</h2>
+                </div>
+          
+              <div className="NewCourse_StarsHoursPrice">
+                <div className="starImgDiv">
+                  {stars(props.course.rating.value).map((num)=> <img className="starImg" src={starImg} alt="."/>)}
+                </div>
+
+              <div className="NewCourse_Data_Price_Hours">
+                
+                <h2 className='totalhours'>{props.course.hours} Hours</h2>
               </div>
-          </div>
+
+              </div>
+          
 
         <div className={courseDetails?"Large-NewData-NewCourse":"nonNewData-NewCourse"}>
+              <div class="vl2"></div>
             <div style={{display:"flex" , flexDirection:"row"}}>
 
             <h3 style={{fontSize:"20px"}}>Course Content :</h3>
             <h3 style={{fontSize:"20px", marginLeft:"8rem"}}>Excercises:</h3>
 
             </div>
+            
         <div className={courseDetails?"NewData-NewCourse":"nonNewData-NewCourse"}>
 
             <div className="Course-subTitles">
@@ -68,7 +77,7 @@ export function NewCourse(props) {
 
           <h5 onClick={handleCourseDetails}>view details</h5>
           </div>
-        <BiDownArrow className="icon" style={{marginRight: '1rem' , transform:'translate(0 ,-1px)'}} onClick={handleCourseDetails}></BiDownArrow>
+        <BiDownArrow className="icon" style={{marginRight: '1rem' , transform:'translate(0 ,0.4rem)'}} onClick={handleCourseDetails}></BiDownArrow>
       <button className="NewCourse-button-OpenCourse" style={{marginRight: '1rem' ,width:"100px",height:"60px",transform:"translate(1rem,1.7rem)" }} onClick={()=>navigate("/CourseItems",{state:{id:props.course.id}})}>Open Course</button>
     </div>  
   )

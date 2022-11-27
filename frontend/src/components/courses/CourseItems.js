@@ -6,6 +6,9 @@ import { useLocation } from 'react-router-dom';
 import './CourseItems.css';
 import ProgressImg from "../../assets/Progress100.png"
 import Progress from './Progress';
+import starImg from "../../assets/goldStar.png"
+import InstImg from "../../assets/avatar8.png"
+import { GetInstructorName } from './../../API/CourseAPI';
 
 
 
@@ -22,8 +25,28 @@ function CourseItems() {
         getDetails();
     }
 
-    
+    const [instNames,setInstNames] = useState([])
 
+    const handleInstNames = async () => {
+        var names = [];
+        for (var i=0 ; i<(details[0].instructors).length;i++){
+            
+            var name = (await GetInstructorName((details[0].instructors)[i])).name
+            names=names.concat([name]);
+        }
+        setInstNames(names)
+    }
+        const stars = (starNumber) => {
+        var array=[]; 
+        for(var i=0;i<starNumber;i++){
+            array=array.concat([0])
+        }
+        return array
+
+        }
+
+        handleInstNames();
+        
   return (
     
     <div className="CourseItems">
@@ -43,12 +66,19 @@ function CourseItems() {
             <div className="CourseItems_Content_title">
             {details[0]&&<h1>{details[0].title}</h1>}
             </div>
-            <div className='CourseItems_Content_Progress'>
+            <div className="CourseItems_Content_Stars">
+                <div className="CourseItems_Content_InstNames">
+                <img alt="." src={InstImg} style={{width:"40px"}}></img>
+                <a href="/InstructorProfile"><h3>{instNames[0]&&instNames[0]}</h3></a>
+                    
+                </div>
+                    
+            {details[0]&&stars(details[0].rating.value).map((num)=> <img className="starImg2" src={starImg} alt="."/>)}
+            </div>
                 <h2>Course Progress</h2>
+            <div className='CourseItems_Content_Progress'>
                 <div style={{display:"flex",flexDirection:"row"}}>
-                {/* <ProgressBar style={{width:"100%",height:"15%", transform:"translate(0px,70px)",fontSize:"18px"}} striped label={`${now}%`} variant="warning" animated now={now}/> */}
                 <Progress done="50" />
-
                 <img alt="." src={ProgressImg} style={{width:"15%"}}></img>
                 </div>
 
