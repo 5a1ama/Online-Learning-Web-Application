@@ -8,6 +8,10 @@ import ProgressImg from "../../assets/Progress100.png"
 import Progress from './Progress';
 import starImg from "../../assets/goldStar.png"
 import InstImg from "../../assets/avatar8.png"
+
+import Gift from "../../assets/gift.png"
+import GiftTop from "../../assets/giftTop.png"
+
 import { GetInstructorName } from './../../API/CourseAPI';
 import Footer from '../footer/Footer';
 import Subtitle from './subtitles/Subtitle';
@@ -20,6 +24,9 @@ function CourseItems() {
 
     const[showDetails,setShowDetails]=useState(false);
     const handleShowDetails =() =>{setShowDetails(!showDetails)};
+
+    const[gift,setGift]=useState(false);
+    const handleGift =() =>{setGift(!gift)};
 
     const [view , setView] = useState("");
     const handleView = (view) => {
@@ -149,8 +156,15 @@ function CourseItems() {
 
                 {view==="Reviews" && 
                     <div>
-
-               
+                        {details[0].discount.amount && <div>
+                        <img alt="." className="Course_Gift" src={Gift} />
+                        <div className="Course_giftText">
+                        <h4 >redeem your {details[0]&&details[0].discount.amount} % Discount now</h4>
+                        <button className='Course_Gift_Redeem'>Redeem</button>
+                            </div>
+                        <img onClick={handleGift} className={gift?"Course_GiftTop2":"Course_GiftTop"} alt="." src={GiftTop} />
+                            </div>}
+                                       
                 </div>}
 
                   
