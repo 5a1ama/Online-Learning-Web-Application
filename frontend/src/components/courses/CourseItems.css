@@ -248,15 +248,12 @@
 
 
 .CourseItems_DivForContinue{
-    transform:scale(0.6);
+    transform:scale(0.58);
     position: absolute;
     top:-70px;
-    left:-90px;
+    left:-110px;
     }
-.CourseItems_DivForContinue_After{
-   
 
-}
 .Course_Gift{
     position:absolute;
     left:0px;
@@ -267,22 +264,27 @@
     z-index: 2;
     position: absolute;
     top:0px;
-    left : 0px
+    left : 0px;
+    transition: 2.3s;
+
 }
 .Course_GiftTop2{
     transform: rotate(400deg)translate(200px,0px);
+    position: absolute;
     transition: 2.3s;
 
 }
 .Course_giftText{
     position:absolute;
-    top:50px;
-    left : 0px;
-    z-index: 1;
+    top:40px;
+    left : 50px;
+    z-index: 0;
+    transition: 2.3s;
+
 
 }
 .Course_giftText h4{
-    color:#d91914;
+    color:#2e2e2e;
     font-weight: 500;
 
 }

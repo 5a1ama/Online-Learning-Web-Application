@@ -7,7 +7,7 @@ const Admin=require("../Models/Admin");
 router.post("/addAdministrator",function(req,res){
     console.log(req.body.name+" "+req.body.email)
     User.find({}).exec(function(err,result){
-        var c=result.length;
+        var c=result[result.length].id;
         var object=new User({id:c+1,Email:req.body.email,Password:req.body.password,Job:"Admin"})
         var object2=new Admin({id:c+1,Email:req.body.email,Password:req.body.password});
         object.save(function(err,result1){
@@ -20,7 +20,8 @@ router.post("/addAdministrator",function(req,res){
 router.post("/addInstructor",function(req,res){
     
     User.find({}).exec(function(err,result){
-        var c=result.length;
+        var c=result[result.length].id;
+
         var object=new User({id:c+1,Email:req.body.email,Password:req.body.password,Job:"Instructor"});
         var object2=new Instructor({id:c+1,Email:req.body.email,Password:req.body.password});
         object.save(function(err,result1){
@@ -32,7 +33,8 @@ router.post("/addInstructor",function(req,res){
 router.post("/addCorporateTrainee",function(req,res){
     
     User.find({}).exec(function(err,result){
-        var c=result.length;
+        var c=result[result.length].id;
+
         var object=new User({id:c+1,Email:req.body.email,Password:req.body.password,Job:"Trainee"})
         var object2=new Trainee({id:c+1,Email:req.body.email,Password:req.body.password,type:"Corporate"});
         object.save(function(err,result1){
@@ -45,7 +47,8 @@ router.post("/addCorporateTrainee",function(req,res){
 router.post("/addIndividualTrainee",function(req,res){
     
     User.find({}).exec(function(err,result){
-        var c=result.length;
+        var c=result[result.length].id;
+
         var object=new User({id:c+1,Email:req.body.email,Password:req.body.password,Job:"Trainee"})
         var object2=new Trainee({id:c+1,Email:req.body.email,Password:req.body.password,type:"Individual"});
         object.save(function(err,result1){

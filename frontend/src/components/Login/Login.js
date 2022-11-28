@@ -25,7 +25,7 @@ function Login() {
             if(type==="Instructor"){
                 navigate("/instructor")
             }
-            if(type=="Trainee"){
+            if(type==="Trainee"){
                 navigate("/TraineeHome")
             }
             // other cases

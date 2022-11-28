@@ -57,7 +57,7 @@ function AllCourses() {
     const handleFilterBar = () => setFilterBar(!FilterBar)
     // const navigate2 = useNavigate();
 
-        
+          
   return (
     <div>
       

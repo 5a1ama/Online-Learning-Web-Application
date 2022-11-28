@@ -1,7 +1,7 @@
 import {React,useState} from 'react'
 import video from '../../assets/ItemsBack.mov';
 import Navbar from './../navbar/Navbar';
-import {  getCourseDetails } from './../../API/CourseAPI';
+import {  getCourseDetails, isEnrolled } from './../../API/CourseAPI';
 import { useLocation } from 'react-router-dom';
 import './CourseItems.css';
 import ProgressImg from "../../assets/Progress100.png"
@@ -11,6 +11,7 @@ import InstImg from "../../assets/avatar8.png"
 
 import Gift from "../../assets/gift.png"
 import GiftTop from "../../assets/giftTop.png"
+import GiftTop2 from "../../assets/giftTop2.png"
 
 import { GetInstructorName } from './../../API/CourseAPI';
 import Footer from '../footer/Footer';
@@ -111,13 +112,16 @@ function CourseItems() {
                 </div>
             
                 <h2>Course Progress</h2>
-            <div className='CourseItems_Content_Progress'>
+                {
+                    
+                    <div className='CourseItems_Content_Progress'>
                 <div style={{display:"flex",flexDirection:"row"}}>
                 <Progress done="50" />
                 <img alt="." src={ProgressImg} style={{width:"15%"}}></img>
                 </div>
 
             </div>
+            }
                 {/* The part after the progress */}
             <div className="CourseItems_Content__SecondPart">
                 

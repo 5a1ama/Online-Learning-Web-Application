@@ -1,6 +1,7 @@
 const Course=require("../Models/Course");
 const User=require("../Models/User");
 const Instructor = require("../Models/Instructor");
+const Trainee = require("../Models/Trainee");
 
 const express=require("express");
 const router=express.Router();
@@ -116,6 +117,21 @@ router.get("/InstructorOfCourse/:InstId",async function(req,res)
     query.exec(function(err,result){
         res.json({name:result[0].Name});
     })
+    }
+)
+router.get("/CourseisEnrolled/:CourseId/:UserId",async function(req,res)
+{
+    var CourseId = req.params.CourseId;   
+    var UserId =req.params.UserId;
+    var result = await Trainee.find({id:UserId})
+    for(var i=0;i<result[0].courses.length;i++){
+        if(CourseId==result[0].courses[i].id)
+            res.json(true);
+        else{
+            res.json(false);
+        }
+    }
+
     }
 )
 
