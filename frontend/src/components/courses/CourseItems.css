@@ -1,3 +1,6 @@
+*,*:focus,*:hover{
+    outline:none;
+}
 .CourseItems{
     width: 100%;
     height: 100%; 
@@ -139,7 +142,9 @@
     
     /* background:#fff; */
 }
-
+.CourseItems_Content_InstNames a:hover{
+    cursor: pointer;
+}
 /* Second Part */
 
 
@@ -162,11 +167,14 @@
 }
 
 .CourseItems_Content__Continue{
-    /* position:absolute; */
+    position:absolute;
+    left:63%;
+    top:12vh;
     width:35%;
-    height: 100%;
-    background-color: rgba(200,200,200,0.5);
+    height: 80vh;
+    background-color: rgba(226, 226, 226, 0.5);
     border-radius: 10px;
+  
 }
 .CourseItems_Content__Views__Buttons{
     position: absolute;
@@ -177,6 +185,7 @@
     background-color: transparent ;
     border-radius: 0px;
     width:20vh;
+    font-size: 20px;
     color:var(--primary-light)
 }
 
@@ -191,19 +200,60 @@
     border-bottom:  4px solid var(--primary-light);
         width:20vh;
         font-weight: bold;
-    color:var(--primary-light)
-
 }
+.CourseItems_Content__Views__Buttons button:default{
+    background-color: rgba(200,200,200,0.5) ;
+    border-bottom:  4px solid var(--primary-light);
+        width:20vh;
+        font-weight: bold;
+}
+
 .vl3 {
     border-bottom: 2px solid rgb(206, 206, 206);
     width: 115vh;
     position: absolute;
     left: 0.3%;
     margin-left: 4vh;
-    top: 6.2vh;
+    top: 7.8vh;
   }
+
   .CourseItems_Content__Views_Content{
     position: absolute;
-    top:10vh;
+    top:12vh;
     /* background-color: #000; */
   }
+  .CourseItems_Content__Views_Content_OverView{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    text-align: left;
+
+  }
+  .CourseItems_Content__Views_Content_OverView h4{
+        font-weight: 400;
+  }
+  .CourseItems_Content__Views_Content_OverView_video{
+    margin-top: 2rem;
+    width: 100%;
+    height:50vh;
+    border-radius: 10px;
+  }
+  .CourseItems_Footer{
+    width: 100%;
+    height:100%;
+    position: absolute;
+    top:200vh;
+  }
+
+
+
+.CourseItems_DivForContinue{
+    transform:scale(0.6);
+    position: absolute;
+    top:-70px;
+    left:-120px;
+    }
+.CourseItems_DivForContinue_After{
+   
+
+}
