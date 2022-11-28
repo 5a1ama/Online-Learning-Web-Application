@@ -2,7 +2,7 @@ import Navbar from "../navbar/Navbar";
 import React, { useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import { NewCourse } from '../courses/NewCourse';
-import { getAllCourses } from '../../API/CourseAPI';
+import {getTraineeDetails} from '../../API/TraineeAPI';
 
 import "./TraineeHome.css";
 
@@ -14,7 +14,7 @@ export function TraineeHome (){
   const [courses,setCourses] = useState([]);
   const getCourses = async () =>{
     
-    setCourses ((await getAllCourses()).slice(1,4));
+    setCourses ((await getTraineeDetails()).slice(0,2));
     // alert(courses);
   }
   getCourses();
