@@ -50,3 +50,4 @@ export const getInstructorDetails= async()=>{
     return j;
 
 }
+
