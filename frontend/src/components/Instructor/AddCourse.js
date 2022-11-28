@@ -7,12 +7,15 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
+import { NewDiv } from './NewDiv';
+import { HiArrowCircleDown, HiOutlineChartSquareBar } from 'react-icons/hi';
 
 export function AddCourse(){
     
     
     const [title,setTitle]=useState("");
-    const [arr,setArr]=useState([])
+    const [Subarr,setArr]=useState([])
+    const [har,setHarr]=useState([]);
     const handleTitle=(event)=>{
         setTitle(event.target.value);
     }
@@ -22,9 +25,9 @@ export function AddCourse(){
     const handleSub=(event)=>{
         setSubtitle(event.target.value)
     }
-    const handleSub2=(event)=>{
-        var index=Number(event.target.getAttribute("id").substring(3));
-        setArr(arr => [...arr.splice(0,index),[event.target.value],...arr.splice(index+1,arr.length)])
+    const handleSub2=(index,value)=>{
+        setArr(Subarr => [...Subarr.splice(0,index),value,...Subarr.splice(index+1,Subarr.length)])
+        
     }
     const handleHours=(event)=>{
         if(event.target.identify<hours.length){
@@ -44,26 +47,23 @@ export function AddCourse(){
     const handleCreate=async()=>{
 
     }
-    const Newdiv=(props)=>{
-        return (
-        <div className='bigAddSub'>
-            {props.arr.map((num,i)=><div className='subtitledivadd'> <TextField   id={"Sub"+(i)}   className="text4-AddCourse"
-     label="Course Subtitle" 
-     color="primary" 
-     variant="filled"
-     /> <TextField id={"hour"+(i)} onChange={handleHours}   className='addedHours'
-     label="Hours" 
-     color="primary" 
-     variant="filled"
-     /> </div>)}
-        </div>)
-    }
+    
     const handleAdd = (event)=>{
     
-        //alert(document.getElementsByClassName("subtitledivadd")[0].childNodes)
-
-        setArr(arr.concat([""]));
-
+       // alert(document.getElementsByClassName("subtitledivadd")[0].childNodes.length)
+        // alert(x.length)
+        
+        // var x=document.getElementsByClassName("text4-AddCourse");
+        // for(var i=0;i<x.length;i++){
+        
+        //     for(var j=0;j<x[i].children.length;j++){
+        //         var y=x[i].children[j].ariaValueText;
+        //         alert(y)
+                
+        //     }
+        // }
+        setArr(Subarr.concat([""]));
+        alert(Subarr)
         
 
        
@@ -114,7 +114,7 @@ export function AddCourse(){
      <br></br>
      <br></br>
      <br></br>
-     <Newdiv  arr={arr}/>
+     <NewDiv handleSub2={handleSub2} arr={Subarr}/>
     
      
      

@@ -1,5 +1,5 @@
 .divcenter{
-   /* background-image: url('../../assets/InstBgHome.jpeg') ;  */
+   background-color: #eee ;
    background-size:cover;
     background-position: 100%;
     width: 100%;
@@ -28,4 +28,12 @@
     background: rgba(0, 0,0, 0.5);
     border-top-left-radius: 20px ;
     border-bottom-right-radius: 20px;
+}
+
+.instructorDitails{
+    background-color: aqua;
+    position: absolute;
+    top: 60%;
+    width: 40%;
+    height: 40%;
 }
