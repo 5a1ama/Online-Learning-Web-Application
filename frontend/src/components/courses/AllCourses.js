@@ -5,7 +5,7 @@ import { FilterAllCourse2, getAllCourses } from '../../API/CourseAPI'
 // @ts-ignore
 import starImg from "../../assets/goldStar.png";
 import './AllCourses.css'
-import { TextField } from '@mui/material';
+import { TextField } from '@mui/material';   
 import NewCourse from './NewCourse';
 import { useLocation } from 'react-router-dom';
 import { SearchCourse } from '../../API/CourseAPI';
@@ -57,9 +57,7 @@ function AllCourses() {
     const handleFilterBar = () => setFilterBar(!FilterBar)
     // const navigate2 = useNavigate();
 
-      
         
-  
   return (
     <div>
       
@@ -68,7 +66,7 @@ function AllCourses() {
     </div>
     <div className='AllCourses'>
     <h1 className="heading">Our Courses</h1>
-    {courses.map((course) => <NewCourse course={course}/>)}
+      {courses.map((course) => <NewCourse course={course}/>)}
     </div>
 
     <button className='AllCourses-FilterBarButton' onClick={handleFilterBar}>Filter Courses</button>

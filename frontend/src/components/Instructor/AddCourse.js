@@ -7,12 +7,16 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
+import { NewDiv } from './NewDiv';
+import { HiArrowCircleDown, HiOutlineChartSquareBar } from 'react-icons/hi';
+import { createCourse } from '../../API/CourseAPI';
 
 export function AddCourse(){
     
     
     const [title,setTitle]=useState("");
-    const [arr,setArr]=useState([])
+    const [Subarr,setArr]=useState([])
+    const [harr,setHarr]=useState([]);
     const handleTitle=(event)=>{
         setTitle(event.target.value);
     }
@@ -22,16 +26,17 @@ export function AddCourse(){
     const handleSub=(event)=>{
         setSubtitle(event.target.value)
     }
-    const handleSub2=(event)=>{
-        var index=Number(event.target.getAttribute("id").substring(3));
-        setArr(arr => [...arr.splice(0,index),[event.target.value],...arr.splice(index+1,arr.length)])
+    const handleSub2=(index,value)=>{
+        Subarr[index]=value;
+        setArr(Subarr)
+        
+    }
+    const handleH=(index,value)=>{
+        harr[index]=value;
+        setHarr(harr);
     }
     const handleHours=(event)=>{
-        if(event.target.identify<hours.length){
-            hours[event.target.identify]=event.target.value;
-        }else{
-            hours=subtitle.concat([event.target.value]);
-        }
+        setHours(event.target.value)
     }
     const [price,setPrice]=useState("");
     const handlePrice=(event)=>{
@@ -42,28 +47,26 @@ export function AddCourse(){
         setSummary(event.target.value)
     }
     const handleCreate=async()=>{
-
+        await createCourse(title,[subtitle].concat(Subarr),[hours].concat(harr),price,summary);
     }
-    const Newdiv=(props)=>{
-        return (
-        <div className='bigAddSub'>
-            {props.arr.map((num,i)=><div className='subtitledivadd'> <TextField   id={"Sub"+(i)}   className="text4-AddCourse"
-     label="Course Subtitle" 
-     color="primary" 
-     variant="filled"
-     /> <TextField id={"hour"+(i)} onChange={handleHours}   className='addedHours'
-     label="Hours" 
-     color="primary" 
-     variant="filled"
-     /> </div>)}
-        </div>)
-    }
+    
     const handleAdd = (event)=>{
     
-        //alert(document.getElementsByClassName("subtitledivadd")[0].childNodes)
-
-        setArr(arr.concat([""]));
-
+       // alert(document.getElementsByClassName("subtitledivadd")[0].childNodes.length)
+        // alert(x.length)
+        
+        // var x=document.getElementsByClassName("text4-AddCourse");
+        // for(var i=0;i<x.length;i++){
+        
+        //     for(var j=0;j<x[i].children.length;j++){
+        //         var y=x[i].children[j].ariaValueText;
+        //         alert(y)
+                
+        //     }
+        // }
+        setArr(Subarr.concat([""]));
+        setHarr(harr.concat([""]))
+        
         
 
        
@@ -97,12 +100,12 @@ export function AddCourse(){
      variant="filled"
      />
 
-            <TextField id = {"sub"+0}  className="text4-AddCourse"
+            <TextField id = {"sub"+0}  className="text4-AddCourse" onChange={handleSub} value={subtitle}
      label="Course Subtitle" 
      color="primary" 
      variant="filled"
      />
-    <TextField identify={0} id ={"hour"+0} onChange={handleHours} value={hours[0]} className="text5-AddCourse"
+    <TextField identify={0} id ={"hour"+0} onChange={handleHours} value={hours} className="text5-AddCourse"
      label="Hours" 
      color="primary" 
      variant="filled"
@@ -114,7 +117,7 @@ export function AddCourse(){
      <br></br>
      <br></br>
      <br></br>
-     <Newdiv  arr={arr}/>
+     <NewDiv handleSub2={handleSub2} handleH={handleH} arr={Subarr} arr2={harr}/>
     
      
      
@@ -126,7 +129,7 @@ export function AddCourse(){
           multiline
           maxRows={9}
         />
-     <button onClick={()=>handleCreate()} className="Submit-button">
+     <button onClick={handleCreate} className="Submit-button">
         Add
             </button>
  

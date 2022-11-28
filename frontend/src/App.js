@@ -60,7 +60,7 @@ function Home() {
     <Bgvid />
     <Courses />
     <WhatHegza />
-    <Footer/>
+    <Footer text={"Do you want to step into the future before others ?"} buttonText={"Register Now"}/>
 
    </div>
 }
