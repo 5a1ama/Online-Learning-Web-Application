@@ -41,7 +41,7 @@ export function InstAllCourses(){
         <div>
 
 <div>
-<Navbar items={["Home","My Courses","Caleneder"]} select="" nav={["/instructor","/InstructorCourses",""]} scroll={["","",""]}  />
+<Navbar items={["Home","My Courses","Caleneder"]} select="" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
 </div>
 <div className='AllCourses'>
             <h1 className="heading">Our Courses</h1>

@@ -1,7 +1,6 @@
 .divcenter{
    background-color: #eee ;
    background-image: linear-gradient(180deg,rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.3)),url('../../assets/InstructorBack.jpeg');
-    display: flex; 
    background-size:cover;
     background-position: 100%;
     width: 100%;
@@ -33,9 +32,55 @@
 }
 
 .instructorDitails{
-    background-color: aqua;
+    background-color: #ffffff;
     position: absolute;
-    top: 60%;
-    width: 40%;
-    height: 40%;
+    top: 5%;
+    left: 5%;
+    width:  25%;
+    height: 58%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius:20px ;
+   flex-direction: column;
+   display: flex;
+   align-items: center;
+   flex-grow: 1 1 0;
+   row-gap: 5%;
+}
+.editIconClick{
+    position: relative;
+    cursor: pointer;
+    top:-80% ;
+    left: 43%;
+}
+.avatar{
+    margin-top: 5%;
+    /* margin: auto;
+    width: 50%;
+    top: 5%; */
+}
+.instructorname{
+    position: relative;
+    /* top: 10%; */
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #607d8b;
+}
+.instructorEmail{
+    position: relative;
+    /* top: 10%; */
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #607d8b;
+}
+.reviewsButton{
+    position: relative;
+    left: 37%;
+    top: 10%;
+    text-decoration-color: black;
+    text-decoration: underline;
+   
 }

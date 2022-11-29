@@ -3,7 +3,6 @@ import {Navbar} from './components/navbar/Navbar'
 import {Bgvid} from './components/bgvid/Bgvid'
 import {Courses} from './components/courses/Courses'
 import { InstructorCourses } from './components/Instructor/InstructorCourses';
-import {Instructor} from './components/Instructor/Instructor';
 import {Login} from './components/Login/Login'
 import {AddCourse} from './components/Instructor/AddCourse'
 import {AllCoursesSearch} from './components/courses/AllCoursesSearch';
@@ -20,15 +19,14 @@ import ControlPanel from './components/Admin/ControlPanel';
 import Footer from './components/footer/Footer';
 import CourseContent from './components/courses/CourseContent';
 import CourseItems from './components/courses/CourseItems';
+import { InstructorHome } from './components/Instructor/InstructorHome';
+import { InstructorReviews } from './components/Instructor/InstructorReviews';
 import CourseItemsContainer from './components/courses/CourseItemsContainer';
 import CourseItems2 from './components/courses/CourseItems2';
 export default function App() {
   const navigate = useNavigate();
   const [first,setFirst]=useState(0);
-  if(first==0){
-    localStorage.clear();
-    setFirst(1);
-  }
+  
   
   return (
     <div>
@@ -36,7 +34,6 @@ export default function App() {
         <Routes>
           <Route path="/courses" element={<Navbar items={["Home"]} select="Home" scroll={["home"]} nav={[""]}/>} />
           <Route path="/" element={<Home />} />
-          <Route path="/instructor" element={<Instructor/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/InstructorCourses" element={<InstructorCourses/>}/>
           <Route path="/addCourse" element={<AddCourse/>}></Route>
@@ -49,6 +46,10 @@ export default function App() {
           <Route path="/AdminControlPanel" element={<ControlPanel/>}/>
           <Route path="/TraineeAllCourses" element={<TraineeAllCourses/>}/>
           <Route path="/CourseContent" element={<CourseContent/>}/>
+          <Route path="/CourseItems" element={<CourseItems/>}/>
+          <Route path="/instructorHome" element={<InstructorHome/>}/> 
+          <Route path="/instructorReviews" element={<InstructorReviews/>}/>
+     
           <Route path="/CourseItems" element={<CourseItemsContainer/>}/>         
            <Route path="/CourseItems2" element={<CourseItemsContainer/>}/>
 

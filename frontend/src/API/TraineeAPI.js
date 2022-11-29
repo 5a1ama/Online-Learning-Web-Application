@@ -1,3 +1,4 @@
+//import { verify } from "./LoginAPI";
 
 export const getTraineeDetails= async(token)=>{
     
