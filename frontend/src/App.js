@@ -21,6 +21,7 @@ import CourseContent from './components/courses/CourseContent';
 import CourseItems from './components/courses/CourseItems';
 import { InstructorHome } from './components/Instructor/InstructorHome';
 import { InstructorReviews } from './components/Instructor/InstructorReviews';
+import { ResetPass } from './components/ResetPass/ResetPass';
 export default function App() {
   const navigate = useNavigate();
   const [first,setFirst]=useState(0);
@@ -47,6 +48,7 @@ export default function App() {
           <Route path="/CourseItems" element={<CourseItems/>}/>
           <Route path="/instructorHome" element={<InstructorHome/>}/> 
           <Route path="/instructorReviews" element={<InstructorReviews/>}/>
+          <Route path="/resetPass" element={<ResetPass/>}/>
         </Routes>
       </div> 
     </div>

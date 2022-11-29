@@ -1,4 +1,4 @@
-//import { verify } from "./LoginAPI";
+import { verify } from "./LoginAPI";
 
 export const getTraineeDetails= async()=>{
     var user =await verify(localStorage.getItem("token"))
