@@ -80,13 +80,13 @@ function CourseItems() {
     <div className="CourseItems">
 
             <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Course" nav={["/","/CourseItems","/","/signUp"]} scroll={["","",""]}  />
-        <div className="CourseItems_Video">
+            <div className="CourseItems_Video">
 
-        <video autoPlay loop muted id='video'>
-        <source src={video} type='video/mp4' />
-        </video>
-        <div className="CourseItems_overlay"></div>
-        </div>
+                 <video autoPlay loop muted id='video'>
+                 <source src={video} type='video/mp4' />
+                 </video>
+                 <div className="CourseItems_overlay"></div>
+            </div>
 
 
         <div className="CourseItems_Content">
@@ -123,81 +123,84 @@ function CourseItems() {
             </div>
             }
                 {/* The part after the progress */}
-            <div className="CourseItems_Content__SecondPart">
                 
-            <div className="CourseItems_Content__Views">
-                <div className="CourseItems_Content__Views__Buttons">
+
+                
+               <div className="CourseItems_Content__Views">
+
+                  <div className="CourseItems_Content__Views__Buttons">
                         <button onClick={()=>handleView("Overview")} >Overview</button>
                         <button onClick={()=>handleView("Syllabus")}>Syllabus</button>
                         <button onClick={()=>handleView("Reviews")}>Reviews</button>
-                        
-                </div>
-                <div className="vl3"></div>
-                <div className="CourseItems_Content__Views_Content">
+                   </div>
+                                    <div className="vl3"></div>
 
-                {view==="Overview" && <div >
-                        <div className="CourseItems_Content__Views_Content_OverView">
-                            <h4>
-                                {details[0]&&details[0].summary}
-                            </h4>
-                            <iframe  src={details[0]&&details[0].previewVideo} className="CourseItems_Content__Views_Content_OverView_video" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+                   <div className="CourseItems_Content__Views_Content">
 
-                        </div>
-                </div>}
+                        {view==="Overview" && 
+                            
+                                <div className="CourseItems_Content__Views_Content_OverView">
+                                    <h4>
+                                    {details[0]&&details[0].summary}
+                                    </h4>
+                                <iframe  src={details[0]&&details[0].previewVideo} className="CourseItems_Content__Views_Content_OverView_video" 
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                 allowfullscreen></iframe> 
 
-                {view==="Syllabus" && <div >
-                        <div className="CourseItems_Syllabus_Subtitles">
-
-                        {details[0]&&details[0].subtitles.map((sub,i)=>
-                        <Subtitle sub={sub} exercise={details[0]&&details[0].excercises} i={i} description={sub.description} ></Subtitle>
-                    )}
-
-                    
-
-                        </div>
-                </div>}
-
-
-                {view==="Reviews" && 
-                    <div>
-                        {details[0].discount.amount && <div>
-                        <img alt="." className="Course_Gift" src={Gift} />
-                        <div className="Course_giftText">
-                        <h4 >redeem your {details[0]&&details[0].discount.amount} % Discount now</h4>
-                        <button className='Course_Gift_Redeem'>Redeem</button>
-                            </div>
-                        <img onClick={handleGift} className={gift?"Course_GiftTop2":"Course_GiftTop"} alt="." src={GiftTop} />
                             </div>}
-                                       
-                </div>}
 
-                  
+                        {view==="Syllabus" && 
+                      
+                            <div className="CourseItems_Syllabus_Subtitles">
+
+                            {details[0]&&details[0].subtitles.map((sub,i)=>
+                            <Subtitle sub={sub} exercise={details[0]&&details[0].excercises} i={i} description={sub.description} ></Subtitle>
+                            )}
+
+                            </div>
+                        }
+
+
+                        {view==="Reviews" && 
+                        <div>
+                            {details[0].discount.amount && <div>
+                            <img alt="." className="Course_Gift" src={Gift} />
+                            <div className="Course_giftText">
+                            <h4 >redeem your {details[0]&&details[0].discount.amount} % Discount now</h4>
+                            <button className='Course_Gift_Redeem'>Redeem</button>
+                                </div>
+                            <img onClick={handleGift} className={gift?"Course_GiftTop2":"Course_GiftTop"} alt="." src={GiftTop} />
+                                </div>}
+                                        
+                        </div>}
+                    </div>
                 </div>
-            </div>
+
             <div className="CourseItems_Content__Continue">
 
-                            <div className="CourseItems_DivForContinue">
-                <div className="CourseItems_DivForContinue_WorkSub">
-
-                            <h5 style={{fontWeight:"600" , fontSize:"25px", color:"var(--primary-light)"}}>
-                                Continue working On current module:
-                                </h5>
-               {details[0]&&details[0].subtitles[0]&&
-                 <Subtitle onClick={handleShowDetails} sub={details[0].subtitles[0]} exercise={details[0].excercises} description={(details[0].subtitles[0].description)} ></Subtitle>
-                }
-                            <iframe  src={details[0]&&details[0].previewVideo} className="CourseItems_Content__Views_Content_OverView_video" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
-
-                </div>
-                       
-                        </div>
-            
-            </div>
+                <div className="CourseItems_DivForContinue">
+                    <div className="CourseItems_DivForContinue_WorkSub">
+                        
+                              <h5 style={{fontWeight:"600" , fontSize:"25px", color:"var(--primary-light)"}}>Continue working On current module: </h5>
+                          {details[0]&&details[0].subtitles[0]&&
+                          <Subtitle onClick={handleShowDetails} sub={details[0].subtitles[0]} exercise={details[0].excercises} description={(details[0].subtitles[0].description)} ></Subtitle>
+                         }
+                         <iframe  src={details[0]&&details[0].previewVideo} className="CourseItems_Content__Views_Content_OverView_video" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
+                    </div>
+                                   
+                 </div>
      
             </div>
-        <div  className="CourseItems_Footer">
-        <Footer text={"Excited to Learn more ? Unlock Premium Courses with Learn Pro "} buttonText={"Upgrade Now"}></Footer>
+
         </div>
-        </div>
+    
+            <div  className="CourseItems_Footer">
+            {/* <Footer text={"Excited to Learn more ? Unlock Premium Courses with Learn Pro "} buttonText={"Upgrade Now"}></Footer> */}
+            </div>
+
+        
+        
+
     </div>
   )
 }

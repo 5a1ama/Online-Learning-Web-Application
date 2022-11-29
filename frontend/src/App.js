@@ -20,6 +20,8 @@ import ControlPanel from './components/Admin/ControlPanel';
 import Footer from './components/footer/Footer';
 import CourseContent from './components/courses/CourseContent';
 import CourseItems from './components/courses/CourseItems';
+import CourseItemsContainer from './components/courses/CourseItemsContainer';
+import CourseItems2 from './components/courses/CourseItems2';
 export default function App() {
   const navigate = useNavigate();
   const [first,setFirst]=useState(0);
@@ -47,7 +49,9 @@ export default function App() {
           <Route path="/AdminControlPanel" element={<ControlPanel/>}/>
           <Route path="/TraineeAllCourses" element={<TraineeAllCourses/>}/>
           <Route path="/CourseContent" element={<CourseContent/>}/>
-          <Route path="/CourseItems" element={<CourseItems/>}/>
+          <Route path="/CourseItems" element={<CourseItemsContainer/>}/>         
+           <Route path="/CourseItems2" element={<CourseItemsContainer/>}/>
+
         </Routes>
       </div> 
     </div>
@@ -61,6 +65,7 @@ function Home() {
     <Bgvid />
     <Courses />
     <WhatHegza />
+    
     <Footer text={"Do you want to step into the future before others ?"} buttonText={"Register Now"}/>
 
    </div>
