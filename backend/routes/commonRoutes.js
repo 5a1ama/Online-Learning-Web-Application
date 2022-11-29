@@ -3,6 +3,7 @@ const router=express.Router();
 const User=require("../Models/User")
 const jwt=require("jsonwebtoken")
 const dotenv=require("dotenv")
+const nodemailer = require('nodemailer');
 // @ts-ignore
 const cookieParser = require("cookie-parser");
 // @ts-ignore
@@ -65,5 +66,39 @@ router.post("/selectCountry/:x/:token",function(req,res){
             const token=jwt.sign(user,process.env.ACCESSTOKEN);
             res.json(token)
         }
+})
+router.get("/findEmail/:email",async function(req,res){
+    var email=req.params.email;
+    var query=await User.find({Email:email});
+    if(query.length==0){
+        res.json("no")
+    }else{
+        res.json(query[0].id);
+    }
+})
+router.get("/sendEmail/:to/:link",function(req,res){
+    const transporter = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+            user: "ziadayman9901@gmail.com",
+            pass: "lwnociqszlkncnuu"
+        }
+      });
+      transporter.verify().then(console.log).catch(console.error);
+     
+    let mailDetails = {
+        from: 'ziadayman9901@gmail.com',
+        to: req.params.to,
+        subject: 'Reset Password',
+        text: "here is the link to reset your password \n "+req.params.link
+    };
+     
+    transporter.sendMail(mailDetails, function(err, data) {
+        if(err) {
+            console.log('Error Occurs');
+        } else {
+            console.log('Email sent successfully');
+        }
+    });
 })
 module.exports=router;
