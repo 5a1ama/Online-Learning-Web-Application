@@ -14,7 +14,7 @@ export function TraineeHome (){
   const [courses,setCourses] = useState([]);
   const getCourses = async () =>{
     
-    setCourses ((await getTraineeDetails()).slice(0,2));
+    setCourses ((await getTraineeDetails(localStorage.getItem("token"))).slice(0,2));
     // alert(courses);
   }
   getCourses();
