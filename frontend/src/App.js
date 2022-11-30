@@ -21,6 +21,9 @@ import CourseContent from './components/courses/CourseContent';
 import CourseItems from './components/courses/CourseItems';
 import { InstructorHome } from './components/Instructor/InstructorHome';
 import { InstructorReviews } from './components/Instructor/InstructorReviews';
+import CourseItemsContainer from './components/courses/CourseItemsContainer';
+import CourseItems2 from './components/courses/CourseItems2';
+import { ResetPass } from './components/ResetPass/ResetPass';
 import { InstructorProfile } from './components/Instructor/InstructorProfile';
 export default function App() {
   const navigate = useNavigate();
@@ -48,6 +51,11 @@ export default function App() {
           <Route path="/CourseItems" element={<CourseItems/>}/>
           <Route path="/instructorHome" element={<InstructorHome/>}/> 
           <Route path="/instructorReviews" element={<InstructorReviews/>}/>
+     
+          <Route path="/CourseItems" element={<CourseItemsContainer/>}/>         
+           <Route path="/CourseItems2" element={<CourseItemsContainer/>}/>
+
+          <Route path="/resetPass" element={<ResetPass/>}/>
           <Route path="/instructorProfile" element={<InstructorProfile/>}/>
         </Routes>
       
@@ -62,6 +70,7 @@ function Home() {
     <Bgvid />
     <Courses />
     <WhatHegza />
+    
     <Footer text={"Do you want to step into the future before others ?"} buttonText={"Register Now"}/>
 
    </div>

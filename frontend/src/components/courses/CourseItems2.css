@@ -1,0 +1,349 @@
+.CourseItems2{
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+    justify-content: space-between;
+
+}
+.CourseItems2_Video{
+    width: 100%;
+    height: 50vh;
+    position: absolute;
+    top:60px;
+}
+.CourseItems2_overlay{
+    background-image: linear-gradient(90deg,rgba(11, 74, 96, 0.9),rgba(3, 35, 46, 0.9));
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0px 0px ;
+
+}
+.CourseItems2_Content{ 
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top:60px;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    /* background-color:rgb(50, 50, 50) */
+   
+}
+
+.CoureItems2_Content_OnVideo{
+    position: absolute;
+    width: 100%;
+    height: 50vh;
+    top:0%;
+    /* background-color: rgba(248, 248, 248, 0.5); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+
+}
+    .CoureItems2_Content_OnVideo h1{
+    
+        color:rgb(255, 255, 255);
+
+        font-size: 50px;
+    }
+    .CoureItems2_Content_OnVideo h2{
+        color:var(--primary-light);
+        font-weight : 600;
+        position: relative;
+        top:15%;
+    }
+    .CourseItems2_Content_InstNames{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        left:20vh;
+        width:80vh;
+        
+        /* background:#fff; */
+    }
+    .CourseItems2_Content_InstNames a:hover{
+        cursor: pointer;
+    }
+
+
+
+
+.CourseItems2_Content_ProgressBar{
+    position: absolute;
+    top:50%;
+    width: 100%;
+    height: 50%;
+    display:flex;
+    flex-direction: row;
+    /* background-color: rgb(196, 196, 196,0.5); */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+}
+.CourseItems2_Content_ProgressBar h2{
+    position: absolute;
+    top:15%;
+    z-index: 1;
+    font-size: 40px;
+    color:var(--primary-light)
+}
+.CourseItems2_Content_ProgressBar img{
+    /* position: absolute; */
+    top:40%;
+    left:75%;
+}
+    .CourseItems2_Content_Progress{
+        /* position: absolute; */
+        top:30vh;
+        width:50%;
+        left:20%;
+        align-self: center;
+        text-align: center;
+        z-index: 1;
+        /* background-color: rgb(27, 21, 15); */
+
+    }
+    
+    .progress {
+        background-color: #d8d8d8;
+        border-radius: 20px;
+        height: 30px;
+        width: 900px;
+        /* transform: translate(0px ,50px); */
+    }
+
+    .progress-done {
+        background-image: linear-gradient(45deg, #ffc107 25%, #ffca2c 25%, #ffca2c 50%, #ffc107 50%, #ffc107 75%, #ffca2c 75%, #ffca2c 100%);
+        background-size: 20px 20px;
+        -webkit-animation: progress-done 62s ease infinite;
+        -moz-animation: progress-done 62s ease infinite;
+        animation: progress-done 62s ease infinite;
+        
+        border-radius: 20px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 0;
+        opacity: 0;
+        transition: 1s ease 0.3s;
+    }
+
+    @-webkit-keyframes progress-done {
+    0%{background-position:0% 51%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 51%}
+    }
+    @-moz-keyframes progress-done {
+    0%{background-position:0% 51%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 51%}
+    }
+    @keyframes progress-done {
+    0%{background-position:0% 51%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 51%}
+    }
+
+
+
+
+.CourseItems2_Content_SecondPart{
+    position: absolute;
+    top:100%;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(0, 255, 0, 0.5); */
+
+}
+
+    .CourseItems2_Content__Views{
+        /* position:absolute; */
+        width:60%;
+        height: 100%;
+        margin-left: 2rem;
+        margin-right: 1rem;
+        padding: 0 0;
+        /* background-color: rgba(212, 212, 212, 0.5); */
+
+        
+    }
+    .CourseItems2_Content__Views__Buttons{
+        position: absolute;
+        left: 4.5vh;
+        top:0vh;
+    }
+    .CourseItems2_Content__Views__Buttons button{
+        background-color: transparent ;
+        border-radius: 0px;
+        width:20vh;
+        font-size: 20px;
+        color:var(--primary-light)
+    }
+    
+    .CourseItems2_Content__Views__Buttons button:hover{
+        background-color: rgba(229, 229, 229, 0.5) ;
+        transition:0s;
+        border-bottom:  4px solid rgba(200,200,200,1);
+    
+    }
+    .CourseItems2_Content__Views__Buttons button:focus{
+        background-color: rgba(200,200,200,0.5) ;
+        border-bottom:  4px solid var(--primary-light);
+            width:20vh;
+            font-weight: bold;
+    }
+    .CourseItems2_Content__Views__Buttons button:default{
+        background-color: rgba(200,200,200,0.5) ;
+        border-bottom:  4px solid var(--primary-light);
+            width:20vh;
+            font-weight: bold;
+    }
+    
+    .vl3 {
+        border-bottom: 2px solid rgb(206, 206, 206);
+        width: 115vh;
+        position: absolute;
+        left: 0.3%;
+        margin-left: 4vh;
+        top: 7.8vh;
+      }
+    
+      .CourseItems2_Content__Views_Content{
+        position: absolute;
+        top:12vh;
+        /* background-color: #000; */
+      }
+      .CourseItems2_Content__Views_Content_OverView{
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        text-align: left;
+    
+      }
+      .CourseItems2_Content__Views_Content_OverView h4{
+            font-weight: 400;
+      }
+      .CourseItems2_Content__Views_Content_OverView_video{
+        margin-top: 2rem;
+        width: 100%;
+        height:50vh;
+        border-radius: 10px;
+      }
+
+    .CourseItems2_Content__Continue{
+        position:absolute;
+        left:63%;
+        top:12vh;
+        width:35%;
+        height: 100%;
+        background-color: rgba(226, 226, 226, 0.5);
+        border-radius: 10px;
+    
+    }
+    .CourseItems2_DivForContinue_WorkSub{
+        position:absolute;
+        top:20vh;
+        left:31vh;
+    }
+
+.CourseItems2_Content_Footer{
+    position: absolute;
+    top:200%;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+}
+
+
+.CourseItems2_DivForContinue{
+    transform:scale(0.58);
+    position: absolute;
+    top:-70px;
+    left:-110px;
+    }
+
+.Course_Gift{
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+
+.Course_GiftTop{
+    z-index: 2;
+    position: absolute;
+    top:0px;
+    left : 0px;
+    transition: 2.3s;
+
+}
+.Course_GiftTop2{
+    transform: rotate(400deg)translate(200px,0px);
+    position: absolute;
+    transition: 2.3s;
+
+}
+.Course_giftText{
+    position:absolute;
+    top:40px;
+    left : 50px;
+    z-index: 0;
+    transition: 2.3s;
+
+
+}
+.Course_giftText h4{
+    color:#2e2e2e;
+    font-weight: 500;
+
+}
+
+.Course_Gift_Redeem{
+    background-image: linear-gradient(45deg, #ffc107 25%, #ffca2c 25%, #ffca2c 50%, #ffc107 50%, #ffc107 75%, #ffca2c 75%, #ffca2c 100%);
+    background-size: 20px 20px;
+    -webkit-animation: Course_Gift_Redeem 62s ease infinite;
+    -moz-animation: Course_Gift_Redeem 62s ease infinite;
+    animation: Course_Gift_Redeem 62s ease infinite;
+    height: 100%;
+	transition: 1s ease 0.3s;
+}
+
+
+
+
+@-webkit-keyframes Course_Gift_Redeem {
+0%{background-position:0% 51%}
+50%{background-position:100% 50%}
+100%{background-position:0% 51%}
+}
+@-moz-keyframes Course_Gift_Redeem {
+0%{background-position:0% 51%}
+50%{background-position:100% 50%}
+100%{background-position:0% 51%}
+}
+@keyframes Course_Gift_Redeem {
+0%{background-position:0% 51%}
+50%{background-position:100% 50%}
+100%{background-position:0% 51%}
+}
+.CourseItems_Syllabus_Subtitles{
+    height: auto;
+    display: flex;
+    flex-direction:column;
+    row-gap: 1vw;
+    background-color: #000;
+
+}

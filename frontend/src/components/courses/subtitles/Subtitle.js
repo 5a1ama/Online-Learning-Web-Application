@@ -7,6 +7,8 @@ function Subtitle(props) {
     const[showDetails,setShowDetails]=useState(false);
     const handleShowDetails =() =>{setShowDetails(!showDetails)};
     return (
+        <div className="CourseItems_Syllabus_Subtitles_1">
+
             <div className={!showDetails?"CourseItems_Syllabus_Subtitles_Content":"CourseItems_Syllabus_Subtitles_Content_Details"}onClick={!showDetails?handleShowDetails:""} >
                 <h2 style={{textAlign:"left" ,margin:"1rem",position:"absolute",top:"5vh"}}>{props.sub.title}</h2>
 
@@ -35,6 +37,7 @@ function Subtitle(props) {
                 </div>
                 </div>
             </div> 
+        </div>
                              )
 }
 

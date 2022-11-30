@@ -147,27 +147,7 @@
 
 
 
-/* .subtitleDiv{
-    position: absolute;
-    top:30%;
-    left:0%;
-    width:100%;
-    flex-direction: row;
-    display: flex;
-    flex-grow: 1 1 0;
-}
-
-.subtitleDiv > TextField{
-    width:40%;
-} */
-
-/* .CourseSub_div{
- position: absolute;   
- width: 1000px;
- top: 43%;
-} */
 .subtitledivadd{
-    /* width: 50%; */
     display: flex;
     flex-direction: row;
     flex-grow: 1 1 0;

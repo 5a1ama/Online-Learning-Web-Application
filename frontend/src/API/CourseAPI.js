@@ -114,3 +114,8 @@ export const GetInstructorName = async(InstId)=>{
   const j=await result.json();
   return j
 }    
+export const isEnrolled = async(CourseId,UserId)=>{
+  const result=await fetch(`http://localhost:8000/course/CourseisEnrolled/${CourseId}/${UserId}`)
+  const j=await result.json();
+  return j
+}

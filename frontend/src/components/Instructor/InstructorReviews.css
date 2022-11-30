@@ -1,30 +1,80 @@
-.reviewsDivMaster{
-    background-color: rgb(215, 0, 0) ;
+.mainDiv{
+    /* background-color: rgb(215, 0, 0) ; 
+    position: relative;
+    height: 100vh; */
+    
+    
+}
+.red{
+    background-color: rgb(243, 22, 22) ;
     background-size:cover;
-     background-position: 100%;
+     background-position: 1000%;
      width: 100%;
      height:100%;
+     position:absolute;
+     background-repeat: repeat;
+
+}
+.reviewsDivMaster{
+    
+     width: 70%;
+     height:auto;
+     display: flex;
+     flex-direction: row;
+     column-gap: 20vw;
+     row-gap: 3vw;
+     flex-grow: 1 1 0;
+     justify-content: center;
+     flex-wrap: wrap;
      position: absolute;
+     top:25%;
+     left:20%;
+     
+     
     
       
 }
 .reviewsDiv{
+    
     display: flex;
     flex-direction: row;
     column-gap: 1vw;
     flex-grow: 1 1 0;
     background-color: aliceblue;
-    width: 40vw;
-    height: 20%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 30%;
+   
+  hyphens: auto;
+     height: 8vw;
+     width: 30%;
+    /* top: 20%;
+    left: 38%;  */
+    
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+
 }
-.reviewDivBig{
+/* .reviewDivBig{
     position: absolute;
+    background-color: rgb(24, 116, 196);
     top: 20%;
-    left: 25%;
+    left: 27%;
+    width: 70%;
     display:flex ;
     flex-direction: column;
     row-gap: 1vw;
     flex-grow: 1 1 0;
     
+    
+} */
+.pwrap{
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  resize: none;
+  
     
 }

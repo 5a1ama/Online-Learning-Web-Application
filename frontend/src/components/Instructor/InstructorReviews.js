@@ -14,28 +14,39 @@ export function InstructorReviews(){
         return(
             <div className="reviewsDiv">
                 <Avatar/>
-                <label>
-                    {props.title}
-                </label>
+                <textarea readOnly className="pwrap">{props.title}</textarea>
+                    
+                
 
             </div>
         )
     }
     
     return(
+        <div className="red">
+            <Navbar items={["Home","My Courses","Caleneder"]} select="" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  /> 
+
+        <div className="mainDiv">
         <div className="reviewsDivMaster">
-            <div>
+            
 
-<Navbar items={["Home","My Courses","Caleneder"]} select="" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  /> 
 
-        </div>
-        
-        <div className="reviewDivBig">
             {reviews && reviews.map((rev)=> <ReviewDiv title={rev}/>)}
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
 
-            </div>
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+        
+        
+        
         </div>
+        </div>
+        </div>
+    
     )
 }
+{/* <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/> */}
