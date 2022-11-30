@@ -9,13 +9,14 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import { NewDiv } from './NewDiv';
 import { HiArrowCircleDown, HiOutlineChartSquareBar } from 'react-icons/hi';
+import { createCourse } from '../../API/CourseAPI';
 
 export function AddCourse(){
     
     
     const [title,setTitle]=useState("");
     const [Subarr,setArr]=useState([])
-    const [har,setHarr]=useState([]);
+    const [harr,setHarr]=useState([]);
     const handleTitle=(event)=>{
         setTitle(event.target.value);
     }
@@ -26,15 +27,16 @@ export function AddCourse(){
         setSubtitle(event.target.value)
     }
     const handleSub2=(index,value)=>{
-        setArr(Subarr => [...Subarr.splice(0,index),value,...Subarr.splice(index+1,Subarr.length)])
+        Subarr[index]=value;
+        setArr(Subarr)
         
     }
+    const handleH=(index,value)=>{
+        harr[index]=value;
+        setHarr(harr);
+    }
     const handleHours=(event)=>{
-        if(event.target.identify<hours.length){
-            hours[event.target.identify]=event.target.value;
-        }else{
-            hours=subtitle.concat([event.target.value]);
-        }
+        setHours(event.target.value)
     }
     const [price,setPrice]=useState("");
     const handlePrice=(event)=>{
@@ -45,7 +47,7 @@ export function AddCourse(){
         setSummary(event.target.value)
     }
     const handleCreate=async()=>{
-
+        await createCourse(title,[subtitle].concat(Subarr),[hours].concat(harr),price,summary);
     }
     
     const handleAdd = (event)=>{
@@ -63,7 +65,8 @@ export function AddCourse(){
         //     }
         // }
         setArr(Subarr.concat([""]));
-        alert(Subarr)
+        setHarr(harr.concat([""]))
+        
         
 
        
@@ -72,7 +75,7 @@ export function AddCourse(){
     return(
     <div className="AddCours">
          <div>
-         <Navbar items={["Home","My Courses","Caleneder"]} select="" nav={["/instructor","/InstructorCourses",""]} scroll={["","",""]}  />
+         <Navbar items={["Home","My Courses","Caleneder"]} select="" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
         </div> 
         <div className="Add-Course-Label">
         <h2>
@@ -97,12 +100,12 @@ export function AddCourse(){
      variant="filled"
      />
 
-            <TextField id = {"sub"+0}  className="text4-AddCourse"
+            <TextField id = {"sub"+0}  className="text4-AddCourse" onChange={handleSub} value={subtitle}
      label="Course Subtitle" 
      color="primary" 
      variant="filled"
      />
-    <TextField identify={0} id ={"hour"+0} onChange={handleHours} value={hours[0]} className="text5-AddCourse"
+    <TextField identify={0} id ={"hour"+0} onChange={handleHours} value={hours} className="text5-AddCourse"
      label="Hours" 
      color="primary" 
      variant="filled"
@@ -114,7 +117,7 @@ export function AddCourse(){
      <br></br>
      <br></br>
      <br></br>
-     <NewDiv handleSub2={handleSub2} arr={Subarr}/>
+     <NewDiv handleSub2={handleSub2} handleH={handleH} arr={Subarr} arr2={harr}/>
     
      
      
@@ -126,7 +129,7 @@ export function AddCourse(){
           multiline
           maxRows={9}
         />
-     <button onClick={()=>handleCreate()} className="Submit-button">
+     <button onClick={handleCreate} className="Submit-button">
         Add
             </button>
  

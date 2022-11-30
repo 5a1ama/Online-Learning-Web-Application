@@ -57,9 +57,7 @@ function AllCourses() {
     const handleFilterBar = () => setFilterBar(!FilterBar)
     // const navigate2 = useNavigate();
 
-      
-        
-  
+          
   return (
     <div>
       
@@ -68,7 +66,7 @@ function AllCourses() {
     </div>
     <div className='AllCourses'>
     <h1 className="heading">Our Courses</h1>
-    {courses.map((course) => <NewCourse course={course}/>)}
+      {courses.map((course) => <NewCourse course={course}/>)}
     </div>
 
     <button className='AllCourses-FilterBarButton' onClick={handleFilterBar}>Filter Courses</button>

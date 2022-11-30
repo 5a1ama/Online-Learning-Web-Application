@@ -16,7 +16,7 @@ router.get("/TraineeMyCourse/:Token",async function(req,res){
     console.log(array+ " "+query.type)
     var arrayCourse = []
     for(var i = 0;i<array.length;i++){
-        var queryCourse = await Course.findOne({id:array[i]})
+        var queryCourse = await Course.findOne({id:array[i].id})
         arrayCourse = arrayCourse.concat([queryCourse])
     }
     res.json(arrayCourse)

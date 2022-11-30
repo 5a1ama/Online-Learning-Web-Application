@@ -23,9 +23,9 @@ function Login() {
         const type=(await verify(x)).job;
         if(type){
             if(type==="Instructor"){
-                navigate("/instructor")
+                navigate("/instructorHome")
             }
-            if(type=="Trainee"){
+            if(type==="Trainee"){
                 navigate("/TraineeHome")
             }
             // other cases

@@ -98,12 +98,12 @@ export const createUser=()=>{
     return response.json();
   });
 }
-export const createCourse=async (title,subtitle,price,summary)=>{
+export const createCourse=async (title,subtitle,hours,price,summary)=>{
   const response=await fetch(`${api}/course`,{method: "POST",
   headers: {
       "Content-type": "application/json; charset=UTF-8"
   },
-  body:JSON.stringify({title:title,subtitles:subtitle,price:price,summary:summary})
+  body:JSON.stringify({title:title,subtitles:subtitle,price:price,summary:summary,hours:hours})
   });
   const j=await response.json()
   return j
@@ -114,3 +114,8 @@ export const GetInstructorName = async(InstId)=>{
   const j=await result.json();
   return j
 }    
+export const isEnrolled = async(CourseId,UserId)=>{
+  const result=await fetch(`http://localhost:8000/course/CourseisEnrolled/${CourseId}/${UserId}`)
+  const j=await result.json();
+  return j
+}

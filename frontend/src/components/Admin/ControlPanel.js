@@ -14,7 +14,12 @@ function ControlPanel() {
     const handleAdmin=async (event)=>{
         event.preventDefault();
 
-        await AddAdmin(adminuser,adminpass);
+        var result=await AddAdmin(adminuser,adminpass);
+        if(result=="ok"){
+            alert("successfully added user")
+        }else{
+            alert("username already exists")
+        }
     }
     const [Instuser,setInstUser]=useState("");
     const [Instpass,setInstPass]=useState("");

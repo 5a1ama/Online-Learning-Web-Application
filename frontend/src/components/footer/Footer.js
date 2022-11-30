@@ -3,17 +3,17 @@ import {useNavigate} from 'react-router-dom';
 import './footer.css';
 export {default as Footer} from './Footer'
 
-function Footer () {
+function Footer (props) {
   
   const navigate = useNavigate();
   return (
     <div className="gpt3__footer section__padding">
     <div className="gpt3__footer-heading">
-      <h1 className="gradient__text">Do you want to step into the future before others ?</h1>
+      <h1 className="gradient__text">{props.text}</h1>
     </div>
 
     <div className="gpt3__footer-btn">
-      <button onClick={()=>navigate("/signUp")}>Register Now</button>
+      <button onClick={()=>navigate("/signUp")}>{props.buttonText}</button>
     </div>
 
 

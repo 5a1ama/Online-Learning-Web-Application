@@ -1,6 +1,7 @@
 const Course=require("../Models/Course");
 const User=require("../Models/User");
 const Instructor = require("../Models/Instructor");
+const Trainee = require("../Models/Trainee");
 
 const express=require("express");
 const router=express.Router();
@@ -63,10 +64,17 @@ router.get("/filter-price/:minprice/:maxprice",async function(req,res){
 router.post("/",function(req,res){
     var query=Course.find({});
     // @ts-ignore
+    var arr=req.body.subtitles;
+    var hourArr=req.body.hours;
+    var final=[];
+    for(var i=0;i<arr.length;i++){
+        final=final.concat([{title:arr[i],hours:hourArr[i]}])
+    }
     query.exec(function(err,result){
-        var object=new Course({id:result.length+1,hours:req.body.hours,title:req.body.title,subtitles:req.body.substitles,price:req.body.price,
-        summary:req.body.summary,rating:req.body.rating,subject:req.body.subject})
+        var object=new Course({id:result.length+1,title:req.body.title,subtitles:final,price:req.body.price,
+        summary:req.body.summary})
         // @ts-ignore
+        console.log("add course")
         object.save(function(req,res){
             
         })
@@ -116,6 +124,21 @@ router.get("/InstructorOfCourse/:InstId",async function(req,res)
     query.exec(function(err,result){
         res.json({name:result[0].Name});
     })
+    }
+)
+router.get("/CourseisEnrolled/:CourseId/:UserId",async function(req,res)
+{
+    var CourseId = req.params.CourseId;   
+    var UserId =req.params.UserId;
+    var result = await Trainee.find({id:UserId})
+    for(var i=0;i<result[0].courses.length;i++){
+        if(CourseId==result[0].courses[i].id)
+            res.json(true);
+        else{
+            res.json(false);
+        }
+    }
+
     }
 )
 
