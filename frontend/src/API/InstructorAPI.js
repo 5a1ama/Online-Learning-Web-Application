@@ -43,11 +43,32 @@ export const FilterMyCourse=async(min,max,subject)=>{
     
 }
 export const getInstructorDetails= async()=>{
-    var user =await verify(localStorage.getItem("token"))
     
-    var result = await fetch(`http://localhost:8000/instructor/getInstructor/${user.id}`)
+    var result = await fetch(`http://localhost:8000/instructor/getInstructor/${localStorage.getItem("token")}`)
     var j=await result.json();
+    
     return j;
 
+}
+export const updateInstructorName=async(name)=>{
+    var result=await fetch(`http://localhost:8000/instructor/updateName/${name}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+}
+export const updateInstructorEmail=async(name)=>{
+    var result=await fetch(`http://localhost:8000/instructor/updateEmail/${name}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+}
+export const updateInstructorSpec=async(name)=>{
+    var result=await fetch(`http://localhost:8000/instructor/updateSpec/${name}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
 }
 

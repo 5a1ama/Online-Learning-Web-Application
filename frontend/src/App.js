@@ -21,14 +21,15 @@ import CourseContent from './components/courses/CourseContent';
 import CourseItems from './components/courses/CourseItems';
 import { InstructorHome } from './components/Instructor/InstructorHome';
 import { InstructorReviews } from './components/Instructor/InstructorReviews';
+import { InstructorProfile } from './components/Instructor/InstructorProfile';
 export default function App() {
   const navigate = useNavigate();
   const [first,setFirst]=useState(0);
   
   
   return (
-    <div>
-      <div>
+    
+      
         <Routes>
           <Route path="/courses" element={<Navbar items={["Home"]} select="Home" scroll={["home"]} nav={[""]}/>} />
           <Route path="/" element={<Home />} />
@@ -47,9 +48,10 @@ export default function App() {
           <Route path="/CourseItems" element={<CourseItems/>}/>
           <Route path="/instructorHome" element={<InstructorHome/>}/> 
           <Route path="/instructorReviews" element={<InstructorReviews/>}/>
+          <Route path="/instructorProfile" element={<InstructorProfile/>}/>
         </Routes>
-      </div> 
-    </div>
+      
+    
   );
 }
 
