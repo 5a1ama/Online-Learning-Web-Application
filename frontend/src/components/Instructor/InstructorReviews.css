@@ -8,32 +8,28 @@
 .red{
     background-color: rgb(243, 22, 22) ;
     background-size:cover;
-     background-position: 1000%;
+    display: flex;
+    flex-direction:column;
      width: 100%;
-     height:100%;
-     position:absolute;
-     background-repeat: repeat;
+     height:100vh;
+     align-items: center;
+     justify-content: center;
 
 }
-.reviewsDivMaster{
-    
-     width: 70%;
-     height:auto;
-     display: flex;
-     flex-direction: row;
-     column-gap: 20vw;
-     row-gap: 3vw;
-     flex-grow: 1 1 0;
-     justify-content: center;
-     flex-wrap: wrap;
-     position: absolute;
-     top:25%;
-     left:20%;
-     
-     
-    
-      
+.InstructorReviews_Main{
+    align-self: center;
+    position: relative;
+    top:80px;
+    /* background-color: aqua; */
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 2rem;
+    row-gap: 2rem;
+
 }
+
 .reviewsDiv{
     
     display: flex;
@@ -51,10 +47,7 @@
     /* top: 20%;
     left: 38%;  */
     
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-radius: 20px;
 
 }
 /* .reviewDivBig{

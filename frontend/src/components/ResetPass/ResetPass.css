@@ -21,6 +21,7 @@
     left: 32%;
     display: flex;
     flex-direction: column; 
+    align-items: center;
 }
 .ResetPassSmallDiv:before{ 
     position: fixed;
@@ -37,10 +38,28 @@
     z-index: 1;
     font-size: 2.2rem;
     font-weight:380;
-    left: 20%;
     top: 3%;
 }
 .PassTextField{
+    position: relative;
     width: 70%;
-
+    top: 20%;
+    background-color: #e0e0e0;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.PassTextField2{
+    position: relative;
+    width: 70%;
+    top: 25%;
+    background-color: #e0e0e0;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.ConfirmButton{
+    position: relative;
+    width: 40%;
+    height: 8%;
+    top: 35%;
+    left: 20%;
 }

@@ -26,13 +26,23 @@ export function InstructorReviews(){
         <div className="red">
             <Navbar items={["Home","My Courses","Caleneder"]} select="" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  /> 
 
-        <div className="mainDiv">
-        <div className="reviewsDivMaster">
-            
-
+            <div className="InstructorReviews_Main">
 
             {reviews && reviews.map((rev)=> <ReviewDiv title={rev}/>)}
 
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+        
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
             <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
             <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
             <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
@@ -40,10 +50,9 @@ export function InstructorReviews(){
             <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
             <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
         
+            </div>
         
         
-        </div>
-        </div>
         </div>
     
     )

@@ -52,6 +52,11 @@ export function InstructorHome(){
        <EditIcon className="editIconClick" />
        
         </div>
+
+        <div className="instructorDitails2">
+
+        </div>
+
 </div>
     );
 }
