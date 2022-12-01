@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { getInstructorDetails } from "../../API/InstructorAPI";
+import { useEffect, useState } from "react";
 import Navbar from "../navbar/Navbar";
 import "./Instructor.css"
 import { InstructorCourse } from "./InstructorCourses";
@@ -9,18 +8,24 @@ import Rating from '@mui/material/Rating';
 import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
 import { Navigate, useNavigate } from "react-router-dom";
+import { getInstructorDetails } from "../../API/InstructorAPI";
 
 export function InstructorHome(){
+    
     const [instructor,setinstructor]=useState()
     const intial = async()=>{
         setinstructor(await getInstructorDetails())
 
 
     }
+    
+        intial()
+        
+
     const navigate = useNavigate();
     
-    intial()
-
+    
+    
     return(
 <div className = "divcenter">
 <div>
@@ -35,7 +40,7 @@ export function InstructorHome(){
         className="avatar"
         sx={{ backgroundColor: '#0277bd' ,width: 100, height: 100 ,fontSize:35}}
         >
-            {instructor && instructor.Name.substring(0,1)+instructor.Name.split(" ")[1].substring(0,1)}
+            {/* {instructor && instructor.Name.substring(0,1)+instructor.Name.split(" ")[1].substring(0,1)} */}
             
         </Avatar>
            <h5 className="instructorname">{instructor && instructor.Name}</h5>
@@ -47,6 +52,11 @@ export function InstructorHome(){
        <EditIcon className="editIconClick" />
        
         </div>
+
+        <div className="instructorDitails2">
+
+        </div>
+
 </div>
     );
 }

@@ -21,6 +21,10 @@ import CourseContent from './components/courses/CourseContent';
 import CourseItems from './components/courses/CourseItems';
 import { InstructorHome } from './components/Instructor/InstructorHome';
 import { InstructorReviews } from './components/Instructor/InstructorReviews';
+import CourseItemsContainer from './components/courses/CourseItemsContainer';
+import CourseItems2 from './components/courses/CourseItems2';
+import { ResetPass } from './components/ResetPass/ResetPass';
+import { InstructorProfile } from './components/Instructor/InstructorProfile';
 import CourseVideo from './components/courses/CourseVideo';
 export default function App() {
   const navigate = useNavigate();
@@ -28,8 +32,8 @@ export default function App() {
   
   
   return (
-    <div>
-      <div>
+    
+      
         <Routes>
           <Route path="/courses" element={<Navbar items={["Home"]} select="Home" scroll={["home"]} nav={[""]}/>} />
           <Route path="/" element={<Home />} />
@@ -52,9 +56,11 @@ export default function App() {
           <Route path="/CourseItems" element={<CourseItems/>}/>         
            <Route path="/Coursevideo" element={<CourseVideo/>}/>
 
+          <Route path="/resetPass" element={<ResetPass/>}/>
+          <Route path="/instructorProfile" element={<InstructorProfile/>}/>
         </Routes>
-      </div> 
-    </div>
+      
+    
   );
 }
 

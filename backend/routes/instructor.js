@@ -188,9 +188,37 @@ router.post("/coursePromotion",async function(req,res){
     await Course.findOneAndUpdate({id:courseid},{discount:{amount:amount,duration:duration
     }})
 })
-router.get("/getInstructor/:id",async function(req,res){
-    var id = req.params.id
+router.get("/getInstructor/:token",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN)
+    var id = user.id
+
     var query = await Instructor.findOne({id:id})
     res.json(query)
+})
+router.post("/updateName/:name/:token",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var id=user.id;
+    
+    var newname=req.params.name;
+    await Instructor.findOneAndUpdate({id:id},{Name:newname});
+    await User.findOneAndUpdate({id:id},{Name:newname});
+})
+router.post("/updateEmail/:name/:token",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var id=user.id;
+    var newname=req.params.name;
+    await Instructor.findOneAndUpdate({id:id},{Email:newname});
+    await User.findOneAndUpdate({id:id},{Email:newname});
+})
+router.post("/updateSpec/:name/:token",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var id=user.id;
+    var newname=req.params.name;
+    await Instructor.findOneAndUpdate({id:id},{specialization:newname});
+    await User.findOneAndUpdate({id:id},{specialization:newname});
 })
 module.exports=router
