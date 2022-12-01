@@ -166,7 +166,7 @@
     top:100%;
     width: 100%;
     height: 100%;
-    /* background-color: rgba(0, 255, 0, 0.5); */
+    background-color: rgba(0, 255, 0, 0.5);
 
 }
 
@@ -259,7 +259,12 @@
         top:20vh;
         left:31vh;
     }
-
+    .CourseItems2_DivForContinue{
+        transform:scale(0.58);
+        position: absolute;
+        top:-70px;
+        left:-110px;
+        }
 .CourseItems2_Content_Footer{
     position: absolute;
     top:200%;
@@ -269,81 +274,13 @@
 }
 
 
-.CourseItems2_DivForContinue{
-    transform:scale(0.58);
-    position: absolute;
-    top:-70px;
-    left:-110px;
-    }
-
-.Course_Gift{
-    position:absolute;
-    left:0px;
-    top:0px;
-}
-
-.Course_GiftTop{
-    z-index: 2;
-    position: absolute;
-    top:0px;
-    left : 0px;
-    transition: 2.3s;
-
-}
-.Course_GiftTop2{
-    transform: rotate(400deg)translate(200px,0px);
-    position: absolute;
-    transition: 2.3s;
-
-}
-.Course_giftText{
-    position:absolute;
-    top:40px;
-    left : 50px;
-    z-index: 0;
-    transition: 2.3s;
 
 
-}
-.Course_giftText h4{
-    color:#2e2e2e;
-    font-weight: 500;
-
-}
-
-.Course_Gift_Redeem{
-    background-image: linear-gradient(45deg, #ffc107 25%, #ffca2c 25%, #ffca2c 50%, #ffc107 50%, #ffc107 75%, #ffca2c 75%, #ffca2c 100%);
-    background-size: 20px 20px;
-    -webkit-animation: Course_Gift_Redeem 62s ease infinite;
-    -moz-animation: Course_Gift_Redeem 62s ease infinite;
-    animation: Course_Gift_Redeem 62s ease infinite;
-    height: 100%;
-	transition: 1s ease 0.3s;
-}
-
-
-
-
-@-webkit-keyframes Course_Gift_Redeem {
-0%{background-position:0% 51%}
-50%{background-position:100% 50%}
-100%{background-position:0% 51%}
-}
-@-moz-keyframes Course_Gift_Redeem {
-0%{background-position:0% 51%}
-50%{background-position:100% 50%}
-100%{background-position:0% 51%}
-}
-@keyframes Course_Gift_Redeem {
-0%{background-position:0% 51%}
-50%{background-position:100% 50%}
-100%{background-position:0% 51%}
-}
-.CourseItems_Syllabus_Subtitles{
+/* .CourseItems_Syllabus_Subtitles{
     height: auto;
     display: flex;
     flex-direction:column;
     row-gap: 1vw;
     background-color: #000;
 
-}
+} */

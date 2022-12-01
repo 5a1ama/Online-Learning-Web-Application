@@ -21,8 +21,7 @@ import CourseContent from './components/courses/CourseContent';
 import CourseItems from './components/courses/CourseItems';
 import { InstructorHome } from './components/Instructor/InstructorHome';
 import { InstructorReviews } from './components/Instructor/InstructorReviews';
-import CourseItemsContainer from './components/courses/CourseItemsContainer';
-import CourseItems2 from './components/courses/CourseItems2';
+import CourseVideo from './components/courses/CourseVideo';
 export default function App() {
   const navigate = useNavigate();
   const [first,setFirst]=useState(0);
@@ -50,8 +49,8 @@ export default function App() {
           <Route path="/instructorHome" element={<InstructorHome/>}/> 
           <Route path="/instructorReviews" element={<InstructorReviews/>}/>
      
-          <Route path="/CourseItems" element={<CourseItemsContainer/>}/>         
-           <Route path="/CourseItems2" element={<CourseItemsContainer/>}/>
+          <Route path="/CourseItems" element={<CourseItems/>}/>         
+           <Route path="/Coursevideo" element={<CourseVideo/>}/>
 
         </Routes>
       </div> 
