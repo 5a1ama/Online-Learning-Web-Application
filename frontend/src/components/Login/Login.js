@@ -7,7 +7,11 @@ import LoginUser from '../../API/LoginAPI'
 import { verify } from '../../API/LoginAPI'
 import isVisible from './../../../node_modules/dom-helpers/esm/isVisible';
 import { visibility } from './../../../node_modules/@mui/system/legacy/display';
+import {sendEmail} from '../../API/CommonAPI'
+import Button from '@mui/material/Button';
+
 export { default as Login } from './Login'
+
 
 function Login() {
     const[wrongemail,setWrongEmail]=useState(null)
@@ -30,6 +34,7 @@ function Login() {
             }
             // other cases
         }else{
+            alert(x.user+" "+x.pass)
             setWrongEmail(x.user);
             setWrongPass(x.pass)
         }
@@ -74,7 +79,12 @@ function Login() {
          </div>
 
          <div className="Login-WrongData" >
-         {wrongpass && <h4>Wrong Password. </h4>}
+         {wrongpass && <div><h4>Wrong Password. </h4>
+    
+         <h3 onClick={()=>sendEmail(email,`/resetPass?email=${email}`)} className="ResetPasswordLogin">Reset Password?</h3>
+         </div>}
+         
+
          </div>
          <div className = "SearchButtons" >
          <button onClick={handleLogin}> Login</button>
