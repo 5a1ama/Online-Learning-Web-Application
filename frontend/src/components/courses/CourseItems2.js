@@ -111,7 +111,7 @@ function CourseItems2() {
             </div>
     
             {/* comment */}
-    
+                        
             <div className="CourseItems2_Content_ProgressBar">
             <h2>Course Progress</h2>
                 {
@@ -181,8 +181,8 @@ function CourseItems2() {
                 
 
                 <div className="CourseItems2_Content__Continue">
+                <div className="CourseItems2_DivForContinue_WorkSub">
                 <div className="CourseItems2_DivForContinue">
-                    <div className="CourseItems2_DivForContinue_WorkSub">
                         
                               <h5 style={{fontWeight:"600" , fontSize:"25px", color:"var(--primary-light)"}}>Continue working On current module: </h5>
                           {details[0]&&details[0].subtitles[0]&&

@@ -25,6 +25,7 @@ import CourseItemsContainer from './components/courses/CourseItemsContainer';
 import CourseItems2 from './components/courses/CourseItems2';
 import { ResetPass } from './components/ResetPass/ResetPass';
 import { InstructorProfile } from './components/Instructor/InstructorProfile';
+import CourseVideo from './components/courses/CourseVideo';
 export default function App() {
   const navigate = useNavigate();
   const [first,setFirst]=useState(0);
@@ -52,8 +53,8 @@ export default function App() {
           <Route path="/instructorHome" element={<InstructorHome/>}/> 
           <Route path="/instructorReviews" element={<InstructorReviews/>}/>
      
-          <Route path="/CourseItems" element={<CourseItemsContainer/>}/>         
-           <Route path="/CourseItems2" element={<CourseItemsContainer/>}/>
+          <Route path="/CourseItems" element={<CourseItems/>}/>         
+           <Route path="/Coursevideo" element={<CourseVideo/>}/>
 
           <Route path="/resetPass" element={<ResetPass/>}/>
           <Route path="/instructorProfile" element={<InstructorProfile/>}/>

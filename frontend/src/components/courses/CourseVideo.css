@@ -1,0 +1,26 @@
+.CourseVideo{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.CourseVideo_Video{
+    width: 80%;
+    height: 60vh;
+    border-radius: 10px;
+}
+.CourseVideo h1{    font-size:25px;
+    color:rgb(130, 130, 130)
+}
+
+.CourseVideo_Directory h2{ 
+    font-size:25px;
+    color:rgb(130, 130, 130)
+}
+.CourseVideo h1:hover{
+    cursor: pointer;
+    color:var(--primary-light);
+    text-decoration: underline;
+}

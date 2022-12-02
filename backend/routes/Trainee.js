@@ -13,6 +13,7 @@ router.get("/TraineeMyCourse/:Token",async function(req,res){
     var Id = user.id
     var query = await Trainee.findOne({id:Id})
     var array = query.courses
+    console.log(array+ " "+query.type)
     var arrayCourse = []
     for(var i = 0;i<array.length;i++){
         var queryCourse = await Course.findOne({id:array[i].id})
@@ -20,4 +21,6 @@ router.get("/TraineeMyCourse/:Token",async function(req,res){
     }
     res.json(arrayCourse)
 })
+
+
 module.exports = router
