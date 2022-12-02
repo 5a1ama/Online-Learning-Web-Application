@@ -27,7 +27,7 @@ router.post("/login",async function(req,res){
     }else{
         
         var query=await User.find({Email:username});
-        if(query.length==1)
+        if(query.length!=0)
         res.json({user:false,pass:true})
         else
         res.json({user:true,pass:false})

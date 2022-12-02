@@ -103,3 +103,20 @@ h3{
 .Login-WrongData a{
     color:greenyellow;
 }
+.ResetPasswordLogin{
+    position: absolute;
+    background-color: transparent;
+    color: white;
+    top: 63.5%;
+    left: 44%;
+    font-size:100%;
+   
+
+}
+.ResetPasswordLogin:hover{
+    color:var(--primary-light);
+    /* border-bottom:1px solid #1e2f45; */
+    text-decoration: underline;
+    cursor: pointer;
+    transition: 0.7s;
+}
