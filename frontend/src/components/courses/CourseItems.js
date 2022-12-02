@@ -1,4 +1,4 @@
-import {React,useState} from 'react'
+import {Component, React,useEffect,useRef,useState} from 'react'
 import video from '../../assets/ItemsBack.mov';
 import Navbar from './../navbar/Navbar';
 import {  getCourseDetails, isEnrolled } from './../../API/CourseAPI';
@@ -21,8 +21,11 @@ import Subtitle from './subtitles/Subtitle';
 function CourseItems() {
     const [first,setFirst] = useState(0);
     const location=useLocation();
-    const [details,setDetails] = useState([]);
+   
 
+
+    const [details,setDetails] = useState([]);
+    
     const[showDetails,setShowDetails]=useState(false);
     const handleShowDetails =() =>{setShowDetails(!showDetails)};
 
@@ -32,19 +35,39 @@ function CourseItems() {
     const [view , setView] = useState("");
     const handleView = (view) => {
         setView(view);
-    } 
-    const handleSubBack = (id) =>{
-
     }
-    
+
+    const bottomRef = useRef(null);
+
+    useEffect(()=>{ 
+        handleView(location.state.View)
+        
+    })
+
+
+ 
+       
+
     const now = 90 ;
     const getDetails = async () => {
         setDetails((await getCourseDetails(location.state.id)));
         setFirst(1);
     }
-    if(first==0){
+    if(first===0){
         getDetails();
+        if(location.state.View==="Syllabus"){
+            bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+        }
+
+        
     }
+    // alert(location.state.View)
+    // if(location.state.View==="Syllabus"){
+    //     handleView("Syllabus")   ;   
+    // }else if(location.state.View==="Overview"){
+    //     handleView("Overview")   ;   
+
+    // }
     const InstNamesLen = () =>
     {
         if(instNames.length>3){
@@ -76,8 +99,10 @@ function CourseItems() {
 
         }
 
-        handleInstNames();
         
+
+        handleInstNames();
+
   return (
     
     <div className="CourseItems">
@@ -90,7 +115,6 @@ function CourseItems() {
                  </video>
                  <div className="CourseItems_overlay"></div>
             </div>
-
             {/* onVideo */                                                                      }
             
             <div className='CoureItems_OnVideo'>
@@ -135,15 +159,17 @@ function CourseItems() {
             
             <div className='CourseItems_SecondPart'>
                 <div className="CourseItems_SecondPart_views">
+
                     <div className="CourseItems_SecondPart_View_Buttons">
-                                <button onClick={()=>handleView("Overview")} >Overview</button>
-                                <button onClick={()=>handleView("Syllabus")}>Syllabus</button>
-                                <button onClick={()=>handleView("Reviews")}>Reviews</button>
+                                <button onClick={()=>{location.state.View="Overview";handleView("Overview")}} >Overview</button>
+                                <button onClick={()=>{location.state.View="Syllabus";handleView("Syllabus")}}>Syllabus</button>
+                                <button onClick={()=>{location.state.View="Reviews";handleView("Reviews")}}>Reviews</button>
                         </div>
                         <div className="vl33"></div>
                         {view==="Overview" && 
                                         
                                         <div className="CourseItems_SecondPart_View_OverView">
+                                            
                                             <h4>
                                             {details[0]&&details[0].summary}
                                             </h4>
@@ -153,12 +179,14 @@ function CourseItems() {
 
                                     </div>}
 
-                                {view==="Syllabus" && 
+                                {view=="Syllabus" && 
 
-                                    <div className="CourseItems_Syllabus_Subtitles">
+                                    <div id="Subtitles" className="CourseItems_Syllabus_Subtitles">
 
+
+                                    <div ref={bottomRef} />
                                     {details[0]&&details[0].subtitles.map((sub,i)=>
-                                    <Subtitle sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i}  description={sub.description} ></Subtitle>
+                                    <Subtitle sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i} SubTitleBack={location.state.SubtitleTitle} View="Syllabus" description={sub.description} ></Subtitle>
                                     )}
 
                                     </div>
@@ -184,7 +212,7 @@ function CourseItems() {
                     <div className="CourseItems_DivForContinue">
                             <div className="CourseItems_DivForContinue_WorkSub">
                                 {details[0]&&details[0].subtitles[0]&&
-                               <Subtitle style={{display:"block"}} onClick={handleShowDetails} sub={details[0].subtitles[0]} exercise={details[0].excercises} description={(details[0].subtitles[0].description)} ></Subtitle>
+                               <Subtitle style={{display:"block"}} onClick={handleShowDetails} sub={details[0].subtitles[0]} exercise={details[0].excercises} View="" description={(details[0].subtitles[0].description)} ></Subtitle>
                                    }
                             <iframe  src={details[0]&&details[0].previewVideo} className="CourseItems_SecondPart_View_OverView_video" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
                     </div>
