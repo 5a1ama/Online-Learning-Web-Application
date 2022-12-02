@@ -15,8 +15,11 @@ function Login() {
     
     const [email,setEmail] = useState("");
     const handleEmail = (event) => { setEmail(event.target.value)}
+    
     const [password,setPassword] = useState("");
+    
     const handlePassword = (event) => { setPassword(event.target.value)}
+
     const navigate=useNavigate();
     const init=async()=>{
         const x=await LoginUser(email,password)

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsBook } from 'react-icons/bs';
 import { IoIosArrowDown, IoIosPaper } from 'react-icons/io'
 import{MdSlowMotionVideo}  from 'react-icons/md'
@@ -7,8 +7,28 @@ import "./Subtitle.css"
 function Subtitle(props) {
     const navigate = useNavigate();
     const[showDetails,setShowDetails]=useState(false);
-    const handleShowDetails =() =>{setShowDetails(!showDetails)
-        if(props.showBack===1) setShowDetails(true)};
+    const [showDetailsClicked,setShowDetailsClicked]=useState(false);
+   
+    const handleShowDetailsClicked =() =>{
+        setShowDetailsClicked(!showDetailsClicked)
+    };
+
+    const handleShowDetails =() =>{
+            setShowDetails(!showDetails)
+        
+        
+    };
+    const HandleSyllabus =()=>{
+        if(props.View==="Syllabus" &&showDetailsClicked===false && props.sub.title==props.SubTitleBack){
+        setShowDetails(true);
+    }
+
+    }
+    useEffect(()=>
+    {
+        HandleSyllabus()
+    }   
+    )
    
     return (
         <div className="CourseItems_Syllabus_Subtitles_1">
@@ -16,7 +36,7 @@ function Subtitle(props) {
             <div className={!showDetails?"CourseItems_Syllabus_Subtitles_Content":"CourseItems_Syllabus_Subtitles_Content_Details"}onClick={!showDetails?handleShowDetails:""} >
                 <h2 style={{textAlign:"left" ,margin:"1rem",position:"absolute",top:"5vh"}}>{props.sub.title}</h2>
 
-                <IoIosArrowDown className={showDetails?"CourseItems_Syllabus_ArrowUp":"CourseItems_Syllabus_ArrowDown"} onClick={handleShowDetails}size={25} ></IoIosArrowDown>
+                <IoIosArrowDown className={showDetails?"CourseItems_Syllabus_ArrowUp":"CourseItems_Syllabus_ArrowDown"} onClick={()=>{handleShowDetails();handleShowDetailsClicked()}}size={25} ></IoIosArrowDown>
                 <div className={showDetails?"CourseItems_Syllabus_Subtitles_Details_Shown":"CourseItems_Syllabus_Subtitles_details_hidden"}>
                 <h4>{props.description}</h4>
                 <div className="CourseItems_Syllabus_Subtitles_Details_Data">
