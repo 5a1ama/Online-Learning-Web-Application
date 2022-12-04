@@ -31,7 +31,6 @@ export function TraineeCourses() {
       };
 return(
     <div className = "TraineeHomeMain">
-
     
     <div>
         <Navbar items={["Home","My Courses","All Courses"]} select="My Courses" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />

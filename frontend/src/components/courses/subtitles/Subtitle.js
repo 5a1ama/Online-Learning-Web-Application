@@ -23,21 +23,7 @@ function Subtitle(props) {
         // }
     })
    
-    const [addedVideoLink,setAddedVideoLink]=useState("");
-    const [vidDescription,setVidDesc]=useState("");
-    const handleAddVidChange=(event)=>{
-        setAddedVideoLink(event.target.value)
-    }
-   
-    const handleVidDescChange=(event)=>{
-        setVidDesc(event.target.value)
-    }
-    const handleSubmitVid =async()=>{
-        
-       const x= await uploadSubtitleVideo(props.CourseId,addedVideoLink,props.sub,vidDescription)
-       setUpdate("a")
-       setAddvideo(false)
-    }
+    
     const handleShowDetailsClicked =() =>{
         setShowDetailsClicked(!showDetailsClicked)
     };
@@ -73,12 +59,12 @@ function Subtitle(props) {
                 <div className="DivHover" style={{display:"flex",flexDirection:"row",flexFlow:"auto" ,justifyContent:"space-between" }}>
                 <MdSlowMotionVideo size={25}></MdSlowMotionVideo>
                 <a href="/instructorCourseVideo" onClick={()=>navigate("/instructorCourseVideo",{state:{Link:VideoLink}})}><h3 style={{color:"#000"}}>Tutorial {i+1}</h3></a>
-                {update!="" && <a href="/instructorCourseVideo" ><h3 onClick={()=>navigate("/instructorCourseVideo",{state:{Link:update,Prop:props.sub,i:i+1,CourseTitle:props.courseTitle,CourseId:props.CourseId}})} style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem">Open Video</h3></a>}
-                {update=="" && props.inst && <a  ><h3 onClick={handleAddVideo} style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem">Add Video</h3></a>}
+                {VideoLink!="" && <a href="/instructorCourseVideo" ><h3 onClick={()=>navigate("/instructorCourseVideo",{state:{Link:VideoLink,Prop:props.sub,i:i+1,CourseTitle:props.courseTitle,CourseId:props.CourseId}})} style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem">Open Video</h3></a>}
+                {VideoLink=="" && props.inst && <a  ><h3 onClick={handleAddVideo} style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem">Add Video</h3></a>}
                 </div>
                 
                 )}
-                {addVideo && <div className='excerciseVideo'> <input onChange={handleAddVidChange} placeholder='Enter video link'/> <input onChange={handleVidDescChange} placeholder="Enter video Description"/> <button onClick={handleSubmitVid}>Add Video</button> </div>}
+                {addVideo && <div className='excerciseVideo'> <input onChange={props.handleAddVidChange} placeholder='Enter video link'/> <input onChange={props.handleVidDescChange} placeholder="Enter video Description"/> <button onClick={()=>{props.handleSubmitVid(props.sub); setAddvideo(false)}}>Add Video</button> </div>}
 
                 <div className="DivHover" style={{display:"flex",flexDirection:"row" ,justifyContent:"space-between"}}>
                 <BsBook size={25}></BsBook>

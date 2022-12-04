@@ -27,6 +27,16 @@ export function InstructorViewCourse() {
     const[addSub,setAddSub]=useState(false)
     const [hours,setHours]=useState("")
     const location=useLocation();
+    const [addedVideoLink,setAddedVideoLink]=useState("");
+    const [vidDescription,setVidDesc]=useState("");
+    const handleAddVidChange=(event)=>{
+        setAddedVideoLink(event.target.value)
+    }
+   
+    const handleVidDescChange=(event)=>{
+        setVidDesc(event.target.value)
+    }
+   
    const[addPrevVid,setPrevVid]=useState(false)
    const[prevVidLink,setPrevVidLink]=useState("");
    const handleSub=(event)=>{
@@ -83,6 +93,12 @@ const handleHours=(event)=>{
         setDetails((await getCourseDetails(location.state.id)));
         setFirst(1);
     }
+
+    const handleSubmitVid =async(sub)=>{
+        
+        const x= await uploadSubtitleVideo(location.state.id,addedVideoLink,sub,vidDescription)
+        getDetails();
+     }
     if(first===0){
         getDetails();
         if(location.state.View==="Syllabus"){
@@ -210,7 +226,7 @@ const handleHours=(event)=>{
 
                                     <div ref={bottomRef} />
                                     {details[0]&&details[0].subtitles.map((sub,i)=>
-                                    <Subtitle update={setFirst} index={i} inst={true} sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i} SubTitleBack={location.state.SubtitleTitle} View="Syllabus" description={sub.description} ></Subtitle>
+                                    <Subtitle handleSubmitVid={handleSubmitVid} handleAddVidChange={handleAddVidChange} handleVidDescChange={handleVidDescChange} update={setFirst} index={i} inst={true} sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i} SubTitleBack={location.state.SubtitleTitle} View="Syllabus" description={sub.description} ></Subtitle>
                                     )}
                                     {!addSub && <div className='btnAddSub'>
                 <button onClick={()=>{setAddSub(true)}}>Add New Subtitle</button>
