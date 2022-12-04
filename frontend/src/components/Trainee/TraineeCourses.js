@@ -30,7 +30,7 @@ export function TraineeCourses() {
         
       };
 return(
-    <div >
+    <div className = "TraineeHomeMain">
 
     
     <div>
