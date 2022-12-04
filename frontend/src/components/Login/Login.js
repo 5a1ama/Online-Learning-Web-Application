@@ -34,7 +34,7 @@ function Login() {
             }
             // other cases
         }else{
-            alert(x.user+" "+x.pass)
+            // alert(x.user+" "+x.pass)
             setWrongEmail(x.user);
             setWrongPass(x.pass)
         }

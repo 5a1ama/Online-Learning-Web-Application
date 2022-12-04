@@ -16,6 +16,7 @@ import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Typography from '@mui/material/Typography';
+import AddIcon from '@mui/icons-material/Add';
 
 
 export function InstructorHome(){
@@ -168,19 +169,22 @@ export function InstructorHome(){
     
 
         <div className="instructorDetails3">
-            <h2>
-                Reminder:
+            <h2 className="reminderLabel">
+                Notes:
             </h2>
-            <ListItem alignItems="flex-start">
-            <ListItemAvatar>
-        <Avatar  
-        sx={{ width:10 , height:10, backgroundColor: 'black',fontSize:20}}/>
-        </ListItemAvatar>
-        <ListItemText
-          primary= "Embeded systems,,01/20/2023,, "
-          
-        /> 
-      </ListItem>
+            <AddIcon className="AddIconReminder"/>
+      <ul className="notesHome">
+        <li>
+          Embeded Systems lecture ,,31/1/2023,,
+        </li>
+        <Divider variant=""/>
+        <li>
+          Quiz marking
+        </li>
+        <Divider variant="" />
+
+      </ul>
+
         </div>
 
 </div>
