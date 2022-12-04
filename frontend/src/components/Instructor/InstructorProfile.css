@@ -32,13 +32,9 @@
     flex-grow: 1 1 0;
     word-wrap: break-word;
 }
-h5{
-    width:50%;
-    font-size: 0.5vw;
-}
-/* .instructorRating{
+.instructorRatingEdit{
     margin-left: 15%;
-} */
+} 
 .editSpecialization{
 
     background-color: white;

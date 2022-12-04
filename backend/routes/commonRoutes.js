@@ -4,6 +4,8 @@ const User=require("../Models/User")
 const jwt=require("jsonwebtoken")
 const dotenv=require("dotenv")
 const nodemailer = require('nodemailer');
+const Instructor=require("../Models/Instructor")
+const Trainee=require("../Models/Trainee")
 // @ts-ignore
 const cookieParser = require("cookie-parser");
 // @ts-ignore
@@ -27,7 +29,7 @@ router.post("/login",async function(req,res){
     }else{
         
         var query=await User.find({Email:username});
-        if(query.length==1)
+        if(query.length!=0)
         res.json({user:false,pass:true})
         else
         res.json({user:true,pass:false})
@@ -85,12 +87,13 @@ router.get("/sendEmail/:to/:link",function(req,res){
         }
       });
       transporter.verify().then(console.log).catch(console.error);
-     
+    console.log(req.params.to+" "+req.params.link) 
     let mailDetails = {
         from: 'ziadayman9901@gmail.com',
         to: req.params.to,
         subject: 'Reset Password',
-        text: "here is the link to reset your password \n "+req.params.link
+        text: "here is the link to reset your password \n " ,
+        html:`<p>Click <a href=http://localhost:3000/resetPass?email=${req.params.to}> here </a> to reset password </p>`
     };
      
     transporter.sendMail(mailDetails, function(err, data) {
@@ -100,5 +103,15 @@ router.get("/sendEmail/:to/:link",function(req,res){
             console.log('Email sent successfully');
         }
     });
+})
+router.get("/resetPass/:email/:pass",async function(req,res){
+   var result=await User.findOne({Email:req.params.email});
+   await User.findOneAndUpdate({Email:req.params.email},{Password:req.params.pass});
+   if(result.Job=="Instructor"){
+    await Instructor.findOneAndUpdate({Email:req.params.email},{Password:req.params.pass})
+   }else if(result.Job=="Trainee"){
+    await Trainee.findOneAndUpdate({Email:req.params.email},{Password:req.params.pass})
+
+   }
 })
 module.exports=router;

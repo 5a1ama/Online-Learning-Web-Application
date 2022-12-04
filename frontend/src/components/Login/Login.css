@@ -103,3 +103,112 @@ h3{
 .Login-WrongData a{
     color:greenyellow;
 }
+.ResetPasswordLogin{
+    position: absolute;
+    background-color: transparent;
+    color: white;
+    top: 63.5%;
+    left: 44%;
+    font-size:100%;
+   
+
+}
+.ResetPasswordLogin:hover{
+    color:var(--primary-light);
+    /* border-bottom:1px solid #1e2f45; */
+    text-decoration: underline;
+    cursor: pointer;
+    transition: 0.7s;
+}
+.Login_C3{
+    position: absolute;
+    top:78px;
+    left:891px;
+}
+.Login_C3:hover{
+    transform:scale(1.2);
+    transition: 1s;
+    cursor: pointer;
+}
+.C3_Text{
+    background-color: rgba(0, 43, 72, 0.5);
+    position: absolute;
+    top:15px;
+    left:974px;
+    color:rgb(255, 255, 255);
+    font-weight: 400;
+    font-size:25px;
+}
+.Login_C1{
+    position: absolute;
+    top:178px;
+    left:551px;
+}
+.Login_C1:hover{
+    transform:scale(1.2);
+    transition: 1s;
+    cursor: pointer;
+}
+.C1_Text{
+    background-color: rgba(0, 43, 72, 0.5);
+    position: absolute;
+    top:130px;
+    left:585px;
+    color:rgb(255, 255, 255);
+    font-weight: 400;
+}
+.Login_C2{
+    position: absolute;
+    top:148px;
+    left:721px;
+}
+.Login_C2:hover{
+    transform:scale(1.2);
+    transition: 1s;
+    cursor: pointer;
+}
+.C2_Text{
+    background-color: rgba(0, 43, 72, 0.5);
+    position: absolute;
+    top:100px;
+    left:740px;
+    color:rgb(255, 255, 255);
+    font-weight: 400;
+}
+.Login_C4{
+    position: absolute;
+    top:148px;
+    left:1131px;
+}
+.Login_C4:hover{
+    transform:scale(1.2);
+    transition: 1s;
+    cursor: pointer;
+}
+.C4_Text{
+    background-color: rgba(0, 43, 72, 0.5);
+    position: absolute;
+    top:110px;
+    left:1175px;
+    color:rgb(255, 255, 255);
+    font-weight: 400;
+}
+.Login_C5{
+    position: absolute;
+    top:175px;
+    left:1295px;
+}
+.Login_C5:hover{
+    transform:scale(1.2);
+    transition: 1s;
+    cursor: pointer;
+    background-image:rgba(66, 198, 255, 0.2);
+}
+.C5_Text{
+    background-color: rgba(0, 43, 72, 0.5);
+    position: absolute;
+    top:120px;
+    left:1300px;
+    color:rgb(255, 255, 255);
+    font-weight: 400;
+}
