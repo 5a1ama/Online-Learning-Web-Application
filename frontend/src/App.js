@@ -14,7 +14,7 @@ import { TraineeCourses } from './components/Trainee/TraineeCourses';
 import {InstAllCourses} from './components/Instructor/InstAllCourses';
 import {TraineeAllCourses} from './components/Trainee/TraineeAllCourses'
 import {Admin} from './components/Admin/Admin'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ControlPanel from './components/Admin/ControlPanel';
 import Footer from './components/footer/Footer';
 import CourseContent from './components/courses/CourseContent';
@@ -28,7 +28,7 @@ export default function App() {
   const navigate = useNavigate();
   const [first,setFirst]=useState(0);
   
-  
+   
   return (
     
       
@@ -63,6 +63,18 @@ export default function App() {
 }
 
 function Home() {
+    const navigate = useNavigate();
+    useEffect(()=>{
+      if(localStorage.getItem('token')){
+          if(localStorage.getItem('type')=='Instructor'){
+            navigate('/instructorHome');
+          }else if(localStorage.getItem('type')=='Trainee'){
+            navigate('/TraineeHome');
+
+          }
+        }
+    },[]
+    )
   return <div className="Home">
     
     <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Home" nav={["","","","/signUp"]} scroll={["Home","Courses","WhatHegza"]}  />

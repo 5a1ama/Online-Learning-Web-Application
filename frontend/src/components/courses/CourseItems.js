@@ -41,12 +41,9 @@ function CourseItems() {
 
     useEffect(()=>{ 
         handleView(location.state.View)
-        
     })
 
 
- 
-       
 
     const now = 90 ;
     const getDetails = async () => {
