@@ -5,6 +5,7 @@ const User=require("../Models/User")
 const jwt=require("jsonwebtoken")
 const dotenv=require("dotenv");
 const Trainee = require("../Models/Trainee");
+const Excercise=require("../Models/Excercise")
 dotenv.config()
 
 router.get("/TraineeMyCourse/:Token",async function(req,res){
@@ -20,6 +21,11 @@ router.get("/TraineeMyCourse/:Token",async function(req,res){
         arrayCourse = arrayCourse.concat([queryCourse])
     }
     res.json(arrayCourse)
+})
+router.get("/excerSolution/:id",async function(req,res){
+    var id=req.params.id;
+    var result=Excercise.findOne({id:id});
+    res.json(result);
 })
 
 

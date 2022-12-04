@@ -41,7 +41,7 @@
     border-bottom-right-radius: 20px;
     top: 5%;
     left: 5%;
-   flex-direction: column;
+   flex-direction: column; 
    display: flex;
    align-items: center;
    flex-grow: 1 1 0;
@@ -84,13 +84,14 @@
     position: absolute;
     width: 400px;
     height: 170px;
-    background-color: #eee;
+    background-color:#ffffa8;
     border-bottom-left-radius: 20px;
     border-top-left-radius:20px;
     border-bottom-right-radius:20px;
     border-top-right-radius:20px;
     top: 60%;
     left: 5%;
+
 }
 .questions{
     position: relative;
@@ -100,5 +101,29 @@
     border-top-left-radius:20px;
     border-bottom-right-radius:20px;
     border-top-right-radius:20px;
+}
+.reminderLabel{
+    position: relative;
+    font-weight: 290;
+    font-family: "Garamond", Times, serif;      
+    top: 1%;
+    left: 2%;
+}
+.AddIconReminder{
+    position: absolute;
+    top: 5%;
+    left: 90%;
+    cursor: pointer;
+}
+.notesHome{
+    list-style-type: disc;
+    position: relative;
+    top: 10%;
+
+
+}
+.notesHome>li{
+    padding: 0;
+    margin-left: 10%;
 }
 

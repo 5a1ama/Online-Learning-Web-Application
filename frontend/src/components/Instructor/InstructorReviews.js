@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
 import "./InstructorReviews.css"
+import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
+
 export function InstructorReviews(){
    const location = useLocation()
     const [reviews,setreviews] = useState([])
@@ -13,8 +15,9 @@ export function InstructorReviews(){
     const ReviewDiv = (props )=>{
         return(
             <div className="reviewsDiv">
-                <Avatar/>
-                <textarea readOnly className="pwrap">{props.title}</textarea>
+                <Avatar sx={{backgroundColor:"#58a5f0"}} className="reviewAvatar"/>
+                <FormatQuoteIcon className="reviewComment"/>
+                <textarea readOnly className="reviewComment">{props.title}</textarea>
                     
                 
 
@@ -23,32 +26,13 @@ export function InstructorReviews(){
     }
     
     return(
-        <div className="red">
+        <div className="reviewsMainDiv">
             <Navbar items={["Home","My Courses","Caleneder"]} select="" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  /> 
 
-            <div className="InstructorReviews_Main">
+            <div className="InstructorReviews">
 
             {reviews && reviews.map((rev)=> <ReviewDiv title={rev}/>)}
-
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-        
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
+          
         
             </div>
         

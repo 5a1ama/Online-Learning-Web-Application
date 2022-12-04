@@ -47,10 +47,17 @@ function Login(){
             }
             // other cases
         }else{
-            alert(x.user+" "+x.pass)
+            // alert(x.user+" "+x.pass)
             setWrongEmail(x.user);
             setWrongPass(x.pass)
         }
+        
+    }
+    const handleForget =async ()=>{
+        var x="aa";
+        alert("we sent you a mail to reset password")
+        await sendEmail(email,x);
+        
         
     }
     const handleLogin=(event)=>{
@@ -107,8 +114,9 @@ function Login(){
 
                 <div className="Login-WrongData" >
                 {wrongpass && <div><h4>Wrong Password. </h4>
-            
                 <h3 onClick={()=>sendEmail(email,`/resetPass?email=${email}`)} className="ResetPasswordLogin">Reset Password?</h3>
+
+               {/* <h3 onClick={handleForget} className="ResetPasswordLogin">Reset Password?</h3>*/}
                 </div>}
                 
 
