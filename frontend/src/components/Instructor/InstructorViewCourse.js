@@ -97,6 +97,7 @@ const handleHours=(event)=>{
     const handleSubmitVid =async(sub)=>{
         
         const x= await uploadSubtitleVideo(location.state.id,addedVideoLink,sub,vidDescription)
+        
         getDetails();
      }
     if(first===0){
