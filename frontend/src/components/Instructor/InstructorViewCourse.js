@@ -17,16 +17,32 @@ import { GetInstructorName } from './../../API/CourseAPI';
 import Footer from '../footer/Footer';
 import Subtitle from '.././courses/subtitles/Subtitle';
 import { uploadCourseVideo } from '../../API/InstructorAPI';
-
+import { addNewSubToCourse, uploadSubtitleVideo } from '../../API/InstructorAPI';
+import {TextField} from "@mui/material";
+import "../courses/subtitles/Subtitle.css"
 
 export function InstructorViewCourse() {
     const [first,setFirst] = useState(0);
+    const [Sub,setSub]=useState("");
+    const[addSub,setAddSub]=useState(false)
+    const [hours,setHours]=useState("")
     const location=useLocation();
    const[addPrevVid,setPrevVid]=useState(false)
    const[prevVidLink,setPrevVidLink]=useState("");
+   const handleSub=(event)=>{
+    setSub(event.target.value)
+}
+const handleHours=(event)=>{
+    setHours(event.target.value)
+}
    const handleAddedPrevVid=(event)=>{
     setPrevVidLink(event.target.value);
    }
+   const handleAddNewSub =async()=>{
+    const x=await addNewSubToCourse(location.state.id,Sub,hours)
+    getDetails()
+    setAddSub(false)
+}
    const handleAddPrevVid=async()=>{
     setFirst(0)
     await uploadCourseVideo(location.state.id,prevVidLink)
@@ -196,6 +212,23 @@ export function InstructorViewCourse() {
                                     {details[0]&&details[0].subtitles.map((sub,i)=>
                                     <Subtitle update={setFirst} index={i} inst={true} sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i} SubTitleBack={location.state.SubtitleTitle} View="Syllabus" description={sub.description} ></Subtitle>
                                     )}
+                                    {!addSub && <div className='btnAddSub'>
+                <button onClick={()=>{setAddSub(true)}}>Add New Subtitle</button>
+            </div>}
+            {addSub && <div className='newSubDiv'>
+            <TextField id = {"sub"+0}  className="textSub1-Subtitle" onChange={handleSub} 
+     label="Course Subtitle" 
+     color="primary" 
+     variant="filled"
+     />
+    <TextField identify={0} id ={"hour"+0} onChange={handleHours} className="textSub1-Subtitle"
+     label="Hours" 
+     color="primary" 
+     variant="filled"
+     />
+     <div> <button onClick={handleAddNewSub} style={{backgroundColor:"green"}}>Confirm</button> <button onClick={()=>setAddSub(false)} style={{backgroundColor:"red"}}>Cancel</button></div>
+
+                </div>}
 
                                     </div>
                                 }

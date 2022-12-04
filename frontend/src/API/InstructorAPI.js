@@ -96,7 +96,7 @@ export const definePromotion=async(id,amount,duration)=>{
 })
 }
 export const addNewSubToCourse=async(courseid,subtitle,hours)=>{
-    const result=await fetch(`http://localhost:8000/course/addCourseSub`,{method: "POST",
+    const result=await fetch(`http://localhost:8000/course/addCourseSub/${subtitle}/${hours}/${courseid}`,{method: "POST",
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     },

@@ -9,13 +9,11 @@ import {TextField} from "@mui/material";
 import "./Subtitle.css"
 function Subtitle(props) {
     const navigate = useNavigate();
-    const[addSub,setAddSub]=useState(false)
     const[update,setUpdate]=useState(props.sub.video[0])
     const[showDetails,setShowDetails]=useState(false);
     const [showDetailsClicked,setShowDetailsClicked]=useState(false);
     const [addVideo,setAddvideo]=useState(false);
-    const [Sub,setSub]=useState("");
-    const [hours,setHours]=useState("")
+    
     const handleAddVideo=()=>{
         setAddvideo(true);
     }
@@ -24,20 +22,13 @@ function Subtitle(props) {
         //     props.update(2)
         // }
     })
-    const handleSub=(event)=>{
-        setSub(event.target.value)
-    }
-    const handleHours=(event)=>{
-        setHours(event.target.value)
-    }
+   
     const [addedVideoLink,setAddedVideoLink]=useState("");
     const [vidDescription,setVidDesc]=useState("");
     const handleAddVidChange=(event)=>{
         setAddedVideoLink(event.target.value)
     }
-    const handleAddNewSub =async()=>{
-        const x=await addNewSubToCourse(props.CourseId,Sub,hours)
-    }
+   
     const handleVidDescChange=(event)=>{
         setVidDesc(event.target.value)
     }
@@ -104,23 +95,6 @@ function Subtitle(props) {
                 </div>
                 </div>
             </div> 
-            {!addSub && <div className='btnAddSub'>
-                <button onClick={()=>{setAddSub(true)}}>Add New Subtitle</button>
-            </div>}
-            {addSub && <div className='newSubDiv'>
-            <TextField id = {"sub"+0}  className="textSub1-Subtitle" onChange={handleSub} 
-     label="Course Subtitle" 
-     color="primary" 
-     variant="filled"
-     />
-    <TextField identify={0} id ={"hour"+0} onChange={handleHours} className="textSub1-Subtitle"
-     label="Hours" 
-     color="primary" 
-     variant="filled"
-     />
-     <div> <button onClick={handleAddNewSub} style={{backgroundColor:"green"}}>Confirm</button> <button onClick={()=>setAddSub(false)} style={{backgroundColor:"red"}}>Cancel</button></div>
-
-                </div>}
             
         </div>
                              )

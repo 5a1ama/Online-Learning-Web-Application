@@ -24,7 +24,6 @@ import { ResetPass } from './components/ResetPass/ResetPass';
 import { InstructorProfile } from './components/Instructor/InstructorProfile';
 import { InstructorViewCourse } from './components/Instructor/InstructorViewCourse';
 import CourseVideo from './components/courses/CourseVideo';
-import { InstructorViewCourse } from './components/Instructor/InstructorViewCourse';
 import { InstructorCourseVideo } from './components/Instructor/InstructorCourseVideo.js';
 export default function App() {
   const navigate = useNavigate();

@@ -63,7 +63,7 @@ router.get("/filter-price/:minprice/:maxprice",async function(req,res){
     }
     res.json(array)
 })
-router.post("/:token",function(req,res){
+router.post("/create/:token",function(req,res){
     var token=req.params.token;
     var user=jwt.verify(token,process.env.ACCESSTOKEN)
     var query=Course.find({});
@@ -92,6 +92,7 @@ router.post("/addCourseSub/:subtitle/:hours/:id",async function(req,res){
     var course=await Course.findOne({id:id});
     
     var subtitles=course.subtitles.concat([{video:[""],lesson:"",description:"",title:subtitle,hours:hours}])
+    
     await Course.findOneAndUpdate({id:id},{subtitles:subtitles})
     res.json("ok")
 }

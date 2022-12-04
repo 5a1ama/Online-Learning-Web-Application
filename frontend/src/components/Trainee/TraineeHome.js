@@ -5,7 +5,7 @@ import { NewCourse } from '../courses/NewCourse';
 import Avatar from '@mui/material/Avatar';
 import EditIcon from '@mui/icons-material/Edit';
 
-import {getTraineeDetails} from '../../API/TraineeAPI';
+import {getTraineeCourses} from '../../API/TraineeAPI';
 
 import "./TraineeHome.css";
 
@@ -17,7 +17,7 @@ export function TraineeHome (){
   const [courses,setCourses] = useState([]);
   const getCourses = async () =>{
     
-    setCourses ((await getTraineeDetails(localStorage.getItem("token"))).slice(0,2));
+    setCourses ((await getTraineeCourses(localStorage.getItem("token"))).slice(0,3));
     // alert(courses);
   }
   getCourses();
@@ -25,13 +25,16 @@ export function TraineeHome (){
  
     return(
         <div className = "TraineeHomeMain">
-
-        {/* {courses.map((course) => <NewCourse course={course}/>)} */}
+          
     
         <div>
              <Navbar items={["Home","My Courses","All Courses"]} select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
         </div>
-        
+        <div className="mainDetailsTrainee">
+        <div className="homeCoursesTrainee">
+          {courses.map((course) => <NewCourse course={course}/>)}
+
+          </div>
 
         <div className="traineeDitails">
         <Avatar className="TraineeAvatar"
@@ -45,6 +48,7 @@ export function TraineeHome (){
            <h5 className="traineeEmail">hala@gmail.com</h5>
            <EditIcon className="T-editIconClick" />
 
+        </div>
         </div>
         </div>
     );
