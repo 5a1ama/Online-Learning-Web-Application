@@ -76,7 +76,7 @@ export const uploadCourseVideo=async(id,link)=>{
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     },
-    body: JSON.stringify({courseID:id,link:link})
+    body: JSON.stringify({courseID:id,link:link,token:localStorage.getItem("token")})
 })
 }
 export const uploadSubtitleVideo=async(id,link,subtitle,description)=>{
@@ -84,7 +84,7 @@ export const uploadSubtitleVideo=async(id,link,subtitle,description)=>{
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     },
-    body: JSON.stringify({courseID:id,link:link,subtitle:subtitle,description:description})
+    body: JSON.stringify({courseID:id,link:link,subtitle:subtitle,description:description,token:localStorage.getItem("token")})
 })
 }
 export const definePromotion=async(id,amount,duration)=>{
@@ -94,5 +94,15 @@ export const definePromotion=async(id,amount,duration)=>{
     },
     body: JSON.stringify({courseID:id,amount:amount,duration:duration})
 })
+}
+export const addNewSubToCourse=async(courseid,subtitle,hours)=>{
+    const result=await fetch(`http://localhost:8000/course/addCourseSub`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    },
+    body: JSON.stringify({courseID:courseid,subtitle:subtitle,hours:hours})
+    
+})
+    return await result.json()
 }
 

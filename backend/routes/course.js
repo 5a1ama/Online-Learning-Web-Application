@@ -2,7 +2,9 @@ const Course=require("../Models/Course");
 const User=require("../Models/User");
 const Instructor = require("../Models/Instructor");
 const Trainee = require("../Models/Trainee");
-
+const jwt=require("jsonwebtoken")
+const dotenv=require("dotenv")
+dotenv.config();
 const express=require("express");
 const router=express.Router();
 // @ts-ignore
@@ -61,18 +63,20 @@ router.get("/filter-price/:minprice/:maxprice",async function(req,res){
     }
     res.json(array)
 })
-router.post("/",function(req,res){
+router.post("/:token",function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN)
     var query=Course.find({});
     // @ts-ignore
     var arr=req.body.subtitles;
     var hourArr=req.body.hours;
     var final=[];
     for(var i=0;i<arr.length;i++){
-        final=final.concat([{title:arr[i],hours:hourArr[i]}])
+        final=final.concat([{title:arr[i],hours:hourArr[i],video:[""]}])
     }
     query.exec(function(err,result){
         var object=new Course({id:result.length+1,title:req.body.title,subtitles:final,price:req.body.price,
-        summary:req.body.summary})
+        summary:req.body.summary,instructors:[user.id]})
         // @ts-ignore
         console.log("add course")
         object.save(function(req,res){
@@ -81,6 +85,17 @@ router.post("/",function(req,res){
         res.json(object)
     })
 })
+router.post("/addCourseSub/:subtitle/:hours/:id",async function(req,res){
+    var subtitle=req.params.subtitle
+    var hours=req.params.hours
+    var id=req.params.id;
+    var course=await Course.findOne({id:id});
+    
+    var subtitles=course.subtitles.concat([{video:[""],lesson:"",description:"",title:subtitle,hours:hours}])
+    await Course.findOneAndUpdate({id:id},{subtitles:subtitles})
+    res.json("ok")
+}
+)
 router.get("/:id",function(req,res){
     var id1=req.params.id
     var query=Course.find({id:id1});
@@ -122,7 +137,11 @@ router.get("/InstructorOfCourse/:InstId",async function(req,res)
     var InstId = req.params.InstId;
     var query = Instructor.find({id:InstId});
     query.exec(function(err,result){
-        res.json({name:result[0].Name});
+        if(result.length!=0){
+            res.json({name:result[0].Name});
+        }
+
+        
     })
     }
 )

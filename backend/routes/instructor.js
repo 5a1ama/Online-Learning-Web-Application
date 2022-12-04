@@ -157,14 +157,13 @@ router.get("/myCourses-search/:search/:token",async function(req,res){
 })
 router.post("/uploadCourseVideo", async function(req,res){
     var token=req.body.token;
-    var user=jwt.verify(token,process.env.ACCESSTOKEN);
     var courseid=req.body.courseID;
     var link=req.body.link; 
+    console.log(link)
     await Course.findOneAndUpdate({id:courseid},{previewVideo:link})
 })
 router.post("/uploadSubtitleVideo",async function(req,res){
     var token=req.body.token;
-    var user=jwt.verify(token,process.env.ACCESSTOKEN);
     var courseid=req.body.courseID;
     var link=req.body.link;
     var description=req.body.description;
@@ -172,12 +171,13 @@ router.post("/uploadSubtitleVideo",async function(req,res){
     var result=await Course.findOne({id:courseid}) ;
     var array=result.subtitles;
     for(var i=0;i<array.length;i++){
-        if(array[i].title==subtitle){
-            array[i].video=link;
+        if(array[i].title==subtitle.title){
+            array[i].video=[link];
             array[i].description=description;
         }
     }
     await Course.findOneAndUpdate({id:courseid},{subtitles:array});
+    res.json(array)
 })
 router.post("/coursePromotion",async function(req,res){
     var token=req.body.token;
