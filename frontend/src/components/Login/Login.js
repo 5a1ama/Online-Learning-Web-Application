@@ -19,8 +19,11 @@ function Login() {
     
     const [email,setEmail] = useState("");
     const handleEmail = (event) => { setEmail(event.target.value)}
+    
     const [password,setPassword] = useState("");
+    
     const handlePassword = (event) => { setPassword(event.target.value)}
+
     const navigate=useNavigate();
     const init=async()=>{
         const x=await LoginUser(email,password)
@@ -38,6 +41,13 @@ function Login() {
             setWrongEmail(x.user);
             setWrongPass(x.pass)
         }
+        
+    }
+    const handleForget =async ()=>{
+        var x="aa";
+        alert("we sent you a mail to reset password")
+        await sendEmail(email,x);
+        
         
     }
     const handleLogin=(event)=>{
@@ -81,7 +91,7 @@ function Login() {
          <div className="Login-WrongData" >
          {wrongpass && <div><h4>Wrong Password. </h4>
     
-         <h3 onClick={()=>sendEmail(email,`/resetPass?email=${email}`)} className="ResetPasswordLogin">Reset Password?</h3>
+         <h3 onClick={handleForget} className="ResetPasswordLogin">Reset Password?</h3>
          </div>}
          
 

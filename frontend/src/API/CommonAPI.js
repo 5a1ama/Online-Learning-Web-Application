@@ -27,3 +27,6 @@ export const sendEmail=async (to,link)=>{
     const result=await fetch(`http://localhost:8000/sendEmail/${to}/${link}`);
 
 }
+export const resetPass=async(email,newpass)=>{
+    const result =await fetch(`http://localhost:8000/resetPass/${email}/${newpass}`)
+}
