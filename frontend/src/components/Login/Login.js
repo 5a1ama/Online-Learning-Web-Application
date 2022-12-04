@@ -116,7 +116,7 @@ function Login(){
                 {wrongpass && <div><h4>Wrong Password. </h4>
                 <h3 onClick={()=>sendEmail(email,`/resetPass?email=${email}`)} className="ResetPasswordLogin">Reset Password?</h3>
 
-               {/* <h3 onClick={handleForget} className="ResetPasswordLogin">Reset Password?</h3>*/}
+               
                 </div>}
                 
 
