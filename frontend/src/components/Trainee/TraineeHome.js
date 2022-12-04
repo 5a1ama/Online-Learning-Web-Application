@@ -24,10 +24,9 @@ export function TraineeHome (){
 
  
     return(
-        <div>
+        <div className = "TraineeHomeMain">
 
-        <h1 className="Trainee-heading"> Recent Courses</h1>
-        {courses.map((course) => <NewCourse course={course}/>)}
+        {/* {courses.map((course) => <NewCourse course={course}/>)} */}
     
         <div>
              <Navbar items={["Home","My Courses","All Courses"]} select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
@@ -35,9 +34,10 @@ export function TraineeHome (){
         
 
         <div className="traineeDitails">
-        <Avatar className="avatar"
-        sx={{ backgroundColor: '#0277bd' ,width: 90, height: 100 ,fontSize:35}}
+        <Avatar className="TraineeAvatar"
+       sx={{ backgroundColor: '#0277bd' ,width: 100, height: 100 ,fontSize:55}}
         >
+          H
             {/* {instructor && instructor.Name.substring(0,1)+instructor.Name.split(" ")[1].substring(0,1)} */}
             
         </Avatar>
