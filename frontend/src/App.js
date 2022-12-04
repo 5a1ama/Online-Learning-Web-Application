@@ -13,7 +13,7 @@ import { TraineeCourses } from './components/Trainee/TraineeCourses';
 import {InstAllCourses} from './components/Instructor/InstAllCourses';
 import {TraineeAllCourses} from './components/Trainee/TraineeAllCourses'
 import {Admin} from './components/Admin/Admin'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ControlPanel from './components/Admin/ControlPanel';
 import Footer from './components/footer/Footer';
 import CourseContent from './components/courses/CourseContent';
@@ -22,6 +22,7 @@ import { InstructorHome } from './components/Instructor/InstructorHome';
 import { InstructorReviews } from './components/Instructor/InstructorReviews';
 import { ResetPass } from './components/ResetPass/ResetPass';
 import { InstructorProfile } from './components/Instructor/InstructorProfile';
+import { InstructorViewCourse } from './components/Instructor/InstructorViewCourse';
 import CourseVideo from './components/courses/CourseVideo';
 import { InstructorViewCourse } from './components/Instructor/InstructorViewCourse';
 import { InstructorCourseVideo } from './components/Instructor/InstructorCourseVideo.js';
@@ -29,7 +30,7 @@ export default function App() {
   const navigate = useNavigate();
   const [first,setFirst]=useState(0);
   
-  
+   
   return (
     
       
@@ -51,6 +52,9 @@ export default function App() {
           <Route path="/CourseItems" element={<CourseItems/>}/>
           <Route path="/instructorHome" element={<InstructorHome/>}/> 
           <Route path="/instructorReviews" element={<InstructorReviews/>}/>
+          <Route path="/InstructorViewCourse" element={<InstructorViewCourse/>}/>
+
+          
      
           <Route path="/CourseItems" element={<CourseItems/>}/>         
            <Route path="/Coursevideo" element={<CourseVideo/>}/>
@@ -66,6 +70,18 @@ export default function App() {
 }
 
 function Home() {
+    const navigate = useNavigate();
+    useEffect(()=>{
+      if(localStorage.getItem('token')){
+          if(localStorage.getItem('type')=='Instructor'){
+            navigate('/instructorHome');
+          }else if(localStorage.getItem('type')=='Trainee'){
+            navigate('/TraineeHome');
+
+          }
+        }
+    },[]
+    )
   return <div className="Home">
     
     <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Home" nav={["","","","/signUp"]} scroll={["Home","Courses","WhatHegza"]}  />
