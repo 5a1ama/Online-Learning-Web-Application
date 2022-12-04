@@ -7,3 +7,8 @@ export const getTraineeDetails= async(token)=>{
     return j;
 
 }
+export const getExcerciseSolution=async(id)=>{
+    const result=await fetch(`http://localhost:8000/Trainee/excerSolution/${id}`);
+    const j=await result.json();
+    return j
+}

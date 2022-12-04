@@ -71,4 +71,28 @@ export const updateInstructorSpec=async(name)=>{
     }
     })
 }
+export const uploadCourseVideo=async(id,link)=>{
+    const result=await fetch(`http://localhost:8000/instructor/uploadCourseVideo`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    },
+    body: JSON.stringify({courseID:id,link:link})
+})
+}
+export const uploadSubtitleVideo=async(id,link,subtitle,description)=>{
+    const result=await fetch(`http://localhost:8000/instructor/uploadSubtitleVideo`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    },
+    body: JSON.stringify({courseID:id,link:link,subtitle:subtitle,description:description})
+})
+}
+export const definePromotion=async(id,amount,duration)=>{
+    const result=await fetch(`http://localhost:8000/instructor/coursePromotion`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    },
+    body: JSON.stringify({courseID:id,amount:amount,duration:duration})
+})
+}
 
