@@ -11,12 +11,12 @@
     height: 60vh;
     border-radius: 10px;
 }
-.CourseVideo h1{    font-size:25px;
+.CourseVideo h1{    font-size:20px;
     color:rgb(130, 130, 130)
 }
 
 .CourseVideo_Directory h2{ 
-    font-size:25px;
+    font-size:20px;
     color:rgb(130, 130, 130)
 }
 .CourseVideo h1:hover{
