@@ -56,63 +56,18 @@
 }
 
 
-.CourseItems_ProgressBar{
-    width: 100%;
-    height: 50%;
-    padding: 2rem 2rem;
-    display:flex;
+
+
+  
+
+.addPreviewVideoInst{
+    margin-top: 2vw;
+    width: 40%;
+    display: flex;
     flex-direction: column;
-    /* background-color: rgb(196, 196, 196,0.5); */
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    align-content: center;
-    margin-bottom: 4rem;
+    row-gap: 0.5vw;
+}    
 
-}
-.CourseItems_ProgressBar h2{
-    z-index: 1;
-    font-size: 40px;
-    color:var(--primary-light)
-}
-
-    .CourseItems_Progress{
-        /* position: absolute; */
-        width:100%;
-        display:flex;
-        flex-direction: row;
-        align-self: center;
-        align-items:center;
-        justify-content: center;
-        z-index: 1;
-
-    }
-    
-    .progress {
-        background-color: #d8d8d8;
-        border-radius: 20px;
-        height: 30px;
-        width: 900px;
-        /* transform: translate(0px ,50px); */
-    }
-
-    .progress-done {
-        background-image: linear-gradient(45deg, #ffc107 25%, #ffca2c 25%, #ffca2c 50%, #ffc107 50%, #ffc107 75%, #ffca2c 75%, #ffca2c 100%);
-        background-size: 20px 20px;
-        -webkit-animation: progress-done 62s ease infinite;
-        -moz-animation: progress-done 62s ease infinite;
-        animation: progress-done 62s ease infinite;
-        
-        border-radius: 20px;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        width: 0;
-        opacity: 0;
-        transition: 1s ease 0.3s;
-    }
 
     @-webkit-keyframes progress-done {
     0%{background-position:0% 51%}
@@ -214,7 +169,7 @@
 
 .vl33 {
     border-bottom: 2px solid rgb(206, 206, 206);
-    width: 110vh;
+    width: 115vh;
     margin-left: 4vh;
     z-index:2;
     transform: translateX(-4vh);

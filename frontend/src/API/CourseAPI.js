@@ -99,7 +99,7 @@ export const createUser=()=>{
   });
 }
 export const createCourse=async (title,subtitle,hours,price,summary)=>{
-  const response=await fetch(`${api}/course`,{method: "POST",
+  const response=await fetch(`${api}/course/create/${localStorage.getItem("token")}`,{method: "POST",
   headers: {
       "Content-type": "application/json; charset=UTF-8"
   },

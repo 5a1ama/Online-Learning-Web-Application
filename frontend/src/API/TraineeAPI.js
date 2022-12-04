@@ -1,6 +1,6 @@
 import { verify } from "./LoginAPI";
 
-export const getTraineeDetails= async(token)=>{
+export const getTraineeCourses= async(token)=>{
     
     var result = await fetch(`http://localhost:8000/Trainee/TraineeMyCourse/${token}`)
     var j=await result.json();
