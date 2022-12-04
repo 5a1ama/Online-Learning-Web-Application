@@ -31,6 +31,10 @@ export function TraineeHome (){
         <div>
              <Navbar items={["Home","My Courses","All Courses"]} select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
         </div>
+
+        <h1 className="Trainee-heading">
+          Recent Courses:
+        </h1>
         
 
         <div className="traineeDitails">

@@ -23,7 +23,6 @@ import { InstructorHome } from './components/Instructor/InstructorHome';
 import { InstructorReviews } from './components/Instructor/InstructorReviews';
 import { ResetPass } from './components/ResetPass/ResetPass';
 import { InstructorProfile } from './components/Instructor/InstructorProfile';
-import { InstructorViewCourse } from './components/Instructor/InstructorViewCourse';
 import CourseVideo from './components/courses/CourseVideo';
 export default function App() {
   const navigate = useNavigate();
@@ -51,7 +50,6 @@ export default function App() {
           <Route path="/CourseItems" element={<CourseItems/>}/>
           <Route path="/instructorHome" element={<InstructorHome/>}/> 
           <Route path="/instructorReviews" element={<InstructorReviews/>}/>
-          <Route path="/InstructorViewCourse" element={<InstructorViewCourse/>}/>
 
           
      
