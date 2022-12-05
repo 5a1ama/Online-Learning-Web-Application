@@ -124,7 +124,7 @@ router.get("/Courses-price-subject/:minprice/:maxprice/:subject",async function(
         }
     }
     console.log(final)
-    res.send(final);
+    res.json(final);
 
 
 })

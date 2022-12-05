@@ -111,3 +111,9 @@
         top:68%;
         left: 20%;
     }
+.TraineeApplyFilterButton{
+    position: relative;
+    top:80%;
+    left:40%;
+    width: 23%;
+}

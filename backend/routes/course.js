@@ -70,13 +70,14 @@ router.post("/create/:token",function(req,res){
     // @ts-ignore
     var arr=req.body.subtitles;
     var hourArr=req.body.hours;
+    console.log(req.body.subject)
     var final=[];
     for(var i=0;i<arr.length;i++){
         final=final.concat([{title:arr[i],hours:hourArr[i],video:[""]}])
     }
     query.exec(function(err,result){
         var object=new Course({id:result.length+1,title:req.body.title,subtitles:final,price:req.body.price,
-        summary:req.body.summary,instructors:[user.id]})
+        summary:req.body.summary,instructors:[user.id],subject:req.body.subject})
         // @ts-ignore
         console.log("add course")
         object.save(function(req,res){
