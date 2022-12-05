@@ -162,6 +162,58 @@ router.get("/CourseisEnrolled/:CourseId/:UserId",async function(req,res)
 
     }
 )
+router.post("/deleteSubtitle/:id/:subtitle",async function(req,res){
+    var id=req.params.id;
+    var subtitle=req.params.subtitle;
+    var course=await Course.findOne({id:id});
+    var arr=course.subtitles;
+    var final=[];
+    
+    for(var i=0;i<arr.length;i++){
+        if(arr[i].title!=subtitle){
+            final=final.concat([arr[i]])
+        }
+    }
+    
+    await Course.findOneAndUpdate({id:id},{subtitles:final})
+    res.json(final)
+})
+router.post("/updateSubtitle/:id/:oldtitle/:title/:hours/:link/:desc",async function(req,res){
+    var id=req.params.id
+    var title=req.params.title;
+    var oldtitle=req.params.oldtitle
+    var hours=req.params.hours;
+    var link=req.params.link
+    var description=req.params.desc
+    var course=await Course.findOne({id:id})
+    var subtitles=course.subtitles
+    var finalSub=[];
+    for(var i=0;i<subtitles.length;i++){
+        if(subtitles[i].title != oldtitle){
+            finalSub=finalSub.concat([subtitles[i]])
+        }else{
+            
+            var object={video:[""],lesson:"",description:"",title:"",hours:0}
+            if(title != "-1"){
+                object.title=title;
+            }
+            if(link != "-1"){
+                object.video=[link];
+            }
+            if(hours != "-1"){
+                object.hours=Number(hours);
+            }
+            if(description != "-1"){
+                object.description=description;
+            }
+            finalSub=finalSub.concat([object])
+        }
+    }
+    
+    await Course.findOneAndUpdate({id:id},{subtitles:finalSub})
+    res.json("ok")
+})
+
 
 
 module.exports=router

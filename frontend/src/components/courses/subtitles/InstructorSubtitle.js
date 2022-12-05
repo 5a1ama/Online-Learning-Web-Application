@@ -7,12 +7,30 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { addNewSubToCourse, uploadSubtitleVideo } from '../../../API/InstructorAPI';
 import {TextField} from "@mui/material";
 import "./Subtitle.css"
+import "./InstructorSubtitle.css"
 function InstructorSubtitle(props) {
     const navigate = useNavigate();
     const[update,setUpdate]=useState(props.sub.video[0])
     const[showDetails,setShowDetails]=useState(false);
     const [showDetailsClicked,setShowDetailsClicked]=useState(false);
     const [addVideo,setAddvideo]=useState(false);
+    const [edit,setEdit]=useState(false)
+    const [newTitle,setNewTitle]=useState("");
+    const [newHours,setNewHours]=useState("");
+    const [newVideoLink,setNewVideo]=useState("");
+    const [newDescription,setDescription]=useState("")
+    const handleNewTitle=(event)=>{
+        setNewTitle(event.target.value);
+    }
+    const handleNewHours=(event)=>{
+        setNewHours(event.target.value);
+    }
+    const handleNewVideo=(event)=>{
+        setNewVideo(event.target.value);
+    }
+    const handleNewDesc=(event)=>{
+        setDescription(event.target.value);
+    }
     
     const handleAddVideo=()=>{
         setAddvideo(true);
@@ -50,6 +68,7 @@ function InstructorSubtitle(props) {
 
             <div className={!showDetails?"CourseItems_Syllabus_Subtitles_Content":"CourseItems_Syllabus_Subtitles_Content_Details"}onClick={!showDetails?handleShowDetails:""} >
                 <h2 style={{textAlign:"left" ,margin:"1rem",position:"absolute",top:"5vh"}}>{props.sub.title}</h2>
+                
 
                 <IoIosArrowDown className={showDetails?"CourseItems_Syllabus_ArrowUp":"CourseItems_Syllabus_ArrowDown"} onClick={()=>{handleShowDetails();handleShowDetailsClicked()}}size={25} ></IoIosArrowDown>
                 <div className={showDetails?"CourseItems_Syllabus_Subtitles_Details_Shown":"CourseItems_Syllabus_Subtitles_details_hidden"}>
@@ -83,7 +102,32 @@ function InstructorSubtitle(props) {
                 </div>
                 </div>
             </div> 
-            
+             {edit && <div className='EditSubDiv'>
+            <TextField id = {"sub"+0}  className="textSub1-Subtitle" onChange={handleNewTitle} 
+     label="New Course Subtitle" 
+     color="primary" 
+     variant="filled"
+     />
+    <TextField identify={0} id ={"hour"+0} onChange={handleNewHours} className="textSub1-Subtitle"
+     label="New Hours" 
+     color="primary" 
+     variant="filled"
+     />
+     <TextField identify={0} id ={"hour"+0} onChange={handleNewVideo} className="textSub1-Subtitle"
+     label="New VideoLink" 
+     color="primary" 
+     variant="filled"
+     />
+     <TextField identify={0} id ={"hour"+0} onChange={handleNewDesc} className="textSub1-Subtitle"
+     label="New Description" 
+     color="primary" 
+     variant="filled"
+     />
+     <div> <button onClick={()=> {setEdit(false); props.handleEdit(props.sub.title,newTitle,newHours,newVideoLink,newDescription)}} style={{backgroundColor:"green"}}>Confirm</button> <button onClick={()=>setEdit(false)} style={{backgroundColor:"red"}}>Cancel</button></div>
+
+                </div>} 
+            <button onClick={()=>setEdit(true)} className='editbtn'>edit</button>
+                <button className='delbtn' onClick={()=>props.handleDelete(props.sub.title)}>delete</button>
         </div>
                              )
 }

@@ -106,3 +106,46 @@ export const addNewSubToCourse=async(courseid,subtitle,hours)=>{
     return await result.json()
 }
 
+export const deleteSubTitle=async (title,id)=>{
+    const result=await fetch(`http://localhost:8000/course/deleteSubtitle/${id}/${title}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }    
+})
+return await result.json()
+
+}
+export const updateSubtitle=async(id,oldtitle,title,hours,link,desc)=>{
+    var route=`http://localhost:8000/course/updateSubtitle/${id}/${oldtitle}`
+    if(title !=""){
+
+        route=route+`/${title}`
+    }else{
+        route=route+`/-1`
+    }
+    if(hours !=""){
+
+        route=route+`/${hours}`
+    }else{
+        route=route+`/-1`
+    }
+    if(link !=""){
+
+        route=route+`/${link}`
+    }else{
+        route=route+`/-1`
+    }
+    if(desc !=""){
+
+        route=route+`/${desc}`
+    }else{
+        route=route+`/-1`
+    }
+    const result=await fetch(route,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }    
+})
+ return await result.json()
+
+}
