@@ -27,8 +27,10 @@ export function InstructorHome(){
 
 
     }
-    
-        intial()
+    useEffect(()=>{
+
+      intial();
+    })
         
 
     const navigate = useNavigate();

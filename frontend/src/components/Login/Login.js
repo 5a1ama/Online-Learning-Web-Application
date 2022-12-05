@@ -37,8 +37,7 @@ function Login(){
         const x=await LoginUser(email,password)
         const type=(await verify(x)).job;
         localStorage.setItem('type',type);
-        
-        if(type){
+                    if(type){
             if(type==="Instructor"){
                 navigate("/instructorHome")
             }
