@@ -28,8 +28,8 @@ const courseschema=new Schema({
         
     },
     rating:{
-        type:{value:Number,count:Number},
-        default:{value:0,count:0}
+        type:{value:Number,count:Number,sumSoFar:0},
+        default:{value:0,count:0,sumSoFar:0}
     },
     reviews:{
         type:[String],
