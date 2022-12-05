@@ -86,7 +86,10 @@ const handleHours=(event)=>{
 
 
  
-       
+    const [countryNumber,setCountryNumber]=useState();
+    const handleCountryNumber = (x) =>{
+      setCountryNumber(x);
+    }
 
     const now = 90 ;
     const getDetails = async () => {
@@ -154,7 +157,7 @@ const handleHours=(event)=>{
     
     <div className="CourseItems">
 
-            <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Course" nav={["/","/CourseItems","/","/signUp"]} scroll={["","",""]}  />
+            <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]}     handleCountryNumber={handleCountryNumber} select="Course" nav={["/","/CourseItems","/","/signUp"]} scroll={["","",""]}  />
             <div className="CourseItems_Video">
 
                  <video autoPlay loop muted id='video'>

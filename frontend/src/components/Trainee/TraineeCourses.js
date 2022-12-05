@@ -52,16 +52,22 @@ export function TraineeCourses() {
       const handleFilter=async ()=>{
         setCourses(await FilterMyCourses(value[0],value[1],subject))
       }
+      const [countryNumber,setCountryNumber]=useState();
+      const handleCountryNumber = (x) =>{
+        setCountryNumber(x);
+      }
 return(
     <div className = "TraineeHomeMain">
     
     <div>
-        <Navbar items={["Home","My Courses","All Courses"]} select="My Courses" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
+        <Navbar items={["Home","My Courses","All Courses"]} 
+              handleCountryNumber={handleCountryNumber}
+              select="My Courses" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
 
     </div>
     <div>
       <div>
-      {courses.map((course) => <NewCourse course={course}/>)}
+      {courses.map((course) => <NewCourse course={course}       country={countryNumber}/>)}
       </div>
     <form className="search-Trainee-courses">
             <div>

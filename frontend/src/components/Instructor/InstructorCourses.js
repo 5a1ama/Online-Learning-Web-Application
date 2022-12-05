@@ -60,14 +60,18 @@ export function InstructorCourses(){
     getCourses();
     setFirst(1);
   }
-    
+  const [countryNumber,setCountryNumber]=useState();
+  const handleCountryNumber = (x) =>{
+    setCountryNumber(x);
+  }
     return(
         <div>
             <div>
-            <Navbar items={["Home","My Courses","Caleneder"]} select="My Courses" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
+            <Navbar items={["Home","My Courses","Caleneder"]}
+            select="My Courses" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]} handleCountryNumber={handleCountryNumber}/>
             </div>
              <div className="InstCourses" name = 'instCourses'>
-            {courses.map((course)=><NewCourse inst={true} course={course}/>)}
+            {courses.map((course)=><NewCourse inst={true} course={course} country={countryNumber}/>)}
                 </div>
                 <div>
                 <form className="search-instrutor-courses">

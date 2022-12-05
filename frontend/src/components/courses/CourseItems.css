@@ -182,7 +182,7 @@
             left:0vh;
         }
 .CourseItems_DivForContinue_WorkSub{
-    /* transform: translateY(-10vh); */
+    transform: translate(30vh,20vh);
 }
 
 .CourseItems_SecondPart_View_Buttons button{

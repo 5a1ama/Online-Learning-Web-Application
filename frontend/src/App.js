@@ -81,11 +81,18 @@ function Home() {
         }
     },[]
     )
+ 
+
+    const [countryNumber,setCountryNumber]=useState(0);
+    const handleCountryNumber = (x) =>{
+      setCountryNumber(x);
+    }
+    
   return <div className="Home">
     
-    <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Home" nav={["","","","/signUp"]} scroll={["Home","Courses","WhatHegza"]}  />
+    <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Home" nav={["","","","/signUp"]} scroll={["Home","Courses","WhatHegza"]}  handleCountryNumber={handleCountryNumber} />
     <Bgvid />
-    <Courses />
+    <Courses country={countryNumber}/>
     <WhatHegza />
     
     <Footer text={"Do you want to step into the future before others ?"} buttonText={"Register Now"}/>

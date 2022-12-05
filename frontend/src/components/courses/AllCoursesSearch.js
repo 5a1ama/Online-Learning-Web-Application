@@ -24,6 +24,11 @@ function AllCoursesSearch() {
     const handleFilterBar = () => setFilterBar(!FilterBar)
     // const navigate2 = useNavigate();
 
+    const [countryNumber,setCountryNumber]=useState();
+    const handleCountryNumber = (x) =>{
+      setCountryNumber(x);
+    }
+   
         getCourses();
         
   
@@ -31,12 +36,14 @@ function AllCoursesSearch() {
     <div>
       
             <div>
-              <Navbar items={["Home","Courses","About Us"]} select="Courses" scroll={["","",""]} nav={["/","/AllCourses",""]}/>
+              <Navbar items={["Home","Courses","About Us"]} 
+              select="Courses" scroll={["","",""]} nav={["/","/AllCourses",""]}     handleCountryNumber={handleCountryNumber}
+              />
             </div>
             <div className='AllCourses'>
             <h1 className="heading">Our Courses</h1>
             <h3 style={{fontSize:"20px",transform:"translate(15px,0px)",fontWeight:"500",color:"black"}}>Showing Search Results for : {location.state.search}</h3>
-            {courses.map((course) => <NewCourse course={course}/>)}
+            {courses.map((course) => <NewCourse course={course}     country={countryNumber}/>)}
             </div>
     
             <button className='AllCourses-FilterBarButton' onClick={handleFilterBar}>Filter Courses</button>

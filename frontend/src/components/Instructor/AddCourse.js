@@ -89,10 +89,17 @@ export function AddCourse(){
        
     }
 
+    const [countryNumber,setCountryNumber]=useState();
+    const handleCountryNumber = (x) =>{
+      setCountryNumber(x);
+    }
+  
+
     return(
     <div className="AddCours">
          <div>
-         <Navbar items={["Home","My Courses","Caleneder"]} select="" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
+         <Navbar items={["Home","My Courses","Caleneder"]} 
+         select="" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}    handleCountryNumber={handleCountryNumber}         />
         </div> 
         <div className="Add-Course-Label">
         <h2>
