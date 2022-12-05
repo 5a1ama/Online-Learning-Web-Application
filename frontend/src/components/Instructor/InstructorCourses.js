@@ -67,7 +67,7 @@ export function InstructorCourses(){
             <Navbar items={["Home","My Courses","Caleneder"]} select="My Courses" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
             </div>
              <div className="InstCourses" name = 'instCourses'>
-            {courses.map((course)=><NewCourse course={course}/>)}
+            {courses.map((course)=><NewCourse inst={true} course={course}/>)}
                 </div>
                 <div>
                 <form className="search-instrutor-courses">

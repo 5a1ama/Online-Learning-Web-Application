@@ -8,7 +8,6 @@ import {AddCourse} from './components/Instructor/AddCourse'
 import {AllCoursesSearch} from './components/courses/AllCoursesSearch';
 import {AllCourses} from './components/courses/AllCourses';
 import {WhatHegza} from './components/whatHegza/WhatHegza'
-
 import { TraineeHome } from './components/Trainee/TraineeHome';
 import { TraineeCourses } from './components/Trainee/TraineeCourses';
 import {InstAllCourses} from './components/Instructor/InstAllCourses';
@@ -24,6 +23,9 @@ import { InstructorReviews } from './components/Instructor/InstructorReviews';
 import { ResetPass } from './components/ResetPass/ResetPass';
 import { InstructorProfile } from './components/Instructor/InstructorProfile';
 import CourseVideo from './components/courses/CourseVideo';
+import { InstructorCourseVideo } from './components/Instructor/InstructorCourseVideo.js';
+import { InstructorViewCourse } from './components/Instructor/InstructorViewCourse';
+
 export default function App() {
   const navigate = useNavigate();
   const [first,setFirst]=useState(0);
@@ -50,12 +52,16 @@ export default function App() {
           <Route path="/CourseItems" element={<CourseItems/>}/>
           <Route path="/instructorHome" element={<InstructorHome/>}/> 
           <Route path="/instructorReviews" element={<InstructorReviews/>}/>
+
+          
      
           <Route path="/CourseItems" element={<CourseItems/>}/>         
            <Route path="/Coursevideo" element={<CourseVideo/>}/>
 
           <Route path="/resetPass" element={<ResetPass/>}/>
           <Route path="/instructorProfile" element={<InstructorProfile/>}/>
+          <Route path='/instructorViewCourse' element={<InstructorViewCourse/>}></Route>
+          <Route path="/instructorCourseVideo" element={<InstructorCourseVideo/>}></Route>
         </Routes>
       
     

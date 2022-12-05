@@ -6,13 +6,38 @@ import {useNavigate} from 'react-router-dom';
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
 import { useState } from "react";
-
+import {FilterMyCourses, getTraineeCourses, searchMyCourses} from '../../API/TraineeAPI';
+import "./TraineeHome.css";
+import { NewCourse } from '../courses/NewCourse';
 
 
 
 
 export function TraineeCourses() {
     const navigate = useNavigate(); 
+    const [courses,setCourses] = useState([]);
+    const [first,setFirst]=useState(0)
+    const[subject,setSubject]=useState("")
+    const handleSubject=(event)=>{
+      setSubject(event.target.value)
+    }
+    const [search,setSearch]=useState("");
+    const handleSearch=(event)=>{
+      setSearch(event.target.value);
+    }
+    const handleSearchClick=async (event)=>{
+      event.preventDefault();
+      setCourses(await searchMyCourses(search) )
+    }
+    const getCourses = async () =>{ 
+    setCourses ((await getTraineeCourses(localStorage.getItem("token"))));
+    // alert(courses);
+  }
+  if(first==0){
+    getCourses();
+    setFirst(1);
+  }
+  
     const [value,setValue]=useState([1000,5000]);
     const valuetext=(value)=> {
         return `${value}°C`;
@@ -20,22 +45,30 @@ export function TraineeCourses() {
       const handleChange = (event, newValue) => {
         setValue(newValue);
         
-      };
-return(
-    <div>
+      }
+      const handleReset =()=>{
 
+      }
+      const handleFilter=async ()=>{
+        setCourses(await FilterMyCourses(value[0],value[1],subject))
+      }
+return(
+    <div className = "TraineeHomeMain">
     
     <div>
         <Navbar items={["Home","My Courses","All Courses"]} select="My Courses" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
 
     </div>
     <div>
+      <div>
+      {courses.map((course) => <NewCourse course={course}/>)}
+      </div>
     <form className="search-Trainee-courses">
             <div>
-                <input type="text" placeholder="Enter Course name"/>
+                <input onChange={handleSearch} type="text" placeholder="Enter Course name"/>
             </div>
         <div>
-            <button><AiOutlineSearch className='icon'/></button>
+            <button onClick={handleSearchClick}><AiOutlineSearch className='icon'/></button>
         </div>
         </form>
     <div className='Trainee-Filter-Box'>
@@ -48,11 +81,14 @@ return(
       <h3 className='Filter-by-label-Traineecourse-subject'>
         Subject :
       </h3>
-      <input type="text" placeholder="Enter Subject Name" 
+      <input type="text" onChange={handleSubject} placeholder="Enter Subject Name" 
       className='TraineeSubjectNameFilter'/>
 
       <button className='TraineeReatFilterButton'>
         Reset Filter
+      </button>
+      <button onClick={handleFilter} className='TraineeApplyFilterButton'>
+        Apply
       </button>
       <div className='TraineeSliderfilterCourse'>
       <Box sx={{ width: 300 }}>
