@@ -15,7 +15,7 @@ import GiftTop2 from "../../assets/giftTop2.png"
 
 import { GetInstructorName } from './../../API/CourseAPI';
 import Footer from '../footer/Footer';
-import Subtitle from '.././courses/subtitles/Subtitle';
+import InstructorSubtitle from '.././courses/subtitles/InstructorSubtitle';
 import { uploadCourseVideo } from '../../API/InstructorAPI';
 import { addNewSubToCourse, uploadSubtitleVideo } from '../../API/InstructorAPI';
 import {TextField} from "@mui/material";
@@ -227,7 +227,7 @@ const handleHours=(event)=>{
 
                                     <div ref={bottomRef} />
                                     {details[0]&&details[0].subtitles.map((sub,i)=>
-                                    <Subtitle handleSubmitVid={handleSubmitVid} handleAddVidChange={handleAddVidChange} handleVidDescChange={handleVidDescChange} update={setFirst} index={i} inst={true} sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i} SubTitleBack={location.state.SubtitleTitle} View="Syllabus" description={sub.description} ></Subtitle>
+                                    <InstructorSubtitle handleSubmitVid={handleSubmitVid} handleAddVidChange={handleAddVidChange} handleVidDescChange={handleVidDescChange} update={setFirst} index={i}  sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i} SubTitleBack={location.state.SubtitleTitle} View="Syllabus" description={sub.description} ></InstructorSubtitle>
                                     )}
                                     {!addSub && <div className='btnAddSub'>
                 <button onClick={()=>{setAddSub(true)}}>Add New Subtitle</button>
