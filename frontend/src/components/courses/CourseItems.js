@@ -95,6 +95,10 @@ function CourseItems() {
         return array
 
         }
+        const [countryNumber,setCountryNumber]=useState();
+        const handleCountryNumber = (x) =>{
+          setCountryNumber(x);
+        }
 
         
 
@@ -104,7 +108,9 @@ function CourseItems() {
     
     <div className="CourseItems">
 
-            <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Course" nav={["/","/CourseItems","/","/signUp"]} scroll={["","",""]}  />
+            <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]}
+                    handleCountryNumber={handleCountryNumber}
+                    select="Course" nav={["/","/CourseItems","/","/signUp"]} scroll={["","",""]}  />
             <div className="CourseItems_Video">
 
                  <video autoPlay loop muted id='video'>
@@ -211,7 +217,7 @@ function CourseItems() {
                                 {details[0]&&details[0].subtitles[0]&&
                                <Subtitle style={{display:"block"}} onClick={handleShowDetails} sub={details[0].subtitles[0]} exercise={details[0].excercises} View="" description={(details[0].subtitles[0].description)} ></Subtitle>
                                    }
-                            <iframe  src={details[0]&&details[0].previewVideo} className="CourseItems_SecondPart_View_OverView_video" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
+                            <iframe  src={details[0]&&details[0].subtitles[0].video[0]} className="CourseItems_SecondPart_View_OverView_video" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
                     </div>
                     </div>
                 </div>

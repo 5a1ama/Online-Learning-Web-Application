@@ -24,6 +24,12 @@ function AllCourses() {
     const valuetext=(value)=> {
       return `${value}°C`;
     }
+    
+    const [countryNumber,setCountryNumber]=useState();
+    const handleCountryNumber = (x) =>{
+      setCountryNumber(x);
+    }
+    
     const getCourses = async () =>{
       setCourses ((await getAllCourses()));
     }
@@ -62,11 +68,12 @@ function AllCourses() {
     <div>
       
     <div>
-    <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Home" nav={["/","/","/","/signUp"]} scroll={["Home","Courses","AboutUs"]}  />
+    <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]}
+     select="Home" nav={["/","/","/","/signUp"]} scroll={["Home","Courses","AboutUs"]}  handleCountryNumber={handleCountryNumber}  />
     </div>
     <div className='AllCourses'>
     <h1 className="heading">Our Courses</h1>
-      {courses.map((course) => <NewCourse course={course}/>)}
+      {courses.map((course) => <NewCourse course={course} country={countryNumber}/>)}
     </div>
 
     <button className='AllCourses-FilterBarButton' onClick={handleFilterBar}>Filter Courses</button>

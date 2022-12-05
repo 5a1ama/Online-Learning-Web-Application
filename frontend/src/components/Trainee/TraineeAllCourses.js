@@ -28,16 +28,21 @@ export function TraineeAllCourses(){
         setValue(newValue);
         
       };
-
+      const [countryNumber,setCountryNumber]=useState();
+      const handleCountryNumber = (x) =>{
+        setCountryNumber(x);
+      }
     return(
         <div>
 
 <div>
- <Navbar items={["Home","My Courses","All Courses"]} select="All Courses" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  /> 
+ <Navbar items={["Home","My Courses","All Courses"]} select="All Courses" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} 
+       handleCountryNumber={handleCountryNumber}
+        scroll={["","",""]}  /> 
         </div>
 <div className='AllCourses'>
             <h1 className="heading">Our Courses</h1>
-            {courses.map((course) => <NewCourse course={course}/>)}
+            {courses.map((course) => <NewCourse course={course} country={countryNumber}/>)}
             </div>
 
             <button className='AllCourses-FilterBarButton' onClick={handleFilterBar}>Filter Courses</button>

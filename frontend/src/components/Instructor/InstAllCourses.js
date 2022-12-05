@@ -36,16 +36,21 @@ export function InstAllCourses(){
       getCourses();
       setFirst(1);
     }
-
+    const [countryNumber,setCountryNumber]=useState();
+    const handleCountryNumber = (x) =>{
+      setCountryNumber(x);
+    }
     return(
         <div>
 
 <div>
-<Navbar items={["Home","My Courses","Caleneder"]} select="" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
+<Navbar items={["Home","My Courses","Caleneder"]} 
+    handleCountryNumber={handleCountryNumber}
+    select="" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
 </div>
 <div className='AllCourses'>
             <h1 className="heading">Our Courses</h1>
-            {courses.map((course) => <NewCourse course={course}/>)}
+            {courses.map((course) => <NewCourse course={course}     country={countryNumber}/>)}
             </div>
 
             <button className='AllCourses-FilterBarButton' onClick={handleFilterBar}>Filter Courses</button>

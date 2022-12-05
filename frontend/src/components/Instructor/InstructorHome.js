@@ -35,13 +35,18 @@ export function InstructorHome(){
 
     const navigate = useNavigate();
     
-    
+    const [countryNumber,setCountryNumber]=useState();
+    const handleCountryNumber = (x) =>{
+      setCountryNumber(x);
+    }
     
     return(
 <div className = "divcenter">
 <div>
 
-<Navbar items={["Home","My Courses","Caleneder"]} select="Home" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
+    <Navbar items={["Home","My Courses","Caleneder"]}     handleCountryNumber={handleCountryNumber}
+
+    select="Home" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
 
         </div>
         <div className="instructorDitails">

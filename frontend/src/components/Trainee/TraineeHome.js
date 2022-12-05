@@ -20,6 +20,10 @@ export function TraineeHome (){
     setCourses ((await getTraineeCourses(localStorage.getItem("token"))).slice(0,3));
     // alert(courses);
   }
+  const [countryNumber,setCountryNumber]=useState();
+  const handleCountryNumber = (x) =>{
+    setCountryNumber(x);
+  }
   getCourses();
 
  
@@ -28,11 +32,13 @@ export function TraineeHome (){
           
     
         <div>
-             <Navbar items={["Home","My Courses","All Courses"]} select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
+             <Navbar items={["Home","My Courses","All Courses"]}
+               handleCountryNumber={handleCountryNumber}
+               select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
         </div>
         <div className="mainDetailsTrainee">
         <div className="homeCoursesTrainee">
-          {courses.map((course) => <NewCourse course={course}/>)}
+          {courses.map((course) => <NewCourse course={course}   country={countryNumber}/>)}
 
           </div>
 

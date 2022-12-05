@@ -30,45 +30,50 @@ export default function App() {
   const navigate = useNavigate();
   const [first,setFirst]=useState(0);
   
-   
+  const [countryNumber,setCountryNumber]=useState(0);
+  const handleCountryNumber = (x) =>{
+    setCountryNumber(x);
+  }
+
   return (
     
       
-        <Routes>
+        <Routes >
           <Route path="/courses" element={<Navbar items={["Home"]} select="Home" scroll={["home"]} nav={[""]}/>} />
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home handleCountryNumber={handleCountryNumber} country={countryNumber} />} />
           <Route path="/login" element={<Login/>}/>
-          <Route path="/InstructorCourses" element={<InstructorCourses/>}/>
-          <Route path="/addCourse" element={<AddCourse/>}></Route>
-          <Route path="/AllCoursesSearch" element={<AllCoursesSearch/>}/>
-          <Route path="/AllCourses" element={<AllCourses/>}/>
-          <Route path="/TraineeHome" element={<TraineeHome/>}/>
-          <Route path="/TraineeCourses" element={<TraineeCourses/>}/> 
-          <Route path="/InstAllCourses" element={<InstAllCourses/>}/>
-          <Route path="/AdminHome" element={<Admin/>}/>
-          <Route path="/AdminControlPanel" element={<ControlPanel/>}/>
-          <Route path="/TraineeAllCourses" element={<TraineeAllCourses/>}/>
-          <Route path="/CourseContent" element={<CourseContent/>}/>
-          <Route path="/CourseItems" element={<CourseItems/>}/>
-          <Route path="/instructorHome" element={<InstructorHome/>}/> 
-          <Route path="/instructorReviews" element={<InstructorReviews/>}/>
+          <Route path="/InstructorCourses" element={<InstructorCourses handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/addCourse" element={<AddCourse handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
+          <Route path="/AllCoursesSearch" element={<AllCoursesSearch handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/AllCourses" element={<AllCourses handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/TraineeHome" element={<TraineeHome handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/TraineeCourses" element={<TraineeCourses handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/> 
+          <Route path="/InstAllCourses" element={<InstAllCourses handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/AdminHome" element={<Admin handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/AdminControlPanel" element={<ControlPanel handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/TraineeAllCourses" element={<TraineeAllCourses handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/CourseContent" element={<CourseContent handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/CourseItems" element={<CourseItems handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/instructorHome" element={<InstructorHome handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/> 
+          <Route path="/instructorReviews" element={<InstructorReviews handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
 
           
      
-          <Route path="/CourseItems" element={<CourseItems/>}/>         
-           <Route path="/Coursevideo" element={<CourseVideo/>}/>
+          <Route path="/CourseItems" element={<CourseItems handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>         
+           <Route path="/Coursevideo" element={<CourseVideo handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
 
-          <Route path="/resetPass" element={<ResetPass/>}/>
-          <Route path="/instructorProfile" element={<InstructorProfile/>}/>
-          <Route path='/instructorViewCourse' element={<InstructorViewCourse/>}></Route>
-          <Route path="/instructorCourseVideo" element={<InstructorCourseVideo/>}></Route>
+          <Route path="/resetPass" element={<ResetPass handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/instructorProfile" element={<InstructorProfile handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path='/instructorViewCourse' element={<InstructorViewCourse handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
+          <Route path="/instructorCourseVideo" element={<InstructorCourseVideo handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
+        
         </Routes>
       
     
   );
 }
 
-function Home() {
+function Home(props) {
     const navigate = useNavigate();
     useEffect(()=>{
       if(localStorage.getItem('token')){
@@ -81,11 +86,15 @@ function Home() {
         }
     },[]
     )
+ 
+
+    
+    
   return <div className="Home">
     
-    <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Home" nav={["","","","/signUp"]} scroll={["Home","Courses","WhatHegza"]}  />
+    <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Home" nav={["","","","/signUp"]} scroll={["Home","Courses","WhatHegza"]} handleCountryNumber={props.handleCountryNumber}   />
     <Bgvid />
-    <Courses />
+    <Courses country={props.country}/>
     <WhatHegza />
     
     <Footer text={"Do you want to step into the future before others ?"} buttonText={"Register Now"}/>
