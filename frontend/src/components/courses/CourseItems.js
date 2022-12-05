@@ -205,7 +205,7 @@ function CourseItems() {
                 </div>
 
                 <div className="CourseItems_SecondPart_Continues">
-                               <h5 style={{fontWeight:"600" , fontSize:"25px", color:"var(--primary-light)"}}>Continue working On current module: </h5>
+                    <h5 style={{fontWeight:"600" , fontSize:"25px", color:"var(--primary-light)"}}>Continue working On current module: </h5>
                     <div className="CourseItems_DivForContinue">
                             <div className="CourseItems_DivForContinue_WorkSub">
                                 {details[0]&&details[0].subtitles[0]&&
