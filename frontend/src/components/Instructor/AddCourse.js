@@ -11,13 +11,17 @@ import { NewDiv } from './NewDiv';
 import { HiArrowCircleDown, HiOutlineChartSquareBar } from 'react-icons/hi';
 import { createCourse } from '../../API/CourseAPI';
 import { AiFillCloseCircle, AiFillCloseSquare, AiOutlineClose } from 'react-icons/ai';
+import { NewDiv2 } from './NewDiv2';
 
 export function AddCourse(){
     
     
     const [title,setTitle]=useState("");
+    const [subject,setSubject]=useState("")
     const [Subarr,setArr]=useState([])
+    const [page,setPage]=useState(0)
     const [harr,setHarr]=useState([]);
+    const [subjectArr,setSubjectArr]=useState([])
     const handleTitle=(event)=>{
         setTitle(event.target.value);
     }
@@ -27,9 +31,17 @@ export function AddCourse(){
     const handleSub=(event)=>{
         setSubtitle(event.target.value)
     }
+    const handleSubject=(event)=>{
+        setSubject(event.target.value)
+    }
     const handleSub2=(index,value)=>{
         Subarr[index]=value;
         setArr(Subarr)
+        
+    }
+    const handleSubject2=(index,value)=>{
+        subjectArr[index]=value;
+        setSubjectArr(subjectArr)
         
     }
     const handleH=(index,value)=>{
@@ -59,23 +71,16 @@ export function AddCourse(){
     }
 
     const handleCreate=async()=>{
-        await createCourse(title,[subtitle].concat(Subarr),[hours].concat(harr),price,summary);
+    
+        await createCourse(title,[subtitle].concat(Subarr),[hours].concat(harr),price,summary,[subject].concat(subjectArr));
     }
     
+    const handleAddSubject=()=>{
+        setSubjectArr(subjectArr.concat([""]))
+    }
     const handleAdd = (event)=>{
     
-       // alert(document.getElementsByClassName("subtitledivadd")[0].childNodes.length)
-        // alert(x.length)
-        
-        // var x=document.getElementsByClassName("text4-AddCourse");
-        // for(var i=0;i<x.length;i++){
-        
-        //     for(var j=0;j<x[i].children.length;j++){
-        //         var y=x[i].children[j].ariaValueText;
-        //         alert(y)
-                
-        //     }
-        // }
+      
         setArr(Subarr.concat([""]));
         setHarr(harr.concat([""]))
         
@@ -84,10 +89,17 @@ export function AddCourse(){
        
     }
 
+    const [countryNumber,setCountryNumber]=useState();
+    const handleCountryNumber = (x) =>{
+      setCountryNumber(x);
+    }
+  
+
     return(
     <div className="AddCours">
          <div>
-         <Navbar items={["Home","My Courses","Caleneder"]} select="" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
+         <Navbar items={["Home","My Courses","Caleneder"]} 
+         select="" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}    handleCountryNumber={handleCountryNumber}         />
         </div> 
         <div className="Add-Course-Label">
         <h2>
@@ -95,8 +107,12 @@ export function AddCourse(){
         </h2>
  
         </div>
+       {page==0 && <button className='btnLeft' style={{display:'none'}} > {"<<<"} </button>}
+       {page==1 && <button className='btnLeft' onClick={()=>setPage(page-1)}  > {"<<<"} </button> }
+       {page==0 && <button className='btnRight' onClick={()=>setPage(page+1)} > {">>>"}</button> }
+       {page==1 && <button className='btnRight' style={{display:'none'}} > {">>>"} </button> }
        
-        <div className="Boxes">
+        {page==0 && <div className="Boxes">
     
 
      <TextField id = "filled-basic" onChange= {handleTitle} className="text1-AddCourse"
@@ -130,7 +146,8 @@ export function AddCourse(){
      <br></br>
      <br></br>
      <NewDiv handleSub2={handleSub2} handleH={handleH} arr={Subarr} arr2={harr}/>
-    
+     <br></br>
+     <br></br>
      
      
 
@@ -141,12 +158,26 @@ export function AddCourse(){
           multiline
           maxRows={9}
         />
-     <button onClick={handleContract} className="Submit-button">
-        Add
-            </button>
+     
  
 
-    </div>
+    </div>}
+    {page==1 && <div className='Boxes'>
+    <TextField id = "filled-basic" onChange= {handleSubject} className="text1-AddCourse"
+     label="Subject" 
+     color="primary" 
+     variant="filled"
+     />
+     <button onClick={handleAddSubject} className="add_textField2">
+       +
+     </button>
+     <br></br>
+     <br></br>
+     <NewDiv2 handleSubject2={handleSubject2} arr={subjectArr} />
+         </div>}
+         <button onClick={handleContract} className="Submit-button">
+        Add
+            </button>
     {contract && 
      <div className="AddCourse_Contract" scroll={true}>
         <button style={{backgroundColor:'transparent'}} onClick={handleContract}><AiOutlineClose className='AddCourse_CloseButton'></AiOutlineClose></button>

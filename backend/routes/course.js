@@ -2,7 +2,9 @@ const Course=require("../Models/Course");
 const User=require("../Models/User");
 const Instructor = require("../Models/Instructor");
 const Trainee = require("../Models/Trainee");
-
+const jwt=require("jsonwebtoken")
+const dotenv=require("dotenv")
+dotenv.config();
 const express=require("express");
 const router=express.Router();
 // @ts-ignore
@@ -61,18 +63,21 @@ router.get("/filter-price/:minprice/:maxprice",async function(req,res){
     }
     res.json(array)
 })
-router.post("/",function(req,res){
+router.post("/create/:token",function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN)
     var query=Course.find({});
     // @ts-ignore
     var arr=req.body.subtitles;
     var hourArr=req.body.hours;
+    console.log(req.body.subject)
     var final=[];
     for(var i=0;i<arr.length;i++){
-        final=final.concat([{title:arr[i],hours:hourArr[i]}])
+        final=final.concat([{title:arr[i],hours:hourArr[i],video:[""]}])
     }
     query.exec(function(err,result){
         var object=new Course({id:result.length+1,title:req.body.title,subtitles:final,price:req.body.price,
-        summary:req.body.summary})
+        summary:req.body.summary,instructors:[user.id],subject:req.body.subject})
         // @ts-ignore
         console.log("add course")
         object.save(function(req,res){
@@ -81,6 +86,18 @@ router.post("/",function(req,res){
         res.json(object)
     })
 })
+router.post("/addCourseSub/:subtitle/:hours/:id",async function(req,res){
+    var subtitle=req.params.subtitle
+    var hours=req.params.hours
+    var id=req.params.id;
+    var course=await Course.findOne({id:id});
+    
+    var subtitles=course.subtitles.concat([{video:[""],lesson:"",description:"",title:subtitle,hours:hours}])
+    
+    await Course.findOneAndUpdate({id:id},{subtitles:subtitles})
+    res.json("ok")
+}
+)
 router.get("/:id",function(req,res){
     var id1=req.params.id
     var query=Course.find({id:id1});
@@ -122,7 +139,11 @@ router.get("/InstructorOfCourse/:InstId",async function(req,res)
     var InstId = req.params.InstId;
     var query = Instructor.find({id:InstId});
     query.exec(function(err,result){
-        res.json({name:result[0].Name});
+        if(result.length!=0){
+            res.json({name:result[0].Name});
+        }
+
+        
     })
     }
 )
@@ -141,6 +162,58 @@ router.get("/CourseisEnrolled/:CourseId/:UserId",async function(req,res)
 
     }
 )
+router.post("/deleteSubtitle/:id/:subtitle",async function(req,res){
+    var id=req.params.id;
+    var subtitle=req.params.subtitle;
+    var course=await Course.findOne({id:id});
+    var arr=course.subtitles;
+    var final=[];
+    
+    for(var i=0;i<arr.length;i++){
+        if(arr[i].title!=subtitle){
+            final=final.concat([arr[i]])
+        }
+    }
+    
+    await Course.findOneAndUpdate({id:id},{subtitles:final})
+    res.json(final)
+})
+router.post("/updateSubtitle/:id/:oldtitle/:title/:hours/:link/:desc",async function(req,res){
+    var id=req.params.id
+    var title=req.params.title;
+    var oldtitle=req.params.oldtitle
+    var hours=req.params.hours;
+    var link=req.params.link
+    var description=req.params.desc
+    var course=await Course.findOne({id:id})
+    var subtitles=course.subtitles
+    var finalSub=[];
+    for(var i=0;i<subtitles.length;i++){
+        if(subtitles[i].title != oldtitle){
+            finalSub=finalSub.concat([subtitles[i]])
+        }else{
+            
+            var object={video:[""],lesson:"",description:"",title:"",hours:0}
+            if(title != "-1"){
+                object.title=title;
+            }
+            if(link != "-1"){
+                object.video=[link];
+            }
+            if(hours != "-1"){
+                object.hours=Number(hours);
+            }
+            if(description != "-1"){
+                object.description=description;
+            }
+            finalSub=finalSub.concat([object])
+        }
+    }
+    
+    await Course.findOneAndUpdate({id:id},{subtitles:finalSub})
+    res.json("ok")
+})
+
 
 
 module.exports=router

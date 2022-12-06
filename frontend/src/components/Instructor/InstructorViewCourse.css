@@ -60,7 +60,14 @@
 
   
 
-    
+.addPreviewVideoInst{
+    margin-top: 2vw;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5vw;
+}    
+
 
     @-webkit-keyframes progress-done {
     0%{background-position:0% 51%}

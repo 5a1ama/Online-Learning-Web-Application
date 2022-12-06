@@ -1,6 +1,5 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom';
-
 import {BiDownArrow, BiLogOutCircle, BiSearch} from 'react-icons/bi'
 import {BsPerson} from 'react-icons/bs'
 
@@ -39,19 +38,46 @@ function Navbar(props) {
 
     const [countryBar,setCountryBar] = useState(false)
     const handleCountryBar = () => setCountryBar(!countryBar)
+    
+    var selectedOption = localStorage.getItem( 'SelectedOption' ) || EgyFlag;
 
-    const [chosenCountry,setChosenCountry] = useState(EgyFlag)
+    const [chosenCountry,setChosenCountry] = useState(selectedOption)
+
+    const [token,setToken]=useState(localStorage.getItem("token"))
+    var CountryNumber = 0;
+
     const handleChosenCountry = (x) => {
         selectCountry(x);
         setChosenCountry(x);
+        handleCountryBar();
+        localStorage.setItem('SelectedOption',x);
+        if     (chosenCountry===EgyFlag) CountryNumber = 0;
+        else if(chosenCountry===UsaFlag) CountryNumber = 1;
+        else if(chosenCountry===UaeFlag) CountryNumber = 2;
+        else if(chosenCountry===UkFlag)  CountryNumber = 3;
+        else if(chosenCountry===GerFlag) CountryNumber = 4;
+        props.handleCountryNumber(CountryNumber);
     }
 
+    useEffect(()=>{
+        setToken(localStorage.getItem("token"))
+        if     (chosenCountry===EgyFlag) CountryNumber = 0;
+        else if(chosenCountry===UsaFlag) CountryNumber = 1;
+        else if(chosenCountry===UaeFlag) CountryNumber = 2;
+        else if(chosenCountry===UkFlag)  CountryNumber = 3;
+        else if(chosenCountry===GerFlag) CountryNumber = 4;
+        
+        props.handleCountryNumber(CountryNumber);
+        },[CountryNumber,chosenCountry,props,localStorage.getItem("token")]);
+    
     const [settingMenu,setSettingMenu] = useState(false)
     const handleSettingMenu = () => setSettingMenu(!settingMenu);
     
     const handleLogOut = () => {
      localStorage.clear();
+    //  Cookies.remove('Token');
      navigate("/Login");
+     
     }
     
 
@@ -96,9 +122,10 @@ function Navbar(props) {
                 style={{borderRadius:'5px',marginRight:'0.5rem',cursor:'pointer'}} ></img>
                 <BiDownArrow className="icon" style={{marginRight: '1rem'}} onClick={()=>{handleAll();handleCountryBar()}}></BiDownArrow>
             </div>
+            
             <BiSearch className="icon" onClick={ ()=>{handleAll();handleSearchBar()}} style={{marginRight: '1rem'}}/>
             
-            {localStorage.getItem("token")===null ? 
+            {token===null ? 
             (<BsPerson className="icon" onClick={()=> navigate('/login')} style={{marginRight: '1rem'}}  /> )
             :
             (<AiOutlineMenu className="icon" onClick={()=>{handleAll();handleSettingMenu()}} style={settingMenu?{color:"rgb(10,138,218)",borderRadius:"5px",zIndex:"1"}:{color:"fff"}}/>)}

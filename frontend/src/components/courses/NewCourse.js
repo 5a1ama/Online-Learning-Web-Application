@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import { useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
 import {BiDownArrow} from 'react-icons/bi';
 import starImg from "../../assets/goldStar.png"
@@ -9,8 +10,16 @@ export function NewCourse(props) {
     
     const [courseDetails,setcourseDetails] = useState(false)
     const handleCourseDetails = () => setcourseDetails(!courseDetails)
+    const [chosenCountry,setChosenCountry] = useState(0);
 
-    
+    useEffect(()=>{
+      setChosenCountry(props.country);
+      
+    },[props.country]);
+
+    const fares = [26,1,3.67,0.81,0.95];
+    const currency = ['LE','$','UAE','£','€'];
+
     const stars = (starNumber) => {
         var array=[];
         for(var i=0;i<starNumber;i++){
@@ -28,9 +37,10 @@ export function NewCourse(props) {
           <div className="newCourse_title">
               <h3 >{props.course.title}</h3>
           </div>
+          
                 <div className="NewCourse_Prices">
-                  <h2 className='NewCourse_price'>{props.course.price}$</h2>
-                  <h2 className='NewCourse_price2'>   {props.course.discount.amount}%</h2>
+                  <h2 className='NewCourse_price'>{  Math.floor(props.course.price*fares[chosenCountry])} {currency[chosenCountry]}</h2>
+                  <h2 className='NewCourse_price2'>   {props.course.discount.amount} %</h2>
                 </div>
           
               <div className="NewCourse_StarsHoursPrice">
@@ -78,7 +88,11 @@ export function NewCourse(props) {
           <h5 onClick={handleCourseDetails}>view details</h5>
           </div>
         <BiDownArrow className="icon" style={{marginRight: '1rem' , transform:'translate(0 ,0.4rem)'}} onClick={handleCourseDetails}></BiDownArrow>
-      <button className="NewCourse-button-OpenCourse" style={{marginRight: '1rem' ,width:"100px",height:"60px",transform:"translate(1rem,1.7rem)" }} onClick={()=>navigate("/CourseItems",{state:{id:props.course.id,View:"Overview"}})}>Open Course</button>
+      <button className="NewCourse-button-OpenCourse" style={{marginRight: '1rem' ,width:"100px",height:"60px",transform:"translate(1rem,1.7rem)" }} onClick={()=>{ if(!props.inst){navigate("/CourseItems",{state:{id:props.course.id,View:"Overview"}})
+    
+    }else{
+      navigate("/instructorViewCourse",{state:{id:props.course.id,View:"Overview"}})
+    }}}>Open Course</button>
     </div>  
   )
 }

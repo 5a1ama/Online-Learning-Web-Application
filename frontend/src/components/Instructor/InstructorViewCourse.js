@@ -1,43 +1,131 @@
-import {React,useState} from 'react'
+import {Component, React,useEffect,useRef,useState} from 'react'
 import video from '../../assets/ItemsBack.mov';
 import Navbar from './../navbar/Navbar';
-import starImg from "../../assets/goldStar.png"
-import InstImg from "../../assets/avatar8.png"
 import {  getCourseDetails, isEnrolled } from './../../API/CourseAPI';
 import { useLocation } from 'react-router-dom';
-import Subtitle from '../courses/subtitles/Subtitle';
-import Footer from '../footer/Footer';
+import '../courses/CourseItems.css';
+import ProgressImg from "../../assets/Progress100.png"
+import Progress from '.././courses/Progress';
+import starImg from "../../assets/goldStar.png"
+import InstImg from "../../assets/avatar8.png"
+import "./InstructorViewCourse.css"
+import Gift from "../../assets/gift.png"
+import GiftTop from "../../assets/giftTop.png"
+import GiftTop2 from "../../assets/giftTop2.png"
+
 import { GetInstructorName } from './../../API/CourseAPI';
+import Footer from '../footer/Footer';
+import InstructorSubtitle from '.././courses/subtitles/InstructorSubtitle';
+import { deleteSubTitle, updateSubtitle, uploadCourseVideo } from '../../API/InstructorAPI';
+import { addNewSubToCourse, uploadSubtitleVideo } from '../../API/InstructorAPI';
+import {TextField} from "@mui/material";
+import "../courses/subtitles/Subtitle.css"
 
-
-
-
-
-export function InstructorViewCourse(){
-
+export function InstructorViewCourse() {
     const [first,setFirst] = useState(0);
+    const [Sub,setSub]=useState("");
+    const[addSub,setAddSub]=useState(false)
+    const [hours,setHours]=useState("")
     const location=useLocation();
-    const [details,setDetails] = useState([]);
+    const [addedVideoLink,setAddedVideoLink]=useState("");
+    const [vidDescription,setVidDesc]=useState("");
+    const handleAddVidChange=(event)=>{
+        setAddedVideoLink(event.target.value)
+    }
+    const handleDelete=async(title)=>{
+        const x=await deleteSubTitle(title,location.state.id)
 
+        getDetails();
+    }
+    const handleEdit=async(oldtitle,title,hours,link,desc)=>{
+        const x=await updateSubtitle(location.state.id,oldtitle,title,hours,link,desc)
+        getDetails();
+    }
+    const handleVidDescChange=(event)=>{
+        setVidDesc(event.target.value)
+    }
+   
+   const[addPrevVid,setPrevVid]=useState(false)
+   const[prevVidLink,setPrevVidLink]=useState("");
+   const handleSub=(event)=>{
+    setSub(event.target.value)
+}
+const handleHours=(event)=>{
+    setHours(event.target.value)
+}
+   const handleAddedPrevVid=(event)=>{
+    setPrevVidLink(event.target.value);
+   }
+   const handleAddNewSub =async()=>{
+    const x=await addNewSubToCourse(location.state.id,Sub,hours)
+    getDetails()
+    setAddSub(false)
+}
+   const handleAddPrevVid=async()=>{
+    setFirst(0)
+    await uploadCourseVideo(location.state.id,prevVidLink)
+    getDetails();
+   }
+    const [details,setDetails] = useState([]);
+    
     const[showDetails,setShowDetails]=useState(false);
     const handleShowDetails =() =>{setShowDetails(!showDetails)};
 
+    const[gift,setGift]=useState(false);
+    const handleGift =() =>{setGift(!gift)};
+
     const [view , setView] = useState("");
     const handleView = (view) => {
-        setView(view);
-    } 
-    const handleSubBack = (id) =>{
 
+        setView(view);
+        if(view != "Overview"){
+            setPrevVid(false)
+
+        }
     }
-    
+
+    const bottomRef = useRef(null);
+
+    useEffect(()=>{ 
+        
+        handleView(location.state.View)
+        
+    })
+
+
+ 
+    const [countryNumber,setCountryNumber]=useState();
+    const handleCountryNumber = (x) =>{
+      setCountryNumber(x);
+    }
+
     const now = 90 ;
     const getDetails = async () => {
         setDetails((await getCourseDetails(location.state.id)));
         setFirst(1);
     }
-    if(first==0){
+
+    const handleSubmitVid =async(sub)=>{
+        
+        const x= await uploadSubtitleVideo(location.state.id,addedVideoLink,sub,vidDescription)
+        
         getDetails();
+     }
+    if(first===0){
+        getDetails();
+        if(location.state.View==="Syllabus"){
+            bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+        }
+
+        
     }
+    // alert(location.state.View)
+    // if(location.state.View==="Syllabus"){
+    //     handleView("Syllabus")   ;   
+    // }else if(location.state.View==="Overview"){
+    //     handleView("Overview")   ;   
+
+    // }
     const InstNamesLen = () =>
     {
         if(instNames.length>3){
@@ -53,7 +141,7 @@ export function InstructorViewCourse(){
         if(details[0]){
 
             for (var i=0 ; i<(details[0].instructors).length;i++){
-                
+        
                 var name = (await GetInstructorName((details[0].instructors)[i])).name
                 names=names.concat([name]);
             }
@@ -69,13 +157,15 @@ export function InstructorViewCourse(){
 
         }
 
-        handleInstNames();
         
 
-    return(
-        <div className="CourseItems">
+        handleInstNames();
+        
+  return (
+    
+    <div className="CourseItems">
 
-            <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Course" nav={["/","/CourseItems","/","/signUp"]} scroll={["","",""]}  />
+            <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]}     handleCountryNumber={handleCountryNumber} select="Course" nav={["/","/CourseItems","/","/signUp"]} scroll={["","",""]}  />
             <div className="CourseItems_Video">
 
                  <video autoPlay loop muted id='video'>
@@ -83,7 +173,6 @@ export function InstructorViewCourse(){
                  </video>
                  <div className="CourseItems_overlay"></div>
             </div>
-
             {/* onVideo */                                                                      }
             
             <div className='CoureItems_OnVideo'>
@@ -108,37 +197,66 @@ export function InstructorViewCourse(){
 
             </div>
             
-          
+            {/* progress bar */                                                                 }
+            
+            
             
             {/* Second Part */                                                                  }
             
             <div className='CourseItems_SecondPart'>
                 <div className="CourseItems_SecondPart_views">
+
                     <div className="CourseItems_SecondPart_View_Buttons">
-                                <button onClick={()=>handleView("Overview")} >Overview</button>
-                                <button onClick={()=>handleView("Syllabus")}>Syllabus</button>
-                                <button onClick={()=>handleView("Reviews")}>Reviews</button>
+                                <button onClick={()=>{location.state.View="Overview";handleView("Overview")}} >Overview</button>
+                                <button onClick={()=>{location.state.View="Syllabus";handleView("Syllabus")}}>Syllabus</button>
+                                <button onClick={()=>{location.state.View="Reviews";handleView("Reviews")}}>Reviews</button>
                         </div>
                         <div className="vl33"></div>
                         {view==="Overview" && 
                                         
                                         <div className="CourseItems_SecondPart_View_OverView">
+                                            
                                             <h4>
                                             {details[0]&&details[0].summary}
                                             </h4>
-                                        <iframe  src={details[0]&&details[0].previewVideo} className="CourseItems_SecondPart_View_OverView_video" 
+                                       {(details[0] && details[0].previewVideo)? (<iframe  src={details[0]&&details[0].previewVideo} className="CourseItems_SecondPart_View_OverView_video" 
                                         title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowfullscreen></iframe> 
+                                        allowfullscreen></iframe>) : (<div><button onClick={()=>setPrevVid(true)}>Add Preview Video</button>
+                                        {addPrevVid && <div className="addPreviewVideoInst"> 
+                                         <input onChange={handleAddedPrevVid} placeholder='enter video link'/>
+                                         <button onClick={handleAddPrevVid}>Submit</button>
+                                        </div>}
+                                        
+                                        </div>) }
 
                                     </div>}
 
-                                {view==="Syllabus" && 
+                                {view=="Syllabus" && 
+                                   
+                                    <div id="Subtitles" className="CourseItems_Syllabus_Subtitles">
 
-                                    <div className="CourseItems_Syllabus_Subtitles">
 
+                                    <div ref={bottomRef} />
                                     {details[0]&&details[0].subtitles.map((sub,i)=>
-                                    <Subtitle sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i}  description={sub.description} ></Subtitle>
+                                    <InstructorSubtitle handleEdit={handleEdit} handleDelete={handleDelete} handleSubmitVid={handleSubmitVid} handleAddVidChange={handleAddVidChange} handleVidDescChange={handleVidDescChange} update={setFirst} index={i}  sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i} SubTitleBack={location.state.SubtitleTitle} View="Syllabus" description={sub.description} ></InstructorSubtitle>
                                     )}
+                                    {!addSub && <div className='btnAddSub'>
+                <button onClick={()=>{setAddSub(true)}}>Add New Subtitle</button>
+            </div>}
+            {addSub && <div className='newSubDiv'>
+            <TextField id = {"sub"+0}  className="textSub1-Subtitle" onChange={handleSub} 
+     label="Course Subtitle" 
+     color="primary" 
+     variant="filled"
+     />
+    <TextField identify={0} id ={"hour"+0} onChange={handleHours} className="textSub1-Subtitle"
+     label="Hours" 
+     color="primary" 
+     variant="filled"
+     />
+     <div> <button onClick={handleAddNewSub} style={{backgroundColor:"green"}}>Confirm</button> <button onClick={()=>setAddSub(false)} style={{backgroundColor:"red"}}>Cancel</button></div>
+
+                </div>}
 
                                     </div>
                                 }
@@ -158,9 +276,7 @@ export function InstructorViewCourse(){
                                 </div>}
                 </div>
 
-                <div className="CourseItems_SecondPart_Continues">
-                       
-                </div>
+               
 
             </div>
 
@@ -168,5 +284,6 @@ export function InstructorViewCourse(){
             <Footer text={"Excited to Learn more ? Unlock Premium Courses with Learn Pro "} buttonText={"Upgrade Now"}></Footer>
 
     </div>
-    )
+  )
 }
+

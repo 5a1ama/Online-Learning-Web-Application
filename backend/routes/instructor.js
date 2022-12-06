@@ -11,6 +11,7 @@ dotenv.config()
 router.get("/myCourses/:token",async function(req,res){
     // @ts-ignore
     // var user=jwt.verify(req.session.token,process.env.ACCESSTOKEN);
+    console.log(123)
     var token=req.params.token;
     var user=jwt.verify(token,process.env.ACCESSTOKEN)
     
@@ -124,7 +125,7 @@ router.get("/Courses-price-subject/:minprice/:maxprice/:subject",async function(
         }
     }
     console.log(final)
-    res.send(final);
+    res.json(final);
 
 
 })
@@ -157,14 +158,13 @@ router.get("/myCourses-search/:search/:token",async function(req,res){
 })
 router.post("/uploadCourseVideo", async function(req,res){
     var token=req.body.token;
-    var user=jwt.verify(token,process.env.ACCESSTOKEN);
     var courseid=req.body.courseID;
     var link=req.body.link; 
+    console.log(link)
     await Course.findOneAndUpdate({id:courseid},{previewVideo:link})
 })
 router.post("/uploadSubtitleVideo",async function(req,res){
     var token=req.body.token;
-    var user=jwt.verify(token,process.env.ACCESSTOKEN);
     var courseid=req.body.courseID;
     var link=req.body.link;
     var description=req.body.description;
@@ -172,12 +172,13 @@ router.post("/uploadSubtitleVideo",async function(req,res){
     var result=await Course.findOne({id:courseid}) ;
     var array=result.subtitles;
     for(var i=0;i<array.length;i++){
-        if(array[i].title==subtitle){
-            array[i].video=link;
+        if(array[i].title==subtitle.title){
+            array[i].video=[link];
             array[i].description=description;
         }
     }
     await Course.findOneAndUpdate({id:courseid},{subtitles:array});
+    res.json(array)
 })
 router.post("/coursePromotion",async function(req,res){
     var token=req.body.token;
@@ -194,6 +195,7 @@ router.get("/getInstructor/:token",async function(req,res){
     var id = user.id
 
     var query = await Instructor.findOne({id:id})
+    
     res.json(query)
 })
 router.post("/updateName/:name/:token",async function(req,res){

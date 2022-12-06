@@ -182,7 +182,7 @@
             left:0vh;
         }
 .CourseItems_DivForContinue_WorkSub{
-    /* transform: translateY(-10vh); */
+    transform: translate(30vh,20vh);
 }
 
 .CourseItems_SecondPart_View_Buttons button{
@@ -214,7 +214,7 @@
 
 .vl33 {
     border-bottom: 2px solid rgb(206, 206, 206);
-    width: 115vh;
+    width: 110vh;
     margin-left: 4vh;
     z-index:2;
     transform: translateX(-4vh);

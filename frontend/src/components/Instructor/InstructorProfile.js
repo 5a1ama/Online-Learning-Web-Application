@@ -88,12 +88,17 @@ export function InstructorProfile(){
     const navigate = useNavigate();
     const [showDiv,setShowDiv] =useState(false);
 
-    
+    const [countryNumber,setCountryNumber]=useState();
+    const handleCountryNumber = (x) =>{
+      setCountryNumber(x);
+    }
     intial()
     return(
       <div className='instructorProfileMaindiv'>
         <div>
-        <Navbar items={["Home","My Courses","Caleneder"]} select="Home" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
+        <Navbar items={["Home","My Courses","Caleneder"]}
+            handleCountryNumber={handleCountryNumber}
+        select="Home" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
         </div>
         <div className="instructorDetailsProfile">
         

@@ -20,17 +20,20 @@ const courseschema=new Schema({
         type:String
     },
     previewVideo:{
-        type:String
+        type:String,
+        default:""
     },
     hours:{
         type:Number,
         
     },
     rating:{
-        type:{value:Number,count:Number}
+        type:{value:Number,count:Number,sumSoFar:0},
+        default:{value:0,count:0,sumSoFar:0}
     },
     reviews:{
-        type:[String]
+        type:[String],
+        default:[]
     },
    
     price:{
@@ -48,16 +51,19 @@ const courseschema=new Schema({
         type:[{video:[String],lesson:String,description:String,title:String,hours:Number}]
     },
     excercises:{
-        type:[Number]
+        type:[Number],
+        default:[]
     },
     summary:{
         type:String
     },
     country:{
-        type:String
+        type:String,
+        default:""
     },
     discount:{
-        type:{amount:Number,duration:Number}
+        type:{amount:Number,duration:Number},
+        default:{amount:0,duration:0}
     }
 })
 const Course = mongoose.model('course', courseschema);

@@ -41,11 +41,14 @@ router.post("/verifyToken",function(req,res){
     if(token){
         try{
             const user=jwt.verify(token,process.env.ACCESSTOKEN);
+            //throw new Error("abc")
             res.json(user)
     
         }
         catch(err){
-            res.json("12")
+                throw new Error("aaa")
+            
+            
     
         }
     

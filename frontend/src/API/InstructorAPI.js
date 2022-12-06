@@ -43,12 +43,15 @@ export const FilterMyCourse=async(min,max,subject)=>{
     
 }
 export const getInstructorDetails= async()=>{
-    
-    var result = await fetch(`http://localhost:8000/instructor/getInstructor/${localStorage.getItem("token")}`)
+    if(localStorage.getItem("token")){
+        var result = await fetch(`http://localhost:8000/instructor/getInstructor/${localStorage.getItem("token")}`)
     var j=await result.json();
     
     return j;
-
+    }else{
+        return ""
+    }
+    
 }
 export const updateInstructorName=async(name)=>{
     var result=await fetch(`http://localhost:8000/instructor/updateName/${name}/${localStorage.getItem("token")}`,{method: "POST",
@@ -76,7 +79,7 @@ export const uploadCourseVideo=async(id,link)=>{
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     },
-    body: JSON.stringify({courseID:id,link:link})
+    body: JSON.stringify({courseID:id,link:link,token:localStorage.getItem("token")})
 })
 }
 export const uploadSubtitleVideo=async(id,link,subtitle,description)=>{
@@ -84,7 +87,7 @@ export const uploadSubtitleVideo=async(id,link,subtitle,description)=>{
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     },
-    body: JSON.stringify({courseID:id,link:link,subtitle:subtitle,description:description})
+    body: JSON.stringify({courseID:id,link:link,subtitle:subtitle,description:description,token:localStorage.getItem("token")})
 })
 }
 export const definePromotion=async(id,amount,duration)=>{
@@ -95,4 +98,57 @@ export const definePromotion=async(id,amount,duration)=>{
     body: JSON.stringify({courseID:id,amount:amount,duration:duration})
 })
 }
+export const addNewSubToCourse=async(courseid,subtitle,hours)=>{
+    const result=await fetch(`http://localhost:8000/course/addCourseSub/${subtitle}/${hours}/${courseid}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    },
+    body: JSON.stringify({courseID:courseid,subtitle:subtitle,hours:hours})
+    
+})
+    return await result.json()
+}
 
+export const deleteSubTitle=async (title,id)=>{
+    const result=await fetch(`http://localhost:8000/course/deleteSubtitle/${id}/${title}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }    
+})
+return await result.json()
+
+}
+export const updateSubtitle=async(id,oldtitle,title,hours,link,desc)=>{
+    var route=`http://localhost:8000/course/updateSubtitle/${id}/${oldtitle}`
+    if(title !=""){
+
+        route=route+`/${title}`
+    }else{
+        route=route+`/-1`
+    }
+    if(hours !=""){
+
+        route=route+`/${hours}`
+    }else{
+        route=route+`/-1`
+    }
+    if(link !=""){
+
+        route=route+`/${link}`
+    }else{
+        route=route+`/-1`
+    }
+    if(desc !=""){
+
+        route=route+`/${desc}`
+    }else{
+        route=route+`/-1`
+    }
+    const result=await fetch(route,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }    
+})
+ return await result.json()
+
+}
