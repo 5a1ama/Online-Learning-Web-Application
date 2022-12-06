@@ -7,7 +7,7 @@ import CoursesVid from "../../assets/Courses.mp4";
 import starImg from "../../assets/goldStar.png";
 import { NewCourse } from './NewCourse';
 export {default as Courses} from './Courses'
-
+  
 function Courses(props) {
   const navigate = useNavigate();
   const [courses,setCourses] = useState([]);
