@@ -16,7 +16,7 @@ import GiftTop2 from "../../assets/giftTop2.png"
 import { GetInstructorName } from './../../API/CourseAPI';
 import Footer from '../footer/Footer';
 import InstructorSubtitle from '.././courses/subtitles/InstructorSubtitle';
-import { uploadCourseVideo } from '../../API/InstructorAPI';
+import { deleteSubTitle, updateSubtitle, uploadCourseVideo } from '../../API/InstructorAPI';
 import { addNewSubToCourse, uploadSubtitleVideo } from '../../API/InstructorAPI';
 import {TextField} from "@mui/material";
 import "../courses/subtitles/Subtitle.css"
@@ -32,7 +32,15 @@ export function InstructorViewCourse() {
     const handleAddVidChange=(event)=>{
         setAddedVideoLink(event.target.value)
     }
-   
+    const handleDelete=async(title)=>{
+        const x=await deleteSubTitle(title,location.state.id)
+
+        getDetails();
+    }
+    const handleEdit=async(oldtitle,title,hours,link,desc)=>{
+        const x=await updateSubtitle(location.state.id,oldtitle,title,hours,link,desc)
+        getDetails();
+    }
     const handleVidDescChange=(event)=>{
         setVidDesc(event.target.value)
     }
@@ -230,7 +238,7 @@ const handleHours=(event)=>{
 
                                     <div ref={bottomRef} />
                                     {details[0]&&details[0].subtitles.map((sub,i)=>
-                                    <InstructorSubtitle handleSubmitVid={handleSubmitVid} handleAddVidChange={handleAddVidChange} handleVidDescChange={handleVidDescChange} update={setFirst} index={i}  sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i} SubTitleBack={location.state.SubtitleTitle} View="Syllabus" description={sub.description} ></InstructorSubtitle>
+                                    <InstructorSubtitle handleEdit={handleEdit} handleDelete={handleDelete} handleSubmitVid={handleSubmitVid} handleAddVidChange={handleAddVidChange} handleVidDescChange={handleVidDescChange} update={setFirst} index={i}  sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i} SubTitleBack={location.state.SubtitleTitle} View="Syllabus" description={sub.description} ></InstructorSubtitle>
                                     )}
                                     {!addSub && <div className='btnAddSub'>
                 <button onClick={()=>{setAddSub(true)}}>Add New Subtitle</button>
