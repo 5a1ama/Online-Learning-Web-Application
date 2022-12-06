@@ -44,7 +44,6 @@ function Navbar(props) {
     const [chosenCountry,setChosenCountry] = useState(selectedOption)
 
     const [token,setToken]=useState(localStorage.getItem("token"))
-    alert(token)
     var CountryNumber = 0;
 
     const handleChosenCountry = (x) => {
@@ -69,7 +68,7 @@ function Navbar(props) {
         else if(chosenCountry===GerFlag) CountryNumber = 4;
         
         props.handleCountryNumber(CountryNumber);
-        },[CountryNumber,chosenCountry,props]);
+        },[CountryNumber,chosenCountry,props,localStorage.getItem("token")]);
     
     const [settingMenu,setSettingMenu] = useState(false)
     const handleSettingMenu = () => setSettingMenu(!settingMenu);

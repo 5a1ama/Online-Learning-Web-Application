@@ -77,7 +77,7 @@ function Home(props) {
 
       const checkToken=async()=>{
         var x=verify(localStorage.getItem("token"))
-        x.catch(()=>{localStorage.setItem("token",null); localStorage.clear(); alert(localStorage.getItem("token"))
+        x.catch(()=>{localStorage.setItem("token",null); localStorage.clear(); //alert(localStorage.getItem("token"))
       })
     }
     const redirect=()=>{
@@ -93,7 +93,7 @@ function Home(props) {
     useEffect(()=>{
       checkToken()
       redirect()
-    },[]
+    },[localStorage.getItem("token")]
     )
 
   return <div className="Home">
