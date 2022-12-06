@@ -43,12 +43,15 @@ export const FilterMyCourse=async(min,max,subject)=>{
     
 }
 export const getInstructorDetails= async()=>{
-    
-    var result = await fetch(`http://localhost:8000/instructor/getInstructor/${localStorage.getItem("token")}`)
+    if(localStorage.getItem("token")){
+        var result = await fetch(`http://localhost:8000/instructor/getInstructor/${localStorage.getItem("token")}`)
     var j=await result.json();
     
     return j;
-
+    }else{
+        return ""
+    }
+    
 }
 export const updateInstructorName=async(name)=>{
     var result=await fetch(`http://localhost:8000/instructor/updateName/${name}/${localStorage.getItem("token")}`,{method: "POST",

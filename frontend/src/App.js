@@ -25,6 +25,7 @@ import { InstructorProfile } from './components/Instructor/InstructorProfile';
 import CourseVideo from './components/courses/CourseVideo';
 import { InstructorCourseVideo } from './components/Instructor/InstructorCourseVideo.js';
 import { InstructorViewCourse } from './components/Instructor/InstructorViewCourse';
+import { verify } from './API/LoginAPI';
 
 export default function App() {
   const navigate = useNavigate();
@@ -34,6 +35,8 @@ export default function App() {
   const handleCountryNumber = (x) =>{
     setCountryNumber(x);
   }
+  
+ 
 
   return (
     
@@ -74,22 +77,29 @@ export default function App() {
 }
 
 function Home(props) {
-    const navigate = useNavigate();
-    useEffect(()=>{
-      if(localStorage.getItem('token')){
-          if(localStorage.getItem('type')=='Instructor'){
-            navigate('/instructorHome');
-          }else if(localStorage.getItem('type')=='Trainee'){
-            navigate('/TraineeHome');
+  const navigate = useNavigate();
 
-          }
+      const checkToken=async()=>{
+        var x=verify(localStorage.getItem("token"))
+        x.catch(()=>{localStorage.setItem("token",null); localStorage.clear(); alert(localStorage.getItem("token"))
+      })
+    }
+    const redirect=()=>{
+      if(localStorage.getItem('token')){
+        if(localStorage.getItem('type')=='Instructor'){
+          navigate('/instructorHome');
+        }else if(localStorage.getItem('type')=='Trainee'){
+          navigate('/TraineeHome');
+
         }
+      }
+    }
+    useEffect(()=>{
+      checkToken()
+      redirect()
     },[]
     )
- 
 
-    
-    
   return <div className="Home">
     
     <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Home" nav={["","","","/signUp"]} scroll={["Home","Courses","WhatHegza"]} handleCountryNumber={props.handleCountryNumber}   />

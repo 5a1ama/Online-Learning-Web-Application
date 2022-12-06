@@ -1,16 +1,30 @@
 .editbtn{
     position: relative;
     height: 2.5vw;
-    left:90%;
+    left:96%;
     top:-5vw;
+    background-color: transparent;
+    color:rgba(30,30,30);
 }
+.editbtn:hover{
+    background-color: transparent;
+    color:rgb(131, 131, 131);
+
+} 
+
 .delbtn{
     position: relative;
     height: 2.5vw;
-    left:93%;
+    left:97%;
     top:-5vw;
-
+    background-color: transparent;
+    color:rgb(228, 0, 0);
 }
+.delbtn:hover{
+    background-color:    transparent;
+    color:rgb(255, 0, 0);
+
+} 
 .EditSubDiv{
     display: flex;
   flex-direction: column;

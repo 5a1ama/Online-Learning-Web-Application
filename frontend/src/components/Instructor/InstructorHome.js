@@ -20,20 +20,20 @@ import AddIcon from '@mui/icons-material/Add';
 
 
 export function InstructorHome(){
-    
+    const navigate=useNavigate();
     const [instructor,setinstructor]=useState()
     const intial = async()=>{
         setinstructor(await getInstructorDetails())
-
-
+    }
+    intial();
+    if(instructor==""){
+      navigate("/")
     }
     useEffect(()=>{
+       // intial();
 
-      intial();
-    })
-        
-
-    const navigate = useNavigate();
+    
+    })   
     
     const [countryNumber,setCountryNumber]=useState();
     const handleCountryNumber = (x) =>{

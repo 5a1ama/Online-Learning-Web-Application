@@ -176,6 +176,7 @@ function CourseItems() {
                                             <h4>
                                             {details[0]&&details[0].summary}
                                             </h4>
+                                            
                                         <iframe  src={details[0]&&details[0].previewVideo} className="CourseItems_SecondPart_View_OverView_video" 
                                         title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowfullscreen></iframe> 

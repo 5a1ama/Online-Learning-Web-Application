@@ -1,6 +1,5 @@
 import React,{useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom';
-import { withCookies, Cookies } from 'react-cookie'
 import {BiDownArrow, BiLogOutCircle, BiSearch} from 'react-icons/bi'
 import {BsPerson} from 'react-icons/bs'
 
@@ -44,7 +43,8 @@ function Navbar(props) {
 
     const [chosenCountry,setChosenCountry] = useState(selectedOption)
 
-    
+    const [token,setToken]=useState(localStorage.getItem("token"))
+    alert(token)
     var CountryNumber = 0;
 
     const handleChosenCountry = (x) => {
@@ -61,6 +61,7 @@ function Navbar(props) {
     }
 
     useEffect(()=>{
+        setToken(localStorage.getItem("token"))
         if     (chosenCountry===EgyFlag) CountryNumber = 0;
         else if(chosenCountry===UsaFlag) CountryNumber = 1;
         else if(chosenCountry===UaeFlag) CountryNumber = 2;
@@ -124,7 +125,7 @@ function Navbar(props) {
             </div>
             <BiSearch className="icon" onClick={ ()=>{handleAll();handleSearchBar()}} style={{marginRight: '1rem'}}/>
             
-            {localStorage.getItem("token")===null ? 
+            {token===null ? 
             (<BsPerson className="icon" onClick={()=> navigate('/login')} style={{marginRight: '1rem'}}  /> )
             :
             (<AiOutlineMenu className="icon" onClick={()=>{handleAll();handleSettingMenu()}} style={settingMenu?{color:"rgb(10,138,218)",borderRadius:"5px",zIndex:"1"}:{color:"fff"}}/>)}

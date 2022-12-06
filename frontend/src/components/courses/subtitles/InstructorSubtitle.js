@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react'
-import { BsBook } from 'react-icons/bs';
+import { BsBook, BsTranslate, BsTrash } from 'react-icons/bs';
 import { IoIosArrowDown, IoIosPaper } from 'react-icons/io'
 import{MdSecurityUpdate, MdSlowMotionVideo}  from 'react-icons/md'
 import { Navigate, useNavigate } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { addNewSubToCourse, uploadSubtitleVideo } from '../../../API/InstructorA
 import {TextField} from "@mui/material";
 import "./Subtitle.css"
 import "./InstructorSubtitle.css"
+import { BiEdit } from 'react-icons/bi';
 function InstructorSubtitle(props) {
     const navigate = useNavigate();
     const[update,setUpdate]=useState(props.sub.video[0])
@@ -126,8 +127,9 @@ function InstructorSubtitle(props) {
      <div> <button onClick={()=> {setEdit(false); props.handleEdit(props.sub.title,newTitle,newHours,newVideoLink,newDescription)}} style={{backgroundColor:"green"}}>Confirm</button> <button onClick={()=>setEdit(false)} style={{backgroundColor:"red"}}>Cancel</button></div>
 
                 </div>} 
-            <button onClick={()=>setEdit(true)} className='editbtn'>edit</button>
-                <button className='delbtn' onClick={()=>props.handleDelete(props.sub.title)}>delete</button>
+
+            <button onClick={()=>setEdit(true)} className='editbtn'><BiEdit size='30' ></BiEdit></button>
+                <button className='delbtn' onClick={()=>props.handleDelete(props.sub.title)}><BsTrash size='30'></BsTrash></button>
         </div>
                              )
 }
