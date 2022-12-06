@@ -38,6 +38,7 @@ export function InstructorViewCourse() {
         getDetails();
     }
     const handleEdit=async(oldtitle,title,hours,link,desc)=>{
+        
         const x=await updateSubtitle(location.state.id,oldtitle,title,hours,link,desc)
         getDetails();
     }

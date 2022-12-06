@@ -188,6 +188,7 @@ router.post("/updateSubtitle/:id/:oldtitle/:title/:hours/:link/:desc",async func
     var course=await Course.findOne({id:id})
     var subtitles=course.subtitles
     var finalSub=[];
+    console.log(link)
     for(var i=0;i<subtitles.length;i++){
         if(subtitles[i].title != oldtitle){
             finalSub=finalSub.concat([subtitles[i]])
