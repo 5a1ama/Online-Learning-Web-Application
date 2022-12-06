@@ -122,6 +122,7 @@ function Navbar(props) {
                 style={{borderRadius:'5px',marginRight:'0.5rem',cursor:'pointer'}} ></img>
                 <BiDownArrow className="icon" style={{marginRight: '1rem'}} onClick={()=>{handleAll();handleCountryBar()}}></BiDownArrow>
             </div>
+            
             <BiSearch className="icon" onClick={ ()=>{handleAll();handleSearchBar()}} style={{marginRight: '1rem'}}/>
             
             {localStorage.getItem("token")===null ? 
