@@ -51,10 +51,7 @@ export default function App() {
           <Route path="/CourseItems" element={<CourseItems/>}/>
           <Route path="/instructorHome" element={<InstructorHome/>}/> 
           <Route path="/instructorReviews" element={<InstructorReviews/>}/>
-          <Route path="/InstructorViewCourse" element={<InstructorViewCourse/>}/>
-
-          
-     
+          <Route path="/InstructorViewCourse" element={<InstructorViewCourse/>}/>     
           <Route path="/CourseItems" element={<CourseItems/>}/>         
            <Route path="/Coursevideo" element={<CourseVideo/>}/>
 
