@@ -56,12 +56,8 @@ export default function App() {
           <Route path="/CourseItems" element={<CourseItems handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/instructorHome" element={<InstructorHome handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/> 
           <Route path="/instructorReviews" element={<InstructorReviews handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
-
-          
-     
           <Route path="/CourseItems" element={<CourseItems handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>         
            <Route path="/Coursevideo" element={<CourseVideo handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
-
           <Route path="/resetPass" element={<ResetPass handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/instructorProfile" element={<InstructorProfile handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path='/instructorViewCourse' element={<InstructorViewCourse handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
