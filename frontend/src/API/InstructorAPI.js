@@ -59,6 +59,7 @@ export const updateInstructorName=async(name)=>{
         "Content-type": "application/json; charset=UTF-8"
     }
     })
+    return await result.json()
 }
 export const updateInstructorEmail=async(name)=>{
     var result=await fetch(`http://localhost:8000/instructor/updateEmail/${name}/${localStorage.getItem("token")}`,{method: "POST",
@@ -66,13 +67,24 @@ export const updateInstructorEmail=async(name)=>{
         "Content-type": "application/json; charset=UTF-8"
     }
     })
+    return await result.json()
+}
+export const updateInstructorPass=async(oldPass,pass)=>{
+    var result=await fetch(`http://localhost:8000/instructor/updatePass2/${oldPass}/${pass}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    return await result.json()
 }
 export const updateInstructorSpec=async(name)=>{
     var result=await fetch(`http://localhost:8000/instructor/updateSpec/${name}/${localStorage.getItem("token")}`,{method: "POST",
     headers: {
         "Content-type": "application/json; charset=UTF-8"
+
     }
     })
+    return await result.json()
 }
 export const uploadCourseVideo=async(id,link)=>{
     const result=await fetch(`http://localhost:8000/instructor/uploadCourseVideo`,{method: "POST",

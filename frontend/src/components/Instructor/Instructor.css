@@ -47,11 +47,23 @@
    flex-grow: 1 1 0;
    row-gap: 5%;
 }
-.editIconClick{
+.AccountIconClick{
     position: relative;
     cursor: pointer;
-    top:-80% ;
+    top: -50% ;
+    left: -1vw;
+    
+}
+.AccountCircleButton{
+    position: relative;
+    top:-90% ;
     left: 43%;
+    height: 10%;
+    width: 5%;
+    background:transparent;
+}
+.AccountCircleButton:hover{
+    background: transparent;
 }
 .avatar{
     margin-top: 5%;

@@ -6,6 +6,7 @@ const User=require("../Models/User")
 const jwt=require("jsonwebtoken")
 const dotenv=require("dotenv");
 const Instructor = require("../Models/Instructor");
+var Trainee=require("../Models/Trainee")
 dotenv.config()
 
 router.get("/myCourses/:token",async function(req,res){
@@ -199,14 +200,41 @@ router.get("/getInstructor/:token",async function(req,res){
     
     res.json(query)
 })
+router.post("/updatePass2/:oldPass/:pass/:token",async function(req,res){
+    var token=req.params.token;
+
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var id=user.id;
+    var result=await User.find({id:id ,Password:req.params.oldPass});
+    if(result.length==0){
+        res.json("error")
+
+    }
+    else{
+        await User.findOneAndUpdate({id:id},{Password:req.params.pass});
+        console.log(id  )
+        if(result.Job=="Instructor"){
+         await Instructor.findOneAndUpdate({id:id},{Password:req.params.pass})
+    
+        }else if(result.Job=="Trainee"){
+         await Trainee.findOneAndUpdate({id:id},{Password:req.params.pass})
+     
+        }
+        res.json("ok")
+
+    }
+ 
+})
 router.post("/updateName/:name/:token",async function(req,res){
     var token=req.params.token;
     var user=jwt.verify(token,process.env.ACCESSTOKEN);
     var id=user.id;
     
     var newname=req.params.name;
+    console.log(newname)
     await Instructor.findOneAndUpdate({id:id},{Name:newname});
     await User.findOneAndUpdate({id:id},{Name:newname});
+    res.json("ok")
 })
 router.post("/updateEmail/:name/:token",async function(req,res){
     var token=req.params.token;
@@ -215,6 +243,7 @@ router.post("/updateEmail/:name/:token",async function(req,res){
     var newname=req.params.name;
     await Instructor.findOneAndUpdate({id:id},{Email:newname});
     await User.findOneAndUpdate({id:id},{Email:newname});
+    res.json("ok")
 })
 router.post("/updateSpec/:name/:token",async function(req,res){
     var token=req.params.token;
@@ -223,5 +252,8 @@ router.post("/updateSpec/:name/:token",async function(req,res){
     var newname=req.params.name;
     await Instructor.findOneAndUpdate({id:id},{specialization:newname});
     await User.findOneAndUpdate({id:id},{specialization:newname});
+    res.json("ok")
+
 })
+
 module.exports=router
