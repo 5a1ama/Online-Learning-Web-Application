@@ -44,7 +44,7 @@ function Navbar(props) {
     const [chosenCountry,setChosenCountry] = useState(selectedOption)
 
     const [token,setToken]=useState(localStorage.getItem("token"))
-    alert(token)
+    // alert(token)
     var CountryNumber = 0;
 
     const handleChosenCountry = (x) => {
