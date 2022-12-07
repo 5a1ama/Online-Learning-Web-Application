@@ -236,6 +236,7 @@ const handleHours=(event)=>{
 
                                 {view==="Reviews" && 
                                 <div>
+                                    
                                     {/* {details[0].discount.amount && <div>
                                     <img alt="." className="Course_Gift" src={Gift} />
                                     <div className="Course_giftText">
@@ -244,6 +245,8 @@ const handleHours=(event)=>{
                                         </div>
                                     <img onClick={handleGift} className={gift?"Course_GiftTop2":"Course_GiftTop"} alt="." src={GiftTop} />
                                         </div>} */}
+
+
                                                 
                                 </div>}
                 </div>
