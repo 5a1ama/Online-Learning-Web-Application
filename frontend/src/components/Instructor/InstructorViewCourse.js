@@ -314,17 +314,14 @@ const handleHours=(event)=>{
 
 
                                 {view==="Reviews" && 
-                                <div>
- 
-                                        <h1>
-                                            Reviews:
-                                        </h1>
-                                        <div className="reviewsCourseDiv">
+                                <div className='InstructorCourseReviewsBig'>
+                                        
+                                        {details && details.length>0 && details[0].reviews.map((review)=><div className="reviewsCourseDiv">
                                          <Avatar sx={{backgroundColor:"#58a5f0"}} className="reviewCourseAvatar"/>
                                         <FormatQuoteIcon className="reviewCourseComment"/>
-                                         <textarea readOnly className="reviewCourseComment">{"good course"}</textarea>
+                                         <textarea readOnly className="reviewCourseComment">{review}</textarea>
                         
-                                 </div>
+                                        </div>)}
                                  
                                         
 

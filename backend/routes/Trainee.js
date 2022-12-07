@@ -6,6 +6,9 @@ const jwt=require("jsonwebtoken")
 const dotenv=require("dotenv");
 const Trainee = require("../Models/Trainee");
 const Excercise=require("../Models/Excercise")
+const Rating=require("../Models/Rating");
+const { use } = require("./commonRoutes");
+const Instructor = require("../Models/Instructor");
 dotenv.config()
 
 router.get("/TraineeMyCourse/:Token",async function(req,res){
@@ -118,5 +121,81 @@ router.get("/searchMyCourse/:search/:token",async function(req,res){
     res.json(final2)
 
 })
+router.post("/updatePass2/:oldPass/:pass/:token",async function(req,res){
+    var token=req.params.token;
 
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var id=user.id;
+    var result=await User.find({id:id ,Password:req.params.oldPass});
+    if(result.length==0){
+        res.json("error")
+
+    }
+    else{
+        await User.findOneAndUpdate({id:id},{Password:req.params.pass});
+        console.log(id  )
+        if(result.Job=="Instructor"){
+         await Instructor.findOneAndUpdate({id:id},{Password:req.params.pass})
+    
+        }else if(result.Job=="Trainee"){
+         await Trainee.findOneAndUpdate({id:id},{Password:req.params.pass})
+     
+        }
+        res.json("ok")
+
+    }
+ 
+})
+router.post("/rateCourse/:rate/:id/:token",async function(req,res){
+    var rate=req.params.rate;
+    var courseId=req.params.id
+    var token=req.params.token
+    var user=jwt.verify(token,process.env.ACCESSTOKEN)
+    var ratings=await Rating.find({idRater:user.id,idRated:courseId});
+    if(ratings.length==0){
+        var allrate=await Rating.find({})
+        var c=allrate.length
+        var object=new Rating({id:c+1,idRated:courseId,idRater:user.id,value:rate})
+        object.save(function(err,result){
+
+        })
+    }else{
+        await Rating.findOneAndUpdate({idRated:courseId,idRater:user.id},{value:rate})
+    }
+    var ratingsofCourse= await Rating.find({idRated:courseId})
+    var count=ratingsofCourse.length;
+    var sum=0;
+    for(var i=0;i<ratingsofCourse.length;i++){
+        sum+=ratingsofCourse[i].value
+    }
+    await Course.findOneAndUpdate({id:courseId},{rating:{value:sum/count,count:count,sumSoFar:sum}})
+    res.json("ok")
+
+})
+router.post("/rateInstructor/:rate/:id/:token",async function(req,res){
+    var rate=req.params.rate;
+    var instId=req.params.id
+    var token=req.params.token
+    var user=jwt.verify(token,process.env.ACCESSTOKEN)
+    var ratings=await Rating.find({idRater:user.id,idRated:instId});
+    if(ratings.length==0){
+        var allrate=await Rating.find({})
+        var c=allrate.length
+        var object=new Rating({id:c+1,idRated:instId,idRater:user.id,value:rate})
+        object.save(function(err,result){
+
+        })
+    }else{
+        await Rating.findOneAndUpdate({idRated:instId,idRater:user.id},{value:rate})
+    }
+    var ratingsofInstructor= await Rating.find({idRated:instId})
+    var count=ratingsofInstructor.length;
+    var sum=0;
+    for(var i=0;i<ratingsofInstructor.length;i++){
+        sum+=ratingsofInstructor[i].value
+    }
+    await Instructor.findOneAndUpdate({id:instId},{rating:{value:sum/count,count:count,sumSoFar:sum}})
+    res.json("ok")
+
+})
 module.exports = router

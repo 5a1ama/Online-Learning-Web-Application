@@ -59,3 +59,11 @@
       left: 3%;
       top: 30%;
   }
+  .InstructorCourseReviewsBig{
+    display:flex;
+    flex-direction: row;
+    column-gap: 0.7vw;
+    row-gap: 0.7vw;
+    width:80%;
+    flex-wrap: wrap;
+  }

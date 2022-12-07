@@ -40,6 +40,8 @@ export const updateTraineeName=async(name)=>{
         "Content-type": "application/json; charset=UTF-8"
     }
     })
+    return await result.json();
+
 }
 export const updateTraineeEmail=async(name)=>{
     var result=await fetch(`http://localhost:8000/trainee/updateEmail/${name}/${localStorage.getItem("token")}`,{method: "POST",
@@ -47,4 +49,14 @@ export const updateTraineeEmail=async(name)=>{
         "Content-type": "application/json; charset=UTF-8"
     }
     })
+    return await result.json();
+}
+
+export const updateTraineePass=async(oldPass,pass)=>{
+    var result=await fetch(`http://localhost:8000/trainee/updatePass2/${oldPass}/${pass}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    return await result.json()
 }
