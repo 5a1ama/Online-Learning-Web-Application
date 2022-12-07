@@ -60,3 +60,11 @@ export const updateTraineePass=async(oldPass,pass)=>{
     })
     return await result.json()
 }
+export const rateInstructor=async(instId,rate)=>{
+    var result=await fetch(`http://localhost:8000/trainee/rateInstructor/${rate}/${instId}/${localStorage.getItem("token")}`)
+    return await result.json();
+}
+export const rateCourse=async(courseId,rate)=>{
+    var result=await fetch(`http://localhost:8000/trainee/rateCourse/${rate}/${courseId}/${localStorage.getItem("token")}`)
+    return await result.json();
+}
