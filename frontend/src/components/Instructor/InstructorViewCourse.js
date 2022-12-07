@@ -12,11 +12,14 @@ import "./InstructorViewCourse.css"
 import Gift from "../../assets/gift.png"
 import GiftTop from "../../assets/giftTop.png"
 import GiftTop2 from "../../assets/giftTop2.png"
+import { Avatar } from "@mui/material";
+import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
+
 
 import { GetInstructorName } from './../../API/CourseAPI';
 import Footer from '../footer/Footer';
 import InstructorSubtitle from '.././courses/subtitles/InstructorSubtitle';
-import { deleteSubTitle, updateSubtitle, uploadCourseVideo } from '../../API/InstructorAPI';
+import { definePromotion, deleteSubTitle, updateSubtitle, uploadCourseVideo } from '../../API/InstructorAPI';
 import { addNewSubToCourse, uploadSubtitleVideo } from '../../API/InstructorAPI';
 import {TextField} from "@mui/material";
 import "../courses/subtitles/Subtitle.css"
@@ -27,8 +30,22 @@ export function InstructorViewCourse() {
     const[addSub,setAddSub]=useState(false)
     const [hours,setHours]=useState("")
     const location=useLocation();
+    const [addDiscount,setAddDiscount]=useState(false)
     const [addedVideoLink,setAddedVideoLink]=useState("");
     const [vidDescription,setVidDesc]=useState("");
+    const [discountamount,setDiscountAmount]=useState("");
+    const handleDiscountAmount=(event)=>{
+        setDiscountAmount(event.target.value)
+    }
+    const [duration,setDuration]=useState("")
+    const handleDuration=(event)=>{
+        setDuration(event.target.value)
+    }
+    const handleAddDiscount=async()=>{
+        const x=await definePromotion(location.state.id,discountamount,duration)
+        setAddDiscount(false)
+        getDetails();
+    }
     const handleAddVidChange=(event)=>{
         setAddedVideoLink(event.target.value)
     }
@@ -38,6 +55,7 @@ export function InstructorViewCourse() {
         getDetails();
     }
     const handleEdit=async(oldtitle,title,hours,link,desc)=>{
+        
         const x=await updateSubtitle(location.state.id,oldtitle,title,hours,link,desc)
         getDetails();
     }
@@ -160,6 +178,25 @@ const handleHours=(event)=>{
         
 
         handleInstNames();
+        const [reviews,setreviews] = useState([])
+    useEffect(()=>{
+        setreviews(location.state)
+
+    })
+
+        const ReviewCourseDiv = (props )=>{
+            return(
+                <div className="reviewsCourseDiv">
+                    <Avatar sx={{backgroundColor:"#58a5f0"}} className="reviewCourseAvatar"/>
+                    <FormatQuoteIcon className="reviewCourseComment"/>
+                    <textarea readOnly className="reviewCourseComment">{props.title}</textarea>
+                        
+                    
+    
+                </div>
+            )
+        }
+        
         
   return (
     
@@ -228,7 +265,21 @@ const handleHours=(event)=>{
                                         </div>}
                                         
                                         </div>) }
-
+                                        {addDiscount && <div style={{position:"relative",left:"110%",top:"-25vw", width:"30%",display: "flex",flexDirection: "column",rowGap: "0.5vw"}}>
+                                        <TextField id = {"sub"+0}  className="textSub1-Subtitle" onChange={handleDiscountAmount} 
+     label="Discount Amount" 
+     color="primary" 
+     variant="filled"
+     />
+     <TextField id = {"sub"+0}  className="textSub1-Subtitle" onChange={handleDuration} 
+     label="Duration" 
+     color="primary" 
+     variant="filled"
+     />
+                                        <button onClick={handleAddDiscount} style={{backgroundColor:"green"}}>Confirm</button>
+                                        <button style={{backgroundColor:"red"}} onClick={()=>setAddDiscount(false)}>Cancel</button>
+                                            </div>} 
+                                        {!addDiscount && (details && details.length>0 && (!details[0].discount || details[0].discount.amount==0)) && <button style={{width:"20vw",position:"relative",left:"100%",top:"-25vw"}} className='discountbtnIVC' onClick={()=>setAddDiscount(true)}>Add Discount</button>}
                                     </div>}
 
                                 {view=="Syllabus" && 
@@ -264,6 +315,19 @@ const handleHours=(event)=>{
 
                                 {view==="Reviews" && 
                                 <div>
+ 
+                                        <h1>
+                                            Reviews:
+                                        </h1>
+                                        <div className="reviewsCourseDiv">
+                                         <Avatar sx={{backgroundColor:"#58a5f0"}} className="reviewCourseAvatar"/>
+                                        <FormatQuoteIcon className="reviewCourseComment"/>
+                                         <textarea readOnly className="reviewCourseComment">{"good course"}</textarea>
+                        
+                                 </div>
+                                 
+                                        
+
                                     {/* {details[0].discount.amount && <div>
                                     <img alt="." className="Course_Gift" src={Gift} />
                                     <div className="Course_giftText">
@@ -272,6 +336,8 @@ const handleHours=(event)=>{
                                         </div>
                                     <img onClick={handleGift} className={gift?"Course_GiftTop2":"Course_GiftTop"} alt="." src={GiftTop} />
                                         </div>} */}
+
+
                                                 
                                 </div>}
                 </div>

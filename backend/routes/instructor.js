@@ -189,6 +189,7 @@ router.post("/coursePromotion",async function(req,res){
     var duration=req.body.duration;
     await Course.findOneAndUpdate({id:courseid},{discount:{amount:amount,duration:duration
     }})
+    res.json("ok")
 })
 router.get("/getInstructor/:token",async function(req,res){
     var token=req.params.token;

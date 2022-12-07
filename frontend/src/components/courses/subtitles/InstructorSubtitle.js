@@ -20,6 +20,9 @@ function InstructorSubtitle(props) {
     const [newHours,setNewHours]=useState("");
     const [newVideoLink,setNewVideo]=useState("");
     const [newDescription,setDescription]=useState("")
+    const handleEdit=(event)=>{
+        setEdit(true);
+    }
     const handleNewTitle=(event)=>{
         setNewTitle(event.target.value);
     }
@@ -103,7 +106,7 @@ function InstructorSubtitle(props) {
                 </div>
                 </div>
             </div> 
-             {edit && <div className='EditSubDiv'>
+            {edit && <div className='EditSubDiv'>
             <TextField id = {"sub"+0}  className="textSub1-Subtitle" onChange={handleNewTitle} 
      label="New Course Subtitle" 
      color="primary" 
@@ -124,12 +127,11 @@ function InstructorSubtitle(props) {
      color="primary" 
      variant="filled"
      />
-     <div> <button onClick={()=> {setEdit(false); props.handleEdit(props.sub.title,newTitle,newHours,newVideoLink,newDescription)}} style={{backgroundColor:"green"}}>Confirm</button> <button onClick={()=>setEdit(false)} style={{backgroundColor:"red"}}>Cancel</button></div>
+     <div> <button onClick={()=> {  props.handleEdit(props.sub.title,newTitle,newHours,newVideoLink,newDescription); setEdit(false); }} style={{backgroundColor:"green"}}>Confirm</button> <button onClick={()=>setEdit(false)} style={{backgroundColor:"red"}}>Cancel</button></div>
 
                 </div>} 
-
-            <button onClick={()=>setEdit(true)} className='editbtn'><BiEdit size='30' ></BiEdit></button>
-                <button className='delbtn' onClick={()=>props.handleDelete(props.sub.title)}><BsTrash size='30'></BsTrash></button>
+            {!edit && <button onClick={handleEdit} className='editbtn'><BiEdit size='30' ></BiEdit></button>}
+            {!edit && <button className='delbtn' onClick={()=>props.handleDelete(props.sub.title)}><BsTrash size='30'></BsTrash></button>}
         </div>
                              )
 }

@@ -187,6 +187,7 @@
 
 .CourseItems_SecondPart_View_Buttons button{
     background-color: transparent ;
+    
     border-radius: 0px;
     width:20vh;
     font-size: 20px;

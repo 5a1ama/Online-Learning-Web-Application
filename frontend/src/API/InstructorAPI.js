@@ -107,8 +107,9 @@ export const definePromotion=async(id,amount,duration)=>{
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     },
-    body: JSON.stringify({courseID:id,amount:amount,duration:duration})
+    body: JSON.stringify({courseID:id,amount:amount,duration:duration,token:localStorage.getItem("token")})
 })
+return await result.json()
 }
 export const addNewSubToCourse=async(courseid,subtitle,hours)=>{
     const result=await fetch(`http://localhost:8000/course/addCourseSub/${subtitle}/${hours}/${courseid}`,{method: "POST",
@@ -132,6 +133,7 @@ return await result.json()
 }
 export const updateSubtitle=async(id,oldtitle,title,hours,link,desc)=>{
     var route=`http://localhost:8000/course/updateSubtitle/${id}/${oldtitle}`
+    
     if(title !=""){
 
         route=route+`/${title}`
