@@ -2,7 +2,7 @@ import {Component, React,useEffect,useRef,useState} from 'react'
 import video from '../../assets/ItemsBack.mov';
 import Navbar from './../navbar/Navbar';
 import {  getCourseDetails, isEnrolled } from './../../API/CourseAPI';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import './CourseItems.css';
 import ProgressImg from "../../assets/Progress100.png"
 import Progress from './Progress';
@@ -16,11 +16,14 @@ import GiftTop2 from "../../assets/giftTop2.png"
 import { GetInstructorName } from './../../API/CourseAPI';
 import Footer from '../footer/Footer';
 import Subtitle from './subtitles/Subtitle';
+import Rating from '@mui/material/Rating';
+import { alertClasses } from '@mui/material';
 
 
 function CourseItems() {
     const [first,setFirst] = useState(0);
     const location=useLocation();
+    const navigate = useNavigate();
    
 
 
@@ -33,6 +36,10 @@ function CourseItems() {
     const handleGift =() =>{setGift(!gift)};
 
     const [view , setView] = useState("");
+    const [traineeRate,setTraineeRate] = useState("")
+    const handleChangeRate = (event , newValue)=>{
+        setTraineeRate(newValue)
+    }
     const handleView = (view) => {
         setView(view);
     }
@@ -126,9 +133,9 @@ function CourseItems() {
                 <div className="CourseItems_Content_Stars">
                     
                     <div className="CourseItems_InstNames">
-                        {instNames[0]&&instNames.slice(0,3).map( (name)=>
+                        {instNames[0]&&instNames.slice(0,3).map( (name,i)=>
                             <div style={{display:"flex" ,flexDirection:"row",width:"90vh" ,padding:".5rem"}}>
-                                <a href="/InstructorProfile" style={{display:"flex" ,flexDirection:"row"}} >
+                                <a onClick={()=>navigate("/TraineeVieWInstructor",{state:details[0].instructors[i]})} style={{display:"flex" ,flexDirection:"row"}} >
                                     <img alt="." src={InstImg} style={{width:"40px",height:"40px" ,transform:"translate(0px,3px)"}}></img> 
                                     <h3>{name}</h3>
                                 </a>                
@@ -156,6 +163,15 @@ function CourseItems() {
                     <img alt="." src={ProgressImg} style={{width:"10%"}}></img>
                 </div>
              }
+             <div className='TraineeCourseRating'>
+             <label >
+                Your Rating:
+             </label>
+             <Rating 
+             name="half-rating" 
+             defaultValue={2.5} precision={0.5}
+             onChange={handleChangeRate} />
+             </div>
             </div>
             
             {/* Second Part */                                                                  }
