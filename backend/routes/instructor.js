@@ -9,6 +9,12 @@ const Instructor = require("../Models/Instructor");
 var Trainee=require("../Models/Trainee")
 dotenv.config()
 
+router.get("/getinstructorTraineeDetails/:id",async function(req,res){
+
+    var query = await Instructor.findOne({id:req.params.id})
+    res.json(query)
+})
+
 router.get("/myCourses/:token",async function(req,res){
     // @ts-ignore
     // var user=jwt.verify(req.session.token,process.env.ACCESSTOKEN);
