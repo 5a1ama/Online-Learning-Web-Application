@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import { useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
 import {BiDownArrow} from 'react-icons/bi';
 import starImg from "../../assets/goldStar.png"
@@ -9,8 +10,16 @@ export function NewCourse(props) {
     
     const [courseDetails,setcourseDetails] = useState(false)
     const handleCourseDetails = () => setcourseDetails(!courseDetails)
+    const [chosenCountry,setChosenCountry] = useState(0);
 
-    
+    useEffect(()=>{
+      setChosenCountry(props.country);
+      
+    },[props.country]);
+
+    const fares = [26,1,3.67,0.81,0.95];
+    const currency = ['LE','$','UAE','£','€'];
+
     const stars = (starNumber) => {
         var array=[];
         for(var i=0;i<starNumber;i++){
@@ -28,9 +37,10 @@ export function NewCourse(props) {
           <div className="newCourse_title">
               <h3 >{props.course.title}</h3>
           </div>
+          
                 <div className="NewCourse_Prices">
-                  <h2 className='NewCourse_price'>{props.course.price}$</h2>
-                  <h2 className='NewCourse_price2'>   {props.course.discount.amount}%</h2>
+                  <h2 className='NewCourse_price'>{  Math.floor(props.course.price*fares[chosenCountry])} {currency[chosenCountry]}</h2>
+                  <h2 className='NewCourse_price2'>   {props.course.discount.amount} %</h2>
                 </div>
           
               <div className="NewCourse_StarsHoursPrice">

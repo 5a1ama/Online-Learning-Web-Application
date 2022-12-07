@@ -11,6 +11,7 @@ dotenv.config()
 router.get("/myCourses/:token",async function(req,res){
     // @ts-ignore
     // var user=jwt.verify(req.session.token,process.env.ACCESSTOKEN);
+    console.log(123)
     var token=req.params.token;
     var user=jwt.verify(token,process.env.ACCESSTOKEN)
     
@@ -124,7 +125,7 @@ router.get("/Courses-price-subject/:minprice/:maxprice/:subject",async function(
         }
     }
     console.log(final)
-    res.send(final);
+    res.json(final);
 
 
 })
@@ -187,6 +188,7 @@ router.post("/coursePromotion",async function(req,res){
     var duration=req.body.duration;
     await Course.findOneAndUpdate({id:courseid},{discount:{amount:amount,duration:duration
     }})
+    res.json("ok")
 })
 router.get("/getInstructor/:token",async function(req,res){
     var token=req.params.token;
@@ -194,6 +196,7 @@ router.get("/getInstructor/:token",async function(req,res){
     var id = user.id
 
     var query = await Instructor.findOne({id:id})
+    
     res.json(query)
 })
 router.post("/updateName/:name/:token",async function(req,res){

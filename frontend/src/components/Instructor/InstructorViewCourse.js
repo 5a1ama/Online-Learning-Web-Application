@@ -18,8 +18,8 @@ import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 
 import { GetInstructorName } from './../../API/CourseAPI';
 import Footer from '../footer/Footer';
-import Subtitle from '.././courses/subtitles/Subtitle';
-import { uploadCourseVideo } from '../../API/InstructorAPI';
+import InstructorSubtitle from '.././courses/subtitles/InstructorSubtitle';
+import { definePromotion, deleteSubTitle, updateSubtitle, uploadCourseVideo } from '../../API/InstructorAPI';
 import { addNewSubToCourse, uploadSubtitleVideo } from '../../API/InstructorAPI';
 import {TextField} from "@mui/material";
 import "../courses/subtitles/Subtitle.css"
@@ -30,6 +30,39 @@ export function InstructorViewCourse() {
     const[addSub,setAddSub]=useState(false)
     const [hours,setHours]=useState("")
     const location=useLocation();
+    const [addDiscount,setAddDiscount]=useState(false)
+    const [addedVideoLink,setAddedVideoLink]=useState("");
+    const [vidDescription,setVidDesc]=useState("");
+    const [discountamount,setDiscountAmount]=useState("");
+    const handleDiscountAmount=(event)=>{
+        setDiscountAmount(event.target.value)
+    }
+    const [duration,setDuration]=useState("")
+    const handleDuration=(event)=>{
+        setDuration(event.target.value)
+    }
+    const handleAddDiscount=async()=>{
+        const x=await definePromotion(location.state.id,discountamount,duration)
+        setAddDiscount(false)
+        getDetails();
+    }
+    const handleAddVidChange=(event)=>{
+        setAddedVideoLink(event.target.value)
+    }
+    const handleDelete=async(title)=>{
+        const x=await deleteSubTitle(title,location.state.id)
+
+        getDetails();
+    }
+    const handleEdit=async(oldtitle,title,hours,link,desc)=>{
+        
+        const x=await updateSubtitle(location.state.id,oldtitle,title,hours,link,desc)
+        getDetails();
+    }
+    const handleVidDescChange=(event)=>{
+        setVidDesc(event.target.value)
+    }
+   
    const[addPrevVid,setPrevVid]=useState(false)
    const[prevVidLink,setPrevVidLink]=useState("");
    const handleSub=(event)=>{
@@ -79,13 +112,23 @@ const handleHours=(event)=>{
 
 
  
-       
+    const [countryNumber,setCountryNumber]=useState();
+    const handleCountryNumber = (x) =>{
+      setCountryNumber(x);
+    }
 
     const now = 90 ;
     const getDetails = async () => {
         setDetails((await getCourseDetails(location.state.id)));
         setFirst(1);
     }
+
+    const handleSubmitVid =async(sub)=>{
+        
+        const x= await uploadSubtitleVideo(location.state.id,addedVideoLink,sub,vidDescription)
+        
+        getDetails();
+     }
     if(first===0){
         getDetails();
         if(location.state.View==="Syllabus"){
@@ -159,7 +202,7 @@ const handleHours=(event)=>{
     
     <div className="CourseItems">
 
-            <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Course" nav={["/","/CourseItems","/","/signUp"]} scroll={["","",""]}  />
+            <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]}     handleCountryNumber={handleCountryNumber} select="Course" nav={["/","/CourseItems","/","/signUp"]} scroll={["","",""]}  />
             <div className="CourseItems_Video">
 
                  <video autoPlay loop muted id='video'>
@@ -222,7 +265,21 @@ const handleHours=(event)=>{
                                         </div>}
                                         
                                         </div>) }
-
+                                        {addDiscount && <div style={{position:"relative",left:"110%",top:"-25vw", width:"30%",display: "flex",flexDirection: "column",rowGap: "0.5vw"}}>
+                                        <TextField id = {"sub"+0}  className="textSub1-Subtitle" onChange={handleDiscountAmount} 
+     label="Discount Amount" 
+     color="primary" 
+     variant="filled"
+     />
+     <TextField id = {"sub"+0}  className="textSub1-Subtitle" onChange={handleDuration} 
+     label="Duration" 
+     color="primary" 
+     variant="filled"
+     />
+                                        <button onClick={handleAddDiscount} style={{backgroundColor:"green"}}>Confirm</button>
+                                        <button style={{backgroundColor:"red"}} onClick={()=>setAddDiscount(false)}>Cancel</button>
+                                            </div>} 
+                                        {!addDiscount && (details && details.length>0 && (!details[0].discount || details[0].discount.amount==0)) && <button style={{width:"20vw",position:"relative",left:"100%",top:"-25vw"}} className='discountbtnIVC' onClick={()=>setAddDiscount(true)}>Add Discount</button>}
                                     </div>}
 
                                 {view=="Syllabus" && 
@@ -232,7 +289,7 @@ const handleHours=(event)=>{
 
                                     <div ref={bottomRef} />
                                     {details[0]&&details[0].subtitles.map((sub,i)=>
-                                    <Subtitle update={setFirst} index={i} inst={true} sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i} SubTitleBack={location.state.SubtitleTitle} View="Syllabus" description={sub.description} ></Subtitle>
+                                    <InstructorSubtitle handleEdit={handleEdit} handleDelete={handleDelete} handleSubmitVid={handleSubmitVid} handleAddVidChange={handleAddVidChange} handleVidDescChange={handleVidDescChange} update={setFirst} index={i}  sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i} SubTitleBack={location.state.SubtitleTitle} View="Syllabus" description={sub.description} ></InstructorSubtitle>
                                     )}
                                     {!addSub && <div className='btnAddSub'>
                 <button onClick={()=>{setAddSub(true)}}>Add New Subtitle</button>

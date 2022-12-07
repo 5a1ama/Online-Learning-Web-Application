@@ -35,7 +35,7 @@ const traineeSchema=new Schema(
             type:[{id:Number,progress:Number}]
           },
           completedExcercise:{
-            type:[Number]
+            type:[{courseId:Number,count:Number}]
           }
 
     }

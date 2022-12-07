@@ -9,8 +9,8 @@ import { sendEmail } from '../../API/CommonAPI';
 export {default as Bgvid} from './Bgvid';
 
 function Bgvid() {
-    const search = useLocation().search;
-    const name = new URLSearchParams(search).get('id');
+    // const search = useLocation().search;
+    // const name = new URLSearchParams(search).get('id');
 
   return (
     <div Name='home' className="Bgvid">

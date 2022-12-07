@@ -7,8 +7,8 @@ import CoursesVid from "../../assets/Courses.mp4";
 import starImg from "../../assets/goldStar.png";
 import { NewCourse } from './NewCourse';
 export {default as Courses} from './Courses'
-
-function Courses() {
+  
+function Courses(props) {
   const navigate = useNavigate();
   const [courses,setCourses] = useState([]);
   const getCourses = async () =>{
@@ -32,7 +32,8 @@ function Courses() {
     <div name="courses" className="Courses">
 
       <h1 className="heading">Popular Courses</h1>
-    {courses.map((course) => <NewCourse course={course}/>)}
+    {courses.map((course) => <NewCourse course={course} country={props.country}/>)}
+
     <h2 className="develop"> Learn and Develop with <br/>a great variety of courses</h2>
     <div className="CourseVid">
     <video autoPlay loop muted id='video'>

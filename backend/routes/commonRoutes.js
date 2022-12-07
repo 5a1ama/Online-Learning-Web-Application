@@ -15,6 +15,7 @@ dotenv.config()
 router.post("/login",async function(req,res){
     var username=req.body.username;
     var password=req.body.password;
+    console.log(username)
     var query=await User.find({Email:username,Password:password});
     if(query.length != 0){
         var user={username:username,password:password,id:query[0].id,job:query[0].Job,country:""}
@@ -22,9 +23,6 @@ router.post("/login",async function(req,res){
         expiresIn: "2h",
       })
     // @ts-ignore
-
-    req.session.token=token;
-    req.session.user=user;
     res.json(token)
     }else{
         
@@ -41,11 +39,14 @@ router.post("/verifyToken",function(req,res){
     if(token){
         try{
             const user=jwt.verify(token,process.env.ACCESSTOKEN);
+            //throw new Error("abc")
             res.json(user)
     
         }
         catch(err){
-            res.json("12")
+                throw new Error("aaa")
+            
+            
     
         }
     

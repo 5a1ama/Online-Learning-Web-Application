@@ -8,6 +8,16 @@ import "./InstructorProfile.css"
 import { getInstructorDetails, updateInstructorEmail, updateInstructorName, updateInstructorSpec } from '../../API/InstructorAPI';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Typography from '@mui/material/Typography';
+import * as React from 'react';
+import { TextField } from '@mui/material';
+
+
 
 export function InstructorProfile(){
     const [oldPass,setOldPass]=useState("");
@@ -76,14 +86,21 @@ export function InstructorProfile(){
 
     }
     const navigate = useNavigate();
-    
+    const [showDiv,setShowDiv] =useState(false);
+
+    const [countryNumber,setCountryNumber]=useState();
+    const handleCountryNumber = (x) =>{
+      setCountryNumber(x);
+    }
     intial()
     return(
-      <div>
+      <div className='instructorProfileMaindiv'>
         <div>
-        <Navbar items={["Home","My Courses","Caleneder"]} select="Home" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
+        <Navbar items={["Home","My Courses","Caleneder"]}
+            handleCountryNumber={handleCountryNumber}
+        select="Home" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
         </div>
-        <div className="instructorDitails">
+        <div className="instructorDetailsProfile">
         
 
         <Avatar  
@@ -96,6 +113,30 @@ export function InstructorProfile(){
           <h5 className="instructorname">{instructor && instructor.Name}</h5>
           <h5 className="instructorEmail">{instructor && instructor.Email}</h5>
                  </div>
+
+              {!showDiv&&  <div className='editinstructordata'>
+                <h2 className='NameLabel'>
+                    Name
+                </h2>
+                <div className='underline'></div>
+                <h2 className='EmailLabel'>
+                    Email
+
+                </h2>
+            
+                
+                <h2 className='specializationLabel'>
+                Specialization
+                </h2>
+                <button onClick={()=> setShowDiv(true)}>
+                        edit
+                    </button>
+                    
+                </div>}
+                {showDiv&&<div className='editinstructordata'> 
+
+                </div>
+                    }
         </div>
     )
 }

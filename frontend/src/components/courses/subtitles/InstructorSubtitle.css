@@ -1,0 +1,41 @@
+.editbtn{
+    position: relative;
+    height: 2.5vw;
+    left:96%;
+    top:-5vw;
+    background-color: transparent;
+    color:rgba(30,30,30);
+}
+.editbtn:hover{
+    background-color: transparent;
+    color:rgb(131, 131, 131);
+
+} 
+
+.delbtn{
+    position: relative;
+    height: 2.5vw;
+    left:97%;
+    top:-5vw;
+    background-color: transparent;
+    color:rgb(228, 0, 0);
+}
+.delbtn:hover{
+    background-color:    transparent;
+    color:rgb(255, 0, 0);
+
+} 
+.EditSubDiv{
+    display: flex;
+  flex-direction: column;
+  flex-grow: 1 1 0;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2vw;
+  position: relative;
+  left:68%;
+  top:50%
+  /* position:absolute;
+  top:22vw;
+  left:70vw; */
+}

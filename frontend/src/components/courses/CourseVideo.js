@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './CourseVideo.css'
 import Navbar from '../navbar/Navbar'
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -11,9 +11,15 @@ function CourseVideo() {
   function refreshPage() {
     window.location.reload(false);
   }
+  const [countryNumber,setCountryNumber]=useState();
+  const handleCountryNumber = (x) =>{
+    setCountryNumber(x);
+  }
+ 
   return (
     <div className ="CourseVideo">
-         <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Home" nav={["","","","/signUp"]} scroll={["Home","Courses","WhatHegza"]}  />
+         <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} 
+         select="Home" nav={["","","","/signUp"]} scroll={["Home","Courses","WhatHegza"]}    handleCountryNumber={handleCountryNumber}         />
          <div className='CourseVideo_Directory' style={{display:'flex' , flexDirection:'row',marginBottom:"1rem",transform:'translate(-40vh,0)'}}>
 
           <h1 onClick={()=>navigate("/CourseItems",{state:{id:location.state.CourseId}})}>
