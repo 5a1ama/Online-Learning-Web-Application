@@ -120,6 +120,7 @@ return await result.json()
 }
 export const updateSubtitle=async(id,oldtitle,title,hours,link,desc)=>{
     var route=`http://localhost:8000/course/updateSubtitle/${id}/${oldtitle}`
+    
     if(title !=""){
 
         route=route+`/${title}`

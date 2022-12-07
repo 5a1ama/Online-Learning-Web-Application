@@ -1,64 +1,74 @@
-.mainDiv{
-    display: flex;
-    flex-direction: column;
-    row-gap: 2.5vw;
-    flex-grow: 1 1 0;
+.instructorProfileMaindiv{
+    background-color: #eee ;
+    background-image: linear-gradient(180deg,rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.3)),url('../../assets/InstructorBack.jpeg');
+    background-size:cover;
+     background-position: 100%;
+     width: 100%;
+     height:100%;
+     position: absolute;
+     top:60px;
 }
-.profileData{
-    width: fit-content;
-    height: 15vw;
-    background-color: rgb(165, 161, 161);
-    display: flex;
-    flex-direction: row;
-    column-gap: 1vw;
-    flex-grow: 1 1 0;
-    justify-content: start;
-    align-items: center;
-    width: 50%;
-}
-.details{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    row-gap: 0.5vw;
-    flex-grow: 1 1 0;
-    
-}
-.editable{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    column-gap: 0.5vw;
-    flex-grow: 1 1 0;
-    word-wrap: break-word;
-}
-.instructorRatingEdit{
-    margin-left: 15%;
-} 
-.editSpecialization{
 
-    background-color: white;
-    height: 100%;
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1 1 0;
-    row-gap: 0.5vw;
-    align-items: center;
+
+.instructorDetailsProfile{
+    position: absolute;
+    width: 350px;
+    height: 380px;
+  background-color:rgb(255, 255, 255);
+    border-top-left-radius: 20px ;
+    border-bottom-right-radius: 20px;
+    top: 5%;
+    left: 3%;
+   flex-direction: column; 
+   display: flex;
+   align-items: center;
+   flex-grow: 1 1 0;
+   row-gap: 5%;
 }
-.editInput{
+.editinstructordata{
+    background-color: rgb(244, 244, 244);
+    position: absolute;
+    width: 700px;
+    height: 380px;
+    left: 30%;
+    top: 5%;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius:20px;
+    border-bottom-right-radius:20px;
+    border-top-right-radius:20px;
+}
+.EditInstructorName{
+    position: relative;
+    top: 2%;
+    left: 1%;
+    width: 90%;
+}
+.underline{
+    position:absolute;
+    top:20vw;
     width: 100%;
-    height: 20%;
-    margin-top: 20%;
+    border-bottom: 1px solid;
+    border-color: rgb(126, 126, 126);
 }
-.changePassDiv{
-    display: flex;
-    flex-direction: column;
-    row-gap: 0.5vw;
-    background-color: rgb(107, 104, 104);
-    align-items: center;
-    width:20%;
+.NameLabel{
+    position: absolute;
+    left: 3%;
+    top: 10%;
+    font-size: 1.5rem;
 }
-.changePassDiv>input{
-    height: 2vw;
+.EmailLabel{
+    position: absolute;
+    left: 3%;
+    top: 30%;
+    font-size: 1.5rem;
+}
+.specializationLabel{
+    position: absolute;
+    left: 3%;
+    top: 52%; 
+    font-size: 1.5rem;
+}
+.divider1{
+    position: absolute;
+    top: 50px;
 }
