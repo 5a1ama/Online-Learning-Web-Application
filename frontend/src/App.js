@@ -27,7 +27,6 @@ import { InstructorCourseVideo } from './components/Instructor/InstructorCourseV
 import { InstructorViewCourse } from './components/Instructor/InstructorViewCourse';
 import { verify } from './API/LoginAPI';
 
-import {InstructorViewCourse} from './components/Instructor/InstructorViewCourse'
 export default function App() {
   const navigate = useNavigate();
   const [first,setFirst]=useState(0);
