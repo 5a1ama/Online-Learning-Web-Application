@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
 import Navbar from '../navbar/Navbar';
 import "./InstructorProfile.css"
-import { getInstructorDetails, updateInstructorEmail, updateInstructorName, updateInstructorSpec } from '../../API/InstructorAPI';
+import { getInstructorDetails, updateInstructorEmail, updateInstructorName, updateInstructorPass, updateInstructorSpec } from '../../API/InstructorAPI';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import List from '@mui/material/List';
@@ -18,11 +18,11 @@ import * as React from 'react';
 import { TextField } from '@mui/material';
 
 
-
 export function InstructorProfile(){
     const [oldPass,setOldPass]=useState("");
     const[newPass,setNewPass]=useState("");
     const [confirmPass,setConfirmPass]=useState("");
+    const [first,setFirst] = useState(0);
     const handleOldPass =(event)=>{
         setOldPass(event.target.value)
     }
@@ -36,6 +36,7 @@ export function InstructorProfile(){
     const [newName,setNewName]=useState("");
     const handleNewName =(event)=>{
         setNewName(event.target.value)
+
     }
     const [newEmail,setNewEmail]=useState("");
     const handleNewEmail =(event)=>{
@@ -45,62 +46,67 @@ export function InstructorProfile(){
     const handleNewSpec =(event)=>{
         setNewSpec(event.target.value)
     }
-    const [specializationEdit,setSpecEdit]=useState(false);
-    const handleSpecialization=()=>{
-        setSpecEdit(true)
-    }
-    const [nameEdit,setNameEdit]=useState(false);
-    const handleName=()=>{
-        setNameEdit(true)
-    }
-    const [emailEdit,setEmailEdit]=useState(false);
-    const handleEmail=()=>{
-        setEmailEdit(true)
-    }
+
     const handleUpdate=async ()=>{
-        if(specializationEdit){
-            setSpecEdit(false)
-            await updateInstructorSpec(newSpec);
-            
-        }
-        if(nameEdit){
-            setNameEdit(false)
-            await updateInstructorName(newName);
-            
-        }
-        if(emailEdit){
-            setEmailEdit(false)
-            await updateInstructorEmail(newEmail);
-        }
+       const x = await updateInstructorSpec(newSpec);
+       const y = await updateInstructorName(newName);
+       const z = await updateInstructorEmail(newEmail);
+
+        setShowDiv(false)
+
+
     }
     const [changePass,setChangePass]=useState(false);
     const handleChangePass =()=>{
         setChangePass(true);
     }
-    const handleUpdatePass =()=>{
+    const handleUpdatePass =async ()=>{
+        if(confirmPass!=newPass){
+            alert("password does not match")
+        }
+        else{
+            const x=await updateInstructorPass(oldPass,newPass)
+            if(x=="error"){
+                alert("Old password is not found")
+            }
+            else{
+                
+                setShowDiv2(false)
+            }
+          
+        }
+ 
 
     }
     const intial = async()=>{
         setinstructor(await getInstructorDetails())
-
-
+        if(first==0){
+            setNewEmail(instructor.Email)
+            setNewName(instructor.Name)
+            setNewSpec(instructor.specialization)
+            setFirst(1)
+        }
+       
     }
     const navigate = useNavigate();
     const [showDiv,setShowDiv] =useState(false);
+    const [showDiv2 ,setShowDiv2]=useState(false)
 
     const [countryNumber,setCountryNumber]=useState();
     const handleCountryNumber = (x) =>{
       setCountryNumber(x);
     }
     intial()
+
     return(
       <div className='instructorProfileMaindiv'>
         <div>
         <Navbar items={["Home","My Courses","Caleneder"]}
             handleCountryNumber={handleCountryNumber}
-        select="Home" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
+        select="" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
+
         </div>
-        <div className="instructorDetailsProfile">
+      {!showDiv2&&  <div className="instructorDetailsProfile">
         
 
         <Avatar  
@@ -112,31 +118,106 @@ export function InstructorProfile(){
        </Avatar>
           <h5 className="instructorname">{instructor && instructor.Name}</h5>
           <h5 className="instructorEmail">{instructor && instructor.Email}</h5>
-                 </div>
+          <button  className='' onClick={()=> {setShowDiv2(true);}}>
+                        Change Password
+                    </button>
+                 </div>}
 
-              {!showDiv&&  <div className='editinstructordata'>
-                <h2 className='NameLabel'>
-                    Name
-                </h2>
-                <div className='underline'></div>
-                <h2 className='EmailLabel'>
-                    Email
+             {!showDiv2 && <div>{!showDiv&&  <div className='editinstructordata'>
+               
+               <div className='dataDivNext'>
+               <label className='NameLabel'>
+                Name
+               </label>
+               <label className='EditInstructorValue'>{instructor && instructor.Name}</label>
+                </div>
+               <Divider/>
+               <div className='dataDivNext'>
+               <label className='EmailLabel'>
+                Mail
+               </label >
+               <label className='EditInstructorValue'>{instructor && instructor.Email}</label>
+               </div>
 
-                </h2>
-            
+               <Divider/>
+               <div className='dataDivNext'>
+               <label className='specializationLabel'>
+                specialization
+               </label>
+               <label className='EditInstructorValue' >{instructor && instructor.specialization}</label>
+               </div>
+               <Divider/>
                 
-                <h2 className='specializationLabel'>
-                Specialization
-                </h2>
-                <button onClick={()=> setShowDiv(true)}>
+             
+
+                <button  className='editProfileButton1' onClick={()=> {setShowDiv(true);}}>
                         edit
                     </button>
                     
-                </div>}
-                {showDiv&&<div className='editinstructordata'> 
+                </div>}</div>}
+                {showDiv&&<div className='editinstructordata2'> 
+                <TextField id="filled-basic" 
+                 defaultValue={instructor && instructor.Name} 
+                 variant="standard" 
+                 className='NameLabel2'
+                 onChange={handleNewName} />
+
+
+                <TextField
+                 id="filled-basic" 
+                 defaultValue={instructor && instructor.Email} 
+                 variant="standard"  
+                 className='NameLabel2'
+                 onChange={handleNewEmail}/>
+
+                <TextField 
+                id="filled-basic" 
+                defaultValue={instructor && instructor.specialization} 
+                variant="standard"
+                 className='NameLabel2'
+                 onChange={handleNewSpec}/>
+
+                <button  className='subProfileButton1' onClick={ handleUpdate}>
+                        submit
+                    </button>
 
                 </div>
                     }
+                    {showDiv2 && <div className='ChangePassswordDiv'>
+                    <TextField 
+                    onChange={handleOldPass}
+                    className='InstructorchangePass'
+                    id="outlined-basic" 
+                    label="Old Password" 
+                    variant="outlined" 
+                    type="password"/>   
+                    
+                    
+                    
+                    <TextField
+                    onChange={handleNewPass}
+                    className='InstructorchangePass'
+                     id="outlined-basic" 
+                     label="New password"
+                      variant="outlined"
+                      type="password" />
+
+
+                    <TextField 
+                    onChange={handleConfirmPass}
+                    className='InstructorchangePass'
+                    id="outlined-basic"
+                    label="Confirm Password"
+                     variant="outlined"
+                     type="password" />
+
+                     <button className='InstructorchangePassBUTTON' onClick={handleUpdatePass}>
+                        Confirm
+                     </button>
+                     <button className='InstructorCancelPassBUTTON' onClick={()=> setShowDiv2(false)}>
+                        Cancel
+                     </button>
+                        </div>}
         </div>
     )
 }
