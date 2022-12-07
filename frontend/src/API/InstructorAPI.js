@@ -131,6 +131,10 @@ export const deleteSubTitle=async (title,id)=>{
 return await result.json()
 
 }
+export const getinstructorTraineeDetails = async(id) =>{
+    const result = await fetch(`http://localhost:8000/getinstructorTraineeDetails/${id}`)
+    return await result.json()
+}
 export const updateSubtitle=async(id,oldtitle,title,hours,link,desc)=>{
     var route=`http://localhost:8000/course/updateSubtitle/${id}/${oldtitle}`
     
