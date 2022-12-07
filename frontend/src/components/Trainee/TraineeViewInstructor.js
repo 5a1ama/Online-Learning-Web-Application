@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
 import Navbar from '../navbar/Navbar';
 import "../Instructor/InstructorProfile.css"
-import { getInstructorDetails, updateInstructorEmail, updateInstructorName, updateInstructorPass, updateInstructorSpec } from '../../API/InstructorAPI';
+import { getInstructorDetails, getinstructorTraineeDetails, updateInstructorEmail, updateInstructorName, updateInstructorPass, updateInstructorSpec } from '../../API/InstructorAPI';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import List from '@mui/material/List';
@@ -27,10 +27,18 @@ export function TraineeViewInstructor(){
     const navigate = useNavigate();
 
     const [countryNumber,setCountryNumber]=useState();
+    const [traineeRate,setTraineeRate] = useState("")
+      const handleChangeRate = (event , newValue)=>{
+        alert(newValue)
+        setTraineeRate(newValue)
+    }
     const handleCountryNumber = (x) =>{
       setCountryNumber(x);
     }
-
+    const getDetails = async ()=>{
+        setinstructor(await getinstructorTraineeDetails(location.state))
+    }
+    getDetails()
     return(
       <div className='instructorProfileMaindiv'>
         <div>
@@ -77,6 +85,13 @@ export function TraineeViewInstructor(){
                <label className='EditInstructorValue' >{instructor && instructor.specialization}</label>
                </div>
                <Divider/>
+               <div>
+                <label className='specializationLabel'>
+                    Rate Instructor
+                </label>
+                <Rating  className='EditInstructorValue' onChange={handleChangeRate}
+                name="half-rating" defaultValue={2.5} precision={0.5} />
+               </div>
         
                     
                 </div>

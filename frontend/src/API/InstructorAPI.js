@@ -132,7 +132,7 @@ return await result.json()
 
 }
 export const getinstructorTraineeDetails = async(id) =>{
-    const result = await fetch(`http://localhost:8000/getinstructorTraineeDetails/${id}`)
+    const result = await fetch(`http://localhost:8000/instructor/getinstructorTraineeDetails/${id}`)
     return await result.json()
 }
 export const updateSubtitle=async(id,oldtitle,title,hours,link,desc)=>{
