@@ -118,5 +118,30 @@ router.get("/searchMyCourse/:search/:token",async function(req,res){
     res.json(final2)
 
 })
+router.post("/updatePass2/:oldPass/:pass/:token",async function(req,res){
+    var token=req.params.token;
+
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var id=user.id;
+    var result=await User.find({id:id ,Password:req.params.oldPass});
+    if(result.length==0){
+        res.json("error")
+
+    }
+    else{
+        await User.findOneAndUpdate({id:id},{Password:req.params.pass});
+        console.log(id  )
+        if(result.Job=="Instructor"){
+         await Instructor.findOneAndUpdate({id:id},{Password:req.params.pass})
+    
+        }else if(result.Job=="Trainee"){
+         await Trainee.findOneAndUpdate({id:id},{Password:req.params.pass})
+     
+        }
+        res.json("ok")
+
+    }
+ 
+})
 
 module.exports = router

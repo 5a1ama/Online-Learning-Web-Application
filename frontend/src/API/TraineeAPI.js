@@ -51,3 +51,12 @@ export const updateTraineeEmail=async(name)=>{
     })
     return await result.json();
 }
+
+export const updateTraineePass=async(oldPass,pass)=>{
+    var result=await fetch(`http://localhost:8000/trainee/updatePass2/${oldPass}/${pass}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    return await result.json()
+}
