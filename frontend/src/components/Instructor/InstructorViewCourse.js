@@ -12,6 +12,9 @@ import "./InstructorViewCourse.css"
 import Gift from "../../assets/gift.png"
 import GiftTop from "../../assets/giftTop.png"
 import GiftTop2 from "../../assets/giftTop2.png"
+import { Avatar } from "@mui/material";
+import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
+
 
 import { GetInstructorName } from './../../API/CourseAPI';
 import Footer from '../footer/Footer';
@@ -132,6 +135,25 @@ const handleHours=(event)=>{
         
 
         handleInstNames();
+        const [reviews,setreviews] = useState([])
+    useEffect(()=>{
+        setreviews(location.state)
+
+    })
+
+        const ReviewCourseDiv = (props )=>{
+            return(
+                <div className="reviewsCourseDiv">
+                    <Avatar sx={{backgroundColor:"#58a5f0"}} className="reviewCourseAvatar"/>
+                    <FormatQuoteIcon className="reviewCourseComment"/>
+                    <textarea readOnly className="reviewCourseComment">{props.title}</textarea>
+                        
+                    
+    
+                </div>
+            )
+        }
+        
         
   return (
     
@@ -236,7 +258,19 @@ const handleHours=(event)=>{
 
                                 {view==="Reviews" && 
                                 <div>
-                                    
+ 
+                                        <h1>
+                                            Reviews:
+                                        </h1>
+                                        <div className="reviewsCourseDiv">
+                                         <Avatar sx={{backgroundColor:"#58a5f0"}} className="reviewCourseAvatar"/>
+                                        <FormatQuoteIcon className="reviewCourseComment"/>
+                                         <textarea readOnly className="reviewCourseComment">{"good course"}</textarea>
+                        
+                                 </div>
+                                 
+                                        
+
                                     {/* {details[0].discount.amount && <div>
                                     <img alt="." className="Course_Gift" src={Gift} />
                                     <div className="Course_giftText">
