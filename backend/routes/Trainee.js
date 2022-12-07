@@ -61,6 +61,30 @@ router.get("/FilterMyCourse/:token/:minprice/:maxprice/:subject",async function(
     res.json(final2)
 
 })
+router.get("/Details/:token",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN)
+    var id=user.id;
+    const trainee=await Trainee.findOne({id:id});
+    res.json(trainee)
+})
+router.post("/updateName/:name/:token",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var id=user.id;
+    
+    var newname=req.params.name;
+    await Trainee.findOneAndUpdate({id:id},{Name:newname});
+    await User.findOneAndUpdate({id:id},{Name:newname});
+})
+router.post("/updateEmail/:name/:token",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var id=user.id;
+    var newname=req.params.name;
+    await Trainee.findOneAndUpdate({id:id},{Email:newname});
+    await User.findOneAndUpdate({id:id},{Email:newname});
+})
 router.get("/searchMyCourse/:search/:token",async function(req,res){
     var search=req.params.search;
     var query=await Course.find({});

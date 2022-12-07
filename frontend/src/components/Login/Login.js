@@ -35,21 +35,28 @@ function Login(){
     const navigate=useNavigate();
     const init=async()=>{
         const x=await LoginUser(email,password)
-        const type=(await verify(x)).job;
-        localStorage.setItem('type',type);
-                    if(type){
-            if(type==="Instructor"){
-                navigate("/instructorHome")
+        try{
+            const type=(await verify(x)).job;
+            if(type){
+                localStorage.setItem('type',type);
+                if(type==="Instructor"){
+                    navigate("/instructorHome")
+                }
+                if(type==="Trainee"){
+                    navigate("/TraineeHome")
+                }
+                // other cases
+            }else{
+                // alert(x.user+" "+x.pass)
+                setWrongEmail(x.user);
+                setWrongPass(x.pass)
             }
-            if(type==="Trainee"){
-                navigate("/TraineeHome")
-            }
-            // other cases
-        }else{
-            // alert(x.user+" "+x.pass)
-            setWrongEmail(x.user);
-            setWrongPass(x.pass)
         }
+        catch{
+            setWrongEmail(x.user);
+                setWrongPass(x.pass)
+        }
+        
         
     }
     const handleForget =async ()=>{
