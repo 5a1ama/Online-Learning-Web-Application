@@ -71,7 +71,7 @@ return(
     </div>
     <div>
       <div className="TraineeCourses_CoursesDiv">
-      {courses.map((course) => <NewCourse course={course}  handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>)}
+      {courses.map((course) => <NewCourse course={course} Trainee={true} handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>)}
       </div>
     <form className="search-Trainee-courses">
             <div>

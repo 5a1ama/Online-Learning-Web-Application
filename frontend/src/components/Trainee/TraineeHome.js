@@ -46,7 +46,7 @@ export function TraineeHome (){
           <div className="homeCoursesTrainee_Course_2">
 
 
-          {courses.map((course) => <NewCourse course={course}   country={countryNumber}/>)}
+          {courses.map((course) => <NewCourse course={course} Trainee={true}   country={countryNumber}/>)}
           </div>
             </div>
           </div>

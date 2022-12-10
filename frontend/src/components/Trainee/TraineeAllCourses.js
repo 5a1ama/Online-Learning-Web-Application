@@ -42,7 +42,7 @@ export function TraineeAllCourses(){
         </div>
 <div className='AllCourses'>
             <h1 className="heading">Our Courses</h1>
-            {courses.map((course) => <NewCourse course={course} country={countryNumber}/>)}
+            {courses.map((course) => <NewCourse course={course} Trainee={true} country={countryNumber}/>)}
             </div>
 
             <button className='AllCourses-FilterBarButton' onClick={handleFilterBar}>Filter Courses</button>

@@ -61,7 +61,7 @@ function AllCourses() {
       setCourses ((await getAllCourses()));
     }
   
-    const handleFilter2=async(event)=>{
+    const handleFilter2=async()=>{
       setFirst(1)
   
       setCourses((await FilterAllCourse2(rate,subject,Math.floor(value[0]/newPriceRatio),Math.floor(value[1]/newPriceRatio))))
@@ -90,13 +90,13 @@ function AllCourses() {
       setSubject('');
       setRate('');
       handleRateChange(event,1);
-      document.getElementById("TextFieldForSubject").innerHTML.value="";
+      document.getElementById("TextFieldForSubject").value="";
       getCourses();
     }
   
-    // useEffect(()=>{
-    //     handleFilter2();
-    // },[rate,subject,value])
+    useEffect(()=>{
+        handleFilter2();
+    },[rate,subject,value])
 
   return (
     <div>

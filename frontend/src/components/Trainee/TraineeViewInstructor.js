@@ -41,6 +41,7 @@ export function TraineeViewInstructor(){
         setinstructor(await getinstructorTraineeDetails(location.state))
     }
     const [MyRate,setMyRate] = useState(0)
+    
     const getRate = async ()=> {
         setMyRate(await myInstructorRate(location.state))
     }
@@ -48,7 +49,8 @@ export function TraineeViewInstructor(){
     React.useEffect(()=>{
       getRate()
 
-    },[traineeRate])
+    },)
+
     const x = MyRate
     return(
       <div className='instructorProfileMaindiv'>
