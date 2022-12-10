@@ -1,0 +1,59 @@
+.TraineeProfilePage{
+    position: relative;
+    background-image: linear-gradient(180deg,rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 0.9)),url('../../assets/TraineeHome.jpg');
+    background-color: black;
+    background-size:contain;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1 1 0;
+    row-gap:2vw ;
+    width: 100%;
+    height:100vh;
+    top:60px;
+}
+.TraineeProfileDetails{
+    position: absolute;
+    width: 350px;
+    height: 380px;
+  background-color:rgb(255, 255, 255);
+    border-top-left-radius: 20px ;
+    border-bottom-right-radius: 20px;
+    top: 5%;
+    left: 3%;
+    display: flex;
+   flex-direction: column; 
+   align-items: center;
+   flex-grow: 1 1 0;
+   row-gap: 5%;
+
+}
+.editTraineedata{
+    background-color: rgb(244, 244, 244);
+    position: absolute;
+    width: 700px;
+    height: 380px;
+    left: 30%;
+    top: 5%;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius:20px;
+    border-bottom-right-radius:20px;
+    border-top-right-radius:20px;
+    display: flex;
+   flex-direction: column; 
+   justify-content: start;
+   flex-grow: 1 1 0;
+   row-gap: 1vw;
+   padding-top: 2%;
+}
+.TraineeNameLabel{
+    font-size: 1.5rem;
+}
+.TraineedataDivNext{
+    margin-left: 1%;
+    font-size: 1.5rem;
+}
+.editTraineeProfileButton1{
+    margin-top: 13%;
+    margin-left: 68%;
+    width:30%;
+}
