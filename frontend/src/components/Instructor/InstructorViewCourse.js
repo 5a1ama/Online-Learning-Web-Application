@@ -280,6 +280,8 @@ const handleHours=(event)=>{
                                         <button style={{backgroundColor:"red"}} onClick={()=>setAddDiscount(false)}>Cancel</button>
                                             </div>} 
                                         {!addDiscount && (details && details.length>0 && (!details[0].discount || details[0].discount.amount==0)) && <button style={{width:"20vw",position:"relative",left:"100%",top:"-25vw"}} className='discountbtnIVC' onClick={()=>setAddDiscount(true)}>Add Discount</button>}
+                                        {!addDiscount && (details && details.length>0 && (details[0].discount && details[0].discount.amount!=0)) && <button style={{width:"20vw",position:"relative",left:"100%",top:"-25vw"}} className='discountbtnIVC' onClick={()=>setAddDiscount(true)}>Edit Discount</button>}
+
                                     </div>}
 
                                 {view=="Syllabus" && 
