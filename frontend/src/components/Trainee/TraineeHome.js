@@ -1,5 +1,5 @@
 import Navbar from "../navbar/Navbar";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import { NewCourse } from '../courses/NewCourse';
 import Avatar from '@mui/material/Avatar';
@@ -17,30 +17,42 @@ export function TraineeHome (){
   const [courses,setCourses] = useState([]);
   const getCourses = async () =>{
     
-    setCourses ((await getTraineeCourses(localStorage.getItem("token"))).slice(0,3));
-    // alert(courses);
+    setCourses ((await getTraineeCourses(localStorage.getItem("token"))).slice(0,1));
+
   }
   const [countryNumber,setCountryNumber]=useState();
   const handleCountryNumber = (x) =>{
     setCountryNumber(x);
   }
-  getCourses();
+  useEffect(()=>{
+    getCourses();
+  })
 
  
     return(
         <div className = "TraineeHomeMain">
           
     
-        <div>
              <Navbar items={["Home","My Courses","All Courses"]}
                handleCountryNumber={handleCountryNumber}
                select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
-        </div>
-        <div className="mainDetailsTrainee">
-        <div className="homeCoursesTrainee">
-          {courses.map((course) => <NewCourse course={course}   country={countryNumber}/>)}
+        
 
+        <div className="mainDetailsTrainee">
+
+          <div className="homeCoursesTrainee">
+            <div className="homeCoursesTrainee_h2">
+            <h2> Continue working on:</h2>
+            </div>
+            <div className="homeCoursesTrainee_Course">
+          <div className="homeCoursesTrainee_Course_2">
+
+
+          {courses.map((course) => <NewCourse course={course}   country={countryNumber}/>)}
           </div>
+            </div>
+          </div>
+
 
         <div className="traineeDitails">
         <Avatar className="TraineeAvatar"
@@ -56,6 +68,7 @@ export function TraineeHome (){
 
         </div>
         </div>
+      
         </div>
     );
 }

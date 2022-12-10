@@ -28,8 +28,11 @@ function AllCoursesSearch() {
     const handleCountryNumber = (x) =>{
       setCountryNumber(x);
     }
-   
-        getCourses();
+    
+    useEffect(()=>{
+      getCourses();
+
+    })
         
   
   return (

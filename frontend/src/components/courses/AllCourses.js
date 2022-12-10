@@ -16,7 +16,34 @@ export {default as AllCourses} from './AllCourses.js';
 
 function AllCourses() {
   const location=useLocation();
-    const[rate,setRate]=useState(0);
+    const[rate,setRate]=useState([]);
+
+    const handleRateChange = (event,reset) => {
+      
+      var id=event.target.id;
+      if(reset===1){
+          for(var i=1;i<6;i++){
+            document.getElementById(i).style.backgroundColor="rgb(10, 138, 218)";
+          }
+      }else{
+        if( rate.includes(event.target.value) || rate[0]===(event.target.value) ){
+          document.getElementById(id).style.backgroundColor="rgb(10, 138, 218)";
+          setRate((prevState) => (
+            prevState.filter((task) => task !== event.target.value)
+            ));
+            
+          }else{
+            document.getElementById(id).style.backgroundColor="gold";
+            setRate((prev) => ([
+              ...prev,
+              event.target.value
+            ]
+            ));
+          }
+          
+        }
+    };
+  
     const [courses,setCourses] = useState([]);
     const [subject,setSubject]=useState("");
     const [first,setFirst]=useState(0);
@@ -33,27 +60,19 @@ function AllCourses() {
     const getCourses = async () =>{
       setCourses ((await getAllCourses()));
     }
-    const handleRateClick=(event)=>{
-      var id=event.target.id;
-      var arr=document.getElementsByClassName("ratebtn");
-      for(var i=0;i<arr.length;i++){
-        arr[i].style.backgroundColor="rgb(10, 138, 218)";
-      }
-      document.getElementById(id).style.backgroundColor="green";
-      setRate(event.target.value);
-      
-    }
+  
     const handleFilter2=async(event)=>{
       setFirst(1)
-      setCourses((await FilterAllCourse2(rate,subject,value[0],value[1])))
+  
+      setCourses((await FilterAllCourse2(rate,subject,Math.floor(value[0]/newPriceRatio),Math.floor(value[1]/newPriceRatio))))
      
     }
     const handleChange = (event, newValue) => {
       setValue(newValue);
-      
     };
     const handleSubject=(event)=>{
       setSubject(event.target.value)
+      
     }
     if(first==0){
       getCourses();
@@ -63,7 +82,22 @@ function AllCourses() {
     const handleFilterBar = () => setFilterBar(!FilterBar)
     // const navigate2 = useNavigate();
 
-          
+    const [newPriceRatio,setNewPriceRatio]= useState();
+    const handleNewPriceRatio = (x) => {
+      setNewPriceRatio(x);
+    }
+    const handleReset= (event)=>{
+      setSubject('');
+      setRate('');
+      handleRateChange(event,1);
+      document.getElementById("TextFieldForSubject").innerHTML.value="";
+      getCourses();
+    }
+  
+    // useEffect(()=>{
+    //     handleFilter2();
+    // },[rate,subject,value])
+
   return (
     <div>
       
@@ -73,7 +107,7 @@ function AllCourses() {
     </div>
     <div className='AllCourses'>
     <h1 className="heading">Our Courses</h1>
-      {courses.map((course) => <NewCourse course={course} country={countryNumber}/>)}
+      {courses.map((course) => <NewCourse course={course}   handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>)}
     </div>
 
     <button className='AllCourses-FilterBarButton' onClick={handleFilterBar}>Filter Courses</button>
@@ -91,22 +125,24 @@ function AllCourses() {
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
         min={0}
-        max={10000} />
+        max={Math.floor(5000*newPriceRatio)} />
 
               </Box>
     </div>
     <h1 className='AllCourses-Subject'>By Subject:</h1>
-    <input className = 'AllCourses-TextField' placeholder='Enter Subject' onChange={handleSubject}/>
+    <input className = 'AllCourses-TextField' placeholder='Enter Subject' onChange={handleSubject} id="TextFieldForSubject"/>
     <button className ='AllCourses-Apply' onClick={handleFilter2}>Apply</button>
     <h1 className='AllCourses-Rate'>By Rate:</h1>
     <div className = 'AllCourses-Rating'>
-      <button className='ratebtn' id="1" value="1" onClick={handleRateClick}>1★</button>
-      <button className='ratebtn' id="2" value="2" onClick={handleRateClick}>2★</button>
-      <button  className='ratebtn' id="3" value="3" onClick={handleRateClick}>3★</button>
-      <button className='ratebtn' id="4" value="4" onClick={handleRateClick}>4★</button>
-      <button className='ratebtn' id="5" value="5" onClick={handleRateClick}>5★</button>
+      <button className='ratebtn2' id="1"  value="1" onClick={handleRateChange}>1★</button>
+      <button className='ratebtn2' id="2"  value="2" onClick={handleRateChange}>2★</button>
+      <button  className='ratebtn2' id="3"  value="3" onClick={handleRateChange}>3★</button>
+      <button className='ratebtn2' id="4"  value="4" onClick={handleRateChange}>4★</button>
+      <button className='ratebtn2' id="5"  value="5" onClick={handleRateChange}>5★</button>
     </div>
-
+    <button onClick={handleReset} className='AllCourses_ReatFilterButton'>
+        Reset Filters
+      </button>
     </div>
     
 

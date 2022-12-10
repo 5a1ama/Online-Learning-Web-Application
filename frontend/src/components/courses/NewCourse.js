@@ -28,6 +28,9 @@ export function NewCourse(props) {
         return array
       
       }
+
+      useEffect(()=>
+      props.handleNewPriceRatio&& props.handleNewPriceRatio(fares[chosenCountry]),[chosenCountry,fares,props]);
    
   return (
 

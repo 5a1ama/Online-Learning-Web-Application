@@ -48,8 +48,6 @@ router.post("/verifyToken",function(req,res){
         catch(err){
                 throw new Error("aaa")
             
-            
-    
         }
     
     }else{

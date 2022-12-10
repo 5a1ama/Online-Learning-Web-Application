@@ -27,25 +27,28 @@ router.get("/",function(req,res){
 })
 router.get("/filter-sub/:ratings/:subject",async function(req,res){
     var rating=req.params.ratings;
+
     var subject=req.params.subject;
-    console.log(subject+" "+rating)
     var query= await Course.find({});
     var array=[];
     for(var i=0;i<query.length;i++){
-        // @ts-ignore
-        if(rating=="0"){
+
+        if(rating==10){
+            // console.log("AnaZero");
             if(subject != "-1" && query[i].subject.includes(subject)){
                 array=array.concat([query[i]])
             }
         }else{
-            if(subject != "-1" && query[i].subject.includes(subject) && query[i].rating.value==rating){
-                array=array.concat([query[i]])
-            }else if(query[i].rating.value==rating && subject=="-1"){
-                array=array.concat([query[i]])
+            for(var z=0;z<5;z++){
+                if(subject != "-1" && query[i].subject.includes(subject) && query[i].rating.value==rating[z]){
+                    array=array.concat([query[i]])
+                }else if(query[i].rating.value==rating[z] && subject=="-1"){
+                    array=array.concat([query[i]])
+                }
             }
         }
     }
-    console.log(array)
+    // console.log(array)
     res.json(array);
 })
 router.get("/filter-price/:minprice/:maxprice",async function(req,res){
@@ -56,7 +59,7 @@ router.get("/filter-price/:minprice/:maxprice",async function(req,res){
     // @ts-ignore
     var array=[];
     for(var i=0;i<query.length;i++){
-        console.log(query[i].price)
+        // console.log(query[i].price)
         if(query[i].price>=minprice && query[i].price<=maxprice){
             array=array.concat([query[i]])
         }
@@ -70,7 +73,7 @@ router.post("/create/:token",function(req,res){
     // @ts-ignore
     var arr=req.body.subtitles;
     var hourArr=req.body.hours;
-    console.log(req.body.subject)
+    // console.log(req.body.subject)
     var final=[];
     for(var i=0;i<arr.length;i++){
         final=final.concat([{title:arr[i],hours:hourArr[i],video:[""]}])
@@ -79,7 +82,7 @@ router.post("/create/:token",function(req,res){
         var object=new Course({id:result.length+1,title:req.body.title,subtitles:final,price:req.body.price,
         summary:req.body.summary,instructors:[user.id],subject:req.body.subject})
         // @ts-ignore
-        console.log("add course")
+        // console.log("add course")
         object.save(function(req,res){
             
         })
@@ -188,7 +191,7 @@ router.post("/updateSubtitle/:id/:oldtitle/:title/:hours/:link/:desc",async func
     var course=await Course.findOne({id:id})
     var subtitles=course.subtitles
     var finalSub=[];
-    console.log(link)
+    // console.log(link)
     for(var i=0;i<subtitles.length;i++){
         if(subtitles[i].title != oldtitle){
             finalSub=finalSub.concat([subtitles[i]])

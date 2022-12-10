@@ -66,7 +66,7 @@
 
 .TraineeHomeMain{
     position: relative;
-    background-image: linear-gradient(180deg,rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 0.9)),url('../../assets/TraineeHome.jpg');
+    /* background-image: linear-gradient(180deg,rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 0.9)),url('../../assets/TraineeHome.jpg'); */
     background-color: black;
     background-size:contain;
     display: flex;
@@ -75,23 +75,64 @@
     row-gap:2vw ;
     width: 100%;
     height:100vh;
+    background: linear-gradient(227deg, #002e48e3, #67add28f, #c3c3c3b8, #9054acb5),url('../../assets/TraineeHome.jpg');
+        background-size: 200% 200%;     
+
+    -webkit-animation: TraineeHomeMain 36s ease infinite;
+    -moz-animation: TraineeHomeMain 36s ease infinite;
+    animation: TraineeHomeMain 36s ease infinite;
 
 }
-.homeCoursesTrainee{
-    transform: scale(0.8);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 65%;    
 
-
-}
 .mainDetailsTrainee{
     position: absolute;
     top:60px;
     display: flex;
     flex-direction: row;
     width: 100%;    
+}
+.homeCoursesTrainee{
+    width:60%;
+    position: relative;
+    top:40px;
+    left:80px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 15px;
+    min-height: 80vh;
+}
+.homeCoursesTrainee_Course{
+    transform:scale(0.9);
 
 
+}
+.homeCoursesTrainee_Course_2{
+    position:absolute;
+    top:0vh;
+    left:0vh;
+    transform: translate(0vh,3vh);
+
+}
+.homeCoursesTrainee_h2 h2{
+    background: linear-gradient(90deg,rgba(2, 34, 52, 0.714),rgba(0, 78, 142, 0.768));
+    border-top-right-radius: 20px ;
+    border-bottom-left-radius: 20px;    color: white;
+    width:80%;
+    transform: translate(110px,30px);
+}
+@-webkit-keyframes TraineeHomeMain {
+    0%{background-position:14% 0%}
+    50%{background-position:87% 100%}
+    100%{background-position:14% 0%}
+}
+@-moz-keyframes TraineeHomeMain {
+    0%{background-position:14% 0%}
+    50%{background-position:87% 100%}
+    100%{background-position:14% 0%}
+}
+@keyframes TraineeHomeMain {
+    0%{background-position:14% 0%}
+    50%{background-position:87% 100%}
+    100%{background-position:14% 0%}
 }
