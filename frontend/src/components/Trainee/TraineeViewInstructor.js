@@ -16,10 +16,11 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { TextField } from '@mui/material';
+import { myInstructorRate, rateCourse, rateInstructor } from '../../API/TraineeAPI';
 
 
 export function TraineeViewInstructor(){
-    const location = useLocation();
+    const   location = useLocation();
     // const [first,setFirst] = useState(0);
     const [instructor,setinstructor]=useState()
     // const [newName,setNewName]=useState("");
@@ -29,8 +30,9 @@ export function TraineeViewInstructor(){
     const [countryNumber,setCountryNumber]=useState();
     const [traineeRate,setTraineeRate] = useState("")
       const handleChangeRate = (event , newValue)=>{
-        alert(newValue)
+        rateInstructor(location.state,newValue)
         setTraineeRate(newValue)
+        
     }
     const handleCountryNumber = (x) =>{
       setCountryNumber(x);
@@ -38,7 +40,16 @@ export function TraineeViewInstructor(){
     const getDetails = async ()=>{
         setinstructor(await getinstructorTraineeDetails(location.state))
     }
+    const [MyRate,setMyRate] = useState(0)
+    const getRate = async ()=> {
+        setMyRate(await myInstructorRate(location.state))
+    }
     getDetails()
+    React.useEffect(()=>{
+      getRate()
+
+    },[traineeRate])
+    const x = MyRate
     return(
       <div className='instructorProfileMaindiv'>
         <div>
@@ -90,7 +101,10 @@ export function TraineeViewInstructor(){
                     Rate Instructor
                 </label>
                 <Rating  className='EditInstructorValue' onChange={handleChangeRate}
-                name="half-rating" defaultValue={2.5} precision={0.5} />
+                name="half-rating" value={MyRate} precision={0.5} />
+                <label>
+                    {MyRate}
+                </label>
                </div>
         
                     

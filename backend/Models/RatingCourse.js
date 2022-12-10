@@ -23,5 +23,5 @@ const ratingSchema=new Schema({
         type:Number
     }
 })
-const Rating=mongoose.model("Rating",ratingSchema);
-module.exports=Rating
+const RatingCourse=mongoose.model("RatingCourse",ratingSchema);
+module.exports=RatingCourse
