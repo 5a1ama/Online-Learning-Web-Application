@@ -26,6 +26,8 @@ import CourseVideo from './components/courses/CourseVideo';
 import { InstructorCourseVideo } from './components/Instructor/InstructorCourseVideo.js';
 import { InstructorViewCourse } from './components/Instructor/InstructorViewCourse';
 import { verify } from './API/LoginAPI';
+import { TraineeViewInstructor } from './components/Trainee/TraineeViewInstructor';
+
 
 export default function App() {
   const navigate = useNavigate();
@@ -65,7 +67,7 @@ export default function App() {
           <Route path="/instructorProfile" element={<InstructorProfile handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path='/instructorViewCourse' element={<InstructorViewCourse handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
           <Route path="/instructorCourseVideo" element={<InstructorCourseVideo handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
-        
+          <Route path="/TraineeVieWInstructor" element={<TraineeViewInstructor handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
         </Routes>
       
     
@@ -74,7 +76,6 @@ export default function App() {
 
 function Home(props) {
   const navigate = useNavigate();
-
       const checkToken=async()=>{
         var x=verify(localStorage.getItem("token"))
         x.catch(()=>{localStorage.setItem("token",null); localStorage.clear(); //alert(localStorage.getItem("token"))

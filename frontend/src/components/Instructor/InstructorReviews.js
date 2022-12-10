@@ -5,7 +5,7 @@ import Navbar from "../navbar/Navbar";
 import "./InstructorReviews.css"
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 
-export function InstructorReviews(){
+export function InstructorReviews(props){
    const location = useLocation()
     const [reviews,setreviews] = useState([])
     useEffect(()=>{
@@ -27,7 +27,9 @@ export function InstructorReviews(){
     
     return(
         <div className="reviewsMainDiv">
-            <Navbar items={["Home","My Courses","Caleneder"]} select="" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  /> 
+            <Navbar items={["Home","My Courses","Caleneder"]} select="" handleCountryNumber={props.handleCountryNumber}
+
+             nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  /> 
 
             <div className="InstructorReviews">
 
@@ -41,5 +43,3 @@ export function InstructorReviews(){
     
     )
 }
-{/* <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/>
-            <ReviewDiv title={"aaaaaaaaaaaaaaaaaaaaaaaaaaaa"}/> */}

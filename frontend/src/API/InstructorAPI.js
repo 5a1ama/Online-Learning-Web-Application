@@ -59,6 +59,7 @@ export const updateInstructorName=async(name)=>{
         "Content-type": "application/json; charset=UTF-8"
     }
     })
+    return await result.json()
 }
 export const updateInstructorEmail=async(name)=>{
     var result=await fetch(`http://localhost:8000/instructor/updateEmail/${name}/${localStorage.getItem("token")}`,{method: "POST",
@@ -66,13 +67,24 @@ export const updateInstructorEmail=async(name)=>{
         "Content-type": "application/json; charset=UTF-8"
     }
     })
+    return await result.json()
+}
+export const updateInstructorPass=async(oldPass,pass)=>{
+    var result=await fetch(`http://localhost:8000/instructor/updatePass2/${oldPass}/${pass}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    return await result.json()
 }
 export const updateInstructorSpec=async(name)=>{
     var result=await fetch(`http://localhost:8000/instructor/updateSpec/${name}/${localStorage.getItem("token")}`,{method: "POST",
     headers: {
         "Content-type": "application/json; charset=UTF-8"
+
     }
     })
+    return await result.json()
 }
 export const uploadCourseVideo=async(id,link)=>{
     const result=await fetch(`http://localhost:8000/instructor/uploadCourseVideo`,{method: "POST",
@@ -95,8 +107,9 @@ export const definePromotion=async(id,amount,duration)=>{
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     },
-    body: JSON.stringify({courseID:id,amount:amount,duration:duration})
+    body: JSON.stringify({courseID:id,amount:amount,duration:duration,token:localStorage.getItem("token")})
 })
+return await result.json()
 }
 export const addNewSubToCourse=async(courseid,subtitle,hours)=>{
     const result=await fetch(`http://localhost:8000/course/addCourseSub/${subtitle}/${hours}/${courseid}`,{method: "POST",
@@ -117,6 +130,10 @@ export const deleteSubTitle=async (title,id)=>{
 })
 return await result.json()
 
+}
+export const getinstructorTraineeDetails = async(id) =>{
+    const result = await fetch(`http://localhost:8000/instructor/getinstructorTraineeDetails/${id}`)
+    return await result.json()
 }
 export const updateSubtitle=async(id,oldtitle,title,hours,link,desc)=>{
     var route=`http://localhost:8000/course/updateSubtitle/${id}/${oldtitle}`

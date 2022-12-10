@@ -17,6 +17,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 export function InstructorHome(){
@@ -65,8 +66,9 @@ export function InstructorHome(){
        name="half-rating-read" defaultValue={instructor && ((instructor.rating.value >Math.floor(instructor.rating.value) && instructor.rating.value<(Math.floor(instructor.rating.value)+0.5))? Math.floor(instructor.rating.value):Math.floor(instructor.rating.value)+0.5)} precision={0.5} readOnly />}
 
        <Button className="reviewsButton"   variant="text" onClick={()=>navigate("/instructorReviews",{state:instructor.reviews})}>{'Reviews>>'} </Button>
-       <EditIcon className="editIconClick" />
-       
+       <button className="AccountCircleButton" onClick={() => navigate('/instructorProfile')}>
+       <AccountCircleIcon  color="primary" sx={{ fontSize: 35  }} className="AccountIconClick"/>
+       </button>
         </div>
 
         <List  className="questions" sx={{ width: '100%', maxWidth: 1000, bgcolor: 'background.paper' }}>
