@@ -105,7 +105,7 @@ export function InstructorCourses(){
       className='SubjectNameFilter' value={searchSubject}/>
       <button onClick={handleFilter2}  className ='InstructorCourses-Apply'>Apply</button>
       <button onClick={handleReset} className='ReatFilterButton'>
-        Reset Filter
+        Reset Filters
       </button>
       <div className='SliderfilterCourse'>
       <Box sx={{ width: 300 }}>

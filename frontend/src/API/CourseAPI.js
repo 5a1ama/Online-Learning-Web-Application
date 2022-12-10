@@ -33,10 +33,12 @@ export const getAllCourses=async()=>{
     return j
   }
 export const FilterAllCourse2= async (rating,subject,minprice,maxprice)=>{
-  
   if(subject != ""){
-    
-
+      
+    if(rating.length===0){
+      
+      rating=10
+    }
    const result = await fetch(`http://localhost:8000/course/filter-sub/${rating}/${subject}`);
    const j1=await result.json();
   const result2= await fetch(`http://localhost:8000/course/filter-price/${minprice}/${maxprice}`)
@@ -56,7 +58,12 @@ export const FilterAllCourse2= async (rating,subject,minprice,maxprice)=>{
   }
   return array;
 
-  }else{
+  }else if(rating.length===0){
+    const result2= await fetch(`http://localhost:8000/course/filter-price/${minprice}/${maxprice}`)
+    const j2=await result2.json();
+    return j2
+  }
+  else{
     
     const result = await fetch(`http://localhost:8000/course/filter-sub/${rating}/-1`);
     const j1=await result.json();

@@ -34,7 +34,7 @@
     
     color:rgb(255, 255, 255);
 
-    font-size: 50px;
+    font-size: 45px;
 }
 .CoureItems_OnVideo h2{
     color:var(--primary-light);
@@ -174,7 +174,7 @@
     min-height: 80vh;
 }
     .CourseItems_DivForContinue{
-        transform:scale(0.58)translate(-50vh,-20vh) ;
+        transform:scale(0.58)translate(-50vh,-30vh) ;
         }
         .CourseItems_DivForContinue_WorkSub{
             position:absolute;
@@ -182,12 +182,11 @@
             left:0vh;
         }
 .CourseItems_DivForContinue_WorkSub{
-    transform: translate(30vh,20vh);
+    transform: translate(0vh,10vh);
 }
 
 .CourseItems_SecondPart_View_Buttons button{
     background-color: transparent ;
-    
     border-radius: 0px;
     width:20vh;
     font-size: 20px;

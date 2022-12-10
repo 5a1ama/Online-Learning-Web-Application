@@ -130,7 +130,7 @@ function Navbar(props) {
             <BiSearch className="icon" onClick={ ()=>{handleAll();handleSearchBar()}} style={{marginRight: '1rem'}}/>
             
             {(token===null || token.length<20) ? 
-            (<BsPerson className="icon" onClick={()=> navigate('/login')} style={{marginRight: '1rem'}}  /> )
+            (<BsPerson className="icon" onClick={()=> navigate('/login')}   /> )
             :
             (<AiOutlineMenu className="icon" onClick={()=>{handleAll();handleSettingMenu()}} style={settingMenu?{color:"rgb(10,138,218)",borderRadius:"5px",zIndex:"1"}:{color:"fff"}}/>)}
 

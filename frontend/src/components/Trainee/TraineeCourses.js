@@ -38,7 +38,7 @@ export function TraineeCourses() {
     setFirst(1);
   }
   
-    const [value,setValue]=useState([1000,5000]);
+    const [value,setValue]=useState([1000,50000]);
     const valuetext=(value)=> {
         return `${value}°C`;
       }
@@ -50,14 +50,18 @@ export function TraineeCourses() {
 
       }
       const handleFilter=async ()=>{
-        setCourses(await FilterMyCourses(value[0],value[1],subject))
+        setCourses(await FilterMyCourses(Math.floor(value[0]/newPriceRatio),Math.floor(value[1]/newPriceRatio),subject))
       }
       const [countryNumber,setCountryNumber]=useState();
       const handleCountryNumber = (x) =>{
         setCountryNumber(x);
       }
+      const [newPriceRatio,setNewPriceRatio]= useState();
+      const handleNewPriceRatio = (x) => {
+        setNewPriceRatio(x);
+      }
 return(
-    <div className = "TraineeHomeMain">
+    <div className = "TraineeHomeMain2">
     
     <div>
         <Navbar items={["Home","My Courses","All Courses"]} 
@@ -66,8 +70,8 @@ return(
 
     </div>
     <div>
-      <div>
-      {courses.map((course) => <NewCourse course={course}       country={countryNumber}/>)}
+      <div className="TraineeCourses_CoursesDiv">
+      {courses.map((course) => <NewCourse course={course}  handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>)}
       </div>
     <form className="search-Trainee-courses">
             <div>
@@ -104,7 +108,7 @@ return(
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
         min={0}
-        max={10000} />
+        max={Math.floor(5000*newPriceRatio)} />
 
               </Box>
       </div>

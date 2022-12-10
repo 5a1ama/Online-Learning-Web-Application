@@ -19,36 +19,40 @@ export function TraineeHome (){
   const [details,setDetails]=useState("");
   const getCourses = async () =>{
     
-    setCourses ((await getTraineeCourses(localStorage.getItem("token"))).slice(0,3));
-    // alert(courses);
+    setCourses ((await getTraineeCourses(localStorage.getItem("token"))).slice(0,1));
+
   }
   const [countryNumber,setCountryNumber]=useState();
   const handleCountryNumber = (x) =>{
     setCountryNumber(x);
   }
-  const getDetails=async ()=>{
-    setDetails(await getTraineeDetails())
-  }
-  useEffect(()=>{
-    getCourses();
-  getDetails()
-  },[courses,details])
+  getCourses();
 
  
     return(
         <div className = "TraineeHomeMain">
           
     
-        <div>
              <Navbar items={["Home","My Courses","All Courses"]}
                handleCountryNumber={handleCountryNumber}
                select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
-        </div>
-        <div className="mainDetailsTrainee">
-        <div className="homeCoursesTrainee">
-          {courses.map((course) => <NewCourse course={course}   country={countryNumber}/>)}
+        
 
+        <div className="mainDetailsTrainee">
+
+          <div className="homeCoursesTrainee">
+            <div className="homeCoursesTrainee_h2">
+            <h2> Continue working on:</h2>
+            </div>
+            <div className="homeCoursesTrainee_Course">
+          <div className="homeCoursesTrainee_Course_2">
+
+
+          {courses.map((course) => <NewCourse course={course}   country={countryNumber}/>)}
           </div>
+            </div>
+          </div>
+
 
         <div className="traineeDitails">
         <Avatar className="TraineeAvatar"
@@ -66,6 +70,7 @@ export function TraineeHome (){
 
         </div>
         </div>
+      
         </div>
     );
 }

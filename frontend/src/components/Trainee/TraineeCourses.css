@@ -117,3 +117,21 @@
     left:40%;
     width: 23%;
 }
+.TraineeCourses_CoursesDiv{
+    position: absolute;
+    top:75px;
+}
+
+.TraineeHomeMain2{
+    position: relative;
+    /* background-image: linear-gradient(180deg,rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 0.9)),url('../../assets/TraineeHome.jpg'); */
+    background-color: aliceblue;
+    background-size:contain;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1 1 0;
+    row-gap:2vw ;
+    width: 100%;
+    height:100vh;
+
+}
