@@ -7,8 +7,6 @@ import EditIcon from '@mui/icons-material/Edit';
 
 import {getTraineeCourses, getTraineeDetails} from '../../API/TraineeAPI';
 import "./TraineeHome.css";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-
 
 
 
@@ -22,6 +20,13 @@ export function TraineeHome (){
     setCourses ((await getTraineeCourses(localStorage.getItem("token"))).slice(0,1));
 
   }
+
+  useEffect(()=>{
+    async function getDetails(){
+      setDetails(await getTraineeDetails())
+    }
+    getDetails();
+  })
   const [countryNumber,setCountryNumber]=useState();
   const handleCountryNumber = (x) =>{
     setCountryNumber(x);
@@ -48,7 +53,7 @@ export function TraineeHome (){
           <div className="homeCoursesTrainee_Course_2">
 
 
-          {courses.map((course) => <NewCourse course={course} Trainee={true}   country={countryNumber}/>)}
+          {courses.map((course) => <NewCourse course={course}   country={countryNumber}/>)}
           </div>
             </div>
           </div>
@@ -64,9 +69,7 @@ export function TraineeHome (){
         </Avatar>
            <h5 className="traineeName">{details && details.Name}</h5>
            <h5 className="traineeEmail">{details && details.Email}</h5>
-           <button className="AccountCircleButton" onClick={() => navigate('/instructorProfile')}>
-       <AccountCircleIcon  color="primary" sx={{ fontSize: 35  }} className="AccountIconClick"/>
-       </button>
+           <EditIcon className="T-editIconClick" />
 
         </div>
         </div>
