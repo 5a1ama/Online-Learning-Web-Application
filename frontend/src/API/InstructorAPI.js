@@ -28,7 +28,6 @@ export const FilterAllCourse=async(min,max,subject)=>{
 }
 export const FilterMyCourse=async(min,max,subject)=>{
     if(subject==""){
-        alert(2);
         const response=await fetch(`${api}/instructor/myCourses-price-subject/${min}/${max}/-1/${localStorage.getItem("token")}`)
         const j=await response.json();
         

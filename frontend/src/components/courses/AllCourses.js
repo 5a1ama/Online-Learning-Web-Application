@@ -91,7 +91,7 @@ function AllCourses() {
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
         min={0}
-        max={10000} />
+        max={50000} />
 
               </Box>
     </div>

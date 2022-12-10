@@ -18,14 +18,13 @@ import Footer from '../footer/Footer';
 import Subtitle from './subtitles/Subtitle';
 import Rating from '@mui/material/Rating';
 import { alertClasses } from '@mui/material';
-
+import { myInstructorRate, rateCourse } from '../../API/TraineeAPI';
 
 function CourseItems() {
     const [first,setFirst] = useState(0);
     const location=useLocation();
     const navigate = useNavigate();
    
-
 
     const [details,setDetails] = useState([]);
     
@@ -36,10 +35,20 @@ function CourseItems() {
     const handleGift =() =>{setGift(!gift)};
 
     const [view , setView] = useState("");
+
     const [traineeRate,setTraineeRate] = useState("")
     const handleChangeRate = (event , newValue)=>{
-        setTraineeRate(newValue)
-    }
+      rateCourse(Number(location.state.id),Number(newValue))
+      setTraineeRate(newValue)
+  }
+
+  const [MyRate,setMyRate] = useState(0)
+  const getRate = async ()=> {
+      setMyRate(await myInstructorRate(Number(location.state.id)))
+  }
+  
+
+ 
     const handleView = (view) => {
         setView(view);
     }
@@ -50,6 +59,10 @@ function CourseItems() {
         handleView(location.state.View)
     })
 
+    useEffect(()=>{
+        getRate()
+    
+      },[traineeRate])    
 
 
     const now = 90 ;
@@ -110,6 +123,7 @@ function CourseItems() {
         
 
         handleInstNames();
+        getRate();
 
   return (
     
@@ -169,7 +183,8 @@ function CourseItems() {
              </label>
              <Rating 
              name="half-rating" 
-             defaultValue={2.5} precision={0.5}
+             value={MyRate}
+              precision={0.5}
              onChange={handleChangeRate} />
              </div>
             </div>
