@@ -27,6 +27,8 @@ import { InstructorCourseVideo } from './components/Instructor/InstructorCourseV
 import { InstructorViewCourse } from './components/Instructor/InstructorViewCourse';
 import { verify } from './API/LoginAPI';
 import { TraineeViewInstructor } from './components/Trainee/TraineeViewInstructor';
+import { TraineeProfile } from './components/Trainee/TraineeProfile';
+
 
 
 export default function App() {
@@ -68,6 +70,7 @@ export default function App() {
           <Route path='/instructorViewCourse' element={<InstructorViewCourse handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
           <Route path="/instructorCourseVideo" element={<InstructorCourseVideo handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
           <Route path="/TraineeVieWInstructor" element={<TraineeViewInstructor handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/TraineeProfile" element={<TraineeProfile handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/> 
         </Routes>
       
     

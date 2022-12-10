@@ -7,6 +7,8 @@ import EditIcon from '@mui/icons-material/Edit';
 
 import {getTraineeCourses, getTraineeDetails} from '../../API/TraineeAPI';
 import "./TraineeHome.css";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 
 
 
@@ -62,7 +64,9 @@ export function TraineeHome (){
         </Avatar>
            <h5 className="traineeName">{details && details.Name}</h5>
            <h5 className="traineeEmail">{details && details.Email}</h5>
-           <EditIcon className="T-editIconClick" />
+           <button className="AccountCircleButton" onClick={() => navigate('/instructorProfile')}>
+       <AccountCircleIcon  color="primary" sx={{ fontSize: 35  }} className="AccountIconClick"/>
+       </button>
 
         </div>
         </div>
