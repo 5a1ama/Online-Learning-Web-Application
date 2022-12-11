@@ -57,3 +57,36 @@
     margin-left: 68%;
     width:30%;
 }
+.TraineedataDivNext{
+    display: flex;
+    flex-direction: row;
+    column-gap: 12vw;
+    justify-content: start;
+    margin-left: 1%;
+    font-size: 1.5rem;
+    word-wrap: break-word;
+    flex-wrap: wrap;
+}
+.TraineeEditData2{
+    background-color: rgb(244, 244, 244);
+    position: absolute;
+    width: 700px;
+    height: 380px;
+    left: 30%;
+    top: 5%;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius:20px;
+    border-bottom-right-radius:20px;
+    border-top-right-radius:20px;
+    display: flex;
+   flex-direction: column; 
+   justify-content: start;
+   flex-grow: 1 1 0;
+   row-gap: 1vw;
+   padding-top: 2%;
+}
+.traineeSubProfileButton1{
+    margin-top: 12%;
+    margin-left: 68%;
+    width:30%;
+}

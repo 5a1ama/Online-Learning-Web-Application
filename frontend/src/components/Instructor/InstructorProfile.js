@@ -147,6 +147,12 @@ export function InstructorProfile(){
                <label className='EditInstructorValue' >{instructor && instructor.specialization}</label>
                </div>
                <Divider/>
+               <div className='dataDivNext'>
+               <label className='specializationLabel'>
+                specialization
+               </label>
+               <label className='EditInstructorValue' >{instructor && instructor.specialization}</label>
+               </div>
                 
              
 
@@ -200,7 +206,7 @@ export function InstructorProfile(){
                      id="outlined-basic" 
                      label="New password"
                       variant="outlined"
-                      type="password" />
+                      t ype="password" />
 
 
                     <TextField 

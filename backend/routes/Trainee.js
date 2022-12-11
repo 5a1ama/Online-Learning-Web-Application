@@ -79,6 +79,8 @@ router.post("/updateName/:name/:token",async function(req,res){
     var newname=req.params.name;
     await Trainee.findOneAndUpdate({id:id},{Name:newname});
     await User.findOneAndUpdate({id:id},{Name:newname});
+    res.json("ok")
+
 })
 router.post("/updateEmail/:name/:token",async function(req,res){
     var token=req.params.token;
@@ -87,6 +89,8 @@ router.post("/updateEmail/:name/:token",async function(req,res){
     var newname=req.params.name;
     await Trainee.findOneAndUpdate({id:id},{Email:newname});
     await User.findOneAndUpdate({id:id},{Email:newname});
+    res.json("ok")
+
 })
 router.get("/searchMyCourse/:search/:token",async function(req,res){
     var search=req.params.search;
