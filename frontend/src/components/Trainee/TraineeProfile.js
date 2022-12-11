@@ -1,21 +1,54 @@
 import Navbar from "../navbar/Navbar";
 import React, { useEffect, useState } from 'react';
 import './TraineeProfile.css'
-import { getTraineeDetails } from "../../API/TraineeAPI";
+import { getTraineeDetails, updateTraineeEmail, updateTraineeName } from "../../API/TraineeAPI";
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
+import { TextField } from '@mui/material';
+
 
 
 export function TraineeProfile(){
     const [countryNumber,setCountryNumber]=useState();
+    const [first,setFirst] = useState(0);
+
     const handleCountryNumber = (x) =>{
       setCountryNumber(x);
     }
     const [Trainee,setTrainee] = useState()
+    const [newName,setNewName]=useState("");
+    const handleNewName =(event)=>{
+        setNewName(event.target.value)
 
+    }
+    const [newEmail,setNewEmail]=useState("");
+    const handleNewEmail =(event)=>{
+        setNewEmail(event.target.value)
+    }
+
+    const [showDiv1,setShowDiv1] = useState(false);
+
+    const handleUpdate=async ()=>{
+       
+        const y = await updateTraineeName(newName);
+        const z = await updateTraineeEmail(newEmail);
+
+         setShowDiv1(false)
+         
+
+         
+     }
+     
     const intial = async()=>{
         setTrainee(await getTraineeDetails())
+        if(first==0){
+            setNewEmail(Trainee.Email)
+            setNewName(Trainee.Name)
+            setFirst(1)
+        }
     }
+
+
     intial()    
     return(
         <div className="TraineeProfilePage">
@@ -57,11 +90,31 @@ export function TraineeProfile(){
                </div>
 
                <Divider/>
-                <button  className='editTraineeProfileButton1'>
+                <button  className='editTraineeProfileButton1' onClick={()=> {setShowDiv1(true);}}>
                         edit
                     </button>
                     
                 </div>
+               {showDiv1&& <div className="TraineeEditData2">
+               <TextField id="filled-basic" 
+                 defaultValue={Trainee && Trainee.Name} 
+                 variant="standard" 
+                 className='NameLabel2'
+                 onChange={handleNewName} />
+
+
+                <TextField
+                 id="filled-basic" 
+                 defaultValue={Trainee && Trainee.Email} 
+                 variant="standard"  
+                 className='NameLabel2'
+                 onChange={handleNewEmail}/>
+
+                    <button  className='traineeSubProfileButton1' onClick={ handleUpdate}>
+                        submit
+                    </button>
+
+                </div>}
 
         </div>
     );
