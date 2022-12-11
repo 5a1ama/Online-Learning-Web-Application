@@ -108,13 +108,13 @@ function Navbar(props) {
                     if(props.nav[i]!="")
                     return <Link to={props.scroll[i]} style={{color:"#fff"}} onClick={()=>navigate(props.nav[i])} smooth={true} duration="500"><li>{item}</li></Link>
                     else
-                    return <Link to={props.scroll[i]}  style={{color:"#bbb"}}  smooth={true} duration="500"><li>{item}</li></Link>
+                    return <Link to={props.scroll[i]}  style={{color:"#fff"}}  smooth={true} duration="500"><li>{item}</li></Link>
                 }
                 else{
                     if(props.nav[i]!="")
                     return <Link to={props.scroll[i]} style={{color:"#bbb"}} onClick={()=>navigate(props.nav[i])} smooth={true} duration="500"><li>{item}</li></Link>
                     else
-                    return <Link to={props.scroll[i]} style={{color:"#bbb"}} smooth={true} duration="500"><li>{item}</li></Link>
+                    return <Link to={props.scroll[i]} style={{color:"#fff"}} smooth={true} duration="500"><li>{item}</li></Link>
                 }
 
             })}      

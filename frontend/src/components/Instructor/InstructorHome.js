@@ -33,7 +33,6 @@ export function InstructorHome(){
     }
     intial();
     
-    
     })   
     
     const [countryNumber,setCountryNumber]=useState();

@@ -23,7 +23,7 @@ export function TraineeHome (){
         setCourses ((await getTraineeCourses(localStorage.getItem("token"))).slice(0,1));
       }
       getCoursess();
-  },[courses])
+  },)
   
   const [details,setDetails]=useState("");
   

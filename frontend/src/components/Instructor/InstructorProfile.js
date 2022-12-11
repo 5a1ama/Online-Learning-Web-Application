@@ -35,32 +35,34 @@ export function InstructorProfile(){
         setConfirmPass(event.target.value);
     }
     const [instructor,setinstructor]=useState()
+
     const [newName,setNewName]=useState("");
     const handleNewName =(event)=>{
         setNewName(event.target.value)
-
     }
+
     const [newEmail,setNewEmail]=useState("");
     const handleNewEmail =(event)=>{
         setNewEmail(event.target.value)
     }
+
     const [newSpec,setNewSpec]=useState("");
     const handleNewSpec =(event)=>{
         setNewSpec(event.target.value)
     }
+
     const [newBio,setNewBio]=useState("");
     const handleNewBio =(event)=>{
         setNewBio(event.target.value)
     }
 
     const handleUpdate=async ()=>{
-       const x = await updateInstructorSpec(newSpec);
-       const y = await updateInstructorName(newName);
-       const z = await updateInstructorEmail(newEmail);
-       const v = await updateInstructorBio(newBio);
-        setShowDiv(false)
-
-
+        
+        await updateInstructorName(newName);
+        await updateInstructorEmail(newEmail);
+        await updateInstructorSpec(newSpec);
+        await updateInstructorBio(newBio);
+       setShowDiv(false)
     }
     const [changePass,setChangePass]=useState(false);
     const handleChangePass =()=>{
@@ -222,7 +224,9 @@ export function InstructorProfile(){
                      id="outlined-basic" 
                      label="New password"
                       variant="outlined"
-                      t ype="password" />
+                      type="password" 
+                      
+                      />
 
 
                     <TextField 

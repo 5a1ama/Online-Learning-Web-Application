@@ -17,8 +17,9 @@ import { GetInstructorName } from './../../API/CourseAPI';
 import Footer from '../footer/Footer';
 import Subtitle from './subtitles/Subtitle';
 import Rating from '@mui/material/Rating';
-import { alertClasses } from '@mui/material';
+import { alertClasses, Avatar } from '@mui/material';
 import { myCourseRate, myInstructorRate, rateCourse } from '../../API/TraineeAPI';
+import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 
 function CourseItems() {
     const [first,setFirst] = useState(0);
@@ -130,9 +131,10 @@ function CourseItems() {
     
     <div className="CourseItems">
 
-            <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]}
-                    handleCountryNumber={handleCountryNumber}
-                    select="Course" nav={["/","/CourseItems","/","/signUp"]} scroll={["","",""]}  />
+            <Navbar items={["Home","My Courses","All Courses"]}
+               handleCountryNumber={handleCountryNumber}
+               select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
+        
             <div className="CourseItems_Video">
 
                  <video autoPlay loop muted id='video'>
@@ -228,9 +230,15 @@ function CourseItems() {
                                     </div>
                                 }
 
-
                                 {view==="Reviews" && 
-                                <div>
+                                <div className='InstructorCourseReviewsBig'>
+                                        
+                                        {details && details.length>0 && details[0].reviews.map((review)=><div className="reviewsCourseDiv">
+                                         <Avatar sx={{backgroundColor:"#58a5f0"}} className="reviewCourseAvatar"/>
+                                        <FormatQuoteIcon className="reviewCourseComment"/>
+                                         <textarea readOnly className="reviewCourseComment">{review}</textarea>
+                        
+                                        </div>)}
                                     {/* {details[0].discount.amount && <div>
                                     <img alt="." className="Course_Gift" src={Gift} />
                                     <div className="Course_giftText">

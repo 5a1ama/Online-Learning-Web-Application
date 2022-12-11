@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
 import {BiDownArrow} from 'react-icons/bi';
 import starImg from "../../assets/goldStar.png"
+import DiscountImg from "../../assets/disCount.png"
+import DiscountImg2 from "../../assets/disCount2.png"
 
 
 export function NewCourse(props) {
@@ -35,14 +37,28 @@ export function NewCourse(props) {
 
     <div className={courseDetails? "newCourse-After":"newCourse"}  >
         <div className={courseDetails? "newCourse-After-Content":"newCourse-content"}>
-
+      
+        { 
+       (props.course.discount.amount>0) && 
+        <img alt="." src={DiscountImg2} className="DiscountLabel2" />
+        }
           <div className="newCourse_title">
               <h3 >{props.course.title}</h3>
           </div>
           
                 { props.Trainee!=="Corporate" &&<div className="NewCourse_Prices">
-                  <h2 className='NewCourse_price'>{  Math.floor(props.course.price*fares[chosenCountry])} {currency[chosenCountry]}</h2>
+                 {
+                 (props.course.discount.amount&&props.course.discount.amount>0)?
+                 <div style={{display:'flex', flexDirection:'row'}}>
                   <h2 className='NewCourse_price2'>   {props.course.discount.amount} %</h2>
+                  <h2 className='NewCourse_price'>{  Math.floor(props.course.price*fares[chosenCountry])} {currency[chosenCountry]}</h2>
+                  <h2 className='NewCourse_priceNew'>{  Math.floor(props.course.price*fares[chosenCountry]) *(props.course.discount.amount/100)} {currency[chosenCountry]}</h2>
+                  </div>
+                  :<div>
+                     <h2 className='NewCourse_priceNoDis'>{  Math.floor(props.course.price*fares[chosenCountry])} {currency[chosenCountry]}</h2>
+                    </div>
+                }
+                
                 </div>}
           
               <div className="NewCourse_StarsHoursPrice">
