@@ -6,6 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import { TextField } from '@mui/material';
 import { updateInstructorPass } from "../../API/InstructorAPI";
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 
 
 
@@ -123,7 +124,7 @@ export function TraineeProfile(){
 
                <Divider/>
                 <button  className='editTraineeProfileButton1' onClick={()=> {setShowDiv1(true);}}>
-                        edit
+                <ModeEditOutlineIcon color="primary"/>
                     </button>
                     
                 </div>
@@ -145,6 +146,9 @@ export function TraineeProfile(){
 
                     <button  className='traineeSubProfileButton1' onClick={ handleUpdate}>
                         submit
+                    </button>
+                    <button  className='TraineecancelProfileButton1' onClick={()=> setShowDiv1(false)}>
+                        Cancel
                     </button>
 
                 </div>}

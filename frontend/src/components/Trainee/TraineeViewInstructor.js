@@ -71,7 +71,11 @@ export function TraineeViewInstructor(){
            
        </Avatar>
           <h5 className="instructorname">{instructor && instructor.Name}</h5>
-          <h5 className="instructorEmail">{instructor && instructor.Email}</h5>
+          <h5 className="instructorEmail">{instructor && instructor.Email}</h5>   
+               
+                <Rating  onChange={handleChangeRate}
+                name="half-rating" value={MyRate} precision={0.5} />
+               
                  </div>
 
              <div className='editinstructordata'>
@@ -98,16 +102,16 @@ export function TraineeViewInstructor(){
                <label className='EditInstructorValue' >{instructor && instructor.specialization}</label>
                </div>
                <Divider/>
-               <div>
-                <label className='specializationLabel'>
-                    Rate Instructor
-                </label>
-                <Rating  className='EditInstructorValue' onChange={handleChangeRate}
-                name="half-rating" value={MyRate} precision={0.5} />
-                <label>
-                    {MyRate}
-                </label>
+               <div className='dataDivNext'>
+               <label className='specializationLabel'>
+                Bio
+               </label>
+               <label className='EditInstructorValue' >{instructor && instructor.bio}</label>
                </div>
+               <br></br>
+              
+
+             
         
                     
                 </div>
