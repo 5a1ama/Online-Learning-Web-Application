@@ -36,6 +36,9 @@ const instructorSchema=new Schema(
           },
           specialization:{
             type:String
+          },
+          bio:{
+            type:String
           }
     }
 )
