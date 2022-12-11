@@ -23,16 +23,16 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 export function InstructorHome(){
     const navigate=useNavigate();
     const [instructor,setinstructor]=useState()
-    const intial = async()=>{
-        setinstructor(await getInstructorDetails())
-    }
-    intial();
+   
     if(instructor==""){
       navigate("/")
     }
     useEffect(()=>{
-       // intial();
-
+      async function intial (){
+        setinstructor(await getInstructorDetails())
+    }
+    intial();
+    
     
     })   
     
@@ -45,9 +45,9 @@ export function InstructorHome(){
 <div className = "divcenter">
 <div>
 
-    <Navbar items={["Home","My Courses","Caleneder"]}     handleCountryNumber={handleCountryNumber}
+    <Navbar items={["Home","My Courses","All Courses"]}     handleCountryNumber={handleCountryNumber}
 
-    select="Home" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
+    select="Home" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]} inst={true} scroll={["","",""]}  />
 
         </div>
         <div className="instructorDitails">

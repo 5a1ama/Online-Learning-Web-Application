@@ -120,8 +120,9 @@ export function InstructorCourses(){
     return(
         <div>
             <div>
-            <Navbar items={["Home","My Courses","Caleneder"]}
-            select="My Courses" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]} handleCountryNumber={handleCountryNumber}/>
+            <Navbar items={["Home","My Courses","All Courses"]}     handleCountryNumber={handleCountryNumber}
+            select="My Courses" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]} inst={true} scroll={["","",""]}  />
+
             </div>
              <div className="InstCourses" name = 'instCourses'>
                   <div className="InstructorCourses_newCourse" onClick={()=> navigate('/addCourse')} >
@@ -140,7 +141,7 @@ export function InstructorCourses(){
         </form>
 
             <div className="Inst-buttonCourse">
-    <button  className="InstructorAllCourses" onClick={()=> navigate('/InstAllCourses')}>All Courses‎ ‎ ‎  ‎   ‎   {">>>"} </button>
+    {/* <button  className="InstructorAllCourses" onClick={()=> navigate('/InstAllCourses')}>All Courses‎ ‎ ‎  ‎   ‎   {">>>"} </button> */}
     </div>
     
     <button className='InstructorCourses-FilterBarButton' onClick={handleFilterBar}>Filter Courses</button>

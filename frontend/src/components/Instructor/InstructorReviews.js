@@ -27,9 +27,8 @@ export function InstructorReviews(props){
     
     return(
         <div className="reviewsMainDiv">
-            <Navbar items={["Home","My Courses","Caleneder"]} select="" handleCountryNumber={props.handleCountryNumber}
-
-             nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  /> 
+               <Navbar items={["Home","My Courses","All Courses"]}     handleCountryNumber={props.handleCountryNumber}
+            select="" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]} inst={true} scroll={["","",""]}  />
 
             <div className="InstructorReviews">
 

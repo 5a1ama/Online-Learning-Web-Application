@@ -128,11 +128,10 @@ export function InstAllCourses(){
     return(
         <div>
 
-<div>
-<Navbar items={["Home","My Courses","Caleneder"]} 
-    handleCountryNumber={handleCountryNumber}
-    select="" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
-</div>
+    <div>
+      <Navbar items={["Home","My Courses","All Courses"]}     handleCountryNumber={handleCountryNumber}
+                  select="All Courses" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]} inst={true} scroll={["","",""]}  />
+    </div>
 <div className='AllCourses'>
             <h1 className="heading">Our Courses</h1>
             {courses.map((course) => <NewCourse course={course} inst={true} handleNewPriceRatio={handleNewPriceRatio}   country={countryNumber}/>)}

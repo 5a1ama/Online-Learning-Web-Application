@@ -101,10 +101,8 @@ export function InstructorProfile(){
     return(
       <div className='instructorProfileMaindiv'>
         <div>
-        <Navbar items={["Home","My Courses","Caleneder"]}
-            handleCountryNumber={handleCountryNumber}
-        select="" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}  />
-
+        <Navbar items={["Home","My Courses","All Courses"]}     handleCountryNumber={handleCountryNumber}
+            select="" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]} inst={true} scroll={["","",""]}  />
         </div>
       {!showDiv2&&  <div className="instructorDetailsProfile">
         

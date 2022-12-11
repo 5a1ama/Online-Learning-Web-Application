@@ -202,7 +202,9 @@ const handleHours=(event)=>{
     
     <div className="CourseItems">
 
-            <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]}     handleCountryNumber={handleCountryNumber} select="Course" nav={["/","/CourseItems","/","/signUp"]} scroll={["","",""]}  />
+            <Navbar items={["Home","My Courses","All Courses"]}     handleCountryNumber={handleCountryNumber}
+            select="" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]} inst={true} scroll={["","",""]}  />
+
             <div className="CourseItems_Video">
 
                  <video autoPlay loop muted id='video'>

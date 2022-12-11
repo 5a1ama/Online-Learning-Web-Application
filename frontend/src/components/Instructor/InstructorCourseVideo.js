@@ -17,9 +17,8 @@ export function InstructorCourseVideo() {
   }
   return (
     <div className ="CourseVideo">
-         <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]}  
-          handleCountryNumber={handleCountryNumber}
-        select="Home" nav={["","","","/signUp"]} scroll={["Home","Courses","WhatHegza"]}  />
+              <Navbar items={["Home","My Courses","All Courses"]}     handleCountryNumber={handleCountryNumber}
+            select="" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]} inst={true} scroll={["","",""]}  />
 
          <div className='CourseVideo_Directory' style={{display:'flex' , flexDirection:'row',marginBottom:"1rem",transform:'translate(-40vh,0)'}}>
 
