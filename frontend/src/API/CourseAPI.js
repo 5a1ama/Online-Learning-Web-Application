@@ -126,3 +126,9 @@ export const isEnrolled = async(CourseId,UserId)=>{
   const j=await result.json();
   return j
 }
+
+export const getMaxPrice = async()=>{
+  const result=await fetch(`http://localhost:8000/course/getMaxPrice`)
+    const j= await result.json();
+    return j
+}

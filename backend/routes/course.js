@@ -15,6 +15,17 @@ router.get("/allTitles",function(req,res){
         res.json(result.map((course)=>course.title))
     })
 })
+router.get("/getMaxPrice", async function(req,res)
+{
+    var query= await Course.find({})
+    var max = 0;
+    for (var i = 0 ; i<query.length; i++){
+        if(query[i].price>max){
+            max = query[i].price;
+       }
+    } 
+        res.json(max)
+})
 // @ts-ignore
 router.get("/",function(req,res){
     
@@ -150,6 +161,7 @@ router.get("/InstructorOfCourse/:InstId",async function(req,res)
     })
     }
 )
+
 router.get("/CourseisEnrolled/:CourseId/:UserId",async function(req,res)
 {
     var CourseId = req.params.CourseId;   

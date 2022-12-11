@@ -190,7 +190,20 @@ router.get("/myInstructorRate/:ratedID/:token",async function(req,res){
     
 
 })
+router.get("/myCourseRate/:ratedID/:token",async function(req,res){
+    var ratedID =Number(req.params.ratedID)
+    var token = req.params.token
+    var user = jwt.verify(token,process.env.ACCESSTOKEN)
+    var rating = await RatingCourse.find({idRated:ratedID,idRater:user.id})
+    if(rating.length==0){
+        res.json(0)
+    }
+    else{
+        res.json(rating[0].value)
+    }
+    
 
+})
 router.get("/rateInstructor/:rate/:id/:token",async function(req,res){
     var rate=Number(req.params.rate);
     var instId=req.params.id

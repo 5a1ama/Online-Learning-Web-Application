@@ -15,7 +15,7 @@ dotenv.config()
 router.post("/login",async function(req,res){
     var username=req.body.username;
     var password=req.body.password;
-    console.log(username)
+    // console.log(username)
     var query=await User.find({Email:username,Password:password});
     if(query.length != 0){
         var user={username:username,password:password,id:query[0].id,job:query[0].Job,country:""}
@@ -86,7 +86,7 @@ router.get("/sendEmail/:to/:link",function(req,res){
         }
       });
       transporter.verify().then(console.log).catch(console.error);
-    console.log(req.params.to+" "+req.params.link) 
+    // console.log(req.params.to+" "+req.params.link) 
     let mailDetails = {
         from: 'ziadayman9901@gmail.com',
         to: req.params.to,

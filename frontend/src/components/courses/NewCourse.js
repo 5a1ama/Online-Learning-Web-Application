@@ -91,11 +91,14 @@ export function NewCourse(props) {
           <h5 onClick={handleCourseDetails}>view details</h5>
           </div>
         <BiDownArrow className="icon" style={{marginRight: '1rem' , transform:'translate(0 ,0.4rem)'}} onClick={handleCourseDetails}></BiDownArrow>
-      <button className="NewCourse-button-OpenCourse" style={{marginRight: '1rem' ,width:"100px",height:"60px",transform:"translate(1rem,1.7rem)" }} onClick={()=>{ if(!props.inst){navigate("/CourseItems",{state:{id:props.course.id,View:"Overview"}})
+      <button className="NewCourse-button-OpenCourse" style={{marginRight: '1rem' ,width:"100px",height:"60px",transform:"translate(1rem,1.7rem)" }} onClick={()=>{ if(props.Trainee){navigate("/CourseItems",{state:{id:props.course.id,View:"Overview"}})
     
-    }else{
+    }else if(props.inst){
       navigate("/instructorViewCourse",{state:{id:props.course.id,View:"Overview"}})
-    }}}>Open Course</button>
+    }else{
+      navigate("/CourseContent",{state:{id:props.course.id,View:"Overview"}})
+    }
+    }}>Open Course</button>
     </div>  
   )
 }

@@ -26,6 +26,7 @@ function Subtitle(props) {
     
     const handleShowDetailsClicked =() =>{
         setShowDetailsClicked(!showDetailsClicked)
+        handleShowDetails();
     };
 
     const handleShowDetails =() =>{
@@ -34,23 +35,24 @@ function Subtitle(props) {
         
     };
     const HandleSyllabus =()=>{
-        if(props.View==="Syllabus" &&showDetailsClicked===false && props.sub.title==props.SubTitleBack){
+        if(props.View==="Syllabus" && showDetailsClicked==false && props.sub.title==props.SubTitleBack){
         setShowDetails(true);
     }
 
     }
-    useEffect(()=>
-    {
-        HandleSyllabus()
-    }   
-    )
-   
+    const[first,setFirst]=useState(0);
+    
+    if(first==0){
+        HandleSyllabus();
+        setFirst(1);
+    }
+    
     return (
         <div className="CourseItems_Syllabus_Subtitles_1">
 
             <div className={!showDetails?"CourseItems_Syllabus_Subtitles_Content":"CourseItems_Syllabus_Subtitles_Content_Details"}onClick={!showDetails?handleShowDetails:""} >
                      <h2 style={{textAlign:"left" ,margin:"1rem",position:"absolute",top:"5vh"}}>{props.sub.title}</h2>
-                    <IoIosArrowDown className={showDetails?"CourseItems_Syllabus_ArrowUp":"CourseItems_Syllabus_ArrowDown"} onClick={()=>{handleShowDetails();handleShowDetailsClicked()}}size={25} ></IoIosArrowDown>
+                    <IoIosArrowDown className={showDetails?"CourseItems_Syllabus_ArrowUp":"CourseItems_Syllabus_ArrowDown"} onClick={()=>{handleShowDetailsClicked()}}size={25} ></IoIosArrowDown>
                 
                 <div className={showDetails?"CourseItems_Syllabus_Subtitles_Details_Shown":"CourseItems_Syllabus_Subtitles_details_hidden"}>
                 <h4>{props.description}</h4>

@@ -18,7 +18,7 @@ import Footer from '../footer/Footer';
 import Subtitle from './subtitles/Subtitle';
 import Rating from '@mui/material/Rating';
 import { alertClasses } from '@mui/material';
-import { myInstructorRate, rateCourse } from '../../API/TraineeAPI';
+import { myCourseRate, myInstructorRate, rateCourse } from '../../API/TraineeAPI';
 
 function CourseItems() {
     const [first,setFirst] = useState(0);
@@ -37,18 +37,14 @@ function CourseItems() {
     const [view , setView] = useState("");
 
     const [traineeRate,setTraineeRate] = useState("")
+
     const handleChangeRate = (event , newValue)=>{
-      rateCourse(Number(location.state.id),Number(newValue))
+      rateCourse( location.state.id,Number(newValue))
       setTraineeRate(newValue)
   }
 
   const [MyRate,setMyRate] = useState(0)
-  const getRate = async ()=> {
-      setMyRate(await myInstructorRate(Number(location.state.id)))
-  }
   
-
- 
     const handleView = (view) => {
         setView(view);
     }
@@ -57,12 +53,14 @@ function CourseItems() {
 
     useEffect(()=>{ 
         handleView(location.state.View)
-    })
+        },[location.state])
 
     useEffect(()=>{
-        getRate()
-    
-      },[traineeRate])    
+        async function getR(){
+            setMyRate(await myCourseRate(location.state.id))
+        }
+        getR();
+      },)    
 
 
     const now = 90 ;
@@ -70,6 +68,9 @@ function CourseItems() {
         setDetails((await getCourseDetails(location.state.id)));
         setFirst(1);
     }
+    useEffect(()=>{
+        getDetails();
+    })
     if(first===0){
         getDetails();
         if(location.state.View==="Syllabus"){
@@ -78,13 +79,7 @@ function CourseItems() {
 
         
     }
-    // alert(location.state.View)
-    // if(location.state.View==="Syllabus"){
-    //     handleView("Syllabus")   ;   
-    // }else if(location.state.View==="Overview"){
-    //     handleView("Overview")   ;   
 
-    // }
     const InstNamesLen = () =>
     {
         if(instNames.length>3){
@@ -107,14 +102,20 @@ function CourseItems() {
             setInstNames(names)
         }
     }
-        const stars = (starNumber) => {
-        var array=[]; 
-        for(var i=0;i<starNumber;i++){
-            array=array.concat([0])
-        }
-        return array
 
-        }
+      
+        const stars = (starNumber) => {
+            var array=[]; 
+            for(var i=0;i<starNumber;i++){
+                array=array.concat([0])
+            }
+            return array
+
+            }
+
+        useEffect(()=>{
+            getDetails();
+        })
         const [countryNumber,setCountryNumber]=useState();
         const handleCountryNumber = (x) =>{
           setCountryNumber(x);
@@ -123,7 +124,7 @@ function CourseItems() {
         
 
         handleInstNames();
-        getRate();
+        // getRate();
 
   return (
     
@@ -184,7 +185,7 @@ function CourseItems() {
              <Rating 
              name="half-rating" 
              value={MyRate}
-              precision={0.5}
+              precision={1}
              onChange={handleChangeRate} />
              </div>
             </div>
