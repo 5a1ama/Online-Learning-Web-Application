@@ -98,6 +98,13 @@ export function TraineeViewInstructor(){
                <label className='EditInstructorValue' >{instructor && instructor.specialization}</label>
                </div>
                <Divider/>
+               <div className='dataDivNext'>
+               <label className='specializationLabel'>
+                Bio
+               </label>
+               <label className='EditInstructorValue' >{instructor && instructor.bio}</label>
+               </div>
+
                <div>
                 <label className='specializationLabel'>
                     Rate Instructor

@@ -53,9 +53,15 @@
     font-size: 1.5rem;
 }
 .editTraineeProfileButton1{
-    margin-top: 13%;
-    margin-left: 68%;
-    width:30%;
+    position: absolute;
+    top: 3%;
+    left: 90%;
+    height: 10%;
+    width: 5%;
+    background-color: transparent;
+}
+.editTraineeProfileButton1:hover{
+    background-color: transparent;
 }
 .TraineedataDivNext{
     display: flex;
@@ -86,7 +92,17 @@
    padding-top: 2%;
 }
 .traineeSubProfileButton1{
-    margin-top: 12%;
-    margin-left: 68%;
+    position: absolute;
+    top: 80%;
+    left: 35%;
     width:30%;
+    height: 10%;
+}
+.TraineecancelProfileButton1{
+    position: absolute;
+    top: 80%;
+    left: 68%;
+    height: 10%;
+    width:30%;
+    background-color: red; 
 }

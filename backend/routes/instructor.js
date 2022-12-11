@@ -235,11 +235,18 @@ router.post("/updateName/:name/:token",async function(req,res){
     var token=req.params.token;
     var user=jwt.verify(token,process.env.ACCESSTOKEN);
     var id=user.id;
-    
     var newname=req.params.name;
-    console.log(newname)
     await Instructor.findOneAndUpdate({id:id},{Name:newname});
     await User.findOneAndUpdate({id:id},{Name:newname});
+    res.json("ok")
+})
+router.post("/updateBio/:name/:token",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var id=user.id;
+    var newname=req.params.name;
+    await Instructor.findOneAndUpdate({id:id},{bio:newname});
+    await User.findOneAndUpdate({id:id},{bio:newname});
     res.json("ok")
 })
 router.post("/updateEmail/:name/:token",async function(req,res){

@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
 import Navbar from '../navbar/Navbar';
 import "./InstructorProfile.css"
-import { getInstructorDetails, updateInstructorEmail, updateInstructorName, updateInstructorPass, updateInstructorSpec } from '../../API/InstructorAPI';
+import { getInstructorDetails, updateInstructorBio, updateInstructorEmail, updateInstructorName, updateInstructorPass, updateInstructorSpec } from '../../API/InstructorAPI';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import List from '@mui/material/List';
@@ -16,6 +16,8 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { TextField } from '@mui/material';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+
 
 
 export function InstructorProfile(){
@@ -46,12 +48,16 @@ export function InstructorProfile(){
     const handleNewSpec =(event)=>{
         setNewSpec(event.target.value)
     }
+    const [newBio,setNewBio]=useState("");
+    const handleNewBio =(event)=>{
+        setNewBio(event.target.value)
+    }
 
     const handleUpdate=async ()=>{
        const x = await updateInstructorSpec(newSpec);
        const y = await updateInstructorName(newName);
        const z = await updateInstructorEmail(newEmail);
-
+       const v = await updateInstructorBio(newBio);
         setShowDiv(false)
 
 
@@ -84,6 +90,7 @@ export function InstructorProfile(){
             setNewEmail(instructor.Email)
             setNewName(instructor.Name)
             setNewSpec(instructor.specialization)
+            setNewBio(instructor.bio)
             setFirst(1)
         }
        
@@ -149,19 +156,18 @@ export function InstructorProfile(){
                <Divider/>
                <div className='dataDivNext'>
                <label className='specializationLabel'>
-                specialization
+                Bio
                </label>
-               <label className='EditInstructorValue' >{instructor && instructor.specialization}</label>
+               <label className='EditInstructorValue' >{instructor && instructor.bio}</label>
                </div>
-                
-             
 
                 <button  className='editProfileButton1' onClick={()=> {setShowDiv(true);}}>
-                        edit
+                        <ModeEditOutlineIcon color="primary"/>
                     </button>
                     
+                    
                 </div>}</div>}
-                {showDiv&&<div className='editinstructordata2'> 
+                {!showDiv2&&showDiv&&<div className='editinstructordata2'> 
                 <TextField id="filled-basic" 
                  defaultValue={instructor && instructor.Name} 
                  variant="standard" 
@@ -183,10 +189,22 @@ export function InstructorProfile(){
                  className='NameLabel2'
                  onChange={handleNewSpec}/>
 
-                <button  className='subProfileButton1' onClick={ handleUpdate}>
-                        submit
-                    </button>
+                 <TextField 
+                id="filled-basic" 
+                defaultValue={instructor && instructor.bio} 
+                variant="standard"
+                 className='NameLabel2'
+                 onChange={handleNewBio}/>
 
+                   
+
+                <button  className='subProfileButton1' onClick={ handleUpdate}>
+                        Submit
+                    </button>
+                    <button  className='cancelProfileButton1' onClick={()=> setShowDiv(false)}>
+                        Cancel
+                    </button>
+                    
                 </div>
                     }
                     {showDiv2 && <div className='ChangePassswordDiv'>
