@@ -31,7 +31,6 @@ export function NewCourse(props) {
 
       useEffect(()=>
       props.handleNewPriceRatio&& props.handleNewPriceRatio(fares[chosenCountry]),[chosenCountry,fares,props]);
-   
   return (
 
     <div className={courseDetails? "newCourse-After":"newCourse"}  >
@@ -41,10 +40,10 @@ export function NewCourse(props) {
               <h3 >{props.course.title}</h3>
           </div>
           
-                <div className="NewCourse_Prices">
+                { props.Trainee!=="Corporate" &&<div className="NewCourse_Prices">
                   <h2 className='NewCourse_price'>{  Math.floor(props.course.price*fares[chosenCountry])} {currency[chosenCountry]}</h2>
                   <h2 className='NewCourse_price2'>   {props.course.discount.amount} %</h2>
-                </div>
+                </div>}
           
               <div className="NewCourse_StarsHoursPrice">
                 <div className="starImgDiv">

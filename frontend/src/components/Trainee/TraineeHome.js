@@ -15,13 +15,18 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 export function TraineeHome (){
     const navigate = useNavigate();
   const [courses,setCourses] = useState([]);
+
+
+
+  useEffect(()=>{
+      async function getCoursess(){
+        setCourses ((await getTraineeCourses(localStorage.getItem("token"))).slice(0,1));
+      }
+      getCoursess();
+  },[courses])
+  
   const [details,setDetails]=useState("");
-  const getCourses = async () =>{
-    
-    setCourses ((await getTraineeCourses(localStorage.getItem("token"))).slice(0,1));
-
-  }
-
+  
   useEffect(()=>{
     async function getDetails(){
       setDetails(await getTraineeDetails())
@@ -32,7 +37,6 @@ export function TraineeHome (){
   const handleCountryNumber = (x) =>{
     setCountryNumber(x);
   }
-  getCourses();
 
  
     return(
@@ -54,7 +58,7 @@ export function TraineeHome (){
           <div className="homeCoursesTrainee_Course_2">
 
 
-          {courses.map((course) => <NewCourse course={course}   country={countryNumber}/>)}
+          {courses.map((course) => <NewCourse course={course} Trainee={details&&details.type}   country={countryNumber}/>)}
           </div>
             </div>
           </div>

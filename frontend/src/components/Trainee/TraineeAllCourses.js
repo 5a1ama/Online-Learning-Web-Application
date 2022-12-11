@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import { useEffect, useState } from "react";
 import {useNavigate} from 'react-router-dom';
 import { Checkbox } from "@mui/material";
+import { getTraineeDetails } from "../../API/TraineeAPI";
 
 
 
@@ -136,7 +137,13 @@ export function TraineeAllCourses(){
       setValue([minPrice,maxPrice])
   }
 
-
+  const [details,setDetails]=useState("");
+  useEffect(()=>{
+    async function getDetails(){
+      setDetails(await getTraineeDetails())
+    }
+    getDetails();
+  })
 
     return(
         <div>
@@ -148,7 +155,7 @@ export function TraineeAllCourses(){
         </div>
 <div className='AllCourses'>
             <h1 className="heading">Our Courses</h1>
-            {courses.map((course) => <NewCourse course={course} Trainee={true} handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>)}
+            {courses.map((course) => <NewCourse course={course} Trainee={details&&details.type} handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>)}
             </div>
 
             <button className='AllCourses-FilterBarButton' onClick={handleFilterBar}>Filter Courses</button>

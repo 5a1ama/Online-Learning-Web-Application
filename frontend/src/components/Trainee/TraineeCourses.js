@@ -5,8 +5,8 @@ import {useNavigate} from 'react-router-dom';
 // import { Slider } from '../courses/Slider';
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
-import { useState } from "react";
-import {FilterMyCourses, getTraineeCourses, searchMyCourses} from '../../API/TraineeAPI';
+import { useEffect, useState } from "react";
+import {FilterMyCourses, getTraineeCourses, getTraineeDetails, searchMyCourses} from '../../API/TraineeAPI';
 import "./TraineeHome.css";
 import { NewCourse } from '../courses/NewCourse';
 
@@ -60,6 +60,13 @@ export function TraineeCourses() {
       const handleNewPriceRatio = (x) => {
         setNewPriceRatio(x);
       }
+      const [details,setDetails]=useState("");
+      useEffect(()=>{
+        async function getDetails(){
+          setDetails(await getTraineeDetails())
+        }
+        getDetails();
+      })
 return(
     <div className = "TraineeHomeMain2">
     
@@ -71,7 +78,7 @@ return(
     </div>
     <div>
       <div className="TraineeCourses_CoursesDiv">
-      {courses.map((course) => <NewCourse course={course} Trainee={true} handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>)}
+      {courses.map((course) => <NewCourse course={course} Trainee={details&&details.type} handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>)}
       </div>
     <form className="search-Trainee-courses">
             <div>
