@@ -74,7 +74,8 @@ export function TraineeViewInstructor(){
           <h5 className="instructorEmail">{instructor && instructor.Email}</h5>   
                
                 <Rating  onChange={handleChangeRate}
-                name="half-rating" value={MyRate} precision={0.5} />
+                name="half-rating" value={MyRate} precision={0.5} 
+                size="medium"/>
                
                  </div>
 

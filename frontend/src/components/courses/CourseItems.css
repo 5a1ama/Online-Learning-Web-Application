@@ -290,3 +290,12 @@
     left: -41.5%;
     top: 20%;
 }
+.RatingLabel{
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 1.5rem;
+}
+.RatingStars{
+    position: absolute;
+    top: -8%;
+    left: -5.5%;
+}

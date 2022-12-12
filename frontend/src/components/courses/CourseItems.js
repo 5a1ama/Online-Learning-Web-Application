@@ -178,17 +178,14 @@ function CourseItems() {
                     <img alt="." src={ProgressImg} style={{width:"10%"}}></img>
                 </div>
              }
-             <div className='TraineeCourseRating'>
-             <label >
-                Your Rating:
-             </label>
              <Rating 
+             className='RatingStars'
+             size='large'
              name="half-rating" 
              value={MyRate}
               precision={1}
              onChange={handleChangeRate} />
              </div>
-            </div>
             
             {/* Second Part */                                                                  }
             
