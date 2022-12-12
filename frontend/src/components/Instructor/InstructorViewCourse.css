@@ -62,8 +62,11 @@
   .InstructorCourseReviewsBig{
     display:flex;
     flex-direction: row;
-    column-gap: 0.7vw;
-    row-gap: 0.7vw;
+    column-gap: 2vw;
+    row-gap: 2vw;
     width:80%;
     flex-wrap: wrap;
+    background-color:rgba(194, 194, 194, 0.295);
+    border-radius: 20px;
+    padding: 1rem;
   }

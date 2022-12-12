@@ -187,8 +187,8 @@ text-align: center;
 
 .starImg{
 /* transform: translate(0px,90px); */
-width: 40px;
-height:30px;
+width: 35px;
+height:25px;
 
 }
 .starImgDiv {
@@ -205,8 +205,9 @@ height:30px;
 }
 .NewCourse_Data_Price_Hours{
     position:absolute;
-    left:30vw;
-    top:90px;
+   
+    top:6.1vh;
+    left:4vh; 
     width: 60vh;
     display:flex;
     flex-direction: row;
@@ -223,19 +224,55 @@ height:30px;
 }
 
 .NewCourse_Prices{
+    left:30vw;
+    top:90px;
     position: absolute;
+    width: 60vh;
+    justify-content: space-between;
     display: flex;
     flex-direction: row;
-    top:6.1vh;
-    left:4vh;    
+       
 }
     .NewCourse_price{
         font-weight:250;
+        font-size: 20px;
+        text-decoration: line-through;
+        color:rgb(177, 177, 177);
+
+        transform: translate(0,0.2rem);
+
+    } 
+    .NewCourse_priceNoDis{
+        font-weight:250;
         font-size: 22px;
+        
+    } 
+    .NewCourse_priceNew{
+        font-weight:450;
+        font-size: 22px;
+        transform:translate(2rem , 0rem)
+
     }
     .NewCourse_price2{
-        font-weight:300;
-        font-size: 20px;
-        color:rgb(255, 0, 0);
-        transform:translate(1rem , 0.15rem)
+        font-weight:500;
+        font-size: 18px;
+        color:rgb(255, 255, 255);
+        transform:translate(23.2rem , -7rem);
+        z-index:2;
+    }
+    .DiscountLabel{
+        position: absolute;
+        width:200px;
+        top:-80px;
+        left:132%;
+        transform: rotate(-45deg);
+        z-index: -1;
+    }
+    .DiscountLabel2{
+        position: absolute;
+        width:100px;
+        top:-80px;
+        left:132%;
+        transform: rotate(180deg);
+        z-index: 1;
     }

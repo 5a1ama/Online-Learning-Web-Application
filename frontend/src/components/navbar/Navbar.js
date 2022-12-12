@@ -106,15 +106,15 @@ function Navbar(props) {
             {props.items.map((item,i)=>{
                 if(item==props.select){
                     if(props.nav[i]!="")
-                    return <Link to={props.scroll[i]} style={{color:"blue"}} onClick={()=>navigate(props.nav[i])} smooth={true} duration="500"><li>{item}</li></Link>
+                    return <Link to={props.scroll[i]} style={{color:"#fff"}} onClick={()=>navigate(props.nav[i])} smooth={true} duration="500"><li>{item}</li></Link>
                     else
-                    return <Link to={props.scroll[i]}   smooth={true} duration="500"><li>{item}</li></Link>
+                    return <Link to={props.scroll[i]}  style={{color:"#fff"}}  smooth={true} duration="500"><li>{item}</li></Link>
                 }
                 else{
                     if(props.nav[i]!="")
-                    return <Link to={props.scroll[i]} onClick={()=>navigate(props.nav[i])} smooth={true} duration="500"><li>{item}</li></Link>
+                    return <Link to={props.scroll[i]} style={{color:"#bbb"}} onClick={()=>navigate(props.nav[i])} smooth={true} duration="500"><li>{item}</li></Link>
                     else
-                    return <Link to={props.scroll[i]} smooth={true} duration="500"><li>{item}</li></Link>
+                    return <Link to={props.scroll[i]} style={{color:"#fff"}} smooth={true} duration="500"><li>{item}</li></Link>
                 }
 
             })}      
@@ -181,9 +181,9 @@ function Navbar(props) {
 
             <div className={settingMenu?"SettingMenu":"nonSettingMenu"}>
                 <div className="SettingItem">
-                    <button >
+                    <button  onClick={()=>{props.inst&&navigate('/instructorProfile')}}>
                         
-                        <BsPerson className="icon" style={{transform:"translate(-10px,3.5px)"}}></BsPerson>My Profile
+                        <BsPerson className="icon" style={{transform:"translate(-10px,3.5px)"}} ></BsPerson>My Profile
                     </button>
                 </div>
                 <div className="SettingItem">

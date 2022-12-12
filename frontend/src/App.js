@@ -102,7 +102,7 @@ function Home(props) {
 
   return <div className="Home">
     
-    <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Home" nav={["","","","/signUp"]} scroll={["Home","Courses","WhatHegza"]} handleCountryNumber={props.handleCountryNumber}   />
+    <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎  ‎ Join Us"]} select="‎ ‎ ‎  ‎  ‎ Join Us" nav={["","","","/signUp"]} scroll={["Home","Courses","WhatHegza"]} handleCountryNumber={props.handleCountryNumber}   />
     <Bgvid />
     <Courses country={props.country}/>
     <WhatHegza />

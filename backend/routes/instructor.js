@@ -246,7 +246,7 @@ router.post("/updateBio/:name/:token",async function(req,res){
     var id=user.id;
     var newname=req.params.name;
     await Instructor.findOneAndUpdate({id:id},{bio:newname});
-    await User.findOneAndUpdate({id:id},{bio:newname});
+    // await User.findOneAndUpdate({id:id},{bio:newname});
     res.json("ok")
 })
 router.post("/updateEmail/:name/:token",async function(req,res){
@@ -264,7 +264,7 @@ router.post("/updateSpec/:name/:token",async function(req,res){
     var id=user.id;
     var newname=req.params.name;
     await Instructor.findOneAndUpdate({id:id},{specialization:newname});
-    await User.findOneAndUpdate({id:id},{specialization:newname});
+    // await User.findOneAndUpdate({id:id},{specialization:newname});
     res.json("ok")
 
 })

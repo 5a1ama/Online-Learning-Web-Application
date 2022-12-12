@@ -98,8 +98,8 @@ export function AddCourse(){
     return(
     <div className="AddCours">
          <div>
-         <Navbar items={["Home","My Courses","Caleneder"]} 
-         select="" nav={["/instructorHome","/InstructorCourses",""]} scroll={["","",""]}    handleCountryNumber={handleCountryNumber}         />
+         <Navbar items={["Home","My Courses","All Courses"]}     handleCountryNumber={handleCountryNumber}
+            select="" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]} inst={true} scroll={["","",""]}  />
         </div> 
         <div className="Add-Course-Label">
         <h2>
