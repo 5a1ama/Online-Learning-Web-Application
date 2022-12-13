@@ -5,7 +5,11 @@ import {BiDownArrow} from 'react-icons/bi';
 import starImg from "../../assets/goldStar.png"
 import DiscountImg from "../../assets/disCount.png"
 import DiscountImg2 from "../../assets/disCount2.png"
+import DiscountImg3 from "../../assets/disCount3.png"
 
+import Gift from "../../assets/gift.png"
+import GiftTop from "../../assets/giftTop.png"
+import GiftTop2 from "../../assets/giftTop2.png"
 
 export function NewCourse(props) {
     const navigate = useNavigate();
@@ -13,6 +17,9 @@ export function NewCourse(props) {
     const [courseDetails,setcourseDetails] = useState(false)
     const handleCourseDetails = () => setcourseDetails(!courseDetails)
     const [chosenCountry,setChosenCountry] = useState(0);
+
+    const[gift,setGift]=useState(false);
+    const handleGift =() =>{setGift(!gift)};
 
     useEffect(()=>{
       setChosenCountry(props.country);
@@ -38,10 +45,12 @@ export function NewCourse(props) {
     <div className={courseDetails? "newCourse-After":"newCourse"}  >
         <div className={courseDetails? "newCourse-After-Content":"newCourse-content"}>
       
-        { 
+    
+         { 
        (props.course.discount.amount>0) && 
-        <img alt="." src={DiscountImg2} className="DiscountLabel2" />
-        }
+         
+        <img alt="." src={DiscountImg3} className="DiscountLabel2" />
+         }
           <div className="newCourse_title">
               <h3 >{props.course.title}</h3>
           </div>

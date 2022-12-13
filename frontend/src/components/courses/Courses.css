@@ -85,7 +85,7 @@ text-align: center;
 }
 .newCourse_title{
     display: flex;
-    width:80vh;
+    width:85vh;
     height:0vh
     
 }
@@ -111,7 +111,7 @@ text-align: center;
 }
 .ViewMoreH55{
     width: 130px;
-    transform:translate(0,0.6rem);
+    transform:translate(0rem,0.6rem);
 
 }
 .newCourse h5{
@@ -254,10 +254,10 @@ height:25px;
 
     }
     .NewCourse_price2{
-        font-weight:500;
-        font-size: 18px;
+        font-weight:700;
+        font-size: 22px;
         color:rgb(255, 255, 255);
-        transform:translate(23.2rem , -7rem);
+        transform:translate(-8.5rem ,-1rem);
         z-index:2;
     }
     .DiscountLabel{
@@ -265,14 +265,83 @@ height:25px;
         width:200px;
         top:-80px;
         left:132%;
-        transform: rotate(-45deg);
+        /* transform: rotate(-45deg); */
         z-index: -1;
     }
     .DiscountLabel2{
         position: absolute;
-        width:100px;
-        top:-80px;
-        left:132%;
-        transform: rotate(180deg);
+        width:160px;
+        top:20px;
+        left:45%;
+        /* transform: rotate(180deg); */
         z-index: 1;
     }
+
+    
+  .Course_Gift{
+    position:absolute;
+    left:100vh;
+    top:-50px;
+    width: 90px;
+}
+
+.Course_GiftTop{
+    z-index: 2;
+    position: absolute;
+    left:100vh;
+    top:-50px;
+    width: 90px;
+    transition: 2.3s;
+
+}
+.Course_GiftTop2{
+    transform: rotate(400deg)translate(90px,0px);
+    position: absolute;
+    left:100vh;
+    top:-50px;
+    width: 90px;
+    transition: 2.3s;
+
+}
+.Course_giftText{
+    position:absolute;
+    left:100vh;
+    top:-50px;
+    z-index: 0;
+    transition: 2.3s;
+
+
+}
+.Course_giftText h4{
+    color:#ff0000;
+    font-weight: 600;
+    transform: translate(5rem,1rem);
+
+}
+
+.Course_Gift_Redeem{
+    background-image: linear-gradient(45deg, #ffc107 25%, #ffca2c 25%, #ffca2c 50%, #ffc107 50%, #ffc107 75%, #ffca2c 75%, #ffca2c 100%);
+    background-size: 20px 20px;
+    -webkit-animation: Course_Gift_Redeem 32s ease infinite;
+    -moz-animation: Course_Gift_Redeem 32s ease infinite;
+    animation: Course_Gift_Redeem 32s ease infinite;
+    height: 100%;
+	transition: 1s ease 0.3s;
+    width: 70px;
+}
+
+@-webkit-keyframes Course_Gift_Redeem {
+0%{background-position:0% 51%}
+50%{background-position:100% 50%}
+100%{background-position:0% 51%}
+}
+@-moz-keyframes Course_Gift_Redeem {
+0%{background-position:0% 51%}
+50%{background-position:100% 50%}
+100%{background-position:0% 51%}
+}
+@keyframes Course_Gift_Redeem {
+0%{background-position:0% 51%}
+50%{background-position:100% 50%}
+100%{background-position:0% 51%}
+}
