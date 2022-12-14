@@ -64,6 +64,10 @@ const courseschema=new Schema({
     discount:{
         type:{amount:Number,EndDate:Date},
         default:{amount:0,EndDate:0}
+    },
+    enrolledStudents:{
+        type:Number,
+        default:0
     }
 })
 const Course = mongoose.model('course', courseschema);

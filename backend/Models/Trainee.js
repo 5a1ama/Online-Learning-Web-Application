@@ -36,6 +36,10 @@ const traineeSchema=new Schema(
           },
           completedExcercise:{
             type:[{courseId:Number,count:Number}]
+          },
+          creditCards:{
+            type:[{cardHolder:String,cardNumber:Number,cardDate:String,cardCvv:Number}],
+            default:[]
           }
 
     }

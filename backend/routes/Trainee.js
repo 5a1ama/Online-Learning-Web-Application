@@ -137,7 +137,6 @@ router.post("/updatePass2/:oldPass/:pass/:token",async function(req,res){
     }
     else{
         await User.findOneAndUpdate({id:id},{Password:req.params.pass});
-        console.log(id  )
         if(result.Job=="Instructor"){
          await Instructor.findOneAndUpdate({id:id},{Password:req.params.pass})
     
@@ -230,5 +229,31 @@ router.get("/rateInstructor/:rate/:id/:token",async function(req,res){
     res.json("ok")
 
 })
-
+router.post("/addCreditCard",async function(req,res){
+    var token=req.body.token
+    var user=jwt.verify(token,process.env.ACCESSTOKEN)
+    var id=user.id;
+    var cardNum=req.body.cardNumber
+    var cardCvv=req.body.cardCvv
+    var cardHolder=req.body.cardHolder
+    var cardDate=req.body.cardDate
+    var trainee=await Trainee.findOne({id:id})
+    var credits=trainee.creditCards;
+    credits.push({cardHolder:cardHolder,cardNumber:cardNum,cardDate:cardDate,cardCvv:cardCvv})
+    await Trainee.findOneAndUpdate({id:id},{creditCards:credits})
+    res.json("ok")
+})
+router.get("/courseProgress/:token/:id",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN)
+    var courseId=req.params.id
+    var trainee=await Trainee.findOne({id:user.id})
+    var traineeCourse=trainee.courses;
+    for(var i=0;i<traineeCourse.length;i++){
+        if(traineeCourse[i].id==courseId){
+            res.json(traineeCourse[i].progress)
+            break;
+        }
+    }
+})
 module.exports = router

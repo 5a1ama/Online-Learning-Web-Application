@@ -16,6 +16,7 @@ export const NewDiv2=(props)=>{
      label="Subject" 
      color="primary" 
      variant="filled"
+     value={array[i]}
      /> </div>)}
         </div>)
 }
