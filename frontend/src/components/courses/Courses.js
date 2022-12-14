@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './Courses.css'
 import {useNavigate} from 'react-router-dom';
@@ -11,11 +11,7 @@ export {default as Courses} from './Courses'
 function Courses(props) {
   const navigate = useNavigate();
   const [courses,setCourses] = useState([]);
-  const getCourses = async () =>{
-    
-    setCourses ((await getAllCourses()).slice(1,4));
-    // alert(courses);
-  }
+
 
   const stars = (starNumber) => {
     var array=[];
@@ -26,8 +22,15 @@ function Courses(props) {
   
   }
    
- 
+ useEffect(()=>{
+  async function getCourses(){
+    
+    setCourses ((await getAllCourses()).slice(1,4));
+    // alert(courses);
+  }
   getCourses();
+})
+
   return (
     <div name="courses" className="Courses">
 

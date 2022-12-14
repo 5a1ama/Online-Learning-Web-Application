@@ -10,6 +10,7 @@ import DiscountImg3 from "../../assets/disCount3.png"
 import Gift from "../../assets/gift.png"
 import GiftTop from "../../assets/giftTop.png"
 import GiftTop2 from "../../assets/giftTop2.png"
+import CountdownTimer from '../countdown/CountDown';
 
 export function NewCourse(props) {
     const navigate = useNavigate();
@@ -40,16 +41,36 @@ export function NewCourse(props) {
 
       useEffect(()=>
       props.handleNewPriceRatio&& props.handleNewPriceRatio(fares[chosenCountry]),[chosenCountry,fares,props]);
-  return (
+
+      function daysDifference(d0, d1) {
+        var diff = new Date(+d1).setHours(12) - new Date(+d0).setHours(12);
+        return Math.round(diff);
+      }
+      
+  
+
+      const NOW_IN_MS = new Date().getTime(); 
+      const Dur =props.course.discount.EndDate
+      const Dur2 = new Date(Dur).getTime();
+      const Duaration_IN_MS = daysDifference(NOW_IN_MS,Dur2);
+      const dateTimeAfterThreeDays = NOW_IN_MS + Duaration_IN_MS;
+    
+ 
+ 
+      return (
 
     <div className={courseDetails? "newCourse-After":"newCourse"}  >
         <div className={courseDetails? "newCourse-After-Content":"newCourse-content"}>
       
-    
          { 
        (props.course.discount.amount>0) && 
-         
-        <img alt="." src={DiscountImg3} className="DiscountLabel2" />
+       <div className="DivForDiscount_NewCourse">
+        <CountdownTimer targetDate={dateTimeAfterThreeDays} />
+        </div>
+         }
+         { 
+       (props.course.discount.amount>0) && 
+         <img alt="." src={DiscountImg3} className="DiscountLabel2" />
          }
           <div className="newCourse_title">
               <h3 >{props.course.title}</h3>
@@ -115,6 +136,7 @@ export function NewCourse(props) {
           <h5 onClick={handleCourseDetails}>view details</h5>
           </div>
         <BiDownArrow className="icon" style={{marginRight: '1rem' , transform:'translate(0 ,0.4rem)'}} onClick={handleCourseDetails}></BiDownArrow>
+     
       <button className="NewCourse-button-OpenCourse" style={{marginRight: '1rem' ,width:"100px",height:"60px",transform:"translate(1rem,1.7rem)" }} onClick={()=>{ if(props.Trainee){navigate("/CourseItems",{state:{id:props.course.id,View:"Overview"}})
     
     }else if(props.inst){
@@ -123,6 +145,7 @@ export function NewCourse(props) {
       navigate("/CourseContent",{state:{id:props.course.id,View:"Overview"}})
     }
     }}>Open Course</button>
+     
     </div>  
   )
 }

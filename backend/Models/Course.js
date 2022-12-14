@@ -62,8 +62,8 @@ const courseschema=new Schema({
         default:""
     },
     discount:{
-        type:{amount:Number,duration:Number},
-        default:{amount:0,duration:0}
+        type:{amount:Number,EndDate:Date},
+        default:{amount:0,EndDate:0}
     }
 })
 const Course = mongoose.model('course', courseschema);
