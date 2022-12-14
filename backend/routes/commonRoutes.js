@@ -113,4 +113,5 @@ router.get("/resetPass/:email/:pass",async function(req,res){
 
    }
 })
+
 module.exports=router;

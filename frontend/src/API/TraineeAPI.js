@@ -78,3 +78,20 @@ export const myCourseRate = async(ratedID)=>{
     return await result.json();
     
 }
+export const addCreditCard=async(cardNumber,cardHolder,cardCvv,cardDate)=>{
+    const result=await fetch("http://localhost:8000/trainee/addCreditCard",{
+        method: "POST",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify({
+            cardHolder:cardHolder,cardNumber:cardNumber,cardDate:cardDate,cardCvv:cardCvv
+        })
+      })
+      return await result.json()
+}
+export const getTraineeCourseProg=async(courseId)=>{
+    const result=await fetch(`http://localhost:8000/trainee/courseProgress/${localStorage.getItem("token")}/${courseId}`)
+    return await result.json()
+
+}

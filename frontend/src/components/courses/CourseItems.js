@@ -18,15 +18,16 @@ import Footer from '../footer/Footer';
 import Subtitle from './subtitles/Subtitle';
 import Rating from '@mui/material/Rating';
 import { alertClasses, Avatar } from '@mui/material';
-import { myCourseRate, myInstructorRate, rateCourse } from '../../API/TraineeAPI';
+import { getTraineeCourseProg, myCourseRate, myInstructorRate, rateCourse } from '../../API/TraineeAPI';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
-
 function CourseItems() {
     const [first,setFirst] = useState(0);
     const location=useLocation();
     const navigate = useNavigate();
-   
-
+    const [progress,setProgress]=useState(0);
+    const getTraineeProgress =async()=>{
+        setProgress(await getTraineeCourseProg(location.state.id));
+    }
     const [details,setDetails] = useState([]);
     
     const[showDetails,setShowDetails]=useState(false);
@@ -61,6 +62,7 @@ function CourseItems() {
             setMyRate(await myCourseRate(location.state.id))
         }
         getR();
+        getTraineeProgress()
       },)    
 
 
@@ -174,7 +176,7 @@ function CourseItems() {
                  <div className='CourseItems_Progress'>
                     
                     <div style={{display:"flex",flexDirection:"row"}}>
-                    <Progress done="100" />
+                    <Progress done={progress} />
                     </div>
 
                     <img alt="." src={ProgressImg} style={{width:"10%"}}></img>

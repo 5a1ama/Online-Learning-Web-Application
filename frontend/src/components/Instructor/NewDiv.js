@@ -24,10 +24,12 @@ export const NewDiv=(props)=>{
      label="Course Subtitle1" 
      color="primary" 
      variant="filled"
+     value={array[i]}
      /> <TextField id={"hour"+(i)}  className='addedHours' onChange={handleH} 
      label="Hours" 
      color="primary" 
      variant="filled"
+     value={array2[i]}
      /> </div>)}
         </div>)
 }
