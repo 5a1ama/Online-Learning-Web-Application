@@ -121,19 +121,26 @@ router.post('/CreateUser' ,(req,res)=>{
     var gender = req.body.gender    
     User.find({}).exec(async function(err,result){
         var c=result.length;
-        var query=await User.find({Email:req.body.email});
-        if(query.length==0){  
-            var object = new User({id:c+1,Name:name,Email:email,Password:password,Username:username,Job:"Trainee",Gender:gender})
-            var object2=new Trainee({id:c+1,Name:name,type:"Individual"});
-            object.save(function(err,result1){
-                object2.save(function(err,result){})
-                res.json("ok")
-            })
+        var query=await User.find({Email:email});
+        var query2 = await User.find({Username:username})
+        if(query2.length!==0){
+            res.json("Username Taken")
         }else{
-            res.json("user already exist")
 
-        } 
-
+            if(query.length==0){  
+                var object = new User({id:c+1,Name:name,Email:email,Password:password,Username:username,Job:"Trainee",Gender:gender})
+                var object2=new Trainee({id:c+1,Name:name,type:"Individual"});
+                object.save(function(err,result1){
+                    object2.save(function(err,result){
+                        
+                    })
+                    res.json("ok")
+                })
+            }else{
+                res.json("email exist")
+            } 
+        }
+            
     })
 
 

@@ -49,6 +49,6 @@ export const CreateUser = async(Name,Email,Password,Username,Gender)=>{
 
         })
       });
-       result.json();
-     
+      const j=await result.json();
+      return j     
 }

@@ -6,13 +6,29 @@
     display: flex; 
     justify-content: space-between;
 }
-.nav{
-    background-color:#ffffff;
+
+.Register_logo2 h1{
+    color:#f1f1f1;
+    padding: 0rem 0rem;
+    font-size: 25px;
+    font-weight: 500;
+    transform: translateX(39rem);
+}
+.websiteContract {
+    width : 140%;
+}
+.websiteContract h3{
+    font-size: 15px;
+    font-weight: 400;
+    margin:0rem;
+    padding: 0rem;
+    transform: translate(10px,-42px);
     
 }
-.logo h1{
-    color:#ffffff;
-    padding: 0rem 1rem;
+
+.websiteContract a:hover{
+    text-decoration:underline ;
+    cursor:pointer;
 }
 .RegisterBox{
     width:30%;
@@ -23,6 +39,7 @@
     position :absolute;
 }
 .RegisterBox-content{
+    position: relative;
     transform: translate(0 ,1rem);
     /* overflow-y: scroll; */
 }
@@ -63,6 +80,7 @@
 .Register-form input:focus{
     outline: none;
 }
+
 
 .Register-formHalf{
     display: flex;
@@ -118,6 +136,27 @@
     margin: 0.7rem 1rem;
     font-size: 15px
 
+}
+.SearchButtonsDisabled button{
+    width:91%;
+    height : 7vh;
+    
+    left:0%;
+    padding: 1rem 1rem;
+    margin: 0.7rem 1rem;
+    font-size: 15px ;
+    background-color:rgb(200,200,200);
+
+}
+.SearchButtonsDisabled button:hover{
+    width:91%;
+    height : 7vh;
+    left:0%;
+    padding: 1rem 1rem;
+    margin: 0.7rem 1rem;
+    font-size: 15px ;
+    background-color:rgb(200,200,200);
+    cursor: default;
 }
 .Register-RegisterHere{
     display: flex;
@@ -297,3 +336,32 @@
             border-radius: 20px;
         }
 
+.Register_EmailExist h4{
+    font-weight: 600;
+}
+.Register_EmailExist a{
+    color:#ddd;
+    font-weight: 400;
+}
+
+.Register_EmailExist a:hover{
+    color:rgb(255, 255, 255);
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+.youSuccessfully{
+    position: absolute;
+    top:30%;
+    left:30%;
+    background-color:rgba(0, 45, 67, 0.8);
+    height: 30%;
+    z-index:2;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    align-content: center;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+}
