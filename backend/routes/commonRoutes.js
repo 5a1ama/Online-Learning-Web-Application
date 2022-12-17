@@ -113,5 +113,32 @@ router.get("/resetPass/:email/:pass",async function(req,res){
 
    }
 })
+router.post('/CreateUser' ,(req,res)=>{
+    var name = req.body.name
+    var username = req.body.username
+    var email = req.body.email
+    var password = req.body.password;
+    var gender = req.body.gender    
+    User.find({}).exec(async function(err,result){
+        var c=result.length;
+        var query=await User.find({Email:req.body.email});
+        if(query.length==0){  
+            var object = new User({id:c+1,Name:name,Email:email,Password:password,Username:username,Job:"Trainee",Gender:gender})
+            var object2=new Trainee({id:c+1,Name:name,type:"Individual"});
+            object.save(function(err,result1){
+                object2.save(function(err,result){})
+                res.json("ok")
+            })
+        }else{
+            res.json("user already exist")
+
+        } 
+
+    })
+
+
+})
+
+
 
 module.exports=router;

@@ -34,3 +34,21 @@ export const getPopularCourse=async()=>{
     const result =await fetch("http://localhost:8000/course/PopularCourses")
     return await result.json()
 }
+export const CreateUser = async(Name,Email,Password,Username,Gender)=>{
+    const result = await fetch(`http://localhost:8000/CreateUser`,{
+        method: "POST",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify({
+            name:Name,
+            username:Username,
+            email: Email,
+            password: Password,
+            gender:Gender
+
+        })
+      });
+       result.json();
+     
+}

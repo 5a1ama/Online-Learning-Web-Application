@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCountdown } from './useCountdown';
 import './countDown.css'
+
+
+
 const DateTimeDisplay = ({ value, type, isDanger }) => {
     return (
       <div className={isDanger ? 'countdown danger' : 'countdown'}>
@@ -11,10 +14,27 @@ const DateTimeDisplay = ({ value, type, isDanger }) => {
   };
 
 const ExpiredNotice = () => {
+  const [expiredTime,setExpiredTime]=useState(10);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if(expiredTime>=0){
+        setExpiredTime(expiredTime - 1);
+        // alert(expiredTime)
+      }
+    }, 1000);
+  
+    return () => clearInterval(interval);
+  }, [expiredTime]);
+
   return (
+      <div>
+    {expiredTime>0 && 
     <div className="expired-notice">
       <span>Expired!!!</span>
-      <p>Please select a future date and time.</p>
+      <p>sorry, the offer is already gone</p>
+      </div>
+    }
     </div>
   );
 };
@@ -39,6 +59,7 @@ const ShowCounter = ({ days, hours, minutes, seconds }) => {
     </div>
   );
 };
+
 
 const CountdownTimer = ({ targetDate }) => {
   const [days, hours, minutes, seconds] = useCountdown(targetDate);
