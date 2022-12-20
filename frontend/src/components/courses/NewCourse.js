@@ -43,7 +43,7 @@ export function NewCourse(props) {
       props.handleNewPriceRatio&& props.handleNewPriceRatio(fares[chosenCountry]),[chosenCountry,fares,props]);
 
       function daysDifference(d0, d1) {
-        var diff = new Date(+d1).setHours(12) - new Date(+d0).setHours(12);
+        var diff = new Date(+d1).getTime() - new Date(+d0).getTime();
         return Math.round(diff);
       }
       
@@ -55,8 +55,19 @@ export function NewCourse(props) {
       const Duaration_IN_MS = daysDifference(NOW_IN_MS,Dur2);
       const dateTimeAfterThreeDays = NOW_IN_MS + Duaration_IN_MS;
     
- 
- 
+      
+      const [expiredTime,setExpiredTime]=useState(10);
+      useEffect(() => {
+        const interval = setInterval(() => {
+          if(expiredTime>=0&& dateTimeAfterThreeDays< (new Date().getTime())){
+            setExpiredTime(expiredTime - 1);
+            // alert(expiredTime)
+          }
+        }, 1000);
+      
+        return () => clearInterval(interval);
+      }, [expiredTime,dateTimeAfterThreeDays]);
+
       return (
 
     <div className={courseDetails? "newCourse-After":"newCourse"}  >
@@ -69,7 +80,11 @@ export function NewCourse(props) {
         </div>
          }
          { 
-       (props.course.discount.amount>0) && 
+       (
+        (props.course.discount.amount>0) && 
+        (expiredTime>0) 
+         
+       )&&
          <img alt="." src={DiscountImg3} className="DiscountLabel2" />
          }
           <div className="newCourse_title">
@@ -78,7 +93,9 @@ export function NewCourse(props) {
           
                 { props.Trainee!=="Corporate" &&<div className="NewCourse_Prices">
                  {
-                 (props.course.discount.amount&&props.course.discount.amount>0)?
+                 (props.course.discount.amount&&props.course.discount.amount>0
+                  &&expiredTime>0
+                  )?
                  <div style={{display:'flex', flexDirection:'row'}}>
                   <h2 className='NewCourse_price2'>   {props.course.discount.amount} %</h2>
                   <h2 className='NewCourse_price'>{  Math.floor(props.course.price*fares[chosenCountry])} {currency[chosenCountry]}</h2>

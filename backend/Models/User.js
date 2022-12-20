@@ -20,19 +20,22 @@ const userSchema = new Schema({
     type: String,
     
   },
+  Username:{
+    type: String,
+  },
   Email: {
     type: String,
     
   },
   Password: {
     type: String,
-    
-
   },
-  
   Job: {
     type: String,
     
+  },
+  Gender: {
+    type: String,
   }
 }, { timestamps: true });
 

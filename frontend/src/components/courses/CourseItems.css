@@ -51,8 +51,14 @@
     
     /* background:#fff; */
 }
+
+.CourseItems_InstNames a{
+ 
+    color:white;
+}
 .CourseItems_InstNames a:hover{
     cursor: pointer;
+    color:white;
 }
 
 

@@ -38,7 +38,6 @@ router.get("/",function(req,res){
 })
 router.get("/filter-sub/:ratings/:subject",async function(req,res){
     var rating=req.params.ratings;
-
     var subject=req.params.subject;
     var query= await Course.find({});
     var array=[];

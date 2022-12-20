@@ -1,0 +1,367 @@
+.Register{
+    width :100%;
+    height : 100vh ;
+    background-image: linear-gradient(-90deg,rgba(9, 117, 185, 0.3),rgba(3, 35, 46, 0.3)),url('../../assets/Login.jpg');
+    background-size:cover;
+    display: flex; 
+    justify-content: space-between;
+}
+
+.Register_logo2 h1{
+    color:#f1f1f1;
+    padding: 0rem 0rem;
+    font-size: 25px;
+    font-weight: 500;
+    transform: translateX(39rem);
+}
+.websiteContract {
+    width : 140%;
+}
+.websiteContract h3{
+    font-size: 15px;
+    font-weight: 400;
+    margin:0rem;
+    padding: 0rem;
+    transform: translate(10px,-42px);
+    
+}
+
+.websiteContract a:hover{
+    text-decoration:underline ;
+    cursor:pointer;
+}
+.RegisterBox{
+    width:30%;
+    height:85vh;
+    background-image: linear-gradient(-90deg,rgba(105, 176, 220, 0.3),rgba(51, 100, 117, 0.3));
+    top:10%;
+    left:3%;
+    position :absolute;
+}
+.RegisterBox-content{
+    position: relative;
+    transform: translate(0 ,1rem);
+    /* overflow-y: scroll; */
+}
+.RegisterBox h2{
+    align-items: center;
+    text-align:center;
+    color:#ffffff;
+    padding :1rem 0rem;
+}
+.Register h3{
+    color:#ffffff;
+    padding :0.5rem 1.5rem;
+}
+.Register-form{
+    display: flex;
+    background-color: #ffffffcc;
+    color:#000;
+    justify-content:space-between;
+    align-items:center;
+    border: 1px solid #ccc ;
+    padding: 4px ; 
+    border-radius: 8px;
+    max-width: 400px;
+    height: 50px;
+    margin: 5px 1.5rem ;
+}
+.Register-form input {
+    background-color : transparent;
+    border:transparent;
+    border:none ;
+    width: 100% ;
+    height:45px;
+    font-size:1.2rem ;
+    color:rgb(0, 0, 0);
+    padding : 0rem 0rem;
+    font-family: 'Poppins' sans-serif;
+}
+.Register-form input:focus{
+    outline: none;
+}
+
+
+.Register-formHalf{
+    display: flex;
+    background-color: #ffffffcc;
+    color:#000;
+    justify-content:space-between;
+    align-items:center;
+    border: 1px solid #ccc ;
+    padding: 4px ; 
+    border-radius: 8px;
+    max-width: 170px;
+    height: 50px;
+    margin: 5px 1.5rem ;
+}
+.Register-formHalf input {
+    background-color : transparent;
+    border:transparent;
+    border:none ;
+    width: 100% ;
+    height:45px;
+    font-size:1.2rem ;
+    color:rgb(0, 0, 0);
+    padding : 0rem 0rem;
+    font-family: 'Poppins' sans-serif;
+}
+.Register-formHalf input:focus{
+    outline: none;
+}
+.translateDown10{
+    transform: translatey(10px);
+}
+.flexRow{
+    display: flex;
+    flex-direction: row;
+}
+.flexCol{
+    display: flex;
+    flex-direction:column;
+}
+
+
+
+
+
+
+
+
+.SearchButtons button{
+    width:91%;
+    height : 7vh;
+    left:0%;
+    padding: 1rem 1rem;
+    margin: 0.7rem 1rem;
+    font-size: 15px
+
+}
+.SearchButtonsDisabled button{
+    width:91%;
+    height : 7vh;
+    
+    left:0%;
+    padding: 1rem 1rem;
+    margin: 0.7rem 1rem;
+    font-size: 15px ;
+    background-color:rgb(200,200,200);
+
+}
+.SearchButtonsDisabled button:hover{
+    width:91%;
+    height : 7vh;
+    left:0%;
+    padding: 1rem 1rem;
+    margin: 0.7rem 1rem;
+    font-size: 15px ;
+    background-color:rgb(200,200,200);
+    cursor: default;
+}
+.Register-RegisterHere{
+    display: flex;
+    flex-direction: row;
+}
+.Register-NotReg {
+    color:#eeeaea;
+    padding :0rem 1.5rem;
+    font-weight: 500;
+}
+
+.Register-RegisterHere a{
+    color:rgb(10, 223, 88);
+    
+    margin: 0rem 0rem;
+    padding: 0rem 0rem;
+    transform: translate(-0.8rem, 0.7rem);
+
+}
+.Register-RegisterHere a:hover{
+    transition: 0.5s;
+    color:rgb(0, 255, 94);
+    text-decoration: underline;
+}
+.Register-WrongData {
+    display:flex;
+    flex-direction: column;
+    padding: 0.2rem 1.5rem;
+    margin:0.5rem 0.5rem;
+    color:red;
+}
+.Register-WrongData a{
+    color:greenyellow;
+}
+.ResetPasswordRegister{
+    position: absolute;
+    background-color: transparent;
+    color: white;
+    top: 63.5%;
+    left: 44%;
+    font-size:100%;
+   
+
+}
+.ResetPasswordRegister:hover{
+    color:var(--primary-light);
+    /* border-bottom:1px solid #1e2f45; */
+    text-decoration: underline;
+    cursor: pointer;
+    transition: 0.7s;
+}
+.Register_C3{
+    position: absolute;
+    top:78px;
+    left:891px;
+}
+.Register_C3:hover{
+    transform:scale(1.2);
+    transition: 1s;
+    cursor: pointer;
+}
+.C3_Text{
+    background-color: rgba(0, 43, 72, 0.5);
+    position: absolute;
+    top:15px;
+    left:974px;
+    color:rgb(255, 255, 255);
+    font-weight: 400;
+    font-size:25px;
+}
+.Register_C1{
+    position: absolute;
+    top:178px;
+    left:551px;
+}
+.Register_C1:hover{
+    transform:scale(1.2);
+    transition: 1s;
+    cursor: pointer;
+}
+.C1_Text{
+    background-color: rgba(0, 43, 72, 0.5);
+    position: absolute;
+    top:130px;
+    left:585px;
+    color:rgb(255, 255, 255);
+    font-weight: 400;
+}
+.Register_C2{
+    position: absolute;
+    top:148px;
+    left:721px;
+}
+.Register_C2:hover{
+    transform:scale(1.2);
+    transition: 1s;
+    cursor: pointer;
+}
+.C2_Text{
+    background-color: rgba(0, 43, 72, 0.5);
+    position: absolute;
+    top:100px;
+    left:740px;
+    color:rgb(255, 255, 255);
+    font-weight: 400;
+}
+.Register_C4{
+    position: absolute;
+    top:148px;
+    left:1131px;
+}
+.Register_C4:hover{
+    transform:scale(1.2);
+    transition: 1s;
+    cursor: pointer;
+}
+.C4_Text{
+    background-color: rgba(0, 43, 72, 0.5);
+    position: absolute;
+    top:110px;
+    left:1175px;
+    color:rgb(255, 255, 255);
+    font-weight: 400;
+}
+.Register_C5{
+    position: absolute;
+    top:175px;
+    left:1295px;
+}
+.Register_C5:hover{
+    transform:scale(1.2);
+    transition: 1s;
+    cursor: pointer;
+    background-image:rgba(66, 198, 255, 0.2);
+}
+.C5_Text{
+    background-color: rgba(0, 43, 72, 0.5);
+    position: absolute;
+    top:120px;
+    left:1300px;
+    color:rgb(255, 255, 255);
+    font-weight: 400;
+}
+
+.scroll {
+    position:absolute;
+    top:10%;
+    left : 2%;
+    height:80%;
+    width:95%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+    .scroll::-webkit-scrollbar {
+        width: 10px;
+        border-radius:20px;
+    }
+
+/* Track */
+
+    .scroll::-webkit-scrollbar-track {
+        background: rgb(181, 181, 181);
+        border-radius: 20px;
+    }
+
+/* Handle */
+
+    .scroll::-webkit-scrollbar-thumb {
+        background: rgb(0, 180, 255);
+        border-radius: 20px;
+    }
+
+    /* Handle on hover */
+
+        .scroll::-webkit-scrollbar-thumb:hover {
+            background: #555;
+            border-radius: 20px;
+        }
+
+.Register_EmailExist h4{
+    font-weight: 600;
+}
+.Register_EmailExist a{
+    color:#ddd;
+    font-weight: 400;
+}
+
+.Register_EmailExist a:hover{
+    color:rgb(255, 255, 255);
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+.youSuccessfully{
+    position: absolute;
+    top:30%;
+    left:30%;
+    background-color:rgba(0, 45, 67, 0.8);
+    height: 30%;
+    z-index:2;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    align-content: center;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+}

@@ -31,7 +31,7 @@
     color:#ffffff;
     padding :1rem 0rem;
 }
-h3{
+.login h3{
     color:#ffffff;
     padding :0.5rem 1.5rem;
 }
@@ -85,7 +85,7 @@ h3{
     
     margin: 0rem 0rem;
     padding: 0rem 0rem;
-    transform: translate(-0.8rem, 0.1rem);
+    transform: translate(-0.8rem, 0.7rem);
 
 }
 .Login-RegisterHere a:hover{

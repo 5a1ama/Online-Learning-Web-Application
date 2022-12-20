@@ -28,6 +28,7 @@ import { InstructorViewCourse } from './components/Instructor/InstructorViewCour
 import { verify } from './API/LoginAPI';
 import { TraineeViewInstructor } from './components/Trainee/TraineeViewInstructor';
 import { TraineeProfile } from './components/Trainee/TraineeProfile';
+import Register from './components/Register/Register';
 
 
 
@@ -44,33 +45,38 @@ export default function App() {
 
   return (
     
-      
-        <Routes >
-          <Route path="/courses" element={<Navbar items={["Home"]} select="Home" scroll={["home"]} nav={[""]}/>} />
+    
+    <Routes >
           <Route path="/" element={<Home handleCountryNumber={handleCountryNumber} country={countryNumber} />} />
+          
           <Route path="/login" element={<Login/>}/>
-          <Route path="/InstructorCourses" element={<InstructorCourses handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
-          <Route path="/addCourse" element={<AddCourse handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
+          <Route path="/signUp" element={<Register />} />          
+          <Route path="/CourseItems" element={<CourseItems handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>         
+          <Route path="/resetPass" element={<ResetPass handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/AllCoursesSearch" element={<AllCoursesSearch handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/AllCourses" element={<AllCourses handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          
+          <Route path="/InstructorCourses" element={<InstructorCourses handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/instructorProfile" element={<InstructorProfile handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path='/instructorViewCourse' element={<InstructorViewCourse handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
+          <Route path="/instructorHome" element={<InstructorHome handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/> 
+          <Route path="/instructorReviews" element={<InstructorReviews handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/instructorCourseVideo" element={<InstructorCourseVideo handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
+          <Route path="/InstAllCourses" element={<InstAllCourses handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/addCourse" element={<AddCourse handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
+          
+          <Route path="/TraineeVieWInstructor" element={<TraineeViewInstructor handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/TraineeHome" element={<TraineeHome handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/TraineeCourses" element={<TraineeCourses handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/> 
-          <Route path="/InstAllCourses" element={<InstAllCourses handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
-          <Route path="/AdminHome" element={<Admin handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
-          <Route path="/AdminControlPanel" element={<ControlPanel handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/TraineeAllCourses" element={<TraineeAllCourses handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/CourseContent" element={<CourseContent handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/CourseItems" element={<CourseItems handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
-          <Route path="/instructorHome" element={<InstructorHome handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/> 
-          <Route path="/instructorReviews" element={<InstructorReviews handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
-          <Route path="/CourseItems" element={<CourseItems handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>         
            <Route path="/Coursevideo" element={<CourseVideo handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
-          <Route path="/resetPass" element={<ResetPass handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
-          <Route path="/instructorProfile" element={<InstructorProfile handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
-          <Route path='/instructorViewCourse' element={<InstructorViewCourse handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
-          <Route path="/instructorCourseVideo" element={<InstructorCourseVideo handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
-          <Route path="/TraineeVieWInstructor" element={<TraineeViewInstructor handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/TraineeProfile" element={<TraineeProfile handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/> 
+
+          <Route path="/AdminHome" element={<Admin handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/AdminControlPanel" element={<ControlPanel handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          
         </Routes>
       
     
@@ -99,7 +105,7 @@ function Home(props) {
       redirect()
     },[localStorage.getItem("token")]
     )
-
+ 
   return <div className="Home">
     
     <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎  ‎ Join Us"]} select="‎ ‎ ‎  ‎  ‎ Join Us" nav={["","","","/signUp"]} scroll={["Home","Courses","WhatHegza"]} handleCountryNumber={props.handleCountryNumber}   />
