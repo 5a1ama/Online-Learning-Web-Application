@@ -1,6 +1,7 @@
 import {Component, React,useEffect,useRef,useState} from 'react'
 import video from '../../assets/ItemsBack.mov';
 import Navbar from './../navbar/Navbar';
+
 import {  getCourseDetails, isEnrolled } from './../../API/CourseAPI';
 import { useLocation } from 'react-router-dom';
 import '../courses/CourseItems.css';
@@ -23,6 +24,7 @@ import { definePromotion, deleteSubTitle, updateSubtitle, uploadCourseVideo } fr
 import { addNewSubToCourse, uploadSubtitleVideo } from '../../API/InstructorAPI';
 import {TextField} from "@mui/material";
 import "../courses/subtitles/Subtitle.css"
+import { downloadCertificate } from '../../API/CommonAPI';
 
 export function InstructorViewCourse() {
     const [first,setFirst] = useState(0);
@@ -42,9 +44,22 @@ export function InstructorViewCourse() {
         setDuration(event.target.value)
     }
     const handleAddDiscount=async()=>{
-        const x=await definePromotion(location.state.id,discountamount,duration)
+        var arrD=duration.split("-")
+        
+            
+        if(arrD[0]>(new Date()).getFullYear() || arrD[1]>(new Date()).getMonth()+1){
+            const x=await definePromotion(location.state.id,discountamount,duration)
         setAddDiscount(false)
         getDetails();
+        }else if(arrD[2]>(new Date()).getDate() && arrD[1]==(new Date()).getMonth()+1){
+            const x=await definePromotion(location.state.id,discountamount,duration)
+        setAddDiscount(false)
+        getDetails();
+        }else{
+            alert("enter a future date")
+
+        }
+        
     }
     const handleAddVidChange=(event)=>{
         setAddedVideoLink(event.target.value)
@@ -204,7 +219,6 @@ const handleHours=(event)=>{
 
             <Navbar items={["Home","My Courses","All Courses"]}     handleCountryNumber={handleCountryNumber}
             select="" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]} inst={true} scroll={["","",""]}  />
-
             <div className="CourseItems_Video">
 
                  <video autoPlay loop muted id='video'>
@@ -237,7 +251,8 @@ const handleHours=(event)=>{
             </div>
             
             {/* progress bar */                                                                 }
-            
+            <button onClick={downloadCertificate}>download</button>
+
             
             
             {/* Second Part */                                                                  }
@@ -268,12 +283,12 @@ const handleHours=(event)=>{
                                         
                                         </div>) }
                                         {addDiscount && <div style={{position:"relative",left:"110%",top:"-25vw", width:"30%",display: "flex",flexDirection: "column",rowGap: "0.5vw"}}>
-                                        <TextField id = {"sub"+0}  className="textSub1-Subtitle" onChange={handleDiscountAmount} 
+                                        <TextField id = {"sub"+0}   className="textSub1-Subtitle" onChange={handleDiscountAmount} 
      label="Discount Amount" 
      color="primary" 
      variant="filled"
      />
-     <TextField id = {"sub"+0}  className="textSub1-Subtitle" onChange={handleDuration} 
+     <TextField id = {"sub"+0}  className="textSub1-Subtitle" type={"date"} onChange={handleDuration} 
      label="Duration" 
      color="primary" 
      variant="filled"
