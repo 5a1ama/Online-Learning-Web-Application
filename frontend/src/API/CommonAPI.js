@@ -58,16 +58,18 @@ export const CreateUser = async(Name,Email,Password,Username,Gender)=>{
       const j=await result.json();
       return j     
 }
-export const downloadCertificate=()=>{
-    fetch("C:/Users/Ziad/OneDrive/Desktop/react certificate.pdf").then(response => {
-        response.blob().then(blob => {
-            // Creating new object of PDF file
-            const fileURL = window.URL.createObjectURL(blob);
-            // Setting various property values
-            let alink = document.createElement('a');
-            alink.href = fileURL;
-            alink.download = 'Certificate.pdf';
-            alink.click();
-        })
-    })
+export const downloadCertificate=async ()=>{
+    
+    fetch("http://localhost:8000/downloadFile").then(resp => resp.arrayBuffer()).then(resp => {
+
+            // set the blog type to final pdf
+            const file = new Blob([resp], {type: 'application/pdf'});
+
+            // process to auto download it
+            const fileURL = URL.createObjectURL(file);
+            const link = document.createElement('a');
+            link.href = fileURL;
+            link.download = "certificate.pdf";
+            link.click();
+        });
 }

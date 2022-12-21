@@ -178,6 +178,10 @@ router.post('/CreateUser' ,(req,res)=>{
 
 
 })
+router.get("/downloadFile",function(req,res){
+    
+    res.download("./filesDownload/react certificate.pdf");
+})
 
 
 

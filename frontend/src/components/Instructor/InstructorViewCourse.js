@@ -16,7 +16,7 @@ import GiftTop2 from "../../assets/giftTop2.png"
 import { Avatar } from "@mui/material";
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 
-
+import { saveAs } from 'file-saver'
 import { GetInstructorName } from './../../API/CourseAPI';
 import Footer from '../footer/Footer';
 import InstructorSubtitle from '.././courses/subtitles/InstructorSubtitle';
@@ -116,7 +116,9 @@ const handleHours=(event)=>{
 
         }
     }
-
+    const handleDownloadCertificate=async ()=>{
+         downloadCertificate();
+    }
     const bottomRef = useRef(null);
 
     useEffect(()=>{ 
@@ -251,7 +253,7 @@ const handleHours=(event)=>{
             </div>
             
             {/* progress bar */                                                                 }
-            <button onClick={downloadCertificate}>download</button>
+            <button onClick={handleDownloadCertificate}>download</button>
 
             
             

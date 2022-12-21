@@ -32,7 +32,7 @@ const traineeSchema=new Schema(
             type:String
           },
           courses:{
-            type:[{id:Number,progress:Number,enrollDate:Date}],
+            type:[{id:Number,progress:Number,enrollDate:Date,notes:[{title:String,note:String}]}],
             default:[]
           },
           completedExcercise:{

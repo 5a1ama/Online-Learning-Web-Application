@@ -95,3 +95,38 @@ export const getTraineeCourseProg=async(courseId)=>{
     return await result.json()
 
 }
+export const addNotes=async(id,title,notes)=>{
+    await fetch(`http://localhost:8000/trainee/addNotesToSub/${id}/${title}/${notes}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+}
+export const downloadNotes=async(id,title)=>{
+    fetch(`http://localhost:8000/trainee/downloadNotes/${id}/${title}/${localStorage.getItem("token")}`).then(resp => resp.arrayBuffer()).then(resp => {
+
+    // set the blog type to final pdf
+    const file = new Blob([resp], {type: 'application/pdf'});
+
+    // process to auto download it
+    const fileURL = URL.createObjectURL(file);
+    const link = document.createElement('a');
+    link.href = fileURL;
+    link.download = "certificate.pdf";
+    link.click();
+});
+}
+export const deleteAfterDownload=async(title)=>{
+    await fetch(`http://localhost:8000/trainee/deleteDownloadedFile/${title+" Notes.pdf"}`)
+}
+export const addReport=async(courseId,reporttype,details)=>{
+    await fetch(`http://localhost:8000/trainee/reportProblem/${localStorage.getItem("token")}/${courseId}/${reporttype}/${details}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+}
+export const getAllReport=async()=>{
+    const result=await fetch(`http://localhost:8000/trainee/myReports/${localStorage.getItem("token")}`)
+    return await result.json();
+}

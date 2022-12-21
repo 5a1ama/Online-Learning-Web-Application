@@ -182,3 +182,14 @@ export const salaryPerMonth=async(month,year)=>{
     return await result.json()
 
 }
+export const addReport=async(courseId,reporttype,details)=>{
+    await fetch(`http://localhost:8000/trainee/reportProblem/${localStorage.getItem("token")}/${courseId}/${reporttype}/${details}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+}
+export const getAllReport=async()=>{
+    const result=await fetch(`http://localhost:8000/trainee/myReports/${localStorage.getItem("token")}`)
+    return await result.json();
+}

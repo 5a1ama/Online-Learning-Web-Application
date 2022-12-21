@@ -9,6 +9,11 @@ const Excercise=require("../Models/Excercise")
 const RatingInst=require("../Models/RatingInst");
 const RatingCourse=require("../Models/RatingCourse")
 const Instructor = require("../Models/Instructor");
+const Reports=require("../Models/Reports");
+const PDFDocument=require('pdfkit')
+const fs =require('fs');
+const { report } = require("process");
+const { use } = require("./commonRoutes");
 dotenv.config()
 
 router.get("/TraineeMyCourse/:Token",async function(req,res){
@@ -255,5 +260,97 @@ router.get("/courseProgress/:token/:id",async function(req,res){
             break;
         }
     }
+})
+router.post("/addNotesToSub/:courseid/:subtitle/:added/:token",async function(req,res){
+    var id=req.params.courseid;
+    var title=req.params.subtitle;
+    var token=req.params.token;
+    var added=req.params.added;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var trainee=await Trainee.findOne({id:user.id})
+    var courses=trainee.courses;
+    var notesArr=[];
+    var index=0;
+    for(var i=0;i<courses.length;i++){
+        if(courses[i].id==id){
+            notesArr=courses[i].notes;
+            index=i;
+        }
+    }
+    var found=false;
+    for(var i=0;i<notesArr.length;i++){
+        if(notesArr[i].title==title){
+            notesArr[i].note=added;
+            found=true;
+            break;
+        }
+    }
+    if(!found){
+        notesArr=notesArr.concat([{title:title,note:added}])
+    }
+    courses[index].notes=notesArr;
+    await Trainee.findOneAndUpdate({id:id},{courses:courses});
+
+})
+router.get("/downloadNotes/:courseid/:subtitle/:token",async function(req,res){
+    var id=req.params.courseid;
+    var title=req.params.subtitle;
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var trainee=await Trainee.findOne({id:user.id})
+    var courses=trainee.courses;
+    var requiredCourseNotes="";
+    for(var i=0;i<courses;i++){
+        if(courses[i].id==id){
+            requiredCourseNotes=courses[i].notes;
+            break;
+        }
+    }
+    var requiredNotes="";
+    for(var i=0;i<requiredCourseNotes.length;i++){
+        if(requiredCourseNotes[i].title==title){
+            requiredNotes=requiredCourseNotes[i].note;
+            break;
+        }
+    }
+
+    const doc = new PDFDocument();
+  
+// Saving the pdf file in root directory.
+doc.pipe(fs.createWriteStream(title+"  Notes" +'.pdf'));
+  
+// Adding functionality
+doc
+   
+  .fontSize(27)
+  .text(requiredNotes, 100, 100);
+  doc.end();
+  res.download(title+"  Notes" +'.pdf');
+})
+router.get("/deleteDownloadedFile/:filename",function(req,res){
+    var filename=req.params.filename;
+    try {
+        fs.unlinkSync(filename);
+      
+        console.log("Delete File successfully.");
+      } catch (error) {
+        console.log(error);
+      }
+})
+router.post("/reportProblem/:token/:courseId/:reporttype/:details",async function(req,res){
+    var c=(await Reports.find({})).length;
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var object=new Reports({id:c+1,ReporterId:user.id,courseId:req.params.courseId,type:req.params.reporttype,details:req.params.details,})
+    object.save(function(err,result){
+
+    })
+
+})
+router.get("/myReports/:token",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var result=await Reports.find({ReporterId:user.id})
+    res.json(result);
 })
 module.exports = router
