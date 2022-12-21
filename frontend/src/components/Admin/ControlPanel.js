@@ -73,7 +73,7 @@ function ControlPanel() {
     }
   return (
     <div className="controlPanel">
-            <Navbar items={["Home","Control Panel","Reports"]} select="Control Panel" nav={["/AdminHome","/AdminControlPanel",""]} scroll={["","",""]}  />
+            <Navbar items={["Home","Control Panel","Reports"]} select="Control Panel" nav={["/AdminHome","/AdminControlPanel",""]} scroll={["","",""]}  handleCountryNumber={()=>{} }  />
         <div className="controlPanel_content">
             <div className="controlPanel_content4horizontal">
                 
