@@ -193,3 +193,10 @@ export const getAllReport=async()=>{
     const result=await fetch(`http://localhost:8000/trainee/myReports/${localStorage.getItem("token")}`)
     return await result.json();
 }
+export const followupReport=async(question,id)=>{
+    await fetch(`http://localhost:8000/trainee/followUpReport/${localStorage.getItem("token")}/${id}/${question}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+}

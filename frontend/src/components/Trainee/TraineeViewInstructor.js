@@ -17,15 +17,36 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { TextField } from '@mui/material';
 import { myInstructorRate, rateCourse, rateInstructor } from '../../API/TraineeAPI';
-
+import { verify } from '../../API/LoginAPI';
 
 export function TraineeViewInstructor(){
+  const navigate = useNavigate(); 
+  const [first2,setFirst2]=useState(0);
+  const begin=async()=>{
+      if(localStorage.getItem("token")){
+          try{
+              var user=await verify(localStorage.getItem("token"));
+              if(user.job!="Trainee"){
+                  alert("login as trainee first")
+                  navigate("/login")
+              }
+          }catch{
+
+          }
+      }else{
+          alert("login as instructor first")
+          navigate("/login")
+      }
+  }
+  if(first2==0){
+      begin();
+      setFirst2(1)
+  }
     const   location = useLocation();
     // const [first,setFirst] = useState(0);
     const [instructor,setinstructor]=useState()
     // const [newName,setNewName]=useState("");
 
-    const navigate = useNavigate();
 
     const [countryNumber,setCountryNumber]=useState();
     const [traineeRate,setTraineeRate] = useState("")
@@ -38,11 +59,13 @@ export function TraineeViewInstructor(){
       setCountryNumber(x);
     }
     const getDetails = async ()=>{
+      if(location.state)
         setinstructor(await getinstructorTraineeDetails(location.state))
     }
     const [MyRate,setMyRate] = useState(0)
     
     const getRate = async ()=> {
+      if(location.state) 
         setMyRate(await myInstructorRate(location.state))
     }
     getDetails()

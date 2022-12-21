@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
 import Navbar from "../navbar/Navbar";
 import "./AddCourse.css"
@@ -12,9 +12,35 @@ import { HiArrowCircleDown, HiOutlineChartSquareBar } from 'react-icons/hi';
 import { createCourse } from '../../API/CourseAPI';
 import { AiFillCloseCircle, AiFillCloseSquare, AiOutlineClose } from 'react-icons/ai';
 import { NewDiv2 } from './NewDiv2';
+import { verify } from '../../API/LoginAPI';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export function AddCourse(){
-    
+    const navigate=useNavigate();
+    const [first,setFirst]=useState(0);
+    const begin=async()=>{
+        if(localStorage.getItem("token")){
+            try{
+                var user=await verify(localStorage.getItem("token"));
+                if(user.job!="Instructor"){
+                    alert("login as instructor first")
+                    navigate("/login")
+                }
+            }catch{
+
+            }
+        }else{
+            alert("login as instructor first")
+            navigate("/login")
+        }
+    }
+    if(first==0){
+        begin();
+        setFirst(1)
+    }
+
+    useEffect(()=>{
+    })
     
     const [title,setTitle]=useState("");
     const [subject,setSubject]=useState("")

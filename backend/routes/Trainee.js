@@ -12,7 +12,6 @@ const Instructor = require("../Models/Instructor");
 const Reports=require("../Models/Reports");
 const PDFDocument=require('pdfkit')
 const fs =require('fs');
-const { report } = require("process");
 const { use } = require("./commonRoutes");
 dotenv.config()
 
@@ -21,7 +20,11 @@ router.get("/TraineeMyCourse/:Token",async function(req,res){
     const user = jwt.verify(Token,process.env.ACCESSTOKEN)
     var Id = user.id
     var query = await Trainee.findOne({id:Id})
-    var array = query.courses
+    var array=[];
+    if(query){
+         array = query.courses
+
+    }
     
     var arrayCourse = []
     for(var i = 0;i<array.length;i++){
@@ -352,5 +355,49 @@ router.get("/myReports/:token",async function(req,res){
     var user=jwt.verify(token,process.env.ACCESSTOKEN);
     var result=await Reports.find({ReporterId:user.id})
     res.json(result);
+})
+router.post("/followUpReport/:token/:reportId/:question",async function(req,res){
+    var token=req.params.token;
+    var reportid=req.params.reportId;
+    var question=req.params.question;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var report=await Reports.findOne({id:reportid});
+    var followup=report.followup;
+    followup=followup.concat([{question:question,answer:""}]);
+    await Reports.findOneAndUpdate({id:reportid},{followup:followup});
+
+})
+router.post("/getRefund/:token/:courseid",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var cid=req.params.courseid;
+    var trainee=await Trainee.findOne({id:user.id})
+    var courses=trainee.courses;
+    var progress="";
+    var index=0;
+    var price=0;
+    var wallet=trainee.wallet;
+    for(var i=0;i<courses.length;i++){
+        if(courses[i].id==cid){
+            progress=courses[i].progress;
+            index=i;
+            price=(await Course.findOne({id:index})).price
+        }
+    }
+    if(progress<50){
+        var newCourses=[];
+        for(var i=0;i<courses.length;i++){
+            if(i != index){
+                newCourses.push(courses[i])
+            }
+        }
+        await Trainee.findOneAndUpdate({id:user.id},{courses:newCourses,wallet:wallet+price})
+    }
+})
+router.get("/viewWallet/:token",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var trainee=await Trainee.findOne({id:user.id});
+    res.json(trainee.wallet);
 })
 module.exports = router

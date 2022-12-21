@@ -42,6 +42,9 @@ const traineeSchema=new Schema(
           creditCards:{
             type:[{cardHolder:String,cardNumber:Number,cardDate:String,cardCvv:Number}],
             default:[]
+          },
+          wallet:{
+            type:Number,default:0
           }
 
     }

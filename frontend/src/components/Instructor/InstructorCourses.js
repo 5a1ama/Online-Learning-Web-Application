@@ -12,14 +12,32 @@ import NewCourse from '../courses/NewCourse';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { Checkbox } from '@mui/material';
+import { verify } from '../../API/LoginAPI';
 
 
 export function InstructorCourses(){
+  const navigate=useNavigate();
+  const [first,setFirst]=useState(0);
+  const begin=async()=>{
+      if(localStorage.getItem("token")){
+          try{
+              var user=await verify(localStorage.getItem("token"));
+              if(user.job!="Instructor"){
+                
+                  alert("login as instructor first")
+                
+                  navigate("/login")
+              }
+          }catch{
 
-
+          }
+      }else{
+          alert("login as instructor first")
+          navigate("/login")
+      }
+  }
       const [search,setSearch]=useState("");
       const [searchSubject,setSearchSubject]=useState("");
-      const[first,setFirst]=useState(0);
 
       const [subject,setSubject]=useState("");
       const handleSubject=(event)=>{
@@ -92,13 +110,13 @@ export function InstructorCourses(){
         setCourses((await SearchMyCourse(localStorage.getItem("token"),search)))
         setFirst(1);
       }
-      const navigate = useNavigate();
       const [courses,setCourses] = useState([]);
       const getCourses = async () =>{
         setCourses ((await getMycourses(localStorage.getItem("token"))));
       }
      
       if(first==0){
+        begin();
         getCourses();
         setFirst(1);
       }

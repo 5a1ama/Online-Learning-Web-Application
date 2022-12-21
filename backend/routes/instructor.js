@@ -300,5 +300,15 @@ router.post("/salaryPerMonth/:year/:month/:token",async function(req,res){
     res.json(sum)
 
 })
+router.post("/followUpReport/:token/:reportId/:question",async function(req,res){
+    var token=req.params.token;
+    var reportid=req.params.reportId;
+    var question=req.params.question;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var report=await Reports.findOne({id:reportid});
+    var followup=report.followup;
+    followup=followup.concat([{question:question,answer:""}]);
+    await Reports.findOneAndUpdate({id:reportid},{followup:followup});
 
+})
 module.exports=router

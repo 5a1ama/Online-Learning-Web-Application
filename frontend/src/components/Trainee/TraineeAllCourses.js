@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import {useNavigate} from 'react-router-dom';
 import { Checkbox } from "@mui/material";
 import { getTraineeDetails } from "../../API/TraineeAPI";
+import { verify } from "../../API/LoginAPI";
 
 
 
@@ -18,6 +19,27 @@ export function TraineeAllCourses(){
     
    
     const navigate = useNavigate(); 
+    const [first2,setFirst2]=useState(0);
+    const begin=async()=>{
+        if(localStorage.getItem("token")){
+            try{
+                var user=await verify(localStorage.getItem("token"));
+                if(user.job!="Trainee"){
+                    alert("login as trainee first")
+                    navigate("/login")
+                }
+            }catch{
+
+            }
+        }else{
+            alert("login as instructor first")
+            navigate("/login")
+        }
+    }
+    if(first2==0){
+        begin();
+        setFirst2(1)
+    }
     const[rate,setRate]=useState([]);
 
     const handleRateChange = (event,reset) => {

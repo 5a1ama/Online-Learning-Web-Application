@@ -33,3 +33,7 @@ body: JSON.stringify({email:user,password:pass})
 const j=await result.json();
 return j
 }
+export const getAllReport=async()=>{
+    const result=await fetch(`http://localhost:8000/admin/getAllReports`)
+    return await result.json();
+}

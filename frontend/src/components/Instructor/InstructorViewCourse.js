@@ -3,7 +3,7 @@ import video from '../../assets/ItemsBack.mov';
 import Navbar from './../navbar/Navbar';
 
 import {  getCourseDetails, isEnrolled } from './../../API/CourseAPI';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../courses/CourseItems.css';
 import ProgressImg from "../../assets/Progress100.png"
 import Progress from '.././courses/Progress';
@@ -25,8 +25,31 @@ import { addNewSubToCourse, uploadSubtitleVideo } from '../../API/InstructorAPI'
 import {TextField} from "@mui/material";
 import "../courses/subtitles/Subtitle.css"
 import { downloadCertificate } from '../../API/CommonAPI';
+import { verify } from '../../API/LoginAPI';
 
 export function InstructorViewCourse() {
+    const navigate=useNavigate();
+    const [first2,setFirst2]=useState(0);
+    const begin=async()=>{
+        if(localStorage.getItem("token")){
+            try{
+                var user=await verify(localStorage.getItem("token"));
+                if(user.job!="Instructor"){
+                    alert("login as instructor first")
+                    navigate("/login")
+                }
+            }catch{
+
+            }
+        }else{
+            alert("login as instructor first")
+            navigate("/login")
+        }
+    }
+    if(first2==0){
+        begin();
+        setFirst2(1)
+    }
     const [first,setFirst] = useState(0);
     const [Sub,setSub]=useState("");
     const[addSub,setAddSub]=useState(false)
@@ -47,11 +70,11 @@ export function InstructorViewCourse() {
         var arrD=duration.split("-")
         
             
-        if(arrD[0]>(new Date()).getFullYear() || arrD[1]>(new Date()).getMonth()+1){
+        if(location.state && (arrD[0]>(new Date()).getFullYear() || arrD[1]>(new Date()).getMonth()+1)){
             const x=await definePromotion(location.state.id,discountamount,duration)
         setAddDiscount(false)
         getDetails();
-        }else if(arrD[2]>(new Date()).getDate() && arrD[1]==(new Date()).getMonth()+1){
+        }else if(location.state && (arrD[2]>(new Date()).getDate() && arrD[1]==(new Date()).getMonth()+1)){
             const x=await definePromotion(location.state.id,discountamount,duration)
         setAddDiscount(false)
         getDetails();
@@ -65,14 +88,19 @@ export function InstructorViewCourse() {
         setAddedVideoLink(event.target.value)
     }
     const handleDelete=async(title)=>{
-        const x=await deleteSubTitle(title,location.state.id)
+        if(location.state){
 
-        getDetails();
+            const x=await deleteSubTitle(title,location.state.id)
+    
+            getDetails();
+        }
     }
     const handleEdit=async(oldtitle,title,hours,link,desc)=>{
-        
-        const x=await updateSubtitle(location.state.id,oldtitle,title,hours,link,desc)
-        getDetails();
+        if(location.state){
+
+            const x=await updateSubtitle(location.state.id,oldtitle,title,hours,link,desc)
+            getDetails();
+        }
     }
     const handleVidDescChange=(event)=>{
         setVidDesc(event.target.value)
@@ -90,9 +118,12 @@ const handleHours=(event)=>{
     setPrevVidLink(event.target.value);
    }
    const handleAddNewSub =async()=>{
-    const x=await addNewSubToCourse(location.state.id,Sub,hours)
-    getDetails()
-    setAddSub(false)
+    if(location.state){
+        
+        const x=await addNewSubToCourse(location.state.id,Sub,hours)
+        getDetails()
+        setAddSub(false)
+    }
 }
    const handleAddPrevVid=async()=>{
     setFirst(0)
@@ -122,8 +153,10 @@ const handleHours=(event)=>{
     const bottomRef = useRef(null);
 
     useEffect(()=>{ 
-        
-        handleView(location.state.View)
+        if(location.state){
+
+            handleView(location.state.View)
+        }
         
     })
 
@@ -146,7 +179,7 @@ const handleHours=(event)=>{
         
         getDetails();
      }
-    if(first===0){
+    if(first===0 && location.state){
         getDetails();
         if(location.state.View==="Syllabus"){
             bottomRef.current?.scrollIntoView({behavior: 'smooth'});
@@ -197,6 +230,7 @@ const handleHours=(event)=>{
         handleInstNames();
         const [reviews,setreviews] = useState([])
     useEffect(()=>{
+        
         setreviews(location.state)
 
     })

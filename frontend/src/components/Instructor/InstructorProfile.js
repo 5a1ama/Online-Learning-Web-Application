@@ -17,14 +17,37 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { TextField } from '@mui/material';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import { verify } from '../../API/LoginAPI';
 
 
 
 export function InstructorProfile(){
+    const navigate=useNavigate();
+    const [first2,setFirst2]=useState(0);
+    const [first,setFirst]=useState(0);
+    const begin=async()=>{
+        if(localStorage.getItem("token")){
+            try{
+                var user=await verify(localStorage.getItem("token"));
+                if(user.job!="Instructor"){
+                    alert("login as instructor first")
+                    navigate("/login")
+                }
+            }catch{
+
+            }
+        }else{
+            alert("login as instructor first")
+            navigate("/login")
+        }
+    }
+   if(first2==0){
+    begin();
+    setFirst2(1);
+   }
     const [oldPass,setOldPass]=useState("");
     const[newPass,setNewPass]=useState("");
     const [confirmPass,setConfirmPass]=useState("");
-    const [first,setFirst] = useState(0);
     const handleOldPass =(event)=>{
         setOldPass(event.target.value)
     }
@@ -89,15 +112,16 @@ export function InstructorProfile(){
     const intial = async()=>{
         setinstructor(await getInstructorDetails())
         if(first==0){
+            
             setNewEmail(instructor.Email)
             setNewName(instructor.Name)
             setNewSpec(instructor.specialization)
             setNewBio(instructor.bio)
             setFirst(1)
+
         }
        
     }
-    const navigate = useNavigate();
     const [showDiv,setShowDiv] =useState(false);
     const [showDiv2 ,setShowDiv2]=useState(false)
 

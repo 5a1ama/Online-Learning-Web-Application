@@ -2,7 +2,32 @@ import React, { useState } from 'react'
 import "./ControlPanel.css"
 import Navbar from '../navbar/Navbar'
 import { AddAdmin, AddInstructor,AddTrainee } from '../../API/AdminAPI';
+import { useNavigate } from 'react-router-dom';
+import { verify } from '../../API/LoginAPI';
+
 function ControlPanel() {
+    const navigate = useNavigate(); 
+  const [first2,setFirst2]=useState(0);
+  const begin=async()=>{
+      if(localStorage.getItem("token")){
+          try{
+              var user=await verify(localStorage.getItem("token"));
+              if(user.job!="Admin"){
+                  alert("login as Admin first")
+                  navigate("/login")
+              }
+          }catch{
+
+          }
+      }else{
+          alert("login as instructor first")
+          navigate("/login")
+      }
+  }
+  if(first2==0){
+      begin();
+      setFirst2(1)
+  }
     const [adminuser,setAdminUser]=useState("");
     const [adminpass,setAdminPass]=useState("");
     const handleAdminUser = (event)=>{

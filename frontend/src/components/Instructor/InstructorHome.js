@@ -18,10 +18,32 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { verify } from "../../API/LoginAPI";
 
 
 export function InstructorHome(){
     const navigate=useNavigate();
+    const [first,setFirst]=useState(0);
+    const begin=async()=>{
+        if(localStorage.getItem("token")){
+            try{
+                var user=await verify(localStorage.getItem("token"));
+                if(user.job!="Instructor"){
+                    alert("login as instructor first")
+                    navigate("/login")
+                }
+            }catch{
+
+            }
+        }else{
+            alert("login as instructor first")
+            navigate("/login")
+        }
+    }
+    if(first==0){
+        begin();
+        setFirst(1)
+    }
     const [instructor,setinstructor]=useState()
    
     if(instructor==""){
