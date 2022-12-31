@@ -30,9 +30,17 @@ router.post("/grantAccess/:corporateId/:courseid",async function(req,res){
     var courseId=req.params.courseid;
     await CourseRequest.findOneAndUpdate({requesterId:corpId,courseId:courseId},{status:"accepted"})
 })
-router.post("/setPromotion/:courseid/:promotion",async function(req,res){
+router.post("/setPromotion/:courseid/:promotion/:endDate",async function(req,res){
     var courseId=req.params.courseid;
     var promotion=req.params.promotion;
-    
+    var endDate=req.params.endDate;
+    for(var i=0;i<courseId.length;i++){
+        await Course.findOneAndUpdate({id:courseId},{discount:{amount:promotion,EndDate:endDate}})
+    }
+})
+router.post("/setPromotionAll/:promotion/:endDate",async function(req,res){
+    var promotion=req.params.promotion;
+    var endDate=req.params.endDate;
+    await Course.updateMany({},{discount:{amount:promotion,EndDate:endDate}})
 })
 module.exports=router;

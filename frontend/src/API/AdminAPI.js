@@ -55,3 +55,17 @@ export const grantAccess=async(courseid,corpid)=>{
     }    
 })
 }
+export const setPromotionOne=async(courseid,promotion,date)=>{
+    await fetch(`http://localhost:8000/admin/setPromotion/${courseid}/${promotion}/${date}`,{method:"POST",
+    headers:{
+        "Content-type": "application/json; charset=UTF-8"
+    }    
+})
+}
+export const setPromotionAll=async(promotion,date)=>{
+    await fetch(`http://localhost:8000/admin/setPromotionAll/${promotion}/${date}`,{method:"POST",
+    headers:{
+        "Content-type": "application/json; charset=UTF-8"
+    }    
+})
+}
