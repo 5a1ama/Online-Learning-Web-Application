@@ -1,5 +1,6 @@
 const express=require("express");
 const Course = require("../Models/Course");
+const CourseRequest=require("../Models/CourseRequest");
 const router=express.Router();
 const User=require("../Models/User")
 const jwt=require("jsonwebtoken")
@@ -399,5 +400,20 @@ router.get("/viewWallet/:token",async function(req,res){
     var user=jwt.verify(token,process.env.ACCESSTOKEN);
     var trainee=await Trainee.findOne({id:user.id});
     res.json(trainee.wallet);
+})
+router.post("/requestAccessToCourse/:token/:courseid",async function(req,res){
+    var token=req.params.token
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var courseid=req.params.courseid;
+    const result=await CourseRequest.find({requesterId:user.id,courseId:courseid})
+    if(result.length !=0){
+        res.json("already requested")
+    }else{
+        var object=new CourseRequest({requesterId:user.id,courseId:courseid});
+        object.save(function(err,result){
+            res.json("ok");
+        })
+    }
+
 })
 module.exports = router

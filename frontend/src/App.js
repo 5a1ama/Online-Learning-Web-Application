@@ -87,7 +87,7 @@ function Home(props) {
   const navigate = useNavigate();
       const checkToken=async()=>{
         var x=verify(localStorage.getItem("token"))
-        x.catch(()=>{localStorage.setItem("token",null); localStorage.clear(); //alert(localStorage.getItem("token"))
+        x.catch(()=>{localStorage.setItem("token",null); localStorage.clear(); navigate("/") //alert(localStorage.getItem("token"))
       })
     }
     const redirect=()=>{

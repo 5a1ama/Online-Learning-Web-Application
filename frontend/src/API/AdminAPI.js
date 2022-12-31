@@ -37,3 +37,21 @@ export const getAllReport=async()=>{
     const result=await fetch(`http://localhost:8000/admin/getAllReports`)
     return await result.json();
 }
+export const setReportState=async(reportid,reportstate)=>{
+    await fetch(`http://localhost:8000/admin/changeReportState/${localStorage.getItem("token")}/${reportstate}/${reportid}`,{method:"POST",
+    headers:{
+        "Content-type": "application/json; charset=UTF-8"
+    }    
+});
+}
+export const getAllRequests=async()=>{
+    const result=await fetch("http://localhost:8000/admin/allRequestAccess");
+    return await result.json();
+}
+export const grantAccess=async(courseid,corpid)=>{
+    await fetch(`http://localhost:8000/admin/grantAccess/${corpid}/${courseid}`,{method:"POST",
+    headers:{
+        "Content-type": "application/json; charset=UTF-8"
+    }    
+})
+}

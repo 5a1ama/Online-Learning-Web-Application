@@ -148,3 +148,11 @@ export const showWallet=async()=>{
     const result=await fetch(`http://localhost:8000/trainee/viewWallet/${localStorage.getItem("token")}`);
     return await result.json();
 }
+export const requestAccessToCourse=async(courseid)=>{
+    const result=await fetch(`http://localhost:8000/trainee/requestAccessToCourse/${localStorage.getItem("token")}/${courseid}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    return await result.json();
+}
