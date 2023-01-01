@@ -231,8 +231,6 @@ router.post("/updateSubtitle/:id/:oldtitle/:title/:hours/:link/:desc",async func
 
 router.get("/PopularCourses",async function(req,res){
     var result=await Course.find({});
-    
-
     var enrollArr=result.map((course)=>course.enrolledStudents)
     enrollArr=enrollArr.sort();
     var final=enrollArr.splice(enrollArr.length-3,enrollArr.length);
