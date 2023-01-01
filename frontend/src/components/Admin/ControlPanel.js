@@ -4,7 +4,7 @@ import Navbar from '../navbar/Navbar'
 import { AddAdmin, AddInstructor,AddTrainee } from '../../API/AdminAPI';
 import { useNavigate } from 'react-router-dom';
 import { verify } from '../../API/LoginAPI';
-
+import notification from "../../assets/notificationIcon.png"
 function ControlPanel() {
     const navigate = useNavigate(); 
   const [first2,setFirst2]=useState(0);
@@ -107,7 +107,13 @@ function ControlPanel() {
             <div className="controlPanel_vertical">
 
             <div className="ControlPanel_Func5">
+                <div className='ControlPanelViewRefundDiv'> <img className='notificationIconPanel' src={notification}></img>
+                <label>You Have New Requests</label>
+                <button>View Refund Requests</button></div>
                 
+                <div className='ControlPanelViewRefundDiv'> <img className='notificationIconPanel' src={notification}></img>
+                <label>You Have New Reports</label>
+                <button>View All Reports</button></div>
             </div>
         </div>
         </div>

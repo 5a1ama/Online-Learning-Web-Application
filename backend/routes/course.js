@@ -237,7 +237,7 @@ router.get("/PopularCourses",async function(req,res){
     var finalCourses=[];
     for(var i=0;i<final.length;i++){
         var course=await Course.find({enrolledStudents:final[i]})
-        finalCourses=finalCourses.concat([course])
+        finalCourses=finalCourses.concat(course)
     }
     res.json(finalCourses)
 })

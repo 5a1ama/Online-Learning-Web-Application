@@ -31,8 +31,9 @@ export function AdminViewReports(){
                 <label>{"Reporter ID :"+ props.report.ReporterId}</label>
                 <label>{"Reported Course ID: "+props.report.courseId}</label>
                 <label>{"Report Type: "+ props.report.type}</label>
-                <textarea>{"Report Details: "+props.report.details}</textarea>
-                <select onChange={handleReportChange}>
+                Report Details: <textarea readOnly className="ReportViewDetails">{props.report.details}</textarea>
+                <div>
+                Status: <select onChange={handleReportChange}>
                     {(props.report.status&& props.report.status=="unseen") && <option selected> unseen</option>}
                     {(props.report.status&&props.report.status!="unseen") && <option> unseen</option>}
                     {(props.report.status&&props.report.status=="resolved") && <option selected> resolved</option>}
@@ -40,18 +41,19 @@ export function AdminViewReports(){
                     {(props.report.status&&props.report.status=="pending") && <option selected> pending</option>}
                     {(props.report.status&&props.report.status!="pending") && <option > pending</option>}
                 </select>
-                {/* {props.report.followup.length>0 && <label>Follow Ups: </label>} */}
-                {/* {props.report.followup.map((follow,i)=><div className="AdminFollowUpDiv">
+                    </div>
+                {props.report.followup.length>0 && <label>Follow Ups: </label>} 
+                {props.report.followup.map((follow,i)=><div className="AdminFollowUpDiv">
                     <label>{follow.question}</label>
                     <select id={"followup"+i} onChange={handleFollowChange}>
                     {(!follow.status || follow.status=="unseen") && <option selected> unseen</option>}
                     {(follow.status && follow.status!="unseen") && <option> unseen</option>}
                     {(follow.status && follow.status=="resolved") && <option selected> resolved</option>}
-                    {(follow.status && follow.status!="resolved") && <option > resolved</option>}
-                    {(follow.status && follow.status=="pending") && <option selected> pending</option>}
-                    {(follow.status && follow.status!="pending") && <option > pending</option>}
+                    {((follow.status && follow.status!="resolved") || !follow.status) && <option > resolved</option>}
+                    {(follow.status && follow.status=="pending")  && <option selected> pending</option>}
+                    {((follow.status && follow.status!="pending") || !follow.status) && <option > pending</option>}
                 </select>
-                    </div>)} */}
+                    </div>)}
 
 
             </div>
@@ -75,12 +77,13 @@ export function AdminViewReports(){
     }
     if(first2==0){
         begin();
+        getAllReports();
         setFirst2(1)
     }
-    getAllReports();
     return(
         <div>
         <Navbar items={["Home","Control Panel","Reports"]} select="Reports" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={()=>{} }  />
+     
         <div className="AdminViewReportsMainDiv">
             {reports && reports.map((report)=><Report report={report}/>)}
         </div>
