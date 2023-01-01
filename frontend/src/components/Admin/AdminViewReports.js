@@ -85,6 +85,7 @@ export function AdminViewReports(){
         <Navbar items={["Home","Control Panel","Reports"]} select="Reports" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={()=>{} }  />
      
         <div className="AdminViewReportsMainDiv">
+            <h1>All Reports :</h1>
             {reports && reports.map((report)=><Report report={report}/>)}
         </div>
         </div>

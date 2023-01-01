@@ -85,12 +85,14 @@ router.post("/create/:token",function(req,res){
     var hourArr=req.body.hours;
     // console.log(req.body.subject)
     var final=[];
+    var totalhours=0;
     for(var i=0;i<arr.length;i++){
         final=final.concat([{title:arr[i],hours:hourArr[i],video:[""]}])
+        totalhours+=hourArr[i];
     }
     query.exec(function(err,result){
         var object=new Course({id:result.length+1,title:req.body.title,subtitles:final,price:req.body.price,
-        summary:req.body.summary,instructors:[user.id],subject:req.body.subject})
+        summary:req.body.summary,instructors:[user.id],subject:req.body.subject,hours:totalhours})
         // @ts-ignore
         // console.log("add course")
         object.save(function(req,res){
@@ -107,7 +109,7 @@ router.post("/addCourseSub/:subtitle/:hours/:id",async function(req,res){
     
     var subtitles=course.subtitles.concat([{video:[""],lesson:"",description:"",title:subtitle,hours:hours}])
     
-    await Course.findOneAndUpdate({id:id},{subtitles:subtitles})
+    await Course.findOneAndUpdate({id:id},{subtitles:subtitles,hours:course.hours+hours})
     res.json("ok")
 }
 )
@@ -182,14 +184,16 @@ router.post("/deleteSubtitle/:id/:subtitle",async function(req,res){
     var course=await Course.findOne({id:id});
     var arr=course.subtitles;
     var final=[];
-    
+    var hours=0
     for(var i=0;i<arr.length;i++){
         if(arr[i].title!=subtitle){
             final=final.concat([arr[i]])
+        }else{
+            hours=arr[i].hours
         }
     }
     
-    await Course.findOneAndUpdate({id:id},{subtitles:final})
+    await Course.findOneAndUpdate({id:id},{subtitles:final,hours:course.hours-hours})
     res.json(final)
 })
 router.post("/updateSubtitle/:id/:oldtitle/:title/:hours/:link/:desc",async function(req,res){
@@ -202,12 +206,14 @@ router.post("/updateSubtitle/:id/:oldtitle/:title/:hours/:link/:desc",async func
     var course=await Course.findOne({id:id})
     var subtitles=course.subtitles
     var finalSub=[];
+    var oldhours=0
+    var newhours=0
     // console.log(link)
     for(var i=0;i<subtitles.length;i++){
         if(subtitles[i].title != oldtitle){
             finalSub=finalSub.concat([subtitles[i]])
         }else{
-            
+            oldhours=subtitles[i].hours
             var object={video:[""],lesson:"",description:"",title:"",hours:0}
             if(title != "-1"){
                 object.title=title;
@@ -217,6 +223,8 @@ router.post("/updateSubtitle/:id/:oldtitle/:title/:hours/:link/:desc",async func
             }
             if(hours != "-1"){
                 object.hours=Number(hours);
+                newhours=Number(hours)
+                
             }
             if(description != "-1"){
                 object.description=description;
@@ -225,7 +233,7 @@ router.post("/updateSubtitle/:id/:oldtitle/:title/:hours/:link/:desc",async func
         }
     }
     
-    await Course.findOneAndUpdate({id:id},{subtitles:finalSub})
+    await Course.findOneAndUpdate({id:id},{subtitles:finalSub,hours:course.hours-oldhours+newhours})
     res.json("ok")
 })
 

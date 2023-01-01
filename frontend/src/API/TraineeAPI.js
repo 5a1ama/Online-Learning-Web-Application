@@ -138,11 +138,20 @@ export const followupReport=async(question,id)=>{
     })
 }
 export const getRefund=async(traineeId,id)=>{
-    await fetch(`http://localhost:8000/trainee/getRefund/${traineeId}/${id}`,{method: "POST",
+    const result=await fetch(`http://localhost:8000/trainee/getRefund/${traineeId}/${id}`,{method: "POST",
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     }
     })
+    return await result.json()
+}
+export const rejectMyRefund=async(traineeId,id)=>{
+    const result=await fetch(`http://localhost:8000/trainee/removeRefund/${traineeId}/${id}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    return await result.json()
 }
 export const requestRefund=async(id)=>{
     const result=await fetch(`http://localhost:8000/trainee/requestRefund/${localStorage.getItem("token")}/${id}`,{method: "POST",

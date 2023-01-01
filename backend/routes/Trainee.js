@@ -388,6 +388,11 @@ router.post("/requestRefund/:token/:courseid",async function(req,res){
     }
     
 })
+router.post("/removeRefund/:traineeId/:courseid",async function(req,res){
+    await RefundRequest.deleteOne({requesterId:req.params.traineeId,courseId:req.params.courseid})
+    res.json("ok")
+
+})
 router.post("/getRefund/:traineeId/:courseid",async function(req,res){
     var cid=req.params.courseid;
     var trainee=await Trainee.findOne({id:req.params.traineeId})
@@ -400,7 +405,7 @@ router.post("/getRefund/:traineeId/:courseid",async function(req,res){
         if(courses[i].id==cid){
             progress=courses[i].progress;
             index=i;
-            price=(await Course.findOne({id:index})).price
+            price=(await Course.findOne({id:courses[index].id})).price
         }
     }
     if(progress<50){
@@ -411,6 +416,10 @@ router.post("/getRefund/:traineeId/:courseid",async function(req,res){
             }
         }
         await Trainee.findOneAndUpdate({id:req.params.traineeId},{courses:newCourses,wallet:wallet+price})
+        await RefundRequest.deleteOne({requesterId:req.params.traineeId,courseId:req.params.courseid})
+        res.json("ok")
+    }else{
+        res.json("error")
     }
 })
 router.get("/viewWallet/:token",async function(req,res){
@@ -433,5 +442,46 @@ router.post("/requestAccessToCourse/:token/:courseid",async function(req,res){
         })
     }
 
+})
+router.post("/solveExcersice/:token/:courseid/:excerId/:answers",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var courseid=req.params.courseid;
+    var excerId=req.params.excerId
+    var answers=req.params.answers
+    var trainee=await Trainee.findOne({id:user.id});
+    var completed=trainee.completedExcercise
+    completed.push({courseId:courseid,excerId:excerId,answers:answers})
+    var progress=0
+    var courses=trainee.courses
+    for(var i=0;i<courses.length;i++){
+        if(courses[i].id==courseid){
+            var total=(await Course.findOne({id:courseid})).excercises.length;
+            progress=completed.length*1.0/total
+            courses[i].progress=progress;       
+            break;
+        }
+    }
+    await Trainee.findOneAndUpdate({id:user.id},{completedExcercise:completed,courses:courses})
+})
+router.get("/excerciseSolution/:excerId",async function(req,res){
+    var excerid=req.params.excerId;
+    var excercise=await Excercise.findOne({id:excerid});
+    res.json(excercise.correctAnswer)
+})
+router.get("/mySolutions/:excerId/:courseId/:token",async function(req,res){
+    var token=req.params.token;
+    var excerid=req.params.excerId;
+    var courseid=req.params.courseId
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var trainee=await Trainee.findOne({id:user.id})
+    var excercise=trainee.completedExcercise;
+    for(var i=0;i<excercise.length;i++){
+        if(excercise[i].excerId==excerid && excercise[i].courseId==courseid){
+            res.json(excercise[i].answers)
+            break;
+        }
+    }
+    res.json("");
 })
 module.exports = router

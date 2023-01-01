@@ -36,7 +36,7 @@ const traineeSchema=new Schema(
             default:[]
           },
           completedExcercise:{
-            type:[{courseId:Number,count:Number}],
+            type:[{courseId:Number,excerId:Number,answers:[String]}],
             default:[]
           },
           creditCards:{

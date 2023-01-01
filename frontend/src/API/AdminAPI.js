@@ -1,4 +1,4 @@
-import { getRefund } from "./TraineeAPI";
+import { getRefund, rejectMyRefund } from "./TraineeAPI";
 
 export const AddAdmin=async (user,pass)=>{
     const result=await fetch("http://localhost:8000/user/addAdministrator",{method:"POST",
@@ -55,14 +55,31 @@ export const getAllRequestRefund=async()=>{
     return await result.json();
 }
 export const grantAccess=async(courseid,corpid)=>{
-    await fetch(`http://localhost:8000/admin/grantAccess/${corpid}/${courseid}`,{method:"POST",
+    const result=await fetch(`http://localhost:8000/admin/grantAccess/${corpid}/${courseid}`,{method:"POST",
     headers:{
         "Content-type": "application/json; charset=UTF-8"
     }    
 })
+return await result.json()
+
+}
+export const rejectAccess=async(courseid,corpid)=>{
+    const result=await fetch(`http://localhost:8000/admin/rejectAccess/${corpid}/${courseid}`,{method:"POST",
+    headers:{
+        "Content-type": "application/json; charset=UTF-8"
+    }
+
+})
+return await result.json()
+
 }
 export const giveRefund=async (courseid,traineeId)=>{
-    await getRefund(traineeId,courseid)
+    const result=await getRefund(traineeId,courseid)
+    return result;
+}
+export const rejectRefund=async (courseid,traineeId)=>{
+    const result=await rejectMyRefund(traineeId,courseid)
+    return result;
 }
 export const setPromotionOne=async(courseid,promotion,date)=>{
     await fetch(`http://localhost:8000/admin/setPromotion/${courseid}/${promotion}/${date}`,{method:"POST",
