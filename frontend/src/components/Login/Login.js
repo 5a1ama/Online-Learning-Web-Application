@@ -53,8 +53,7 @@ function Login() {
         
         
     }
-    const handleForget =async ()=>{
-        var x="aa";
+    const handleForget =async (x)=>{
         alert("we sent you a mail to reset password")
         await sendEmail(email,x);
         
@@ -113,7 +112,7 @@ function Login() {
 
                 <div className="Login-WrongData" >
                 {wrongpass && <div><h4>Wrong Password. </h4>
-                <h3 onClick={()=>sendEmail(email,`/resetPass?email=${email}`)} className="ResetPasswordLogin">Reset Password?</h3>
+                <h3 onClick={()=>handleForget(`/resetPass?email=${email}`)} className="ResetPasswordLogin">Reset Password?</h3>
 
                
                 </div>}

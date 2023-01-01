@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useCountdown } from './useCountdown';
 import './countDown.css'
+import { definePromotion, definePromotion2 } from '../../API/InstructorAPI';
 
 
 
@@ -59,12 +60,16 @@ const ShowCounter = ({ days, hours, minutes, seconds }) => {
     </div>
   );
 };
+const resetPromotion = async(id,x)=>{
+  definePromotion2(id,x);
+}
 
-
-const CountdownTimer = ({ targetDate }) => {
+const CountdownTimer = ({ targetDate ,id}) => {
   const [days, hours, minutes, seconds] = useCountdown(targetDate);
 
   if (days + hours + minutes + seconds <= 0) {
+
+    resetPromotion(id,0);
     return <ExpiredNotice />;
   } else {
     return (

@@ -1,10 +1,6 @@
 .CourseItems_Syllabus_Subtitles_1{
-  display: block;
-  /* flex-direction: row;
-  display: flex;
-  column-gap: 6vw;
-  flex-grow: 1 1 0;
-  justify-content: start; */
+
+
 }
 .CourseItems_Syllabus_Subtitles_Content {
     height: 15vh;
@@ -26,7 +22,8 @@
     cursor: pointer;
 }
 .CourseItems_Syllabus_Subtitles_Content_Details{
-    height: 60vh;
+    height: auto;
+    min-height: 50vh;
     border-bottom: 2px solid rgb(206, 206, 206);
     width: 115vh;
     position: relative;
@@ -67,7 +64,7 @@
     flex-direction: column;
     width: 80%;
     text-align:left;
-    padding: 0;
+    padding: 0rem 0rem;
     transform: translate(2vh,15vh);
     
   }
@@ -96,6 +93,9 @@
   .CourseItems_OpenItem2:hover{
     text-decoration: underline;
   }
+  .CourseItems_OpenItem3:hover{
+    text-decoration: none;
+  }
   .DivHover{
     cursor: pointer;
     border-radius: 10px;
@@ -110,6 +110,7 @@
   .DivHover:hover{
     background: rgb(220,220,220);
   }
+
   .CourseItems_DivForContinue_WorkSub{
     position:absolute;
     top:20vh;

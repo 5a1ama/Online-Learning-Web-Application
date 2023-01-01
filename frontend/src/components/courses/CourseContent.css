@@ -28,14 +28,13 @@
     background-color: rgba(0,0,0,0);
     /* background-image:  linear-gradient(90deg, rgb(0, 187, 255) -100%, rgba(174, 0, 255, 0.1)40% ); */
     border-radius: 40px;
-    position: absolute;
-    height:6vw;
-    width:20vw;
+    height:4vw;
+    width:15vw;
+    transform: translateY(2rem);
     border-color: rgb(120, 120, 120);
     border: solid 3px;
     z-index: 1;
-    top:400px;
-    left:41%;
+    
     font-size: 20px;
 }
 .CourseContent_button_Enroll:hover{
@@ -45,7 +44,7 @@
 
     background-image:  linear-gradient(90deg, rgb(0, 187, 255) -80%, rgba(174, 0, 255, 0.1)40% );
 
-    transform: scale(1.4);
+    transform: scale(1.4)translateY(1.5rem);
     
 }
 
@@ -84,3 +83,61 @@
     width:100%;
     height: 100%;
   }
+.CourseContent_Counter{
+  transform:translate(35rem,-1rem)
+}
+.CourseContent_DiscountLabel2{
+  position: absolute;
+  width:115px;
+  top:80px;
+  left:76.5%;
+  /* transform: rotate(180deg); */
+  z-index: 1;
+}
+
+
+.CourseContent_NewCourse_Prices{
+  left:30vw;
+  top:90px;
+  position: absolute;
+  width: 60vh;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+     
+}
+  .CourseContent_NewCourse_price{
+      font-weight:250;
+      font-size: 20px;
+    
+      text-decoration: line-through;
+      color:rgb(177, 177, 177);
+      transform: translate(1rem,0);
+  } 
+  .CourseContent_NewCourse_price h2{
+    color:rgb(177, 177, 177);
+  }
+
+  .CourseContent_NewCourse_priceNoDis{
+      font-weight:450;
+      font-size: 20px;
+  
+      transform: translate(1rem,0);
+  } 
+  .CourseContent_NewCourse_priceNew{
+      font-weight:450;
+      font-size: 22px;
+      transform:translate(2rem , 0rem)
+
+  }
+  .CourseContent_NewCourse_price2{
+      font-weight:700;
+      font-size: 20px;
+      color:rgb(255, 0, 0);
+      transform: translate(35rem,-3rem);
+      z-index:2;
+  }
+.SecondPart_RightSide_Content{
+  width: 35%;
+  position: relative;
+}

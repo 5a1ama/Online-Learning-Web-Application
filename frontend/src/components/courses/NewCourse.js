@@ -17,10 +17,11 @@ export function NewCourse(props) {
     
     const [courseDetails,setcourseDetails] = useState(false)
     const handleCourseDetails = () => setcourseDetails(!courseDetails)
-    const [chosenCountry,setChosenCountry] = useState(0);
+    
+        const[gift,setGift]=useState(false);
+        const handleGift =() =>{setGift(!gift)};
 
-    const[gift,setGift]=useState(false);
-    const handleGift =() =>{setGift(!gift)};
+        const [chosenCountry,setChosenCountry] = useState(0);
 
     useEffect(()=>{
       setChosenCountry(props.country);
@@ -76,7 +77,7 @@ export function NewCourse(props) {
          { 
        (props.course.discount.amount>0) && 
        <div className="DivForDiscount_NewCourse">
-        <CountdownTimer targetDate={dateTimeAfterThreeDays} />
+        <CountdownTimer targetDate={dateTimeAfterThreeDays} id={props.course.id}/>
         </div>
          }
          { 
@@ -101,7 +102,8 @@ export function NewCourse(props) {
                   <h2 className='NewCourse_price'>{  Math.floor(props.course.price*fares[chosenCountry])} {currency[chosenCountry]}</h2>
                   <h2 className='NewCourse_priceNew'>{  Math.floor(props.course.price*fares[chosenCountry]) *(props.course.discount.amount/100)} {currency[chosenCountry]}</h2>
                   </div>
-                  :<div>
+                  :
+                  <div>
                      <h2 className='NewCourse_priceNoDis'>{  Math.floor(props.course.price*fares[chosenCountry])} {currency[chosenCountry]}</h2>
                     </div>
                 }
@@ -163,7 +165,7 @@ export function NewCourse(props) {
     }
     }}>Open Course</button>
      
-    </div>  
+    </div>   
   )
 }
 
