@@ -18,13 +18,22 @@ import Footer from '../footer/Footer';
 import Subtitle from './subtitles/Subtitle';
 import Rating from '@mui/material/Rating';
 import { alertClasses, Avatar } from '@mui/material';
-import { getTraineeCourseProg, myCourseRate, myInstructorRate, rateCourse } from '../../API/TraineeAPI';
+import { getTraineeCourseProg, myCourseRate, myInstructorRate, rateCourse, requestRefund } from '../../API/TraineeAPI';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
+
 function CourseItems() {
     const [first,setFirst] = useState(0);
     const location=useLocation();
     const navigate = useNavigate();
     const [progress,setProgress]=useState(0);
+    const handleUnenroll=async()=>{
+        const result=await requestRefund(location.state.id)
+        if(result=="error"){
+            alert("you already requested a refund")
+        }else{
+            alert("your request has been sent")
+        }
+    }
     const getTraineeProgress =async()=>{
         setProgress(await getTraineeCourseProg(location.state.id));
     }
@@ -59,7 +68,15 @@ function CourseItems() {
 
     useEffect(()=>{
         async function getR(){
-            setMyRate(await myCourseRate(location.state.id))
+            const myrate=await myCourseRate(location.state.id)
+            if(myrate!="error"){
+                setMyRate(myrate)
+            }else{
+                localStorage.setItem("token",null);
+                localStorage.removeItem("token");
+                localStorage.clear();
+                navigate("/");
+            }
         }
         getR();
         getTraineeProgress()
@@ -169,7 +186,7 @@ function CourseItems() {
             </div>
             
             {/* progress bar */                                                                 }
-            
+            <button className='CourseItemsUnenrollbtn' onClick={handleUnenroll}>UnEnroll</button>
             <div className='CourseItems_ProgressBar'>
                 <h2>Course Progress</h2>
              {

@@ -78,6 +78,7 @@ router.get("/findEmail/:email",async function(req,res){
     }
 })
 router.get("/sendEmail/:to/:link",function(req,res){
+    console.log("11");
     const transporter = nodemailer.createTransport({
         service: "Gmail",
         auth: {
@@ -102,6 +103,41 @@ router.get("/sendEmail/:to/:link",function(req,res){
             console.log('Email sent successfully');
         }
     });
+    res.json("ok");
+})
+router.get("/sendEmailAttach/:token/:courseName",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN)
+    var trainee=await Trainee.findOne({id:user.id});
+    const transporter = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+            user: "ziadayman9901@gmail.com",
+            pass: "lwnociqszlkncnuu"
+        }
+      });
+      transporter.verify().then(console.log).catch(console.error);
+    // console.log(req.params.to+" "+req.params.link) 
+    let mailDetails = {
+        from: 'ziadayman9901@gmail.com',
+        to: trainee.Email,
+        subject: 'Congratulations',
+        text: "you have successfully completed the "+req.params.courseName+" course" ,
+        attachments: [{
+            filename: 'Certificate.pdf',
+            path: 'C:/Users/Ziad/OneDrive/Desktop/react certificate.pdf', 
+            contentType: 'application/pdf'
+          }]
+    };
+     
+    transporter.sendMail(mailDetails, function(err, data) {
+        if(err) {
+            // console.log('Error Occurs');
+        } else {
+            // console.log('Email sent successfully');
+        }
+    });
+    res.json("ok");
 })
 router.get("/resetPass/:email/:pass",async function(req,res){
    var result=await User.findOne({Email:req.params.email});
@@ -144,6 +180,10 @@ router.post('/CreateUser' ,(req,res)=>{
     })
 
 
+})
+router.get("/downloadFile",function(req,res){
+    
+    res.download("./filesDownload/react certificate.pdf");
 })
 
 

@@ -100,7 +100,7 @@ export function NewCourse(props) {
                  <div style={{display:'flex', flexDirection:'row'}}>
                   <h2 className='NewCourse_price2'>   {props.course.discount.amount} %</h2>
                   <h2 className='NewCourse_price'>{  Math.floor(props.course.price*fares[chosenCountry])} {currency[chosenCountry]}</h2>
-                  <h2 className='NewCourse_priceNew'>{  Math.floor(props.course.price*fares[chosenCountry]) *(props.course.discount.amount/100)} {currency[chosenCountry]}</h2>
+                  <h2 className='NewCourse_priceNew'>{  Math.floor(props.course.price*fares[chosenCountry])-( Math.floor(props.course.price*fares[chosenCountry]) *(props.course.discount.amount/100))} {currency[chosenCountry]}</h2>
                   </div>
                   :
                   <div>

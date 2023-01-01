@@ -29,6 +29,8 @@ import { verify } from './API/LoginAPI';
 import { TraineeViewInstructor } from './components/Trainee/TraineeViewInstructor';
 import { TraineeProfile } from './components/Trainee/TraineeProfile';
 import Register from './components/Register/Register';
+import { TraineeCongrats } from './components/Trainee/TraineeCongrats';
+import { AdminViewReports } from './components/Admin/AdminViewReports';
 
 
 
@@ -76,7 +78,8 @@ export default function App() {
 
           <Route path="/AdminHome" element={<Admin handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/AdminControlPanel" element={<ControlPanel handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
-          
+          <Route path="/TraineeCongrats" element={<TraineeCongrats/>} />
+          <Route path="/AdminReports" element={<AdminViewReports/>}/>
         </Routes>
       
     
@@ -87,7 +90,7 @@ function Home(props) {
   const navigate = useNavigate();
       const checkToken=async()=>{
         var x=verify(localStorage.getItem("token"))
-        x.catch(()=>{localStorage.setItem("token",null); localStorage.clear(); //alert(localStorage.getItem("token"))
+        x.catch(()=>{localStorage.setItem("token",null); localStorage.clear(); navigate("/") //alert(localStorage.getItem("token"))
       })
     }
     const redirect=()=>{

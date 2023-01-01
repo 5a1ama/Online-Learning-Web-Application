@@ -2,7 +2,32 @@ import React, { useState } from 'react'
 import "./ControlPanel.css"
 import Navbar from '../navbar/Navbar'
 import { AddAdmin, AddInstructor,AddTrainee } from '../../API/AdminAPI';
+import { useNavigate } from 'react-router-dom';
+import { verify } from '../../API/LoginAPI';
+
 function ControlPanel() {
+    const navigate = useNavigate(); 
+  const [first2,setFirst2]=useState(0);
+  const begin=async()=>{
+      if(localStorage.getItem("token")){
+          try{
+              var user=await verify(localStorage.getItem("token"));
+              if(user.job!="Admin"){
+                  alert("login as Admin first")
+                  navigate("/login")
+              }
+          }catch{
+
+          }
+      }else{
+          alert("login as instructor first")
+          navigate("/login")
+      }
+  }
+  if(first2==0){
+      begin();
+      setFirst2(1)
+  }
     const [adminuser,setAdminUser]=useState("");
     const [adminpass,setAdminPass]=useState("");
     const handleAdminUser = (event)=>{
@@ -48,7 +73,7 @@ function ControlPanel() {
     }
   return (
     <div className="controlPanel">
-            <Navbar items={["Home","Control Panel","Reports"]} select="Control Panel" nav={["/AdminHome","/AdminControlPanel",""]} scroll={["","",""]}  />
+            <Navbar items={["Home","Control Panel","Reports"]} select="Control Panel" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={()=>{} }  />
         <div className="controlPanel_content">
             <div className="controlPanel_content4horizontal">
                 
@@ -76,9 +101,7 @@ function ControlPanel() {
                     <button onClick={handleTrainee}>Add trainee</button>
                 </form>
             </div> 
-             <div className="ControlPanel_Func">
-
-            </div>
+             
 
             </div>
             <div className="controlPanel_vertical">
