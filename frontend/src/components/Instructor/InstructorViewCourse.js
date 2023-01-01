@@ -287,9 +287,7 @@ const handleHours=(event)=>{
             </div>
             
             {/* progress bar */                                                                 }
-            <button onClick={handleDownloadCertificate}>download</button>
-
-            
+         
             
             {/* Second Part */                                                                  }
             
