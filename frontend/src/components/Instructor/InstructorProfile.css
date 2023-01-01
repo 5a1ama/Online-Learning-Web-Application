@@ -155,3 +155,24 @@
     width:30%;
     height: 10%;
 }
+.InstProfOwedMoneyDiv{
+    position: absolute;
+    top:60%;
+    left:3%;
+    width: fit-content;
+    height: 18%;
+    background-color: white;
+    border-radius: 20px ;
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.5vw;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.OwedMoneyMonthText{
+    width: 30%;
+}
+.OwedMoneyYearText{
+    width: 30%;
+}

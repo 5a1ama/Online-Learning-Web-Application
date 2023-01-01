@@ -1,28 +1,322 @@
-import React from 'react'
 import './CourseContent.css';
 import video from '../../assets/PreviewBack.mp4';
 import Navbar from './../navbar/Navbar';
 import { AiOutlinePlayCircle } from 'react-icons/ai';
+import { React,useEffect,useRef,useState} from 'react'
+import {  getCourseDetails, isEnrolled } from './../../API/CourseAPI';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import './CourseItems.css';
+import ProgressImg from "../../assets/Progress100.png"
+import Progress from './Progress';
+import starImg from "../../assets/goldStar.png"
+import InstImg from "../../assets/avatar8.png"
 
-function CourseContent() {
-  return (
+import Gift from "../../assets/gift.png"
+import GiftTop from "../../assets/giftTop.png"
+import GiftTop2 from "../../assets/giftTop2.png"
+import DiscountImg3 from "../../assets/disCount3.png"
+
+import { GetInstructorName } from './../../API/CourseAPI';
+import Footer from '../footer/Footer';
+import Subtitle from './subtitles/Subtitle';
+import Rating from '@mui/material/Rating';
+import { alertClasses, Avatar } from '@mui/material';
+import { getTraineeCourseProg, myCourseRate, myInstructorRate, rateCourse } from '../../API/TraineeAPI';
+import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
+import CountdownTimer from '../countdown/CountDown';
+function CourseContent(props) {
+  const [first,setFirst] = useState(0);
+  const location=useLocation();
+  const navigate = useNavigate();
+  const [progress,setProgress]=useState(0);
+  const getTraineeProgress =async()=>{
+      setProgress(await getTraineeCourseProg(location.state.id));
+  }
+  const [details,setDetails] = useState([]);
+  
+  const[showDetails,setShowDetails]=useState(false);
+  const handleShowDetails =() =>{setShowDetails(!showDetails)};
+
+  const[gift,setGift]=useState(false);
+  const handleGift =() =>{setGift(!gift)};
+
+  const [view , setView] = useState("");
+
+  const [traineeRate,setTraineeRate] = useState("")
+
+  const handleChangeRate = (event , newValue)=>{
+    rateCourse( location.state.id,Number(newValue))
+    setTraineeRate(newValue)
+}
+
+const [MyRate,setMyRate] = useState(0)
+
+  const handleView = (view) => {
+      setView(view);
+  }
+
+  const bottomRef = useRef(null);
+
+  useEffect(()=>{ 
+      handleView(location.state.View)
+      },[location.state])
+
+  
+
+
+  const now = 90 ;
+  // const getDetails = async () => {
+  //     setDetails((await getCourseDetails(location.state.id)));
+  //     setFirst(1);
+  // }
+  useEffect(()=>{
+    async function getDetails(){
+      setDetails((await getCourseDetails(location.state.id)));       
+      setFirst(1)
+    }
+ 
+    getDetails();
+  })
+  
+  if(first===0){
+      // getDetails();
+      if(location.state.View==="Syllabus"){
+          bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+      }
+
+      
+  }
+
+  const InstNamesLen = () =>
+  {
+      if(instNames.length>3){
+          return true;
+      }else{
+          return false;
+      }
+  }
+  const [instNames,setInstNames] = useState([])
+
+  const handleInstNames = async () => {
+      var names = [];
+      if(details[0]){
+
+          for (var i=0 ; i<(details[0].instructors).length;i++){
+              
+              var name = (await GetInstructorName((details[0].instructors)[i])).name
+              names=names.concat([name]);
+          }
+          setInstNames(names)
+      }
+  }
+
     
-    <div className="CourseContent">
-            <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} select="Course" nav={["/","/CourseContent","/","/signUp"]} scroll={["","",""]}  />
+      const stars = (starNumber) => {
+          var array=[]; 
+          for(var i=0;i<starNumber;i++){
+              array=array.concat([0])
+          }
+          return array
+
+          }
+
+      useEffect(()=>{
+
+          // getDetails();
+          handleInstNames();
+
+        })
+      const [countryNumber,setCountryNumber]=useState();
+      const handleCountryNumber = (x) =>{
+        setCountryNumber(x);
+      }
+      function daysDifference(d0, d1) {
+        var diff = new Date(+d1).getTime() - new Date(+d0).getTime();
+        return Math.round(diff);
+      }
+      
+  
+
+      const NOW_IN_MS = new Date().getTime(); 
+      const Dur =details[0]&&details[0].discount.EndDate
+      const Dur2 = new Date(Dur).getTime();
+      const Duaration_IN_MS = daysDifference(NOW_IN_MS,Dur2);
+      const dateTimeAfterThreeDays = NOW_IN_MS + Duaration_IN_MS;
+    
+      
+      const [expiredTime,setExpiredTime]=useState(10);
+      useEffect(() => {
+        const interval = setInterval(() => {
+          if(expiredTime>=0&& dateTimeAfterThreeDays< (new Date().getTime())){
+            setExpiredTime(expiredTime - 1);
+            // alert(expiredTime)
+          }
+        }, 1000);
+      
+        return () => clearInterval(interval);
+      }, [expiredTime,dateTimeAfterThreeDays]);
+
+      
+      const [chosenCountry,setChosenCountry] = useState(0);
+
+      useEffect(()=>{
+        setChosenCountry(props.country);
         
-            
-        <div className="CourseContent_Video">
+      },[props.country]);
+  
+      const fares = [26,1,3.67,0.81,0.95];
+      const currency = ['LE','$','UAE','£','€'];
+  
+  return (
+        
+    
+    <div className="CourseItems">
+        <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎  ‎ Join Us"]} select="‎ ‎ ‎  ‎  ‎ Join Us" nav={["/","/","/","/signUp"]} scroll={["","",""]} handleCountryNumber={props.handleCountryNumber}   />
 
-        <iframe  src="https://www.youtube.com/embed/4oV65GVVits?controls=1&autoplay=1&frameborder=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
-        <div className="CourseContent_overlay"></div>
-        </div>
-                       <button className="CourseContent_button_Enroll">
-                    Enroll now 
-                </button>
 
-        <div className="CourseContent_Content">
+    <div className="CourseItems_Video">
+
+        <video autoPlay loop muted id='video'>
+        <source src={video} type='video/mp4' />
+        </video>
+        <div className="CourseItems_overlay"></div>
+    </div>
+    {/* onVideo */                                                                      }
+
+    <div className='CoureItems_OnVideo'>
+        {details[0]&&<h1>{details[0].title}</h1>}
+
+        <div className="CourseItems_Content_Stars">
             
+            <div className="CourseItems_InstNames">
+                {instNames[0]&&instNames.slice(0,3).map( (name,i)=>
+                    <div style={{display:"flex" ,flexDirection:"row",width:"90vh" ,padding:".5rem"}}>
+                        <a onClick={()=>navigate("/TraineeVieWInstructor",{state:details[0].instructors[i]})} style={{display:"flex" ,flexDirection:"row"}} >
+                            <img alt="." src={InstImg} style={{width:"40px",height:"40px" ,transform:"translate(0px,3px)"}}></img> 
+                            <h3>{name}</h3>
+                        </a>                
+                        </div>
+                )}
+                
+            </div>
+                
+            {details[0]&&stars(details[0].rating.value).map((num)=> <img className="starImg2" style={{width:'40px'}} src={starImg} alt="."/>)}
         </div>
+
+        <button className="CourseContent_button_Enroll">
+                        Enroll now 
+                    </button>
+                    { 
+       (
+        (details[0]&&details[0].discount.amount>0) && 
+        (expiredTime>0) 
+         
+       )?
+         <>
+         <img alt="." src={DiscountImg3} style={{transform:'translate(6.5rem,1.5rem)'}} className="CourseContent_DiscountLabel2" />
+                  <h2 className='CourseContent_NewCourse_price2' style={{color:'rgb(255, 0, 0)'}}>   {details[0]&&details[0].discount.amount} %</h2>
+                  {details[0]&&details[0].discount.amount>0 && 
+                    <div className="CourseContent_Counter">
+                    <CountdownTimer  targetDate={dateTimeAfterThreeDays} />
+                    </div>
+                    }
+                  
+                 
+         </>
+         
+         :
+                  <div>
+                    </div>
+                    
+                  }
+          
+
+    </div>
+
+   
+    {/* Second Part */                                                                  }
+
+    <div className='CourseItems_SecondPart'>
+        <div className="CourseItems_SecondPart_views">
+
+                 <div className="CourseItems_SecondPart_View_Buttons">
+                        <button onClick={()=>{location.state.View="Overview";handleView("Overview")}} >Overview</button>
+                        <button onClick={()=>{location.state.View="Syllabus";handleView("Syllabus")}}>Syllabus</button>
+                        <button onClick={()=>{location.state.View="Reviews";handleView("Reviews")}}>Reviews</button>
+                </div>
+                        <div className="vl33"></div>
+                         {view==="Overview" && 
+                                
+                                <div className="CourseItems_SecondPart_View_OverView">
+                                    
+                                    <h4>
+                                    {details[0]&&details[0].summary}
+                                    </h4>
+                                    
+                                <iframe  src={details[0]&&details[0].previewVideo} className="CourseItems_SecondPart_View_OverView_video" 
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe> 
+
+                            </div>}
+
+                        {view=="Syllabus" && 
+
+                            <div id="Subtitles" className="CourseItems_Syllabus_Subtitles">
+
+
+                            <div ref={bottomRef} />
+                            {details[0]&&details[0].subtitles.map((sub,i)=>
+                            <Subtitle guest={true} sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i} SubTitleBack={location.state.SubtitleTitle} View="Syllabus" description={sub.description} ></Subtitle>
+                            )}
+
+                            </div>
+                        }
+
+                        {view==="Reviews" && 
+                        <div className='InstructorCourseReviewsBig'>
+                                
+                                {details && details.length>0 && details[0].reviews.map((review)=>
+                                <div className="reviewsCourseDiv">
+                                <Avatar sx={{backgroundColor:"#58a5f0"}} className="reviewCourseAvatar"/>
+                                <FormatQuoteIcon className="reviewCourseComment"/>
+                                <textarea readOnly className="reviewCourseComment">{review}</textarea>
+                                </div>)}
+                                  
+                        </div>}
+             </div>
+                                   
+                {/* {details[0]&&details[0].discount.amount>0 && <div className='CourseGift_Content'>
+                                  <h2 style={{textAlign:'center',color:'var(--primary-light)'}}>redeem your offer here : </h2>
+                                    <img alt="." className="Course_Gift" src={Gift} />
+                                    <div className="Course_giftText">
+                                    <h4 >redeem your {details[0]&&details[0].discount.amount}
+                                     % Discount</h4>
+                                    <button className='Course_Gift_Redeem'>Redeem</button>
+                                        </div>
+                                    <img onClick={handleGift} className={gift?"Course_GiftTop2":"Course_GiftTop"} alt="." src={GiftTop} />
+                                        </div>} */}
+                                        <div className='SecondPart_RightSide_Content'>
+                                       
+
+                                        <div className='flexRow' style={{alignItems:'center'}}>
+                                          <h1 style={{color:'var(--primary-light)'}}>Price : </h1>
+                                        {details[0]&&details[0].discount.amount>0 &&  (expiredTime>0)?
+                                        <>
+                                          <h2 className='CourseContent_NewCourse_price' style={{color:'rgb(177, 177, 177)'}}>{ details[0]&& Math.floor(details[0].price*fares[chosenCountry])} {currency[chosenCountry]}</h2>
+                                          <h2 className='CourseContent_NewCourse_priceNew'>{ details[0]&& Math.floor(details[0].price*fares[chosenCountry]) *(details[0].discount.amount/100)} {currency[chosenCountry]}</h2>
+                                        </>
+                                        :
+                                        <h2 className='CourseContent_NewCourse_priceNoDis'>{details[0]&&  Math.floor(details[0].price*fares[chosenCountry])} {currency[chosenCountry]}</h2>
+
+                                        }
+                                          </div>
+                                        </div>
+       
+    </div>
+
+    {/* Footer */                                                                        }
+    <Footer text={"Excited to Learn more ? Unlock Premium Courses with Learn Pro "} buttonText={"Upgrade Now"}></Footer>
+
     </div>
   )
 }

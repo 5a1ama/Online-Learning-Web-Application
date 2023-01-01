@@ -118,6 +118,15 @@ export const definePromotion=async(id,amount,duration)=>{
 })
 return await result.json()
 }
+export const definePromotion2=async(id,amount)=>{
+    const result=await fetch(`http://localhost:8000/instructor/coursePromotion2`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    },
+    body: JSON.stringify({courseID:id,amount:amount})
+})
+return await result.json()
+}
 export const addNewSubToCourse=async(courseid,subtitle,hours)=>{
     const result=await fetch(`http://localhost:8000/course/addCourseSub/${subtitle}/${hours}/${courseid}`,{method: "POST",
     headers: {
@@ -176,4 +185,31 @@ export const updateSubtitle=async(id,oldtitle,title,hours,link,desc)=>{
 })
  return await result.json()
 
+}
+export const salaryPerMonth=async(month,year)=>{
+    const result=await fetch(`http://localhost:8000/instructor/salaryPerMonth/${year}/${month}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    return await result.json()
+
+}
+export const addReport=async(courseId,reporttype,details)=>{
+    await fetch(`http://localhost:8000/trainee/reportProblem/${localStorage.getItem("token")}/${courseId}/${reporttype}/${details}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+}
+export const getAllReport=async()=>{
+    const result=await fetch(`http://localhost:8000/trainee/myReports/${localStorage.getItem("token")}`)
+    return await result.json();
+}
+export const followupReport=async(question,id)=>{
+    await fetch(`http://localhost:8000/trainee/followUpReport/${localStorage.getItem("token")}/${id}/${question}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
 }

@@ -193,7 +193,14 @@ router.post("/coursePromotion",async function(req,res){
     var courseid=req.body.courseID;
     var amount=req.body.amount;
     var duration=req.body.duration;
-    await Course.findOneAndUpdate({id:courseid},{discount:{amount:amount,duration:duration
+    await Course.findOneAndUpdate({id:courseid},{discount:{amount:amount,EndDate:duration
+    }})
+    res.json("ok")
+})
+router.post("/coursePromotion2",async function(req,res){
+    var courseid=req.body.courseID;
+    var amount=req.body.amount;
+    await Course.findOneAndUpdate({id:courseid},{discount:{amount:amount
     }})
     res.json("ok")
 })
@@ -268,5 +275,47 @@ router.post("/updateSpec/:name/:token",async function(req,res){
     res.json("ok")
 
 })
+router.post("/salaryPerMonth/:year/:month/:token",async function(req,res){
+    var trainee=await Trainee.find({})
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN)
+    var courses=await Course.find({})
+    var instCourses=[]
+    for(var i=0;i<courses.length;i++){
+        if(courses[i].instructors.includes(user.id)){
+            instCourses=instCourses.concat([courses[i]])
+        }
+    }
+    var year=Number(req.params.year)
+    var month=Number(req.params.month)
+    var sum=0
+    
+    for(var i=0;i<trainee.length;i++){
+        var traineeCourses=trainee[i].courses
+        for(var j=0;j<traineeCourses.length;j++){
+            var id=traineeCourses[j].id
+            var date=traineeCourses[j].enrollDate
+            
+            for(var k=0;k<instCourses.length;k++){
+                if(date && instCourses[k].id==id && date.getMonth()+1==month && date.getFullYear()==year){
+                    sum+=instCourses[k].price
+                }
+            }
+        }
+    }
+    sum=sum- (sum*10)/100
+    res.json(sum)
 
+})
+router.post("/followUpReport/:token/:reportId/:question",async function(req,res){
+    var token=req.params.token;
+    var reportid=req.params.reportId;
+    var question=req.params.question;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var report=await Reports.findOne({id:reportid});
+    var followup=report.followup;
+    followup=followup.concat([{question:question,answer:""}]);
+    await Reports.findOneAndUpdate({id:reportid},{followup:followup});
+
+})
 module.exports=router

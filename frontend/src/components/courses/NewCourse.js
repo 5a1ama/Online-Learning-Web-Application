@@ -5,14 +5,23 @@ import {BiDownArrow} from 'react-icons/bi';
 import starImg from "../../assets/goldStar.png"
 import DiscountImg from "../../assets/disCount.png"
 import DiscountImg2 from "../../assets/disCount2.png"
+import DiscountImg3 from "../../assets/disCount3.png"
 
+import Gift from "../../assets/gift.png"
+import GiftTop from "../../assets/giftTop.png"
+import GiftTop2 from "../../assets/giftTop2.png"
+import CountdownTimer from '../countdown/CountDown';
 
 export function NewCourse(props) {
     const navigate = useNavigate();
     
     const [courseDetails,setcourseDetails] = useState(false)
     const handleCourseDetails = () => setcourseDetails(!courseDetails)
-    const [chosenCountry,setChosenCountry] = useState(0);
+    
+        const[gift,setGift]=useState(false);
+        const handleGift =() =>{setGift(!gift)};
+
+        const [chosenCountry,setChosenCountry] = useState(0);
 
     useEffect(()=>{
       setChosenCountry(props.country);
@@ -33,28 +42,68 @@ export function NewCourse(props) {
 
       useEffect(()=>
       props.handleNewPriceRatio&& props.handleNewPriceRatio(fares[chosenCountry]),[chosenCountry,fares,props]);
-  return (
+
+      function daysDifference(d0, d1) {
+        var diff = new Date(+d1).getTime() - new Date(+d0).getTime();
+        return Math.round(diff);
+      }
+      
+  
+
+      const NOW_IN_MS = new Date().getTime(); 
+      const Dur =props.course.discount.EndDate
+      const Dur2 = new Date(Dur).getTime();
+      const Duaration_IN_MS = daysDifference(NOW_IN_MS,Dur2);
+      const dateTimeAfterThreeDays = NOW_IN_MS + Duaration_IN_MS;
+    
+      
+      const [expiredTime,setExpiredTime]=useState(10);
+      useEffect(() => {
+        const interval = setInterval(() => {
+          if(expiredTime>=0&& dateTimeAfterThreeDays< (new Date().getTime())){
+            setExpiredTime(expiredTime - 1);
+            // alert(expiredTime)
+          }
+        }, 1000);
+      
+        return () => clearInterval(interval);
+      }, [expiredTime,dateTimeAfterThreeDays]);
+
+      return (
 
     <div className={courseDetails? "newCourse-After":"newCourse"}  >
         <div className={courseDetails? "newCourse-After-Content":"newCourse-content"}>
       
-        { 
+         { 
        (props.course.discount.amount>0) && 
-        <img alt="." src={DiscountImg2} className="DiscountLabel2" />
-        }
+       <div className="DivForDiscount_NewCourse">
+        <CountdownTimer targetDate={dateTimeAfterThreeDays} id={props.course.id}/>
+        </div>
+         }
+         { 
+       (
+        (props.course.discount.amount>0) && 
+        (expiredTime>0) 
+         
+       )&&
+         <img alt="." src={DiscountImg3} className="DiscountLabel2" />
+         }
           <div className="newCourse_title">
               <h3 >{props.course.title}</h3>
           </div>
           
                 { props.Trainee!=="Corporate" &&<div className="NewCourse_Prices">
                  {
-                 (props.course.discount.amount&&props.course.discount.amount>0)?
+                 (props.course.discount.amount&&props.course.discount.amount>0
+                  &&expiredTime>0
+                  )?
                  <div style={{display:'flex', flexDirection:'row'}}>
                   <h2 className='NewCourse_price2'>   {props.course.discount.amount} %</h2>
                   <h2 className='NewCourse_price'>{  Math.floor(props.course.price*fares[chosenCountry])} {currency[chosenCountry]}</h2>
-                  <h2 className='NewCourse_priceNew'>{  Math.floor(props.course.price*fares[chosenCountry]) *(props.course.discount.amount/100)} {currency[chosenCountry]}</h2>
+                  <h2 className='NewCourse_priceNew'>{  Math.floor(props.course.price*fares[chosenCountry])-( Math.floor(props.course.price*fares[chosenCountry]) *(props.course.discount.amount/100))} {currency[chosenCountry]}</h2>
                   </div>
-                  :<div>
+                  :
+                  <div>
                      <h2 className='NewCourse_priceNoDis'>{  Math.floor(props.course.price*fares[chosenCountry])} {currency[chosenCountry]}</h2>
                     </div>
                 }
@@ -106,6 +155,7 @@ export function NewCourse(props) {
           <h5 onClick={handleCourseDetails}>view details</h5>
           </div>
         <BiDownArrow className="icon" style={{marginRight: '1rem' , transform:'translate(0 ,0.4rem)'}} onClick={handleCourseDetails}></BiDownArrow>
+     
       <button className="NewCourse-button-OpenCourse" style={{marginRight: '1rem' ,width:"100px",height:"60px",transform:"translate(1rem,1.7rem)" }} onClick={()=>{ if(props.Trainee){navigate("/CourseItems",{state:{id:props.course.id,View:"Overview"}})
     
     }else if(props.inst){
@@ -114,7 +164,8 @@ export function NewCourse(props) {
       navigate("/CourseContent",{state:{id:props.course.id,View:"Overview"}})
     }
     }}>Open Course</button>
-    </div>  
+     
+    </div>   
   )
 }
 

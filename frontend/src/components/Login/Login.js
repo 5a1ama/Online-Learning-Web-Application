@@ -1,24 +1,18 @@
-import React,{useState} from 'react'
-import {useNavigate} from "react-router-dom"
-
+import React, { useState } from 'react'
+import { verify } from '../../API/LoginAPI';
+import { sendEmail } from './../../API/CommonAPI';
+import { useNavigate } from 'react-router-dom';
+import LoginUser from './../../API/LoginAPI';
 import './Login.css'
 import {Link} from 'react-scroll'
-import LoginUser from '../../API/LoginAPI'
-import { verify } from '../../API/LoginAPI'
-import isVisible from './../../../node_modules/dom-helpers/esm/isVisible';
-import { visibility } from './../../../node_modules/@mui/system/legacy/display';
-import {sendEmail} from '../../API/CommonAPI'
-import Button from '@mui/material/Button';
 import c1 from '../../assets/c1.png'
 import c2 from '../../assets/c2.png'
 import c3 from '../../assets/c3.png'
 import c4 from '../../assets/c4.png'
 import c5 from '../../assets/c5.png'
 
-export { default as Login } from './Login'
-
-
-function Login(){
+export {default as Login} from './Login'
+function Login() {
     const[wrongemail,setWrongEmail]=useState(null)
     const[wrongpass,setWrongPass]=useState(null)
     const[label,setLabel] = useState(0);
@@ -45,6 +39,9 @@ function Login(){
                 if(type==="Trainee"){
                     navigate("/TraineeHome")
                 }
+                if(type==="Admin"){
+                    navigate("/AdminControlPanel")
+                }
                 // other cases
             }else{
                 // alert(x.user+" "+x.pass)
@@ -60,23 +57,20 @@ function Login(){
         
     }
     const handleForget =async ()=>{
-        var x="aa";
-        alert("we sent you a mail to reset password")
-        await sendEmail(email,x);
+        alert("we sent you a mail to reset password");
+        await sendEmail(email,`/resetPass?email=${email}`);
         
         
     }
     const handleLogin=(event)=>{
-        
+    //     setWrongEmail(null)
+    //     setWrongPass(null)
     event.preventDefault();
     init();
    }
-    
-    return(<
-        div className = "login" >
-
-           
-            <div className = { 'logo' } >
+  return (
+    <div className = "login">
+       <div className = { 'logo' } >
                 <a href="/">
                 <h1 color = "white" > Learn. </h1> 
                 </a>
@@ -96,12 +90,13 @@ function Login(){
             </div>
          <div className = "LoginBox" >
          <div className="LoginBox-content">
-         <form>
+
+         <form onSubmit={handleLogin}>
          <Link to=""> <h2> Login Here </h2> </Link>
          <h3> Enter Your Email: </h3> 
             <div className = "Login-form" >
                 <div>
-                <input type = "email"  placeholder = "Ex: John@gmail.com" onChange={handleEmail} required={true}/ >
+                <input type = "email"  placeholder = "Ex: John@gmail.com" onChange={handleEmail} required={true}/>
                 </div>
             </div>
          
@@ -109,7 +104,7 @@ function Login(){
             <div className = "Login-form" >
             
             <input type = "password" placeholder = "**********" 
-            inputMode='password' onChange={handlePassword} required={true}  / >
+            inputMode='password' onChange={handlePassword} required={true}  />
             </div>
          
                 <div className="Login-WrongData" >
@@ -120,7 +115,7 @@ function Login(){
 
                 <div className="Login-WrongData" >
                 {wrongpass && <div><h4>Wrong Password. </h4>
-                <h3 onClick={()=>sendEmail(email,`/resetPass?email=${email}`)} className="ResetPasswordLogin">Reset Password?</h3>
+                <h3 onClick={handleForget} className="ResetPasswordLogin">Reset Password?</h3>
 
                
                 </div>}
@@ -128,7 +123,7 @@ function Login(){
 
          </div>
             <div className = "SearchButtons" >
-            <button onClick={handleLogin}> Login</button>
+            <button  > Login</button>
             </div> 
             <div className="Login-RegisterHere">
             <h3 className="Login-NotReg">Not Registered yet?</h3>
@@ -138,9 +133,8 @@ function Login(){
          
          </div> 
          </div>
-        </div>
-    
-          );
+    </div>
+  )
 }
 
 export default Login

@@ -72,6 +72,7 @@ text-align: center;
     border-radius : 20px ;
 
 }
+
 .newCourse-content{
     width :900px ;
     height: 150px ;
@@ -85,7 +86,7 @@ text-align: center;
 }
 .newCourse_title{
     display: flex;
-    width:80vh;
+    width:85vh;
     height:0vh
     
 }
@@ -111,7 +112,7 @@ text-align: center;
 }
 .ViewMoreH55{
     width: 130px;
-    transform:translate(0,0.6rem);
+    transform:translate(0rem,0.6rem);
 
 }
 .newCourse h5{
@@ -238,8 +239,7 @@ height:25px;
         font-size: 20px;
         text-decoration: line-through;
         color:rgb(177, 177, 177);
-
-        transform: translate(0,0.2rem);
+        transform: translate(7.5rem,-1.8rem);
 
     } 
     .NewCourse_priceNoDis{
@@ -254,10 +254,10 @@ height:25px;
 
     }
     .NewCourse_price2{
-        font-weight:500;
-        font-size: 18px;
-        color:rgb(255, 255, 255);
-        transform:translate(23.2rem , -7rem);
+        font-weight:700;
+        font-size: 20px;
+        color:rgb(255, 0, 0);
+        transform:translate(2rem ,0rem);
         z-index:2;
     }
     .DiscountLabel{
@@ -265,14 +265,21 @@ height:25px;
         width:200px;
         top:-80px;
         left:132%;
-        transform: rotate(-45deg);
+        /* transform: rotate(-45deg); */
         z-index: -1;
     }
     .DiscountLabel2{
         position: absolute;
         width:100px;
-        top:-80px;
-        left:132%;
-        transform: rotate(180deg);
+        top:80px;
+        left:76.5%;
+        /* transform: rotate(180deg); */
         z-index: 1;
+    }
+
+    .DivForDiscount_NewCourse{
+        position: absolute;
+        top:70px;
+        left:200px;
+        transform: scale(0.9);
     }

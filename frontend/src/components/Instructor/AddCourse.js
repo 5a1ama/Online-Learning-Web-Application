@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
 import Navbar from "../navbar/Navbar";
 import "./AddCourse.css"
@@ -12,9 +12,35 @@ import { HiArrowCircleDown, HiOutlineChartSquareBar } from 'react-icons/hi';
 import { createCourse } from '../../API/CourseAPI';
 import { AiFillCloseCircle, AiFillCloseSquare, AiOutlineClose } from 'react-icons/ai';
 import { NewDiv2 } from './NewDiv2';
+import { verify } from '../../API/LoginAPI';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export function AddCourse(){
-    
+    const navigate=useNavigate();
+    const [first,setFirst]=useState(0);
+    const begin=async()=>{
+        if(localStorage.getItem("token")){
+            try{
+                var user=await verify(localStorage.getItem("token"));
+                if(user.job!="Instructor"){
+                    alert("login as instructor first")
+                    navigate("/login")
+                }
+            }catch{
+
+            }
+        }else{
+            alert("login as instructor first")
+            navigate("/login")
+        }
+    }
+    if(first==0){
+        begin();
+        setFirst(1)
+    }
+
+    useEffect(()=>{
+    })
     
     const [title,setTitle]=useState("");
     const [subject,setSubject]=useState("")
@@ -115,20 +141,20 @@ export function AddCourse(){
         {page==0 && <div className="Boxes">
     
 
-     <TextField id = "filled-basic" onChange= {handleTitle} className="text1-AddCourse"
+     <TextField id = "filled-basic" onChange= {handleTitle} value={title} className="text1-AddCourse"
      label="Course Title" 
      color="primary" 
      variant="filled"
      />
   
 
-           <TextField id = "filled-basic" onChange={handlePrice} className="text2-AddCourse"
+           <TextField id = "filled-basic" onChange={handlePrice} value={price} className="text2-AddCourse"
      label="Price" 
      color="primary" 
      variant="filled"
      />
 
-            <TextField id = {"sub"+0}  className="text4-AddCourse" onChange={handleSub} value={subtitle}
+            <TextField id = {"sub"+0}  className="text4-AddCourse"  onChange={handleSub} value={subtitle}
      label="Course Subtitle" 
      color="primary" 
      variant="filled"
@@ -151,7 +177,7 @@ export function AddCourse(){
      
      
 
-<TextField onChange={handleSummary} className="text3-AddCourse"
+<TextField onChange={handleSummary} value={summary} className="text3-AddCourse"
           id="outlined-multiline-flexible"
           label="Course Summary"
           variant="filled"
@@ -163,7 +189,7 @@ export function AddCourse(){
 
     </div>}
     {page==1 && <div className='Boxes'>
-    <TextField id = "filled-basic" onChange= {handleSubject} className="text1-AddCourse"
+    <TextField id = "filled-basic" value={subject} onChange= {handleSubject} className="text1-AddCourse"
      label="Subject" 
      color="primary" 
      variant="filled"

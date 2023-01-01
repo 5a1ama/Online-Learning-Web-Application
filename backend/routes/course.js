@@ -38,7 +38,6 @@ router.get("/",function(req,res){
 })
 router.get("/filter-sub/:ratings/:subject",async function(req,res){
     var rating=req.params.ratings;
-
     var subject=req.params.subject;
     var query= await Course.find({});
     var array=[];
@@ -112,7 +111,7 @@ router.post("/addCourseSub/:subtitle/:hours/:id",async function(req,res){
     res.json("ok")
 }
 )
-router.get("/:id",function(req,res){
+router.get("/courseDetails/:id",function(req,res){
     var id1=req.params.id
     var query=Course.find({id:id1});
     // @ts-ignore
@@ -230,6 +229,17 @@ router.post("/updateSubtitle/:id/:oldtitle/:title/:hours/:link/:desc",async func
     res.json("ok")
 })
 
-
+router.get("/PopularCourses",async function(req,res){
+    var result=await Course.find({});
+    var enrollArr=result.map((course)=>course.enrolledStudents)
+    enrollArr=enrollArr.sort();
+    var final=enrollArr.splice(enrollArr.length-3,enrollArr.length);
+    var finalCourses=[];
+    for(var i=0;i<final.length;i++){
+        var course=await Course.find({enrolledStudents:final[i]})
+        finalCourses=finalCourses.concat(course)
+    }
+    res.json(finalCourses)
+})
 
 module.exports=router

@@ -7,9 +7,29 @@ import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
 import { FilterAllCourse } from "../../API/InstructorAPI";
 import { Checkbox } from '@mui/material';
+import { useNavigate } from "react-router-dom";
+import { verify } from "../../API/LoginAPI";
 
 export function InstAllCourses(){
   const [first,setFirst]=useState(0);
+  const navigate=useNavigate();
+    const begin=async()=>{
+        if(localStorage.getItem("token")){
+            try{
+                var user=await verify(localStorage.getItem("token"));
+                if(user.job!="Instructor"){
+                    alert("login as instructor first")
+                    navigate("/login")
+                }
+            }catch{
+
+            }
+        }else{
+            alert("login as instructor first")
+            navigate("/login")
+        }
+    }
+   
     const [courses,setCourses] = useState([]);
     const [newPriceRatio,setNewPriceRatio]= useState();
     const handleNewPriceRatio = (x) => {
@@ -50,6 +70,7 @@ export function InstAllCourses(){
     const [FilterBar,setFilterBar] = useState(false)
     const handleFilterBar = () => setFilterBar(!FilterBar)
     if(first==0){
+      begin();
       getCourses();
       setFirst(1);
     }

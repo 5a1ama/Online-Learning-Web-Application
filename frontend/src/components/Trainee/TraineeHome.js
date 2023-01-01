@@ -8,12 +8,34 @@ import EditIcon from '@mui/icons-material/Edit';
 import {getTraineeCourses, getTraineeDetails} from '../../API/TraineeAPI';
 import "./TraineeHome.css";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { verify } from "../../API/LoginAPI";
 
 
 
     
 export function TraineeHome (){
-    const navigate = useNavigate();
+    const navigate = useNavigate(); 
+    const [first2,setFirst2]=useState(0);
+    const begin=async()=>{
+        if(localStorage.getItem("token")){
+            try{
+                var user=await verify(localStorage.getItem("token"));
+                if(user.job!="Trainee"){
+                    alert("login as trainee first")
+                    navigate("/login")
+                }
+            }catch{
+
+            }
+        }else{
+            alert("login as instructor first")
+            navigate("/login")
+        }
+    }
+    if(first2==0){
+        begin();
+        setFirst2(1)
+    }
   const [courses,setCourses] = useState([]);
 
 

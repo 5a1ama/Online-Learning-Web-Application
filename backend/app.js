@@ -20,7 +20,7 @@ const userRouter=require("./routes/addUsers")
 const instructorRouter=require("./routes/instructor")
 const commonRouter=require("./routes/commonRoutes");
 const TraineeRout = require("./routes/Trainee");
-
+const adminRoute=require("./routes/admin");
 // #Importing the userController
 const oneDay = 1000 * 60 * 60 * 24;
 app.use(cookieParser());
@@ -38,7 +38,8 @@ app.use("/course",courseRouter)
 app.use("/user",userRouter)
 app.use("/instructor",instructorRouter)
 app.use("/",commonRouter)
-app.use("/Trainee",TraineeRout)
+app.use("/trainee",TraineeRout)
+app.use("/admin",adminRoute)
 // configurations
 // Mongo DB
 mongoose.connect(MongoURI)

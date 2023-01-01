@@ -51,8 +51,20 @@
     
     /* background:#fff; */
 }
+
+.CourseItems_InstNames a{
+ 
+    color:white;
+    transform: translate(10px,5px);
+}
+.CourseItems_InstNames h3{
+ 
+    color:white;
+    transform: translate(10px,5px);
+}
 .CourseItems_InstNames a:hover{
     cursor: pointer;
+    color:white;
 }
 
 
@@ -135,19 +147,20 @@
     flex-direction: row;
     width: 100%;
     height: auto;
+    
     /* background:#ffc107; */
-    padding:0rem 2rem;
+    padding:0rem 1rem;
     margin-bottom: 4rem;
 }
 
 .CourseItems_SecondPart_views{
-    width:60%;
+    width:65%;
     padding:1rem;
 }
     .CourseItems_SecondPart_View_OverView{
         display: flex;
         flex-direction: column;
-        width: 100%;
+        width: 90%;
         text-align: left;
 
     }
@@ -174,7 +187,7 @@
     min-height: 80vh;
 }
     .CourseItems_DivForContinue{
-        transform:scale(0.58)translate(-50vh,-30vh) ;
+        transform:scale(0.65)translate(-50vh,-30vh) ;
         }
         .CourseItems_DivForContinue_WorkSub{
             position:absolute;
@@ -222,53 +235,92 @@
   }
 
 
-  .Course_Gift{
+.TraineeCourseRating{
+    position: relative;
+    left: -41.5%;
+    top: 20%;
+}
+.RatingLabel{
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 1.5rem;
+}
+.RatingStars{
+    position: absolute;
+    top: -8%;
+    left: -5.5%;
+}
+.CourseItemsUnenrollbtn{
+    position:relative;
+    left:40%;
+    width: 20%;
+}
+
+
+.CourseGift_Content{
+    width: 35%;
+    position: relative;
+    /* top:0%; */
+}
+
+    
+.Course_Gift{
     position:absolute;
-    left:0px;
-    top:0px;
+    /* left:100vh; */
+    /* top:50px; */
+    width: 180px;
 }
 
 .Course_GiftTop{
     z-index: 2;
     position: absolute;
-    top:0px;
-    left : 0px;
+    /* left:100vh; */
+    /* top:-50px; */
+    width: 180px;
     transition: 2.3s;
-
+    cursor: pointer;
 }
 .Course_GiftTop2{
-    transform: rotate(400deg)translate(200px,0px);
+    transform: rotate(400deg)translate(180px,0px);
     position: absolute;
+    /* left:100vh; */
+    /* top:-50px; */
+    width: 180px;
     transition: 2.3s;
+    cursor: pointer;
+
 
 }
 .Course_giftText{
     position:absolute;
-    top:40px;
-    left : 50px;
+    /* left:100vh; */
+    /* top:-50px; */
     z-index: 0;
     transition: 2.3s;
-
-
+    /* word-break: break-all; */
+    width:100px;
+    
 }
 .Course_giftText h4{
-    color:#2e2e2e;
+    word-wrap: break-word;
+    color:#ff0000;
     font-weight: 500;
+    font-size: 14px;
+    transform: translate(3rem,2rem);
 
 }
 
 .Course_Gift_Redeem{
     background-image: linear-gradient(45deg, #ffc107 25%, #ffca2c 25%, #ffca2c 50%, #ffc107 50%, #ffc107 75%, #ffca2c 75%, #ffca2c 100%);
     background-size: 20px 20px;
-    -webkit-animation: Course_Gift_Redeem 62s ease infinite;
-    -moz-animation: Course_Gift_Redeem 62s ease infinite;
-    animation: Course_Gift_Redeem 62s ease infinite;
+    -webkit-animation: Course_Gift_Redeem 32s ease infinite;
+    -moz-animation: Course_Gift_Redeem 32s ease infinite;
+    animation: Course_Gift_Redeem 32s ease infinite;
     height: 100%;
 	transition: 1s ease 0.3s;
+    width: 105px;
+    transform: translate(2.5rem,3.2rem);
+
 }
-
-
-
 
 @-webkit-keyframes Course_Gift_Redeem {
 0%{background-position:0% 51%}
@@ -285,17 +337,5 @@
 50%{background-position:100% 50%}
 100%{background-position:0% 51%}
 }
-.TraineeCourseRating{
-    position: relative;
-    left: -41.5%;
-    top: 20%;
-}
-.RatingLabel{
-    font-family: "Lucida Console", "Courier New", monospace;
-    font-size: 1.5rem;
-}
-.RatingStars{
-    position: absolute;
-    top: -8%;
-    left: -5.5%;
-}
+
+

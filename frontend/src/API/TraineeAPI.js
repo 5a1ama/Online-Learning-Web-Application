@@ -78,3 +78,98 @@ export const myCourseRate = async(ratedID)=>{
     return await result.json();
     
 }
+export const addCreditCard=async(cardNumber,cardHolder,cardCvv,cardDate)=>{
+    const result=await fetch("http://localhost:8000/trainee/addCreditCard",{
+        method: "POST",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify({
+            cardHolder:cardHolder,cardNumber:cardNumber,cardDate:cardDate,cardCvv:cardCvv
+        })
+      })
+      return await result.json()
+}
+export const getTraineeCourseProg=async(courseId)=>{
+    const result=await fetch(`http://localhost:8000/trainee/courseProgress/${localStorage.getItem("token")}/${courseId}`)
+    return await result.json()
+
+}
+export const addNotes=async(id,title,notes)=>{
+    await fetch(`http://localhost:8000/trainee/addNotesToSub/${id}/${title}/${notes}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+}
+export const downloadNotes=async(id,title)=>{
+    fetch(`http://localhost:8000/trainee/downloadNotes/${id}/${title}/${localStorage.getItem("token")}`).then(resp => resp.arrayBuffer()).then(resp => {
+
+    // set the blog type to final pdf
+    const file = new Blob([resp], {type: 'application/pdf'});
+
+    // process to auto download it
+    const fileURL = URL.createObjectURL(file);
+    const link = document.createElement('a');
+    link.href = fileURL;
+    link.download = "certificate.pdf";
+    link.click();
+});
+}
+export const deleteAfterDownload=async(title)=>{
+    await fetch(`http://localhost:8000/trainee/deleteDownloadedFile/${title+" Notes.pdf"}`)
+}
+export const addReport=async(courseId,reporttype,details)=>{
+    await fetch(`http://localhost:8000/trainee/reportProblem/${localStorage.getItem("token")}/${courseId}/${reporttype}/${details}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+}
+export const getAllReport=async()=>{
+    const result=await fetch(`http://localhost:8000/trainee/myReports/${localStorage.getItem("token")}`)
+    return await result.json();
+}
+export const followupReport=async(question,id)=>{
+    await fetch(`http://localhost:8000/trainee/followUpReport/${localStorage.getItem("token")}/${id}/${question}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+}
+export const getRefund=async(traineeId,id)=>{
+    const result=await fetch(`http://localhost:8000/trainee/getRefund/${traineeId}/${id}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    return await result.json()
+}
+export const rejectMyRefund=async(traineeId,id)=>{
+    const result=await fetch(`http://localhost:8000/trainee/removeRefund/${traineeId}/${id}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    return await result.json()
+}
+export const requestRefund=async(id)=>{
+    const result=await fetch(`http://localhost:8000/trainee/requestRefund/${localStorage.getItem("token")}/${id}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    return await result.json();
+}
+export const showWallet=async()=>{
+    const result=await fetch(`http://localhost:8000/trainee/viewWallet/${localStorage.getItem("token")}`);
+    return await result.json();
+}
+export const requestAccessToCourse=async(courseid)=>{
+    const result=await fetch(`http://localhost:8000/trainee/requestAccessToCourse/${localStorage.getItem("token")}/${courseid}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    return await result.json();
+}

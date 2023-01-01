@@ -32,10 +32,19 @@ const traineeSchema=new Schema(
             type:String
           },
           courses:{
-            type:[{id:Number,progress:Number}]
+            type:[{id:Number,progress:Number,enrollDate:Date,notes:[{title:String,note:String}]}],
+            default:[]
           },
           completedExcercise:{
-            type:[{courseId:Number,count:Number}]
+            type:[{courseId:Number,excerId:Number,answers:[String]}],
+            default:[]
+          },
+          creditCards:{
+            type:[{cardHolder:String,cardNumber:Number,cardDate:String,cardCvv:Number}],
+            default:[]
+          },
+          wallet:{
+            type:Number,default:0
           }
 
     }

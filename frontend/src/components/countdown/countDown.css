@@ -1,0 +1,61 @@
+.expired-notice {
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #ebebeb;
+    border-radius: 0.25rem;
+    margin:-1rem;
+    transform: scale(0.8);
+  }
+  
+  .expired-notice > span {
+    font-size:1.5rem;
+    font-weight: bold;
+    color: red;
+  }
+  
+  .expired-notice > p {
+    font-size: 1rem;
+  }
+  
+  .show-counter {
+    padding: 0.5rem;
+  }
+  
+  .show-counter .countdown-link {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ebebeb;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    color: rgb(216, 216, 216);
+    /* transform: translate(-77vh,17vh); */
+  }
+  
+  .show-counter .countdown {
+    line-height: 1rem;
+    padding: 0 0.75rem 0 0.75rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .show-counter .countdown.danger {
+    color: #ff0000;
+  }
+  
+  .show-counter .countdown > p {
+    margin: 0;
+  }
+  
+  .show-counter .countdown > span {
+    text-transform: uppercase;
+    font-size: 0.5rem;
+    line-height:0.5rem;
+  }
+  

@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
 import Navbar from '../navbar/Navbar';
 import "./InstructorProfile.css"
-import { getInstructorDetails, updateInstructorBio, updateInstructorEmail, updateInstructorName, updateInstructorPass, updateInstructorSpec } from '../../API/InstructorAPI';
+import { getInstructorDetails, salaryPerMonth, updateInstructorBio, updateInstructorEmail, updateInstructorName, updateInstructorPass, updateInstructorSpec } from '../../API/InstructorAPI';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import List from '@mui/material/List';
@@ -17,14 +17,52 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { TextField } from '@mui/material';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import { verify } from '../../API/LoginAPI';
 
 
 
 export function InstructorProfile(){
+    const navigate=useNavigate();
+    const [first2,setFirst2]=useState(0);
+    const [first,setFirst]=useState(0);
+    const [owedMoney,setOwedMoney]=useState(0);
+    const [showMoney,setShowMoney]=useState(false);
+    const [month,setMonth]=useState("");
+    const [year,setYear]=useState("");
+    const handleMonthChange=(event)=>{
+        setMonth(event.target.value);
+    }
+    const handleYearChange=(event)=>{
+        setYear(event.target.value);
+    }
+    const handleShowMoney=async ()=>{
+        
+        setShowMoney(true);
+        setOwedMoney(await salaryPerMonth(month,year))
+    }
+    const begin=async()=>{
+        if(localStorage.getItem("token")){
+            try{
+                var user=await verify(localStorage.getItem("token"));
+                if(user.job!="Instructor"){
+                    alert("login as instructor first")
+                    navigate("/login")
+                }
+            }catch{
+
+            }
+        }else{
+            alert("login as instructor first")
+            navigate("/login")
+        }
+    }
+   if(first2==0){
+    begin();
+    setFirst2(1);
+   }
     const [oldPass,setOldPass]=useState("");
     const[newPass,setNewPass]=useState("");
     const [confirmPass,setConfirmPass]=useState("");
-    const [first,setFirst] = useState(0);
     const handleOldPass =(event)=>{
         setOldPass(event.target.value)
     }
@@ -89,15 +127,16 @@ export function InstructorProfile(){
     const intial = async()=>{
         setinstructor(await getInstructorDetails())
         if(first==0){
+            
             setNewEmail(instructor.Email)
             setNewName(instructor.Name)
             setNewSpec(instructor.specialization)
             setNewBio(instructor.bio)
             setFirst(1)
+
         }
        
     }
-    const navigate = useNavigate();
     const [showDiv,setShowDiv] =useState(false);
     const [showDiv2 ,setShowDiv2]=useState(false)
 
@@ -166,7 +205,32 @@ export function InstructorProfile(){
                     </button>
                     
                     
-                </div>}</div>}
+                </div>}
+                <div className='InstProfOwedMoneyDiv'>
+                            <label>View Owed Money</label>
+                            <TextField onChange={handleMonthChange}
+                    className='OwedMoneyMonthText'
+                     id="outlined-basic" 
+                     label="Choose the month"
+                      variant="outlined"
+                      
+                      
+                      />
+                      <TextField onChange={handleYearChange}
+                    className='OwedMoneyYearText'
+                     id="outlined-basic" 
+                     label="Choose the year"
+                      variant="outlined"
+                      
+                      
+                      />
+                      <button onClick={handleShowMoney}>View Money</button>
+                      {showMoney && <label>The Amount is: {owedMoney}</label>}
+                        </div>
+                
+                </div>
+
+                }
                 {!showDiv2&&showDiv&&<div className='editinstructordata2'> 
                 <TextField id="filled-basic" 
                  defaultValue={instructor && instructor.Name} 
@@ -244,6 +308,7 @@ export function InstructorProfile(){
                         Cancel
                      </button>
                         </div>}
+                        
         </div>
     )
 }
