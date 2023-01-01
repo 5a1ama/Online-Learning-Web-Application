@@ -6,6 +6,7 @@ import { getAllCourses } from '../../API/CourseAPI';
 import CoursesVid from "../../assets/Courses.mp4";
 import starImg from "../../assets/goldStar.png";
 import { NewCourse } from './NewCourse';
+import { getPopularCourse } from './../../API/CommonAPI';
 export {default as Courses} from './Courses'
   
 function Courses(props) {
@@ -25,8 +26,8 @@ function Courses(props) {
  useEffect(()=>{
   async function getCourses(){
     
-    setCourses ((await getAllCourses()).slice(1,4));
-    // alert(courses);
+    setCourses ((await getPopularCourse()));
+
   }
   getCourses();
 })
