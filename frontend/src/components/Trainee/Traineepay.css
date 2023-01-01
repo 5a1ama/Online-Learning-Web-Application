@@ -1,0 +1,84 @@
+.TraineeAddNewCardMain{
+    height: 100vh;
+    background-color:rgb(203, 215, 215);
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.TraineeAddNewCardDiv{
+    position: relative;
+    top: 12%;
+    background-color: rgb(255, 255, 255);
+    height: 490px;
+    width: 600px;
+    border-top-left-radius: 2%;
+    border-top-right-radius: 2%;
+    border-bottom-left-radius: 2%;
+    border-bottom-right-radius: 2%;
+    align-items: center;
+}
+.addNewCardLabel{
+    position: relative; 
+    top: 3%;
+    left: 3%;
+    font-size: 30px;
+}
+.CardNumberTextField{
+    position: relative;
+    top: 13%;
+    left: 15%;
+    width: 67%;
+}
+.CreditCardIcon{
+    position: relative; 
+    top: 16%;
+    left: 9%;
+}
+.ExpCardDate{
+    position: relative;
+    top: 17%;
+    left:15%;
+
+}
+.CVVTEXT{
+    position: relative;
+    left: 10%;
+    width: 20%;
+}
+.CardHolderTextField{
+    position: relative;
+    top: 22%;
+    left: 15%;
+    width: 67%;
+}
+.AddCardSubmitButton{
+    position: relative;
+    top: 44%;
+    left: -8%;
+    width: 30%;
+}
+.CancelCardSubmitButton{
+    position: relative;
+    width: 30%;
+    left: -15%;
+    background-color: red;
+}
+.CardDiv{
+    position: relative;
+    top: 28%;
+    left: 30%;
+}
+.CancelCardSubmitButton:hover{
+    background-color: rgb(244, 61, 61);
+}
+.infoIcon{
+    position: absolute;
+    left: 65%;
+    top: 12%;
+    width: 2vh;
+    height: 2vh;
+    background-color: transparent;
+}
+.infoIcon:hover{
+    background-color: transparent;
+}
