@@ -18,6 +18,7 @@ justify-content: space-between;
 .controlPanel_content4horizontal{
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 .ControlPanel_Func{
     width :20% ;

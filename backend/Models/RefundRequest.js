@@ -10,33 +10,17 @@ mongoose.connect(MongoURI)
 .then(()=>{
   console.log("MongoDB is now connected!")
 })
-const reportSchema=new Schema({
-    id:{
+const requestSchema=new Schema({
+    requesterId:{
         type:Number
     },
-    ReporterId:{
-        type:Number
-    }
-    ,
     courseId:{
         type:Number
-    }
-    ,
-    type:{
-        type:String
-    },
-    details:{
-        type:String
     },
     status:{
         type:String,
-        default:"unseen"
-    },
-    followup:{
-        type:[{question:String,status:String}],
-        default:[]
+        default:"rejected"
     }
-
 })
-const Reports=mongoose.model("reports",reportSchema);
-module.exports=Reports;
+const RefundRequest=mongoose.model("RefundRequest",requestSchema);
+module.exports=RefundRequest

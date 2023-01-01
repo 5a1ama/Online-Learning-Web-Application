@@ -29,8 +29,8 @@ export const sendEmail=async (to,link)=>{
     const result=await axios.get(`http://localhost:8000/sendEmail/${to}/aaa`);
 
 }
-export const sendEmailAttach=async(to,title)=>{
-    const result=await fetch(`http://localhost:8000/sendEmailAttach/${to}/${title}`);
+export const sendEmailAttach=async(title)=>{
+    const result=await fetch(`http://localhost:8000/sendEmailAttach/${localStorage.getItem("token")}/${title}`);
 
 }
 export const resetPass=async(email,newpass)=>{

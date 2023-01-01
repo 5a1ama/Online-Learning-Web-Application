@@ -279,8 +279,8 @@ router.post("/salaryPerMonth/:year/:month/:token",async function(req,res){
             instCourses=instCourses.concat([courses[i]])
         }
     }
-    var year=req.params.year
-    var month=req.params.month
+    var year=Number(req.params.year)
+    var month=Number(req.params.month)
     var sum=0
     
     for(var i=0;i<trainee.length;i++){
@@ -290,7 +290,7 @@ router.post("/salaryPerMonth/:year/:month/:token",async function(req,res){
             var date=traineeCourses[j].enrollDate
             
             for(var k=0;k<instCourses.length;k++){
-                if(instCourses[k].id==id && date.getMonth==month && date.getFullYear==year){
+                if(date && instCourses[k].id==id && date.getMonth()+1==month && date.getFullYear()==year){
                     sum+=instCourses[k].price
                 }
             }

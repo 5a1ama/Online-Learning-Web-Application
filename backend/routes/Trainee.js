@@ -14,6 +14,7 @@ const Reports=require("../Models/Reports");
 const PDFDocument=require('pdfkit')
 const fs =require('fs');
 const { use } = require("./commonRoutes");
+const RefundRequest = require("../Models/RefundRequest");
 dotenv.config()
 
 router.get("/TraineeMyCourse/:Token",async function(req,res){
@@ -201,15 +202,20 @@ router.get("/myInstructorRate/:ratedID/:token",async function(req,res){
 router.get("/myCourseRate/:ratedID/:token",async function(req,res){
     var ratedID =Number(req.params.ratedID)
     var token = req.params.token
-    var user = jwt.verify(token,process.env.ACCESSTOKEN)
-    var rating = await RatingCourse.find({idRated:ratedID,idRater:user.id})
-    if(rating.length==0){
-        res.json(0)
+    try{
+        var user = jwt.verify(token,process.env.ACCESSTOKEN)
+        var rating = await RatingCourse.find({idRated:ratedID,idRater:user.id})
+        if(rating.length==0){
+            res.json(0)
+        }
+        else{
+            res.json(rating[0].value)
+        }
+            
     }
-    else{
-        res.json(rating[0].value)
+    catch{
+        res.json("error");
     }
-    
 
 })
 router.get("/rateInstructor/:rate/:id/:token",async function(req,res){
@@ -368,11 +374,23 @@ router.post("/followUpReport/:token/:reportId/:question",async function(req,res)
     await Reports.findOneAndUpdate({id:reportid},{followup:followup});
 
 })
-router.post("/getRefund/:token/:courseid",async function(req,res){
+router.post("/requestRefund/:token/:courseid",async function(req,res){
     var token=req.params.token;
     var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var result=await RefundRequest.find({requesterId:user.id,courseId:req.params.courseid});
+    if(result.length==0){
+        var object=new RefundRequest({requesterId:user.id,courseId:req.params.courseid})
+    object.save(function(err,result){
+        res.json("ok")
+    })
+    }else{
+        res.json("error");
+    }
+    
+})
+router.post("/getRefund/:traineeId/:courseid",async function(req,res){
     var cid=req.params.courseid;
-    var trainee=await Trainee.findOne({id:user.id})
+    var trainee=await Trainee.findOne({id:req.params.traineeId})
     var courses=trainee.courses;
     var progress="";
     var index=0;
@@ -392,7 +410,7 @@ router.post("/getRefund/:token/:courseid",async function(req,res){
                 newCourses.push(courses[i])
             }
         }
-        await Trainee.findOneAndUpdate({id:user.id},{courses:newCourses,wallet:wallet+price})
+        await Trainee.findOneAndUpdate({id:req.params.traineeId},{courses:newCourses,wallet:wallet+price})
     }
 })
 router.get("/viewWallet/:token",async function(req,res){

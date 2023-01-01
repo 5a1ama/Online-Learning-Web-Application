@@ -137,12 +137,20 @@ export const followupReport=async(question,id)=>{
     }
     })
 }
-export const getRefund=async(id)=>{
-    await fetch(`http://localhost:8000/trainee/getRefund/${localStorage.getItem("token")}/${id}`,{method: "POST",
+export const getRefund=async(traineeId,id)=>{
+    await fetch(`http://localhost:8000/trainee/getRefund/${traineeId}/${id}`,{method: "POST",
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     }
     })
+}
+export const requestRefund=async(id)=>{
+    const result=await fetch(`http://localhost:8000/trainee/requestRefund/${localStorage.getItem("token")}/${id}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    return await result.json();
 }
 export const showWallet=async()=>{
     const result=await fetch(`http://localhost:8000/trainee/viewWallet/${localStorage.getItem("token")}`);

@@ -29,6 +29,8 @@ import { verify } from './API/LoginAPI';
 import { TraineeViewInstructor } from './components/Trainee/TraineeViewInstructor';
 import { TraineeProfile } from './components/Trainee/TraineeProfile';
 import Register from './components/Register/Register';
+import { TraineeCongrats } from './components/Trainee/TraineeCongrats';
+import { AdminViewReports } from './components/Admin/AdminViewReports';
 
 
 
@@ -76,7 +78,8 @@ export default function App() {
 
           <Route path="/AdminHome" element={<Admin handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/AdminControlPanel" element={<ControlPanel handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
-          
+          <Route path="/TraineeCongrats" element={<TraineeCongrats/>} />
+          <Route path="/AdminReports" element={<AdminViewReports/>}/>
         </Routes>
       
     

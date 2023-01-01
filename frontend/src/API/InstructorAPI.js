@@ -178,7 +178,11 @@ export const updateSubtitle=async(id,oldtitle,title,hours,link,desc)=>{
 
 }
 export const salaryPerMonth=async(month,year)=>{
-    const result=await fetch(`http://localhost:8000/instructor/salaryPerMonth/${year}/${month}/${localStorage.getItem("token")}`)
+    const result=await fetch(`http://localhost:8000/instructor/salaryPerMonth/${year}/${month}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
     return await result.json()
 
 }

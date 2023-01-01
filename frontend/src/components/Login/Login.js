@@ -39,6 +39,9 @@ function Login() {
                 if(type==="Trainee"){
                     navigate("/TraineeHome")
                 }
+                if(type==="Admin"){
+                    navigate("/AdminControlPanel")
+                }
                 // other cases
             }else{
                 // alert(x.user+" "+x.pass)

@@ -73,7 +73,7 @@ function ControlPanel() {
     }
   return (
     <div className="controlPanel">
-            <Navbar items={["Home","Control Panel","Reports"]} select="Control Panel" nav={["/AdminHome","/AdminControlPanel",""]} scroll={["","",""]}  handleCountryNumber={()=>{} }  />
+            <Navbar items={["Home","Control Panel","Reports"]} select="Control Panel" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={()=>{} }  />
         <div className="controlPanel_content">
             <div className="controlPanel_content4horizontal">
                 
@@ -101,9 +101,7 @@ function ControlPanel() {
                     <button onClick={handleTrainee}>Add trainee</button>
                 </form>
             </div> 
-             <div className="ControlPanel_Func">
-
-            </div>
+             
 
             </div>
             <div className="controlPanel_vertical">

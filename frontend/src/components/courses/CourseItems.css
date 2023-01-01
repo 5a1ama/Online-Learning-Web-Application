@@ -242,3 +242,8 @@
     top: -8%;
     left: -5.5%;
 }
+.CourseItemsUnenrollbtn{
+    position:relative;
+    left:40%;
+    width: 20%;
+}

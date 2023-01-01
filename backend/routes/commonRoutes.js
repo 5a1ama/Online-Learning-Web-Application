@@ -105,7 +105,10 @@ router.get("/sendEmail/:to/:link",function(req,res){
     });
     res.json("ok");
 })
-router.get("/sendEmailAttach/:to/:courseName",function(req,res){
+router.get("/sendEmailAttach/:token/:courseName",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN)
+    var trainee=await Trainee.findOne({id:user.id});
     const transporter = nodemailer.createTransport({
         service: "Gmail",
         auth: {
@@ -117,7 +120,7 @@ router.get("/sendEmailAttach/:to/:courseName",function(req,res){
     // console.log(req.params.to+" "+req.params.link) 
     let mailDetails = {
         from: 'ziadayman9901@gmail.com',
-        to: req.params.to,
+        to: trainee.Email,
         subject: 'Congratulations',
         text: "you have successfully completed the "+req.params.courseName+" course" ,
         attachments: [{

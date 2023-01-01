@@ -1,0 +1,20 @@
+.AdminViewReportsMainDiv{
+    top:10%;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    row-gap: 0.5vw;
+    justify-content: center;
+    align-items: center;
+}
+.AdminReportDiv{
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5vw;
+    background-color: white;
+    width: fit-content;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+}
