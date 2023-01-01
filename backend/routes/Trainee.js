@@ -464,4 +464,24 @@ router.post("/solveExcersice/:token/:courseid/:excerId/:answers",async function(
     }
     await Trainee.findOneAndUpdate({id:user.id},{completedExcercise:completed,courses:courses})
 })
+router.get("/excerciseSolution/:excerId",async function(req,res){
+    var excerid=req.params.excerId;
+    var excercise=await Excercise.findOne({id:excerid});
+    res.json(excercise.correctAnswer)
+})
+router.get("/mySolutions/:excerId/:courseId/:token",async function(req,res){
+    var token=req.params.token;
+    var excerid=req.params.excerId;
+    var courseid=req.params.courseId
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var trainee=await Trainee.findOne({id:user.id})
+    var excercise=trainee.completedExcercise;
+    for(var i=0;i<excercise.length;i++){
+        if(excercise[i].excerId==excerid && excercise[i].courseId==courseid){
+            res.json(excercise[i].answers)
+            break;
+        }
+    }
+    res.json("");
+})
 module.exports = router
