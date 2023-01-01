@@ -112,7 +112,7 @@
     
       text-decoration: line-through;
       color:rgb(177, 177, 177);
-      transform: translate(1rem,0);
+      transform: translate(1rem,0rem);
   } 
   .CourseContent_NewCourse_price h2{
     color:rgb(177, 177, 177);
@@ -122,7 +122,7 @@
       font-weight:450;
       font-size: 20px;
   
-      transform: translate(1rem,0);
+      transform: translate(1rem,0.2rem);
   } 
   .CourseContent_NewCourse_priceNew{
       font-weight:450;
@@ -139,5 +139,22 @@
   }
 .SecondPart_RightSide_Content{
   width: 35%;
+  padding-top:0.5rem ;
   position: relative;
+}
+.vlHor {
+  border-bottom: 2px solid rgb(206, 206, 206);
+  width: 70vh;
+  margin-left: 0vh;
+  z-index:2;
+  transform: translateX(-4vh);
+  margin-bottom: 2rem;
+}
+  .vlVertical
+{
+    
+        border-left: 2px solid rgb(206, 206, 206);
+        width: 10vh;
+        z-index:2;
+      
 }
