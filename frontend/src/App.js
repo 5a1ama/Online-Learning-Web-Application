@@ -32,6 +32,7 @@ import Register from './components/Register/Register';
 import { TraineeCongrats } from './components/Trainee/TraineeCongrats';
 import { AdminViewReports } from './components/Admin/AdminViewReports';
 import { AdminViewRequests } from './components/Admin/AdminViewRequests';
+import { TraineePay } from './components/Trainee/TraineePay';
 
 import { AdminViewRefunds } from './components/Admin/AdminViewRefunds';
 
@@ -76,16 +77,8 @@ export default function App() {
           <Route path="/CourseContent" element={<CourseContent handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/CourseItems" element={<CourseItems handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
            <Route path="/Coursevideo" element={<CourseVideo handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
-          <Route path="/TraineeProfile" element={<TraineeProfile handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/> 
-
-          <Route path="/AdminHome" element={<Admin handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
-          <Route path="/AdminControlPanel" element={<ControlPanel handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
-          <Route path="/TraineeCongrats" element={<TraineeCongrats/>} />
-          <Route path="/AdminReports" element={<AdminViewReports/>}/>
-          <Route path="/AdminRequests" element={<AdminViewRequests/>}/>
-          <Route path="/AdminRefunds" element={<AdminViewRefunds/>}/>
-
-
+          <Route path="/TraineeProfile" element={<TraineeProfile handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/TraineePays" element={<TraineePay handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
         </Routes>
       
     
