@@ -1,17 +1,14 @@
-const Reports = require("./Models/Reports");
+const RefundRequest = require("./Models/RefundRequest");
 
-var object=new Reports({id:1,ReporterId:1,courseId:1,type:"technical",details:"report1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa00",
-followup:[{question:"follow1"},{question:"follow2"}]})
+var object=new RefundRequest({id:1,requesterId:21,courseId:4})
 object.save(function(err,res){
 
 })
-var object2=new Reports({id:2,ReporterId:2,courseId:1,type:"technical",details:"report2aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa00",
-followup:[{question:"follow1"},{question:"follow2"}]})
+var object2=new RefundRequest({id:2,requesterId:21,courseId:2})
 object2.save(function(err,res){
     
 })
-var object2=new Reports({id:3,ReporterId:3,courseId:1,type:"technical",details:"report3aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa00",
-followup:[{question:"follow1"},{question:"follow2"}]})
-object2.save(function(err,res){
+// var object2=new RefundRequest({id:3,requesterId:21,courseId:5})
+// object2.save(function(err,res){
     
-})
+// })

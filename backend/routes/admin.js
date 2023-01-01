@@ -34,7 +34,23 @@ router.get("/allRequestRefund",async function(req,res){
 router.post("/grantAccess/:corporateId/:courseid",async function(req,res){
     var corpId=req.params.corporateId;
     var courseId=req.params.courseid;
-    await CourseRequest.findOneAndUpdate({requesterId:corpId,courseId:courseId},{status:"accepted"})
+    await CourseRequest.deleteOne({requesterId:corpId,courseId:courseId});
+    var trainee=await Trainee.findOneAndUpdate({id:corpId});
+    var courses=trainee.courses;
+    courses.push({id:courseId,progress:0,enrollDate:new Date(),notes:[]});
+    await Trainee.findOneAndUpdate({id:corpId},{courses:courses})
+    var course=await Course.findOne({id:courseId});
+    var enroll=course.enrolledStudents;
+    enroll=enroll+1;
+    await Course.findOneAndUpdate({id:courseId},{enrolledStudents:enroll});
+    res.json("ok")
+
+})
+router.post("/rejectAccess/:corporateId/:courseid",async function(req,res){
+    var corpId=req.params.corporateId;
+    var courseId=req.params.courseid;
+    await CourseRequest.deleteOne({requesterId:corpId,courseId:courseId});
+    res.json("ok")
 })
 router.post("/setPromotion/:courseid/:promotion/:endDate",async function(req,res){
     var courseId=req.params.courseid;

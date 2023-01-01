@@ -186,7 +186,7 @@ function CourseItems() {
             </div>
             
             {/* progress bar */                                                                 }
-            <button className='CourseItemsUnenrollbtn' onClick={handleUnenroll}>UnEnroll</button>
+            {progress<50 && <button className='CourseItemsUnenrollbtn' onClick={handleUnenroll}>UnEnroll</button>}
             <div className='CourseItems_ProgressBar'>
                 <h2>Course Progress</h2>
              {

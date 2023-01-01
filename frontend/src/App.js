@@ -31,7 +31,9 @@ import { TraineeProfile } from './components/Trainee/TraineeProfile';
 import Register from './components/Register/Register';
 import { TraineeCongrats } from './components/Trainee/TraineeCongrats';
 import { AdminViewReports } from './components/Admin/AdminViewReports';
+import { AdminViewRequests } from './components/Admin/AdminViewRequests';
 
+import { AdminViewRefunds } from './components/Admin/AdminViewRefunds';
 
 
 export default function App() {
@@ -80,6 +82,10 @@ export default function App() {
           <Route path="/AdminControlPanel" element={<ControlPanel handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/TraineeCongrats" element={<TraineeCongrats/>} />
           <Route path="/AdminReports" element={<AdminViewReports/>}/>
+          <Route path="/AdminRequests" element={<AdminViewRequests/>}/>
+          <Route path="/AdminRefunds" element={<AdminViewRefunds/>}/>
+
+
         </Routes>
       
     
