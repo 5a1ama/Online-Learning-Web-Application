@@ -77,7 +77,8 @@ export default function App() {
           <Route path="/CourseContent" element={<CourseContent handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/CourseItems" element={<CourseItems handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
            <Route path="/Coursevideo" element={<CourseVideo handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
-          <Route path="/TraineeProfile" element={<TraineeProfile handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/> 
+          <Route path="/TraineeProfile" element={<TraineeProfile handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/TraineePays" element={<TraineePay handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
         </Routes>
       
     
