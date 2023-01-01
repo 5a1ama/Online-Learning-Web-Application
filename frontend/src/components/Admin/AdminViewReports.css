@@ -1,10 +1,13 @@
 .AdminViewReportsMainDiv{
-    top:10%;
+    position: relative;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    top:30%;
     display: flex;
     height: 100%;
     width: 100%;
     flex-direction: column;
-    row-gap: 0.5vw;
+    row-gap: 1vw;
     justify-content: center;
     align-items: center;
 }
@@ -15,6 +18,19 @@
     background-color: white;
     width: fit-content;
     height: auto;
+    width: 20%;
+    background-color:rgba(9, 117, 185, 0.95);
+    color: white;
     justify-content: center;
     align-items: center;
+    border-radius: 20px;
+}
+.ReportViewDetails{
+    word-wrap: break-word;
+    border: none;
+    resize: none;
+    outline: 0;
+    background: transparent;
+    color: white;
+    
 }
