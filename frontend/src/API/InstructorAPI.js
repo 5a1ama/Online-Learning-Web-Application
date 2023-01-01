@@ -118,6 +118,15 @@ export const definePromotion=async(id,amount,duration)=>{
 })
 return await result.json()
 }
+export const definePromotion2=async(id,amount)=>{
+    const result=await fetch(`http://localhost:8000/instructor/coursePromotion2`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    },
+    body: JSON.stringify({courseID:id,amount:amount})
+})
+return await result.json()
+}
 export const addNewSubToCourse=async(courseid,subtitle,hours)=>{
     const result=await fetch(`http://localhost:8000/course/addCourseSub/${subtitle}/${hours}/${courseid}`,{method: "POST",
     headers: {

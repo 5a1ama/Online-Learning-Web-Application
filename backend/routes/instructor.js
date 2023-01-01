@@ -197,6 +197,13 @@ router.post("/coursePromotion",async function(req,res){
     }})
     res.json("ok")
 })
+router.post("/coursePromotion2",async function(req,res){
+    var courseid=req.body.courseID;
+    var amount=req.body.amount;
+    await Course.findOneAndUpdate({id:courseid},{discount:{amount:amount
+    }})
+    res.json("ok")
+})
 router.get("/getInstructor/:token",async function(req,res){
     var token=req.params.token;
     var user=jwt.verify(token,process.env.ACCESSTOKEN)
