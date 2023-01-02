@@ -283,7 +283,9 @@ router.post("/addNotesToSub/:courseid/:subtitle/:added/:token",async function(re
     var index=0;
     for(var i=0;i<courses.length;i++){
         if(courses[i].id==id){
-            notesArr=courses[i].notes;
+            if(courses[i].notes){
+                notesArr=courses[i].notes;
+            }
             index=i;
         }
     }
