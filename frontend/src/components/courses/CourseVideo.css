@@ -6,11 +6,7 @@
     justify-content: center;
     align-items: center;
 }
-.CourseVideo_Video{
-    width: 80%;
-    height: 60vh;
-    border-radius: 10px;
-}
+
 .CourseVideo h1{    font-size:20px;
     color:rgb(130, 130, 130)
 }
@@ -23,4 +19,41 @@
     cursor: pointer;
     color:var(--primary-light);
     text-decoration: underline;
+}
+.CourseVideo_Video_Notes{
+    width:90%;
+    justify-self: center;
+    align-self: center;
+
+}
+.CourseVideo_Video{
+    width: 70%;
+    height: 60vh;
+    border-radius: 10px;
+    margin-left: 3rem;
+    margin-right: 1rem;
+}
+.CourseVideo_Input{
+    width:30%;
+    margin-right: 3rem;
+    border-radius: 10px;
+    background-image: url('../../assets/notesVideo.jpg');
+    padding-top: 3.2rem;
+    padding-left: 4rem;
+    line-height: 1.1rem;
+}
+.CourseVideo_Notes_text{
+    position: absolute;
+    left:79.5%;
+}
+.PlusButton{
+    position: absolute;
+    top:23%;
+    left:91.5%;
+    background-color: transparent;
+    color:black;
+}
+.PlusButton:hover{
+    background-color: transparent;
+
 }
