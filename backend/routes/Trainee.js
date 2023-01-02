@@ -308,7 +308,9 @@ router.post("/addNotesToSub/:courseid/:subtitle/:added/:token",async function(re
     var index=0;
     for(var i=0;i<courses.length;i++){
         if(courses[i].id==id){
-            notesArr=courses[i].notes;
+            if(courses[i].notes){
+                notesArr=courses[i].notes;
+            }
             index=i;
         }
     }
@@ -320,11 +322,16 @@ router.post("/addNotesToSub/:courseid/:subtitle/:added/:token",async function(re
             break;
         }
     }
+    console.log(notesArr+" "+found)
     if(!found){
         notesArr=notesArr.concat([{title:title,note:added}])
     }
+    
+
     courses[index].notes=notesArr;
-    await Trainee.findOneAndUpdate({id:id},{courses:courses});
+    
+    await Trainee.findOneAndUpdate({id:user.id},{courses:courses});
+    res.json("ok")
 
 })
 router.get("/downloadNotes/:courseid/:subtitle/:token",async function(req,res){
@@ -488,6 +495,7 @@ router.post("/solveExcersice/:token/:courseid/:excerId/:answers",async function(
         }
     }
     await Trainee.findOneAndUpdate({id:user.id},{completedExcercise:completed,courses:courses})
+    res.json("ok")
 })
 router.get("/excerciseSolution/:excerId",async function(req,res){
     var excerid=req.params.excerId;

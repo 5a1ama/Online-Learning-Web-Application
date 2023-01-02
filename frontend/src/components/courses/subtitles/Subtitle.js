@@ -64,8 +64,8 @@ function Subtitle(props) {
                         {props.sub.video.map((VideoLink,i)=>
                            <div className="DivHover" style={{display:"flex",flexDirection:"row",flexFlow:"auto" ,justifyContent:"space-between" }}>
                               <MdSlowMotionVideo size={25}></MdSlowMotionVideo>
-                                {props.inst && !props.guest&& <a href="/instructorCourseVideo" onClick={()=>navigate("/instructorCourseVideo",{state:{Link:VideoLink}})}><h3 style={{color:"#000"}}>Tutorial {i+1}</h3></a> }
-                                {!props.inst && !props.guest && <a href="/CourseVideo" onClick={()=>navigate("/CourseVideo",{state:{Link:VideoLink}})}><h3 style={{color:"#000"}}>Tutorial {i+1}</h3></a> }
+                                {props.inst && !props.guest&& <a href="/instructorCourseVideo" onClick={()=>navigate("/instructorCourseVideo",{state:{Link:VideoLink,Prop:props.sub,i:i+1,CourseTitle:props.courseTitle,CourseId:props.CourseId}})}><h3 style={{color:"#000"}}>Tutorial {i+1}</h3></a> }
+                                {!props.inst && !props.guest && <a href="/CourseVideo" onClick={()=>navigate("/CourseVideo",{state:{Link:VideoLink,Prop:props.sub,i:i+1,CourseTitle:props.courseTitle,CourseId:props.CourseId}})}><h3 style={{color:"#000"}}>Tutorial {i+1}</h3></a> }
                                
                                 { props.guest && <a href="/"><h3 style={{color:"#aaa"}}>Tutorial {i+1}</h3></a> }
 

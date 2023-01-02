@@ -15,11 +15,7 @@ export const getTraineeDetails=async()=>{
     var result=await axios.get(`http://localhost:8000/Trainee/Details/${localStorage.getItem("token")}`)
     return result.data
 }
-export const getExcerciseSolution=async(id)=>{
-    const result=await fetch(`http://localhost:8000/Trainee/excerSolution/${id}`);
-    const j=await result.json();
-    return j
-}
+
 export const FilterMyCourses=async(min,max,subject)=>{
     if(subject != ""){
         const result=await fetch(`http://localhost:8000/Trainee/FilterMyCourse/${localStorage.getItem("token")}/${min}/${max}/${subject}`)
@@ -109,11 +105,12 @@ export const getTraineeCourseProg=async(courseId)=>{
 
 }
 export const addNotes=async(id,title,notes)=>{
-    await fetch(`http://localhost:8000/trainee/addNotesToSub/${id}/${title}/${notes}/${localStorage.getItem("token")}`,{method: "POST",
+    const result=await fetch(`http://localhost:8000/trainee/addNotesToSub/${id}/${title}/${notes}/${localStorage.getItem("token")}`,{method: "POST",
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     }
     })
+    return await result.json();
 }
 export const downloadNotes=async(id,title)=>{
     fetch(`http://localhost:8000/trainee/downloadNotes/${id}/${title}/${localStorage.getItem("token")}`).then(resp => resp.arrayBuffer()).then(resp => {
@@ -185,4 +182,22 @@ export const requestAccessToCourse=async(courseid)=>{
     }
     })
     return await result.json();
+}
+export const solveExcersice=async(courseid,excerId,answers)=>{
+    const result=await fetch(`http://localhost:8000/trainee/solveExcersice/${localStorage.getItem("token")}/${courseid}/${excerId}/${answers}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    return await result.json();
+}
+
+export const getMyExcerciseSolution=async(excerId,courseId)=>{
+    const result=await fetch(`http://localhost:8000/trainee/mySolutions/${excerId}/${courseId}/${localStorage.getItem("token")}`)
+    return await result.json();
+}
+export const getExcerciseSolution=async(id)=>{
+    const result=await fetch(`http://localhost:8000/Trainee/excerciseSolution/${id}`);
+    const j=await result.json();
+    return j
 }

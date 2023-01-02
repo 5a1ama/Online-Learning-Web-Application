@@ -10,6 +10,12 @@ import ProgressImg from "../../assets/Progress100.png"
 import Progress from './Progress';
 import starImg from "../../assets/goldStar.png"
 import InstImg from "../../assets/avatar8.png"
+import deadlineIcon from "../../assets/deadlineIcon.png"
+import CertIcon from "../../assets/CertIcon.png"
+import OnlineIcon from "../../assets/OnlineIcon.png"
+import BeginnerIcon from "../../assets/Beginner-Icon.png"
+import HoursIcon from "../../assets/HoursIcon.png"
+import SpracheIcon from "../../assets/SpracheIcon.png"
 
 import Gift from "../../assets/gift.png"
 import GiftTop from "../../assets/giftTop.png"
@@ -24,6 +30,7 @@ import { alertClasses, Avatar } from '@mui/material';
 import { getTraineeCourseProg, myCourseRate, myInstructorRate, rateCourse } from '../../API/TraineeAPI';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import CountdownTimer from '../countdown/CountDown';
+import CourseHighlights from './coursehighlights/CourseHighlights';
 function CourseContent(props) {
   const [first,setFirst] = useState(0);
   const location=useLocation();
@@ -73,13 +80,16 @@ const [MyRate,setMyRate] = useState(0)
   // }
   useEffect(()=>{
     async function getDetails(){
-      setDetails((await getCourseDetails(location.state.id)));       
+      setDetails((await getCourseDetails(location.state.id)));      
       setFirst(1)
     }
  
     getDetails();
+
   })
   
+  
+
   if(first===0){
       // getDetails();
       if(location.state.View==="Syllabus"){
@@ -168,7 +178,8 @@ const [MyRate,setMyRate] = useState(0)
   
       const fares = [26,1,3.67,0.81,0.95];
       const currency = ['LE','$','UAE','£','€'];
-  
+      var CourseHours ="Approx. " + (details[0]? details[0].hours:-1) + " hours to complete"; 
+
   return (
         
     
@@ -316,6 +327,7 @@ const [MyRate,setMyRate] = useState(0)
                                         </div>
                                     <img onClick={handleGift} className={gift?"Course_GiftTop2":"Course_GiftTop"} alt="." src={GiftTop} />
                                         </div>} */}
+                                                   <div className="vlVertical"></div>
                                         <div className='SecondPart_RightSide_Content'>
                                        
 
@@ -331,7 +343,34 @@ const [MyRate,setMyRate] = useState(0)
 
                                         }
                                           </div>
+                                          <div className="vlHor"></div>
+                                        <div>
+                                          <CourseHighlights img={CertIcon}
+                                           first="Shareable Certificate" 
+                                           second="Earn a Certificate upon completion.">
+                                           </CourseHighlights>
+                                 
+                                           <CourseHighlights img={OnlineIcon}
+                                           first="100% online" 
+                                           second="Start instantly and learn at your own schedule.">
+                                           </CourseHighlights>
+                                           <CourseHighlights img={BeginnerIcon}
+                                           first="Beginner Level" 
+                                           second="">
+                                           </CourseHighlights>
+                                           
+                                           <CourseHighlights img={HoursIcon}
+                                           first={CourseHours}
+                                           second="">
+                                           </CourseHighlights>
+
+                                           <CourseHighlights img={SpracheIcon}
+                                           first="English"
+                                           second="Subtitles: Arabic, French, German, Spainsh">
+                                           </CourseHighlights>
+                                        
                                         </div>
+                                      </div>
        
     </div>
 

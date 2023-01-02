@@ -29,6 +29,10 @@ export function InstructorProfile(){
     const [showMoney,setShowMoney]=useState(false);
     const [month,setMonth]=useState("");
     const [year,setYear]=useState("");
+    const handleDateChange=(event)=>{
+        setMonth(event.target.value.split("-")[1])
+        setYear(event.target.value.split("-")[0])
+    }
     const handleMonthChange=(event)=>{
         setMonth(event.target.value);
     }
@@ -208,22 +212,16 @@ export function InstructorProfile(){
                 </div>}
                 <div className='InstProfOwedMoneyDiv'>
                             <label>View Owed Money</label>
-                            <TextField onChange={handleMonthChange}
+                            <TextField onChange={handleDateChange}
+                            type={"month"}
                     className='OwedMoneyMonthText'
                      id="outlined-basic" 
-                     label="Choose the month"
+                     label=""
                       variant="outlined"
                       
                       
                       />
-                      <TextField onChange={handleYearChange}
-                    className='OwedMoneyYearText'
-                     id="outlined-basic" 
-                     label="Choose the year"
-                      variant="outlined"
                       
-                      
-                      />
                       <button onClick={handleShowMoney}>View Money</button>
                       {showMoney && <label>The Amount is: {owedMoney}</label>}
                         </div>
