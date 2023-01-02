@@ -99,7 +99,7 @@ export function TraineeHome (){
            <button className="traineeAccountCircleButton" onClick={() => navigate('/TraineeProfile')}>
        <AccountCircleIcon  color="primary" sx={{ fontSize: 35  }} className="AccountIconClick"/>
        </button>
-
+       
         </div>
         </div>
       

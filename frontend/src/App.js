@@ -35,6 +35,8 @@ import { AdminViewRequests } from './components/Admin/AdminViewRequests';
 import { TraineePay } from './components/Trainee/TraineePay';
 
 import { AdminViewRefunds } from './components/Admin/AdminViewRefunds';
+import { TraineePayments } from './components/Trainee/TraineePayments';
+
 
 
 export default function App() {
@@ -79,6 +81,7 @@ export default function App() {
            <Route path="/Coursevideo" element={<CourseVideo handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/TraineeProfile" element={<TraineeProfile handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/> 
           <Route path="/TraineePays" element={<TraineePay handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/TraineePayments" element={<TraineePayments handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
 
           <Route path="/AdminHome" element={<Admin handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/AdminControlPanel" element={<ControlPanel handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
@@ -86,6 +89,7 @@ export default function App() {
           <Route path="/AdminReports" element={<AdminViewReports/>}/>
           <Route path="/AdminRequests" element={<AdminViewRequests/>}/>
           <Route path="/AdminRefunds" element={<AdminViewRefunds/>}/>
+
 
 
         </Routes>

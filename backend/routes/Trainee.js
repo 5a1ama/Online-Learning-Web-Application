@@ -35,6 +35,29 @@ router.get("/TraineeMyCourse/:Token",async function(req,res){
     }
     res.json(arrayCourse)
 })
+
+router.get("/myCards/:token",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var trainee=await Trainee.findOne({id:user.id})
+    res.json(trainee.creditCards)
+})
+router.post("/deleteCard/:cardNumber/:token",async function(req,res){
+    var token=req.params.token
+    var user = jwt.verify(token,process.env.ACCESSTOKEN);
+    var trainee=await Trainee.findOne({id:user.id})
+    var cards = trainee.creditCards
+    var newCards = []
+    console.log(req.params.cardNumber)
+    for(var i= 0 ; i<cards.length ;i++){
+        if(cards[i].cardNumber!=req.params.cardNumber ){
+            newCards.push(cards[i])
+        }
+    }
+    await Trainee.findOneAndUpdate({id:user.id},{creditCards:newCards})
+    res.json("ok");
+
+})
 router.get("/excerSolution/:id",async function(req,res){
     var id=req.params.id;
     var result=Excercise.findOne({id:id});
@@ -253,11 +276,13 @@ router.post("/addCreditCard",async function(req,res){
     var cardHolder=req.body.cardHolder
     var cardDate=req.body.cardDate
     var trainee=await Trainee.findOne({id:id})
+    console.log(cardNum)
     var credits=trainee.creditCards;
     credits.push({cardHolder:cardHolder,cardNumber:cardNum,cardDate:cardDate,cardCvv:cardCvv})
     await Trainee.findOneAndUpdate({id:id},{creditCards:credits})
     res.json("ok")
 })
+
 router.get("/courseProgress/:token/:id",async function(req,res){
     var token=req.params.token;
     var user=jwt.verify(token,process.env.ACCESSTOKEN)
