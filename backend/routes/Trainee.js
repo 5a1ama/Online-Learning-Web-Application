@@ -463,6 +463,7 @@ router.post("/solveExcersice/:token/:courseid/:excerId/:answers",async function(
         }
     }
     await Trainee.findOneAndUpdate({id:user.id},{completedExcercise:completed,courses:courses})
+    res.json("ok")
 })
 router.get("/excerciseSolution/:excerId",async function(req,res){
     var excerid=req.params.excerId;

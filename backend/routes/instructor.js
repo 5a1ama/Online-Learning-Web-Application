@@ -289,14 +289,13 @@ router.post("/salaryPerMonth/:year/:month/:token",async function(req,res){
     var year=Number(req.params.year)
     var month=Number(req.params.month)
     var sum=0
-    
     for(var i=0;i<trainee.length;i++){
         var traineeCourses=trainee[i].courses
         for(var j=0;j<traineeCourses.length;j++){
             var id=traineeCourses[j].id
             var date=traineeCourses[j].enrollDate
-            
             for(var k=0;k<instCourses.length;k++){
+                
                 if(date && instCourses[k].id==id && date.getMonth()+1==month && date.getFullYear()==year){
                     sum+=instCourses[k].price
                 }
