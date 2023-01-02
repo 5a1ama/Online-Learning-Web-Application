@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import { useEffect, useState } from "react";
 import {useNavigate} from 'react-router-dom';
 import { Checkbox } from "@mui/material";
-import { getTraineeDetails } from "../../API/TraineeAPI";
+import { getTraineeCourses, getTraineeDetails } from "../../API/TraineeAPI";
 import { verify } from "../../API/LoginAPI";
 
 
@@ -72,7 +72,10 @@ export function TraineeAllCourses(){
       setMaxPriceValue ((await getMaxPrice()));
     }
     const [courses,setCourses] = useState([]);
-   
+    const [myCourses,setMyCourses]=useState([]);
+    const getMyCourses=async()=>{
+      setMyCourses((await getTraineeCourses(localStorage.getItem("token"))))
+    }
     const getCourses = async () =>{
       setCourses ((await getAllCourses()));
       getMaxPriceValue();
@@ -114,6 +117,7 @@ export function TraineeAllCourses(){
   
     if(first==0){
       getCourses();
+      getMyCourses();
       setFirst(1);
     }
     const [FilterBar,setFilterBar] = useState(false)
@@ -166,7 +170,7 @@ export function TraineeAllCourses(){
     }
     getDetails();
   })
-
+  
     return(
         <div>
 
@@ -177,7 +181,22 @@ export function TraineeAllCourses(){
         </div>
 <div className='AllCourses'>
             <h1 className="heading">Our Courses</h1>
-            {courses.map((course) => <NewCourse course={course} Trainee={details&&details.type} handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>)}
+            {courses.map((course) =>{
+              var found=false;
+              for(var i=0;i<myCourses.length;i++){
+                if(myCourses[i].title==course.title){
+                  found=true;
+                  break;
+                }
+              }
+              if(found)
+                return <NewCourse guest={false} course={course} Trainee={details&&details.type} handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>
+              else
+                return <NewCourse  course={course} handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>
+
+              }) 
+            }
+          
             </div>
 
             <button className='AllCourses-FilterBarButton' onClick={handleFilterBar}>Filter Courses</button>
