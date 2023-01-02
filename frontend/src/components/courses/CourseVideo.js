@@ -3,6 +3,8 @@ import './CourseVideo.css'
 import Navbar from '../navbar/Navbar'
 import { useLocation, useNavigate } from 'react-router-dom';
 import {Link, ScrollLink} from 'react-scroll'
+import { AiOutlinePlus } from 'react-icons/ai';
+import { addNotes } from '../../API/TraineeAPI';
 
 function CourseVideo() {
   const location=useLocation();
@@ -10,6 +12,13 @@ function CourseVideo() {
   var previewVideo = location.state.Link;
   function refreshPage() {
     window.location.reload(false);
+  }
+  const [notes,setNotes]=useState("");
+  const handleNotes= (event)=>{
+    setNotes(event.target.value)
+  }
+  const handleSubmitNotes = async() =>{
+    await addNotes(location.state.CourseId,location.state.Prop.title,notes);
   }
   const [countryNumber,setCountryNumber]=useState();
   const handleCountryNumber = (x) =>{
@@ -35,9 +44,14 @@ function CourseVideo() {
                <h1 onClick={refreshPage}> Video {location.state.i}</h1>
           
           </div>
+          <div className="flexRow CourseVideo_Video_Notes" style={{width:'100%',padding:'1rem'}}>
+          <h2 className="CourseVideo_Notes_text">Notes</h2>
          <iframe  src={previewVideo} className="CourseVideo_Video" 
                                         title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowfullscreen></iframe> 
+        <textarea className="CourseVideo_Input" onChange={handleNotes}></textarea>
+        <button className="PlusButton" onClick={handleSubmitNotes}><AiOutlinePlus size="30px"></AiOutlinePlus></button>
+                                        </div>
       </div>
   )
 }
