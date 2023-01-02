@@ -300,6 +300,7 @@ router.post("/addNotesToSub/:courseid/:subtitle/:added/:token",async function(re
     }
     courses[index].notes=notesArr;
     await Trainee.findOneAndUpdate({id:id},{courses:courses});
+
     res.json("ok")
 
 })
