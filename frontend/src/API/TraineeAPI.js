@@ -92,11 +92,12 @@ export const getTraineeCourseProg=async(courseId)=>{
 
 }
 export const addNotes=async(id,title,notes)=>{
-    await fetch(`http://localhost:8000/trainee/addNotesToSub/${id}/${title}/${notes}/${localStorage.getItem("token")}`,{method: "POST",
+    const result=await fetch(`http://localhost:8000/trainee/addNotesToSub/${id}/${title}/${notes}/${localStorage.getItem("token")}`,{method: "POST",
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     }
     })
+    return await result.json();
 }
 export const downloadNotes=async(id,title)=>{
     fetch(`http://localhost:8000/trainee/downloadNotes/${id}/${title}/${localStorage.getItem("token")}`).then(resp => resp.arrayBuffer()).then(resp => {
