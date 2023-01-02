@@ -18,7 +18,7 @@ function CourseVideo() {
     setNotes(event.target.value)
   }
   const handleSubmitNotes = async() =>{
-    await addNotes(location.state.CourseId,location.state.Prop.title,notes);
+    const x = await addNotes(location.state.CourseId,location.state.Prop.title,notes);
   }
   const [countryNumber,setCountryNumber]=useState();
   const handleCountryNumber = (x) =>{
