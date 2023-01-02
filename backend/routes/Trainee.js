@@ -297,11 +297,15 @@ router.post("/addNotesToSub/:courseid/:subtitle/:added/:token",async function(re
             break;
         }
     }
+    console.log(notesArr+" "+found)
     if(!found){
         notesArr=notesArr.concat([{title:title,note:added}])
     }
+    
+
     courses[index].notes=notesArr;
-    await Trainee.findOneAndUpdate({id:id},{courses:courses});
+    
+    await Trainee.findOneAndUpdate({id:user.id},{courses:courses});
     res.json("ok")
 
 })
