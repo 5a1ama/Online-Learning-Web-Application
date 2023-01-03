@@ -27,11 +27,118 @@ import Footer from '../footer/Footer';
 import Subtitle from './subtitles/Subtitle';
 import Rating from '@mui/material/Rating';
 import { alertClasses, Avatar } from '@mui/material';
-import { getTraineeCourseProg, myCourseRate, myInstructorRate, rateCourse } from '../../API/TraineeAPI';
+import { courseEnroll, getTraineeCourseProg, myCourseRate, myInstructorRate, rateCourse } from '../../API/TraineeAPI';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import CountdownTimer from '../countdown/CountDown';
 import CourseHighlights from './coursehighlights/CourseHighlights';
+
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import paypalIcon from "../../assets/PaypalIcon.png";
+import Radio from '@mui/material/Radio';
+import { deleteCard, getAllCards } from "../../API/TraineeAPI";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import PaymentsIcon from '@mui/icons-material/Payments';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
+import { green } from '@mui/material/colors';
+import Button from '@mui/material/Button';
+import Fab from '@mui/material/Fab';
+import CheckIcon from '@mui/icons-material/Check';
+import SaveIcon from '@mui/icons-material/Save';
+
 function CourseContent(props) {
+
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const timer = useRef();
+
+  const buttonSx = {
+    ...(success && {
+      bgcolor: green[500],
+      '&:hover': {
+        bgcolor: green[700],
+      },
+    }),
+  };
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timer.current);
+    };
+  }, []);
+ const enroll = async ()=>{
+
+  const x = await courseEnroll(location.state.id)
+ }
+  const handleButtonClick = () => {
+    if (!loading) {
+      setSuccess(false);
+      setLoading(true);
+      timer.current = window.setTimeout(() => {
+        setSuccess(true);
+        setLoading(false);
+        alert("the payment is succ.")
+        enroll()
+        navigate("/CourseItems",{state:{id:location.state.id,View:"Overview"}})
+      
+      }, 2000);
+    }
+    
+  };
+
+  const [selectedRadioValue, setSelectedRadioValue] =useState('a');
+
+  const handleChangeradio = (event) => {
+  setSelectedRadioValue(event.target.value);}
+
+  const [showDivMyCards,setShowDivMyCards] = useState(false);
+  const [allCards,setAllCards] = useState();
+  const intial = async()=>{
+    setAllCards(await getAllCards())
+  }
+
+  const update = ()=>{
+    intial()
+   }
+    const MyCards = (props) =>{
+        const handledeleteCard = async()=>{
+         const x =   await deleteCard(props.card.cardNumber)
+           update()
+    
+        }
+        return(
+            <div className="MyCardsSmallDivToPay">
+                 <List  sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <CreditCardIcon color = "primary"/>
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary={"*******"+(props.card.cardNumber+"").substring((props.card.cardNumber+"").length-4)} secondary={props.card.cardDate} />
+              <Radio
+        checked={selectedRadioValue == props.id}
+        onChange={handleChangeradio}
+        value={props.id}
+        name="radio-buttons"
+        inputProps={{ 'aria-label': 'A' }}
+      /> 
+      </ListItem>
+      <Divider variant="fullWidth" />
+    </List>
+           
+            </div>
+        )
+    } 
+  
   const [first,setFirst] = useState(0);
   const location=useLocation();
   const navigate = useNavigate();
@@ -55,8 +162,9 @@ function CourseContent(props) {
     rateCourse( location.state.id,Number(newValue))
     setTraineeRate(newValue)
 }
+//const [selectedRadioValue,setSelectedRadioValue] = useState('a')
 
-const [showPaymentDiv,stShowPaymentDiv] = useState(false);
+const [showPaymentDiv,setShowPaymentDiv] = useState(false);
 
 const [MyRate,setMyRate] = useState(0)
 
@@ -180,11 +288,17 @@ const [MyRate,setMyRate] = useState(0)
       const currency = ['LE','$','UAE','£','€'];
       var CourseHours ="Approx. " + (details[0]? details[0].hours:-1) + " hours to complete"; 
 
+      intial();
+
   return (
         
     
     <div className="CourseItems">
-        <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎  ‎ Join Us"]} select="‎ ‎ ‎  ‎  ‎ Join Us" nav={["/","/","/","/signUp"]} scroll={["","",""]} handleCountryNumber={props.handleCountryNumber}   />
+        {!localStorage.getItem("token")?<Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎  ‎ Join Us"]} select="‎ ‎ ‎  ‎  ‎ Join Us" nav={["/","/","/","/signUp"]} scroll={["","",""]} handleCountryNumber={props.handleCountryNumber}   />
+:<Navbar items={["Home","My Courses","All Courses"]}
+               handleCountryNumber={handleCountryNumber}
+               select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
+              }
 
 
     <div className="CourseItems_Video">
@@ -216,7 +330,7 @@ const [MyRate,setMyRate] = useState(0)
             {details[0]&&stars(details[0].rating.value).map((num)=> <img className="starImg2" style={{width:'40px'}} src={starImg} alt="."/>)}
         </div>
 
-        <button className="CourseContent_button_Enroll" >
+        <button className="CourseContent_button_Enroll" onClick={()=>setShowPaymentDiv(true)} >
                         Enroll now 
                     </button>
                     { 
@@ -250,6 +364,41 @@ const [MyRate,setMyRate] = useState(0)
 
          {showPaymentDiv &&   <div className="PaymentsOptionsDivShadow"> <div className="PaymentsOptionsDiv">
 
+         <List className="paymentsOptionList" sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+         <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+          <CreditCardIcon color = "primary"/>
+            </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="Credit/Debit card"/>
+        <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} onClick={()=>setShowDivMyCards(true)}>
+        <ArrowForwardIosIcon/>
+                    </IconButton>
+      </ListItem>
+      <Divider variant="fullWidth" />
+
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <PaymentsIcon color="primary"/>
+          {/* <Avatar src={paypalIcon}/> */}
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="Other Payment Options"/>
+        <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} >
+        <ArrowForwardIosIcon/>
+                    </IconButton>
+      </ListItem>
+
+     
+      <Divider variant="fullWidth" />
+
+
+    </List>
+    <button className="paymentsOptionCancel" onClick={()=>setShowPaymentDiv(false)}>
+        Cancel
+    </button>
 
 
 
@@ -264,6 +413,45 @@ const [MyRate,setMyRate] = useState(0)
 
 
             </div> </div>}
+
+            { showDivMyCards && <div className="MycardsToPay">
+
+            <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} onClick={()=>setShowDivMyCards(false)} >
+        <ArrowBackIcon fontSize='large'/>
+                    </IconButton>
+            {allCards&&allCards.map((card,i)=><MyCards id={i}  card={card}/>)}
+
+            {/* <button className="PayButton" onClick={()=>aler}>
+              Pay
+            </button> */}
+
+<Box sx={{ m: 1, position: 'relative' }}>
+        <Button
+          variant="contained"
+          sx={buttonSx}
+          disabled={loading}
+          onClick={handleButtonClick}
+          className="PayButton"
+  
+        >
+         Pay
+        </Button>
+        {loading && (
+          <CircularProgress
+            size={24}
+            sx={{
+              color: green[500],
+              position: 'absolute',
+              top: '50%',
+              left: '83%',
+              marginTop: '-12px',
+              marginLeft: '-12px',
+            }}
+          />
+        )}
+      </Box>
+
+            </div>}
 
    
     {/* Second Part */                                                                  }
