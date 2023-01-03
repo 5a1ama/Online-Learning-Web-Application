@@ -369,6 +369,31 @@ doc
   doc.end();
   res.download(title+"  Notes" +'.pdf');
 })
+
+router.get("/myNotes/:courseId/:subtitle/:token",async function(req,res){
+    var token=req.params.token;
+    var sub=req.params.subtitle;
+    var courseid=req.params.courseId
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var trainee=await Trainee.findOne({id:user.id})
+    var courses = trainee.courses
+    var course ;
+    for(var i=0;i<courses.length;i++){
+        if(courses[i].id==courseid){
+            course = courses[i]
+        }
+    }
+
+    var notes = course.notes;
+    for(var i=0;i<notes.length;i++){
+        if(notes[i].title==sub){
+            res.json(notes[i].note);
+            break;
+        }
+    }
+
+})
+
 router.get("/deleteDownloadedFile/:filename",function(req,res){
     var filename=req.params.filename;
     try {

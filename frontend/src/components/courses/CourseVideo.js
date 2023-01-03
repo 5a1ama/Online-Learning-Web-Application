@@ -4,7 +4,7 @@ import Navbar from '../navbar/Navbar'
 import { useLocation, useNavigate } from 'react-router-dom';
 import {Link, ScrollLink} from 'react-scroll'
 import { AiOutlinePlus } from 'react-icons/ai';
-import { addNotes, getTraineeDetails } from '../../API/TraineeAPI';
+import { addNotes, getTraineeDetails, getTraineeNotes } from '../../API/TraineeAPI';
 import { useEffect } from 'react';
 
 function CourseVideo() {
@@ -20,21 +20,23 @@ function CourseVideo() {
   }
   const handleSubmitNotes = async() =>{
     const x = await addNotes(location.state.CourseId,location.state.Prop.title,notes);
+    alert('done');
   }
   const [countryNumber,setCountryNumber]=useState();
   const handleCountryNumber = (x) =>{
     setCountryNumber(x);
   }
 
-  const[Trainee,setTrainee]=useState(null);
+  
+    const[Oldnotes,setOldNotes]=useState("");
 
-useEffect(()=>{
+  useEffect(()=>{
+    async function handleOldNotes (){
+      setOldNotes(await getTraineeNotes(location.state.CourseId,location.state.Prop.title));
+    }
+    handleOldNotes();
+  });
 
-  async function getTrainee(){
-    setTrainee (await getTraineeDetails());
- }
- getTrainee();
-})
 
   return (
     <div className ="CourseVideo">
@@ -60,7 +62,7 @@ useEffect(()=>{
          <iframe  src={previewVideo} className="CourseVideo_Video" 
                                         title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowfullscreen></iframe> 
-        <textarea className="CourseVideo_Input" onChange={handleNotes} >Pew pew</textarea>
+        {Oldnotes&&<textarea className="CourseVideo_Input" onChange={()=>handleNotes} >{Oldnotes}</textarea>}
         <button className="PlusButton" onClick={handleSubmitNotes}><AiOutlinePlus size="30px"></AiOutlinePlus></button>
                                         </div>
       </div>
