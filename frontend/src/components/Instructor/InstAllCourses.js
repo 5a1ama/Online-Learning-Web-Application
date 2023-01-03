@@ -5,7 +5,7 @@ import AllCoursesSearch from "../courses/AllCoursesSearch";
 import NewCourse from "../courses/NewCourse";
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
-import { FilterAllCourse } from "../../API/InstructorAPI";
+import { FilterAllCourse, getMycourses } from "../../API/InstructorAPI";
 import { Checkbox } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import { verify } from "../../API/LoginAPI";
@@ -40,6 +40,10 @@ export function InstAllCourses(){
     const getMaxPriceValue = async () =>{
       setMaxPriceValue ((await getMaxPrice()));
     }
+    const[myCourses,setMyCourses]=useState([]);
+    const getMyCourses=async()=>{
+      setMyCourses((await getMycourses(localStorage.getItem("token"))))
+    }
     const getCourses = async () =>{
       setCourses ((await getAllCourses()));
       getMaxPriceValue();
@@ -72,6 +76,7 @@ export function InstAllCourses(){
     if(first==0){
       begin();
       getCourses();
+      getMyCourses();
       setFirst(1);
     }
     const[rate,setRate]=useState([]);
@@ -155,7 +160,19 @@ export function InstAllCourses(){
     </div>
 <div className='AllCourses'>
             <h1 className="heading">Our Courses</h1>
-            {courses.map((course) => <NewCourse course={course} inst={true} handleNewPriceRatio={handleNewPriceRatio}   country={countryNumber}/>)}
+            {courses.map((course) =>{
+              var found=false;
+              for(var i=0;i<myCourses.length;i++){
+                if(myCourses[i].title==course.title){
+                  found=true;
+                  break;
+                }
+              }
+              if(found)
+                return <NewCourse course={course} inst={true} handleNewPriceRatio={handleNewPriceRatio}   country={countryNumber}/>
+              else
+                return <NewCourse course={course}  handleNewPriceRatio={handleNewPriceRatio}   country={countryNumber}/>
+              } )}
             </div>
 
             <button className='AllCourses-FilterBarButton' onClick={handleFilterBar}>Filter Courses</button>

@@ -6,7 +6,8 @@ const User=require("../Models/User")
 const jwt=require("jsonwebtoken")
 const dotenv=require("dotenv");
 const Instructor = require("../Models/Instructor");
-var Trainee=require("../Models/Trainee")
+var Trainee=require("../Models/Trainee");
+const Excercise = require("../Models/Excercise");
 dotenv.config()
 
 router.get("/getinstructorTraineeDetails/:id",async function(req,res){
@@ -315,6 +316,21 @@ router.post("/followUpReport/:token/:reportId/:question",async function(req,res)
     var followup=report.followup;
     followup=followup.concat([{question:question,answer:""}]);
     await Reports.findOneAndUpdate({id:reportid},{followup:followup});
+
+    
+})
+
+router.post("/createExercise/:token",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var questions=req.body.questions;
+    var choices =req.body.choices;
+    var excerciesCount= (await Excercise.find({})).length +1;
+    var object =new Excercise({id:excerciesCount,questions,choices,correctAnswer,instructorID:user.id})
+    object.save(function(error,result){
+        res.json ("ok")
+    })
+
 
 })
 module.exports=router
