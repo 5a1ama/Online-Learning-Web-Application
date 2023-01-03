@@ -56,6 +56,8 @@ function CourseContent(props) {
     setTraineeRate(newValue)
 }
 
+const [showPaymentDiv,stShowPaymentDiv] = useState(false);
+
 const [MyRate,setMyRate] = useState(0)
 
   const handleView = (view) => {
@@ -214,10 +216,12 @@ const [MyRate,setMyRate] = useState(0)
             {details[0]&&stars(details[0].rating.value).map((num)=> <img className="starImg2" style={{width:'40px'}} src={starImg} alt="."/>)}
         </div>
 
-        <button className="CourseContent_button_Enroll">
+        <button className="CourseContent_button_Enroll" >
                         Enroll now 
                     </button>
                     { 
+          
+
        (
         (details[0]&&details[0].discount.amount>0) && 
         (expiredTime>0) 
@@ -243,6 +247,23 @@ const [MyRate,setMyRate] = useState(0)
           
 
     </div>
+
+         {showPaymentDiv &&   <div className="PaymentsOptionsDivShadow"> <div className="PaymentsOptionsDiv">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div> </div>}
 
    
     {/* Second Part */                                                                  }

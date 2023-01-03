@@ -9,6 +9,7 @@ import { updateInstructorPass } from "../../API/InstructorAPI";
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { useNavigate } from "react-router-dom";
 import { verify } from "../../API/LoginAPI";
+import CreditCardIcon from '@mui/icons-material/CreditCard';
 
 
 
@@ -127,6 +128,10 @@ export function TraineeProfile(){
           <button  className=''  onClick={()=> setShowDiv2(true)}>
                         Change Password
                     </button>
+            <button className="TraineeMyCreditCards" onClick={() => navigate('/TraineePayments')}>
+                My Cards 
+            </button>
+    
 
         </div>
 
@@ -150,6 +155,8 @@ export function TraineeProfile(){
                 <button  className='editTraineeProfileButton1' onClick={()=> {setShowDiv1(true);}}>
                 <ModeEditOutlineIcon color="primary"/>
                     </button>
+                  
+
                     
                 </div>
                 </div>}

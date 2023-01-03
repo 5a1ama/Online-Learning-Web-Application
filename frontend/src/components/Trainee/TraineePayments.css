@@ -1,0 +1,51 @@
+.MyCardsDivMain{
+    height: 100vh;
+    background-color:rgb(203, 215, 215);
+    align-items: center;
+    display: flex;
+    flex-direction: column; 
+}
+.PaymentsNav{
+    position: relative;
+    left: -50%;
+}
+.MyCardsDiv{
+    position: absolute;
+    width: 400px;
+    height:550px;
+    top: 16%;
+    border: transparent;
+    background-color: rgb(255, 255, 255);
+     border-bottom-left-radius: 20px;
+     border-top-right-radius: 20px;
+     border-top-left-radius: 20px;
+    /* display: flex;
+   flex-direction: column;
+   align-items: center;
+   flex-grow: 1 1 0;
+   row-gap: 0.5vw; */
+}
+.dividercards{
+    width: 100%;
+}
+.mycardsLabel{
+    position: relative;
+    top: 2%;
+    left: 2%;
+}
+.MyCardsSmallDiv{
+    position: relative;
+    top: 4%;
+}
+.AddCardButton{
+    position: absolute;
+    left: 80%;
+    top: 2%;
+    height: 10%;
+    width: 5%;
+    background:transparent;
+}
+.AddCardButton:hover{
+    background-color: transparent;
+}
+
