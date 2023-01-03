@@ -4,7 +4,8 @@ import Navbar from '../navbar/Navbar'
 import { useLocation, useNavigate } from 'react-router-dom';
 import {Link, ScrollLink} from 'react-scroll'
 import { AiOutlinePlus } from 'react-icons/ai';
-import { addNotes } from '../../API/TraineeAPI';
+import { addNotes, getTraineeDetails, getTraineeNotes } from '../../API/TraineeAPI';
+import { useEffect } from 'react';
 
 function CourseVideo() {
   const location=useLocation();
@@ -19,12 +20,24 @@ function CourseVideo() {
   }
   const handleSubmitNotes = async() =>{
     const x = await addNotes(location.state.CourseId,location.state.Prop.title,notes);
+    alert('done');
   }
   const [countryNumber,setCountryNumber]=useState();
   const handleCountryNumber = (x) =>{
     setCountryNumber(x);
   }
- 
+
+  
+    const[Oldnotes,setOldNotes]=useState("");
+
+  useEffect(()=>{
+    async function handleOldNotes (){
+      setOldNotes(await getTraineeNotes(location.state.CourseId,location.state.Prop.title));
+    }
+    handleOldNotes();
+  });
+
+
   return (
     <div className ="CourseVideo">
          <Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎   ‎  Join Us"]} 
@@ -49,7 +62,7 @@ function CourseVideo() {
          <iframe  src={previewVideo} className="CourseVideo_Video" 
                                         title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowfullscreen></iframe> 
-        <textarea className="CourseVideo_Input" onChange={handleNotes}></textarea>
+        {Oldnotes&&<textarea className="CourseVideo_Input" onChange={()=>handleNotes} >{Oldnotes}</textarea>}
         <button className="PlusButton" onClick={handleSubmitNotes}><AiOutlinePlus size="30px"></AiOutlinePlus></button>
                                         </div>
       </div>
