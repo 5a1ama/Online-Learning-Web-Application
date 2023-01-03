@@ -81,10 +81,23 @@ export const addCreditCard=async(cardNumber,cardHolder,cardCvv,cardDate)=>{
             "Content-type": "application/json; charset=UTF-8"
         },
         body: JSON.stringify({
-            cardHolder:cardHolder,cardNumber:cardNumber,cardDate:cardDate,cardCvv:cardCvv
+            cardHolder:cardHolder,cardNumber:cardNumber,cardDate:cardDate,cardCvv:cardCvv,token:localStorage.getItem("token")
         })
       })
       return await result.json()
+}
+export const getAllCards=async()=>{
+    const result=await fetch(`http://localhost:8000/trainee/myCards/${localStorage.getItem("token")}`)
+    return await result.json();
+}
+export const deleteCard=async(cardNumber)=>{
+    const result = await fetch(`http://localhost:8000/trainee/deleteCard/${cardNumber}/${localStorage.getItem("token")}`,{
+        method: "POST",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        },
+      })
+    return await result.json();
 }
 export const getTraineeCourseProg=async(courseId)=>{
     const result=await fetch(`http://localhost:8000/trainee/courseProgress/${localStorage.getItem("token")}/${courseId}`)
@@ -92,11 +105,12 @@ export const getTraineeCourseProg=async(courseId)=>{
 
 }
 export const addNotes=async(id,title,notes)=>{
-    await fetch(`http://localhost:8000/trainee/addNotesToSub/${id}/${title}/${notes}/${localStorage.getItem("token")}`,{method: "POST",
+    const result=await fetch(`http://localhost:8000/trainee/addNotesToSub/${id}/${title}/${notes}/${localStorage.getItem("token")}`,{method: "POST",
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     }
     })
+    return await result.json();
 }
 export const downloadNotes=async(id,title)=>{
     fetch(`http://localhost:8000/trainee/downloadNotes/${id}/${title}/${localStorage.getItem("token")}`).then(resp => resp.arrayBuffer()).then(resp => {

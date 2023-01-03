@@ -158,3 +158,34 @@
         z-index:2;
       
 }
+
+
+.PaymentsOptionsDiv{
+  position: absolute;
+  width: 400px;
+  height:550px;
+  top: 16%;
+  left: 35%;
+  border: transparent;
+  background-color: rgb(255, 255, 255);
+   border-bottom-left-radius: 20px;
+   border-top-right-radius: 20px;
+   border-top-left-radius: 20px;
+   z-index: 1;
+}
+.PaymentsOptionsDivShadow{
+    width: 100%;
+    height: 100%;
+    background: transparent; 
+    display: flex;
+    flex-direction: column;
+  position:absolute;
+  z-index: 1;
+}
+.PaymentsOptionsDivShadow::before{
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0,0, 0.5);
+}
