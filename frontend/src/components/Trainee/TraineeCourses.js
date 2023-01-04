@@ -89,6 +89,7 @@ export function TraineeCourses() {
         }
         getDetails();
       })
+     
 return(
     <div className = "TraineeHomeMain2">
     

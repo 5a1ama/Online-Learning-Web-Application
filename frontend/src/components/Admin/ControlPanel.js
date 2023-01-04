@@ -107,14 +107,14 @@ function ControlPanel() {
             <div className="controlPanel_vertical">
 
             <div className="ControlPanel_Func5">
-                <div className='ControlPanelViewRefundDiv'> <img className='notificationIconPanel' src={notification}></img>
+                <div className='ControlPanelViewRefundDiv'> <img className='notificationIconPanel' alt="." src={notification}></img>
                 <label>You Have New Access Requests</label>
                 <button onClick={()=>navigate("/AdminRequests")}>View Access Requests</button></div>
                 
-                <div className='ControlPanelViewRefundDiv'> <img className='notificationIconPanel' src={notification}></img>
+                <div className='ControlPanelViewRefundDiv'> <img className='notificationIconPanel' alt="." src={notification}></img>
                 <label>You Have New Reports</label>
                 <button onClick={()=>navigate("/AdminReports")}>View All Reports</button></div>
-                <div className='ControlPanelViewRefundDiv'> <img className='notificationIconPanel' src={notification}></img>
+                <div className='ControlPanelViewRefundDiv'> <img className='notificationIconPanel' alt="." src={notification}></img>
                 <label>You Have New Refund Requests</label>
                 <button onClick={()=>navigate("/AdminRefunds")}>View Refund Requests</button></div>
             </div>
