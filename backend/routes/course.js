@@ -260,7 +260,8 @@ router.get("/PopularCourses",async function(req,res){
         var course=await Course.find({enrolledStudents:final[i]})
         finalCourses=finalCourses.concat(course)
     }
-  
+  console.log(finalCourses)
+  console.log("-------------------------hazeoum -----------------------------")
     res.json(finalCourses)
 })
 router.get("/allPromoted", async function(req,res){
