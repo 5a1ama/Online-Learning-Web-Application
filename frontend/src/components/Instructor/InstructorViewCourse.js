@@ -58,6 +58,7 @@ export function InstructorViewCourse() {
     const [addDiscount,setAddDiscount]=useState(false)
     const [addedVideoLink,setAddedVideoLink]=useState("");
     const [vidDescription,setVidDesc]=useState("");
+    
     const [discountamount,setDiscountAmount]=useState("");
     const handleDiscountAmount=(event)=>{
         setDiscountAmount(event.target.value)
