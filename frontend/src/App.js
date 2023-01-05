@@ -113,6 +113,8 @@ function Home(props) {
         }else if(localStorage.getItem('type')=='Trainee'){
           navigate('/TraineeHome');
 
+        }else if(localStorage.getItem('type')=="Admin"){
+          navigate('/AdminHome')
         }
       }
     }
