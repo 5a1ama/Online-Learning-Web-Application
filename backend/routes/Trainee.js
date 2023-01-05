@@ -329,7 +329,7 @@ router.post("/addNotesToSub/:courseid/:subtitle/:added/:token",async function(re
     
 
     courses[index].notes=notesArr;
-    
+    console.log(courses[0].notes[0].note)
     await Trainee.findOneAndUpdate({id:user.id},{courses:courses});
     res.json("ok")
 
@@ -342,12 +342,13 @@ router.get("/downloadNotes/:courseid/:subtitle/:token",async function(req,res){
     var trainee=await Trainee.findOne({id:user.id})
     var courses=trainee.courses;
     var requiredCourseNotes="";
-    for(var i=0;i<courses;i++){
+    for(var i=0;i<courses.length;i++){
         if(courses[i].id==id){
             requiredCourseNotes=courses[i].notes;
             break;
         }
     }
+
     var requiredNotes="";
     for(var i=0;i<requiredCourseNotes.length;i++){
         if(requiredCourseNotes[i].title==title){
@@ -544,4 +545,18 @@ router.get("/mySolutions/:excerId/:courseId/:token",async function(req,res){
 })
 
 
+router.post("/enrollCourse/:courseID/:token",async function(req,res){
+    var token = req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var courseID = req.params.courseID
+    var course = await Course.findOne({id:courseID})
+    var enrolledStudent = course.enrolledStudents
+    enrolledStudent +=1
+    var trainee = await Trainee.findOne({id:user.id})
+    var traineeCourses = trainee.courses
+    traineeCourses.push({id:courseID,progress:0,enrollDate:new Date(),notes:[]})
+    await Course.findOneAndUpdate({id:courseID},{enrolledStudents:enrolledStudent})
+    await Trainee.findOneAndUpdate({id:user.id},{courses:traineeCourses})
+    res.json("ok")
+})
 module.exports = router

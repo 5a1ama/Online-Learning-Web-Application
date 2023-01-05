@@ -4,7 +4,7 @@ import Navbar from '../navbar/Navbar'
 import { useLocation, useNavigate } from 'react-router-dom';
 import {Link, ScrollLink} from 'react-scroll'
 import { AiOutlinePlus } from 'react-icons/ai';
-import { addNotes, getTraineeDetails, getTraineeNotes } from '../../API/TraineeAPI';
+import { addNotes, getTraineeDetails, getTraineeNotes, downloadNotes } from '../../API/TraineeAPI';
 import { useEffect } from 'react';
 
 function CourseVideo() {
@@ -18,9 +18,30 @@ function CourseVideo() {
   const handleNotes= (event)=>{
     setNotes(event.target.value)
   }
+
+
+   const [expiredTime,setExpiredTime]=useState(-1)
+  
+    useEffect(() => {
+      const interval = setInterval(() => {
+        if(expiredTime>0){
+          setExpiredTime(expiredTime - 1);
+        }else if(expiredTime==0){
+
+          setNoteAdded(false);
+
+        }
+      }, 1000);
+    
+      return () => clearInterval(interval);
+    }, [expiredTime]);
+    
+  const[noteAdded,setNoteAdded]=useState(false);
+  
   const handleSubmitNotes = async() =>{
     const x = await addNotes(location.state.CourseId,location.state.Prop.title,notes);
-    alert('done');
+    setNoteAdded(true);
+    setExpiredTime(10);
   }
   const [countryNumber,setCountryNumber]=useState();
   const handleCountryNumber = (x) =>{
@@ -62,8 +83,10 @@ function CourseVideo() {
          <iframe  src={previewVideo} className="CourseVideo_Video" 
                                         title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowfullscreen></iframe> 
-        {Oldnotes&&<textarea className="CourseVideo_Input" onChange={()=>handleNotes} >{Oldnotes}</textarea>}
+                                      {noteAdded&&  <h3 className='noteAddedSuccess'>note added successfully</h3>}
+        {Oldnotes&&<textarea className="CourseVideo_Input" onChange={handleNotes} >{Oldnotes}</textarea>}
         <button className="PlusButton" onClick={handleSubmitNotes}><AiOutlinePlus size="30px"></AiOutlinePlus></button>
+        <button className="CourseVideo_DownloadNotes" onClick={()=>downloadNotes(location.state.CourseId,location.state.Prop.title)}>Download Notes</button>
                                         </div>
       </div>
   )
