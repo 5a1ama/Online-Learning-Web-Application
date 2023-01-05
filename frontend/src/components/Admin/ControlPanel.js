@@ -5,6 +5,11 @@ import { AddAdmin, AddInstructor,AddTrainee } from '../../API/AdminAPI';
 import { useNavigate } from 'react-router-dom';
 import { verify } from '../../API/LoginAPI';
 import notification from "../../assets/notificationIcon.png"
+import ReactCardFlip from 'react-card-flip';
+import AdminAv from '../../assets/adminAV.png'
+import InstructorAV from '../../assets/instructorAV.png'
+import TraineeAv from '../../assets/traineeAV.png'
+import {AiOutlineClose} from 'react-icons/ai'
 function ControlPanel() {
     const navigate = useNavigate(); 
   const [first2,setFirst2]=useState(0);
@@ -71,53 +76,101 @@ function ControlPanel() {
         
         await AddTrainee(traineeuser,traineepass);
     }
+
+
+    const [flip,setFlip]=useState(false);
+    const handleFlip=()=>{
+        setFlip(!flip)
+    }
+    const [flipInst,setFlipInst]=useState(false);
+    const handleFlipInst=()=>{
+        setFlipInst(!flipInst)
+    }
+  
+    const [flipTrainee,setFlipTrainee]=useState(false);
+    const handleFlipTrainee=()=>{
+        setFlipTrainee(!flipTrainee)
+    }
+  
   return (
     <div className="controlPanel">
             <Navbar items={["Home","Control Panel","Reports"]} select="Control Panel" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={()=>{} }  />
         <div className="controlPanel_content">
             <div className="controlPanel_content4horizontal">
                 
-            <div className="ControlPanel_Func">
+            <ReactCardFlip isFlipped={flip} flipDirection="horizontal" >
+            <div  onClick={handleFlip}  className='ControlPanel_ControlsUp'>
+
+                <img alt="."   className='ControlPanel_ControlsUp1' src={AdminAv} />
+            </div>
+            <div  className="ControlPanel_Func">
                 <h3>Add Admin</h3>
+                <AiOutlineClose onClick={handleFlip} className='closeButton'></AiOutlineClose>
+
                 <form>
                     <input onChange={handleAdminUser} type="username" placeholder="Enter new Administrator username"></input>
                     <input onChange={handleAdminPass} type="password" placeholder="Enter new Administrator password"></input>
                     <button onClick={handleAdmin}>Add Admin</button>
                 </form>
             </div>
-            <div className="ControlPanel_Func">
+           
+                </ReactCardFlip>
+
+                <ReactCardFlip isFlipped={flipInst} flipDirection="horizontal" >
+                <div  onClick={handleFlipInst}  className='ControlPanel_ControlsUp'>
+
+                    <img alt="."   className='ControlPanel_ControlsUp1' src={InstructorAV} />
+                    </div>
+
+                <div  className="ControlPanel_Func">
+                
             <h3>Add Instructor</h3>
+               <AiOutlineClose onClick={handleFlipInst} className='closeButton'></AiOutlineClose>
                 <form>
                     <input onChange={handleInstUser} type="username" placeholder="Enter new Instructor username"></input>
                     <input onChange={handleInstPass} type="password" placeholder="Enter new Instructor password"></input>
                     <button onClick={handleInst}>Add Instructor</button>
                 </form>
             </div>
-            <div className="ControlPanel_Func">
-            <h4>Add corporate trainee</h4>
+
+                </ReactCardFlip>
+
+                <ReactCardFlip isFlipped={flipTrainee} flipDirection="horizontal" >
+                <div  onClick={handleFlipTrainee}  className='ControlPanel_ControlsUp'>
+
+                    <img alt="."   className='ControlPanel_ControlsUp1' src={TraineeAv} />
+                    </div>
+
+            <div  className="ControlPanel_Func">
+            <h3>Add trainee</h3>
+            <AiOutlineClose onClick={handleFlipTrainee} className='closeButton'></AiOutlineClose>
+
                 <form>
                     <input onChange={handleTraineeUser} type="username" placeholder="Enter new trainee username"></input>
                     <input onChange={handleTraineePass} type="password" placeholder="Enter new trainee password"></input>
                     <button onClick={handleTrainee}>Add trainee</button>
                 </form>
             </div> 
-             
+            </ReactCardFlip>
 
             </div>
             <div className="controlPanel_vertical">
 
-            <div className="ControlPanel_Func5">
-                <div className='ControlPanelViewRefundDiv'> <img className='notificationIconPanel' alt="." src={notification}></img>
-                <label>You Have New Access Requests</label>
-                <button onClick={()=>navigate("/AdminRequests")}>View Access Requests</button></div>
-                
-                <div className='ControlPanelViewRefundDiv'> <img className='notificationIconPanel' alt="." src={notification}></img>
-                <label>You Have New Reports</label>
-                <button onClick={()=>navigate("/AdminReports")}>View All Reports</button></div>
-                <div className='ControlPanelViewRefundDiv'> <img className='notificationIconPanel' alt="." src={notification}></img>
-                <label>You Have New Refund Requests</label>
-                <button onClick={()=>navigate("/AdminRefunds")}>View Refund Requests</button></div>
+            <div className="ControlPanel_ControlsDown ControlPanel_ControlsDown1" onClick={()=>navigate("/AdminRequests")}>
+
             </div>
+
+            <div className="ControlPanel_ControlsDown ControlPanel_ControlsDown2" onClick={()=>navigate("/AdminReports")}>
+
+            </div>
+            
+            <div className="ControlPanel_ControlsDown ControlPanel_ControlsDown4" onClick={()=>navigate("/AdminPromotions")}>
+                
+            </div>
+            <div className="ControlPanel_ControlsDown ControlPanel_ControlsDown3" onClick={()=>navigate("/AdminRefunds")}> 
+                
+            </div>
+
         </div>
         </div>
         </div>

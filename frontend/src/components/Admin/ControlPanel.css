@@ -1,5 +1,4 @@
 .controlPanel{
-    background-image: linear-gradient(180deg,rgba(198, 198, 198, 0.404),rgba(221, 221, 221, 0.914) );
     background-size:cover;
     width :100%;
     height:100vh;  
@@ -21,45 +20,39 @@ justify-content: space-between;
     justify-content: center;
 }
 .ControlPanel_Func{
-    width :20% ;
+    width :40vh ;
     height:40vh ;
     background-color: white;
     box-shadow:0px 6px 10px rgb(0,0,0,0.3);
-    border-radius: 15px;
+    border-radius: 25px;
     margin: 2rem 2rem;
+    padding: 1rem 0.1rem;
     position: relative;
     align-items: center;
     justify-content: center;
     align-self: center;
     align-content: center;
+    /* transform: translate3d(0,1,0,80deg); */
+    transition: 1s;
 }
 .ControlPanel_Func h3{
     color:rgb(10, 138, 218);
     font-size: 25px;
+    
     text-align: center;
     align-items: center;
 
 }
 .ControlPanel_Func h4{
     color:rgb(10, 138, 218);
-    font-size: 20px;
-    text-align: center;
+    font-size: 23px;
+    width: 40vh;
+    overflow-wrap: break-word;  
+    word-wrap: break-word; 
+    word-break: break-word;
+        text-align: center;
     align-items: center;
-    margin-top:1rem;
 
-}
-.ControlPanel_Func5{
-    width :93% ;
-    height:auto ;
-    display: flex;
-    flex-direction: column;
-    row-gap: 0.5vw;
-
-    align-items: left;
-    background-color: white;
-    box-shadow:0px 6px 10px rgb(0,0,0,0.3);
-    border-radius: 15px;
-    margin: 2rem 2rem;
 }
 
 .ControlPanel_Func form{
@@ -83,6 +76,7 @@ justify-content: space-between;
     width: 250px ;
     height:50px;
     font-size:1rem ;
+    padding:1rem;
     font-family: 'Poppins' sans-serif;
     margin:1rem 1rem;
 }
@@ -106,17 +100,84 @@ justify-content: space-between;
     align-items: center;
     flex-grow: 1 1 0;
 }
-/* .controlPanel_vertical{
+.controlPanel_vertical{
     width:80%;
-    height:30vh ;
-    background-color: white;
-    box-shadow:0px 6px 10px rgb(0,0,0,0.3);
-    border-radius: 15px;
-    margin: 2rem 2rem;
+    height:40vh ;
+    /* background-color: white; */
+
+    margin: 1rem 1rem;
     position: relative;
     align-items: center;
     justify-content: center;
     align-self: center;
     align-content: center;
+    display:flex;
+    /* overflow: hidden; */
+    flex-direction:row;
 }
- */
+
+.ControlPanel_ControlsDown{
+    width: 25%;
+    height: 100%;
+    margin: 1rem;
+    border-radius: 15px;
+
+    cursor: pointer;
+    background-size: cover;
+    
+}
+.ControlPanel_ControlsDown:hover{
+    
+    box-shadow:0px 20px 20px rgba(0, 0, 0, 0.351);
+    border-right: 0px solid rgb(225, 225, 225);
+    z-index:1;
+
+    transition:0.2s;
+}
+.ControlPanel_ControlsDown1{
+    background-image: url('../../assets/Request.jpg');
+    
+}
+.ControlPanel_ControlsDown2{
+    background-image: url('../../assets/Report.jpg');
+    
+}
+.ControlPanel_ControlsDown3{
+    background-image: url('../../assets/Refund.jpg');
+
+}
+.ControlPanel_ControlsDown4{
+    background-image: url('../../assets/promotions.jpg');
+
+}
+
+
+.ControlPanel_ControlsUp{
+    width: 40vh;
+    height: 40vh;
+    margin: 1rem;
+    border-radius: 15px;
+    cursor: pointer;
+    background-size: cover;
+
+    
+}
+
+.ControlPanel_ControlsUp1{
+
+    
+}
+
+.ControlPanel_ControlsUp1:hover{
+    filter: drop-shadow(0px 10px 5px #180c0d35);
+    transform: translateY(-0.1rem);
+    z-index:1;
+    transition:0.2s;
+}
+.closeButton{
+    color:red;
+    cursor: pointer;
+    position: relative;
+    top:-11%;
+    left:88%;
+}
