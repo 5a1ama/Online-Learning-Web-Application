@@ -99,7 +99,7 @@ function ControlPanel() {
             <div className="controlPanel_content4horizontal">
                 
             <ReactCardFlip isFlipped={flip} flipDirection="horizontal" >
-            <div  onClick={handleFlip}  className='ControlPanel_ControlsUp'>
+            <div  onClick={()=>{handleFlip();setFlipInst(false);setFlipTrainee(false);}}  className='ControlPanel_ControlsUp'>
 
                 <img alt="."   className='ControlPanel_ControlsUp1' src={AdminAv} />
             </div>
@@ -117,7 +117,7 @@ function ControlPanel() {
                 </ReactCardFlip>
 
                 <ReactCardFlip isFlipped={flipInst} flipDirection="horizontal" >
-                <div  onClick={handleFlipInst}  className='ControlPanel_ControlsUp'>
+                <div  onClick={()=>{handleFlipInst();setFlip(false);setFlipTrainee(false);}}  className='ControlPanel_ControlsUp'>
 
                     <img alt="."   className='ControlPanel_ControlsUp1' src={InstructorAV} />
                     </div>
@@ -136,7 +136,7 @@ function ControlPanel() {
                 </ReactCardFlip>
 
                 <ReactCardFlip isFlipped={flipTrainee} flipDirection="horizontal" >
-                <div  onClick={handleFlipTrainee}  className='ControlPanel_ControlsUp'>
+                <div  onClick={()=>{handleFlipTrainee();setFlipInst(false);setFlip(false);}}  className='ControlPanel_ControlsUp'>
 
                     <img alt="."   className='ControlPanel_ControlsUp1' src={TraineeAv} />
                     </div>

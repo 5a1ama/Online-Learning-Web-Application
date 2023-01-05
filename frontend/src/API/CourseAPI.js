@@ -132,3 +132,8 @@ export const getMaxPrice = async()=>{
     const j= await result.json();
     return j
 }
+export const getAllPromoted = async()=>{
+  const result=await fetch(`http://localhost:8000/course/allPromoted`)
+    const j= await result.json();
+    return j
+}

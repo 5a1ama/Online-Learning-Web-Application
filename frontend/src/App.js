@@ -39,6 +39,7 @@ import { TraineePayments } from './components/Trainee/TraineePayments';
 
 import { InstructorCreateExercise } from './components/Instructor/InstructorCreateExercise';
 import { Payment } from './components/Payment';
+import AdminPromotions from './components/Admin/AdminPromotions/AdminPromotions';
 
 
 export default function App() {
@@ -73,6 +74,8 @@ export default function App() {
           <Route path="/instructorCourseVideo" element={<InstructorCourseVideo handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
           <Route path="/InstAllCourses" element={<InstAllCourses handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/addCourse" element={<AddCourse handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
+          <Route path="/InstructorAddExcer" element={<InstructorCreateExercise/>}/>
+          <Route path="/pay" element={<Payment/>}/>
           
           <Route path="/TraineeVieWInstructor" element={<TraineeViewInstructor handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/TraineeHome" element={<TraineeHome handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
@@ -91,8 +94,8 @@ export default function App() {
           <Route path="/AdminReports" element={<AdminViewReports/>}/>
           <Route path="/AdminRequests" element={<AdminViewRequests/>}/>
           <Route path="/AdminRefunds" element={<AdminViewRefunds/>}/>
-          <Route path="/InstructorAddExcer" element={<InstructorCreateExercise/>}/>
-          <Route path="/pay" element={<Payment/>}/>
+          <Route path="/AdminPromotions" element={<AdminPromotions/>}/>
+       
         </Routes>
       
     

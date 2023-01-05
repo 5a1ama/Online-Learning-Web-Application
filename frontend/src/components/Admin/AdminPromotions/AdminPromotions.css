@@ -1,0 +1,226 @@
+.adminPromotions{
+    width: 100%;
+    
+}
+.adminPromotions_content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top:60px;
+    justify-content: center;
+    align-items: center;
+    padding:2rem;
+}
+.ActivePromotions{
+
+    color: var(--primary-light);
+    border-radius: 0px;
+
+    cursor: pointer;
+    width:100px;
+    margin-right: 1rem;
+}
+.ActivePromotions:hover{
+    transform: translateY(-0.1rem);
+    filter: drop-shadow(0px 4px 2px #1c1c1c3c);
+    transition: 0.1s;
+}
+.AdminCourses{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.AdminCoursesPromo{
+
+    height:200px;
+    margin: 0 0;
+    transform: scale(0.85)translate(-5rem,-0.5rem);
+}
+.AdminCourseSetPromo{
+   width:350px;
+   height:400px;
+   transform: translate(0,2rem);
+   border-radius:10px ;
+   margin: 0 0;
+   padding: 1.5rem 1rem;
+    
+   background-color: rgba(223, 223, 223, 0.536); 
+
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+}
+.AdminCourseSetPromo h2{
+    text-align: center;
+    font-size:20px;
+    color:var(--primary-light);
+    margin-bottom:1rem;
+}
+.AdminSetPromoAmount{
+    transform: translate(40px,10px);
+    font-weight: 500;
+}
+
+.AdminSetPromo_Input{
+    align-self: center;
+    margin: 1rem;
+    width:80%;
+    height: 5vh;
+    border-radius: 10px;
+}
+.applyPromo_Set{
+    margin-top: 1.5rem;
+    align-self: center;
+    width:50%;
+}
+/* ///////////////////////////////////////////////   ////////////////////////////////////////pew */
+
+ .adminCourses-FilterBarButton{
+     position: absolute;
+    color :#e4ebef;
+    width: 16%;
+    height:5vh;
+    top : 23vh;
+    left: 80.7%;
+    font-weight:400;
+    font-size: 20px;
+    padding: 0rem 0rem;
+    z-index:1;
+
+ }
+
+ .adminCourses-FilterDiv{
+    background-color :rgba(0, 53, 72, 0.921);
+    position: absolute;
+    border-radius : 20px ;
+    width: 21.5%;
+    height: 65vh;
+    color :#f0f3f5;
+    top : 26vh;
+    left: 78%;
+    padding: 0rem 0.5rem;
+    transform: scale(0.8);
+    transition: 0.5s;
+    
+ }
+
+ .adminCourses-nonFilterDiv{
+    position: absolute;
+    transform: scale(0);
+     transition: 0.7s;
+     top : 10vh;
+     left: 80%;
+     padding: 0rem 0rem;
+  }
+  
+ .adminCourses-Slider{
+    color:#fff;
+    position: absolute;
+    top : 43%;
+    left: 15%;
+    padding: 0rem 0rem;
+
+ }
+ .adminCourses-Slider_Checkbox{
+   color:#fff;
+   background-color: #fff;
+   position: absolute;
+   left:65%;
+   padding: 0rem 0rem;
+ }
+ .adminCourses-Slider h3{
+   position: absolute;
+   left: 155%;
+   top:15%
+   
+ }
+.adminCourses-Slider_div_check
+{
+   position: absolute;
+   top:60%;
+   left:60%
+}
+.adminCourses-Slider_div_check h3{
+    transform:translate(40px,0px);
+}
+ .adminCourses-Subject{
+    font-weight:600;
+    font-size: 30px;
+    position: absolute;
+    top : 4%;
+    left: 6%;
+ 
+
+ }
+
+ .adminCourses-TextField{
+    position: relative;
+    top : 7%;
+    left: 10%;
+    background-color: #f0f3f5;
+    border-radius : 7px ;
+    height: 9%;
+    width :70%;
+    
+    background-color: #fff;
+    border:transparent;
+    border:none ;
+
+    font-size:1rem ;
+    font-family: 'Poppins' sans-serif;
+   outline:none;
+   
+
+ }
+
+ .adminCourses-Price{
+    position: relative;
+    top : 33%;
+    left: 2%;
+    font-weight:600;
+    font-size: 30px;
+ 
+ }
+
+ .adminCourses-Apply{
+    position: relative;
+    top : 67%;
+    left: -15%;
+
+ }
+
+ .adminCourses-Rate{
+
+    position: relative;
+    top : 33%;
+    left: 2%;
+    font-weight:600;
+    font-size: 30px;
+ }
+
+ .adminCourses-Rating{
+    position: relative;
+    top : 35%;
+    left: 10%;
+    width: 250px;
+    
+
+ }
+ .adminCourses-Rating button{
+    width: 40px;
+    height: 30px;
+   margin: 0.1rem 0.1rem;
+   padding : 0 0;
+    text-align: center;
+}
+
+ .adminCourses_ReatFilterButton{
+   background-color: grey;
+   transform:translate(2vh,27vh)
+ }
+ .adminCourses_ReatFilterButton:hover{
+   background-color: rgb(169, 169, 169);
+   transition: 1s;
+ }

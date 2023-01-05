@@ -70,8 +70,21 @@ router.get("/filter-price/:minprice/:maxprice",async function(req,res){
     var array=[];
     for(var i=0;i<query.length;i++){
         // console.log(query[i].price)
-        if(query[i].price>=minprice && query[i].price<=maxprice){
-            array=array.concat([query[i]])
+        var d1 = new Date();
+        if(query[i].discount.amount>0&&query[i].discount.EndDate){
+                var d2 = new Date(query[i].discount.EndDate)
+                if(d2.getTime()>d1.getTime()){
+                    if(query[i].price-(query[i].price*(query[i].discount.amount/100))>=minprice && query[i].price-(query[i].price*(query[i].discount.amount/100))<=maxprice){
+                        array=array.concat([query[i]])
+                    }
+                }
+            
+        }
+        else{
+
+            if(query[i].price>=minprice && query[i].price<=maxprice){
+                array=array.concat([query[i]])
+            }
         }
     }
     res.json(array)
@@ -250,5 +263,24 @@ router.get("/PopularCourses",async function(req,res){
   
     res.json(finalCourses)
 })
-
+router.get("/allPromoted", async function(req,res){
+    var query= await Course.find({});
+    // @ts-ignore
+    var array= [];
+    for(i=0;i<query.length;i++){
+        var d1 = new Date();
+        if(query[i].discount.amount>0){
+            if(query[i].discount.EndDate)
+            {
+                var d2 = new Date(query[i].discount.EndDate)
+       
+                if(d2.getTime()>d1.getTime()){
+                    
+                array = array.concat([query[i]]);
+                }
+            }
+        }
+    }
+    res.json(array);
+})
 module.exports=router

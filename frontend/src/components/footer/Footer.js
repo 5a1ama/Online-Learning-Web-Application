@@ -1,11 +1,12 @@
 import React from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate,useLocation} from 'react-router-dom';
 import './footer.css';
 export {default as Footer} from './Footer'
 
 function Footer (props) {
-  
+
   const navigate = useNavigate();
+
   return (
     <div className="gpt3__footer section__padding">
     <div className="gpt3__footer-heading">
@@ -13,7 +14,13 @@ function Footer (props) {
     </div>
 
     <div className="gpt3__footer-btn">
-      <button onClick={()=>navigate("/signUp")}>{props.buttonText}</button>
+{
+     props.course? 
+     <button onClick={()=>navigate("/signUp",{state:{Courseid:props.course}})}>{props.buttonText}</button>
+     :
+     <button onClick={()=>navigate("/signUp")}>{props.buttonText}</button>
+    }
+    
     </div>
 
 
