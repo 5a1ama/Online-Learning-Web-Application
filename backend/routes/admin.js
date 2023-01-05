@@ -56,9 +56,12 @@ router.post("/setPromotion/:courseid/:promotion/:endDate",async function(req,res
     var courseId=req.params.courseid;
     var promotion=req.params.promotion;
     var endDate=req.params.endDate;
-    for(var i=0;i<courseId.length;i++){
-        await Course.findOneAndUpdate({id:courseId[i]},{discount:{amount:promotion,EndDate:endDate}})
+    var courses=(courseId.substring(1,courseId.length-1)).split(",");
+    console.log(courses)
+    for(var i=0;i<courses.length;i++){
+        await Course.findOneAndUpdate({id:Number(courses[i])},{discount:{amount:promotion,EndDate:endDate}})
     }
+
 })
 router.post("/setPromotionAll/:promotion/:endDate",async function(req,res){
     var promotion=req.params.promotion;
