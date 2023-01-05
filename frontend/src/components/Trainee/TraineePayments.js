@@ -62,7 +62,7 @@ export function TraineePayments(){
     return(
         <div className="MyCardsDivMain">
              <div className="PaymentsNav">
-            <Navbar items={["Home","My Courses","All Courses"]} select="All Courses" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} 
+            <Navbar items={["Home","My Courses","All Courses"]} select="" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} 
        handleCountryNumber={handleCountryNumber}
         scroll={["","",""]}  /> 
             </div>  
