@@ -4,7 +4,7 @@ import { useState } from "react";
 export const QuestionsDiv=(props)=>{
     const [array,setArray]=useState(props.arr);
     const[array2,setArray2]=useState(props.arr2);
-    const handleQuestion =(event)=>{
+    const handleQuestion2 =(event)=>{
         const temp=array;
         var index=Number(event.target.getAttribute("id").substring(8))
         temp[index]=event.target.value

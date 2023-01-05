@@ -27,6 +27,13 @@ import "../courses/subtitles/Subtitle.css"
 import { downloadCertificate } from '../../API/CommonAPI';
 import { verify } from '../../API/LoginAPI';
 
+import FlagIcon from '@mui/icons-material/Flag';
+import MenuItem from '@mui/material/MenuItem';
+import Divider from '@mui/material/Divider';
+import { addReport } from '../../API/TraineeAPI';
+
+
+
 export function InstructorViewCourse() {
     const navigate=useNavigate();
     const [first2,setFirst2]=useState(0);
@@ -247,7 +254,36 @@ const handleHours=(event)=>{
                 </div>
             )
         }
-        
+       
+const Issues = [
+  {
+    value: 'technical',
+    label: 'Technical',
+  },
+  {
+    value: 'financial',
+    label: 'Financial',
+  },
+  {
+    value: 'other',
+    label: 'Other',
+  },
+];
+  
+const [showReportDiv ,setShowReportDiv] = useState(false);
+const [issueType,setIssueType] = useState("");
+const [issuewords,setIssueWords] = useState("");
+
+const handleChangeIssueType = (event)=>{
+     setIssueType(event.target.value)
+}
+const handleChangeIssueWords = (event)=>{
+    setIssueWords(event.target.value)
+}
+const handleSubmitReport = ()=>{
+    addReport(location.state.id,issueType,issuewords)
+    setShowReportDiv(false)
+}
         
   return (
     
@@ -283,8 +319,59 @@ const handleHours=(event)=>{
                     {details[0]&&stars(details[0].rating.value).map((num)=> <img className="starImg2" style={{width:'40px'}} src={starImg} alt="."/>)}
                 </div>
 
+                <button className="reportButton" onClick={()=>setShowReportDiv(true)}>
+                     Report Issue <FlagIcon fontSize='small' sx={{height:'8%',width:'8%'}}/>
+                </button>
+
 
             </div>
+        {showReportDiv&&   <div className="reportInstructorDivShadow"> <div className="reportInstructorDiv">
+            <h1 className="ReportLabel">
+                Report
+            </h1>
+            <Divider className='DividerCard' variant="middle"/>
+          
+           <TextField
+           className="IssusList"
+          id="outlined-select-currency"
+          select
+          label="Your Issue"
+          sx={{width:'70%'}}
+          helperText="Please select your Issue"
+          onChange={handleChangeIssueType}
+        >
+              {Issues.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+
+            </TextField>
+
+            <TextField
+            className="IssueTextField"
+            sx={{width:'70%'}}
+          id="outlined-multiline-flexible"
+          label="Your Issue"
+          multiline
+          maxRows={7}
+          onChange={handleChangeIssueWords}
+     
+        />
+
+        <button className="supmitReportButton" onClick={handleSubmitReport}>
+            Submit
+        </button>
+
+        <button className="cancelReportButton" onClick={()=>setShowReportDiv(false)}>
+            cancel
+            </button>
+
+
+                    </div> </div>}
+ 
+
+            
             
             {/* progress bar */                                                                 }
          
@@ -292,6 +379,10 @@ const handleHours=(event)=>{
             {/* Second Part */                                                                  }
             
             <div className='CourseItems_SecondPart'>
+
+
+
+
                 <div className="CourseItems_SecondPart_views">
 
                     <div className="CourseItems_SecondPart_View_Buttons">
