@@ -329,7 +329,7 @@ router.post("/addNotesToSub/:courseid/:subtitle/:added/:token",async function(re
     
 
     courses[index].notes=notesArr;
-    
+    console.log(courses[0].notes[0].note)
     await Trainee.findOneAndUpdate({id:user.id},{courses:courses});
     res.json("ok")
 
@@ -342,12 +342,13 @@ router.get("/downloadNotes/:courseid/:subtitle/:token",async function(req,res){
     var trainee=await Trainee.findOne({id:user.id})
     var courses=trainee.courses;
     var requiredCourseNotes="";
-    for(var i=0;i<courses;i++){
+    for(var i=0;i<courses.length;i++){
         if(courses[i].id==id){
             requiredCourseNotes=courses[i].notes;
             break;
         }
     }
+
     var requiredNotes="";
     for(var i=0;i<requiredCourseNotes.length;i++){
         if(requiredCourseNotes[i].title==title){

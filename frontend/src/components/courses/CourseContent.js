@@ -201,8 +201,11 @@ const [MyRate,setMyRate] = useState(0)
   if(first===0){
       // getDetails();
       if(location.state.View==="Syllabus"){
-          bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+          bottomRef.current.scrollIntoView({behavior: 'smooth'});
+      }else{
+        window.scrollTo({top:0 ,behavior: 'smooth'});
       }
+      
 
       
   }
@@ -288,14 +291,18 @@ const [MyRate,setMyRate] = useState(0)
       const currency = ['LE','$','UAE','£','€'];
       var CourseHours ="Approx. " + (details[0]? details[0].hours:-1) + " hours to complete"; 
 
-      intial();
+     if(localStorage.getItem("token")){
+       intial();
+
+     }
 
   return (
         
     
     <div className="CourseItems">
-        {!localStorage.getItem("token")?<Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎  ‎ Join Us"]} select="‎ ‎ ‎  ‎  ‎ Join Us" nav={["/","/","/","/signUp"]} scroll={["","",""]} handleCountryNumber={props.handleCountryNumber}   />
-:<Navbar items={["Home","My Courses","All Courses"]}
+        {!localStorage.getItem("token")&&<Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎  ‎ Join Us"]} select="‎ ‎ ‎  ‎  ‎ Join Us" nav={["/","/","/","/signUp"]} scroll={["","",""]} handleCountryNumber={props.handleCountryNumber}   />
+        }
+        {localStorage.getItem("token")&&<Navbar items={["Home","My Courses","All Courses"]}
                handleCountryNumber={handleCountryNumber}
                select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
               }
@@ -330,7 +337,9 @@ const [MyRate,setMyRate] = useState(0)
             {details[0]&&stars(details[0].rating.value).map((num)=> <img className="starImg2" style={{width:'40px'}} src={starImg} alt="."/>)}
         </div>
 
-        <button className="CourseContent_button_Enroll" onClick={()=>setShowPaymentDiv(true)} >
+        <button className="CourseContent_button_Enroll" onClick={localStorage.getItem("token")?
+          ()=>setShowPaymentDiv(true) : ()=>window.scrollTo({top:1000 ,behavior: 'smooth'})
+          } >
                         Enroll now 
                     </button>
                     { 
@@ -362,97 +371,90 @@ const [MyRate,setMyRate] = useState(0)
 
     </div>
 
-         {showPaymentDiv &&   <div className="PaymentsOptionsDivShadow"> <div className="PaymentsOptionsDiv">
-
-         <List className="paymentsOptionList" sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-         <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-          <CreditCardIcon color = "primary"/>
-            </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Credit/Debit card"/>
-        <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} onClick={()=>setShowDivMyCards(true)}>
-        <ArrowForwardIosIcon/>
-                    </IconButton>
-      </ListItem>
-      <Divider variant="fullWidth" />
-
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <PaymentsIcon color="primary"/>
-          {/* <Avatar src={paypalIcon}/> */}
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Other Payment Options"/>
-        <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} >
-        <ArrowForwardIosIcon/>
-                    </IconButton>
-      </ListItem>
-
-     
-      <Divider variant="fullWidth" />
 
 
-    </List>
-    <button className="paymentsOptionCancel" onClick={()=>setShowPaymentDiv(false)}>
-        Cancel
-    </button>
+              {localStorage.getItem("token")&&  <>
+                  {showPaymentDiv &&   <div className="PaymentsOptionsDivShadow"> <div className="PaymentsOptionsDiv">
+
+                  <List className="paymentsOptionList" sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                  <ListItem>
+                  <ListItemAvatar>
+                    <Avatar>
+                    <CreditCardIcon color = "primary"/>
+                      </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary="Credit/Debit card"/>
+                  <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} onClick={()=>setShowDivMyCards(true)}>
+                  <ArrowForwardIosIcon/>
+                              </IconButton>
+                </ListItem>
+                <Divider variant="fullWidth" />
+
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <PaymentsIcon color="primary"/>
+                    {/* <Avatar src={paypalIcon}/> */}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary="Other Payment Options"/>
+                  <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} >
+                  <ArrowForwardIosIcon/>
+                              </IconButton>
+                </ListItem>
+
+              
+                <Divider variant="fullWidth" />
 
 
+              </List>
+              <button className="paymentsOptionCancel" onClick={()=>setShowPaymentDiv(false)}>
+                  Cancel
+              </button>
 
 
+                      </div> </div>}
 
+                      { showDivMyCards && <div className="MycardsToPay">
 
+                      <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} onClick={()=>setShowDivMyCards(false)} >
+                  <ArrowBackIcon fontSize='large'/>
+                              </IconButton>
+                      {allCards&&allCards.map((card,i)=><MyCards id={i}  card={card}/>)}
 
+                      {/* <button className="PayButton" onClick={()=>aler}>
+                        Pay
+                      </button> */}
 
+          <Box sx={{ m: 1, position: 'relative' }}>
+                  <Button
+                    variant="contained"
+                    sx={buttonSx}
+                    disabled={loading}
+                    onClick={handleButtonClick}
+                    className="PayButton"
+                    
+                  >
+                  Pay
+                  </Button>
+                  {loading && (
+                    <CircularProgress
+                      size={24}
+                      sx={{
+                        color: green[500],
+                        position: 'absolute',
+                        top: '50%',
+                        left: '83%',
+                        marginTop: '-12px',
+                        marginLeft: '-12px',
+                      }}
+                    />
+                  )}
+                </Box>
 
+                      </div>}
 
-
-
-
-            </div> </div>}
-
-            { showDivMyCards && <div className="MycardsToPay">
-
-            <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} onClick={()=>setShowDivMyCards(false)} >
-        <ArrowBackIcon fontSize='large'/>
-                    </IconButton>
-            {allCards&&allCards.map((card,i)=><MyCards id={i}  card={card}/>)}
-
-            {/* <button className="PayButton" onClick={()=>aler}>
-              Pay
-            </button> */}
-
-<Box sx={{ m: 1, position: 'relative' }}>
-        <Button
-          variant="contained"
-          sx={buttonSx}
-          disabled={loading}
-          onClick={handleButtonClick}
-          className="PayButton"
-  
-        >
-         Pay
-        </Button>
-        {loading && (
-          <CircularProgress
-            size={24}
-            sx={{
-              color: green[500],
-              position: 'absolute',
-              top: '50%',
-              left: '83%',
-              marginTop: '-12px',
-              marginLeft: '-12px',
-            }}
-          />
-        )}
-      </Box>
-
-            </div>}
-
+                    </>}
    
     {/* Second Part */                                                                  }
 
@@ -484,7 +486,7 @@ const [MyRate,setMyRate] = useState(0)
                             <div id="Subtitles" className="CourseItems_Syllabus_Subtitles">
 
 
-                            <div ref={bottomRef} />
+                            <div />
                             {details[0]&&details[0].subtitles.map((sub,i)=>
                             <Subtitle guest={true} sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i} SubTitleBack={location.state.SubtitleTitle} View="Syllabus" description={sub.description} ></Subtitle>
                             )}
@@ -563,8 +565,10 @@ const [MyRate,setMyRate] = useState(0)
     </div>
 
     {/* Footer */                                                                        }
-    <Footer text={"Excited to Learn more ? Unlock Premium Courses with Learn Pro "} buttonText={"Upgrade Now"}></Footer>
-
+    {localStorage.getItem("token")?
+      <Footer text={"Excited to Learn more ? Unlock Premium Courses with Learn Pro "} buttonText={"Upgrade Now"}></Footer>
+    : <Footer ref={bottomRef}  name="footer" text={"Excited to Learn ? Register now and unlock variety of courses "} buttonText={"Register Now"} course={location.state.id}></Footer>
+    }
     </div>
   )
 }

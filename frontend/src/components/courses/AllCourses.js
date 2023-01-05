@@ -42,15 +42,20 @@ function AllCourses() {
         }
     };
 
-    const [newPriceRatio,setNewPriceRatio]= useState();
-    const handleNewPriceRatio = (x) => {
-      setNewPriceRatio(x);
-    }
+   
     const [maxPriceValue,setMaxPriceValue]=useState(30000);
     const getMaxPriceValue = async () =>{
       setMaxPriceValue ((await getMaxPrice()));
     }
-
+    const [newPriceRatio,setNewPriceRatio]= useState();
+    const handleNewPriceRatio = (x) => {
+      setNewPriceRatio(x);
+    }
+    const [countryNumber,setCountryNumber]=useState();
+    const handleCountryNumber = (x) =>{
+      setCountryNumber(x);
+    }
+    
     const [courses,setCourses] = useState([]);
     const getCourses = async () =>{
       setCourses ((await getAllCourses()));
@@ -79,12 +84,7 @@ function AllCourses() {
       setValue([minPrice,maxPrice]);
     }
 
-    
-    const [countryNumber,setCountryNumber]=useState();
-    const handleCountryNumber = (x) =>{
-      setCountryNumber(x);
-    }
-    
+   
     const valuetext=(value)=> {
       return `${value}°C`;
     }

@@ -71,7 +71,7 @@ export function NewCourse(props) {
 
       return (
 
-    <div className={courseDetails? "newCourse-After":"newCourse"}  >
+    <div className={props.Admin==true?"newCourseAdmin newCourse":(courseDetails? "newCourse-After":"newCourse")}  >
         <div className={courseDetails? "newCourse-After-Content":"newCourse-content"}>
       
          { 
@@ -161,7 +161,7 @@ export function NewCourse(props) {
     }else if(props.inst){
       navigate("/instructorViewCourse",{state:{id:props.course.id,View:"Overview"}})
     }else{
-      navigate("/CourseContent",{state:{id:props.course.id,View:"Overview"}})
+      navigate("/CourseContent",{state:{id:props.course.id,View:""}})
     }
     }}>Open Course</button>
      

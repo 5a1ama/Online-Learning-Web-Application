@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { verify } from '../../API/LoginAPI';
 import { sendEmail } from './../../API/CommonAPI';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 import LoginUser from './../../API/LoginAPI';
 import './Login.css'
 import {Link} from 'react-scroll'
@@ -15,6 +15,7 @@ export {default as Login} from './Login'
 function Login() {
     const[wrongemail,setWrongEmail]=useState(null)
     const[wrongpass,setWrongPass]=useState(null)
+    const location = useLocation();
     const[label,setLabel] = useState(0);
     const handleLabel = (i) => {
         setLabel(i);
@@ -37,7 +38,14 @@ function Login() {
                     navigate("/instructorHome")
                 }
                 if(type==="Trainee"){
-                    navigate("/TraineeHome")
+                    
+                    try{
+
+                        navigate("/CourseContent",{state:{id:location.state.Courseid,View:""}})
+                    }
+                    catch{
+                        navigate("/TraineeHome")
+                    }
                 }
                 if(type==="Admin"){
                     navigate("/AdminControlPanel")
@@ -63,8 +71,6 @@ function Login() {
         
     }
     const handleLogin=(event)=>{
-    //     setWrongEmail(null)
-    //     setWrongPass(null)
     event.preventDefault();
     init();
    }

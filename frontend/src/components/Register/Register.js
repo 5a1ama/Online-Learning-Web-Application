@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import {useNavigate} from "react-router-dom"
+import {useNavigate,useLocation} from "react-router-dom"
 
 import './Register.css'
 import {Link} from 'react-scroll'
@@ -97,13 +97,22 @@ function Register(){
             }
 
    } 
+   const location= useLocation();
+ 
    useEffect(()=>{
     const interval = setInterval(()=>{
         if(success>0){
           setSuccess(success-1);
         }
         if(success==0){
-          navigate('/login')
+          
+          try{
+
+            navigate('/login',{state:{Courseid:location.state.Courseid}})
+          }catch{
+            navigate('/login')
+          }
+          
         }
     },1000);
     return () => clearInterval(interval);
