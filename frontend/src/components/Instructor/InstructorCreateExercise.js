@@ -168,7 +168,7 @@ export function InstructorCreateExercise (){
                                   size="small"
                                   />
             </div>
-            <TextField required={true}
+            {/* <TextField required={true}
             onChange={handleAnswer}
                                 type={"text"}
                                 className='atoofachoicescheckboxes'
@@ -178,8 +178,21 @@ export function InstructorCreateExercise (){
                                  value={answer}
 
                                   size="small"
-                                  />
-            
+                                  /> */}
+            <select  className="answeroptiongrp" required onChange={handleAnswer}>
+                <option>
+                    1
+                </option>
+                <option>
+                    2
+                </option>
+                <option>
+                    3
+                </option>
+                <option>
+                    4
+                </option>
+            </select>
             
             </div>
             <br></br>

@@ -42,3 +42,10 @@ left:87% ;
     left:87% ;
     top: 80%;
 }
+
+.answeroptiongrp{
+    width:20%;
+    height: 2vw;
+    border-radius: 5px;
+
+}

@@ -88,7 +88,7 @@ export const QuestionsDiv=(props)=>{
                                   size="small"
                                   />
             </div>
-            <TextField required={true}
+            {/* <TextField required={true}
             onChange={handleAnswer}
                                 type={"text"}
                                 className='atoofachoicescheckboxes'
@@ -98,7 +98,22 @@ export const QuestionsDiv=(props)=>{
                                  
 
                                   size="small"
-                                  />
+                                  /> */}
+
+<select className="answeroptiongrp" id={"answer"+i} required onChange={handleAnswer}>
+                <option>
+                    1
+                </option>
+                <option>
+                    2
+                </option>
+                <option>
+                    3
+                </option>
+                <option>
+                    4
+                </option>
+            </select>
                                   </div>)}
         </div>)
 }
