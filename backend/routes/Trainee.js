@@ -559,4 +559,5 @@ router.post("/enrollCourse/:courseID/:token",async function(req,res){
     await Trainee.findOneAndUpdate({id:user.id},{courses:traineeCourses})
     res.json("ok")
 })
+
 module.exports = router

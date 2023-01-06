@@ -4,7 +4,15 @@ import { useEffect, useState } from "react";
 export const QuestionsDiv=(props)=>{
     const [array,setArray]=useState(props.arr);
     const[array2,setArray2]=useState(props.arr2);
-    
+    const[array3,setArray3]=useState(props.arr3);
+    const handleAnswer=(event)=>{
+        const temp=array3;
+        var index=Number(event.target.getAttribute("id").substring(6))
+        temp[index]=event.target.value
+        setArray(temp)
+        
+        props.handleAnswer(index,event.target.value)
+    }
     const handleQuestion =(event)=>{
         const temp=array;
         var index=Number(event.target.getAttribute("id").substring(8))
@@ -80,6 +88,17 @@ export const QuestionsDiv=(props)=>{
                                   size="small"
                                   />
             </div>
+            <TextField required={true}
+            onChange={handleAnswer}
+                                type={"text"}
+                                className='atoofachoicescheckboxes'
+                                id={"answer"+i }
+                                label="Solution"
+                                 variant="outlined"
+                                 
+
+                                  size="small"
+                                  />
                                   </div>)}
         </div>)
 }

@@ -6,6 +6,7 @@ const jwt=require("jsonwebtoken")
 const dotenv=require("dotenv")
 dotenv.config();
 const express=require("express");
+const Excercise = require("../Models/Excercise");
 const router=express.Router();
 // @ts-ignore
 router.get("/allTitles",function(req,res){
@@ -196,17 +197,27 @@ router.post("/deleteSubtitle/:id/:subtitle",async function(req,res){
     var subtitle=req.params.subtitle;
     var course=await Course.findOne({id:id});
     var arr=course.subtitles;
+    var arr2=course.excercises;
     var final=[];
     var hours=0
+    var index=0;
+    var finalExcer=[];
     for(var i=0;i<arr.length;i++){
         if(arr[i].title!=subtitle){
             final=final.concat([arr[i]])
         }else{
             hours=arr[i].hours
+            index=arr[i].excerciseId;
+        }
+    }
+    for(var i=0;i<arr2.length;i++){
+        if(arr2[i]!=index){
+            finalExcer=finalExcer.concat([arr2[i]])
         }
     }
     
-    await Course.findOneAndUpdate({id:id},{subtitles:final,hours:course.hours-hours})
+    await Course.findOneAndUpdate({id:id},{subtitles:final,hours:course.hours-hours,excercises:finalExcer})
+    await Excercise.deleteOne({id:index})
     res.json(final)
 })
 router.post("/updateSubtitle/:id/:oldtitle/:title/:hours/:link/:desc",async function(req,res){

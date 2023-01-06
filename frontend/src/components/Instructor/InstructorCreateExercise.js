@@ -8,8 +8,11 @@ import { useEffect, useState } from "react";
 import { QuestionsDiv } from "./QuestionsDiv";
 import { NewDiv } from "./NewDiv";
 import { createExercise } from "../../API/InstructorAPI";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function InstructorCreateExercise (){
+    const location=useLocation()
+    const navigate=useNavigate();
     const [questionsArr,setQuestionsArr]=useState([]);
     const [choicesArr,setChoicesArr]=useState([]);
     const [update,setUpdate]=useState("")
@@ -18,6 +21,24 @@ export function InstructorCreateExercise (){
     const[choice2,setChoice2]=useState("");
     const[choice3,setChoice3]=useState("");
     const[choice4,setChoice4]=useState("");
+    const[answer,setAnswer]=useState("");
+    const[answerArray,setAnswerArray]=useState([])
+    const handleAnswer=(event)=>{
+        setAnswer(event.target.value)
+    }
+    const handleAnswer2=(index,value)=>{
+        var temp=[];
+        for(var i=0;i<answerArray.length;i++){
+            temp.push(answerArray[i])
+        }
+            if(temp.length==0){
+                temp=[value]
+            }else{
+                temp[index]=value
+
+            }
+            setAnswerArray(temp);
+    }
     const handleChoice1=(event)=>{
         setChoice1(event.target.value)
     }
@@ -48,9 +69,11 @@ export function InstructorCreateExercise (){
         
     }
     const handleSubmit=async (event)=>{
-        
-        const x = await createExercise([question].concat(questionsArr),[[choice1,choice2,choice3,choice4]].concat(choicesArr))
+        event.preventDefault();
+        const x = await createExercise([question].concat(questionsArr),[[choice1,choice2,choice3,choice4]].concat(choicesArr),location.state.courseId,
+        location.state.subtitle,[answer].concat(answerArray))
         alert("successfuly created!")
+        navigate("/InstructorViewCourse",{state:{id:location.state.courseId,View:"Syllabus"}})
     }
     
     const handleChoice=(index1,index2,value)=>{
@@ -67,6 +90,7 @@ export function InstructorCreateExercise (){
         
         setQuestionsArr(questionsArr.concat([""]));
         setChoicesArr(choicesArr.concat([["","","",""]]));
+        setAnswerArray(answerArray.concat([""]));
         
     }
     
@@ -144,12 +168,22 @@ export function InstructorCreateExercise (){
                                   size="small"
                                   />
             </div>
-            
+            <TextField required={true}
+            onChange={handleAnswer}
+                                type={"text"}
+                                className='atoofachoicescheckboxes'
+                                id={"choice-" }
+                                label="Solution"
+                                 variant="outlined"
+                                 value={answer}
+
+                                  size="small"
+                                  />
             
             
             </div>
             <br></br>
-<QuestionsDiv arr={questionsArr} arr2={choicesArr} handleQues2={handleQuestion} handleChoice2={handleChoice}/>
+<QuestionsDiv arr={questionsArr} arr2={choicesArr} arr3={answerArray} handleAnswer={handleAnswer2} handleQues2={handleQuestion} handleChoice2={handleChoice}/>
 
     <button className="submitbtnExcer" type="submit">Submit</button>
 
