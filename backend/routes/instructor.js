@@ -331,7 +331,9 @@ router.post("/createExercise/:token/:courseid/:title",async function(req,res){
     console.log(questions)
     console.log(choices)
     
-    var excerciesCount= (await Excercise.find({})).length +1;
+    var excerciesid= ((await Excercise.find({})).map((exe)=>exe.id));
+    excerciesid.sort();
+    var excerciesCount=excerciesid[excerciesid.length-1];
     var object =new Excercise({id:excerciesCount,questions:questions,choices:choices,instructorID:user.id,correctAnswer:answer})
     object.save(async function(error,result){
         var course=await Course.findOne({id:courseid});

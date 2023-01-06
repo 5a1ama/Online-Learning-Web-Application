@@ -117,13 +117,13 @@ router.post("/create/:token",function(req,res){
 })
 router.post("/addCourseSub/:subtitle/:hours/:id",async function(req,res){
     var subtitle=req.params.subtitle
-    var hours=req.params.hours
+    var hours=Number(req.params.hours)
     var id=req.params.id;
     var course=await Course.findOne({id:id});
     
     var subtitles=course.subtitles.concat([{video:[""],lesson:"",description:"",title:subtitle,hours:hours}])
     
-    await Course.findOneAndUpdate({id:id},{subtitles:subtitles,hours:course.hours+hours})
+    await Course.findOneAndUpdate({id:id},{subtitles:subtitles,hours:Number(course.hours)+hours})
     res.json("ok")
 }
 )
@@ -206,7 +206,7 @@ router.post("/deleteSubtitle/:id/:subtitle",async function(req,res){
         if(arr[i].title!=subtitle){
             final=final.concat([arr[i]])
         }else{
-            hours=arr[i].hours
+            hours=Number(arr[i].hours)
             index=arr[i].excerciseId;
         }
     }
@@ -216,7 +216,7 @@ router.post("/deleteSubtitle/:id/:subtitle",async function(req,res){
         }
     }
     
-    await Course.findOneAndUpdate({id:id},{subtitles:final,hours:course.hours-hours,excercises:finalExcer})
+    await Course.findOneAndUpdate({id:id},{subtitles:final,hours:Number(course.hours)-hours,excercises:finalExcer})
     await Excercise.deleteOne({id:index})
     res.json(final)
 })
@@ -224,7 +224,7 @@ router.post("/updateSubtitle/:id/:oldtitle/:title/:hours/:link/:desc",async func
     var id=req.params.id
     var title=req.params.title;
     var oldtitle=req.params.oldtitle
-    var hours=req.params.hours;
+    var hours=Number(req.params.hours);
     var link=req.params.link
     var description=req.params.desc
     var course=await Course.findOne({id:id})
@@ -257,7 +257,7 @@ router.post("/updateSubtitle/:id/:oldtitle/:title/:hours/:link/:desc",async func
         }
     }
     
-    await Course.findOneAndUpdate({id:id},{subtitles:finalSub,hours:course.hours-oldhours+newhours})
+    await Course.findOneAndUpdate({id:id},{subtitles:finalSub,hours:Number(course.hours)-Number(oldhours)+Number(newhours)})
     res.json("ok")
 })
 
