@@ -1,11 +1,13 @@
 import Navbar from "../navbar/Navbar"
 import { TextField } from '@mui/material';
+import{ Button} from "@mui/material";
 
 
 import "./InstructorCreateExercise.css"
 import { useEffect, useState } from "react";
 import { QuestionsDiv } from "./QuestionsDiv";
 import { NewDiv } from "./NewDiv";
+import { createExercise } from "../../API/InstructorAPI";
 
 export function InstructorCreateExercise (){
     const [questionsArr,setQuestionsArr]=useState([]);
@@ -45,7 +47,10 @@ export function InstructorCreateExercise (){
         setQuestion(event.target.value)
         
     }
-    const handleSubmit=()=>{
+    const handleSubmit=async (event)=>{
+        
+        const x = await createExercise([question].concat(questionsArr),[[choice1,choice2,choice3,choice4]].concat(choicesArr))
+        alert("successfuly created!")
     }
     
     const handleChoice=(index1,index2,value)=>{
@@ -78,12 +83,13 @@ export function InstructorCreateExercise (){
         
         +
     </button>
-    <button className="submitbtnExcer" onClick={handleSubmit}>Submit</button>
    {/* {questionsArr.map((questions,i)=><QuestionDiv num={i}  /> )}
    <label>{questionsArr}</label> */}
     {/* <QuestionsDiv handleChoice2={handleChoice} handleQuestion2={handleQuestion} arr1={questionsArr} arr2={choicesArr}  /> */}
+    <form onSubmit={handleSubmit}>
     <div className="questionDiv">
-            <TextField
+            <TextField required
+
                                 id={"question"}
                                 onChange={handleQuestion2}
                                 type={"text"}
@@ -94,7 +100,7 @@ export function InstructorCreateExercise (){
                                   size="small"
                                   />
             <div>
-            <TextField
+            <TextField required
              onChange={handleChoice1}
                                 type={"text"}
                                 className='atoofachoicescheckboxes'
@@ -104,7 +110,7 @@ export function InstructorCreateExercise (){
                                   value={choice1}
                                   size="small"
                                   />
-            <TextField
+            <TextField required
             onChange={handleChoice2}
                                 type={"text"}
                                 className='atoofachoicescheckboxes'
@@ -115,7 +121,7 @@ export function InstructorCreateExercise (){
 
                                   size="small"
                                   />
-            <TextField
+            <TextField required
             onChange={handleChoice3}
                                 type={"text"}
                                 className='atoofachoicescheckboxes'
@@ -126,7 +132,7 @@ export function InstructorCreateExercise (){
 
                                   size="small"
                                   />
-            <TextField
+            <TextField required={true}
             onChange={handleChoice4}
                                 type={"text"}
                                 className='atoofachoicescheckboxes'
@@ -142,8 +148,12 @@ export function InstructorCreateExercise (){
             
             
             </div>
-            
+            <br></br>
 <QuestionsDiv arr={questionsArr} arr2={choicesArr} handleQues2={handleQuestion} handleChoice2={handleChoice}/>
+
+    <button className="submitbtnExcer" type="submit">Submit</button>
+
+    </form>
 </div>
 
         </div>

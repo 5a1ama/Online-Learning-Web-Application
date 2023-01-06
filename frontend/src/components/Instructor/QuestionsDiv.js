@@ -24,7 +24,8 @@ export const QuestionsDiv=(props)=>{
     }
         return (
         <div className="qestionsdiv2main" >
-            {props.arr.map((num,i)=><div className='questionDiv'> <TextField
+            {props.arr.map((num,i)=><div className='questionDiv'> 
+            <TextField required
                                 id={"question"+i}
                                 onChange={handleQuestion}
                                 type={"text"}
@@ -35,7 +36,7 @@ export const QuestionsDiv=(props)=>{
                                   size="small"
                                   /> 
                                   <div>
-            <TextField
+            <TextField required
              onChange={handleChoice}
                                 type={"text"}
                                 className='atoofachoicescheckboxes'
@@ -45,7 +46,7 @@ export const QuestionsDiv=(props)=>{
                                  // value={array2[i][0]}
                                   size="small"
                                   />
-            <TextField
+            <TextField required
             onChange={handleChoice}
                                 type={"text"}
                                 className='atoofachoicescheckboxes'
@@ -56,7 +57,7 @@ export const QuestionsDiv=(props)=>{
 
                                   size="small"
                                   />
-            <TextField
+            <TextField required
             onChange={handleChoice}
                                 type={"text"}
                                 className='atoofachoicescheckboxes'
@@ -67,7 +68,7 @@ export const QuestionsDiv=(props)=>{
 
                                   size="small"
                                   />
-            <TextField
+            <TextField required
             onChange={handleChoice}
                                 type={"text"}
                                 className='atoofachoicescheckboxes'
