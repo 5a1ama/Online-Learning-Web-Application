@@ -1,24 +1,19 @@
 import {Component, React,useEffect,useRef,useState} from 'react'
 import video from '../../assets/ItemsBack.mov';
 import Navbar from './../navbar/Navbar';
-import {  getCourseDetails, isEnrolled } from './../../API/CourseAPI';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import {  getCourseDetails } from './../../API/CourseAPI';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './CourseItems.css';
 import ProgressImg from "../../assets/Progress100.png"
 import Progress from './Progress';
 import starImg from "../../assets/goldStar.png"
 import InstImg from "../../assets/avatar8.png"
-
-import Gift from "../../assets/gift.png"
-import GiftTop from "../../assets/giftTop.png"
-import GiftTop2 from "../../assets/giftTop2.png"
-
 import { GetInstructorName } from './../../API/CourseAPI';
 import Footer from '../footer/Footer';
 import Subtitle from './subtitles/Subtitle';
 import Rating from '@mui/material/Rating';
-import { alertClasses, Avatar } from '@mui/material';
-import { getTraineeCourseProg, myCourseRate, myInstructorRate, rateCourse, requestRefund } from '../../API/TraineeAPI';
+import { Avatar } from '@mui/material';
+import { getTraineeCourseProg, myCourseRate, rateCourse, requestRefund } from '../../API/TraineeAPI';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 
 function CourseItems() {
