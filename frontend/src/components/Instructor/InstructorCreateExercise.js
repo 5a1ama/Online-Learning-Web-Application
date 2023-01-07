@@ -193,7 +193,8 @@ export function InstructorCreateExercise (){
                     4
                 </option>
             </select>
-            
+            <div className="vl33" style={{marginTop:'1rem'}}></div>
+
             </div>
             <br></br>
 <QuestionsDiv arr={questionsArr} arr2={choicesArr} arr3={answerArray} handleAnswer={handleAnswer2} handleQues2={handleQuestion} handleChoice2={handleChoice}/>
