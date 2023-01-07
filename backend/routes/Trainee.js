@@ -296,6 +296,18 @@ router.get("/courseProgress/:token/:id",async function(req,res){
         }
     }
 })
+router.get("/excerciseQuestions/:id",async function(req,res){
+    var id=req.params.id;
+    var excer=await Excercise.findOne({id:id});
+    res.json(excer.questions);
+
+})
+router.get("/excerciseChoices/:id",async function(req,res){
+    var id=req.params.id;
+    var excer=await Excercise.findOne({id:id});
+    res.json(excer.choices);
+
+})
 router.post("/addNotesToSub/:courseid/:subtitle/:added/:token",async function(req,res){
     var id=req.params.courseid;
     var title=req.params.subtitle;
@@ -522,6 +534,12 @@ router.post("/solveExcersice/:token/:courseid/:excerId/:answers",async function(
     }
     await Trainee.findOneAndUpdate({id:user.id},{completedExcercise:completed,courses:courses})
     res.json("ok")
+})
+router.get("/myCompleted/:token",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN)
+    var trainee=await Trainee.findOne({id:user.id})
+    res.json((trainee.completedExcercise).map((excer)=>excer.excerId))
 })
 router.get("/excerciseSolution/:excerId",async function(req,res){
     var excerid=req.params.excerId;

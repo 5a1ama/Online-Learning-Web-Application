@@ -191,6 +191,10 @@ export const solveExcersice=async(courseid,excerId,answers)=>{
     })
     return await result.json();
 }
+export const getMyCompletedExce=async()=>{
+    const result=await fetch(`http://localhost:8000/trainee/myCompleted/${localStorage.getItem("token")}`)
+    return await result.json();
+}
 
 export const getMyExcerciseSolution=async(excerId,courseId)=>{
     const result=await fetch(`http://localhost:8000/trainee/mySolutions/${excerId}/${courseId}/${localStorage.getItem("token")}`)
@@ -201,7 +205,14 @@ export const getExcerciseSolution=async(id)=>{
     const j=await result.json();
     return j
 }
-
+export const getExcerciseQuestions=async(id)=>{
+    const result=await fetch(`http://localhost:8000/Trainee/excerciseQuestions/${id}`)
+    return await result.json();
+}
+export const getExcerciseChoices=async(id)=>{
+    const result=await fetch(`http://localhost:8000/Trainee/excerciseChoices/${id}`)
+    return await result.json();
+}
 export const getTraineeNotes =async(id,sub)=>{
     const result=await fetch(`http://localhost:8000/trainee/myNotes/${id}/${sub}/${localStorage.getItem("token")}`);
     const j=await result.json();

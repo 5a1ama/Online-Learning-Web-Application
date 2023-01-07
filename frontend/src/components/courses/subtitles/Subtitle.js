@@ -7,6 +7,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { addNewSubToCourse, uploadSubtitleVideo } from '../../../API/InstructorAPI';
 import {TextField} from "@mui/material";
 import "./Subtitle.css"
+import { getMyCompletedExce } from '../../../API/TraineeAPI';
 function Subtitle(props) {
     const navigate = useNavigate();
     const[update,setUpdate]=useState(props.sub.video[0])
@@ -22,7 +23,10 @@ function Subtitle(props) {
         //     props.update(2)
         // }
     })
-   
+    const [completedExcercise,setCompletedExcer]=useState([])
+    const getCompleted=async()=>{
+        setCompletedExcer(await getMyCompletedExce())
+    }   
     
     const handleShowDetailsClicked =() =>{
         setShowDetailsClicked(!showDetailsClicked)
@@ -44,9 +48,10 @@ function Subtitle(props) {
     
     if(first==0){
         HandleSyllabus();
+        getCompleted();
         setFirst(1);
     }
-    
+
     return (
         <div className="CourseItems_Syllabus_Subtitles_1">
 
@@ -64,15 +69,15 @@ function Subtitle(props) {
                         {props.sub.video.map((VideoLink,i)=>
                            <div className="DivHover" style={{display:"flex",flexDirection:"row",flexFlow:"auto" ,justifyContent:"space-between" }}>
                               <MdSlowMotionVideo size={25}></MdSlowMotionVideo>
-                                {props.inst && !props.guest&& <a href="/instructorCourseVideo" onClick={()=>navigate("/instructorCourseVideo",{state:{Link:VideoLink,Prop:props.sub,i:i+1,CourseTitle:props.courseTitle,CourseId:props.CourseId}})}><h3 style={{color:"#000"}}>Tutorial {i+1}</h3></a> }
-                                {!props.inst && !props.guest && <a href="/CourseVideo" onClick={()=>navigate("/CourseVideo",{state:{Link:VideoLink,Prop:props.sub,i:i+1,CourseTitle:props.courseTitle,CourseId:props.CourseId}})}><h3 style={{color:"#000"}}>Tutorial {i+1}</h3></a> }
+                                {(props.inst && !props.guest ) && <a href="/instructorCourseVideo" onClick={()=>navigate("/instructorCourseVideo",{state:{Link:VideoLink,Prop:props.sub,i:i+1,CourseTitle:props.courseTitle,CourseId:props.CourseId}})}><h3 style={{color:"#000"}}>Tutorial {i+1}</h3></a> }
+                                {!props.inst && !props.guest  && <a href="/CourseVideo" onClick={()=>navigate("/CourseVideo",{state:{Link:VideoLink,Prop:props.sub,i:i+1,CourseTitle:props.courseTitle,CourseId:props.CourseId}})}><h3 style={{color:"#000"}}>Tutorial {i+1}</h3></a> }
                                
                                 { props.guest && <a href="/"><h3 style={{color:"#aaa"}}>Tutorial {i+1}</h3></a> }
 
                                 {VideoLink!="" && props.inst && !props.guest && <a href="/instructorCourseVideo" ><h3 onClick={()=>navigate("/instructorCourseVideo",{state:{Link:VideoLink,Prop:props.sub,i:i+1,CourseTitle:props.courseTitle,CourseId:props.CourseId}})} style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem">Open Video</h3></a>}
                                 {VideoLink!="" && !props.inst &&  !props.guest && <a href="/CourseVideo" ><h3 onClick={()=>navigate("/CourseVideo",{state:{Link:VideoLink,Prop:props.sub,i:i+1,CourseTitle:props.courseTitle,CourseId:props.CourseId}})} style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem">Open Video</h3></a>}
                                 {VideoLink!="" && props.guest && <a href="/"><h3 style={{color:"rgb(200,200,200)"}} className="CourseItems_OpenItem3">Open Video</h3></a>}
-                                
+                                {VideoLink=="" && !props.inst && !props.guest && <h3 style={{color:"rgb(0,0,0)"}} className="CourseItems_OpenItem3">No Video Yet</h3> }
                                 </div>
                                 
                         )}
@@ -90,11 +95,14 @@ function Subtitle(props) {
                 </div>
                 <div className="DivHover" style={{display:"flex",flexDirection:"row" ,justifyContent:"space-between"}}>
                     <IoIosPaper size={25}></IoIosPaper>
-                    {!props.guest&&<a href="/CourseExercise" ><h3 style={{color:"#000",transform:"translate(-.6rem , 0rem)"}} >Exercise</h3></a>}
+                    {!props.guest&&<a  ><h3 style={{color:"#000",transform:"translate(-.6rem , 0rem)"}} >Exercise</h3></a>}
                     {props.guest&&<a href="/" ><h3 style={{color:"#aaa",transform:"translate(-.6rem , 0rem)"}} >Exercise</h3></a>}
                     
-                    {props.exercise.length> props.index && props.exercise[props.index] && <a href="/InstructorCourseExercise"><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Exercise {props.exercise}</h3></a>}
-                    {props.exercise.length<=props.index && <a href="/InstructorAddExcer"><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Add Excercise</h3></a> }
+                    {props.sub.excerciseId && !completedExcercise.includes(props.sub.excerciseId) && !props.inst && !props.guest &&  <a onClick={()=>navigate("/TraineeCourseExercise",{state:{excerciseId:props.sub.excerciseId,courseId:props.CourseId}})}><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Exercise1</h3></a>}
+                    {props.sub.excerciseId && completedExcercise.includes(props.sub.excerciseId) && !props.inst && !props.guest &&  <a onClick={()=>navigate("/TraineeGradingExercise",{state:{excerciseId:props.sub.excerciseId,courseId:props.CourseId}})}><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Show Grade</h3></a>}
+
+                    {!props.sub.excerciseId && !props.inst && <h3 style={{color:"rgb(0,0,0)"}} className="CourseItems_OpenItem3">No Excercise Yet</h3> }
+                    {!props.sub.excerciseId &&  props.inst && <a href="/InstructorAddExcer"><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Add Excercise</h3></a> }
                 </div>
 
                 </div>
