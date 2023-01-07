@@ -21,6 +21,11 @@ function InstructorSubtitle(props) {
     const [newVideoLink,setNewVideo]=useState("");
     const [newDescription,setDescription]=useState("")
     const handleEdit=(event)=>{
+        //alert(document.getElementById(event.target.getAttribute("id")).style.left)
+        var x=document.getElementsByClassName("EditSubDiv");
+        // for( var i=0;i<x.length;i++){
+        //     x[i].style.display="none"
+        // }
         setEdit(true);
     }
     const handleNewTitle=(event)=>{
@@ -135,7 +140,7 @@ function InstructorSubtitle(props) {
      <div> <button onClick={()=> {  props.handleEdit(props.sub.title,newTitle,newHours,newVideoLink,newDescription); setEdit(false); }} style={{backgroundColor:"green"}}>Confirm</button> <button onClick={()=>setEdit(false)} style={{backgroundColor:"red"}}>Cancel</button></div>
 
                 </div>} 
-            {!edit && <button onClick={handleEdit} className='editbtn'><BiEdit size='30' ></BiEdit></button>}
+            {!edit && <button onClick={handleEdit} id="edit1" className='ISeditbtn'><BiEdit   size='30' > </BiEdit></button>}
             {!edit && <button className='delbtn' onClick={()=>props.handleDelete(props.sub.title)}><BsTrash size='30'></BsTrash></button>}
         </div>
                              )

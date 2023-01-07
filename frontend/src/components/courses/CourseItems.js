@@ -69,9 +69,11 @@ function CourseItems() {
     useEffect(()=>{
         async function getR(){
             const myrate=await myCourseRate(location.state.id)
+            
             if(myrate!="error"){
                 setMyRate(myrate)
             }else{
+                alert(myrate)
                 localStorage.setItem("token",null);
                 localStorage.removeItem("token");
                 localStorage.clear();
@@ -79,7 +81,6 @@ function CourseItems() {
             }
         }
         getR();
-        getTraineeProgress()
       },)    
 
 
@@ -93,6 +94,7 @@ function CourseItems() {
     })
     if(first===0){
         getDetails();
+        getTraineeProgress()
         if(location.state.View==="Syllabus"){
             bottomRef.current?.scrollIntoView({behavior: 'smooth'});
         }
@@ -240,7 +242,7 @@ function CourseItems() {
 
                                     <div ref={bottomRef} />
                                     {details[0]&&details[0].subtitles.map((sub,i)=>
-                                    <Subtitle sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i} SubTitleBack={location.state.SubtitleTitle} View="Syllabus" description={sub.description} ></Subtitle>
+                                    <Subtitle  sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i} SubTitleBack={location.state.SubtitleTitle} View="Syllabus" description={sub.description} ></Subtitle>
                                     )}
 
                                     </div>

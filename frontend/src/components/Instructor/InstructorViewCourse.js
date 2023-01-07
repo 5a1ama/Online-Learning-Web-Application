@@ -432,7 +432,7 @@ const handleSubmitReport = ()=>{
                                     <div id="Subtitles" className="CourseItems_Syllabus_Subtitles">
 
 
-                                    <div ref={bottomRef} />
+                                    <div style={{display:"flex",flexDirection:"column",rowGaP:"3vw"}} ref={bottomRef} />
                                     {details[0]&&details[0].subtitles.map((sub,i)=>
                                     <InstructorSubtitle handleEdit={handleEdit} handleDelete={handleDelete} handleSubmitVid={handleSubmitVid} handleAddVidChange={handleAddVidChange} handleVidDescChange={handleVidDescChange} update={setFirst} index={i}  sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i} SubTitleBack={location.state.SubtitleTitle} View="Syllabus" description={sub.description} ></InstructorSubtitle>
                                     )}

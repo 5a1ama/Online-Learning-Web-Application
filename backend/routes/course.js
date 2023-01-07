@@ -238,7 +238,7 @@ router.post("/updateSubtitle/:id/:oldtitle/:title/:hours/:link/:desc",async func
             finalSub=finalSub.concat([subtitles[i]])
         }else{
             oldhours=subtitles[i].hours
-            var object={video:[""],lesson:"",description:"",title:"",hours:0}
+            var object={video:[subtitles[i].video[0]],lesson:subtitles[i].lesson,description:subtitles[i].description,title:subtitles[i].description,hours:oldhours}
             if(title != "-1"){
                 object.title=title;
             }
