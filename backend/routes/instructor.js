@@ -327,13 +327,21 @@ router.post("/createExercise/:token/:courseid/:title",async function(req,res){
     var choices =req.body.choices;
     var courseid=req.params.courseid
     var answer=req.body.answers;
+    if(!answer){
+        answer=1
+    }
     var title=req.params.title;
     console.log(questions)
     console.log(choices)
     
     var excerciesid= ((await Excercise.find({})).map((exe)=>exe.id));
-    excerciesid.sort();
-    var excerciesCount=excerciesid[excerciesid.length-1];
+    var max=excerciesid[0];
+    for(var i=0;i<excerciesid.length;i++){
+        if(excerciesid[i]>max){
+            max=excerciesid[i]
+        }
+    }
+    var excerciesCount=max+1;
     var object =new Excercise({id:excerciesCount,questions:questions,choices:choices,instructorID:user.id,correctAnswer:answer})
     object.save(async function(error,result){
         var course=await Course.findOne({id:courseid});

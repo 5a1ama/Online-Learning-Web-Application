@@ -1,0 +1,45 @@
+.TGEMainDiv{
+    margin-top: 10%;
+    margin-bottom: 5%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vw;
+    justify-content: center;
+    align-items: center;
+
+}
+.TGEquestionDiv{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5vw;
+    justify-content: center;
+    align-items: center;
+
+}
+.TGELABEL{
+    font-size: 1.5vw;
+}
+.TGELABELgreen{
+    font-size: 1.5vw;
+    width: 2vw;
+    background-color: rgb(7, 216, 7);
+}
+.TGELABELred{
+    font-size: 1.5vw;
+    width: 2vw;
+    background-color: rgb(246, 28, 28);
+}
+
+.TGEChoiceDiv{
+    display:flex;
+    max-width: 100%;
+    flex-wrap: wrap;
+    word-wrap: break-word;
+    flex-direction: row;
+    column-gap: 5vw;
+    justify-content: center;
+    align-items: center;
+}

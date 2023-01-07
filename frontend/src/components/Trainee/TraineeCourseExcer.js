@@ -13,6 +13,7 @@ export function TraineeCourseExcer(){
     const [questions,setQuestion]=useState([]);
     const [choices,setChoices]=useState([]);
     const [solutions,setSolutions]=useState([]);
+    
     const getQuestions=async()=>{
         setQuestion(await getExcerciseQuestions(location.state.excerciseId))
         setChoices(await getExcerciseChoices(location.state.excerciseId))

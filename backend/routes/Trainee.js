@@ -520,7 +520,7 @@ router.post("/solveExcersice/:token/:courseid/:excerId/:answers",async function(
     var user=jwt.verify(token,process.env.ACCESSTOKEN);
     var courseid=req.params.courseid;
     var excerId=req.params.excerId
-    var answers=req.params.answers
+    var answers=req.params.answers.substring(1,req.params.answers.length-1).split(",")
     var trainee=await Trainee.findOne({id:user.id});
     var completed=trainee.completedExcercise
     completed.push({courseId:courseid,excerId:excerId,answers:answers})
@@ -548,6 +548,34 @@ router.get("/excerciseSolution/:excerId",async function(req,res){
     var excercise=await Excercise.findOne({id:excerid});
     res.json(excercise.correctAnswer)
 })
+router.get("/myGrade/:excerid/:token",async function(req,res){
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN)
+    var excerid=req.params.excerid;
+    var excer=await Excercise.findOne({id:excerid})
+    var trainee=await Trainee.findOne({id:user.id})
+    var completed=trainee.completedExcercise;
+    var excerSol=excer.correctAnswer;
+    var excerChoices=excer.choices;
+    var mySol=[];
+    for(var i=0;i<completed.length;i++){
+        if(completed[i].excerId==excerid){
+            mySol=completed[i].answers;
+            break;
+        }
+    }
+    var trueAnswer=0;
+    for(var i=0;i<excerSol.length;i++){
+        
+        if(excerChoices[i][Number(excerSol[i])-1]==mySol[i]){
+            trueAnswer++;
+        }
+    }
+    var arr2=[1,2,3]
+    var x=[...arr2,10,arr2.splice(3,3)]
+    
+    res.json(trueAnswer+"/"+excerSol.length)
+})
 router.get("/mySolutions/:excerId/:courseId/:token",async function(req,res){
     var token=req.params.token;
     var excerid=req.params.excerId;
@@ -561,10 +589,7 @@ router.get("/mySolutions/:excerId/:courseId/:token",async function(req,res){
             break;
         }
     }
-    res.json("");
 })
-
-
 router.post("/enrollCourse/:courseID/:token",async function(req,res){
     var token = req.params.token;
     var user=jwt.verify(token,process.env.ACCESSTOKEN);

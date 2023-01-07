@@ -218,6 +218,10 @@ export const getTraineeNotes =async(id,sub)=>{
     const j=await result.json();
     return j
 }
+export const MyGrade=async(excerid)=>{
+    const result=await fetch(`http://localhost:8000/trainee/myGrade/${excerid}/${localStorage.getItem("token")}`)
+    return await result.json();
+}
 export const courseEnroll = async(courseId)=>{
     const result = await fetch(`http://localhost:8000/Trainee/enrollCourse/${courseId}/${localStorage.getItem("token")}`,{method: "POST",
     headers: {
