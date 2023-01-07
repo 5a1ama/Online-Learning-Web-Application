@@ -15,6 +15,7 @@
     display: flex;
     flex-direction: column;
     row-gap: 0.5vw;
+    flex-grow: 1 1 0;
     justify-content: center;
     align-items: center;
 
@@ -24,12 +25,11 @@
 }
 .TGELABELgreen{
     font-size: 1.5vw;
-    width: 2vw;
     background-color: rgb(7, 216, 7);
 }
 .TGELABELred{
     font-size: 1.5vw;
-    width: 2vw;
+    width: 25%;
     background-color: rgb(246, 28, 28);
 }
 
@@ -42,4 +42,19 @@
     column-gap: 5vw;
     justify-content: center;
     align-items: center;
+}
+.imageTGE{
+    width: 5%;
+    height: 5%;
+}
+.ICONQUEST{
+    display: flex;
+    flex-direction: row;
+    column-gap: 1.5vw;
+    justify-content: center;
+    align-items: center;
+}
+.horizontalLineTGE{
+    border-bottom: 2px solid;
+    width: 40%;
 }

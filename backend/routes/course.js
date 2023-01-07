@@ -92,7 +92,8 @@ router.get("/filter-price/:minprice/:maxprice",async function(req,res){
 })
 router.post("/create/:token",function(req,res){
     var token=req.params.token;
-    var user=jwt.verify(token,process.env.ACCESSTOKEN)
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN)
     var query=Course.find({});
     // @ts-ignore
     var arr=req.body.subtitles;
@@ -114,6 +115,10 @@ router.post("/create/:token",function(req,res){
         })
         res.json(object)
     })
+    }catch{
+        res.json("error")
+    }
+    
 })
 router.post("/addCourseSub/:subtitle/:hours/:id",async function(req,res){
     var subtitle=req.params.subtitle

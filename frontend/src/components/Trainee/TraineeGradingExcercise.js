@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 import { getExcerciseChoices, getExcerciseQuestions, getExcerciseSolution, getMyExcerciseSolution, MyGrade } from "../../API/TraineeAPI";
 import Navbar from "../navbar/Navbar";
 import "./TraineeGradingExcercise.css"
+import correct from "../../assets/correctcheckIcon.png"
+import wrong from "../../assets/wrongcheckIcon.png"
 export function TraineeGradingExercise(){
     const location=useLocation()
     const [countryNumber,setCountryNumber]=useState();
@@ -42,16 +44,24 @@ export function TraineeGradingExercise(){
               handleCountryNumber={handleCountryNumber}
               select="" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
               <div className="TGEMainDiv">
+              <label>{"Grade: "+Grade}</label>
                 {excerciseQuestions.map((question,i)=><div className="TGEquestionDiv">
-                    <label>{"Grade: "+Grade}</label>
-                    <label className="TGELABEL">{question}</label>
+                   <div className="ICONQUEST">
+                   <label className="TGELABEL">{question}</label>
+                   {excerciseChoices[i][Number(excerciseSolution[i])-1]==myanswers[i] && <img className="imageTGE" src={correct}/>}
+                   {excerciseChoices[i][Number(excerciseSolution[i])-1]!=myanswers[i] && <img className="imageTGE" src={wrong}/>}
+                     </div>
+
                     <div className="TGEChoiceDiv">
                         <label className={excerciseChoices[i][0]==excerciseChoices[i][Number(excerciseSolution[i])-1]? "TGELABELgreen":"TGELABEL"}  >{excerciseChoices[i][0]}</label>
                         <label className={excerciseChoices[i][1]==excerciseChoices[i][Number(excerciseSolution[i])-1]? "TGELABELgreen":"TGELABEL"} >{excerciseChoices[i][1]}</label>
                         <label className={excerciseChoices[i][2]==excerciseChoices[i][Number(excerciseSolution[i])-1]? "TGELABELgreen":"TGELABEL"} >{excerciseChoices[i][2]}</label>
                         <label className={excerciseChoices[i][3]==excerciseChoices[i][Number(excerciseSolution[i])-1]? "TGELABELgreen":"TGELABEL"} >{excerciseChoices[i][3]}</label>
                     </div>
-                </div>)}
+                    <div className="horizontalLineTGE"></div>
+                    <br></br>
+                </div>
+                )}
               </div>
         </div>
     )

@@ -21,17 +21,22 @@ router.get("/myCourses/:token",async function(req,res){
     // var user=jwt.verify(req.session.token,process.env.ACCESSTOKEN);
     console.log(123)
     var token=req.params.token;
-    var user=jwt.verify(token,process.env.ACCESSTOKEN)
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN)
     
-    var id=user.id ;
-    var result=await Course.find({});
-    var array=[];
-    for(var i=0;i<result.length;i++){
-        if(result[i].instructors.includes(id)){
-            array=array.concat([result[i]]);
+        var id=user.id ;
+        var result=await Course.find({});
+        var array=[];
+        for(var i=0;i<result.length;i++){
+            if(result[i].instructors.includes(id)){
+                array=array.concat([result[i]]);
+            }
         }
+        res.json(array)
+    
+    }catch{
+        res.json("error")
     }
-    res.json(array)
 })
 router.get("/myCourses-Titles",async function(req,res){
     var id=req.body.id;
@@ -93,26 +98,30 @@ router.get("/myCourses-price-subject/:minprice/:maxprice/:subject/:token",async 
 
     var subject=req.params.subject.toLocaleLowerCase();
     var token=req.params.token;
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN)
     
-    var user=jwt.verify(token,process.env.ACCESSTOKEN)
+        var id=user.id ;
+        var result =await Course.find({});
+        var array=[];
+        for(var i=0;i<result.length;i++){
+            if(result[i].instructors.includes(id)){
+                array=array.concat([result[i]]);
+            }
+        }
+        var final=[];
+        for(var i=0;i<array.length;i++){
+            if((subject!="-1" && array[i].price>=minprice && array[i].price<=maxprice && array[i].subject.includes(subject)) || (subject=="-1" &&
+            array[i].price>=minprice && array[i].price<=maxprice )){
+                final=final.concat([array[i]])
+            }
+        }
+        res.send(final);
     
-    var id=user.id ;
-    var result =await Course.find({});
-    var array=[];
-    for(var i=0;i<result.length;i++){
-        if(result[i].instructors.includes(id)){
-            array=array.concat([result[i]]);
-        }
+    
+    }catch{
+        res.json("error")
     }
-    var final=[];
-    for(var i=0;i<array.length;i++){
-        if((subject!="-1" && array[i].price>=minprice && array[i].price<=maxprice && array[i].subject.includes(subject)) || (subject=="-1" &&
-        array[i].price>=minprice && array[i].price<=maxprice )){
-            final=final.concat([array[i]])
-        }
-    }
-    res.send(final);
-
 
 })
 router.get("/Courses-price-subject/:minprice/:maxprice/:subject",async function(req,res){
@@ -140,29 +149,34 @@ router.get("/Courses-price-subject/:minprice/:maxprice/:subject",async function(
 router.get("/myCourses-search/:search/:token",async function(req,res){
     var search=req.params.search;
     var token=req.params.token;
-    var user=jwt.verify(token,process.env.ACCESSTOKEN)
-    var id=user.id
-    var result =await Course.find({});
-    var array=[];
-    for(var i=0;i<result.length;i++){
-        if(result[i].instructors.includes(id)){
-            
-            array=array.concat([result[i]]);
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN)
+        var id=user.id
+        var result =await Course.find({});
+        var array=[];
+        for(var i=0;i<result.length;i++){
+            if(result[i].instructors.includes(id)){
+                
+                array=array.concat([result[i]]);
+            }
         }
-    }
-    var final=[];
-    var query2=await User.find({Name:search,Job:"Instructor"})
-    id2=-1;
-    if(query2.length!=0){
-      var id2=query2[0].id;
-    }
-    for(var i=0;i<array.length;i++){
-        if(search=="" || array[i].title.toLocaleLowerCase().includes(search.toLocaleLowerCase()) || array[i].subject.includes(search.toLocaleLowerCase()) ||
-        array[i].instructors.includes(id2)){
-            final=final.concat([array[i]])
+        var final=[];
+        var query2=await User.find({Name:search,Job:"Instructor"})
+        id2=-1;
+        if(query2.length!=0){
+          var id2=query2[0].id;
         }
+        for(var i=0;i<array.length;i++){
+            if(search=="" || array[i].title.toLocaleLowerCase().includes(search.toLocaleLowerCase()) || array[i].subject.includes(search.toLocaleLowerCase()) ||
+            array[i].instructors.includes(id2)){
+                final=final.concat([array[i]])
+            }
+        }
+        res.json(final)
+    
+    }catch{
+        res.json("error")
     }
-    res.json(final)
 })
 router.post("/uploadCourseVideo", async function(req,res){
     var token=req.body.token;
@@ -190,13 +204,18 @@ router.post("/uploadSubtitleVideo",async function(req,res){
 })
 router.post("/coursePromotion",async function(req,res){
     var token=req.body.token;
-    var user=jwt.verify(token,process.env.ACCESSTOKEN);
-    var courseid=req.body.courseID;
-    var amount=req.body.amount;
-    var duration=req.body.duration;
-    await Course.findOneAndUpdate({id:courseid},{discount:{amount:amount,EndDate:duration
-    }})
-    res.json("ok")
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
+        var courseid=req.body.courseID;
+        var amount=req.body.amount;
+        var duration=req.body.duration;
+        await Course.findOneAndUpdate({id:courseid},{discount:{amount:amount,EndDate:duration
+        }})
+        res.json("ok")
+    
+    }catch{
+        res.json("error")
+    }
 })
 router.post("/coursePromotion2",async function(req,res){
     var courseid=req.body.courseID;
@@ -207,158 +226,202 @@ router.post("/coursePromotion2",async function(req,res){
 })
 router.get("/getInstructor/:token",async function(req,res){
     var token=req.params.token;
-    var user=jwt.verify(token,process.env.ACCESSTOKEN)
-    var id = user.id
-
-    var query = await Instructor.findOne({id:id})
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN)
+        var id = user.id
     
-    res.json(query)
+        var query = await Instructor.findOne({id:id})
+        
+        res.json(query)
+    
+    }catch{
+        res.json("error")
+    }
 })
 router.post("/updatePass2/:oldPass/:pass/:token",async function(req,res){
     var token=req.params.token;
-
-    var user=jwt.verify(token,process.env.ACCESSTOKEN);
-    var id=user.id;
-    var result=await User.find({id:id ,Password:req.params.oldPass});
-    if(result.length==0){
-        res.json("error")
-
-    }
-    else{
-        await User.findOneAndUpdate({id:id},{Password:req.params.pass});
-        console.log(id  )
-        if(result.Job=="Instructor"){
-         await Instructor.findOneAndUpdate({id:id},{Password:req.params.pass})
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
+        var id=user.id;
+        var result=await User.find({id:id ,Password:req.params.oldPass});
+        if(result.length==0){
+            res.json("error")
     
-        }else if(result.Job=="Trainee"){
-         await Trainee.findOneAndUpdate({id:id},{Password:req.params.pass})
-     
         }
-        res.json("ok")
-
+        else{
+            await User.findOneAndUpdate({id:id},{Password:req.params.pass});
+            console.log(id  )
+            if(result.Job=="Instructor"){
+             await Instructor.findOneAndUpdate({id:id},{Password:req.params.pass})
+        
+            }else if(result.Job=="Trainee"){
+             await Trainee.findOneAndUpdate({id:id},{Password:req.params.pass})
+         
+            }
+            res.json("ok")
+    
+        }
+    
+    }catch{
+        res.json("error")
     }
  
 })
 router.post("/updateName/:name/:token",async function(req,res){
     var token=req.params.token;
-    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
     var id=user.id;
     var newname=req.params.name;
     await Instructor.findOneAndUpdate({id:id},{Name:newname});
     await User.findOneAndUpdate({id:id},{Name:newname});
     res.json("ok")
+    }catch{
+        res.json("error")
+    }
+    
 })
 router.post("/updateBio/:name/:token",async function(req,res){
     var token=req.params.token;
-    var user=jwt.verify(token,process.env.ACCESSTOKEN);
-    var id=user.id;
-    var newname=req.params.name;
-    await Instructor.findOneAndUpdate({id:id},{bio:newname});
-    // await User.findOneAndUpdate({id:id},{bio:newname});
-    res.json("ok")
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
+        var id=user.id;
+        var newname=req.params.name;
+        await Instructor.findOneAndUpdate({id:id},{bio:newname});
+        // await User.findOneAndUpdate({id:id},{bio:newname});
+        res.json("ok")
+    
+    }catch{
+        res.json("error")
+    }
 })
 router.post("/updateEmail/:name/:token",async function(req,res){
     var token=req.params.token;
-    var user=jwt.verify(token,process.env.ACCESSTOKEN);
-    var id=user.id;
-    var newname=req.params.name;
-    await Instructor.findOneAndUpdate({id:id},{Email:newname});
-    await User.findOneAndUpdate({id:id},{Email:newname});
-    res.json("ok")
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
+        var id=user.id;
+        var newname=req.params.name;
+        await Instructor.findOneAndUpdate({id:id},{Email:newname});
+        await User.findOneAndUpdate({id:id},{Email:newname});
+        res.json("ok")    
+    }
+    catch{
+        res.json("error")
+    }
 })
 router.post("/updateSpec/:name/:token",async function(req,res){
     var token=req.params.token;
-    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
     var id=user.id;
     var newname=req.params.name;
     await Instructor.findOneAndUpdate({id:id},{specialization:newname});
     // await User.findOneAndUpdate({id:id},{specialization:newname});
     res.json("ok")
+    }catch{
+        res.json("error")
+    }
+    
 
 })
 router.post("/salaryPerMonth/:year/:month/:token",async function(req,res){
     var trainee=await Trainee.find({})
     var token=req.params.token;
-    var user=jwt.verify(token,process.env.ACCESSTOKEN)
-    var courses=await Course.find({})
-    var instCourses=[]
-    for(var i=0;i<courses.length;i++){
-        if(courses[i].instructors.includes(user.id)){
-            instCourses=instCourses.concat([courses[i]])
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN)
+        var courses=await Course.find({})
+        var instCourses=[]
+        for(var i=0;i<courses.length;i++){
+            if(courses[i].instructors.includes(user.id)){
+                instCourses=instCourses.concat([courses[i]])
+            }
         }
-    }
-    var year=Number(req.params.year)
-    var month=Number(req.params.month)
-    var sum=0
-    for(var i=0;i<trainee.length;i++){
-        var traineeCourses=trainee[i].courses
-        for(var j=0;j<traineeCourses.length;j++){
-            var id=traineeCourses[j].id
-            var date=traineeCourses[j].enrollDate
-            for(var k=0;k<instCourses.length;k++){
-                
-                if(date && instCourses[k].id==id && date.getMonth()+1==month && date.getFullYear()==year){
-                    sum+=instCourses[k].price
+        var year=Number(req.params.year)
+        var month=Number(req.params.month)
+        var sum=0
+        for(var i=0;i<trainee.length;i++){
+            var traineeCourses=trainee[i].courses
+            for(var j=0;j<traineeCourses.length;j++){
+                var id=traineeCourses[j].id
+                var date=traineeCourses[j].enrollDate
+                for(var k=0;k<instCourses.length;k++){
+                    
+                    if(date && instCourses[k].id==id && date.getMonth()+1==month && date.getFullYear()==year){
+                        sum+=instCourses[k].price
+                    }
                 }
             }
         }
+        sum=sum- (sum*10)/100
+        res.json(sum)
+    
+    
+    }catch{
+        res.json("error")
     }
-    sum=sum- (sum*10)/100
-    res.json(sum)
-
 })
 router.post("/followUpReport/:token/:reportId/:question",async function(req,res){
     var token=req.params.token;
     var reportid=req.params.reportId;
     var question=req.params.question;
-    var user=jwt.verify(token,process.env.ACCESSTOKEN);
-    var report=await Reports.findOne({id:reportid});
-    var followup=report.followup;
-    followup=followup.concat([{question:question,answer:""}]);
-    await Reports.findOneAndUpdate({id:reportid},{followup:followup});
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
+        var report=await Reports.findOne({id:reportid});
+        var followup=report.followup;
+        followup=followup.concat([{question:question,answer:""}]);
+        await Reports.findOneAndUpdate({id:reportid},{followup:followup});
+        res.json("ok")
+    }catch{
+        res.json("error")
+    }
 
     
 })
 
 router.post("/createExercise/:token/:courseid/:title",async function(req,res){
     var token=req.params.token;
-    var user=jwt.verify(token,process.env.ACCESSTOKEN);
-    var questions=req.body.questions;
-    var choices =req.body.choices;
-    var courseid=req.params.courseid
-    var answer=req.body.answers;
-    if(!answer){
-        answer=1
-    }
-    var title=req.params.title;
-    console.log(questions)
-    console.log(choices)
-    
-    var excerciesid= ((await Excercise.find({})).map((exe)=>exe.id));
-    var max=excerciesid[0];
-    for(var i=0;i<excerciesid.length;i++){
-        if(excerciesid[i]>max){
-            max=excerciesid[i]
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
+        var questions=req.body.questions;
+        var choices =req.body.choices;
+        var courseid=req.params.courseid
+        var answer=req.body.answers;
+        if(!answer){
+            answer=1
         }
-    }
-    var excerciesCount=max+1;
-    var object =new Excercise({id:excerciesCount,questions:questions,choices:choices,instructorID:user.id,correctAnswer:answer})
-    object.save(async function(error,result){
-        var course=await Course.findOne({id:courseid});
-        var oldExcercise=course.excercises
-        var subtitles=course.subtitles;
-        oldExcercise.push(excerciesCount)
-        for(var i=0;i<subtitles.length;i++){
-            if(subtitles[i].title==title){
-                subtitles[i].excerciseId=excerciesCount;
-                break;
+        var title=req.params.title;
+        console.log(questions)
+        console.log(choices)
+        
+        var excerciesid= ((await Excercise.find({})).map((exe)=>exe.id));
+        var max=excerciesid[0];
+        for(var i=0;i<excerciesid.length;i++){
+            if(excerciesid[i]>max){
+                max=excerciesid[i]
             }
         }
-        await Course.findOneAndUpdate({id:courseid},{subtitles:subtitles,excercises:oldExcercise.concat([excerciesCount])})
-        res.json ("ok")
-
-    })
-
+        var excerciesCount=max+1;
+        var object =new Excercise({id:excerciesCount,questions:questions,choices:choices,instructorID:user.id,correctAnswer:answer})
+        object.save(async function(error,result){
+            var course=await Course.findOne({id:courseid});
+            var oldExcercise=course.excercises
+            var subtitles=course.subtitles;
+            oldExcercise.push(excerciesCount)
+            for(var i=0;i<subtitles.length;i++){
+                if(subtitles[i].title==title){
+                    subtitles[i].excerciseId=excerciesCount;
+                    break;
+                }
+            }
+            await Course.findOneAndUpdate({id:courseid},{subtitles:subtitles,excercises:oldExcercise.concat([excerciesCount])})
+            res.json ("ok")
+    
+        })
+    
+    
+    }catch{
+        res.json("error")
+    }
 
 })
 module.exports=router

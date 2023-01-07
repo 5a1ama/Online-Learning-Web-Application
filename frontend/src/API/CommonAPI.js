@@ -1,4 +1,7 @@
 import axios from 'axios'
+import {useNavigate} from "react-router-dom"
+
+
 export const selectCountry = async (country)=>{
     if(localStorage.getItem("token")){
         const result=await fetch(`http://localhost:8000/selectCountry/${country}/${localStorage.getItem("token")}`,{method: "POST",
@@ -7,6 +10,12 @@ export const selectCountry = async (country)=>{
         }
         });
         const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }
         localStorage.setItem("token",j);
 
     }else{
