@@ -41,6 +41,7 @@ import { InstructorCreateExercise } from './components/Instructor/InstructorCrea
 import { Payment } from './components/Payment';
 import AdminPromotions from './components/Admin/AdminPromotions/AdminPromotions';
 import { TraineeCourseExcer } from './components/Trainee/TraineeCourseExcer';
+import { TraineeGradingExercise } from './components/Trainee/TraineeGradingExcercise';
 
 
 export default function App() {
@@ -97,6 +98,7 @@ export default function App() {
           <Route path="/AdminRefunds" element={<AdminViewRefunds/>}/>
           <Route path="/AdminPromotions" element={<AdminPromotions/>}/>
           <Route path="/TraineeCourseExercise" element={<TraineeCourseExcer/>}/>
+          <Route path="/TraineeGradingExercise" element={<TraineeGradingExercise/>}/>
         </Routes>
       
     

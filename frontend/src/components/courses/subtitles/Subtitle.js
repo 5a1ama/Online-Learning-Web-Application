@@ -98,7 +98,7 @@ function Subtitle(props) {
                     {!props.guest&&<a  ><h3 style={{color:"#000",transform:"translate(-.6rem , 0rem)"}} >Exercise</h3></a>}
                     {props.guest&&<a href="/" ><h3 style={{color:"#aaa",transform:"translate(-.6rem , 0rem)"}} >Exercise</h3></a>}
                     
-                    {props.sub.excerciseId && !completedExcercise.includes(props.sub.excerciseId) && !props.inst && !props.guest &&  <a onClick={()=>navigate("/TraineeCourseExercise",{state:{excerciseId:props.sub.excerciseId,courseId:props.CourseId}})}><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Exercise1</h3></a>}
+                    {props.sub.excerciseId && !completedExcercise.includes(props.sub.excerciseId) && !props.inst && !props.guest &&  <a onClick={()=>navigate("/TraineeCourseExercise",{state:{excerciseId:props.sub.excerciseId,courseId:props.CourseId,title:props.courseTitle}})}><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Exercise1</h3></a>}
                     {props.sub.excerciseId && completedExcercise.includes(props.sub.excerciseId) && !props.inst && !props.guest &&  <a onClick={()=>navigate("/TraineeGradingExercise",{state:{excerciseId:props.sub.excerciseId,courseId:props.CourseId}})}><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Show Grade</h3></a>}
 
                     {!props.sub.excerciseId && !props.inst && <h3 style={{color:"rgb(0,0,0)"}} className="CourseItems_OpenItem3">No Excercise Yet</h3> }

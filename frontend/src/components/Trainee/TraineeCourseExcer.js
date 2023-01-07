@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getExcerciseChoices, getExcerciseQuestions, solveExcersice } from "../../API/TraineeAPI";
+import { getExcerciseChoices, getExcerciseQuestions, getTraineeCourseProg, solveExcersice } from "../../API/TraineeAPI";
 import Navbar from "../navbar/Navbar"
 import "./TraineeCourseExcer.css"
 export function TraineeCourseExcer(){
@@ -39,9 +39,15 @@ export function TraineeCourseExcer(){
         
     }
     const handleSubmit=async ()=>{
-        const x=await solveExcersice(location.state.CourseId,location.state.excerciseId,solutions)
+        const x=await solveExcersice(location.state.courseId,location.state.excerciseId,solutions)
         alert("Answers were submitted")
-        navigate("/CourseItems",{state:{id:location.state.CourseId,View:"Syllabus"}})
+        const y=Number(await getTraineeCourseProg(location.state.courseId));
+        if(y==100){
+            navigate("/TraineeCongrats",{state:{title:location.state.title,courseId:location.state.courseId}});
+        }else{
+            navigate("/CourseItems",{state:{id:location.state.courseId,View:"Syllabus"}})
+
+        }
     }
     getQuestions();
     

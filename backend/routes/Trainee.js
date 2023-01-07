@@ -236,7 +236,8 @@ router.get("/myCourseRate/:ratedID/:token",async function(req,res){
         }
             
     }
-    catch{
+    catch(err){
+        console.log(err.message);
         res.json("error");
     }
 
@@ -289,6 +290,7 @@ router.get("/courseProgress/:token/:id",async function(req,res){
     var courseId=req.params.id
     var trainee=await Trainee.findOne({id:user.id})
     var traineeCourse=trainee.courses;
+    
     for(var i=0;i<traineeCourse.length;i++){
         if(traineeCourse[i].id==courseId){
             res.json(traineeCourse[i].progress)
@@ -527,7 +529,7 @@ router.post("/solveExcersice/:token/:courseid/:excerId/:answers",async function(
     for(var i=0;i<courses.length;i++){
         if(courses[i].id==courseid){
             var total=(await Course.findOne({id:courseid})).excercises.length;
-            progress=completed.length*1.0/total
+            progress=(completed.length*1.0/total)*100
             courses[i].progress=progress;       
             break;
         }

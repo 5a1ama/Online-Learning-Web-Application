@@ -52,6 +52,7 @@ export function TraineeCongrats(){
             <label className="CongratsLable">Congrats you have successfully finished the Course</label>
             <label className="CongratsLable">We have sent you the certificate by mail</label>
             <button onClick={()=>downloadCertificate()}>Download Certificate</button>
+            <button style={{width:"12.5%"}} onClick={()=>(navigate("/CourseItems",{state:{id:location.state.courseId}}))}>Return To Course</button>
 
         </div>
         </div>
