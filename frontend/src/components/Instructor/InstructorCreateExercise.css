@@ -27,7 +27,7 @@
 
 .plusbuttn{
     position:fixed;
-left:85% ;
+left:87% ;
     top: 22%;
 }
 .qestionsdiv2main{
@@ -39,6 +39,13 @@ left:85% ;
 }
 .submitbtnExcer{
     position:fixed;
-    left:85% ;
+    left:87% ;
     top: 80%;
+}
+
+.answeroptiongrp{
+    width:20%;
+    height: 2vw;
+    border-radius: 5px;
+
 }

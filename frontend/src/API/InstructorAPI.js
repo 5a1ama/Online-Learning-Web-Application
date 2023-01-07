@@ -214,12 +214,12 @@ export const followupReport=async(question,id)=>{
     })
 }
 
-export const createExercise=async(questions,choices)=>{
-    const result=await fetch(`http://localhost:8000/instructor/createExercise/${localStorage.getItem("token")}`,{method: "POST",
+export const createExercise=async(questions,choices,courseid,title,answers)=>{
+    const result=await fetch(`http://localhost:8000/instructor/createExercise/${localStorage.getItem("token")}/${courseid}/${title}`,{method: "POST",
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     },
-    body: JSON.stringify({questions:questions,choices:choices})
+    body: JSON.stringify({questions:questions,choices:choices,answers:answers})
 
 
     })

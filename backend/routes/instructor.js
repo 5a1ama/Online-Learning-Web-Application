@@ -320,15 +320,35 @@ router.post("/followUpReport/:token/:reportId/:question",async function(req,res)
     
 })
 
-router.post("/createExercise/:token",async function(req,res){
+router.post("/createExercise/:token/:courseid/:title",async function(req,res){
     var token=req.params.token;
     var user=jwt.verify(token,process.env.ACCESSTOKEN);
     var questions=req.body.questions;
     var choices =req.body.choices;
-    var excerciesCount= (await Excercise.find({})).length +1;
-    var object =new Excercise({id:excerciesCount,questions,choices,correctAnswer,instructorID:user.id})
-    object.save(function(error,result){
+    var courseid=req.params.courseid
+    var answer=req.body.answers;
+    var title=req.params.title;
+    console.log(questions)
+    console.log(choices)
+    
+    var excerciesid= ((await Excercise.find({})).map((exe)=>exe.id));
+    excerciesid.sort();
+    var excerciesCount=excerciesid[excerciesid.length-1];
+    var object =new Excercise({id:excerciesCount,questions:questions,choices:choices,instructorID:user.id,correctAnswer:answer})
+    object.save(async function(error,result){
+        var course=await Course.findOne({id:courseid});
+        var oldExcercise=course.excercises
+        var subtitles=course.subtitles;
+        oldExcercise.push(excerciesCount)
+        for(var i=0;i<subtitles.length;i++){
+            if(subtitles[i].title==title){
+                subtitles[i].excerciseId=excerciesCount;
+                break;
+            }
+        }
+        await Course.findOneAndUpdate({id:courseid},{subtitles:subtitles,excercises:oldExcercise.concat([excerciesCount])})
         res.json ("ok")
+
     })
 
 
