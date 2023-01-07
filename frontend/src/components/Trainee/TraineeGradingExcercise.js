@@ -8,9 +8,10 @@ export function TraineeGradingExercise(){
       }
     return(
         <div>
-                                <Navbar items={["Home","My Courses","All Courses"]} 
+             <Navbar items={["Home","My Courses","All Courses"]} 
               handleCountryNumber={handleCountryNumber}
               select="" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
+              
 
         </div>
     )
