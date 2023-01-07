@@ -265,14 +265,16 @@ router.get("/PopularCourses",async function(req,res){
     var result=await Course.find({});
     var enrollArr=result.map((course)=>course.enrolledStudents)
     enrollArr=enrollArr.sort();
+
     var final=enrollArr.splice(enrollArr.length-3,enrollArr.length);
+
     var finalCourses=[];
-    for(var i=0;i<final.length;i++){
-        var course=await Course.find({enrolledStudents:final[i]})
+    let uniqueEnrolled = [...new Set(final)];
+    for(var i=0;i<uniqueEnrolled.length;i++){
+        var course=await Course.find({enrolledStudents:uniqueEnrolled[i]})
+        if(!finalCourses.includes(course))
         finalCourses=finalCourses.concat(course)
     }
-  console.log(finalCourses)
-  console.log("-------------------------hazeoum -----------------------------")
     res.json(finalCourses)
 })
 router.get("/allPromoted", async function(req,res){
