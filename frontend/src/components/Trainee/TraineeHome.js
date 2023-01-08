@@ -41,7 +41,7 @@ export function TraineeHome (){
 
   useEffect(()=>{
       async function getCoursess(){
-        // setCourses ((await getTraineeCourses(localStorage.getItem("token"))).slice(0,1));
+        setCourses ((await getTraineeCourses(localStorage.getItem("token"))).slice(0,1));
       }
       getCoursess();
     },)

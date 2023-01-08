@@ -29,9 +29,9 @@ function tokenVerify(req,res,next){
    
 }
 
-router.get("/TraineeMyCourse/:Token",tokenVerify,async function(req,res){
+router.get("/TraineeMyCourse/:token",tokenVerify,async function(req,res){
 
-    var Token = req.params.Token
+    var Token = req.params.token
     const user = jwt.verify(Token,process.env.ACCESSTOKEN)
     var Id = user.id
     var query = await Trainee.findOne({id:Id})
