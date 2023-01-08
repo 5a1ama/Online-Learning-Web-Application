@@ -489,7 +489,7 @@ const handleSubmitReport = ()=>{
             </div>
 
             {/* Footer */                                                                        }
-            <Footer text={"Excited to Learn more ? Unlock Premium Courses with Learn Pro "} buttonText={"Upgrade Now"}></Footer>
+             <Footer inst = {true} text={"Excited to Learn more ? Unlock Premium Courses with Learn Pro "} buttonText={"Upgrade Now"}></Footer>
 
     </div>
   )

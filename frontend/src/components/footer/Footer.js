@@ -15,10 +15,10 @@ function Footer (props) {
 
     <div className="gpt3__footer-btn">
 {
-     props.course? 
+     props.course && 
      <button onClick={()=>navigate("/signUp",{state:{Courseid:props.course}})}>{props.buttonText}</button>
-     :
-     <button onClick={()=>navigate("/signUp")}>{props.buttonText}</button>
+    //  :
+    //  <button onClick={()=>navigate("/signUp")}>{props.buttonText}</button>
     }
     
     </div>

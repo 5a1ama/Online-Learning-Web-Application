@@ -124,6 +124,7 @@ export const downloadNotes=async(id,title)=>{
     link.href = fileURL;
     link.download = "certificate.pdf";
     link.click();
+    deleteAfterDownload(title);
 });
 }
 export const deleteAfterDownload=async(title)=>{

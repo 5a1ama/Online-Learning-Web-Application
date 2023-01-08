@@ -40,6 +40,7 @@ import { TraineePayments } from './components/Trainee/TraineePayments';
 import { InstructorCreateExercise } from './components/Instructor/InstructorCreateExercise';
 import { Payment } from './components/Payment';
 import AdminPromotions from './components/Admin/AdminPromotions/AdminPromotions';
+import { MyInstructorReports } from './components/Instructor/instructorReports';
 
 
 export default function App() {
@@ -75,8 +76,10 @@ export default function App() {
           <Route path="/InstAllCourses" element={<InstAllCourses handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/addCourse" element={<AddCourse handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
           <Route path="/InstructorAddExcer" element={<InstructorCreateExercise/>}/>
-          <Route path="/pay" element={<Payment/>}/>
+          <Route path="/instructorReport" element={<MyInstructorReports handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+
           
+          <Route path="/pay" element={<Payment/>}/>
           <Route path="/TraineeVieWInstructor" element={<TraineeViewInstructor handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/TraineeHome" element={<TraineeHome handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/TraineeCourses" element={<TraineeCourses handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/> 

@@ -48,7 +48,7 @@ router.post("/deleteCard/:cardNumber/:token",async function(req,res){
     var trainee=await Trainee.findOne({id:user.id})
     var cards = trainee.creditCards
     var newCards = []
-    console.log(req.params.cardNumber)
+    // console.log(req.params.cardNumber)
     for(var i= 0 ; i<cards.length ;i++){
         if(cards[i].cardNumber!=req.params.cardNumber ){
             newCards.push(cards[i])
@@ -93,7 +93,7 @@ router.get("/FilterMyCourse/:token/:minprice/:maxprice/:subject",async function(
             final2=final2.concat([final[i]])
         }
     }
-    console.log(final2)
+    // console.log(final2)
     res.json(final2)
 
 })
@@ -276,7 +276,7 @@ router.post("/addCreditCard",async function(req,res){
     var cardHolder=req.body.cardHolder
     var cardDate=req.body.cardDate
     var trainee=await Trainee.findOne({id:id})
-    console.log(cardNum)
+    // console.log(cardNum)
     var credits=trainee.creditCards;
     credits.push({cardHolder:cardHolder,cardNumber:cardNum,cardDate:cardDate,cardCvv:cardCvv})
     await Trainee.findOneAndUpdate({id:id},{creditCards:credits})
@@ -322,14 +322,14 @@ router.post("/addNotesToSub/:courseid/:subtitle/:added/:token",async function(re
             break;
         }
     }
-    console.log(notesArr+" "+found)
+    // console.log(notesArr+" "+found)
     if(!found){
         notesArr=notesArr.concat([{title:title,note:added}])
     }
     
 
     courses[index].notes=notesArr;
-    console.log(courses[0].notes[0].note)
+    // console.log(courses[0].notes[0].note)
     await Trainee.findOneAndUpdate({id:user.id},{courses:courses});
     res.json("ok")
 
@@ -400,9 +400,9 @@ router.get("/deleteDownloadedFile/:filename",function(req,res){
     try {
         fs.unlinkSync(filename);
       
-        console.log("Delete File successfully.");
+        // console.log("Delete File successfully.");
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
 })
 router.post("/reportProblem/:token/:courseId/:reporttype/:details",async function(req,res){
