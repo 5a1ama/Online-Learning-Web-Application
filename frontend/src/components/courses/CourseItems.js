@@ -12,7 +12,9 @@ import { GetInstructorName } from './../../API/CourseAPI';
 import Footer from '../footer/Footer';
 import Subtitle from './subtitles/Subtitle';
 import Rating from '@mui/material/Rating';
+import Divider from '@mui/material/Divider';
 import { Avatar, TextField } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
 import { getTraineeCourseProg, myCourseRate, rateCourse, requestRefund } from '../../API/TraineeAPI';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import { addReport } from '../../API/InstructorAPI';
@@ -107,7 +109,36 @@ function CourseItems() {
             return false;
         }
     }
+
+    const Issues = [
+        {
+            value: 'technical',
+            label: 'Technical',
+        },
+        {
+            value: 'financial',
+            label: 'Financial',
+        },
+        {
+            value: 'other',
+            label: 'Other',
+        },
+        ];
     const [instNames,setInstNames] = useState([])
+    const [issueType,setIssueType] = useState("");
+    const [issuewords,setIssueWords] = useState("");
+
+    const [showReportDiv ,setShowReportDiv] = useState(false);
+    const handleChangeIssueType = (event)=>{
+        setIssueType(event.target.value)
+    }
+    const handleChangeIssueWords = (event)=>{
+        setIssueWords(event.target.value)
+    }
+    const handleSubmitReport = ()=>{
+        addReport(location.state.id,issueType,issuewords)
+        setShowReportDiv(false)
+    }
 
     const handleInstNames = async () => {
         var names = [];
@@ -183,6 +214,47 @@ function CourseItems() {
 
 
             </div>
+
+
+            {showReportDiv&& <div className="reportTraineeDivShadow">
+                 <div className="reportTraineeDiv">
+                            <h1 className="ReportLabel"> Report</h1>
+                            <Divider className='DividerCard' variant="middle"/>
+
+                            <TextField
+                            className="IssusList-trainee"
+                            id="outlined-select-currency"
+                            select
+                            label="Your Issue"
+                            sx={{width:'70%'}}
+                            helperText="Please select your Issue"
+                            onChange={handleChangeIssueType}
+                            >
+                            {Issues.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                            </MenuItem>
+                            ))}
+                            </TextField>
+
+                            <TextField
+                            className="IssueTextField-trainee"
+                            sx={{width:'70%'}}
+                            id="outlined-multiline-flexible"
+                            label="Your Issue"
+                            multiline
+                            maxRows={7}
+                            onChange={handleChangeIssueWords}
+                            />
+
+                    <button className="submitReportButton-trainee" onClick={handleSubmitReport}>
+                        Submit
+                    </button>
+                    <button className="cancelReportButton-trainee" onClick={()=>setShowReportDiv(false)}>
+                        cancel
+                        </button>
+                    </div> 
+                        </div>}
 
 
 

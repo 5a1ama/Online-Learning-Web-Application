@@ -129,6 +129,8 @@ export function TraineeProfile(){
        </Avatar>
        <h5 className="instructorname">{Trainee && Trainee.Name}</h5>
           <h5 className="instructorEmail">{Trainee && Trainee.Email}</h5>
+
+        
           <button  className=''  onClick={()=> setShowDiv2(true)}>
                         Change Password
                     </button>
@@ -139,24 +141,24 @@ export function TraineeProfile(){
             <button className="TraineeWallet" onClick={() => setShowDiv3(true)}>
                 wallet
             </button>
+
+            <div className='walletDiv'> 
+
+                <h1 className="accountBalance">
+                Account balance :
+                </h1>
+
+                <h2 className="ammount">
+                    {traineeWallet} 
+                </h2>
+
+
+                </div>
     
 
         </div>
 
-        {showDiv2 && <div className='walletDiv'> 
-
-        <h1>
-            account balance
-        </h1>
-
-        <h2>
-            {traineeWallet}
-        </h2>
-
-    
-
-        
-        </div>}
+       
 
         <div className='editTraineedata'>
                
@@ -183,6 +185,9 @@ export function TraineeProfile(){
                     
                 </div>
                 </div>}
+
+               
+
                {showDiv1&& <div className="TraineeEditData2">
                <TextField id="filled-basic" 
                  defaultValue={Trainee && Trainee.Name} 
