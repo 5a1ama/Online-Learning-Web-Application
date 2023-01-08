@@ -139,16 +139,43 @@ export const rateInstructor=async(instId,rate)=>{
 }
 export const rateCourse=async(courseId,rate)=>{
     var result=await fetch(`http://localhost:8000/trainee/rateCourse/${rate}/${courseId}/${localStorage.getItem("token")}`)
-    return await result.json();
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const myInstructorRate = async(ratedID)=>{
     var result = await fetch(`http://localhost:8000/trainee/myInstructorRate/${ratedID}/${localStorage.getItem('token')}`)
-    return await result.json();
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
     
 }
 export const myCourseRate = async(ratedID)=>{
     var result = await fetch(`http://localhost:8000/trainee/myCourseRate/${ratedID}/${localStorage.getItem('token')}`)
-    return await result.json();
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
     
 }
 export const addCreditCard=async(cardNumber,cardHolder,cardCvv,cardDate)=>{
@@ -161,11 +188,29 @@ export const addCreditCard=async(cardNumber,cardHolder,cardCvv,cardDate)=>{
             cardHolder:cardHolder,cardNumber:cardNumber,cardDate:cardDate,cardCvv:cardCvv,token:localStorage.getItem("token")
         })
       })
-      return await result.json()
+      const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const getAllCards=async()=>{
     const result=await fetch(`http://localhost:8000/trainee/myCards/${localStorage.getItem("token")}`)
-    return await result.json();
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const deleteCard=async(cardNumber)=>{
     const result = await fetch(`http://localhost:8000/trainee/deleteCard/${cardNumber}/${localStorage.getItem("token")}`,{
@@ -174,11 +219,29 @@ export const deleteCard=async(cardNumber)=>{
             "Content-type": "application/json; charset=UTF-8"
         },
       })
-    return await result.json();
+      const j=await result.json();
+      if(j=="error"){
+
+          alert("you must login first")
+          window.location.href="/login"
+
+      }else{
+        return j
+
+      }
 }
 export const getTraineeCourseProg=async(courseId)=>{
     const result=await fetch(`http://localhost:8000/trainee/courseProgress/${localStorage.getItem("token")}/${courseId}`)
-    return await result.json()
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 
 }
 export const addNotes=async(id,title,notes)=>{
@@ -187,7 +250,16 @@ export const addNotes=async(id,title,notes)=>{
         "Content-type": "application/json; charset=UTF-8"
     }
     })
-    return await result.json();
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const downloadNotes=async(id,title)=>{
     fetch(`http://localhost:8000/trainee/downloadNotes/${id}/${title}/${localStorage.getItem("token")}`).then(resp => resp.arrayBuffer()).then(resp => {
@@ -231,7 +303,16 @@ export const getRefund=async(traineeId,id)=>{
         "Content-type": "application/json; charset=UTF-8"
     }
     })
-    return await result.json()
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const rejectMyRefund=async(traineeId,id)=>{
     const result=await fetch(`http://localhost:8000/trainee/removeRefund/${traineeId}/${id}`,{method: "POST",
@@ -239,7 +320,16 @@ export const rejectMyRefund=async(traineeId,id)=>{
         "Content-type": "application/json; charset=UTF-8"
     }
     })
-    return await result.json()
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const requestRefund=async(id)=>{
     const result=await fetch(`http://localhost:8000/trainee/requestRefund/${localStorage.getItem("token")}/${id}`,{method: "POST",
@@ -247,11 +337,29 @@ export const requestRefund=async(id)=>{
         "Content-type": "application/json; charset=UTF-8"
     }
     })
-    return await result.json();
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const showWallet=async()=>{
     const result=await fetch(`http://localhost:8000/trainee/viewWallet/${localStorage.getItem("token")}`);
-    return await result.json();
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const requestAccessToCourse=async(courseid)=>{
     const result=await fetch(`http://localhost:8000/trainee/requestAccessToCourse/${localStorage.getItem("token")}/${courseid}`,{method: "POST",
@@ -259,7 +367,16 @@ export const requestAccessToCourse=async(courseid)=>{
         "Content-type": "application/json; charset=UTF-8"
     }
     })
-    return await result.json();
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const solveExcersice=async(courseid,excerId,answers)=>{
     const result=await fetch(`http://localhost:8000/trainee/solveExcersice/${localStorage.getItem("token")}/${courseid}/${excerId}/${answers}`,{method: "POST",
@@ -267,38 +384,109 @@ export const solveExcersice=async(courseid,excerId,answers)=>{
         "Content-type": "application/json; charset=UTF-8"
     }
     })
-    return await result.json();
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const getMyCompletedExce=async()=>{
     const result=await fetch(`http://localhost:8000/trainee/myCompleted/${localStorage.getItem("token")}`)
-    return await result.json();
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 
 export const getMyExcerciseSolution=async(excerId,courseId)=>{
     const result=await fetch(`http://localhost:8000/trainee/mySolutions/${excerId}/${courseId}/${localStorage.getItem("token")}`)
-    return await result.json();
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const getExcerciseSolution=async(id)=>{
     const result=await fetch(`http://localhost:8000/Trainee/excerciseSolution/${id}`);
     const j=await result.json();
-    return j
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
+    
 }
 export const getExcerciseQuestions=async(id)=>{
     const result=await fetch(`http://localhost:8000/Trainee/excerciseQuestions/${id}`)
-    return await result.json();
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const getExcerciseChoices=async(id)=>{
     const result=await fetch(`http://localhost:8000/Trainee/excerciseChoices/${id}`)
-    return await result.json();
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const getTraineeNotes =async(id,sub)=>{
     const result=await fetch(`http://localhost:8000/trainee/myNotes/${id}/${sub}/${localStorage.getItem("token")}`);
     const j=await result.json();
-    return j
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const MyGrade=async(excerid)=>{
     const result=await fetch(`http://localhost:8000/trainee/myGrade/${excerid}/${localStorage.getItem("token")}`)
-    return await result.json();
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const courseEnroll = async(courseId)=>{
     const result = await fetch(`http://localhost:8000/Trainee/enrollCourse/${courseId}/${localStorage.getItem("token")}`,{method: "POST",
@@ -307,5 +495,13 @@ export const courseEnroll = async(courseId)=>{
     }
     })
     const j=await result.json();
-    return j
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }

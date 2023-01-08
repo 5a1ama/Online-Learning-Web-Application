@@ -425,4 +425,31 @@ router.post("/createExercise/:token/:courseid/:title",async function(req,res){
     }
 
 })
+router.post("/updateExercise/:token/:courseid/:title/:excerid",async function(req,res){
+    var token=req.params.token;
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
+        var questions=req.body.questions;
+        var choices =req.body.choices;
+        var answer=req.body.answers;
+        if(!answer){
+            answer=1
+        }
+        console.log(questions)
+        console.log(choices)
+        
+        var excerciesid= req.params.excerid;
+       
+        await Excercise.findOneAndUpdate({id:excerciesid},{questions:questions,choices:choices,correctAnswer:answer})
+            res.json ("ok")
+    
+        
+    
+    
+    }catch{
+        res.json("error")
+    }
+
+})
+
 module.exports=router

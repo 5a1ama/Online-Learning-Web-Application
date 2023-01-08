@@ -404,3 +404,23 @@ export const createExercise=async(questions,choices,courseid,title,answers)=>{
 
         }
 }
+export const updateExercise=async(questions,choices,courseid,title,answers,excerid)=>{
+    const result=await fetch(`http://localhost:8000/instructor/updateExercise/${localStorage.getItem("token")}/${courseid}/${title}/${excerid}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    },
+    body: JSON.stringify({questions:questions,choices:choices,answers:answers})
+
+
+    })
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
+}
