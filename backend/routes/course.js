@@ -10,7 +10,7 @@ const Excercise = require("../Models/Excercise");
 const router=express.Router();
 // @ts-ignore
 router.get("/allTitles",function(req,res){
-    var query=Course.find({});
+    var query=Course.find({published:true});
     // @ts-ignore
     query.exec(function(err,result){
         res.json(result.map((course)=>course.title))
@@ -18,7 +18,7 @@ router.get("/allTitles",function(req,res){
 })
 router.get("/getMaxPrice", async function(req,res)
 {
-    var query= await Course.find({})
+    var query= await Course.find({published:true})
     var max = 0;
     for (var i = 0 ; i<query.length; i++){
         if(query[i].price>max){
@@ -30,7 +30,7 @@ router.get("/getMaxPrice", async function(req,res)
 // @ts-ignore
 router.get("/",function(req,res){
     
-    var query=Course.find({});
+    var query=Course.find({published:true});
     // @ts-ignore
     query.exec(function(err,result){
         
@@ -40,7 +40,7 @@ router.get("/",function(req,res){
 router.get("/filter-sub/:ratings/:subject",async function(req,res){
     var rating=req.params.ratings;
     var subject=req.params.subject;
-    var query= await Course.find({});
+    var query= await Course.find({published:true});
     var array=[];
     for(var i=0;i<query.length;i++){
 
@@ -65,7 +65,7 @@ router.get("/filter-sub/:ratings/:subject",async function(req,res){
 router.get("/filter-price/:minprice/:maxprice",async function(req,res){
     var minprice=req.params.minprice;
     var maxprice=req.params.maxprice;
-    var query=await Course.find({})
+    var query=await Course.find({published:true})
     
     // @ts-ignore
     var array=[];
@@ -262,7 +262,7 @@ router.post("/updateSubtitle/:id/:oldtitle/:title/:hours/:link/:desc",async func
 })
 
 router.get("/PopularCourses",async function(req,res){
-    var result=await Course.find({});
+    var result=await Course.find({published:true});
     var enrollArr=result.map((course)=>course.enrolledStudents)
     enrollArr=enrollArr.sort();
 
@@ -271,7 +271,7 @@ router.get("/PopularCourses",async function(req,res){
     var finalCourses=[];
     let uniqueEnrolled = [...new Set(final)];
     for(var i=0;i<uniqueEnrolled.length;i++){
-        var course=await Course.find({enrolledStudents:uniqueEnrolled[i]})
+        var course=await Course.find({enrolledStudents:uniqueEnrolled[i],published:true})
         if(!finalCourses.includes(course))
         finalCourses=finalCourses.concat(course)
     }

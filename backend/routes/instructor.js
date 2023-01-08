@@ -19,7 +19,7 @@ router.get("/getinstructorTraineeDetails/:id",async function(req,res){
 router.get("/myCourses/:token",async function(req,res){
     // @ts-ignore
     // var user=jwt.verify(req.session.token,process.env.ACCESSTOKEN);
-    console.log(123)
+
     var token=req.params.token;
     var user=jwt.verify(token,process.env.ACCESSTOKEN)
     

@@ -1,13 +1,14 @@
 .ISeditbtn{
     position: relative;
     height: 2.5vw;
-    left:96%;
-    top:-5vw;
+    left:100%;
+    top:2.5vw;
     background-color: transparent;
     color:rgba(30,30,30);
 }
 .CourseItems_Syllabus_Subtitles_1{
-    margin-bottom: 3vw;
+    margin-bottom: 0vw;
+    position: relative;
 }
 .ISeditbtn:hover{
     background-color: transparent;
@@ -16,10 +17,10 @@
 } 
 
 .delbtn{
-    position: relative;
+    position: absolute;
     height: 2.5vw;
-    left:97%;
-    top:-5vw;
+    top:40px;
+    left:90%;
     background-color: transparent;
     color:rgb(228, 0, 0);
 }
@@ -35,7 +36,7 @@
   justify-content: center;
   align-items: center;
   row-gap: 2vw;
-  position: relative;
+  position: absolute;
   width: fit-content;
   left:75%;
   top:0%;
@@ -49,4 +50,34 @@
     background: transparent;
     color:rgb(0, 140, 255);
     
+}
+
+.textBox_Instructor{
+    height:20px;
+    width:200px;
+    border-radius:10px ;
+    padding: 1rem;
+    margin: 0.5rem;
+    border:1px solid ;
+}
+.textBox_Instructor:focus{
+    border:1.5px solid
+
+}
+.addVideo_Inst{
+    height:40px;
+    width: 100px;
+    text-align: center;
+    justify-items: center;
+    align-items: center;
+    padding: 0rem 0rem;
+}
+.BiEdit{
+    transform: translate(0px,4px);
+    color:#888
+}
+.BiEdit:hover{
+    cursor: pointer;
+    color:#555;
+    transition: 0.1s;
 }

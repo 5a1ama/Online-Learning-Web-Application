@@ -155,3 +155,104 @@
   row-gap: 0.5vw;
 
 }
+.SettingButton{
+  position: absolute;
+  top:-10%;
+  left:96%;
+}
+.SettingButton:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+  filter: drop-shadow(0px 4px 2px #1c1c1c3c);
+  transition: 1s
+}
+.newSubtitleInput{
+  width: 50%;
+  height:50%;
+  position: absolute;
+  top:5vh;
+  border:none;
+  padding: 1rem;
+  color:var(--primary-light);
+  font-weight:bolder;
+  font-size: 30px;
+  background-color: rgba(231, 231, 231, 0.5);
+  border-radius: 10px;
+
+}
+.newSubtitleInput:focus{
+  outline: none;
+}
+.newSubtitleInput::placeholder{
+  color:var(--primary-light);
+
+  font-size: 30px;
+}
+
+.newSubtitleHoursInput{
+  width: 30%;
+  height:50%;
+  position: absolute;
+  top:5vh;
+  left:70vh;
+  border:none;
+  padding: 1rem;
+  color:var(--primary-light);
+  font-weight:bolder;
+  font-size: 30px;
+  background-color: rgba(231, 231, 231, 0.5);
+  border-radius: 10px;
+
+}
+.newSubtitleHoursInput:focus{
+  outline: none;
+}
+
+.InstCourseItems_Syllabus_Subtitles_Content {
+  height: 15vh;
+  border-bottom: 2px solid rgb(206, 206, 206);
+  width: 115vh;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+.InstCourseItems_Syllabus_Subtitles_Content h2{
+color:var(--primary-light)
+}
+
+.InstCourseItems_Syllabus_Subtitles_Content:hover{
+background-color:rgb(232, 232, 232);
+  cursor: pointer;
+}
+.InstCourseItems_Syllabus_Subtitles_ContentNoHover {
+  height: 15vh;
+  border-bottom: 2px solid rgb(206, 206, 206);
+  width: 115vh;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+.InstCourseItems_Syllabus_Subtitles_ContentNoHover h2{
+color:var(--primary-light)
+}
+.Instructor_checkmark1{
+
+  cursor: pointer;
+  position:absolute;
+  top:48%;
+  left:52%;
+}
+.Instructor_checkmark1:hover{
+  cursor: pointer;
+  transition: 0.2s;
+}
+.Instructor_checkmark2{
+  cursor: pointer;
+  position:absolute;
+  top:48%;
+  left:95%;
+}
+.Instructor_checkmark2:hover{
+  cursor: pointer;
+  transition: 0.2s;
+}
