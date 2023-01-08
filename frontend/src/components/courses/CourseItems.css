@@ -338,3 +338,107 @@
 }
 
 
+.ReportButton{
+
+    position:absolute;
+    left:84%;
+    top: 390px;
+    width: 200px;
+
+}
+
+.problemDiv{
+    background-color :rgba(0, 53, 72, 0.921);
+    position: absolute;
+    border-radius : 20px ;
+    width: 16%;
+    height: 40vh;
+    color :#f0f3f5;
+    top : 60%;
+    left: 83%;
+    padding: 0rem 1rem;
+    transition: 0.5s;
+ }
+
+ .nonProblemDiv{
+    position: absolute;
+    transform: scale(0);
+     transition: 0.7s;
+     top : 22%;
+     left: 72%;
+  }
+  .ProblemHeader{
+    font-size: medium;
+  }
+
+  .tecProblem{
+    position: relative;
+    top : 10%;
+    left: 12%;
+    width: 120px;
+ 
+  }
+ 
+  .finProblem{
+    position: relative;
+    top : 17%;
+    left: 12%;
+    width: 120px;
+  }
+ 
+  .otherProblem{
+    position: relative;
+    top : 24%;
+    left: 12%;
+    width: 120px;
+    
+  }
+
+  .tecProblemDiv{
+    background-color :rgba(0, 53, 72, 0.921);
+    position: absolute;
+    border-radius : 20px ;
+    width: 16%;
+    height: 40vh;
+    color :#f0f3f5;
+    top : 60%;
+    left: 83%;
+    padding: 0rem 1rem;
+    transition: 0.5s;
+
+  }
+
+  .tecProblemDiv-header{
+    position: relative;
+    font-size: medium;
+    top: 10%;
+
+  }
+  
+
+
+  .nonTecProblem{
+    position: absolute;
+    transform: scale(0);
+     transition: 0.7s;
+     top : 22%;
+     left: 72%;
+
+  }
+
+  .tecProblemDescriptionTextField{
+    position: relative;
+    top: 22%;
+    left: 15%;
+    width: 67%;
+    z-index: 2;
+}
+
+.tecProblemSubmit{
+
+  position: relative;
+    top: 38%;
+    left: 15%;
+    width: 67%;
+    z-index: 2;
+}
