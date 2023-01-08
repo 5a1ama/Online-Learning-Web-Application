@@ -17,7 +17,10 @@ export function NewCourse(props) {
     
     const [courseDetails,setcourseDetails] = useState(false)
     const handleCourseDetails = () => setcourseDetails(!courseDetails)
-  
+    
+        const[gift,setGift]=useState(false);
+        const handleGift =() =>{setGift(!gift)};
+
         const [chosenCountry,setChosenCountry] = useState(0);
 
     useEffect(()=>{
@@ -192,9 +195,11 @@ export function NewCourse(props) {
       }
      
       <button className="NewCourse-button-OpenCourse" style={{marginRight: '1rem' ,width:"100px",height:"60px",transform:"translate(1rem,1.7rem)" }} 
-      onClick={()=>{ if(props.Trainee){navigate("/CourseItems",{state:{id:props.course.id,View:"Overview"}})
-    
-    }else if(props.inst){
+      onClick={()=>{
+        if(props.Trainee){
+          navigate("/CourseItems",{state:{id:props.course.id,View:"Overview"}})
+          
+        }else if(props.inst){
       navigate("/instructorViewCourse",{state:{id:props.course.id,View:"Overview"}})
     }else{
       navigate("/CourseContent",{state:{id:props.course.id,View:""}})
