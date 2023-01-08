@@ -25,6 +25,7 @@ function CourseItems() {
     const location=useLocation();
     const navigate = useNavigate();
     const [progress,setProgress]=useState(0);
+
     const handleUnenroll=async()=>{
         const result=await requestRefund(location.state.id)
         if(result=="error"){
@@ -40,9 +41,6 @@ function CourseItems() {
     
     const[showDetails,setShowDetails]=useState(false);
     const handleShowDetails =() =>{setShowDetails(!showDetails)};
-
-    const[gift,setGift]=useState(false);
-    const handleGift =() =>{setGift(!gift)};
 
     const [view , setView] = useState("");
 
@@ -63,7 +61,7 @@ function CourseItems() {
 
     useEffect(()=>{ 
         handleView(location.state.View)
-        },[location.state])
+        },[location.state.View])
 
     useEffect(()=>{
         async function getR(){

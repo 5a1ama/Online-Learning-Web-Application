@@ -6,6 +6,7 @@ export const getTraineeCourses= async(token)=>{
     // var j=await result.json();
     // return j;
     var result =await axios.get(`http://localhost:8000/Trainee/TraineeMyCourse/${token}`)
+
     return result.data
 
 }
