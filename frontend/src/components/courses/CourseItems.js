@@ -1,4 +1,4 @@
-import {Component, React,useEffect,useRef,useState} from 'react'
+import {Component,Checkbox, React,useEffect,useRef,useState} from 'react'
 import video from '../../assets/ItemsBack.mov';
 import Navbar from './../navbar/Navbar';
 import {  getCourseDetails } from './../../API/CourseAPI';
@@ -12,9 +12,11 @@ import { GetInstructorName } from './../../API/CourseAPI';
 import Footer from '../footer/Footer';
 import Subtitle from './subtitles/Subtitle';
 import Rating from '@mui/material/Rating';
-import { Avatar } from '@mui/material';
+import { Avatar, TextField } from '@mui/material';
 import { getTraineeCourseProg, myCourseRate, rateCourse, requestRefund } from '../../API/TraineeAPI';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
+import { addReport } from '../../API/InstructorAPI';
+
 
 function CourseItems() {
     const [first,setFirst] = useState(0);
@@ -138,7 +140,6 @@ function CourseItems() {
           setCountryNumber(x);
         }
 
-        
 
         handleInstNames();
         // getRate();
@@ -146,6 +147,7 @@ function CourseItems() {
   return (
     
     <div className="CourseItems">
+
 
             <Navbar items={["Home","My Courses","All Courses"]}
                handleCountryNumber={handleCountryNumber}
@@ -181,6 +183,9 @@ function CourseItems() {
 
 
             </div>
+
+
+
             
             {/* progress bar */                                                                 }
             {progress<50 && <button className='CourseItemsUnenrollbtn' onClick={handleUnenroll}>UnEnroll</button>}

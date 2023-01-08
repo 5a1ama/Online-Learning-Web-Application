@@ -58,10 +58,15 @@ router.post("/verifyToken",function(req,res){
 router.post("/selectCountry/:x/:token",function(req,res){
         var country=req.params.x;
         if(token!="-1"){
-            const user=jwt.verify(req.params.token,process.env.ACCESSTOKEN)
+            try{
+                const user=jwt.verify(req.params.token,process.env.ACCESSTOKEN)
             user.country=country;
             const token=jwt.sign(user,process.env.ACCESSTOKEN);
             res.json(token)
+            }catch{
+                res.json("error")
+            }
+            
         }else{
             const user={country:country};
             const token=jwt.sign(user,process.env.ACCESSTOKEN);
@@ -107,7 +112,8 @@ router.get("/sendEmail/:to/:link",function(req,res){
 })
 router.get("/sendEmailAttach/:token/:courseName",async function(req,res){
     var token=req.params.token;
-    var user=jwt.verify(token,process.env.ACCESSTOKEN)
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN)
     var trainee=await Trainee.findOne({id:user.id});
     const transporter = nodemailer.createTransport({
         service: "Gmail",
@@ -138,6 +144,10 @@ router.get("/sendEmailAttach/:token/:courseName",async function(req,res){
         }
     });
     res.json("ok");
+    }catch{
+        res.json("error");
+    }
+    
 })
 router.get("/resetPass/:email/:pass",async function(req,res){
    var result=await User.findOne({Email:req.params.email});

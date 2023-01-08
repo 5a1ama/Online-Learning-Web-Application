@@ -139,7 +139,7 @@ export function InstructorCourses(){
         <div>
             <div>
             <Navbar items={["Home","My Courses","All Courses"]}     handleCountryNumber={handleCountryNumber}
-            select="My Courses" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]} inst={true} scroll={["","",""]}  />
+            select="My Courses" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]}  inst={true} scroll={["","",""]}  />
 
             </div>
              <div className="InstCourses" name = 'instCourses'>
