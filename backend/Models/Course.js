@@ -48,7 +48,8 @@ const courseschema=new Schema({
         type:[Number]
     },
     subtitles:{
-        type:[{video:[String],lesson:String,description:String,title:String,hours:Number}]
+        type:[{video:[String],lesson:String,description:String,title:String,hours:Number,excerciseId:Number}],
+        default:[]
     },
     excercises:{
         type:[Number],

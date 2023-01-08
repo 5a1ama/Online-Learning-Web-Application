@@ -1,13 +1,18 @@
 import Navbar from "../navbar/Navbar"
 import { TextField } from '@mui/material';
+import{ Button} from "@mui/material";
 
 
 import "./InstructorCreateExercise.css"
 import { useEffect, useState } from "react";
 import { QuestionsDiv } from "./QuestionsDiv";
 import { NewDiv } from "./NewDiv";
+import { createExercise } from "../../API/InstructorAPI";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function InstructorCreateExercise (){
+    const location=useLocation()
+    const navigate=useNavigate();
     const [questionsArr,setQuestionsArr]=useState([]);
     const [choicesArr,setChoicesArr]=useState([]);
     const [update,setUpdate]=useState("")
@@ -16,6 +21,24 @@ export function InstructorCreateExercise (){
     const[choice2,setChoice2]=useState("");
     const[choice3,setChoice3]=useState("");
     const[choice4,setChoice4]=useState("");
+    const[answer,setAnswer]=useState("");
+    const[answerArray,setAnswerArray]=useState([])
+    const handleAnswer=(event)=>{
+        setAnswer(event.target.value)
+    }
+    const handleAnswer2=(index,value)=>{
+        var temp=[];
+        for(var i=0;i<answerArray.length;i++){
+            temp.push(answerArray[i])
+        }
+            if(temp.length==0){
+                temp=[value]
+            }else{
+                temp[index]=value
+
+            }
+            setAnswerArray(temp);
+    }
     const handleChoice1=(event)=>{
         setChoice1(event.target.value)
     }
@@ -45,7 +68,12 @@ export function InstructorCreateExercise (){
         setQuestion(event.target.value)
         
     }
-    const handleSubmit=()=>{
+    const handleSubmit=async (event)=>{
+        event.preventDefault();
+        const x = await createExercise([question].concat(questionsArr),[[choice1,choice2,choice3,choice4]].concat(choicesArr),location.state.courseId,
+        location.state.subtitle,[answer].concat(answerArray))
+        alert("successfuly created!")
+        navigate("/InstructorViewCourse",{state:{id:location.state.courseId,View:"Syllabus"}})
     }
     
     const handleChoice=(index1,index2,value)=>{
@@ -62,6 +90,7 @@ export function InstructorCreateExercise (){
         
         setQuestionsArr(questionsArr.concat([""]));
         setChoicesArr(choicesArr.concat([["","","",""]]));
+        setAnswerArray(answerArray.concat([""]));
         
     }
     
@@ -78,12 +107,13 @@ export function InstructorCreateExercise (){
         
         +
     </button>
-    <button className="submitbtnExcer" onClick={handleSubmit}>Submit</button>
    {/* {questionsArr.map((questions,i)=><QuestionDiv num={i}  /> )}
    <label>{questionsArr}</label> */}
     {/* <QuestionsDiv handleChoice2={handleChoice} handleQuestion2={handleQuestion} arr1={questionsArr} arr2={choicesArr}  /> */}
+    <form onSubmit={handleSubmit}>
     <div className="questionDiv">
-            <TextField
+            <TextField required
+
                                 id={"question"}
                                 onChange={handleQuestion2}
                                 type={"text"}
@@ -94,7 +124,7 @@ export function InstructorCreateExercise (){
                                   size="small"
                                   />
             <div>
-            <TextField
+            <TextField required
              onChange={handleChoice1}
                                 type={"text"}
                                 className='atoofachoicescheckboxes'
@@ -104,7 +134,7 @@ export function InstructorCreateExercise (){
                                   value={choice1}
                                   size="small"
                                   />
-            <TextField
+            <TextField required
             onChange={handleChoice2}
                                 type={"text"}
                                 className='atoofachoicescheckboxes'
@@ -115,7 +145,7 @@ export function InstructorCreateExercise (){
 
                                   size="small"
                                   />
-            <TextField
+            <TextField required
             onChange={handleChoice3}
                                 type={"text"}
                                 className='atoofachoicescheckboxes'
@@ -126,7 +156,7 @@ export function InstructorCreateExercise (){
 
                                   size="small"
                                   />
-            <TextField
+            <TextField required={true}
             onChange={handleChoice4}
                                 type={"text"}
                                 className='atoofachoicescheckboxes'
@@ -138,12 +168,40 @@ export function InstructorCreateExercise (){
                                   size="small"
                                   />
             </div>
-            
-            
-            
+            {/* <TextField required={true}
+            onChange={handleAnswer}
+                                type={"text"}
+                                className='atoofachoicescheckboxes'
+                                id={"choice-" }
+                                label="Solution"
+                                 variant="outlined"
+                                 value={answer}
+
+                                  size="small"
+                                  /> */}
+           Choose Correct Choice:<select  className="answeroptiongrp" required onChange={handleAnswer}>
+                <option>
+                    1
+                </option>
+                <option>
+                    2
+                </option>
+                <option>
+                    3
+                </option>
+                <option>
+                    4
+                </option>
+            </select>
+            <div className="vl33" style={{marginTop:'1rem'}}></div>
+
             </div>
-            
-<QuestionsDiv arr={questionsArr} arr2={choicesArr} handleQues2={handleQuestion} handleChoice2={handleChoice}/>
+            <br></br>
+<QuestionsDiv arr={questionsArr} arr2={choicesArr} arr3={answerArray} handleAnswer={handleAnswer2} handleQues2={handleQuestion} handleChoice2={handleChoice}/>
+
+    <button className="submitbtnExcer" type="submit">Submit</button>
+
+    </form>
 </div>
 
         </div>

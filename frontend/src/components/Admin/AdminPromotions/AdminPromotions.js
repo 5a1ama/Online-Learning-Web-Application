@@ -10,7 +10,7 @@ import NewCourse from '../../courses/NewCourse'
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
 import { Checkbox } from '@mui/material';
-import { setPromotionOne } from '../../../API/AdminAPI'
+import { setPromotionAll, setPromotionOne } from '../../../API/AdminAPI'
 
 function AdminPromotions() {
    const [View,setView]=useState("Active");
@@ -157,37 +157,72 @@ const [duration,setDuration]=useState("")
 const handleDuration=(event)=>{
     setDuration(event.target.value)
 }
-const handleAddDiscount=async()=>{
-    var arrD=duration.split("-")
-    
-        
-    if( (arrD[0]>(new Date()).getFullYear() || arrD[1]>(new Date()).getMonth()+1)){
-        const x=await setPromotionOne([4,5],discountamount,duration)
-    
-    }else if( (arrD[2]>(new Date()).getDate() && arrD[1]==(new Date()).getMonth()+1)){
-        const x=await setPromotionOne([4,5],discountamount,duration)
-    
-    }else{
-        alert("enter a future date")
 
+
+function refreshPage() {
+  window.location.reload(true);
+}
+const handleDiscount = async () =>{
+  var arrD=duration.split("-")
+    if(selectAll){
+      const x = await setPromotionAll(discountamount,duration);
+    }else{
+
+      if( (arrD[0]>(new Date()).getFullYear() || arrD[1]>(new Date()).getMonth()+1)){
+        const x=await setPromotionOne(selectedCourses,discountamount,duration);
+        refreshPage();
+        getCourses();
+        
+  
+  }else if( (arrD[2]>(new Date()).getDate() && arrD[1]==(new Date()).getMonth()+1)){
+      const x=await setPromotionOne(selectedCourses,discountamount,duration)
+      refreshPage();
+      getCourses();
+
+    }else{
+      alert("enter a future date")
+      
     }
-    
+  }
 }
 
-  
+const handleAddDiscount=()=>{
+  handleDiscount();
+  refreshPage();
+  getCourses();
+      
+}
+  const [selectedCourses,setSelectedCourses]=useState([]);
+  const handleSelectedChange = (event)=> {
+
+    setSelectedCourses((prevState) => ([...prevState,event]));
+  }  
+  const handleSelectedDelete = (event) =>{
+    setSelectedCourses(() => (
+       selectedCourses.filter((task) => task !== event)
+    
+    )
+    );
+  }
+const [selectAll,setSelectAll]=useState(false);
+const handleSelectall = () =>{
+  setSelectAll(!selectAll);
+}
 
    return (
     <div className="adminPromotions">
     <Navbar items={["Home","Control Panel","Reports"]} select="" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={handleCountryNumber}  />
       <div className='adminPromotions_content'>
         <div className='flexRow'>
-        <img alt="." src={View=="Active"?ActivePromo2:ActivePromo} onClick={()=>setView("Active")} className="ActivePromotions" />
-        <img alt="." src={View=="define"?definePromo2:definePromo} onClick={()=>setView("define")} className="ActivePromotions"/>
+        <img alt="." src={View=="Active"?ActivePromo2:ActivePromo} onClick={()=>{setView("Active");getCourses();}} className="ActivePromotions" />
+        <img alt="." src={View=="define"?definePromo2:definePromo} onClick={()=>{setView("define");getCourses();}} className="ActivePromotions"/>
         </div>
         
        {View=="Active" && 
          <div>
-        {promotedCourses.map((course) => <NewCourse course={course}   handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>)}
+        {promotedCourses.map((course) => <NewCourse 
+        course={course}
+          handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>)}
         </div>
       } 
       {
@@ -203,11 +238,20 @@ const handleAddDiscount=async()=>{
                                 <input className="AdminSetPromo_Input" type="Date" onChange={handleDuration}></input>
                        
                                 <button className='applyPromo_Set' onClick={handleAddDiscount}>Apply Promotion</button>
+                                <h4 className='AdminSetPromoAmount' style={{color:'var(--primary-light)'}}>click on a course to select it</h4>
                                   </div>
                               </div>
 
                     <div className='AdminCoursesPromo'> 
-                          {courses.map((course) => <NewCourse course={course}  Admin={true}  handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>)}
+                   <div className="flexRow checkBoxAdminPromo2">
+                    <Checkbox className='' id="CheckBoxadminSelectAll" onClick={handleSelectall} style={{color:'#000'}} ></Checkbox>
+                    <h3 style={{transform:'translate(0,5px)'}}>select all</h3>
+                    </div>
+
+                          {courses.map((course) => <NewCourse course={course} selectAll={selectAll}
+                           setSelectedCourses={setSelectedCourses} handleSelectedChange={handleSelectedChange} handleSelectedDelete={handleSelectedDelete}
+                          Admin={true}
+                            handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>)}
                     </div>
 
                        <button className='adminCourses-FilterBarButton' onClick={handleFilterBar}>Filter Courses</button>

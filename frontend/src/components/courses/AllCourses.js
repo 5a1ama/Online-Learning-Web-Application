@@ -19,6 +19,7 @@ export {default as AllCourses} from './AllCourses.js';
 function AllCourses() {
   const location=useLocation();
     const[rate,setRate]=useState([]);
+    
     const handleRateChange = (event,reset) => {
       var id=event.target.id;
       if(reset===1){
