@@ -29,7 +29,7 @@ export function InstructorCourseVideo() {
         setFirst(1)
     }
     useEffect(()=>{
-      navigate("/")
+      
       if(first==0){
         begin();
         setFirst(1)

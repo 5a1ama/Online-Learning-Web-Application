@@ -1,24 +1,19 @@
 import {Component, React,useEffect,useRef,useState} from 'react'
 import video from '../../assets/ItemsBack.mov';
 import Navbar from './../navbar/Navbar';
-import {  getCourseDetails, isEnrolled } from './../../API/CourseAPI';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import {  getCourseDetails } from './../../API/CourseAPI';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './CourseItems.css';
 import ProgressImg from "../../assets/Progress100.png"
 import Progress from './Progress';
 import starImg from "../../assets/goldStar.png"
 import InstImg from "../../assets/avatar8.png"
-
-import Gift from "../../assets/gift.png"
-import GiftTop from "../../assets/giftTop.png"
-import GiftTop2 from "../../assets/giftTop2.png"
-
 import { GetInstructorName } from './../../API/CourseAPI';
 import Footer from '../footer/Footer';
 import Subtitle from './subtitles/Subtitle';
 import Rating from '@mui/material/Rating';
-import { alertClasses, Avatar } from '@mui/material';
-import { getTraineeCourseProg, myCourseRate, myInstructorRate, rateCourse, requestRefund } from '../../API/TraineeAPI';
+import { Avatar } from '@mui/material';
+import { getTraineeCourseProg, myCourseRate, rateCourse, requestRefund } from '../../API/TraineeAPI';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 
 function CourseItems() {
@@ -69,9 +64,11 @@ function CourseItems() {
     useEffect(()=>{
         async function getR(){
             const myrate=await myCourseRate(location.state.id)
+            
             if(myrate!="error"){
                 setMyRate(myrate)
             }else{
+                alert(myrate)
                 localStorage.setItem("token",null);
                 localStorage.removeItem("token");
                 localStorage.clear();
@@ -79,7 +76,6 @@ function CourseItems() {
             }
         }
         getR();
-        getTraineeProgress()
       },)    
 
 
@@ -93,6 +89,7 @@ function CourseItems() {
     })
     if(first===0){
         getDetails();
+        getTraineeProgress()
         if(location.state.View==="Syllabus"){
             bottomRef.current?.scrollIntoView({behavior: 'smooth'});
         }
@@ -240,7 +237,7 @@ function CourseItems() {
 
                                     <div ref={bottomRef} />
                                     {details[0]&&details[0].subtitles.map((sub,i)=>
-                                    <Subtitle sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i} SubTitleBack={location.state.SubtitleTitle} View="Syllabus" description={sub.description} ></Subtitle>
+                                    <Subtitle  sub={sub} courseTitle={details[0]&&details[0].title} CourseId={location.state.id} exercise={details[0]&&details[0].excercises} i={i} SubTitleBack={location.state.SubtitleTitle} View="Syllabus" description={sub.description} ></Subtitle>
                                     )}
 
                                     </div>

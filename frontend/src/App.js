@@ -40,6 +40,8 @@ import { TraineePayments } from './components/Trainee/TraineePayments';
 import { InstructorCreateExercise } from './components/Instructor/InstructorCreateExercise';
 import { Payment } from './components/Payment';
 import AdminPromotions from './components/Admin/AdminPromotions/AdminPromotions';
+import { TraineeCourseExcer } from './components/Trainee/TraineeCourseExcer';
+import { TraineeGradingExercise } from './components/Trainee/TraineeGradingExcercise';
 import { MyInstructorReports } from './components/Instructor/instructorReports';
 
 
@@ -98,7 +100,8 @@ export default function App() {
           <Route path="/AdminRequests" element={<AdminViewRequests/>}/>
           <Route path="/AdminRefunds" element={<AdminViewRefunds/>}/>
           <Route path="/AdminPromotions" element={<AdminPromotions/>}/>
-       
+          <Route path="/TraineeCourseExercise" element={<TraineeCourseExcer/>}/>
+          <Route path="/TraineeGradingExercise" element={<TraineeGradingExercise/>}/>
         </Routes>
       
     

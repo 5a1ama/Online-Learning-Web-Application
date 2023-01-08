@@ -4,7 +4,15 @@ import { useEffect, useState } from "react";
 export const QuestionsDiv=(props)=>{
     const [array,setArray]=useState(props.arr);
     const[array2,setArray2]=useState(props.arr2);
-    
+    const[array3,setArray3]=useState(props.arr3);
+    const handleAnswer=(event)=>{
+        const temp=array3;
+        var index=Number(event.target.getAttribute("id").substring(6))
+        temp[index]=event.target.value
+        setArray(temp)
+        
+        props.handleAnswer(index,event.target.value)
+    }
     const handleQuestion =(event)=>{
         const temp=array;
         var index=Number(event.target.getAttribute("id").substring(8))
@@ -24,7 +32,8 @@ export const QuestionsDiv=(props)=>{
     }
         return (
         <div className="qestionsdiv2main" >
-            {props.arr.map((num,i)=><div className='questionDiv'> <TextField
+            {props.arr.map((num,i)=><div className='questionDiv'> 
+            <TextField required
                                 id={"question"+i}
                                 onChange={handleQuestion}
                                 type={"text"}
@@ -35,7 +44,7 @@ export const QuestionsDiv=(props)=>{
                                   size="small"
                                   /> 
                                   <div>
-            <TextField
+            <TextField required
              onChange={handleChoice}
                                 type={"text"}
                                 className='atoofachoicescheckboxes'
@@ -45,7 +54,7 @@ export const QuestionsDiv=(props)=>{
                                  // value={array2[i][0]}
                                   size="small"
                                   />
-            <TextField
+            <TextField required
             onChange={handleChoice}
                                 type={"text"}
                                 className='atoofachoicescheckboxes'
@@ -56,7 +65,7 @@ export const QuestionsDiv=(props)=>{
 
                                   size="small"
                                   />
-            <TextField
+            <TextField required
             onChange={handleChoice}
                                 type={"text"}
                                 className='atoofachoicescheckboxes'
@@ -67,7 +76,7 @@ export const QuestionsDiv=(props)=>{
 
                                   size="small"
                                   />
-            <TextField
+            <TextField required
             onChange={handleChoice}
                                 type={"text"}
                                 className='atoofachoicescheckboxes'
@@ -79,6 +88,34 @@ export const QuestionsDiv=(props)=>{
                                   size="small"
                                   />
             </div>
-                                  </div>)}
+            {/* <TextField required={true}
+            onChange={handleAnswer}
+                                type={"text"}
+                                className='atoofachoicescheckboxes'
+                                id={"answer"+i }
+                                label="Solution"
+                                 variant="outlined"
+                                 
+
+                                  size="small"
+                                  /> */}
+
+Choose Correct Choice: <select className="answeroptiongrp" id={"answer"+i} required onChange={handleAnswer}>
+                <option>
+                    1
+                </option>
+                <option>
+                    2
+                </option>
+                <option>
+                    3
+                </option>
+                <option>
+                    4
+                </option>
+            </select>
+            <div className="vl33"  style={{marginTop:'1rem'}}></div>
+                                  </div>
+                                 )}
         </div>)
 }

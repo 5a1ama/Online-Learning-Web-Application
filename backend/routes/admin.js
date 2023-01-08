@@ -56,7 +56,7 @@ router.post("/setPromotion/:courseid/:promotion/:endDate",async function(req,res
     var courseId=req.params.courseid;
     var promotion=req.params.promotion;
     var endDate=req.params.endDate;
-    var courses=(courseId.substring(1,courseId.length-1)).split(",");
+    var courses=(courseId.substring(0,courseId.length)).split(",");
     console.log(courses)
     for(var i=0;i<courses.length;i++){
         await Course.findOneAndUpdate({id:Number(courses[i])},{discount:{amount:promotion,EndDate:endDate}})

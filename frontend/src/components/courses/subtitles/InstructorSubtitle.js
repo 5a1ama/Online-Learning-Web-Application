@@ -21,6 +21,11 @@ function InstructorSubtitle(props) {
     const [newVideoLink,setNewVideo]=useState("");
     const [newDescription,setDescription]=useState("")
     const handleEdit=(event)=>{
+        //alert(document.getElementById(event.target.getAttribute("id")).style.left)
+        var x=document.getElementsByClassName("EditSubDiv");
+        // for( var i=0;i<x.length;i++){
+        //     x[i].style.display="none"
+        // }
         setEdit(true);
     }
     const handleNewTitle=(event)=>{
@@ -66,6 +71,9 @@ function InstructorSubtitle(props) {
         HandleSyllabus()
     }   
     )
+    const handleNavigate=()=>{
+        navigate("/InstructorAddExcer",{state:{courseId:props.CourseId,subtitle:props.sub.title}})
+    }
    
     return (
         <div className="CourseItems_Syllabus_Subtitles_1">
@@ -99,8 +107,10 @@ function InstructorSubtitle(props) {
                 <div className="DivHover" style={{display:"flex",flexDirection:"row" ,justifyContent:"space-between"}}>
                 <IoIosPaper size={25}></IoIosPaper>
                 <a href="/CourseExercise" ><h3 style={{color:"#000",transform:"translate(-.6rem , 0rem)"}} >Exercise</h3></a>
-                {props.exercise.length> props.index && props.exercise[props.index] && <a href="/InstructorCourseExercise"><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Exercise {props.exercise}</h3></a>}
-                {props.exercise.length<=props.index && <a href="/InstructorAddExcer"><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Add Excercise</h3></a> }
+                {props.sub.excerciseId&& <a onClick={()=>navigate("/InstructorEditExcer")}><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Edit Exercise</h3></a>}
+                {!props.sub.excerciseId && <a onClick={handleNavigate} ><h3   style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Add Excercise</h3></a> }
+                {/* onClick={navigate("/InstructorAddExcer",{state:{courseId:props.CourseId,title:props.sub.subtitle}})} */}
+                {/* {props.exercise.length<=props.index && <button className='AddExcerBTNZIAD'  onClick={handleNavigate} > Add Excercise</button>} */}
                 </div>
 
                 </div>
@@ -130,7 +140,7 @@ function InstructorSubtitle(props) {
      <div> <button onClick={()=> {  props.handleEdit(props.sub.title,newTitle,newHours,newVideoLink,newDescription); setEdit(false); }} style={{backgroundColor:"green"}}>Confirm</button> <button onClick={()=>setEdit(false)} style={{backgroundColor:"red"}}>Cancel</button></div>
 
                 </div>} 
-            {!edit && <button onClick={handleEdit} className='editbtn'><BiEdit size='30' ></BiEdit></button>}
+            {!edit && <button onClick={handleEdit} id="edit1" className='ISeditbtn'><BiEdit   size='30' > </BiEdit></button>}
             {!edit && <button className='delbtn' onClick={()=>props.handleDelete(props.sub.title)}><BsTrash size='30'></BsTrash></button>}
         </div>
                              )

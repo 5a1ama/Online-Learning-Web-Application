@@ -69,9 +69,37 @@ export function NewCourse(props) {
         return () => clearInterval(interval);
       }, [expiredTime,dateTimeAfterThreeDays]);
 
+
+        const [adminClick,setAdminClick] = useState(false);
+        const handleAdminClick = (event) =>{
+          setAdminClick(!adminClick);
+          if(!props.selectAll){
+            if(adminClick==false){
+              props.handleSelectedChange(event);
+              
+            }else{
+              props.handleSelectedDelete(event);
+            }
+          }else{
+            setAdminClick(true);
+          }
+        }
+
+     useEffect(()=>{
+      if(props.selectAll){
+        setAdminClick(true);
+        
+      }else{
+        setAdminClick(false);
+      }
+     },[props.selectAll])
       return (
 
-    <div className={props.Admin==true?"newCourseAdmin newCourse":(courseDetails? "newCourse-After":"newCourse")}  >
+    <div
+    onClick={()=>(props.Admin&&handleAdminClick(props.course.id))} 
+    className={props.Admin==true?
+      (adminClick?"newCourseAdminClicked ":"newCourseAdmin newCourse")
+    :(courseDetails? "newCourse-After":"newCourse")}  >
         <div className={courseDetails? "newCourse-After-Content":"newCourse-content"}>
       
          { 
@@ -150,11 +178,20 @@ export function NewCourse(props) {
         </div>
           </div>
         </div>
+        {!props.Admin ?
+        <>
           <div className="ViewMoreH55">
 
           <h5 onClick={handleCourseDetails}>view details</h5>
           </div>
         <BiDownArrow className="icon" style={{marginRight: '1rem' , transform:'translate(0 ,0.4rem)'}} onClick={handleCourseDetails}></BiDownArrow>
+        </>
+        :
+        <div className="ViewMoreH555">
+ 
+          
+          </div>
+      }
      
       <button className="NewCourse-button-OpenCourse" style={{marginRight: '1rem' ,width:"100px",height:"60px",transform:"translate(1rem,1.7rem)" }} onClick={()=>{ if(props.Trainee){navigate("/CourseItems",{state:{id:props.course.id,View:"Overview"}})
     
