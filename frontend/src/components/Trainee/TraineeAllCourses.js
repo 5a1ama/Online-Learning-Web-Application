@@ -147,7 +147,6 @@ export function TraineeAllCourses(){
       Filter();
    
   },[rate,subject,value])
-
   const[freePrice,SetFreePrice]=useState(false)
   const handleFreePrice = () =>{
     SetFreePrice(!freePrice);
@@ -181,14 +180,16 @@ export function TraineeAllCourses(){
         </div>
 <div className='AllCourses'>
             <h1 className="heading">Our Courses</h1>
-            {courses.map((course) =>{
+            {courses&&courses.map((course) =>{
               var found=false;
+              
               for(var i=0;i<myCourses.length;i++){
                 if(myCourses[i].title==course.title){
                   found=true;
                   break;
                 }
               }
+
               if(found)
                 return <NewCourse guest={false} course={course} Trainee={details&&details.type} handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>
               else
