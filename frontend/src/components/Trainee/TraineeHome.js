@@ -39,14 +39,14 @@ export function TraineeHome (){
   const [courses,setCourses] = useState([]);
 
 
-
   useEffect(()=>{
       async function getCoursess(){
-        setCourses ((await getTraineeCourses(localStorage.getItem("token"))).slice(0,1));
+        // setCourses ((await getTraineeCourses(localStorage.getItem("token"))).slice(0,1));
       }
       getCoursess();
-  },)
-  
+    },)
+    
+
   const [details,setDetails]=useState("");
   
   useEffect(()=>{

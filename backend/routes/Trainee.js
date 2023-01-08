@@ -24,11 +24,13 @@ function tokenVerify(req,res,next){
         next();
     }catch{
         res.json("error")
+   
     }
    
 }
 
 router.get("/TraineeMyCourse/:Token",tokenVerify,async function(req,res){
+
     var Token = req.params.Token
     const user = jwt.verify(Token,process.env.ACCESSTOKEN)
     var Id = user.id
@@ -44,6 +46,7 @@ router.get("/TraineeMyCourse/:Token",tokenVerify,async function(req,res){
         var queryCourse = await Course.findOne({id:array[i].id})
         arrayCourse = arrayCourse.concat([queryCourse])
     }
+
     res.json(arrayCourse)
 })
 

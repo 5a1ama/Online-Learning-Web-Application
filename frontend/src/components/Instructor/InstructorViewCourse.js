@@ -478,7 +478,6 @@
 
                
 
-            </div>
 
             {/* Footer */                                                                        }
              <Footer inst = {true} text={"Excited to Learn more ? Unlock Premium Courses with Learn Pro "} buttonText={"Upgrade Now"}></Footer>
