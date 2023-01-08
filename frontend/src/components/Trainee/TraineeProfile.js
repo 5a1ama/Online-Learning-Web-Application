@@ -1,7 +1,7 @@
 import Navbar from "../navbar/Navbar";
 import React, { useEffect, useState } from 'react';
 import './TraineeProfile.css'
-import { getTraineeDetails, updateTraineeEmail, updateTraineeName, updateTraineePass } from "../../API/TraineeAPI";
+import { getTraineeDetails, showWallet, updateTraineeEmail, updateTraineeName, updateTraineePass } from "../../API/TraineeAPI";
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import { TextField } from '@mui/material';
@@ -85,6 +85,9 @@ export function TraineeProfile(){
 
     const [showDiv1,setShowDiv1] = useState(false);
     const [showDiv2,setShowDiv2] = useState(false);
+    const [showDiv3,setShowDiv3] = useState(false);
+
+    const[traineeWallet,setTraineeWallet] = useState();
 
     const handleUpdate=async ()=>{
        
@@ -98,6 +101,7 @@ export function TraineeProfile(){
      }
      
     const intial = async()=>{
+        setTraineeWallet(await showWallet())
         setTrainee(await getTraineeDetails())
         if(first==0){
             setNewEmail(Trainee.Email)
@@ -115,7 +119,7 @@ export function TraineeProfile(){
                handleCountryNumber={handleCountryNumber}
                select="" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
         </div> 
-        {!showDiv2&&<div><div className="TraineeProfileDetails">
+        {!showDiv2&&!showDiv3&&<div><div className="TraineeProfileDetails">
         <Avatar  
        className="avatar"
        sx={{ backgroundColor: '#0277bd' ,width: 100, height: 100 ,fontSize:55}}
@@ -131,9 +135,28 @@ export function TraineeProfile(){
             <button className="TraineeMyCreditCards" onClick={() => navigate('/TraineePayments')}>
                 My Cards 
             </button>
+
+            <button className="TraineeWallet" onClick={() => setShowDiv3(true)}>
+                wallet
+            </button>
     
 
         </div>
+
+        {showDiv2 && <div className='walletDiv'> 
+
+        <h1>
+            account balance
+        </h1>
+
+        <h2>
+            {traineeWallet}
+        </h2>
+
+    
+
+        
+        </div>}
 
         <div className='editTraineedata'>
                
