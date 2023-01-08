@@ -16,7 +16,7 @@ export const selectCountry = async (country)=>{
             window.location.href="/login"
 
         }
-        localStorage.setItem("token",j);
+        //localStorage.setItem("token",j);
 
     }else{
         const result=await fetch(`http://localhost:8000/selectCountry/${country}/-1}`,{method: "POST",
@@ -40,6 +40,13 @@ export const sendEmail=async (to,link)=>{
 }
 export const sendEmailAttach=async(title)=>{
     const result=await fetch(`http://localhost:8000/sendEmailAttach/${localStorage.getItem("token")}/${title}`);
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }
 
 }
 export const resetPass=async(email,newpass)=>{
