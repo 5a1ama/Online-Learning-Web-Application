@@ -9,6 +9,7 @@ import {TextField} from "@mui/material";
 import "./Subtitle.css"
 import "./InstructorSubtitle.css"
 import { BiEdit } from 'react-icons/bi';
+import { MyGrade } from '../../../API/TraineeAPI';
 function InstructorSubtitle(props) {
     const navigate = useNavigate();
     const[update,setUpdate]=useState(props.sub.video[0])
@@ -28,6 +29,7 @@ function InstructorSubtitle(props) {
         // }
         setEdit(true);
     }
+    
     const handleNewTitle=(event)=>{
         setNewTitle(event.target.value);
     }

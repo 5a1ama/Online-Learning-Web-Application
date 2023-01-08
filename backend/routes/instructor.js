@@ -406,6 +406,7 @@ router.post("/createExercise/:token/:courseid/:title",async function(req,res){
             var course=await Course.findOne({id:courseid});
             var oldExcercise=course.excercises
             var subtitles=course.subtitles;
+            console.log(12)
             oldExcercise.push(excerciesCount)
             for(var i=0;i<subtitles.length;i++){
                 if(subtitles[i].title==title){
@@ -413,7 +414,7 @@ router.post("/createExercise/:token/:courseid/:title",async function(req,res){
                     break;
                 }
             }
-            await Course.findOneAndUpdate({id:courseid},{subtitles:subtitles,excercises:oldExcercise.concat([excerciesCount])})
+            await Course.findOneAndUpdate({id:courseid},{subtitles:subtitles,excercises:oldExcercise})
             res.json ("ok")
     
         })

@@ -533,17 +533,46 @@ router.post("/solveExcersice/:token/:courseid/:excerId/:answers",tokenVerify,asy
     var user=jwt.verify(token,process.env.ACCESSTOKEN);
     var courseid=req.params.courseid;
     var excerId=req.params.excerId
-    var answers=req.params.answers.substring(1,req.params.answers.length-1).split(",")
+    var excer=await Excercise.findOne({id:excerId})
+    var excerSol=excer.correctAnswer
+    var excerChoices=excer.choices;
+    var answers=req.params.answers
+    answers=answers.substring(0,req.params.answers.length-1).split(",")
     var trainee=await Trainee.findOne({id:user.id});
     var completed=trainee.completedExcercise
-    completed.push({courseId:courseid,excerId:excerId,answers:answers})
+    var found=false;
+    for(var i=0;i<completed.length;i++){
+        if(completed[i].excerId==excerId){
+            found=true;
+            completed[i].answers=answers;
+        }
+    }
+    if(!found){
+        completed.push({courseId:courseid,excerId:excerId,answers:answers})
+    }
+    var mySol=[];
+    for(var i=0;i<completed.length;i++){
+        if(completed[i].excerId==excerId){
+            mySol=completed[i].answers;
+            break;
+        }
+    }
+    var trueAnswer=0;
+    for(var i=0;i<excerSol.length;i++){
+        
+        if(excerChoices[i][Number(excerSol[i])-1]==mySol[i]){
+            trueAnswer++;
+        }
+    }
     var progress=0
     var courses=trainee.courses
     for(var i=0;i<courses.length;i++){
         if(courses[i].id==courseid){
             var total=(await Course.findOne({id:courseid})).excercises.length;
             progress=(completed.length*1.0/total)*100
-            courses[i].progress=progress;       
+            if(trueAnswer>=(excerSol.length/2)){
+                courses[i].progress=Math.ceil(progress);       
+            }
             break;
         }
     }
@@ -571,9 +600,11 @@ router.get("/myGrade/:excerid/:token",tokenVerify,async function(req,res){
     var excerSol=excer.correctAnswer;
     var excerChoices=excer.choices;
     var mySol=[];
+    var found=false;
     for(var i=0;i<completed.length;i++){
         if(completed[i].excerId==excerid){
             mySol=completed[i].answers;
+            found=true;
             break;
         }
     }
@@ -584,10 +615,12 @@ router.get("/myGrade/:excerid/:token",tokenVerify,async function(req,res){
             trueAnswer++;
         }
     }
-    var arr2=[1,2,3]
-    var x=[...arr2,10,arr2.splice(3,3)]
-    
-    res.json(trueAnswer+"/"+excerSol.length)
+    if(found){
+        res.json(trueAnswer+"/"+excerSol.length)
+
+    }else{
+        res.json("")
+    }
 })
 router.get("/mySolutions/:excerId/:courseId/:token",tokenVerify,async function(req,res){
     var token=req.params.token;
@@ -596,7 +629,6 @@ router.get("/mySolutions/:excerId/:courseId/:token",tokenVerify,async function(r
     var user=jwt.verify(token,process.env.ACCESSTOKEN);
     var trainee=await Trainee.findOne({id:user.id})
     var excercise=trainee.completedExcercise;
-    console.log(excerid+" "+courseid)
     for(var i=0;i<excercise.length;i++){
         if(excercise[i].excerId==excerid && excercise[i].courseId==courseid){
             res.json(excercise[i].answers)

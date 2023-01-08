@@ -21,7 +21,7 @@ export function InstructorCreateExercise (){
     const[choice2,setChoice2]=useState("");
     const[choice3,setChoice3]=useState("");
     const[choice4,setChoice4]=useState("");
-    const[answer,setAnswer]=useState("");
+    const[answer,setAnswer]=useState("1");
     const[answerArray,setAnswerArray]=useState([])
     const handleAnswer=(event)=>{
         setAnswer(event.target.value)
