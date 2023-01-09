@@ -27,7 +27,11 @@
     import CountdownTimer from '../countdown/CountDown';
     import {AiOutlineSetting} from 'react-icons/ai'
     import {IoCheckmarkDoneCircleOutline} from 'react-icons/io5'
-
+    import {MdPriceCheck} from 'react-icons/md'
+    import {TbDiscount2} from 'react-icons/tb'
+    import {BsFlag,BsTrash} from 'react-icons/bs'
+    
+    
 
     export function InstructorViewCourse() {
         const navigate=useNavigate();
@@ -281,7 +285,11 @@
 
     return () => clearInterval(interval);
     }, [expiredTime,dateTimeAfterThreeDays]);
-
+    
+    const [SettingMenu,setSettingMenu]= useState(false);
+    const handleSettingMenu =()=> {
+        setSettingMenu(!SettingMenu)
+    }
             
     return (
         
@@ -301,7 +309,14 @@
                 
                 <div className='CoureItems_OnVideo'>
                     {details[0]&&<h1 style={{fontSize:'35px'}}>{details[0].title}</h1>}
-                    <AiOutlineSetting color="#fff" size="30px" className='SettingButton'></AiOutlineSetting>
+                    <AiOutlineSetting color={SettingMenu?"var(--primary-light)":"#fff"} size="30px" className='SettingButton' onClick={handleSettingMenu}></AiOutlineSetting>
+                   { SettingMenu &&<div className='InstsettingMenu'>
+                        <button className='InstSettingItem'><MdPriceCheck className="Menuicon" color="rgb(0,200,0)" size="23px" ></MdPriceCheck>Add Price</button>
+                        <button className='InstSettingItem'><TbDiscount2 className="Menuicon" color="grey" size="23px" ></TbDiscount2>Add Discount</button>
+                        <button className='InstSettingItem'><BsFlag className="Menuicon" color="rgb(230,200,0)" size="23px" ></BsFlag>Report Issue</button>
+                        <button className='InstSettingItem'><BsTrash className="Menuicon" color="red" size="23px" ></BsTrash>Delete Course</button>
+                        
+                    </div>}
                     <div className="CourseItems_Content_Stars">
                         
                         <div className="CourseItems_InstNames">
