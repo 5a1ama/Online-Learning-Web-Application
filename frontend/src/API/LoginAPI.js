@@ -29,7 +29,16 @@ export const verify =async(token)=>{
             token: token
         })
       })
-      return await response.json()
+      const j=await response.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const selectCountry= async (country)=>{
     if(! localStorage.getItem("token")){

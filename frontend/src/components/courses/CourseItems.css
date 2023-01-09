@@ -338,107 +338,73 @@
 }
 
 
-.ReportButton{
-
-    position:absolute;
-    left:84%;
-    top: 390px;
-    width: 200px;
+.reportTraineeDivShadow{
+    width: 100%;
+    height: 100%;
+    background: transparent; 
+    display: flex;
+    flex-direction: column;
+  position:fixed;
+  z-index: 3;
+  }
+  .reportTraineeDivShadow::before{
+  position: fixed;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0,0, 0.5);
 
 }
 
-.problemDiv{
-    background-color :rgba(0, 53, 72, 0.921);
+.reportTraineeDiv{
+position: absolute;
+top: 15%;
+left: 32%;
+background-color: rgb(255, 255, 255);
+height: 490px;
+width: 500px;
+border-top-left-radius: 2%;
+border-top-right-radius: 2%;
+border-bottom-left-radius: 2%;
+border-bottom-right-radius: 2%;
+/* display: flex;
+flex-direction: column;
+align-items: center; */
+z-index: 2;
+}
+
+.submitReportButton-trainee{
     position: absolute;
-    border-radius : 20px ;
-    width: 16%;
-    height: 40vh;
-    color :#f0f3f5;
-    top : 60%;
-    left: 83%;
-    padding: 0rem 1rem;
-    transition: 0.5s;
+    top: 85%;
+    left: 73%;
+    width: 25%;
+}
+
+.cancelReportButton-trainee{
+
+        position: absolute;
+        top: 85%;
+        left: 45%;
+        width: 25%;
+        background-color: red;
  }
 
- .nonProblemDiv{
-    position: absolute;
-    transform: scale(0);
-     transition: 0.7s;
-     top : 22%;
-     left: 72%;
-  }
-  .ProblemHeader{
-    font-size: medium;
-  }
+.cancelReportButton-trainee:hover{
+        background-color: rgb(243, 92, 92);
+    }
 
-  .tecProblem{
+.IssueTextField-trainee{
     position: relative;
-    top : 10%;
-    left: 12%;
-    width: 120px;
- 
-  }
- 
-  .finProblem{
-    position: relative;
-    top : 17%;
-    left: 12%;
-    width: 120px;
-  }
- 
-  .otherProblem{
-    position: relative;
-    top : 24%;
-    left: 12%;
-    width: 120px;
-    
-  }
-
-  .tecProblemDiv{
-    background-color :rgba(0, 53, 72, 0.921);
-    position: absolute;
-    border-radius : 20px ;
-    width: 16%;
-    height: 40vh;
-    color :#f0f3f5;
-    top : 60%;
-    left: 83%;
-    padding: 0rem 1rem;
-    transition: 0.5s;
-
-  }
-
-  .tecProblemDiv-header{
-    position: relative;
-    font-size: medium;
-    top: 10%;
-
-  }
-  
-
-
-  .nonTecProblem{
-    position: absolute;
-    transform: scale(0);
-     transition: 0.7s;
-     top : 22%;
-     left: 72%;
-
-  }
-
-  .tecProblemDescriptionTextField{
-    position: relative;
-    top: 22%;
+    top: 12%;
     left: 15%;
-    width: 67%;
-    z-index: 2;
 }
 
-.tecProblemSubmit{
-
-  position: relative;
-    top: 38%;
+.IssusList-trainee{
+    position: relative;
+    top: 8%;
     left: 15%;
-    width: 67%;
-    z-index: 2;
+}
+
+.reportButtonTrainee{
+    position: relative;
 }

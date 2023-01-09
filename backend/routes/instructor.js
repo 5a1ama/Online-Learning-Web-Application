@@ -406,6 +406,7 @@ router.post("/createExercise/:token/:courseid/:title",async function(req,res){
             var course=await Course.findOne({id:courseid});
             var oldExcercise=course.excercises
             var subtitles=course.subtitles;
+            console.log(12)
             oldExcercise.push(excerciesCount)
             for(var i=0;i<subtitles.length;i++){
                 if(subtitles[i].title==title){
@@ -413,7 +414,7 @@ router.post("/createExercise/:token/:courseid/:title",async function(req,res){
                     break;
                 }
             }
-            await Course.findOneAndUpdate({id:courseid},{subtitles:subtitles,excercises:oldExcercise.concat([excerciesCount])})
+            await Course.findOneAndUpdate({id:courseid},{subtitles:subtitles,excercises:oldExcercise})
             res.json ("ok")
     
         })
@@ -424,4 +425,31 @@ router.post("/createExercise/:token/:courseid/:title",async function(req,res){
     }
 
 })
+router.post("/updateExercise/:token/:courseid/:title/:excerid",async function(req,res){
+    var token=req.params.token;
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
+        var questions=req.body.questions;
+        var choices =req.body.choices;
+        var answer=req.body.answers;
+        if(!answer){
+            answer=1
+        }
+        console.log(questions)
+        console.log(choices)
+        
+        var excerciesid= req.params.excerid;
+       
+        await Excercise.findOneAndUpdate({id:excerciesid},{questions:questions,choices:choices,correctAnswer:answer})
+            res.json ("ok")
+    
+        
+    
+    
+    }catch{
+        res.json("error")
+    }
+
+})
+
 module.exports=router

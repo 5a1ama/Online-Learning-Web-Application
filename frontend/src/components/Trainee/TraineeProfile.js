@@ -85,7 +85,7 @@ export function TraineeProfile(){
 
     const [showDiv1,setShowDiv1] = useState(false);
     const [showDiv2,setShowDiv2] = useState(false);
-    const [showDiv3,setShowDiv3] = useState(false);
+
 
     const[traineeWallet,setTraineeWallet] = useState();
 
@@ -119,7 +119,7 @@ export function TraineeProfile(){
                handleCountryNumber={handleCountryNumber}
                select="" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
         </div> 
-        {!showDiv2&&!showDiv3&&<div><div className="TraineeProfileDetails">
+        {!showDiv2&&<div><div className="TraineeProfileDetails">
         <Avatar  
        className="avatar"
        sx={{ backgroundColor: '#0277bd' ,width: 100, height: 100 ,fontSize:55}}
@@ -129,6 +129,8 @@ export function TraineeProfile(){
        </Avatar>
        <h5 className="instructorname">{Trainee && Trainee.Name}</h5>
           <h5 className="instructorEmail">{Trainee && Trainee.Email}</h5>
+
+        
           <button  className=''  onClick={()=> setShowDiv2(true)}>
                         Change Password
                     </button>
@@ -136,27 +138,24 @@ export function TraineeProfile(){
                 My Cards 
             </button>
 
-            <button className="TraineeWallet" onClick={() => setShowDiv3(true)}>
-                wallet
-            </button>
+
+            <div className='walletDiv'> 
+
+                <h1 className="accountBalance">
+                Account balance :
+                </h1>
+
+                <h2 className="ammount">
+                    {traineeWallet} 
+                </h2>
+
+
+                </div>
     
 
         </div>
 
-        {showDiv2 && <div className='walletDiv'> 
-
-        <h1>
-            account balance
-        </h1>
-
-        <h2>
-            {traineeWallet}
-        </h2>
-
-    
-
-        
-        </div>}
+       
 
         <div className='editTraineedata'>
                
@@ -183,6 +182,9 @@ export function TraineeProfile(){
                     
                 </div>
                 </div>}
+
+               
+
                {showDiv1&& <div className="TraineeEditData2">
                <TextField id="filled-basic" 
                  defaultValue={Trainee && Trainee.Name} 

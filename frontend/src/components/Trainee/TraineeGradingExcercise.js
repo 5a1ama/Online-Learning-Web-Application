@@ -7,6 +7,7 @@ import correct from "../../assets/correctcheckIcon.png"
 import wrong from "../../assets/wrongcheckIcon.png"
 export function TraineeGradingExercise(){
     const location=useLocation()
+    const [first,setFirst]=useState(0)
     const [countryNumber,setCountryNumber]=useState();
       const handleCountryNumber = (x) =>{
         setCountryNumber(x);
@@ -32,11 +33,15 @@ export function TraineeGradingExercise(){
       const getExcerSol=async()=>{
         setExcerSol(await getExcerciseSolution(location.state.excerciseId))
       }
-      getMyAnswers();
+      if(first==0){
+        getMyAnswers();
       getExcerChoice();
       getExcer();
       getExcerSol();
       getMyGrade()
+      setFirst(1);
+      }
+      
     //    alert(location.state.courseId)
     return(
         <div>
@@ -44,7 +49,7 @@ export function TraineeGradingExercise(){
               handleCountryNumber={handleCountryNumber}
               select="" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
               <div className="TGEMainDiv">
-              <label>{"Grade: "+Grade}</label>
+              <h2>{"Grade: "+Grade}</h2>
                 {excerciseQuestions.map((question,i)=><div className="TGEquestionDiv">
                    <div className="ICONQUEST">
                    <label className="TGELABEL">{question}</label>

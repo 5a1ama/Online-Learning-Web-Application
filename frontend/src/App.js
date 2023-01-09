@@ -43,6 +43,7 @@ import AdminPromotions from './components/Admin/AdminPromotions/AdminPromotions'
 import { TraineeCourseExcer } from './components/Trainee/TraineeCourseExcer';
 import { TraineeGradingExercise } from './components/Trainee/TraineeGradingExcercise';
 import { MyInstructorReports } from './components/Instructor/instructorReports';
+import { InstructorEditExercise } from './components/Instructor/InstructorEditExcer';
 
 
 export default function App() {
@@ -102,6 +103,7 @@ export default function App() {
           <Route path="/AdminPromotions" element={<AdminPromotions/>}/>
           <Route path="/TraineeCourseExercise" element={<TraineeCourseExcer/>}/>
           <Route path="/TraineeGradingExercise" element={<TraineeGradingExercise/>}/>
+          <Route path="/InstructorEditExcer" element={<InstructorEditExercise/>}/>
         </Routes>
       
     

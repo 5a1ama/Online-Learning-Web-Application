@@ -7,9 +7,17 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { addNewSubToCourse, uploadSubtitleVideo } from '../../../API/InstructorAPI';
 import {TextField} from "@mui/material";
 import "./Subtitle.css"
-import { getMyCompletedExce } from '../../../API/TraineeAPI';
+import { getMyCompletedExce, MyGrade } from '../../../API/TraineeAPI';
+
 function Subtitle(props) {
     const navigate = useNavigate();
+    const [grade,setGrade]=useState("");
+
+    const getGrade=async()=>{
+        setGrade(await MyGrade(props.sub.excerciseId))
+    }
+    
+
     const[update,setUpdate]=useState(props.sub.video[0])
     const[showDetails,setShowDetails]=useState(false);
     const [showDetailsClicked,setShowDetailsClicked]=useState(false);
@@ -49,6 +57,7 @@ function Subtitle(props) {
     if(first==0){
         HandleSyllabus();
         getCompleted();
+        getGrade();
         setFirst(1);
     }
 
@@ -99,7 +108,10 @@ function Subtitle(props) {
                     {props.guest&&<a href="/" ><h3 style={{color:"#aaa",transform:"translate(-.6rem , 0rem)"}} >Exercise</h3></a>}
                     
                     {props.sub.excerciseId && !completedExcercise.includes(props.sub.excerciseId) && !props.inst && !props.guest &&  <a onClick={()=>navigate("/TraineeCourseExercise",{state:{excerciseId:props.sub.excerciseId,courseId:props.CourseId,title:props.courseTitle}})}><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Exercise1</h3></a>}
-                    {props.sub.excerciseId && completedExcercise.includes(props.sub.excerciseId) && !props.inst && !props.guest &&  <a onClick={()=>navigate("/TraineeGradingExercise",{state:{excerciseId:props.sub.excerciseId,courseId:props.CourseId}})}><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Show Grade</h3></a>}
+                    {props.sub.excerciseId && completedExcercise.includes(props.sub.excerciseId) && !props.inst && !props.guest && grade!="" &&
+                    <h3 style={{color:"rgb(0,0,0)"}} className="CourseItems_OpenItem3">{"Your Grade: "+grade}</h3> }
+                    {props.sub.excerciseId && completedExcercise.includes(props.sub.excerciseId) && !props.inst && !props.guest && Number(grade.split("/")[0]*1.0/grade.split("/")[1])>=0.5 &&  <a onClick={()=>navigate("/TraineeGradingExercise",{state:{excerciseId:props.sub.excerciseId,courseId:props.CourseId}})}><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Show Grade And Solutions</h3></a>}
+                    {props.sub.excerciseId && completedExcercise.includes(props.sub.excerciseId) && !props.inst && !props.guest && Number(grade.split("/")[0]*1.0/grade.split("/")[1])<0.5 &&  <a onClick={()=>navigate("/TraineeCourseExercise",{state:{excerciseId:props.sub.excerciseId,courseId:props.CourseId,title:props.courseTitle}})}><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Retake</h3></a>}
 
                     {!props.sub.excerciseId && !props.inst && <h3 style={{color:"rgb(0,0,0)"}} className="CourseItems_OpenItem3">No Excercise Yet</h3> }
                     {!props.sub.excerciseId &&  props.inst && <a href="/InstructorAddExcer"><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Add Excercise</h3></a> }

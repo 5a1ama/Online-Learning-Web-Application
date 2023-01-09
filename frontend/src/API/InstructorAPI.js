@@ -5,11 +5,29 @@ const api="http://localhost:8000"
 export const getMycourses=async (token)=>{
     const response=await fetch(`http://localhost:8000/instructor/myCourses/${token}`);
     const j=await response.json();
-    return j;
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+            return j
+        }else{
+          return j
+
+        }
+    
 }
 export const SearchMyCourse=async(token,search)=>{
     const response=await fetch(`http://localhost:8000/instructor/myCourses-search/${search}/${token}`);
     const j=await response.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
     return j;
 
 }
@@ -30,13 +48,31 @@ export const FilterMyCourse=async(min,max,subject)=>{
     if(subject==""){
         const response=await fetch(`${api}/instructor/myCourses-price-subject/${min}/${max}/-1/${localStorage.getItem("token")}`)
         const j=await response.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
         
-        return j
+        
     }else{
         
         const response=await fetch(`${api}/instructor/myCourses-price-subject/${min}/${max}/${subject}/${localStorage.getItem("token")}`)
         
         const j=await response.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
         return j
     }
     
@@ -45,8 +81,15 @@ export const getInstructorDetails= async()=>{
     if(localStorage.getItem("token")){
         var result = await fetch(`http://localhost:8000/instructor/getInstructor/${localStorage.getItem("token")}`)
     var j=await result.json();
-    
-    return j;
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
     }else{
         return ""
     }
@@ -58,7 +101,16 @@ export const updateInstructorName=async(name)=>{
         "Content-type": "application/json; charset=UTF-8"
     }
     })
-    return await result.json()
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const updateInstructorEmail=async(name)=>{
     var result=await fetch(`http://localhost:8000/instructor/updateEmail/${name}/${localStorage.getItem("token")}`,{method: "POST",
@@ -66,7 +118,16 @@ export const updateInstructorEmail=async(name)=>{
         "Content-type": "application/json; charset=UTF-8"
     }
     })
-    return await result.json()
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const updateInstructorBio=async(name)=>{
     var result=await fetch(`http://localhost:8000/instructor/updateBio/${name}/${localStorage.getItem("token")}`,{method: "POST",
@@ -74,7 +135,16 @@ export const updateInstructorBio=async(name)=>{
         "Content-type": "application/json; charset=UTF-8"
     }
     })
-    return await result.json()
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const updateInstructorPass=async(oldPass,pass)=>{
     var result=await fetch(`http://localhost:8000/instructor/updatePass2/${oldPass}/${pass}/${localStorage.getItem("token")}`,{method: "POST",
@@ -82,7 +152,16 @@ export const updateInstructorPass=async(oldPass,pass)=>{
         "Content-type": "application/json; charset=UTF-8"
     }
     })
-    return await result.json()
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const updateInstructorSpec=async(name)=>{
     var result=await fetch(`http://localhost:8000/instructor/updateSpec/${name}/${localStorage.getItem("token")}`,{method: "POST",
@@ -91,7 +170,16 @@ export const updateInstructorSpec=async(name)=>{
 
     }
     })
-    return await result.json()
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const uploadCourseVideo=async(id,link)=>{
     const result=await fetch(`http://localhost:8000/instructor/uploadCourseVideo`,{method: "POST",
@@ -116,7 +204,16 @@ export const definePromotion=async(id,amount,duration)=>{
     },
     body: JSON.stringify({courseID:id,amount:amount,duration:duration,token:localStorage.getItem("token")})
 })
-return await result.json()
+const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const definePromotion2=async(id,amount)=>{
     const result=await fetch(`http://localhost:8000/instructor/coursePromotion2`,{method: "POST",
@@ -125,7 +222,16 @@ export const definePromotion2=async(id,amount)=>{
     },
     body: JSON.stringify({courseID:id,amount:amount})
 })
-return await result.json()
+const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const addNewSubToCourse=async(courseid,subtitle,hours)=>{
     const result=await fetch(`http://localhost:8000/course/addCourseSub/${subtitle}/${hours}/${courseid}`,{method: "POST",
@@ -135,7 +241,16 @@ export const addNewSubToCourse=async(courseid,subtitle,hours)=>{
     body: JSON.stringify({courseID:courseid,subtitle:subtitle,hours:hours})
     
 })
-    return await result.json()
+const j=await result.json();
+if(j=="error"){
+
+    alert("you must login first")
+    window.location.href="/login"
+
+}else{
+  return j
+
+}
 }
 
 export const deleteSubTitle=async (title,id)=>{
@@ -144,12 +259,30 @@ export const deleteSubTitle=async (title,id)=>{
         "Content-type": "application/json; charset=UTF-8"
     }    
 })
-return await result.json()
+const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 
 }
 export const getinstructorTraineeDetails = async(id) =>{
     const result = await fetch(`http://localhost:8000/instructor/getinstructorTraineeDetails/${id}`)
-    return await result.json()
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const updateSubtitle=async(id,oldtitle,title,hours,link,desc)=>{
     var route=`http://localhost:8000/course/updateSubtitle/${id}/${oldtitle}`
@@ -183,7 +316,16 @@ export const updateSubtitle=async(id,oldtitle,title,hours,link,desc)=>{
         "Content-type": "application/json; charset=UTF-8"
     }    
 })
- return await result.json()
+const j=await result.json();
+if(j=="error"){
+
+    alert("you must login first")
+    window.location.href="/login"
+
+}else{
+  return j
+
+}
 
 }
 export const salaryPerMonth=async(month,year)=>{
@@ -192,7 +334,16 @@ export const salaryPerMonth=async(month,year)=>{
         "Content-type": "application/json; charset=UTF-8"
     }
     })
-    return await result.json()
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 
 }
 export const addReport=async(courseId,reporttype,details)=>{
@@ -204,14 +355,33 @@ export const addReport=async(courseId,reporttype,details)=>{
 }
 export const getAllReport=async()=>{
     const result=await fetch(`http://localhost:8000/trainee/myReports/${localStorage.getItem("token")}`)
-    return await result.json();
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const followupReport=async(question,id)=>{
-    await fetch(`http://localhost:8000/trainee/followUpReport/${localStorage.getItem("token")}/${id}/${question}`,{method: "POST",
+    const result=await fetch(`http://localhost:8000/trainee/followUpReport/${localStorage.getItem("token")}/${id}/${question}`,{method: "POST",
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     }
     })
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 
 export const createExercise=async(questions,choices,courseid,title,answers)=>{
@@ -223,5 +393,34 @@ export const createExercise=async(questions,choices,courseid,title,answers)=>{
 
 
     })
-    return await result.json();
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
+}
+export const updateExercise=async(questions,choices,courseid,title,answers,excerid)=>{
+    const result=await fetch(`http://localhost:8000/instructor/updateExercise/${localStorage.getItem("token")}/${courseid}/${title}/${excerid}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    },
+    body: JSON.stringify({questions:questions,choices:choices,answers:answers})
+
+
+    })
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
