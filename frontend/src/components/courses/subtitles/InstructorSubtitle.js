@@ -9,6 +9,7 @@ import {TextField} from "@mui/material";
 import "./Subtitle.css"
 import "./InstructorSubtitle.css"
 import { BiEdit } from 'react-icons/bi';
+import { MyGrade } from '../../../API/TraineeAPI';
 function InstructorSubtitle(props) {
     const navigate = useNavigate();
     const[update,setUpdate]=useState(props.sub.video[0])
@@ -28,6 +29,7 @@ function InstructorSubtitle(props) {
         // }
         setEdit(true);
     }
+    
     const handleNewTitle=(event)=>{
         setNewTitle(event.target.value);
     }
@@ -145,7 +147,7 @@ function InstructorSubtitle(props) {
                 <div className="DivHover" style={{display:"flex",flexDirection:"row" ,justifyContent:"space-between"}}>
                     <IoIosPaper size={25}></IoIosPaper>
                     <a href="/CourseExercise" ><h3 style={{color:"#000",transform:"translate(-.6rem , 0rem)"}} >Exercise</h3></a>
-                    {props.sub.excerciseId&& <a onClick={()=>navigate("/InstructorEditExcer")}><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Edit Exercise</h3></a>}
+                    {props.sub.excerciseId&& <a onClick={()=>navigate("/InstructorEditExcer",{state:{courseId:props.CourseId,subtitle:props.sub.title,excerciseId:props.sub.excerciseId}})}><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Edit Exercise</h3></a>}
                     {!props.sub.excerciseId && <a onClick={handleNavigate} ><h3   style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Add Excercise</h3></a> }
                     {/* onClick={navigate("/InstructorAddExcer",{state:{courseId:props.CourseId,title:props.sub.subtitle}})} */}
                     {/* {props.exercise.length<=props.index && <button className='AddExcerBTNZIAD'  onClick={handleNavigate} > Add Excercise</button>} */}

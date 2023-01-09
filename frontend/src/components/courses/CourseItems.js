@@ -35,7 +35,7 @@ function CourseItems() {
         }
     }
     const getTraineeProgress =async()=>{
-        setProgress(await getTraineeCourseProg(location.state.id));
+        setProgress(Math.ceil(await getTraineeCourseProg(location.state.id)));
     }
     const [details,setDetails] = useState([]);
     
@@ -70,7 +70,7 @@ function CourseItems() {
             if(myrate!="error"){
                 setMyRate(myrate)
             }else{
-                alert(myrate)
+                alert("login first")
                 localStorage.setItem("token",null);
                 localStorage.removeItem("token");
                 localStorage.clear();

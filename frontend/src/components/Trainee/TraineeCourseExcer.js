@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getExcerciseChoices, getExcerciseQuestions, getTraineeCourseProg, solveExcersice } from "../../API/TraineeAPI";
 import Navbar from "../navbar/Navbar"
@@ -13,7 +13,7 @@ export function TraineeCourseExcer(){
     const [questions,setQuestion]=useState([]);
     const [choices,setChoices]=useState([]);
     const [solutions,setSolutions]=useState([]);
-    
+    const [first,setFirst]=useState(0)
     const getQuestions=async()=>{
         setQuestion(await getExcerciseQuestions(location.state.excerciseId))
         setChoices(await getExcerciseChoices(location.state.excerciseId))
@@ -50,7 +50,14 @@ export function TraineeCourseExcer(){
 
         }
     }
-    getQuestions();
+    useEffect(()=>{
+        getQuestions();
+
+    })
+    if(first==0){
+        getQuestions();
+        setFirst(1);
+    }
     
     return(
         <div>
