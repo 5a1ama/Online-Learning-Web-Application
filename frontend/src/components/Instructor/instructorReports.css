@@ -3,7 +3,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     background-color: transparent;
 }
 .instructorReportsMainDiv::before{
@@ -18,6 +18,8 @@
 
  position: absolute;
     top: 20%;
+    left: 2%;
+
     background-color: rgb(255, 255, 255);
     height: 490px;
     width: 400px;
@@ -25,4 +27,117 @@
     border-top-right-radius: 2%;
     border-bottom-left-radius: 2%;
     border-bottom-right-radius: 2%;
+}
+.reportDetailsDiv{
+    position: absolute;
+    left: 30%;
+    top: 20%;
+    background-color: rgb(255, 255, 255);
+    height: 490px;
+    width: 900px;
+    border-top-left-radius: 2%;
+    border-top-right-radius: 2%;
+    border-bottom-left-radius: 2%;
+    border-bottom-right-radius: 2%;
+}
+.listOfReportsDiv{
+    position: relative;
+    top: 2%;
+    left: 2%;
+}
+.stateLabel{
+    position: relative;
+    top: 2%;
+    left: 2%;
+}
+.stateLabelDiv{
+    display: flex;
+    flex-direction: row;
+    column-gap: 75%;
+}
+.stateLabel2{
+    position: relative;
+    top: 0.5vw;
+    font-size: 1.5rem;
+    color: rgb(10,138,218);
+
+}
+.FollowUpButton{
+    position: absolute;
+    top: 27vw;
+    left: 48vw;
+    width:10vw;
+}
+.detailsLabel{
+    position: absolute;
+    top: 14%;
+    left: 2%;
+}
+.DtailsText{
+    position: relative;
+    top: 2vw;
+    left: 10vw;
+    width: 70%;
+
+}
+.FollowUpShadowDiv{
+    width: 100%;
+    height: 100%;
+    background: transparent; 
+    display: flex;
+    flex-direction: column;
+  position:fixed;
+  z-index: 2;
+}
+.FollowUpShadowDiv::before{
+    position: fixed;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0,0, 0.5);
+}
+.followUpDiv{
+    position: absolute;
+    left: 35%;
+    top: 20%;
+    background-color: rgb(255, 255, 255);
+    height: 490px;
+    width: 500px;
+    border-top-left-radius: 2%;
+    border-top-right-radius: 2%;
+    border-bottom-left-radius: 2%;
+    border-bottom-right-radius: 2%;
+    z-index: 2;
+}
+.FollowText{
+    position: absolute;
+    top: 4vw;
+    left: 4vw;
+    width: 70%;
+}
+.followUpQuestion{
+    position: relative;
+    top: 2%;
+    left: 2%;
+}
+.followUpDivider{
+    position: relative;
+    top: 2%;
+}
+.followUpAddButton{
+    position: relative;
+    top: 75%;
+    left: -5%;
+    width: 30%;
+
+}
+.followUpCancelButton{
+    position: absolute;
+    top: 85%;
+    left: 30%;
+    width: 30%;
+    background-color: red;
+}
+.followUpCancelButton:hover{
+    background-color: rgb(246, 99, 99);
 }
