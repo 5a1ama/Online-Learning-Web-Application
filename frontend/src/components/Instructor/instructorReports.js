@@ -38,9 +38,22 @@ export function MyInstructorReports(){
     }
 
     const handleFollowUpCommentMethod = async ()=>{
-        // followupReport(followUpComment,)
+       const x = followupReport(followUpComment,reportFollowID)
+    //    setAllInstReports(await getAllReport())
+    //    for(var i =0;i<allInstReports.length;i++){
+    //     if(allInstReports[i].id== reportFollowID){
+    //         alert(allInstReports[i].followup)
+    //         setFollowUpAfter(allInstReports[i].followup)
+    //     }
+    //    }
+    alert("Your follow Up is succ. added")
+       setFollowUpReportDiv3(false)
+       setShowReportDiv3(false)
+
 
     }
+    const [followUpAfter,setFollowUpAfter] = useState();
+
     const [first,setFirst]=useState(0);
     const [index,setIndex]=useState(-1);
     const handleSetIndex=(index1)=>{
@@ -69,7 +82,7 @@ export function MyInstructorReports(){
           </Avatar>
         </ListItemAvatar>
         <ListItemText primary={ props.report.type } secondary={props.report.details.substring(props.report.details.length-20)+"......"} />
-         <IconButton edge="end"  sx={{color:"#F21C1C"}}   onClick={()=>{setShowReportDiv3(true);setreport(props.report)}}>
+         <IconButton edge="end"  sx={{color:"#F21C1C"}}   onClick={()=>{setShowReportDiv3(true);setreport(props.report);setFollowUpAfter(props.report.followup);setReportFollowId(props.report.id)}}>
                       <ArrowForwardIosIcon color="primary" />
                     </IconButton> 
 
@@ -99,8 +112,8 @@ export function MyInstructorReports(){
                 </div>
                 
                 <Divider variant="fullWidth" />
-                {(props.report.status=="unseen" || props.report.status=="pending") && <button className="FollowUpButton" onClick={()=>{setFollowUpReportDiv3(true);setReportFollowId(props.report.id)}}>
-                    Follow UP</button>}
+
+                {(props.report.status=="unseen" || props.report.status=="pending") }
 
                     <h2 className="detailsLabel" >
                         Details:
@@ -111,7 +124,7 @@ export function MyInstructorReports(){
                     <TextField
                     className="DtailsText"
           id="outlined-read-only-input"
-          label="Read Only"
+          label="Report Details"
           defaultValue={props.report.details}
           InputProps={{
             readOnly: true,
@@ -166,12 +179,32 @@ select="" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]} inst=
             <div className="instructorReportsList">
                 {allInstReports&&allInstReports.map((report,i)=><GetAllInstReports index={i}  report={report}/>)}
 
+            
+
               
            
 
             </div>
            {showReportDiv3 && <div className="reportDetailsDiv" id={"reportDetailsDiv"} >
                    <ReportDetailsAndStatus report={report}/>
+                   <h2 className="FollowupLabel">
+                    Follow Up:
+                   </h2>
+
+                   <div className="followUpTextFieldDiv">
+
+                         {followUpAfter&&followUpAfter.map((followUp)=><TextField  className="followUpTextField"
+                              id="outlined-read-only-input"
+                              label="Your Follow Up"
+                            defaultValue={followUp.question}
+
+                             InputProps={{
+                               readOnly: true,
+                                            }}
+                                 multiline />)}
+                                 <button className="FollowUpButton" onClick={()=>{setFollowUpReportDiv3(true);}}>
+                    Follow UP</button>
+                                   </div>
                 </div> }
 
                {FollowUpReportDiv3 && <div className="FollowUpShadowDiv"><div className="followUpDiv">
@@ -179,6 +212,7 @@ select="" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]} inst=
                 <h2 className="followUpQuestion">
                     Your Comment:
                 </h2>
+                
 
                 <Divider variant="fullWidth" className="followUpDivider" />
                <TextField
@@ -190,6 +224,7 @@ select="" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]} inst=
           maxRows={10}
           onChange={handleFollowUpComment}
         />
+        {}
         
         <button className="followUpAddButton" onClick={handleFollowUpCommentMethod}>
             Add

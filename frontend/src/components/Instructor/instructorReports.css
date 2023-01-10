@@ -27,6 +27,7 @@
     border-top-right-radius: 2%;
     border-bottom-left-radius: 2%;
     border-bottom-right-radius: 2%;
+    
 }
 .reportDetailsDiv{
     position: absolute;
@@ -39,6 +40,8 @@
     border-top-right-radius: 2%;
     border-bottom-left-radius: 2%;
     border-bottom-right-radius: 2%;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 .listOfReportsDiv{
     position: relative;
@@ -63,9 +66,9 @@
 
 }
 .FollowUpButton{
-    position: absolute;
-    top: 27vw;
-    left: 48vw;
+    position: relative;
+    top: 100%;
+    left: 60%;
     width:10vw;
 }
 .detailsLabel{
@@ -76,7 +79,7 @@
 .DtailsText{
     position: relative;
     top: 2vw;
-    left: 10vw;
+    left: 17%;
     width: 70%;
 
 }
@@ -140,4 +143,20 @@
 }
 .followUpCancelButton:hover{
     background-color: rgb(246, 99, 99);
+}
+.followUpTextField{
+    width: 70%;
+}
+.FollowupLabel{
+    position: relative;
+    top: 8%;
+    left: 2%;
+}
+.followUpTextFieldDiv{
+    position: relative;
+    top: 12%;
+    left: 17%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.8vw;
 }
