@@ -1,12 +1,6 @@
 const api='http://localhost:8000';
-let token = localStorage.token;
 
-if (!token) token = localStorage.token = Math.random().toString(36).substr(-8);
 
-const headers = {
-  Accept: "application/json",
-  Authorization: token,
-};
 export const SearchCourse=async(search)=>{
   const result=await fetch(`${api}/course/search/${search}`);
   return await result.json()
@@ -112,8 +106,16 @@ export const createCourse=async (title,subtitle,hours,price,summary,subjects)=>{
   },
   body:JSON.stringify({title:title,subtitles:subtitle,price:price,summary:summary,hours:hours,subject:subjects})
   });
-  const j=await response.json()
-  return j
+  const j=await response.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 
 export const GetInstructorName = async(InstId)=>{

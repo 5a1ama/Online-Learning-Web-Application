@@ -1,7 +1,7 @@
 import Navbar from "../navbar/Navbar";
 import React, { useEffect, useState } from 'react';
 import './TraineeProfile.css'
-import { getTraineeDetails, updateTraineeEmail, updateTraineeName, updateTraineePass } from "../../API/TraineeAPI";
+import { getTraineeDetails, showWallet, updateTraineeEmail, updateTraineeName, updateTraineePass } from "../../API/TraineeAPI";
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import { TextField } from '@mui/material';
@@ -86,6 +86,9 @@ export function TraineeProfile(){
     const [showDiv1,setShowDiv1] = useState(false);
     const [showDiv2,setShowDiv2] = useState(false);
 
+
+    const[traineeWallet,setTraineeWallet] = useState();
+
     const handleUpdate=async ()=>{
        
         const y = await updateTraineeName(newName);
@@ -98,6 +101,7 @@ export function TraineeProfile(){
      }
      
     const intial = async()=>{
+        setTraineeWallet(await showWallet())
         setTrainee(await getTraineeDetails())
         if(first==0){
             setNewEmail(Trainee.Email)
@@ -125,15 +129,33 @@ export function TraineeProfile(){
        </Avatar>
        <h5 className="instructorname">{Trainee && Trainee.Name}</h5>
           <h5 className="instructorEmail">{Trainee && Trainee.Email}</h5>
+
+        
           <button  className=''  onClick={()=> setShowDiv2(true)}>
                         Change Password
                     </button>
             <button className="TraineeMyCreditCards" onClick={() => navigate('/TraineePayments')}>
                 My Cards 
             </button>
+
+
+            <div className='walletDiv'> 
+
+                <h1 className="accountBalance">
+                Account balance :
+                </h1>
+
+                <h2 className="ammount">
+                    {traineeWallet} 
+                </h2>
+
+
+                </div>
     
 
         </div>
+
+       
 
         <div className='editTraineedata'>
                
@@ -160,6 +182,9 @@ export function TraineeProfile(){
                     
                 </div>
                 </div>}
+
+               
+
                {showDiv1&& <div className="TraineeEditData2">
                <TextField id="filled-basic" 
                  defaultValue={Trainee && Trainee.Name} 

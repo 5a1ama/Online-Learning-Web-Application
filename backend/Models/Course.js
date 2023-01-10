@@ -69,6 +69,10 @@ const courseschema=new Schema({
     enrolledStudents:{
         type:Number,
         default:0
+    },
+    published :{
+        type:Boolean,
+        default:false
     }
 })
 const Course = mongoose.model('course', courseschema);

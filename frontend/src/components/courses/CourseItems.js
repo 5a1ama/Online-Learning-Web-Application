@@ -1,4 +1,4 @@
-import {Component, React,useEffect,useRef,useState} from 'react'
+import {Component,Checkbox, React,useEffect,useRef,useState} from 'react'
 import video from '../../assets/ItemsBack.mov';
 import Navbar from './../navbar/Navbar';
 import {  getCourseDetails } from './../../API/CourseAPI';
@@ -12,15 +12,20 @@ import { GetInstructorName } from './../../API/CourseAPI';
 import Footer from '../footer/Footer';
 import Subtitle from './subtitles/Subtitle';
 import Rating from '@mui/material/Rating';
-import { Avatar } from '@mui/material';
+import Divider from '@mui/material/Divider';
+import { Avatar, TextField } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
 import { getTraineeCourseProg, myCourseRate, rateCourse, requestRefund } from '../../API/TraineeAPI';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
+import { addReport } from '../../API/InstructorAPI';
+
 
 function CourseItems() {
     const [first,setFirst] = useState(0);
     const location=useLocation();
     const navigate = useNavigate();
     const [progress,setProgress]=useState(0);
+
     const handleUnenroll=async()=>{
         const result=await requestRefund(location.state.id)
         if(result=="error"){
@@ -30,15 +35,12 @@ function CourseItems() {
         }
     }
     const getTraineeProgress =async()=>{
-        setProgress(await getTraineeCourseProg(location.state.id));
+        setProgress(Math.ceil(await getTraineeCourseProg(location.state.id)));
     }
     const [details,setDetails] = useState([]);
     
     const[showDetails,setShowDetails]=useState(false);
     const handleShowDetails =() =>{setShowDetails(!showDetails)};
-
-    const[gift,setGift]=useState(false);
-    const handleGift =() =>{setGift(!gift)};
 
     const [view , setView] = useState("");
 
@@ -59,7 +61,7 @@ function CourseItems() {
 
     useEffect(()=>{ 
         handleView(location.state.View)
-        },[location.state])
+        },[location.state.View])
 
     useEffect(()=>{
         async function getR(){
@@ -68,7 +70,7 @@ function CourseItems() {
             if(myrate!="error"){
                 setMyRate(myrate)
             }else{
-                alert(myrate)
+                alert("login first")
                 localStorage.setItem("token",null);
                 localStorage.removeItem("token");
                 localStorage.clear();
@@ -105,7 +107,36 @@ function CourseItems() {
             return false;
         }
     }
+
+    const Issues = [
+        {
+            value: 'technical',
+            label: 'Technical',
+        },
+        {
+            value: 'financial',
+            label: 'Financial',
+        },
+        {
+            value: 'other',
+            label: 'Other',
+        },
+        ];
     const [instNames,setInstNames] = useState([])
+    const [issueType,setIssueType] = useState("");
+    const [issuewords,setIssueWords] = useState("");
+
+    const [showReportDiv ,setShowReportDiv] = useState(false);
+    const handleChangeIssueType = (event)=>{
+        setIssueType(event.target.value)
+    }
+    const handleChangeIssueWords = (event)=>{
+        setIssueWords(event.target.value)
+    }
+    const handleSubmitReport = ()=>{
+        addReport(location.state.id,issueType,issuewords)
+        setShowReportDiv(false)
+    }
 
     const handleInstNames = async () => {
         var names = [];
@@ -138,7 +169,6 @@ function CourseItems() {
           setCountryNumber(x);
         }
 
-        
 
         handleInstNames();
         // getRate();
@@ -146,6 +176,7 @@ function CourseItems() {
   return (
     
     <div className="CourseItems">
+
 
             <Navbar items={["Home","My Courses","All Courses"]}
                handleCountryNumber={handleCountryNumber}
@@ -179,8 +210,56 @@ function CourseItems() {
                     {details[0]&&stars(details[0].rating.value).map((num)=> <img className="starImg2" style={{width:'40px'}} src={starImg} alt="."/>)}
                 </div>
 
+                <button className='reportButtonTrainee' onClick={()=>setShowReportDiv(true)}>
+                    Report issue
+                </button>
+
 
             </div>
+
+
+            {showReportDiv&& <div className="reportTraineeDivShadow">
+                 <div className="reportTraineeDiv">
+                            <h1 className="ReportLabel"> Report</h1>
+                            <Divider className='DividerCard' variant="middle"/>
+
+                            <TextField
+                            className="IssusList-trainee"
+                            id="outlined-select-currency"
+                            select
+                            label="Your Issue"
+                            sx={{width:'70%'}}
+                            helperText="Please select your Issue"
+                            onChange={handleChangeIssueType}
+                            >
+                            {Issues.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                            </MenuItem>
+                            ))}
+                            </TextField>
+
+                            <TextField
+                            className="IssueTextField-trainee"
+                            sx={{width:'70%'}}
+                            id="outlined-multiline-flexible"
+                            label="Your Issue"
+                            multiline
+                            maxRows={7}
+                            onChange={handleChangeIssueWords}
+                            />
+
+                    <button className="submitReportButton-trainee" onClick={handleSubmitReport}>
+                        Submit
+                    </button>
+                    <button className="cancelReportButton-trainee" onClick={()=>setShowReportDiv(false)}>
+                        cancel
+                        </button>
+                    </div> 
+                        </div>}
+
+
+
             
             {/* progress bar */                                                                 }
             {progress<50 && <button className='CourseItemsUnenrollbtn' onClick={handleUnenroll}>UnEnroll</button>}

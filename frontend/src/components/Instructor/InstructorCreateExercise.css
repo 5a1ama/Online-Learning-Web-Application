@@ -25,9 +25,14 @@
     height: 5%;
 }
 
-.plusbuttn{
+.ICEplusbuttn{
     position:fixed;
 left:87% ;
+    top: 22%;
+}
+.ICEminusbuttn{
+    position:fixed;
+left:92% ;
     top: 22%;
 }
 .qestionsdiv2main{

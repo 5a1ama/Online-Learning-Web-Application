@@ -14,13 +14,10 @@
   color:var(--primary-light)
 }
 
-.CourseItems_Syllabus_Subtitles_Content_Details h2{
-  color:var(--primary-light)
-}
 .CourseItems_Syllabus_Subtitles_Content:hover{
-    background-color:rgb(232, 232, 232);
+  background-color:rgb(232, 232, 232);
     cursor: pointer;
-}
+  }
 .CourseItems_Syllabus_Subtitles_Content_Details{
     height: auto;
     min-height: 50vh;
@@ -29,9 +26,12 @@
     position: relative;
     display: flex;
     flex-direction: row;
-
     
-}
+    
+  }
+  .CourseItems_Syllabus_Subtitles_Content_Details h2{
+    color:var(--primary-light)
+  }
 
   
   .CourseItems_Syllabus_ArrowDown {
@@ -104,13 +104,18 @@
     align-items:center;
     align-content:center;
     text-align: left;
+    width:80vh;
     /* flex: auto; */
 
 }
   .DivHover:hover{
     background: rgb(220,220,220);
   }
+.LargeDivHover{
+  display: flex;
+  flex-direction: row;
 
+}
   .CourseItems_DivForContinue_WorkSub{
     position:absolute;
     top:20vh;

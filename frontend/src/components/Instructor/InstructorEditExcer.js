@@ -7,10 +7,11 @@ import "./InstructorCreateExercise.css"
 import { useEffect, useState } from "react";
 import { QuestionsDiv } from "./QuestionsDiv";
 import { NewDiv } from "./NewDiv";
-import { createExercise } from "../../API/InstructorAPI";
+import { createExercise, updateExercise } from "../../API/InstructorAPI";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getExcerciseChoices, getExcerciseQuestions, getExcerciseSolution } from "../../API/TraineeAPI";
 
-export function InstructorCreateExercise (){
+export function InstructorEditExercise (props){
     const location=useLocation()
     const navigate=useNavigate();
     const [questionsArr,setQuestionsArr]=useState([]);
@@ -23,6 +24,28 @@ export function InstructorCreateExercise (){
     const[choice4,setChoice4]=useState("");
     const[answer,setAnswer]=useState("1");
     const[answerArray,setAnswerArray]=useState([])
+    const[first,setFirst]=useState(0)
+    const initial=async()=>{
+        const ques=await getExcerciseQuestions(location.state.excerciseId)
+        const choices=await getExcerciseChoices(location.state.excerciseId)
+        const answers=await getExcerciseSolution(location.state.excerciseId)
+        setQuestionsArr(ques.splice(1,ques.length));
+        setQuestion(ques[0])
+        setChoicesArr(choices.splice(1,choices.length))
+        setChoice1(choices[0][0])
+        setChoice2(choices[0][1])
+        setChoice3(choices[0][2])
+        setChoice4(choices[0][3])
+        if(answers[0] !=""){
+
+            setAnswer(answers[0])
+        }else{
+            setAnswer("1")
+
+        }
+        setAnswerArray(answers.splice(1,answers.length))
+        
+    }
     const handleAnswer=(event)=>{
         setAnswer(event.target.value)
     }
@@ -70,9 +93,9 @@ export function InstructorCreateExercise (){
     }
     const handleSubmit=async (event)=>{
         event.preventDefault();
-        const x = await createExercise([question].concat(questionsArr),[[choice1,choice2,choice3,choice4]].concat(choicesArr),location.state.courseId,
-        location.state.subtitle,[answer].concat(answerArray))
-        alert("successfuly created!")
+        const x = await updateExercise([question].concat(questionsArr),[[choice1,choice2,choice3,choice4]].concat(choicesArr),location.state.courseId,
+        location.state.subtitle,[answer].concat(answerArray),location.state.excerciseId)
+        alert("successfuly updated!")
         navigate("/InstructorViewCourse",{state:{id:location.state.courseId,View:"Syllabus"}})
     }
     
@@ -98,8 +121,13 @@ export function InstructorCreateExercise (){
         setChoicesArr(choicesArr.splice(0,choicesArr.length-1));
         setAnswerArray(answerArray.splice(0,answerArray.length-1));
     }
-
-
+    useEffect(()=>{
+        //initial();
+    })
+    if(first==0){
+        initial();
+        setFirst(1)
+    }
 
     return(
         <div>
@@ -187,7 +215,7 @@ export function InstructorCreateExercise (){
 
                                   size="small"
                                   /> */}
-           Choose Correct Choice:<select  className="answeroptiongrp" required onChange={handleAnswer}>
+           Choose Correct Choice:<select value={answer}  className="answeroptiongrp" required onChange={handleAnswer}>
                 <option>
                     1
                 </option>

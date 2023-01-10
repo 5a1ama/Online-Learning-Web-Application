@@ -93,11 +93,12 @@ export function NewCourse(props) {
         setAdminClick(false);
       }
      },[props.selectAll])
+     
       return (
 
     <div
     onClick={()=>(props.Admin&&handleAdminClick(props.course.id))} 
-    className={props.Admin==true?
+    className={props.Admin?
       (adminClick?"newCourseAdminClicked ":"newCourseAdmin newCourse")
     :(courseDetails? "newCourse-After":"newCourse")}  >
         <div className={courseDetails? "newCourse-After-Content":"newCourse-content"}>
@@ -193,9 +194,12 @@ export function NewCourse(props) {
           </div>
       }
      
-      <button className="NewCourse-button-OpenCourse" style={{marginRight: '1rem' ,width:"100px",height:"60px",transform:"translate(1rem,1.7rem)" }} onClick={()=>{ if(props.Trainee){navigate("/CourseItems",{state:{id:props.course.id,View:"Overview"}})
-    
-    }else if(props.inst){
+      <button className="NewCourse-button-OpenCourse" style={{marginRight: '1rem' ,width:"100px",height:"60px",transform:"translate(1rem,1.7rem)" }} 
+      onClick={()=>{
+        if(props.Trainee){
+          navigate("/CourseItems",{state:{id:props.course.id,View:"Overview"}})
+          
+        }else if(props.inst){
       navigate("/instructorViewCourse",{state:{id:props.course.id,View:"Overview"}})
     }else{
       navigate("/CourseContent",{state:{id:props.course.id,View:""}})

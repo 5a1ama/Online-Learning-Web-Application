@@ -5,11 +5,12 @@ export const QuestionsDiv=(props)=>{
     const [array,setArray]=useState(props.arr);
     const[array2,setArray2]=useState(props.arr2);
     const[array3,setArray3]=useState(props.arr3);
+    // alert(props.arr+" "+props.arr2+" "+props.arr3)
     const handleAnswer=(event)=>{
         const temp=array3;
         var index=Number(event.target.getAttribute("id").substring(6))
         temp[index]=event.target.value
-        setArray(temp)
+        setArray3(temp)
         
         props.handleAnswer(index,event.target.value)
     }
@@ -40,7 +41,8 @@ export const QuestionsDiv=(props)=>{
                                 className='atoofachoicescheckboxes'
                                  label="enter the question"
                                  variant="outlined"
-                                  //value={props.arr[i]}
+                                  value={props.arr[i]}
+                                  //value={num}
                                   size="small"
                                   /> 
                                   <div>
@@ -51,7 +53,7 @@ export const QuestionsDiv=(props)=>{
                                  id={"choice-"+i+"-0" }
                                  label="choice 1"
                                  variant="outlined"
-                                 // value={array2[i][0]}
+                                value={props.arr2[i][0]}
                                   size="small"
                                   />
             <TextField required
@@ -61,7 +63,7 @@ export const QuestionsDiv=(props)=>{
                                 id={"choice-"+i+"-1" }
                                 label="choice 2"
                                  variant="outlined"
-                                //value={array2[i][1]}
+                               value={props.arr2[i][1]}
 
                                   size="small"
                                   />
@@ -72,7 +74,7 @@ export const QuestionsDiv=(props)=>{
                                 id={"choice-"+i+"-2" }
                                 label="choice 3"
                                  variant="outlined"
-                                 //value={array2[i][2]}
+                                 value={props.arr2[i][2]}
 
                                   size="small"
                                   />
@@ -83,7 +85,7 @@ export const QuestionsDiv=(props)=>{
                                 id={"choice-"+i+"-3" }
                                 label="choice 4"
                                  variant="outlined"
-                                //value={array2[i][3]}
+                                value={props.arr2[i][3]}
 
                                   size="small"
                                   />
@@ -100,7 +102,10 @@ export const QuestionsDiv=(props)=>{
                                   size="small"
                                   /> */}
 
-Choose Correct Choice: <select className="answeroptiongrp" id={"answer"+i} required onChange={handleAnswer}>
+Choose Correct Choice: <select  value={props.arr3[i]} 
+className="answeroptiongrp" 
+id={"answer"+i} required 
+onChange={handleAnswer}>
                 <option>
                     1
                 </option>

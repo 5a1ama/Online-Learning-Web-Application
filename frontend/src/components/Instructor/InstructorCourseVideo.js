@@ -29,7 +29,7 @@ export function InstructorCourseVideo() {
         setFirst(1)
     }
     useEffect(()=>{
-      
+    
       if(first==0){
         begin();
         setFirst(1)
@@ -39,7 +39,7 @@ export function InstructorCourseVideo() {
       window.location.reload();
     }
   const location=useLocation();
-  var previewVideo=""
+  var previewVideo = location.state.Link;
   
   if(location.state !=null){
     //previewVideo = location.state.Link;

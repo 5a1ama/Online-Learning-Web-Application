@@ -14,7 +14,7 @@
 .TraineeProfileDetails{
     position: absolute;
     width: 350px;
-    height: 380px;
+    height: 450px;
   background-color:rgb(255, 255, 255);
     border-top-left-radius: 20px ;
     border-bottom-right-radius: 20px;
@@ -113,4 +113,41 @@
     position: relative;
     width: 48%;
 
+}
+
+.walletDiv{
+    position: absolute;
+    width: 270px;
+    height: 70px;
+    background-color:rgb(255, 255, 255);
+    border-top-left-radius: 20px ;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    top: 1%;
+    left: 1170px;
+    display: flex;
+    flex-direction: row; 
+    padding-top: 7%;
+}
+
+.accountBalance{
+    position: relative;
+    top: 1px;
+    left: 5%;
+    font-size: medium;
+    color: rgb(48, 136, 213);
+}
+
+.TraineeWallet{
+    position: relative;
+    width: 48%;
+
+}
+
+.ammount{
+    position: relative;
+    top: -20%;
+    left: 11%;
+    color: rgb(48, 136, 213);
 }
