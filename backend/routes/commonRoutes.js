@@ -10,13 +10,14 @@ const Trainee=require("../Models/Trainee")
 const cookieParser = require("cookie-parser");
 // @ts-ignore
 const sessions = require('express-session');
+const bcrypt=require("bcrypt");
 dotenv.config()
 
 router.post("/login",async function(req,res){
     var username=req.body.username;
     var password=req.body.password;
     // console.log(username)
-    var query=await User.find({Email:username,Password:password});
+    var query=await User.find({Email:username,Password:bcrypt.hash(password,process.env.secretPassword)});
     if(query.length != 0){
         var user={username:username,password:password,id:query[0].id,job:query[0].Job,country:""}
     var token=jwt.sign(user,process.env.ACCESSTOKEN,{
@@ -151,11 +152,11 @@ router.get("/sendEmailAttach/:token/:courseName",async function(req,res){
 })
 router.get("/resetPass/:email/:pass",async function(req,res){
    var result=await User.findOne({Email:req.params.email});
-   await User.findOneAndUpdate({Email:req.params.email},{Password:req.params.pass});
+   await User.findOneAndUpdate({Email:req.params.email},{Password:bcrypt.hash(req.params.pass,process.env.secretPassword)});
    if(result.Job=="Instructor"){
-    await Instructor.findOneAndUpdate({Email:req.params.email},{Password:req.params.pass})
+    await Instructor.findOneAndUpdate({Email:req.params.email},{Password:bcrypt.hash(req.params.pass,process.env.secretPassword)})
    }else if(result.Job=="Trainee"){
-    await Trainee.findOneAndUpdate({Email:req.params.email},{Password:req.params.pass})
+    await Trainee.findOneAndUpdate({Email:req.params.email},{Password:bcrypt.hash(req.params.pass,process.env.secretPassword)})
 
    }
 })
@@ -174,7 +175,7 @@ router.post('/CreateUser' ,(req,res)=>{
         }else{
 
             if(query.length==0){  
-                var object = new User({id:c+1,Name:name,Email:email,Password:password,Username:username,Job:"Trainee",Gender:gender})
+                var object = new User({id:c+1,Name:name,Email:email,Password:bcrypt.hash(password,process.env.secretPassword),Username:username,Job:"Trainee",Gender:gender})
                 var object2=new Trainee({id:c+1,Name:name,type:"Individual"});
                 object.save(function(err,result1){
                     object2.save(function(err,result){
