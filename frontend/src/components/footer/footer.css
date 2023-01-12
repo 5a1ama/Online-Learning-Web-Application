@@ -3,7 +3,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    padding: 2rem;
+    padding-top: 3rem;
     background:radial-gradient(circle at 30% -100%,rgba(9, 117, 185, 0.95) 25%,rgba(3, 35, 46, 0.95) 85%, rgba(5, 50, 65, 0.95) 100%)
 }
 

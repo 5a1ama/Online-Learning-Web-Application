@@ -109,8 +109,11 @@
     background: transparent; 
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
   position:fixed;
-  z-index: 3;
+  z-index: 2;
   }
   .reportInstructorDivShadow::before{
   position: fixed;
@@ -119,6 +122,7 @@
   height: 100%;
   background: rgba(0, 0,0, 0.5);
 }
+
 .IssusList{
     position: relative;
     top: 8%;
@@ -292,4 +296,172 @@ color:var(--primary-light)
   margin-right: 1rem;
   margin-left: 1rem;
   transform: translate(0,0.4rem);
+}
+
+.ShowPriceDiv{
+    background-color: rgb(255, 255, 255);
+    height: auto;
+    width: 500px;
+  border-radius: 2%;
+    z-index: 4;
+    display: flex;
+    padding: 1rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ShowDiscountDiv{
+  background-color: rgb(255, 255, 255);
+  height: 350px;
+  width: 450px;
+border-radius: 2%;
+  z-index: 2;
+  display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+.Inst_SetPrice{
+  background-color:rgb(47, 215, 21);
+}
+.Inst_SetPrice:hover{
+  background-color:rgb(41, 228, 12);
+}
+.Inst_SetPriceCancel{
+  background-color: rgb(232, 7, 7);
+}
+
+.Inst_SetPriceCancel:hover{
+  background-color: red;
+}
+.ShowPriceLabel{
+  text-align: center;
+  color:var(--primary-light);
+}
+.ShowDiscountLabel{
+  text-align: center;
+  color:var(--primary-light);
+  margin: 0rem;
+
+
+}
+.FromButtonsAddPrice{
+  align-items: center;
+  align-self: center;
+  padding: 1rem;
+}
+.FromButtonsAddPrice button{
+  margin-right: 1rem;
+}
+.PriceTextField{
+  margin: 2rem;
+}
+.DiscountTextField{
+  margin: 2rem;
+}
+.Inst_CourseContent_button_Enroll{
+  background-color: rgba(0,0,0,0);
+  /* background-image:  linear-gradient(90deg, rgb(0, 187, 255) -100%, rgba(174, 0, 255, 0.1)40% ); */
+  border-radius: 40px;
+  height:4vw;
+  width:15vw;
+  border-color: rgb(120, 120, 120);
+  border: solid 3px;
+  z-index: 1;
+  transform: translate(0rem,-1rem);
+  font-size: 20px;
+}
+.Inst_CourseContent_button_Enroll:hover{
+  transition: 1s;
+  transition-delay: 50ms;
+  background-color: rgba(0,0,0,0);
+
+  background-image:  linear-gradient(90deg, rgb(0, 187, 255) -80%, rgba(174, 0, 255, 0.1)40% );
+
+  transform: scale(1.4)translateY(-1.5rem);
+  
+}
+.Inst_BsTrash{
+  color:rgb(226, 32, 32);
+  transform: translate(4px,0px);
+
+}
+.Inst_BsTrash:hover{
+  cursor: pointer;
+  color: rgb(235, 0, 0);
+  transition: 0.2s;
+}
+.Inst_BiEdit{
+  transform: translate(4px,0px);
+  color:#888
+}
+.Inst_BiEdit:hover{
+  cursor: pointer;
+  color:#555;
+  transition: 0.1s;
+}
+.textBox_Instructor_Summary{
+  max-height:160px;
+  max-width:100%;
+  min-height: 40px;
+  min-width:  400px;
+  border-radius:10px ;
+  padding: 1rem;
+  margin: 0.5rem;
+  border:1px solid ;
+}
+.textBox_Instructor_Summary:focus{
+  border:1.5px solid
+
+}
+.Inst_CourseView_SecontPart_Right{
+  width: 30%;
+  margin-left: 1rem;
+}
+.SettingPreviewVideo_Inst{
+  color:#888;
+  transform: translate(15px,40px);
+  cursor: pointer;
+}
+.SettingPreviewVideo_Inst:hover{
+  color:#555;
+  transition: 0.5s;
+}
+
+.InstsettingMenuPreview{
+  position:absolute;
+  width: 28vh;
+  height: 20vh;
+  top:10%;
+  left:103%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  z-index: 0;
+  filter: drop-shadow(0px 4px 2px #1c1c1c3c);
+  display: flex;
+  flex-direction:column;
+  justify-content: flex-start;
+  flex-grow: 1;
+}
+.ShowPreviewLabel{
+  text-align: center;
+  color:var(--primary-light);
+  font-size: 30px;
+}
+.addPreviewImg_Inst{
+  margin-left: 4.5rem;
+  align-self: center;
+  justify-self: center;
+  
+  border-radius: 10px;
+}
+.addPreviewImg_Inst:hover{
+  cursor: pointer;
+  transform: scale(1.01)translate(0rem,0.1rem);
+  transition:0.5s;
+  filter: drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.251));
+}
+.addPreviewImg_Inst_text{
+ text-align: center;
+ margin-top: 4rem;
 }

@@ -65,7 +65,13 @@ button:hover{
   transition:0.3s;
 
 }
+.cancelButton{
+  background-color:rgb(220,0,0);
+}
 
+.cancelButton:hover{
+  background-color:rgb(255,0,0);
+}
 
 @media screen and (max-width: 940px){
   h1{

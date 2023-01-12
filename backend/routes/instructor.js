@@ -211,6 +211,8 @@ router.post("/coursePromotion",async function(req,res){
         var duration=req.body.duration;
         await Course.findOneAndUpdate({id:courseid},{discount:{amount:amount,EndDate:duration
         }})
+       
+
         res.json("ok")
     
     }catch{
@@ -451,5 +453,37 @@ router.post("/updateExercise/:token/:courseid/:title/:excerid",async function(re
     }
 
 })
+router.post("/UpdatePrice/:price/:courseid/:token",async function(req,res){
+    var token=req.params.token;
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var id=user.id;
+    var courseId=req.params.courseid;
+    var price = req.params.price;
 
+    await Course.findOneAndUpdate({id:courseId},{price:price});
+    res.json("ok")
+    }catch{
+        res.json("error")
+    }
+    
+})
+router.post("/UpdateSummary/:Summary/:courseid/:token",async function(req,res){
+    var token=req.params.token;
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var id=user.id;
+    var courseId=req.params.courseid;
+    var Summary1 = req.params.Summary;
+
+
+    await Course.findOneAndUpdate({id:courseId},{summary:Summary1});
+    res.json("ok")
+
+    }catch{
+        res.json("error")
+
+    }
+    
+})
 module.exports=router
