@@ -6,6 +6,7 @@
     import '../courses/CourseItems.css';
     import starImg from "../../assets/goldStar.png"
     import InstImg from "../../assets/avatar8.png"
+    import addPreviewImg from "../../assets/AddPreview.png"
     import "./InstructorViewCourse.css"
     import { Avatar } from "@mui/material";
     import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
@@ -14,7 +15,7 @@
     import { GetInstructorName } from './../../API/CourseAPI';
     import Footer from '../footer/Footer';
     import InstructorSubtitle from '.././courses/subtitles/InstructorSubtitle';
-    import { definePromotion, deleteSubTitle, updateSubtitle, uploadCourseVideo } from '../../API/InstructorAPI';
+    import { definePromotion, deleteSubTitle, updateCourseSummary, updateSubtitle, uploadCourseVideo } from '../../API/InstructorAPI';
     import { addNewSubToCourse, uploadSubtitleVideo } from '../../API/InstructorAPI';
     import {TextField} from "@mui/material";
     import "../courses/subtitles/Subtitle.css"
@@ -29,14 +30,22 @@
     import {IoCheckmarkDoneCircleOutline} from 'react-icons/io5'
     import {MdPriceCheck} from 'react-icons/md'
     import {TbDiscount2} from 'react-icons/tb'
-    import {BsFlag,BsTrash} from 'react-icons/bs'
-    
+    import {BsFlag,BsThreeDotsVertical,BsTrash} from 'react-icons/bs'
+    import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { updateCoursePrice } from './../../API/InstructorAPI';
+import { BiEdit } from 'react-icons/bi';
+import {loading} from '../loading/Loading'
+import Loading from './../loading/Loading';
     
 
     export function InstructorViewCourse() {
         const navigate=useNavigate();
         const location=useLocation();
-
+   
         const [first2,setFirst2]=useState(0);
         
         const begin=async()=>{
@@ -76,23 +85,23 @@
         const handleDiscountAmount=(event)=>{
             setDiscountAmount(event.target.value)
         }
-
-        const [duration,setDuration]=useState("")
+        const [duration,setDuration]=useState("");
         const handleDuration=(event)=>{
-            setDuration(event.target.value)
+            
+            setDuration(event)
         }
+        // const handleDuration = (newValue) => {
+        //     setDuration(newValue);
+        //   };
 
         const handleAddDiscount=async()=>{
-            var arrD=duration.split("-")
+
             
-            if(location.state && (arrD[0]>(new Date()).getFullYear() || arrD[1]>(new Date()).getMonth()+1)){
+            if(location.state && new Date()<new Date(duration)){
                 const x=await definePromotion(location.state.id,discountamount,duration)
-                setAddDiscount(false)
                 getDetails();
-            }else if(location.state && (arrD[2]>(new Date()).getDate() && arrD[1]==(new Date()).getMonth()+1)){
-                const x=await definePromotion(location.state.id,discountamount,duration)
-                setAddDiscount(false)
-                getDetails();
+                setShowDiscountDiv(false);
+
             }else{
                 alert("enter a future date")
             }
@@ -137,6 +146,8 @@
 
         const handleAddedPrevVid=(event)=>{
         setPrevVidLink(event.target.value);
+
+
     }
     const [subChecked,setSubChecked]=useState();
     const HandleSubCheck=()=>{
@@ -153,10 +164,12 @@
                 
             }
         }
-    const handleAddPrevVid=async()=>{
+    const handleAddPrevVid=async(x)=>{
             setFirst(0)
+    
             await uploadCourseVideo(location.state.id,prevVidLink)
             getDetails();
+
     }
         const [details,setDetails] = useState([]);
         
@@ -174,18 +187,21 @@
         const bottomRef = useRef(null);
 
         useEffect(()=>{ 
-            if(location.state){
+            if(location.state && first===0){
                 handleView(location.state.View)
             }
             
         })
 
-
+        useEffect(()=>{ 
+            async function getdetails () {
+                setDetails((await getCourseDetails(location.state.id)));
+                
+            }
+            getDetails();
+        })
     
-        const [countryNumber,setCountryNumber]=useState();
-        const handleCountryNumber = (x) =>{
-        setCountryNumber(x);
-        }
+      
 
         const getDetails = async () => {
             setDetails((await getCourseDetails(location.state.id)));
@@ -200,8 +216,9 @@
         }
         if(first===0 && location.state){
             getDetails();
-            if(location.state.View==="Syllabus"){
+            if(view==="Syllabus"){
                 bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+                
             }
         
         }
@@ -250,6 +267,10 @@
     ];
     
     const [showReportDiv ,setShowReportDiv] = useState(false);
+    const [showPriceDiv ,setShowPriceDiv] = useState(false);
+    const [showDiscountDiv ,setShowDiscountDiv] = useState(false);
+
+
     const [issueType,setIssueType] = useState("");
     const [issuewords,setIssueWords] = useState("");
 
@@ -290,11 +311,79 @@
     const handleSettingMenu =()=> {
         setSettingMenu(!SettingMenu)
     }
-            
-    return (
+
+    const [price,setPrice] = useState(0);
+    const handleAddPrice = (event) => {
+        setPrice(event.target.value);
         
-        <div className="CourseItems">
-                
+    }
+    const handleSubmitPrice = async()=>{
+        const x = await updateCoursePrice(price/fares[chosenCountry],location.state.id);
+        setShowPriceDiv(false);
+    }
+
+    const [countryNumber,setCountryNumber]=useState();
+    const handleCountryNumber = (x) =>{
+    setCountryNumber(x);
+    }
+
+    const [chosenCountry,setChosenCountry] = useState(0);
+
+    useEffect(()=>{
+
+      setChosenCountry(countryNumber);
+      
+    },[countryNumber]);
+
+    const fares = [26,1,3.67,0.81,0.95];
+    const currency = ['LE','$','UAE','£','€'];
+
+   var isDiscount = (details[0]&&details[0].discount.amount>0) && (expiredTime>0);
+   var EndDate    = details[0] && ( new Date(details[0].discount.EndDate));         
+   var isSummary  = details[0]&&details[0].summary!=" " && details[0]&&details[0].summary!="" && details[0]&&details[0].summary
+
+   
+
+   const[AddsummaryDiv,setAddSummaryDiv] = useState("");
+
+   const handleAddsummaryDiv =() => {
+    setAddSummaryDiv(!AddsummaryDiv);
+   }
+
+   const[summary,setSummary] = useState("");
+
+   const handleEditSummary = async(event) => {
+    setSummary(event.target.value);
+   }
+
+   const handleSubmitSummary = async()=>{
+    const x = await updateCourseSummary(summary,location.state.id);
+    }
+
+   const deleteSummary = async() => {
+    const z = await updateCourseSummary(" ",location.state.id);
+    setSummary("");
+
+    }
+
+   
+   const[editPreview,setEditPreveiw]=useState(false);
+    const handleEditPreview=()=>{
+
+        setEditPreveiw(!editPreview);
+    }
+    const handleDeletePreview =async()=>{
+        setPrevVidLink("");
+        setFirst(0)
+        await uploadCourseVideo(location.state.id,prevVidLink)
+        getDetails();
+    }
+ 
+   return (
+        
+       <div className="CourseItems">
+       {details[0]?
+                <>
 
                 <Navbar items={["Home","My Courses","All Courses"]}     handleCountryNumber={handleCountryNumber}
                 select="" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]} inst={true} scroll={["","",""]}  />
@@ -310,19 +399,22 @@
                 <div className='CoureItems_OnVideo'>
                     {details[0]&&<h1 style={{fontSize:'35px'}}>{details[0].title}</h1>}
                     <AiOutlineSetting color={SettingMenu?"var(--primary-light)":"#fff"} size="30px" className='SettingButton' onClick={handleSettingMenu}></AiOutlineSetting>
-                   { SettingMenu &&<div className='InstsettingMenu'>
-                        <button className='InstSettingItem'><MdPriceCheck className="Menuicon" color="rgb(0,200,0)" size="23px" ></MdPriceCheck>Add Price</button>
-                        <button className='InstSettingItem'><TbDiscount2 className="Menuicon" color="grey" size="23px" ></TbDiscount2>Add Discount</button>
-                        <button className='InstSettingItem'><BsFlag className="Menuicon" color="rgb(230,200,0)" size="23px" ></BsFlag>Report Issue</button>
+                    
+                    {/* ====================== Setting Menu ======================= */}
+                    { SettingMenu &&<div className='InstsettingMenu'>
+                        <button className='InstSettingItem' onClick={()=>setShowPriceDiv(true)}><MdPriceCheck className="Menuicon" color="rgb(0,200,0)" size="23px" ></MdPriceCheck>{details[0]&&details[0].price>0 ?"Edit Price":"Add Price"}</button>
+                        <button className='InstSettingItem' onClick={()=>setShowDiscountDiv(true)}><TbDiscount2 className="Menuicon" color="grey" size="23px" ></TbDiscount2>{(details[0]&&details[0].discount.amount>0) && (expiredTime>0)?"Edit Discount":"Add Discount"}</button>
+                        <button className='InstSettingItem' onClick={()=>setShowReportDiv(true)}><BsFlag className="Menuicon" color="rgb(230,200,0)" size="23px" ></BsFlag>Report Issue</button>
                         <button className='InstSettingItem'><BsTrash className="Menuicon" color="red" size="23px" ></BsTrash>Delete Course</button>
                         
                     </div>}
-                    <div className="CourseItems_Content_Stars">
-                        
+                    {/* ================================================================ */}
+                    
+                    <div className="CourseItems_Content_Stars">    
                         <div className="CourseItems_InstNames">
                             {instNames[0]&&instNames.slice(0,3).map( (name)=>
                                 <div style={{display:"flex" ,flexDirection:"row",width:"90vh" ,padding:".5rem"}}>
-                                    <a href="/InstructorProfile" style={{display:"flex" ,flexDirection:"row"}} >
+                                    <a href="/InstructorProfile" className='flexRow' >
                                         <img alt="." src={InstImg} style={{width:"40px",height:"40px" ,transform:"translate(0px,3px)"}}></img> 
                                         <h3>{name}</h3>
                                     </a>                
@@ -334,19 +426,27 @@
                     </div>
 
                     { /* --------- counter for discount ------------ */}
-                    {(details[0]&&details[0].discount.amount>0) && (expiredTime>0) &&
+                    {isDiscount ?
                         <>
-                             <img alt="." src={DiscountImg3} style={{transform:'translate(-8.5rem,2rem)'}} className="CourseContent_DiscountLabel2" />
-                                <h2 className='CourseContent_NewCourse_price2' style={{color:'red' ,transform:'translate(20rem,2.2rem)'}}>   {details[0]&&details[0].discount.amount} %</h2>
-                                {details[0]&&details[0].discount.amount>0 && 
-                                    <div className="CourseContent_Counter" style={{transform:'translate(20rem,3.5rem)'}}>
+                             <img alt="." src={DiscountImg3} style={{transform:'translate(-4.5rem,2rem)'}} className="CourseContent_DiscountLabel2" />
+                                <h2 className='CourseContent_NewCourse_price2' style={{color:'red' ,transform:'translate(24rem,2.2rem)'}}>   {details[0]&&details[0].discount.amount} %</h2>
+                                {isDiscount && 
+                                    <div className="CourseContent_Counter" style={{transform:'translate(24rem,3.5rem)'}}>
                                     <CountdownTimer  targetDate={dateTimeAfterThreeDays} />
                                     </div>
                                     }
                         </>
+                        :
+                        <div style={{minHeight:'100px',minWidth:'200px'}}>
+                        </div>
                     }
 
+                    
+                       <button className="Inst_CourseContent_button_Enroll">Publish Course </button>
+
                 </div>
+             
+             
                     {/* ------------------ Report Div ------------------- */}
             {showReportDiv&& <div className="reportInstructorDivShadow">
                  <div className="reportInstructorDiv">
@@ -379,17 +479,101 @@
                             onChange={handleChangeIssueWords}
                             />
 
-                    <button className="supmitReportButton" onClick={handleSubmitReport}>
-                        Submit
-                    </button>
-                    <button className="cancelReportButton" onClick={()=>setShowReportDiv(false)}>
-                        cancel
-                        </button>
+                    <button className="supmitReportButton" onClick={handleSubmitReport}>Submit</button>
+                    <button className="cancelReportButton" onClick={()=>setShowReportDiv(false)}>cancel</button>
                     </div> 
                         </div>}
 
+                        {/*---------------- show Price Div ------------------------*/}
 
-                {/*----------------------------- Second Part ---------------------------------------------*/   }
+                 {showPriceDiv&& 
+                 <div className="reportInstructorDivShadow">
+                       <div className="ShowPriceDiv ">
+                            <h1 className="ShowPriceLabel">{details[0]&&details[0].price>0?"Edit Price":"Add Price"}</h1>
+                            <Divider className='' variant="middle"/>
+
+                            <TextField
+                            className="PriceTextField"
+                            sx={{width:'70%'}}
+                            id="outlined-multiline-flexible"
+                            label={price + currency[chosenCountry]}
+                            defaultValue={details[0]&&Math.floor(details[0].price*fares[chosenCountry])}
+                            multiline
+                            maxRows={7}
+                            onChange={handleAddPrice}
+                            />
+                            <div className='flexRow FromButtonsAddPrice'>
+                                    <button className="Inst_SetPrice" onClick={handleSubmitPrice}> Submit</button>
+                                    <button className="Inst_SetPriceCancel" onClick={()=>setShowPriceDiv(false)}> cancel</button>
+                            </div>
+                        </div> 
+                    </div>}
+                    {/* --------------------- Discount Div --------------- */}
+                    {showDiscountDiv&& 
+                 <div className="reportInstructorDivShadow">
+                       <div className="ShowDiscountDiv ">
+                            <h1 className="ShowDiscountLabel">{isDiscount? "Edit Discount": "Add Discount"}</h1>
+                            <Divider className='' variant="middle"/>
+
+                            <TextField  
+                            className="DiscountTextField"
+                            sx={{width:'55%',margin:'1rem'}}
+                            id="outlined-multiline-flexible"
+                            label={isDiscount? details[0].discount.amount:"Discount amount"}
+                            multiline
+                            maxRows={7}
+                            onChange={handleDiscountAmount}
+                            />
+                  
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                 <DatePicker
+
+                            label={isDiscount?EndDate.getDate()+"/"+(EndDate.getMonth()+1)+"/"+EndDate.getFullYear():"End Date"}
+                            className='DiscountTextField'
+                                sx={{width:'70%'}}
+                                inputFormat="MM/DD/YYYY"
+                                 value={duration}
+                                onChange={handleDuration
+                                }
+                                 renderInput={(params) => <TextField {...params} />}
+                                />
+                                </LocalizationProvider>
+
+                            <div className='flexRow FromButtonsAddPrice'>
+                                    <button className="Inst_SetPrice" onClick={handleAddDiscount}>
+                                        Submit
+                                    </button>
+                                    <button className="Inst_SetPriceCancel" onClick={()=>setShowDiscountDiv(false)}>
+                                        cancel
+                                        </button>
+                            </div>
+                        </div> 
+                    </div>}
+                {/* -------- Change Preview Video Div  */}
+                    {addPrevVid&& 
+                 <div className="reportInstructorDivShadow">
+                       <div className="ShowPriceDiv ">
+                            <h1 className="ShowPreviewLabel">{details[0]&&details[0].previewVideo?"Edit Preview Video":"Add Preview Video"}</h1>
+                            <Divider className='' variant="middle"/>
+                            <TextField
+                            className="PriceTextField"
+                            sx={{width:'70%'}}
+                            id="outlined-multiline-flexible"
+                            label="Enter Preview Video"
+                            defaultValue={details[0]&&details[0].previewVideo}
+                            multiline
+                            maxRows={7}
+                            onChange={handleAddedPrevVid}
+                            />
+                            <div className='flexRow FromButtonsAddPrice'>
+                                    <button className="Inst_SetPrice" onClick={()=>{handleAddPrevVid();setPrevVid(false)}}> Submit</button>
+                                    <button className="Inst_SetPriceCancel" onClick={()=>setPrevVid(false)}> cancel</button>
+                            </div>
+                        </div> 
+                    </div>}
+
+
+                {/*============================================ Second Part =====================================================*/   }
                 
                 <div className='CourseItems_SecondPart'>
 
@@ -399,22 +583,63 @@
                                     <button onClick={()=>{location.state.View="Overview";handleView("Overview")}} >Overview</button>
                                     <button onClick={()=>{location.state.View="Syllabus";handleView("Syllabus")}}>Syllabus</button>
                                     <button onClick={()=>{location.state.View="Reviews";handleView("Reviews")}}>Reviews</button>
-                            </div>
+                        </div>
                             <div className="vl33"></div>
                             {view==="Overview" &&    
                                             <div className="CourseItems_SecondPart_View_OverView">
-                                                <h4>{details[0]&&details[0].summary}</h4>
+                                           
+                                                
+                                                {isSummary ?
+                                                 
+                                                    !AddsummaryDiv
+                                                    ?
+                                                     <div className='flexRow'>
+                                                        <h4>{details[0]&&details[0].summary}
+                                                        <BiEdit onClick={handleAddsummaryDiv} className='Inst_BiEdit' size="20px"></BiEdit>
+                                                        <BsTrash size='20px' onClick={deleteSummary} className='Inst_BsTrash'></BsTrash>
+                                                        </h4>
+                                                     </div>
+                                                    :
+                                                      <div className='excerciseVideo'> 
+                                                         <textarea onChange={handleEditSummary} className="textBox_Instructor_Summary"  defaultValue={details[0]&&details[0].summary}/> 
+                                                         <button onClick={()=>{handleSubmitSummary(); setAddSummaryDiv(false)}} className="addVideo_Inst">Edit Summary</button> 
+                                                         <button className="cancelButton" onClick={()=>setAddSummaryDiv(false)}>cancel</button>
+                                                     </div>
+   
+                                                :
+                                                 <div className='excerciseVideo'> 
+                                                    <textarea onChange={handleEditSummary} className="textBox_Instructor_Summary" placeholder='Enter Course Summary'/> 
+                                                    <button onClick={()=>{handleSubmitSummary();}} className="addVideo_Inst">Add</button> 
+                                                  </div>
+                                                   
+                                                }
+                                            
+                                             
+                                            
+                                                    
                                             {(details[0] && details[0].previewVideo)
                                             ?
-                                                (<iframe  src={details[0]&&details[0].previewVideo} className="CourseItems_SecondPart_View_OverView_video" 
+                                            ( 
+                                                 <div className='flexRow' style={{position:'relative'}}>
+                                                <iframe  src={details[0]&&details[0].previewVideo} className="CourseItems_SecondPart_View_OverView_video" 
                                                 title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowfullscreen></iframe>)
-                                            :
-                                              (<div><button onClick={()=>setPrevVid(true)}>Add Preview Video</button>
-                                                {addPrevVid && <div className="addPreviewVideoInst"> 
-                                                <input onChange={handleAddedPrevVid} placeholder='enter video link'/>
-                                                <button onClick={handleAddPrevVid}>Submit</button>
-                                                </div>}
+                                                allowfullscreen></iframe>
+                                                <AiOutlineSetting size="30px" className='SettingPreviewVideo_Inst' onClick={handleEditPreview}></AiOutlineSetting>
+                                               
+                                               {editPreview  && <div className='InstsettingMenuPreview'>
+                                                    <button className='InstSettingItem' onClick={()=>{handleEditPreview();setPrevVid(true)}}><BiEdit className="Menuicon" color="rgb(0,200,0)" size="23px" ></BiEdit>Edit Video</button>
+                                                    <button className='InstSettingItem' onClick={()=>{handleDeletePreview()}}><BsTrash className="Menuicon" color="red" size="23px"  ></BsTrash>Delete Video</button>    
+                                                </div>
+                                                }
+
+                                                </div>  
+                                               )
+                                                
+                                                :
+                                              (
+                                              <div>
+                                                <img alt="." className='addPreviewImg_Inst' src={addPreviewImg} onClick={()=>setPrevVid(true)}  />
+                                               
                                               </div>) }
                                             
                                             {addDiscount && <div style={{position:"relative",left:"110%",top:"-25vw", width:"30%",display: "flex",flexDirection: "column",rowGap: "0.5vw"}}>
@@ -430,8 +655,7 @@
                                             <button style={{backgroundColor:"red"}} onClick={()=>setAddDiscount(false)}>Cancel</button>
                                                 </div>} 
 
-                                            {!addDiscount && (details && details.length>0 && (!details[0].discount || details[0].discount.amount==0)) && <button style={{width:"20vw",position:"relative",left:"100%",top:"-25vw"}} className='discountbtnIVC' onClick={()=>setAddDiscount(true)}>Add Discount</button>}
-                                            {!addDiscount && (details && details.length>0 && (details[0].discount && details[0].discount.amount!=0)) && <button style={{width:"20vw",position:"relative",left:"100%",top:"-25vw"}} className='discountbtnIVC' onClick={()=>setAddDiscount(true)}>Edit Discount</button>}
+
 
                                         </div>}
 
@@ -486,6 +710,20 @@
                 
                                     </div>}
                     </div>
+                    <div className='Inst_CourseView_SecontPart_Right' >
+                    <div className='flexRow' style={{alignItems:'center'}}>
+                                          <h1 style={{color:'var(--primary-light)'}}>Price : </h1>
+                                        {details[0]&&details[0].discount.amount>0 &&  (expiredTime>0)?
+                                        <>
+                                          <h2 className='CourseContent_NewCourse_price' style={{color:'rgb(177, 177, 177)'}}>{ details[0]&& Math.floor(details[0].price*fares[chosenCountry])} {currency[chosenCountry]}</h2>
+                                          <h2 className='CourseContent_NewCourse_priceNew'>{ details[0]&& details[0].price*fares[chosenCountry] - Math.floor(details[0].price*fares[chosenCountry]) *(details[0].discount.amount/100)} {currency[chosenCountry]}</h2>
+                                        </>
+                                        :
+                                        <h2 className='CourseContent_NewCourse_priceNoDis'>{details[0]&&  Math.floor(details[0].price*fares[chosenCountry])} {currency[chosenCountry]}</h2>
+
+                                        }
+                                        </div>
+                    </div>
 
                 
 
@@ -496,8 +734,13 @@
 
             {/* Footer */                                                                        }
              <Footer inst = {true} text={"Excited to Learn more ? Unlock Premium Courses with Learn Pro "} buttonText={"Upgrade Now"}></Footer>
-
-        </div>
+             </>
+    
+    :
+        <Loading></Loading>
+                                    }
+    </div>
+                                
     )
     }
 

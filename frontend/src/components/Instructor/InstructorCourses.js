@@ -13,6 +13,7 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { Checkbox } from '@mui/material';
 import { verify } from '../../API/LoginAPI';
+import Loading from '../loading/Loading';
 
 
 export function InstructorCourses(){
@@ -142,6 +143,9 @@ export function InstructorCourses(){
             select="My Courses" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]}  inst={true} scroll={["","",""]}  />
 
             </div>
+
+            {courses.length!=0?
+             <>
              <div className="InstCourses" name = 'instCourses'>
                   <div className="InstructorCourses_newCourse" onClick={()=> navigate('/addCourse')} >
                   <h1> ADD NEW COURSE</h1>
@@ -196,6 +200,10 @@ export function InstructorCourses(){
 
 
                 </div>
+                </>
+                :
+                <Loading></Loading>}
+
         </div>
        
     )

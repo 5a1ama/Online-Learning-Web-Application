@@ -53,6 +53,7 @@ import Button from '@mui/material/Button';
 import Fab from '@mui/material/Fab';
 import CheckIcon from '@mui/icons-material/Check';
 import SaveIcon from '@mui/icons-material/Save';
+import Loading from './../loading/Loading';
 
 function CourseContent(props) {
 
@@ -300,6 +301,8 @@ const [MyRate,setMyRate] = useState(0)
         
     
     <div className="CourseItems">
+      {details[0]?
+      <>
         {!localStorage.getItem("token")&&<Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎  ‎ Join Us"]} select="‎ ‎ ‎  ‎  ‎ Join Us" nav={["/","/","/","/signUp"]} scroll={["","",""]} handleCountryNumber={props.handleCountryNumber}   />
         }
         {localStorage.getItem("token")&&<Navbar items={["Home","My Courses","All Courses"]}
@@ -338,7 +341,7 @@ const [MyRate,setMyRate] = useState(0)
         </div>
 
         <button className="CourseContent_button_Enroll" onClick={localStorage.getItem("token")?
-          ()=>setShowPaymentDiv(true) : ()=>window.scrollTo({top:1000 ,behavior: 'smooth'})
+          ()=>setShowPaymentDiv(true) : ()=>window.scrollTo({top:10000 ,behavior: 'smooth'})
           } >
                         Enroll now 
                     </button>
@@ -507,16 +510,7 @@ const [MyRate,setMyRate] = useState(0)
                         </div>}
              </div>
                                    
-                {/* {details[0]&&details[0].discount.amount>0 && <div className='CourseGift_Content'>
-                                  <h2 style={{textAlign:'center',color:'var(--primary-light)'}}>redeem your offer here : </h2>
-                                    <img alt="." className="Course_Gift" src={Gift} />
-                                    <div className="Course_giftText">
-                                    <h4 >redeem your {details[0]&&details[0].discount.amount}
-                                     % Discount</h4>
-                                    <button className='Course_Gift_Redeem'>Redeem</button>
-                                        </div>
-                                    <img onClick={handleGift} className={gift?"Course_GiftTop2":"Course_GiftTop"} alt="." src={GiftTop} />
-                                        </div>} */}
+
                                                    <div className="vlVertical"></div>
                                         <div className='SecondPart_RightSide_Content'>
                                        
@@ -526,7 +520,7 @@ const [MyRate,setMyRate] = useState(0)
                                         {details[0]&&details[0].discount.amount>0 &&  (expiredTime>0)?
                                         <>
                                           <h2 className='CourseContent_NewCourse_price' style={{color:'rgb(177, 177, 177)'}}>{ details[0]&& Math.floor(details[0].price*fares[chosenCountry])} {currency[chosenCountry]}</h2>
-                                          <h2 className='CourseContent_NewCourse_priceNew'>{ details[0]&& Math.floor(details[0].price*fares[chosenCountry]) *(details[0].discount.amount/100)} {currency[chosenCountry]}</h2>
+                                          <h2 className='CourseContent_NewCourse_priceNew'>{ details[0]&& details[0].price*fares[chosenCountry] - Math.floor(details[0].price*fares[chosenCountry]) *(details[0].discount.amount/100)} {currency[chosenCountry]}</h2>
                                         </>
                                         :
                                         <h2 className='CourseContent_NewCourse_priceNoDis'>{details[0]&&  Math.floor(details[0].price*fares[chosenCountry])} {currency[chosenCountry]}</h2>
@@ -568,6 +562,11 @@ const [MyRate,setMyRate] = useState(0)
     {localStorage.getItem("token")?
       <Footer text={"Excited to Learn more ? Unlock Premium Courses with Learn Pro "} buttonText={"Upgrade Now"}></Footer>
     : <Footer ref={bottomRef}  name="footer" text={"Excited to Learn ? Register now and unlock variety of courses "} buttonText={"Register Now"} course={location.state.id}></Footer>
+    }
+    
+    </>
+    :
+    <Loading></Loading>
     }
     </div>
   )

@@ -9,6 +9,7 @@ import { FilterAllCourse, getMycourses } from "../../API/InstructorAPI";
 import { Checkbox } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import { verify } from "../../API/LoginAPI";
+import Loading from "../loading/Loading";
 
 export function InstAllCourses(){
   const [first,setFirst]=useState(0);
@@ -160,6 +161,8 @@ export function InstAllCourses(){
     </div>
 <div className='AllCourses'>
             <h1 className="heading">Our Courses</h1>
+            {courses.length!=0?
+            <>
             {courses.map((course) =>{
               var found=false;
               for(var i=0;i<myCourses.length;i++){
@@ -169,10 +172,14 @@ export function InstAllCourses(){
                 }
               }
               if(found)
-                return <NewCourse course={course} inst={true} handleNewPriceRatio={handleNewPriceRatio}   country={countryNumber}/>
+              return <NewCourse course={course} inst={true} handleNewPriceRatio={handleNewPriceRatio}   country={countryNumber}/>
               else
-                return <NewCourse course={course}  handleNewPriceRatio={handleNewPriceRatio}   country={countryNumber}/>
-              } )}
+              return <NewCourse course={course}  handleNewPriceRatio={handleNewPriceRatio}   country={countryNumber}/>
+            } )}
+            </>
+            :
+            <Loading></Loading>}
+
             </div>
 
             <button className='AllCourses-FilterBarButton' onClick={handleFilterBar}>Filter Courses</button>

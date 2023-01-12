@@ -100,7 +100,7 @@ function InstructorSubtitle(props) {
                {/* ------------- div for video----------------------*/}
                     {props.sub.video.map((VideoLink,i)=>
                     <div className='LargeDivHover'>
-                    <div className="DivHover" style={{display:"flex",flexDirection:"row",flexFlow:"auto" ,justifyContent:"space-between" }}>
+                    <div className="DivHover flexRow" style={{flexFlow:"auto" ,justifyContent:"space-between" }}>
                     <MdSlowMotionVideo size={25}></MdSlowMotionVideo>
                     <a href="/instructorCourseVideo" onClick={()=>navigate("/instructorCourseVideo",{state:{Link:VideoLink}})}><h3 style={{color:"#000"}}>Tutorial {i+1}</h3></a> 
                     
