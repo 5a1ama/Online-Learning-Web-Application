@@ -404,3 +404,7 @@ z-index: 2;
     top: 8%;
     left: 15%;
 }
+
+.reportButtonTrainee{
+    position: relative;
+}

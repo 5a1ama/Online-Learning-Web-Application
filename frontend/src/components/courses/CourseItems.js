@@ -210,6 +210,10 @@ function CourseItems() {
                     {details[0]&&stars(details[0].rating.value).map((num)=> <img className="starImg2" style={{width:'40px'}} src={starImg} alt="."/>)}
                 </div>
 
+                <button className='reportButtonTrainee' onClick={()=>setShowReportDiv(true)}>
+                    Report issue
+                </button>
+
 
             </div>
 
