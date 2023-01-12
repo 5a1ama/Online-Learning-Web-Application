@@ -180,7 +180,7 @@ function CourseItems() {
 
             <Navbar items={["Home","My Courses","All Courses"]}
                handleCountryNumber={handleCountryNumber}
-               select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
+               select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} trainee={true} scroll={["","",""]}  />
         
             <div className="CourseItems_Video">
 

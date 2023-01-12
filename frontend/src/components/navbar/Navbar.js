@@ -204,6 +204,12 @@ function Navbar(props) {
                         My Reports
                     </button>   
                 </div>}
+                {props.trainee && <div className="SettingItem">
+                    <button onClick={()=>navigate('/traineeReport')}>
+                        <FiHelpCircle className="icon" style={{transform:"translate(-10px,3.5px)"}}></FiHelpCircle>
+                        My Reports
+                    </button>   
+                </div>}
                 <div className="SettingItem">
                     <button onClick={handleLogOut}>
                         <BiLogOutCircle className="icon" style={{transform:"translate(-10px,3.5px)"}}></BiLogOutCircle>

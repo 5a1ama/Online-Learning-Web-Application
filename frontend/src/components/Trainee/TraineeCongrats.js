@@ -43,7 +43,7 @@ export function TraineeCongrats(){
     return(
         <div>
                     <div>
- <Navbar items={["Home","My Courses","All Courses"]} select="" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} 
+ <Navbar items={["Home","My Courses","All Courses"]} select="" trainee={true} nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} 
        handleCountryNumber={handleCountryNumber}
         scroll={["","",""]}  /> 
         </div>
