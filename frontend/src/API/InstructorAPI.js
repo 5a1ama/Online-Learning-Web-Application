@@ -424,3 +424,39 @@ export const updateExercise=async(questions,choices,courseid,title,answers,excer
 
         }
 }
+export const updateCoursePrice=async(price,id)=>{
+    var result=await fetch(`http://localhost:8000/instructor/UpdatePrice/${price}/${id}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
+}
+export const updateCourseSummary=async(Summary,id)=>{
+    var result=await fetch(`http://localhost:8000/instructor/UpdateSummary/${Summary}/${id}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+            
+          return j
+
+        }
+}

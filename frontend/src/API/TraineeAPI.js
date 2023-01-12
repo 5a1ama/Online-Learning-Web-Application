@@ -338,15 +338,7 @@ export const requestRefund=async(id)=>{
     }
     })
     const j=await result.json();
-        if(j=="error"){
-
-            alert("you must login first")
-            window.location.href="/login"
-
-        }else{
-          return j
-
-        }
+    return j;
 }
 export const showWallet=async()=>{
     const result=await fetch(`http://localhost:8000/trainee/viewWallet/${localStorage.getItem("token")}`);

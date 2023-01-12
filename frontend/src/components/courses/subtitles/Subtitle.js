@@ -14,6 +14,7 @@ function Subtitle(props) {
     const [grade,setGrade]=useState("");
 
     const getGrade=async()=>{
+        if(!props.guest)
         setGrade(await MyGrade(props.sub.excerciseId))
     }
     
@@ -33,6 +34,7 @@ function Subtitle(props) {
     })
     const [completedExcercise,setCompletedExcer]=useState([])
     const getCompleted=async()=>{
+        if(!props.guest)
         setCompletedExcer(await getMyCompletedExce())
     }   
     
@@ -60,7 +62,10 @@ function Subtitle(props) {
         getGrade();
         setFirst(1);
     }
+    const handleGuestClick = () =>{
+        window.scrollTo({top:10000 ,behavior: 'smooth'});
 
+    }
     return (
         <div className="CourseItems_Syllabus_Subtitles_1">
 
@@ -81,11 +86,11 @@ function Subtitle(props) {
                                 {(props.inst && !props.guest ) && <a href="/instructorCourseVideo" onClick={()=>navigate("/instructorCourseVideo",{state:{Link:VideoLink,Prop:props.sub,i:i+1,CourseTitle:props.courseTitle,CourseId:props.CourseId}})}><h3 style={{color:"#000"}}>Tutorial {i+1}</h3></a> }
                                 {!props.inst && !props.guest  && <a href="/CourseVideo" onClick={()=>navigate("/CourseVideo",{state:{Link:VideoLink,Prop:props.sub,i:i+1,CourseTitle:props.courseTitle,CourseId:props.CourseId}})}><h3 style={{color:"#000"}}>Tutorial {i+1}</h3></a> }
                                
-                                { props.guest && <a href="/"><h3 style={{color:"#aaa"}}>Tutorial {i+1}</h3></a> }
+                                { props.guest && <a onClick={handleGuestClick}><h3 style={{color:"#aaa"}}>Tutorial {i+1}</h3></a> }
 
                                 {VideoLink!="" && props.inst && !props.guest && <a href="/instructorCourseVideo" ><h3 onClick={()=>navigate("/instructorCourseVideo",{state:{Link:VideoLink,Prop:props.sub,i:i+1,CourseTitle:props.courseTitle,CourseId:props.CourseId}})} style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem">Open Video</h3></a>}
                                 {VideoLink!="" && !props.inst &&  !props.guest && <a href="/CourseVideo" ><h3 onClick={()=>navigate("/CourseVideo",{state:{Link:VideoLink,Prop:props.sub,i:i+1,CourseTitle:props.courseTitle,CourseId:props.CourseId}})} style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem">Open Video</h3></a>}
-                                {VideoLink!="" && props.guest && <a href="/"><h3 style={{color:"rgb(200,200,200)"}} className="CourseItems_OpenItem3">Open Video</h3></a>}
+                                {VideoLink!="" && props.guest && <a onClick={handleGuestClick}><h3 style={{color:"rgb(200,200,200)"}} className="CourseItems_OpenItem3">Open Video</h3></a>}
                                 {VideoLink=="" && !props.inst && !props.guest && <h3 style={{color:"rgb(0,0,0)"}} className="CourseItems_OpenItem3">No Video Yet</h3> }
                                 </div>
                                 
@@ -97,15 +102,15 @@ function Subtitle(props) {
                    {!props.guest&& <a href="/"><h3 style={{color:"#000", transform:"translate(-1.5rem , 0rem)"}}>Lesson</h3></a>}
                    {!props.guest&& <a href="/"><h3 style={{color:"rgb(0, 140, 255)"}}className="CourseItems_OpenItem2">Lesson 1 {props.Lesson}</h3></a>}
 
-                   {props.guest && <a href="/"><h3 style={{color:"#bbb", transform:"translate(-1.5rem , 0rem)"}}>Lesson</h3></a>}
-                    {props.guest&& <a href="/"><h3 style={{color:"#aaa"}}className="CourseItems_OpenItem3">Lesson 1 {props.Lesson}</h3></a>}
+                   {props.guest && <a onClick={handleGuestClick}><h3 style={{color:"#bbb", transform:"translate(-1.5rem , 0rem)"}}>Lesson</h3></a>}
+                    {props.guest&& <a onClick={handleGuestClick}><h3 style={{color:"#aaa"}}className="CourseItems_OpenItem3">Lesson 1 {props.Lesson}</h3></a>}
 
 
                 </div>
                 <div className="DivHover" style={{display:"flex",flexDirection:"row" ,justifyContent:"space-between"}}>
                     <IoIosPaper size={25}></IoIosPaper>
                     {!props.guest&&<a  ><h3 style={{color:"#000",transform:"translate(-.6rem , 0rem)"}} >Exercise</h3></a>}
-                    {props.guest&&<a href="/" ><h3 style={{color:"#aaa",transform:"translate(-.6rem , 0rem)"}} >Exercise</h3></a>}
+                    {props.guest&&<a onClick={handleGuestClick} ><h3 style={{color:"#aaa",transform:"translate(-.6rem , 0rem)"}} >Exercise</h3></a>}
                     
                     {props.sub.excerciseId && !completedExcercise.includes(props.sub.excerciseId) && !props.inst && !props.guest &&  <a onClick={()=>navigate("/TraineeCourseExercise",{state:{excerciseId:props.sub.excerciseId,courseId:props.CourseId,title:props.courseTitle}})}><h3 style={{color:"rgb(0, 140, 255)"}} className="CourseItems_OpenItem2"> Exercise1</h3></a>}
                     {props.sub.excerciseId && completedExcercise.includes(props.sub.excerciseId) && !props.inst && !props.guest && grade!="" &&

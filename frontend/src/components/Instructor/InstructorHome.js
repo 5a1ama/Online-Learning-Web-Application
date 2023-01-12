@@ -19,6 +19,7 @@ import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { verify } from "../../API/LoginAPI";
+import Loading from './../loading/Loading';
 
 
 export function InstructorHome(){
@@ -64,6 +65,8 @@ export function InstructorHome(){
     
     return(
 <div className = "divcenter">
+   
+  
 <div>
 
     <Navbar items={["Home","My Courses","All Courses"]}     handleCountryNumber={handleCountryNumber}
@@ -71,6 +74,8 @@ export function InstructorHome(){
     select="Home" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]} inst={true} scroll={["","",""]}  />
 
         </div>
+        {instructor?
+  <>
         <div className="instructorDitails">
         
 
@@ -216,6 +221,11 @@ export function InstructorHome(){
       </ul>
 
         </div>
+        </>
+      :
+      <Loading></Loading>
+      }
+
 
 </div>
     );
