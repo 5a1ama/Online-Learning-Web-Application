@@ -52,7 +52,36 @@
     border: 1px solid #fff;
     
 }
+.gpt3__footer-btn2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    padding: 1rem;
+    /* border: 1px solid #fff; */
+    text-align: center;
+
+    margin-bottom: 3rem;
+    cursor: pointer;
+}
+
+.gpt3__footer-btn2 button {
+    /* border-radius: 0; */
+    height: 60px;
+    width: 250px;
+    background : transparent;
+    border: 1px solid #fff;
+    font-size: 20px;
+    font-family: var(--font-family);
+    color: #fff;
+ 
+}
+.gpt3__footer-btn2 button:hover {
+    background-color:white ;
+    color :rgb(10,138,218);
+    border: 1px solid #fff;
+    
+}
 .gpt3__footer-links {
     display: flex;
     justify-content: space-between;

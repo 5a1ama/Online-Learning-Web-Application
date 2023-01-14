@@ -200,7 +200,13 @@ export function NewCourse(props) {
           navigate("/CourseItems",{state:{id:props.course.id,View:"Overview"}})
           
         }else if(props.inst){
+          if(props.course.published==false)
       navigate("/instructorViewCourse",{state:{id:props.course.id,View:"Overview"}})
+      else 
+      navigate("/InstructorViewPublished",{state:{id:props.course.id,View:"Overview"}})
+         } else if(props.instNo){
+          navigate("/CourseContentInst",{state:{id:props.course.id,View:"Overview"}})
+          
     }else{
       navigate("/CourseContent",{state:{id:props.course.id,View:""}})
     }

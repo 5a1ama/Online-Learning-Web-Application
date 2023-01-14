@@ -10,15 +10,27 @@ function Footer (props) {
   return (
     <div className="gpt3__footer">
     <div className="gpt3__footer-heading">
+      {props.inst?
+      <>
+      <h1 className="gradient__text" style={{fontSize:'45px'}}>{props.text}</h1>
+      <h2  style={{fontSize:'25px',color:'#eee',fontWeight:'400'}}>you will then be able to switch between instructor and trainee profile </h2>
+
+      </>
+      
+      :
       <h1 className="gradient__text">{props.text}</h1>
+      }
     </div>
 
-    <div className="gpt3__footer-btn">
+    <div className={props.inst?"gpt3__footer-btn2":"gpt3__footer-btn"}>
 {
-     props.course && 
+     props.course && !props.inst?
      <button onClick={()=>navigate("/signUp",{state:{Courseid:props.course}})}>{props.buttonText}</button>
-    //  :
-    //  <button onClick={()=>navigate("/signUp")}>{props.buttonText}</button>
+     :
+     props.inst?
+     <button onClick={()=>props.handleContract()} >{props.buttonText}</button> 
+     :
+     <button onClick={()=>navigate("/signUp")}>{props.buttonText}</button>
     }
     
     </div>

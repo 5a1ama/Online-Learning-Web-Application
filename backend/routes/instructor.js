@@ -515,4 +515,74 @@ router.post("/UpdateSummary/:Summary/:courseid/:token",async function(req,res){
     }
     
 })
+router.post("/DeleteCourse/:courseid/:token",async function(req,res){
+    var token=req.params.token;
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var id=user.id;
+    var courseId=req.params.courseid;
+
+    await Course.deleteOne({id:courseId});
+    res.json("ok")
+
+    }catch{
+        res.json("error")
+
+    }
+    
+})
+
+router.post("/PublishCourse/:courseid/:token",async function(req,res){
+    var token=req.params.token;
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var id=user.id;
+    }
+    catch{
+        res.json("error");
+
+    }
+    var courseId=req.params.courseid;
+    var myCourse = await Course.findOne({id:courseId});
+    var subtitles = myCourse.subtitles;
+    var flag = true;
+    var subtitle = null ;
+    for(i = 0 ; i<myCourse.subtitles.length ; i++){
+        for(j = 0 ; j<myCourse.subtitles[i].video ; j++){
+            var video = myCourse.subtitles[i].video[j];
+            if(video.length==0||video==""||video==" "){
+                flag=false;
+                subtitle = myCourse.subtitles[i].title;
+            }
+        }
+        if(!myCourse.subtitles[i].excerciseId || myCourse.subtitles[i].excerciseId<0){
+            flag=false;
+            subtitle = myCourse.subtitles[i].title;
+
+        }    
+    }
+
+    if(myCourse.title==""||myCourse.title==" "){
+        res.json("title");
+    }
+    else if(myCourse.previewVideo==""||myCourse.previewVideo==" "){
+        res.json("PrevVideo");
+    }
+    else if(myCourse.summary==""||myCourse.summary==" "){
+        res.json("summary");
+    }
+    else if(subtitles.length==0){
+        res.json("subtitle");
+    }
+    else if(flag==false){
+        res.json(subtitle)
+    }
+    else{
+        await Course.findOneAndUpdate({id:courseId},{published:true});
+        res.json("ok")
+    }
+
+   
+    
+})
 module.exports=router

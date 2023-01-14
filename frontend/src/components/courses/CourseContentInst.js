@@ -1,9 +1,9 @@
 import './CourseContent.css';
 import video from '../../assets/PreviewBack.mp4';
-import Navbar from './../navbar/Navbar';
-import { AiOutlinePlayCircle } from 'react-icons/ai';
+import Navbar from '../navbar/Navbar';
+import { AiOutlineClose, AiOutlinePlayCircle } from 'react-icons/ai';
 import { React,useEffect,useRef,useState} from 'react'
-import {  getCourseDetails, isEnrolled } from './../../API/CourseAPI';
+import {  getCourseDetails, isEnrolled } from '../../API/CourseAPI';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import './CourseItems.css';
 import ProgressImg from "../../assets/Progress100.png"
@@ -22,11 +22,11 @@ import GiftTop from "../../assets/giftTop.png"
 import GiftTop2 from "../../assets/giftTop2.png"
 import DiscountImg3 from "../../assets/disCount3.png"
 
-import { GetInstructorName } from './../../API/CourseAPI';
+import { GetInstructorName } from '../../API/CourseAPI';
 import Footer from '../footer/Footer';
 import Subtitle from './subtitles/Subtitle';
 import Rating from '@mui/material/Rating';
-import { alertClasses, Avatar } from '@mui/material';
+import { alertClasses, Avatar, Checkbox } from '@mui/material';
 import { courseEnroll, getTraineeCourseProg, myCourseRate, myInstructorRate, rateCourse } from '../../API/TraineeAPI';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import CountdownTimer from '../countdown/CountDown';
@@ -53,10 +53,10 @@ import Button from '@mui/material/Button';
 import Fab from '@mui/material/Fab';
 import CheckIcon from '@mui/icons-material/Check';
 import SaveIcon from '@mui/icons-material/Save';
-import Loading from './../loading/Loading';
-import { verify } from './../../API/LoginAPI';
+import Loading from '../loading/Loading';
+import { verify } from '../../API/LoginAPI';
 
-function CourseContent(props) {
+function CourseContentInst(props) {
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -80,95 +80,21 @@ function CourseContent(props) {
 
   const x = await courseEnroll(location.state.id)
  }
-  const handleButtonClick = () => {
-    if (!loading) {
-      setSuccess(false);
-      setLoading(true);
-      timer.current = window.setTimeout(() => {
-        setSuccess(true);
-        setLoading(false);
-        alert("the payment is succ.")
-        enroll()
-        navigate("/CourseItems",{state:{id:location.state.id,View:"Overview"}})
-      
-      }, 2000);
-    }
+ 
     
-  };
-
-  const [selectedRadioValue, setSelectedRadioValue] =useState('a');
-
-  const handleChangeradio = (event) => {
-  setSelectedRadioValue(event.target.value);}
-
-  const [showDivMyCards,setShowDivMyCards] = useState(false);
-  const [allCards,setAllCards] = useState();
-  const intial = async()=>{
-    setAllCards(await getAllCards())
-  }
-
-  const update = ()=>{
-    intial()
-   }
-    const MyCards = (props) =>{
-        const handledeleteCard = async()=>{
-         const x =   await deleteCard(props.card.cardNumber)
-           update()
-    
-        }
-        return(
-            <div className="MyCardsSmallDivToPay">
-                 <List  sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <CreditCardIcon color = "primary"/>
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary={"*******"+(props.card.cardNumber+"").substring((props.card.cardNumber+"").length-4)} secondary={props.card.cardDate} />
-              <Radio
-        checked={selectedRadioValue == props.id}
-        onChange={handleChangeradio}
-        value={props.id}
-        name="radio-buttons"
-        inputProps={{ 'aria-label': 'A' }}
-      /> 
-      </ListItem>
-      <Divider variant="fullWidth" />
-    </List>
-           
-            </div>
-        )
-    } 
   
   const [first,setFirst] = useState(0);
   const location=useLocation();
   const navigate = useNavigate();
-  const [progress,setProgress]=useState(0);
-  const getTraineeProgress =async()=>{
-      setProgress(await getTraineeCourseProg(location.state.id));
-  }
   const [details,setDetails] = useState([]);
   
   const[showDetails,setShowDetails]=useState(false);
   const handleShowDetails =() =>{setShowDetails(!showDetails)};
 
-  const[gift,setGift]=useState(false);
-  const handleGift =() =>{setGift(!gift)};
-
   const [view , setView] = useState("");
-
-  const [traineeRate,setTraineeRate] = useState("")
-
-  const handleChangeRate = (event , newValue)=>{
-    rateCourse( location.state.id,Number(newValue))
-    setTraineeRate(newValue)
-}
-//const [selectedRadioValue,setSelectedRadioValue] = useState('a')
-
+ 
 const [showPaymentDiv,setShowPaymentDiv] = useState(false);
 
-const [MyRate,setMyRate] = useState(0)
 
   const handleView = (view) => {
       setView(view);
@@ -180,15 +106,7 @@ const [MyRate,setMyRate] = useState(0)
       handleView(location.state.View)
       },[location.state])
 
-  
-
-
-  const now = 90 ;
-  // const getDetails = async () => {
-  //     setDetails((await getCourseDetails(location.state.id)));
-  //     setFirst(1);
-  // }
-  useEffect(()=>{
+useEffect(()=>{
     async function getDetails(){
       setDetails((await getCourseDetails(location.state.id)));      
       setFirst(1)
@@ -210,15 +128,6 @@ const [MyRate,setMyRate] = useState(0)
       
 
       
-  }
-
-  const InstNamesLen = () =>
-  {
-      if(instNames.length>3){
-          return true;
-      }else{
-          return false;
-      }
   }
   const [instNames,setInstNames] = useState([])
 
@@ -298,21 +207,32 @@ getUser();
       const currency = ['LE','$','UAE','£','€'];
       var CourseHours ="Approx. " + (details[0]? details[0].hours:-1) + " hours to complete"; 
 
-     if(user&&user.type=="trainee"){
-       intial();}
+      const handleBecome = ()=>{
+        
+      }
+      const[contract,setContract]=useState(false);
+      const handleContract =()=>
+      {
+          setContract(!contract);
+      }
+      const [buttonConfirm,setButtonConfirm]=useState(false);
+      const handleButtonConfirm =() =>{
+          setButtonConfirm(!buttonConfirm);
+      }
+      const handleCreate=async(e)=>{
+        e.preventDefault();
+      //  const x = await switchtrainee();
 
+    }
   return (
         
     
     <div className="CourseItems">
       {details[0]?
       <>
-        {!localStorage.getItem("token")&&<Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎  ‎ Join Us"]} select="‎ ‎ ‎  ‎  ‎ Join Us" nav={["/","/","/","/signUp"]} scroll={["","",""]} handleCountryNumber={props.handleCountryNumber}   />
-        }
-        {localStorage.getItem("token")&&<Navbar items={["Home","My Courses","All Courses"]}
-               handleCountryNumber={handleCountryNumber}
-               select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
-              }
+                <Navbar items={["Home","My Courses","All Courses"]}     handleCountryNumber={handleCountryNumber}
+            select="" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]} inst={true} scroll={["","",""]}  />
+            
 
 
     <div className="CourseItems_Video">
@@ -344,8 +264,7 @@ getUser();
             {details[0]&&stars(details[0].rating.value).map((num)=> <img className="starImg2" style={{width:'40px'}} src={starImg} alt="."/>)}
         </div>
 
-        <button className="CourseContent_button_Enroll" onClick={localStorage.getItem("token")?
-          ()=>setShowPaymentDiv(true) : ()=>window.scrollTo({top:10000 ,behavior: 'smooth'})
+        <button className="CourseContent_button_Enroll" onClick={ ()=>window.scrollTo({top:10000 ,behavior: 'smooth'})
           } >
                         Enroll now 
                     </button>
@@ -378,90 +297,6 @@ getUser();
 
     </div>
 
-
-
-              {localStorage.getItem("token")&&  <>
-                  {showPaymentDiv &&   <div className="PaymentsOptionsDivShadow"> <div className="PaymentsOptionsDiv">
-
-                  <List className="paymentsOptionList" sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                  <ListItem>
-                  <ListItemAvatar>
-                    <Avatar>
-                    <CreditCardIcon color = "primary"/>
-                      </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary="Credit/Debit card"/>
-                  <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} onClick={()=>setShowDivMyCards(true)}>
-                  <ArrowForwardIosIcon/>
-                              </IconButton>
-                </ListItem>
-                <Divider variant="fullWidth" />
-
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <PaymentsIcon color="primary"/>
-                    {/* <Avatar src={paypalIcon}/> */}
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary="Other Payment Options"/>
-                  <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} >
-                  <ArrowForwardIosIcon/>
-                              </IconButton>
-                </ListItem>
-
-              
-                <Divider variant="fullWidth" />
-
-
-              </List>
-              <button className="paymentsOptionCancel" onClick={()=>setShowPaymentDiv(false)}>
-                  Cancel
-              </button>
-
-
-                      </div> </div>}
-
-                      { showDivMyCards && <div className="MycardsToPay">
-
-                      <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} onClick={()=>setShowDivMyCards(false)} >
-                  <ArrowBackIcon fontSize='large'/>
-                              </IconButton>
-                      {allCards&&allCards.map((card,i)=><MyCards id={i}  card={card}/>)}
-
-                      {/* <button className="PayButton" onClick={()=>aler}>
-                        Pay
-                      </button> */}
-
-          <Box sx={{ m: 1, position: 'relative' }}>
-                  <Button
-                    variant="contained"
-                    sx={buttonSx}
-                    disabled={loading}
-                    onClick={handleButtonClick}
-                    className="PayButton"
-                    
-                  >
-                  Pay
-                  </Button>
-                  {loading && (
-                    <CircularProgress
-                      size={24}
-                      sx={{
-                        color: green[500],
-                        position: 'absolute',
-                        top: '50%',
-                        left: '83%',
-                        marginTop: '-12px',
-                        marginLeft: '-12px',
-                      }}
-                    />
-                  )}
-                </Box>
-
-                      </div>}
-
-                    </>}
    
     {/* Second Part */                                                                  }
 
@@ -563,10 +398,82 @@ getUser();
     </div>
 
     {/* Footer */                                                                        }
-    {localStorage.getItem("token")?
-      <Footer text={"Excited to Learn more ? Unlock Premium Courses with Learn Pro "} buttonText={"Upgrade Now"}></Footer>
-    : <Footer ref={bottomRef}  name="footer" text={"Excited to Learn ? Register now and unlock variety of courses "} buttonText={"Register Now"} course={location.state.id}></Footer>
+    {contract && 
+     <div className="AddCourse_Contract" scroll={true}>
+        <button style={{backgroundColor:'transparent'}} onClick={handleContract}><AiOutlineClose className='AddCourse_CloseButton'></AiOutlineClose></button>
+            <h1>Terms & Conditions</h1>
+            <div style={{margin:'1rem'}}></div>
+
+            <p>Welcome to Learn!</p>
+            <div style={{margin:'0.5rem'}}></div>
+
+                <p>These terms and conditions outline the rules and regulations for the use of Almod7koonAlkhamsa's Website, located at Learn.com.</p>
+                <p>By accessing this website we assume you accept these terms and conditions. Do not continue to use Learn if you do not agree to take all of the terms and conditions stated on this page.</p>
+
+                <div style={{margin:'1rem'}}></div>
+             <h3 style={{color:"#000"}}><strong >License</strong></h3>
+             <div style={{margin:'1rem'}}></div>
+            <p>Unless otherwise stated, Almod7koonAlkhamsa and/or its licensors own the intellectual property rights for all material on Learn. All intellectual property rights are reserved. You may access this from Learn for your own personal use subjected to restrictions set in these terms and conditions.</p>
+            <div style={{margin:'0.5rem'}}></div>
+
+            <p>You must not:</p>
+            <div style={{margin:'0.5rem'}}></div>
+
+                <p>
+                <li>Republish material from Learn</li>
+                <li>Sell, rent or sub-license material from Learn</li>
+                <li>Reproduce, duplicate or copy material from Learn</li>
+                <li>Redistribute content from Learn</li>
+            </p>
+            <div style={{margin:'1rem'}}></div>
+          
+            <h3 style={{color:"#000"}}><strong >Payments and Refund Policy</strong></h3>
+            <h4>For details on our refund and cancellation policies, please refer to the information below.
+               Please note that our policies may differ between offerings, and payment options may vary.
+                Please also note that we treat violations of our Terms of Use and Honor Code very seriously,
+                 and we have no obligation to offer refunds to users who violate these or other learn. policies, 
+                 even if their requests are made within the designated refund period. Similarly,
+                  we have no obligation to offer late refunds to users who do not receive a passing mark in a Content Offering,
+                   or who are otherwise unsatisfied with their final grade.</h4>
+                   <div style={{margin:'1rem'}}></div>
+            <div style={{textAlign:'left'}}>
+          <h4 style={{fontWeight:'800'}}>1. One-time Purchases</h4>
+          <div style={{margin:'1rem'}}></div>
+
+                <div style={{margin:'1.5rem'}}></div>
+
+                <p><strong>-Courses and Specializations</strong></p>
+                <div style={{margin:'1rem'}}></div>
+
+                <p>If you cancel your one-time, paid enrollment for a course or specialization, learn. will offer you a complete refund until 14 days after payment, or until you earn a course certificate for any course in the specialization, whichever is earlier.</p>
+                <div style={{margin:'0.5rem'}}></div>
+                <p>If you pre-enroll and pay for a course or specialization, learn. will offer you a complete refund until 14 days after the course or specialization launches or until you have earned your course or specialization certificate, whichever is earlier.</p>
+                <div style={{margin:'1rem'}}></div>
+                <p><strong>-Refunds for Certificates</strong></p>
+                <div style={{margin:'1rem'}}></div>
+
+                <p>Once you have earned a course certificate with your payment, you are not eligible for a refund even if it is within 14 days. If you do not earn your course certificate within 180 days, your registration will expire and you will need to pay to re-enroll for the course.</p>
+                <div style={{margin:'1rem'}}></div>
+
+              </div>
+              <form onSubmit={handleCreate}>
+                                <div className="AddCourse_Contract_Check">
+                            <Checkbox onClick={handleButtonConfirm} ></Checkbox>
+                            <h4>I Hereby Accept The Terms&Conditions</h4>
+                                </div>
+                                <button className={buttonConfirm?'AddCourse_Contract_ConfirmButton':'disabledButton'} disabled={!buttonConfirm}  >Confirm</button>
+                            </form>
+
+         
+
+        
+        </div>
+
     }
+        {contract&&<div className="AddCourse_Overlay2"></div>}
+
+   <Footer ref={bottomRef} handleContract={handleContract} name="footer" text={"initialize your trainee profile now "} inst={true} buttonText={"Become a trainee"} course={location.state.id}></Footer>
+    
     
     </>
     :
@@ -576,4 +483,4 @@ getUser();
   )
 }
 
-export default CourseContent
+export default CourseContentInst
