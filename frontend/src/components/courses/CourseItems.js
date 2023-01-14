@@ -15,7 +15,7 @@ import Rating from '@mui/material/Rating';
 import Divider from '@mui/material/Divider';
 import { Avatar, TextField } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
-import { alreadyUnenrollRequested, getTraineeCourseProg, myCourseRate, rateCourse, requestRefund } from '../../API/TraineeAPI';
+import { addReviewToCourse, alreadyUnenrollRequested, getTraineeCourseProg, myCourseRate, rateCourse, requestRefund } from '../../API/TraineeAPI';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import { addReport } from '../../API/InstructorAPI';
 
@@ -26,6 +26,11 @@ function CourseItems() {
     const navigate = useNavigate();
     const [progress,setProgress]=useState(0);
     const [alreadyUnenrolled,setAlready]=useState(false);
+    const [reviewDiv,setShowReviewDiv]=useState(false);
+    const [review,setReview]=useState("");
+    const handleReviewSubmit=async()=>{
+        const x=await addReviewToCourse(location.state.id);
+    }
     const handleUnenroll=async()=>{
         const result=await requestRefund(location.state.id)
         if(result=="error"){
@@ -215,6 +220,10 @@ function CourseItems() {
                 <button className='reportButtonTrainee' onClick={()=>setShowReportDiv(true)}>
                     Report issue
                 </button>
+                <br></br>
+                <button className='reportButtonTrainee' onClick={()=>setShowReviewDiv(true)}>
+                    Add A Review
+                </button>
 
 
             </div>
@@ -259,6 +268,22 @@ function CourseItems() {
                         </button>
                     </div> 
                         </div>}
+                {reviewDiv && <div className='reportTraineeDivShadow'>
+                    <div>
+                    <h1 className="ReportLabel"> Report</h1>
+                            <Divider className='DividerCard' variant="middle"/>
+
+                            <TextField
+                            className="IssusList-trainee"
+                            id="outlined-select-currency"
+                            select
+                            label="Your Issue"
+                            sx={{width:'70%'}}
+                            helperText="Please select your Issue"
+                            onChange={handleChangeIssueType}
+                            />
+                    </div>
+                            </div>}
 
 
 
