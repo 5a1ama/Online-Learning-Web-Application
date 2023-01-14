@@ -521,6 +521,7 @@ router.post("/addReviewToCourse/:token/:courseId/:review",async function(req,res
         var review=req.params.review;
         var course=await Course.findOne({id:courseId});
         var reviews=course.reviews;
+        console.log(review);
         if(!reviews){
             reviews=[];
         }

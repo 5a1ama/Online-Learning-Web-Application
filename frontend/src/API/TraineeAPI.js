@@ -392,7 +392,11 @@ export const solveExcersice=async(courseid,excerId,answers)=>{
         }
 }
 export const addReviewToCourse=async(courseId,review)=>{
-    const result=await fetch(`http://localhost:8000/trainee/addReviewToInst/${localStorage.getItem("token")}/${courseId}/${review}`)
+    const result=await fetch(`http://localhost:8000/trainee/addReviewToCourse/${localStorage.getItem("token")}/${courseId}/${review}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
     const j=await result.json();
     if(j=="error"){
 
@@ -405,7 +409,11 @@ export const addReviewToCourse=async(courseId,review)=>{
     }
 }
 export const addReviewToInst=async(instId,review)=>{
-    const result=await fetch(`http://localhost:8000/trainee/addReviewToCourse/${localStorage.getItem("token")}/${instId}/${review}`)
+    const result=await fetch(`http://localhost:8000/trainee/addReviewToInst/${localStorage.getItem("token")}/${instId}/${review}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
     const j=await result.json();
     if(j=="error"){
 

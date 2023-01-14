@@ -414,3 +414,8 @@ z-index: 2;
 .reportButtonTrainee{
     position: relative;
 }
+.reviewCI-trainee{
+    top:20%;
+    left:10%;
+    width: 80%;
+}

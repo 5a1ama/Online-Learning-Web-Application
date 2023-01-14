@@ -29,7 +29,13 @@ function CourseItems() {
     const [reviewDiv,setShowReviewDiv]=useState(false);
     const [review,setReview]=useState("");
     const handleReviewSubmit=async()=>{
-        const x=await addReviewToCourse(location.state.id);
+        const x=await addReviewToCourse(location.state.id,review);
+        alert("Review submitted successfully")
+        setShowReviewDiv(false);
+        
+    }
+    const handleReviewChange=(event)=>{
+        setReview(event.target.value);
     }
     const handleUnenroll=async()=>{
         const result=await requestRefund(location.state.id)
@@ -269,19 +275,24 @@ function CourseItems() {
                     </div> 
                         </div>}
                 {reviewDiv && <div className='reportTraineeDivShadow'>
-                    <div>
+                    <div className='reportTraineeDiv'>
                     <h1 className="ReportLabel"> Report</h1>
                             <Divider className='DividerCard' variant="middle"/>
 
                             <TextField
-                            className="IssusList-trainee"
+                            className="reviewCI-trainee"
                             id="outlined-select-currency"
-                            select
-                            label="Your Issue"
-                            sx={{width:'70%'}}
-                            helperText="Please select your Issue"
-                            onChange={handleChangeIssueType}
+                            
+                            label="Your Review"
+                            
+                            onChange={handleReviewChange}
                             />
+                            <button className="submitReportButton-trainee" onClick={handleReviewSubmit}>
+                        Submit
+                    </button>
+                    <button className="cancelReportButton-trainee" onClick={()=>setShowReviewDiv(false)}>
+                        cancel
+                        </button>
                     </div>
                             </div>}
 
