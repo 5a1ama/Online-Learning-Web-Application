@@ -174,7 +174,7 @@ export function InstAllCourses(){
               if(found)
               return <NewCourse course={course} inst={true} handleNewPriceRatio={handleNewPriceRatio}   country={countryNumber}/>
               else
-              return <NewCourse course={course}  handleNewPriceRatio={handleNewPriceRatio}   country={countryNumber}/>
+              return <NewCourse course={course} instNo={true} handleNewPriceRatio={handleNewPriceRatio}   country={countryNumber}/>
             } )}
             </>
             :

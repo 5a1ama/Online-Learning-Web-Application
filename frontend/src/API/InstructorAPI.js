@@ -460,3 +460,55 @@ export const updateCourseSummary=async(Summary,id)=>{
 
         }
 }
+
+export const DeleteCourse=async(id)=>{
+    var result=await fetch(`http://localhost:8000/instructor/DeleteCourse/${id}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+            
+          return j
+
+        }
+}
+export const PublishCourse=async(id)=>{
+    var result=await fetch(`http://localhost:8000/instructor/PublishCourse/${id}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else if(j=="title"){
+            alert("Please enter title for your course")
+
+        }else if(j=="summary"){
+            alert("Please enter summary for your course")
+
+        }else if(j=="PrevVideo"){
+            alert("Please enter preview video for your course")
+        }else if(j=="subtitle"){
+            alert("Please add at least one subtitle for your course")
+        }else if(j=="ok"){
+            alert('tmam')
+            return j
+        }
+        else{
+            alert("There is data missing in subtitle : " + j)
+
+        }
+}

@@ -7,6 +7,8 @@
     import starImg from "../../assets/goldStar.png"
     import InstImg from "../../assets/avatar8.png"
     import addPreviewImg from "../../assets/AddPreview.png"
+    import subIcon from "../../assets/subIcon.png"
+
     import "./InstructorViewCourse.css"
     import { Avatar } from "@mui/material";
     import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
@@ -15,7 +17,7 @@
     import { GetInstructorName } from './../../API/CourseAPI';
     import Footer from '../footer/Footer';
     import InstructorSubtitle from '.././courses/subtitles/InstructorSubtitle';
-    import { definePromotion, deleteSubTitle, updateCourseSummary, updateSubtitle, uploadCourseVideo } from '../../API/InstructorAPI';
+    import { definePromotion, deleteSubTitle, PublishCourse, updateCourseSummary, updateSubtitle, uploadCourseVideo } from '../../API/InstructorAPI';
     import { addNewSubToCourse, uploadSubtitleVideo } from '../../API/InstructorAPI';
     import {TextField} from "@mui/material";
     import "../courses/subtitles/Subtitle.css"
@@ -36,10 +38,12 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { updateCoursePrice } from './../../API/InstructorAPI';
+import { updateCoursePrice, DeleteCourse } from './../../API/InstructorAPI';
 import { BiEdit } from 'react-icons/bi';
 import {loading} from '../loading/Loading'
 import Loading from './../loading/Loading';
+import CourseHighlights from './../courses/coursehighlights/CourseHighlights';
+import Subtitle from './../courses/subtitles/Subtitle';
     
 
     export function InstructorViewCourse() {
@@ -164,12 +168,14 @@ import Loading from './../loading/Loading';
                 
             }
         }
-    const handleAddPrevVid=async(x)=>{
+        const handleAddPrevVidAsync = async()=>{
             setFirst(0)
-    
             await uploadCourseVideo(location.state.id,prevVidLink)
             getDetails();
 
+        }
+    const handleAddPrevVid=()=>{
+        handleAddPrevVidAsync();
     }
         const [details,setDetails] = useState([]);
         
@@ -193,27 +199,42 @@ import Loading from './../loading/Loading';
             
         })
 
+        const getDetails = async () => {
+            setDetails((await getCourseDetails(location.state.id)));
+            setFirst(1);
+        }
+        
         useEffect(()=>{ 
             async function getdetails () {
                 setDetails((await getCourseDetails(location.state.id)));
                 
             }
-            getDetails();
+            getdetails();
         })
     
       
 
-        const getDetails = async () => {
-            setDetails((await getCourseDetails(location.state.id)));
-            setFirst(1);
-        }
 
-        const handleSubmitVid =async(sub)=>{
+        const handleSubmitVid =(sub)=>{
+            submitVideo(sub);
             
-            const x= await uploadSubtitleVideo(location.state.id,addedVideoLink,sub,vidDescription)
-            
+        }
+        const submitVideo = async(sub)=>{
+            if(addedVideoLink!=""&&vidDescription!=""){
+                const x= await uploadSubtitleVideo(location.state.id,addedVideoLink,sub,vidDescription);
+            }else if(addedVideoLink==""){
+                const x= await uploadSubtitleVideo(location.state.id,sub.video,sub,vidDescription);
+
+            }else if(vidDescription==""){
+                const x= await uploadSubtitleVideo(location.state.id,addedVideoLink,sub,sub.description);
+
+            }else{
+                const x= await uploadSubtitleVideo(location.state.id,sub.video,sub,sub.description);
+
+            }
             getDetails();
         }
+
         if(first===0 && location.state){
             getDetails();
             if(view==="Syllabus"){
@@ -269,6 +290,7 @@ import Loading from './../loading/Loading';
     const [showReportDiv ,setShowReportDiv] = useState(false);
     const [showPriceDiv ,setShowPriceDiv] = useState(false);
     const [showDiscountDiv ,setShowDiscountDiv] = useState(false);
+    const [showDeleteDiv ,setShowDeleteDiv] = useState(false);
 
 
     const [issueType,setIssueType] = useState("");
@@ -352,20 +374,26 @@ import Loading from './../loading/Loading';
 
    const[summary,setSummary] = useState("");
 
-   const handleEditSummary = async(event) => {
+   const handleEditSummary = (event) => {
     setSummary(event.target.value);
    }
 
-   const handleSubmitSummary = async()=>{
-    const x = await updateCourseSummary(summary,location.state.id);
-    }
+   const handleSubmitSummary = ()=>{
+    SummaryAddition();
+    setAddSummaryDiv(false);    
+}
+    const SummaryAddition = async()=>{
+        const z = await updateCourseSummary(summary,location.state.id);
 
-   const deleteSummary = async() => {
-    const z = await updateCourseSummary(" ",location.state.id);
+    }
+   const deleteSummary = () => {
     setSummary("");
+    SummaryDeletion();
+    }
+    const SummaryDeletion = async()=>{
+        const z = await updateCourseSummary(" ",location.state.id);
 
     }
-
    
    const[editPreview,setEditPreveiw]=useState(false);
     const handleEditPreview=()=>{
@@ -378,7 +406,18 @@ import Loading from './../loading/Loading';
         await uploadCourseVideo(location.state.id,prevVidLink)
         getDetails();
     }
- 
+    const handleDeleteCourse = ()=>{
+        DeleteCourse2();
+        
+    }
+    const DeleteCourse2 =async ()=>{
+        const x = await DeleteCourse(location.state.id);
+        navigate('/InstructorCourses')
+    }
+
+        const handlePublish =async()=>{
+            const x = await PublishCourse(location.state.id);
+        }
    return (
         
        <div className="CourseItems">
@@ -405,30 +444,17 @@ import Loading from './../loading/Loading';
                         <button className='InstSettingItem' onClick={()=>setShowPriceDiv(true)}><MdPriceCheck className="Menuicon" color="rgb(0,200,0)" size="23px" ></MdPriceCheck>{details[0]&&details[0].price>0 ?"Edit Price":"Add Price"}</button>
                         <button className='InstSettingItem' onClick={()=>setShowDiscountDiv(true)}><TbDiscount2 className="Menuicon" color="grey" size="23px" ></TbDiscount2>{(details[0]&&details[0].discount.amount>0) && (expiredTime>0)?"Edit Discount":"Add Discount"}</button>
                         <button className='InstSettingItem' onClick={()=>setShowReportDiv(true)}><BsFlag className="Menuicon" color="rgb(230,200,0)" size="23px" ></BsFlag>Report Issue</button>
-                        <button className='InstSettingItem'><BsTrash className="Menuicon" color="red" size="23px" ></BsTrash>Delete Course</button>
+                        <button className='InstSettingItem' onClick={()=>setShowDeleteDiv(true)}><BsTrash className="Menuicon" color="red" size="23px" ></BsTrash>Delete Course</button>
                         
                     </div>}
                     {/* ================================================================ */}
                     
-                    <div className="CourseItems_Content_Stars">    
-                        <div className="CourseItems_InstNames">
-                            {instNames[0]&&instNames.slice(0,3).map( (name)=>
-                                <div style={{display:"flex" ,flexDirection:"row",width:"90vh" ,padding:".5rem"}}>
-                                    <a href="/InstructorProfile" className='flexRow' >
-                                        <img alt="." src={InstImg} style={{width:"40px",height:"40px" ,transform:"translate(0px,3px)"}}></img> 
-                                        <h3>{name}</h3>
-                                    </a>                
-                                    </div>
-                            )}
-                        </div>
-                            
-                        {details[0]&&stars(details[0].rating.value).map((num)=> <img className="starImg2" style={{width:'40px'}} src={starImg} alt="."/>)}
-                    </div>
+                 
 
                     { /* --------- counter for discount ------------ */}
                     {isDiscount ?
                         <>
-                             <img alt="." src={DiscountImg3} style={{transform:'translate(-4.5rem,2rem)'}} className="CourseContent_DiscountLabel2" />
+                             <img alt="." src={DiscountImg3} style={{transform:'translate(-4.5rem,0rem)'}} className="CourseContent_DiscountLabel2" />
                                 <h2 className='CourseContent_NewCourse_price2' style={{color:'red' ,transform:'translate(24rem,2.2rem)'}}>   {details[0]&&details[0].discount.amount} %</h2>
                                 {isDiscount && 
                                     <div className="CourseContent_Counter" style={{transform:'translate(24rem,3.5rem)'}}>
@@ -442,7 +468,7 @@ import Loading from './../loading/Loading';
                     }
 
                     
-                       <button className="Inst_CourseContent_button_Enroll">Publish Course </button>
+                       <button className="Inst_CourseContent_button_Enroll" onClick={handlePublish}>Publish Course </button>
 
                 </div>
              
@@ -559,7 +585,7 @@ import Loading from './../loading/Loading';
                             className="PriceTextField"
                             sx={{width:'70%'}}
                             id="outlined-multiline-flexible"
-                            label="Enter Preview Video"
+                            label="Enter Preview Video Link"
                             defaultValue={details[0]&&details[0].previewVideo}
                             multiline
                             maxRows={7}
@@ -568,6 +594,18 @@ import Loading from './../loading/Loading';
                             <div className='flexRow FromButtonsAddPrice'>
                                     <button className="Inst_SetPrice" onClick={()=>{handleAddPrevVid();setPrevVid(false)}}> Submit</button>
                                     <button className="Inst_SetPriceCancel" onClick={()=>setPrevVid(false)}> cancel</button>
+                            </div>
+                        </div> 
+                    </div>}
+                    {/* ======================== Delete Course ====================== */}
+                    {showDeleteDiv&& 
+                 <div className="reportInstructorDivShadow">
+                       <div className="ShowPriceDiv ">
+                            <h1 className="ShowPriceLabel" style={{color:'red',fontSize:'20px'}}>You are about to delete current course<br></br> do you want to continue?</h1>
+                            <Divider className='' variant="middle"/>
+                            <div className='flexRow FromButtonsAddPrice'>
+                                    <button className="Inst_SetPrice" onClick={handleDeleteCourse}> Confirm</button>
+                                    <button className="Inst_SetPriceCancel" onClick={()=>setShowDeleteDiv(false)}> cancel</button>
                             </div>
                         </div> 
                     </div>}
@@ -609,7 +647,7 @@ import Loading from './../loading/Loading';
                                                 :
                                                  <div className='excerciseVideo'> 
                                                     <textarea onChange={handleEditSummary} className="textBox_Instructor_Summary" placeholder='Enter Course Summary'/> 
-                                                    <button onClick={()=>{handleSubmitSummary();}} className="addVideo_Inst">Add</button> 
+                                                    <button onClick={handleSubmitSummary} className="addVideo_Inst">Add</button> 
                                                   </div>
                                                    
                                                 }
@@ -723,6 +761,18 @@ import Loading from './../loading/Loading';
 
                                         }
                                         </div>
+                                        <div className="vlHor"></div>
+                                        <h2 style={{margin:'2rem 0rem', color:'var(--primary-light'}} >Subjects : </h2>
+                                        <div>
+                                            {
+                                                details[0]&&details[0].subject.map((subject)=>
+                                          <CourseHighlights img={subIcon}
+                                           first={subject} 
+                                            >
+                                           </CourseHighlights>
+                                                )
+                                            }
+                                           </div>
                     </div>
 
                 

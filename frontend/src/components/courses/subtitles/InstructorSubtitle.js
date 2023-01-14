@@ -116,7 +116,7 @@ function InstructorSubtitle(props) {
                         style={{color:"rgb(0, 140, 255)"}}
                          className="CourseItems_OpenItem">Add Video</h3></a>}
                     </div>
-                    {VideoLink!="" && <BiEdit onClick={handleEditVideo} className='BiEdit' size="20px"></BiEdit>}
+                    {VideoLink!="" && !props.Nodelete && <BiEdit onClick={handleEditVideo} className='BiEdit' size="20px"></BiEdit>}
                     </div>
                     )}
                 
@@ -139,7 +139,7 @@ function InstructorSubtitle(props) {
                         <a href="/"><h3 style={{color:"#000", transform:"translate(-1.5rem , 0rem)"}}>Lesson</h3></a>
                         <a href="/"><h3 style={{color:"rgb(0, 140, 255)"}}className="CourseItems_OpenItem2">Lesson 1 {props.Lesson}</h3></a>
                     </div>
-                    <BiEdit className='BiEdit' size="20px"></BiEdit>
+                    { !props.Nodelete&&<BiEdit className='BiEdit' size="20px"></BiEdit>}
                  </div>
 
                 {/* div for exersices */}
@@ -183,7 +183,7 @@ function InstructorSubtitle(props) {
      <div> <button onClick={()=> {  props.handleEdit(props.sub.title,newTitle,newHours,newVideoLink,newDescription); setEdit(false); }} style={{backgroundColor:"green"}}>Confirm</button> <button onClick={()=>setEdit(false)} style={{backgroundColor:"red"}}>Cancel</button></div>
 
                 </div>} 
-            {!edit && <button className='delbtn' onClick={()=>props.handleDelete(props.sub.title)}><BsTrash size='30'></BsTrash></button>}
+            {!edit && !props.Nodelete&& <button className='delbtn' onClick={()=>props.handleDelete(props.sub.title)}><BsTrash size='30'></BsTrash></button>}
      
         </div>
                              )

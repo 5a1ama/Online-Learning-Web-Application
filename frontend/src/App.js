@@ -44,6 +44,8 @@ import { TraineeCourseExcer } from './components/Trainee/TraineeCourseExcer';
 import { TraineeGradingExercise } from './components/Trainee/TraineeGradingExcercise';
 import { MyInstructorReports } from './components/Instructor/instructorReports';
 import { InstructorEditExercise } from './components/Instructor/InstructorEditExcer';
+import { InstructorViewPublished } from './components/Instructor/InstructorViewPublished';
+import CourseContentInst from './components/courses/CourseContentInst';
 
 
 export default function App() {
@@ -73,6 +75,9 @@ export default function App() {
           <Route path="/InstructorCourses" element={<InstructorCourses handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/instructorProfile" element={<InstructorProfile handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path='/instructorViewCourse' element={<InstructorViewCourse handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
+          <Route path='/InstructorViewPublished' element={<InstructorViewPublished handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
+          <Route path='/CourseContentInst' element={<CourseContentInst handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
+
           <Route path="/instructorHome" element={<InstructorHome handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/> 
           <Route path="/instructorReviews" element={<InstructorReviews handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/instructorCourseVideo" element={<InstructorCourseVideo handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
