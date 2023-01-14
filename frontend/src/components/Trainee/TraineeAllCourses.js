@@ -174,7 +174,7 @@ export function TraineeAllCourses(){
         <div>
 
 <div>
- <Navbar items={["Home","My Courses","All Courses"]} select="All Courses" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} 
+ <Navbar items={["Home","My Courses","All Courses"]} select="All Courses" trainee={true} nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} 
        handleCountryNumber={handleCountryNumber}
         scroll={["","",""]}  /> 
         </div>
