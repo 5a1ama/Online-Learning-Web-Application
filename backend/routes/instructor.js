@@ -432,9 +432,13 @@ router.post("/SwitchToTrainee/:token",async function(req,res){
     var token=req.params.token;
     try{
         var user=jwt.verify(token,process.env.ACCESSTOKEN);
-        var instructor=await Instructor({id:user.id});
+        var instructor=await Instructor.findOne({id:user.id});
         await Instructor.findOneAndUpdate({id:user.id},{switch:true})
-        res.json("ok")
+        var object=new Trainee({id:instructor.id,Name:instructor.Name,Email:instructor.Email,Password:instructor.Password,type:"Individual"})
+        object.save(function(err,result){
+            res.json("ok")
+        })
+       
     }catch{
         res.json("error");
     }
