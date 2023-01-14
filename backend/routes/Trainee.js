@@ -473,10 +473,64 @@ router.post("/requestRefund/:token/:courseid",tokenVerify,async function(req,res
     }
     
 })
+router.get("/alreadyRequestedRefund/:courseid/:token",async function(req,res){
+   try{
+    var token=req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var courseid=req.params.courseid;
+    var request=await RefundRequest.find({requesterId:user.id,courseId:courseid})
+    if(request.length==0){
+        res.json(false);
+    }else{
+        res.json(true);
+    }
+   } catch{
+    res.json("error");
+   }
+})
 router.post("/removeRefund/:traineeId/:courseid",async function(req,res){
     await RefundRequest.deleteOne({requesterId:req.params.traineeId,courseId:req.params.courseid})
     res.json("ok")
 
+})
+router.post("/addReviewToInst/:token/:instId/:review",async function(req,res){
+    var token=req.params.token;
+    
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
+        var instid=req.params.instId;
+        var review=req.params.review;
+        var instructor=await Instructor.findOne({id:instid});
+        var reviews=instructor.reviews;
+        if(!reviews){
+            reviews=[];
+        }
+        reviews.push(review);
+        await Instructor.findOneAndUpdate({id:instid},{reviews:reviews});
+        res.json("ok")
+    }catch{
+        res.json("error")
+    }
+})
+router.post("/addReviewToCourse/:token/:courseId/:review",async function(req,res){
+    var token=req.params.token;
+    
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
+        var courseId=req.params.courseId;
+        var review=req.params.review;
+        var course=await Course.findOne({id:courseId});
+        var reviews=course.reviews;
+        console.log(review);
+        if(!reviews){
+            reviews=[];
+        }
+        reviews.push(review);
+        await Course.findOneAndUpdate({id:courseId},{reviews:reviews});
+        res.json("ok")
+    }catch{
+        res.json("error")
+    }
 })
 router.post("/getRefund/:traineeId/:courseid",async function(req,res){
     var cid=req.params.courseid;

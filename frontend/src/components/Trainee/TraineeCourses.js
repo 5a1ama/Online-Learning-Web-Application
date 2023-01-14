@@ -96,7 +96,7 @@ return(
     <div>
         <Navbar items={["Home","My Courses","All Courses"]} 
               handleCountryNumber={handleCountryNumber}
-              select="My Courses" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
+              select="My Courses" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} trainee={true} scroll={["","",""]}  />
 
     </div>
     <div>

@@ -8,6 +8,7 @@ const dotenv=require("dotenv");
 const Instructor = require("../Models/Instructor");
 var Trainee=require("../Models/Trainee");
 const Excercise = require("../Models/Excercise");
+const { route } = require("./commonRoutes");
 dotenv.config()
 
 router.get("/getinstructorTraineeDetails/:id",async function(req,res){
@@ -426,6 +427,34 @@ router.post("/createExercise/:token/:courseid/:title",async function(req,res){
         res.json("error")
     }
 
+})
+router.post("/SwitchToTrainee/:token",async function(req,res){
+    var token=req.params.token;
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
+        var instructor=await Instructor.findOne({id:user.id});
+        await Instructor.findOneAndUpdate({id:user.id},{switch:true})
+        var object=new Trainee({id:instructor.id,Name:instructor.Name,Email:instructor.Email,Password:instructor.Password,type:"Individual"})
+        object.save(function(err,result){
+            res.json("ok")
+        })
+       
+    }catch{
+        res.json("error");
+    }
+
+})
+router.post("/closeCourse/:token/:courseId",async function(req,res){
+    var token=req.params.token;
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN)
+        var courseId=req.params.courseId;
+    await Course.findOneAndUpdate({id:courseId},{closed:true})
+    res.json("ok")
+    }catch{
+        res.json("error");
+    }
+    
 })
 router.post("/updateExercise/:token/:courseid/:title/:excerid",async function(req,res){
     var token=req.params.token;

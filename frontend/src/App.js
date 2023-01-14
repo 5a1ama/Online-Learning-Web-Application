@@ -44,6 +44,8 @@ import { TraineeCourseExcer } from './components/Trainee/TraineeCourseExcer';
 import { TraineeGradingExercise } from './components/Trainee/TraineeGradingExcercise';
 import { MyInstructorReports } from './components/Instructor/instructorReports';
 import { InstructorEditExercise } from './components/Instructor/InstructorEditExcer';
+import { MyTraineeReports } from './components/Trainee/traineeReport';
+
 import { InstructorViewPublished } from './components/Instructor/InstructorViewPublished';
 import CourseContentInst from './components/courses/CourseContentInst';
 
@@ -98,6 +100,8 @@ export default function App() {
           <Route path="/TraineeProfile" element={<TraineeProfile handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/> 
           <Route path="/TraineePays" element={<TraineePay handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/TraineePayments" element={<TraineePayments handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/traineeReport" element={<MyTraineeReports handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+
 
           <Route path="/AdminHome" element={<Admin handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/AdminControlPanel" element={<ControlPanel handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>

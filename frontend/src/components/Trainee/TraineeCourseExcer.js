@@ -63,7 +63,7 @@ export function TraineeCourseExcer(){
         <div>
                     <Navbar items={["Home","My Courses","All Courses"]} 
               handleCountryNumber={handleCountryNumber}
-              select="" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
+              select="" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} trainee={true} scroll={["","",""]}  />
               
               
               <div className="TCEMainDiv">

@@ -15,7 +15,7 @@ import Rating from '@mui/material/Rating';
 import Divider from '@mui/material/Divider';
 import { Avatar, TextField } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
-import { getTraineeCourseProg, myCourseRate, rateCourse, requestRefund } from '../../API/TraineeAPI';
+import { addReviewToCourse, alreadyUnenrollRequested, getTraineeCourseProg, myCourseRate, rateCourse, requestRefund } from '../../API/TraineeAPI';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import { addReport } from '../../API/InstructorAPI';
 
@@ -25,7 +25,18 @@ function CourseItems() {
     const location=useLocation();
     const navigate = useNavigate();
     const [progress,setProgress]=useState(0);
-
+    const [alreadyUnenrolled,setAlready]=useState(false);
+    const [reviewDiv,setShowReviewDiv]=useState(false);
+    const [review,setReview]=useState("");
+    const handleReviewSubmit=async()=>{
+        const x=await addReviewToCourse(location.state.id,review);
+        alert("Review submitted successfully")
+        setShowReviewDiv(false);
+        
+    }
+    const handleReviewChange=(event)=>{
+        setReview(event.target.value);
+    }
     const handleUnenroll=async()=>{
         const result=await requestRefund(location.state.id)
         if(result=="error"){
@@ -84,6 +95,8 @@ function CourseItems() {
     const now = 90 ;
     const getDetails = async () => {
         setDetails((await getCourseDetails(location.state.id)));
+        setAlready(await alreadyUnenrollRequested(location.state.id))
+        
         setFirst(1);
     }
     useEffect(()=>{
@@ -180,7 +193,7 @@ function CourseItems() {
 
             <Navbar items={["Home","My Courses","All Courses"]}
                handleCountryNumber={handleCountryNumber}
-               select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
+               select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} trainee={true} scroll={["","",""]}  />
         
             <div className="CourseItems_Video">
 
@@ -212,6 +225,10 @@ function CourseItems() {
 
                 <button className='reportButtonTrainee' onClick={()=>setShowReportDiv(true)}>
                     Report issue
+                </button>
+                <br></br>
+                <button className='reportButtonTrainee' onClick={()=>setShowReviewDiv(true)}>
+                    Add A Review
                 </button>
 
 
@@ -257,13 +274,36 @@ function CourseItems() {
                         </button>
                     </div> 
                         </div>}
+                {reviewDiv && <div className='reportTraineeDivShadow'>
+                    <div className='reportTraineeDiv'>
+                    <h1 className="ReportLabel"> Report</h1>
+                            <Divider className='DividerCard' variant="middle"/>
+
+                            <TextField
+                            className="reviewCI-trainee"
+                            id="outlined-select-currency"
+                            
+                            label="Your Review"
+                            
+                            onChange={handleReviewChange}
+                            />
+                            <button className="submitReportButton-trainee" onClick={handleReviewSubmit}>
+                        Submit
+                    </button>
+                    <button className="cancelReportButton-trainee" onClick={()=>setShowReviewDiv(false)}>
+                        cancel
+                        </button>
+                    </div>
+                            </div>}
 
 
 
             
             {/* progress bar */                                                                 }
-            {progress<50 && <button className='CourseItemsUnenrollbtn' onClick={handleUnenroll}>UnEnroll</button>}
-            <div className='CourseItems_ProgressBar'>
+            {alreadyUnenrolled==true && <h4 className='CIunenrollLABEL'>Your UnEnrolling request is being processed</h4>}
+
+            {progress<50 && alreadyUnenrolled==false &&  <button className='CourseItemsUnenrollbtn' onClick={handleUnenroll}>UnEnroll</button>}
+            <div className='CourseItems_ProgressBar'> 
                 <h2>Course Progress</h2>
              {
                  <div className='CourseItems_Progress'>

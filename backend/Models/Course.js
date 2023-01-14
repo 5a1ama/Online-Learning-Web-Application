@@ -75,7 +75,12 @@ const courseschema=new Schema({
     published :{
         type:Boolean,
         default:false
+    },
+    closed:{
+        type:Boolean,
+        default:false
     }
+    
 })
 const Course = mongoose.model('course', courseschema);
 

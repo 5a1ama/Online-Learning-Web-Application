@@ -1,0 +1,162 @@
+.traineeReportsMainDiv{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: transparent;
+}
+.traineeReportsMainDiv::before{
+    position: fixed;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0,0, 0.2);
+}
+
+.traineeReportsList{
+
+ position: absolute;
+    top: 20%;
+    left: 2%;
+
+    background-color: rgb(255, 255, 255);
+    height: 490px;
+    width: 400px;
+    border-top-left-radius: 2%;
+    border-top-right-radius: 2%;
+    border-bottom-left-radius: 2%;
+    border-bottom-right-radius: 2%;
+    
+}
+.reportDetailsDiv-trainee{
+    position: absolute;
+    left: 30%;
+    top: 20%;
+    background-color: rgb(255, 255, 255);
+    height: 490px;
+    width: 900px;
+    border-top-left-radius: 2%;
+    border-top-right-radius: 2%;
+    border-bottom-left-radius: 2%;
+    border-bottom-right-radius: 2%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.listOfReportsDiv-trainee{
+    position: relative;
+    top: 2%;
+    left: 2%;
+}
+.stateLabel-trainee{
+    position: relative;
+    top: 2%;
+    left: 2%;
+}
+.stateLabelDiv-trainee{
+    display: flex;
+    flex-direction: row;
+    column-gap: 75%;
+}
+.stateLabel2-trainee{
+    position: relative;
+    top: 0.5vw;
+    font-size: 1.5rem;
+    color: rgb(10,138,218);
+
+}
+.FollowUpButton-trainee{
+    position: relative;
+    top: 100%;
+    left: 60%;
+    width:10vw;
+}
+.detailsLabel-trainee{
+    position: absolute;
+    top: 14%;
+    left: 2%;
+}
+.DtailsText-trainee{
+    position: relative;
+    top: 2vw;
+    left: 17%;
+    width: 70%;
+
+}
+.FollowUpShadowDiv-trainee{
+    width: 100%;
+    height: 100%;
+    background: transparent; 
+    display: flex;
+    flex-direction: column;
+  position:fixed;
+  z-index: 2;
+}
+.FollowUpShadowDiv-trainee::before{
+    position: fixed;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0,0, 0.5);
+}
+.followUpDiv-trainee{
+    position: absolute;
+    left: 35%;
+    top: 20%;
+    background-color: rgb(255, 255, 255);
+    height: 490px;
+    width: 500px;
+    border-top-left-radius: 2%;
+    border-top-right-radius: 2%;
+    border-bottom-left-radius: 2%;
+    border-bottom-right-radius: 2%;
+    z-index: 2;
+}
+.FollowText-trainee{
+    position: absolute;
+    top: 4vw;
+    left: 4vw;
+    width: 70%;
+}
+.followUpQuestion-trainee{
+    position: relative;
+    top: 2%;
+    left: 2%;
+}
+.followUpDivider-trainee{
+    position: relative;
+    top: 2%;
+}
+.followUpAddButton-trainee{
+    position: relative;
+    top: 75%;
+    left: -5%;
+    width: 30%;
+
+}
+.followUpCancelButton-trainee{
+    position: absolute;
+    top: 85%;
+    left: 30%;
+    width: 30%;
+    background-color: red;
+}
+.followUpCancelButton-trainee:hover{
+    background-color: rgb(246, 99, 99);
+}
+.followUpTextField-trainee{
+    width: 70%;
+}
+.FollowupLabel-trainee{
+    position: relative;
+    top: 8%;
+    left: 2%;
+}
+.followUpTextFieldDiv-trainee{
+    position: relative;
+    top: 12%;
+    left: 17%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.8vw;
+}

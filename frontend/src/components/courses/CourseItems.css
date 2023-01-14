@@ -261,7 +261,13 @@
     /* top:0%; */
 }
 
-    
+.CIunenrollLABEL{
+    position: relative;
+    font-size: 1.5vw;
+    left:34%;
+    color:var(--primary-light);
+
+}
 .Course_Gift{
     position:absolute;
     /* left:100vh; */
@@ -407,4 +413,9 @@ z-index: 2;
 
 .reportButtonTrainee{
     position: relative;
+}
+.reviewCI-trainee{
+    top:20%;
+    left:10%;
+    width: 80%;
 }
