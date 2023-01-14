@@ -14,8 +14,12 @@ function Subtitle(props) {
     const [grade,setGrade]=useState("");
 
     const getGrade=async()=>{
-        if(!props.guest)
-        setGrade(await MyGrade(props.sub.excerciseId))
+        if(!props.guest){
+            if(props.sub.excerciseId){
+                setGrade(await MyGrade(props.sub.excerciseId))
+
+            }
+        }
     }
     
 

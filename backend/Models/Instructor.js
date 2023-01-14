@@ -39,6 +39,10 @@ const instructorSchema=new Schema(
           },
           bio:{
             type:String
+          },
+          switch:{
+            type:Boolean,
+            default:false
           }
     }
 )

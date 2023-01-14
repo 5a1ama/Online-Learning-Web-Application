@@ -340,6 +340,10 @@ export const requestRefund=async(id)=>{
     const j=await result.json();
     return j;
 }
+export const alreadyUnenrollRequested=async(courseid)=>{
+    const result=await fetch(`http://localhost:8000/trainee/alreadyRequestedRefund/${courseid}/${localStorage.getItem("token")}`)
+    return await result.json();
+}
 export const showWallet=async()=>{
     const result=await fetch(`http://localhost:8000/trainee/viewWallet/${localStorage.getItem("token")}`);
     const j=await result.json();
@@ -386,6 +390,32 @@ export const solveExcersice=async(courseid,excerId,answers)=>{
           return j
 
         }
+}
+export const addReviewToCourse=async(instId,review)=>{
+    const result=await fetch(`http://localhost:8000/trainee/addReviewToInst/${localStorage.getItem("token")}/${instId}/${review}`)
+    const j=await result.json();
+    if(j=="error"){
+
+        alert("you must login first")
+        window.location.href="/login"
+
+    }else{
+      return j
+
+    }
+}
+export const addReviewToInst=async(courseId,review)=>{
+    const result=await fetch(`http://localhost:8000/trainee/addReviewToCourse/${localStorage.getItem("token")}/${courseId}/${review}`)
+    const j=await result.json();
+    if(j=="error"){
+
+        alert("you must login first")
+        window.location.href="/login"
+
+    }else{
+      return j
+
+    }
 }
 export const getMyCompletedExce=async()=>{
     const result=await fetch(`http://localhost:8000/trainee/myCompleted/${localStorage.getItem("token")}`)

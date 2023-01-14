@@ -460,3 +460,32 @@ export const updateCourseSummary=async(Summary,id)=>{
 
         }
 }
+export const closeCourse=async(courseid)=>{
+    const result=await fetch(`http://localhost:8000/instructor/closeCourse/${localStorage.getItem("token")}/${courseid}`)
+    const j=await result.json();
+    if(j=="error"){
+
+        alert("you must login first")
+        window.location.href="/login"
+
+    }else{
+        
+      return j
+
+    }
+
+}
+export const SwitchToTrainee=async()=>{
+    const result=await fetch(`http://localhost:8000/instructor/SwitchToTrainee/${localStorage.getItem("token")}`)
+    const j=await result.json();
+    if(j=="error"){
+
+        alert("you must login first")
+        window.location.href="/login"
+
+    }else{
+        
+      return j
+
+    }
+}

@@ -15,7 +15,7 @@ import Rating from '@mui/material/Rating';
 import Divider from '@mui/material/Divider';
 import { Avatar, TextField } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
-import { getTraineeCourseProg, myCourseRate, rateCourse, requestRefund } from '../../API/TraineeAPI';
+import { alreadyUnenrollRequested, getTraineeCourseProg, myCourseRate, rateCourse, requestRefund } from '../../API/TraineeAPI';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import { addReport } from '../../API/InstructorAPI';
 
@@ -25,7 +25,7 @@ function CourseItems() {
     const location=useLocation();
     const navigate = useNavigate();
     const [progress,setProgress]=useState(0);
-
+    const [alreadyUnenrolled,setAlready]=useState(false);
     const handleUnenroll=async()=>{
         const result=await requestRefund(location.state.id)
         if(result=="error"){
@@ -84,6 +84,8 @@ function CourseItems() {
     const now = 90 ;
     const getDetails = async () => {
         setDetails((await getCourseDetails(location.state.id)));
+        setAlready(await alreadyUnenrollRequested(location.state.id))
+        
         setFirst(1);
     }
     useEffect(()=>{
@@ -262,8 +264,10 @@ function CourseItems() {
 
             
             {/* progress bar */                                                                 }
-            {progress<50 && <button className='CourseItemsUnenrollbtn' onClick={handleUnenroll}>UnEnroll</button>}
-            <div className='CourseItems_ProgressBar'>
+            {alreadyUnenrolled==true && <h4 className='CIunenrollLABEL'>Your UnEnrolling request is being processed</h4>}
+
+            {progress<50 && alreadyUnenrolled==false &&  <button className='CourseItemsUnenrollbtn' onClick={handleUnenroll}>UnEnroll</button>}
+            <div className='CourseItems_ProgressBar'> 
                 <h2>Course Progress</h2>
              {
                  <div className='CourseItems_Progress'>

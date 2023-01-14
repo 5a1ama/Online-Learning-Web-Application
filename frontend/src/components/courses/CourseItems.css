@@ -261,7 +261,13 @@
     /* top:0%; */
 }
 
-    
+.CIunenrollLABEL{
+    position: relative;
+    font-size: 1.5vw;
+    left:34%;
+    color:var(--primary-light);
+
+}
 .Course_Gift{
     position:absolute;
     /* left:100vh; */
