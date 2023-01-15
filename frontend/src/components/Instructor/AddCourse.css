@@ -155,7 +155,7 @@
     height :7%;
     /* padding: 1rem 1rem; */
     margin: 0rem 0rem;
-
+    z-index: 1;
     font-size: 20px;
 
 }

@@ -37,8 +37,8 @@ export function TraineeViewInstructor(){
       if(localStorage.getItem("token")){
           try{
               var user=await verify(localStorage.getItem("token"));
-              if(user.job!="Trainee"){
-                  alert("login as trainee first")
+              if(user.type!="Trainee"&&user.job!="Trainee"){
+                alert("login as trainee first")
                   navigate("/login")
               }
           }catch{

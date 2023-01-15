@@ -8,7 +8,6 @@
     import InstImg from "../../assets/avatar8.png"
     import addPreviewImg from "../../assets/AddPreview.png"
     import subIcon from "../../assets/subIcon.png"
-
     import "./InstructorViewCourse.css"
     import { Avatar } from "@mui/material";
     import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
@@ -783,7 +782,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
 
 
             {/* Footer */                                                                        }
-             <Footer inst = {true} text={"Excited to Learn more ? Unlock Premium Courses with Learn Pro "} buttonText={"Upgrade Now"}></Footer>
+             <Footer inst = {true} text={"Excited to Unlock all our premium features ? Upgrade now to Learn Pro "} buttonText={"Upgrade Now"}></Footer>
              </>
     
     :

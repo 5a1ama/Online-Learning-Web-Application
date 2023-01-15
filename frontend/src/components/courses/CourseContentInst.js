@@ -56,6 +56,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import Loading from '../loading/Loading';
 import { verify } from '../../API/LoginAPI';
 import { SwitchToTrainee } from '../../API/InstructorAPI';
+import { changeTokenToTrainee, getInstructorDetails } from './../../API/InstructorAPI';
 
 function CourseContentInst(props) {
 
@@ -245,6 +246,9 @@ getUser();
     return () => clearInterval(interval);
 
    },[successSwitch,navigate])
+   
+   
+  
   return (
         
     
@@ -497,7 +501,7 @@ getUser();
         </div>
 
     }
-        {(contract||successSwitch>=0 )&&<div className="AddCourse_Overlay2"></div>}
+        {(contract||successSwitch>=0 )&&<div className="AddCourse_Overlay3"></div>}
 
    <Footer ref={bottomRef} handleContract={handleContract} name="footer" text={"initialize your trainee profile now "} inst={true} buttonText={"Become a trainee"} course={location.state.id}></Footer>
     

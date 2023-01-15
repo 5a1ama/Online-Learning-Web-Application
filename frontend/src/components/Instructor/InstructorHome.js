@@ -83,15 +83,15 @@ export function InstructorHome(){
         className="avatar"
         sx={{ backgroundColor: '#0277bd' ,width: 100, height: 100 ,fontSize:55}}
         >
-             {instructor && instructor.Name.substring(0,1)} 
+             {instructor.Name && instructor.Name.substring(0,1)} 
             
         </Avatar>
-           <h5 className="instructorname">{instructor && instructor.Name}</h5>
-           <h5 className="instructorEmail">{instructor && instructor.Email}</h5>
-          {instructor && <Rating className="instructorRating"
-       name="half-rating-read" defaultValue={instructor && ((instructor.rating.value >Math.floor(instructor.rating.value) && instructor.rating.value<(Math.floor(instructor.rating.value)+0.5))? Math.floor(instructor.rating.value):Math.floor(instructor.rating.value)+0.5)} precision={0.5} readOnly />}
+           <h5 className="instructorname">{instructor.Name && instructor.Name}</h5>
+           <h5 className="instructorEmail">{instructor.Email && instructor.Email}</h5>
+          {instructor.rating && <Rating className="instructorRating"
+       name="half-rating-read" defaultValue={instructor.rating.value && ((instructor.rating.value >Math.floor(instructor.rating.value) && instructor.rating.value<(Math.floor(instructor.rating.value)+0.5))? Math.floor(instructor.rating.value):Math.floor(instructor.rating.value)+0.5)} precision={0.5} readOnly />}
 
-       <Button className="reviewsButton"   variant="text" onClick={()=>navigate("/instructorReviews",{state:instructor.reviews})}>{'Reviews>>'} </Button>
+       <Button className="reviewsButton"   variant="text" onClick={()=>{instructor.reviews&&navigate("/instructorReviews",{state:instructor.reviews})}}>{'Reviews>>'} </Button>
        <button className="AccountCircleButton" onClick={() => navigate('/instructorProfile')}>
        <AccountCircleIcon  color="primary" sx={{ fontSize: 35  }} className="AccountIconClick"/>
        </button>
