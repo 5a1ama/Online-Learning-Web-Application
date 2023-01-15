@@ -547,3 +547,12 @@ export const SwitchToTrainee=async()=>{
 
     }
 }
+export const changeTokenToTrainee=async()=>{
+    const x=await fetch(`http://localhost:8000/instructor/changeTokenToTrainee/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    const j=await x.json();
+    localStorage.setItem("token",j);
+}

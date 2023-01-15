@@ -16,11 +16,22 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { TextField } from '@mui/material';
-import { myInstructorRate, rateCourse, rateInstructor } from '../../API/TraineeAPI';
+import { addReviewToInst, myInstructorRate, rateCourse, rateInstructor } from '../../API/TraineeAPI';
 import { verify } from '../../API/LoginAPI';
 
 export function TraineeViewInstructor(){
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const location=useLocation();
+  const [reviewDiv,setShowReviewDiv]=useState(false);
+  const [review,setReview]=useState("");
+  const handleReviewSubmit=async()=>{
+      const x=await addReviewToInst(location.state,review);
+      alert("Review submitted successfully")
+      setShowReviewDiv(false);
+  }
+  const handleReviewChange=(event)=>{
+      setReview(event.target.value);
+  }
   const [first2,setFirst2]=useState(0);
   const begin=async()=>{
       if(localStorage.getItem("token")){
@@ -42,7 +53,6 @@ export function TraineeViewInstructor(){
       begin();
       setFirst2(1)
   }
-    const   location = useLocation();
     // const [first,setFirst] = useState(0);
     const [instructor,setinstructor]=useState()
     // const [newName,setNewName]=useState("");
@@ -139,6 +149,22 @@ export function TraineeViewInstructor(){
         
                     
                 </div>
+                <button onClick={()=>setShowReviewDiv(true)} className='TVIReviewbtn' >Add Review</button>
+                {reviewDiv && <div className='TVIREVIEWDIV'> <TextField
+                            className="TVIreviewCI-trainee"
+                            id="outlined-select-currency"
+                            
+                            label="Your Review"
+                            
+                            onChange={handleReviewChange}
+                            />
+                            <button className="TVIsubmitReportButton" onClick={handleReviewSubmit}>
+                        Submit
+                    </button>
+                    <button className="TVIcancelReportButton1" onClick={()=>setShowReviewDiv(false)}>
+                        cancel
+                        </button>
+                             </div>}
                   
         </div>
     )
