@@ -444,6 +444,23 @@ router.post("/SwitchToTrainee/:token",async function(req,res){
     }
 
 })
+router.post("/changeTokenToTrainee/:token",async function(req,res){
+    var token=req.params.token;
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
+        var inst=await Instructor.find({id:user.id,switch:true});
+        if(inst.length==0){
+            res.json("error2");
+        }else{
+            user.type="Trainee";
+            var token=jwt.sign(user,process.env.ACCESSTOKEN);
+            res.json(token);
+        }
+
+    }catch{
+        res.json("error");
+    }
+})
 router.post("/closeCourse/:token/:courseId",async function(req,res){
     var token=req.params.token;
     try{
