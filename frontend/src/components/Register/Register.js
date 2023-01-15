@@ -62,7 +62,6 @@ function Register(){
       setGender(event.target.value)
     }
    
-    const [success,setSuccess]=useState(-1);
     
       useEffect(()=>{
         const handlePasswordCheck = () => {
@@ -78,6 +77,8 @@ function Register(){
       },[password,passwordChecked])
 
     const navigate=useNavigate();
+    
+    const [success,setSuccess]=useState(-1);
 
     const handleRegister= async(event)=>{
     

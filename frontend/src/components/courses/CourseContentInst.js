@@ -55,6 +55,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import SaveIcon from '@mui/icons-material/Save';
 import Loading from '../loading/Loading';
 import { verify } from '../../API/LoginAPI';
+import { SwitchToTrainee } from '../../API/InstructorAPI';
 
 function CourseContentInst(props) {
 
@@ -207,23 +208,43 @@ getUser();
       const currency = ['LE','$','UAE','£','€'];
       var CourseHours ="Approx. " + (details[0]? details[0].hours:-1) + " hours to complete"; 
 
-      const handleBecome = ()=>{
-        
-      }
       const[contract,setContract]=useState(false);
+      const [successSwitch,setSuccessSwitch]=useState(-1);
+      
       const handleContract =()=>
       {
+
           setContract(!contract);
+          window.scrollTo({top:0 ,behavior: 'smooth'})
       }
+
       const [buttonConfirm,setButtonConfirm]=useState(false);
       const handleButtonConfirm =() =>{
           setButtonConfirm(!buttonConfirm);
       }
       const handleCreate=async(e)=>{
         e.preventDefault();
-      //  const x = await switchtrainee();
+        alert(1);
+       const x = await SwitchToTrainee();
+        alert(2);
+       setSuccessSwitch(3);
+       setContract(false);
 
     }
+
+
+   useEffect(()=>{
+    const interval = setInterval(()=>{
+        if(successSwitch>=0){
+          setSuccessSwitch(successSwitch-1);
+        }
+        if(successSwitch==0){
+          
+        }
+    },1000);
+    return () => clearInterval(interval);
+
+   },[successSwitch,navigate])
   return (
         
     
@@ -243,6 +264,7 @@ getUser();
         <div className="CourseItems_overlay"></div>
     </div>
     {/* onVideo */                                                                      }
+    
 
     <div className='CoureItems_OnVideo'>
         {details[0]&&<h1>{details[0].title}</h1>}
@@ -263,6 +285,11 @@ getUser();
                 
             {details[0]&&stars(details[0].rating.value).map((num)=> <img className="starImg2" style={{width:'40px'}} src={starImg} alt="."/>)}
         </div>
+        
+    {successSwitch>=0 && <div className="youSuccessfully_Inst">
+              <h1 style={{color:"#fff"}}>Congratulations</h1>
+              <h3 style={{color:"#eee" , fontWeight:'400'}}> you have successfully initialized your trainee profile,<br></br> you can now switch between instructor and trainee from the setting menu </h3>
+            </div>}
 
         <button className="CourseContent_button_Enroll" onClick={ ()=>window.scrollTo({top:10000 ,behavior: 'smooth'})
           } >
@@ -470,7 +497,7 @@ getUser();
         </div>
 
     }
-        {contract&&<div className="AddCourse_Overlay2"></div>}
+        {(contract||successSwitch>=0 )&&<div className="AddCourse_Overlay2"></div>}
 
    <Footer ref={bottomRef} handleContract={handleContract} name="footer" text={"initialize your trainee profile now "} inst={true} buttonText={"Become a trainee"} course={location.state.id}></Footer>
     

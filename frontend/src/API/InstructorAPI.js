@@ -528,8 +528,14 @@ export const closeCourse=async(courseid)=>{
 
 }
 export const SwitchToTrainee=async()=>{
-    const result=await fetch(`http://localhost:8000/instructor/SwitchToTrainee/${localStorage.getItem("token")}`)
+    const result=await fetch(`http://localhost:8000/instructor/SwitchToTrainee/${localStorage.getItem("token")}`
+    ,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
     const j=await result.json();
+    
     if(j=="error"){
 
         alert("you must login first")
