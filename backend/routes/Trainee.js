@@ -727,13 +727,15 @@ router.post("/enrollCourseWallet/:courseID/:token",tokenVerify,async function(re
     enrolledStudent +=1
     var trainee = await Trainee.findOne({id:user.id})
     var traineeCourses = trainee.courses
-    if(trainee.wallet>=(course.price-course.discount.amount)){
+    if(trainee.wallet>=(course.price-course.price*course.discount.amount)){
+        console.log("12")
         traineeCourses.push({id:courseID,progress:0,enrollDate:new Date(),notes:[]})
-        var wallet=trainee.wallet-course.price+course.discount.amount
+        var wallet=trainee.wallet-course.price+course.price*course.discount.amount
         await Course.findOneAndUpdate({id:courseID},{enrolledStudents:enrolledStudent})
         await Trainee.findOneAndUpdate({id:user.id},{courses:traineeCourses,wallet:wallet})
         res.json("ok")
     }else{
+        console.log("13")
         res.json("error2");
     }
     

@@ -205,21 +205,24 @@
   position: fixed;
   width: 400px;
   height:auto;
-  min-height: 440px;
-  top: 25%;
-  left: 35%;
+  min-height: 470px;
+  /* top: 15%; */
+  left: 35%; 
+  margin-top: 4%;
   border: transparent;
   background-color: rgb(255, 255, 255);
    border-bottom-left-radius: 20px;
    border-top-right-radius: 20px;
    border-top-left-radius: 20px;
    border-bottom-right-radius: 20px;
+   overflow-y: scroll;
+   overflow-x: hidden;
    z-index: 3;
 }
 .paymentsOptionCancel{
   background-color: red;
   position: relative;
-  top: 40%;
+  top: 30%;
   left: 70%;
 }
 .paymentsOptionCancel:hover{
@@ -231,9 +234,30 @@
 }
 .addCardButtonCourse{
   position: relative;
-  top: 80%;
-  left: 60%;
-  width: 10vw;
+  left: 70%;
+}
+
+.AddCardToPayDiv{
+  background-color: rgb(195, 187, 187);
+  position: relative;
+  left: 2%;
+  width: 95%;
+  height: 3.5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  cursor: pointer;
+ 
+
+}
+.AddCardToPayDiv:hover{
+  transition: 0.4s;
+  background-color: rgb(157, 154, 154);
 }
 .AddCourse_Overlay3{
     position: fixed;
