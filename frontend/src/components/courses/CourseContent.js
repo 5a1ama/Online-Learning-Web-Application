@@ -128,8 +128,8 @@ function CourseContent(props) {
       
   } 
 
-  const update = ()=>{
-    intial()
+  const update = async()=>{
+    await intial()
    }
     const MyCards = (props) =>{
         const handledeleteCard = async()=>{
