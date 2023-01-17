@@ -48,6 +48,8 @@ import { MyTraineeReports } from './components/Trainee/traineeReport';
 
 import { InstructorViewPublished } from './components/Instructor/InstructorViewPublished';
 import CourseContentInst from './components/courses/CourseContentInst';
+import { TraineeAddCardToPay } from './components/courses/TraineeAddCardToPay';
+
 
 
 export default function App() {
@@ -101,6 +103,7 @@ export default function App() {
           <Route path="/TraineePays" element={<TraineePay handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/TraineePayments" element={<TraineePayments handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path="/traineeReport" element={<MyTraineeReports handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
+          <Route path="/TraineeAddCardToPay" element={<TraineeAddCardToPay handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
 
 
           <Route path="/AdminHome" element={<Admin handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
