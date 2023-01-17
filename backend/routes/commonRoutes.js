@@ -176,7 +176,7 @@ router.post('/CreateUser' ,(req,res)=>{
 
             if(query.length==0){                                             //await bcrypt.hash(password, await salt)
                 var object = new User({id:c+1,Name:name,Email:email,Password:await bcrypt.hash(password, await salt),Username:username,Job:"Trainee",Gender:gender})
-                var object2=new Trainee({id:c+1,Name:name,type:"Individual",Email:email,Password:password});
+                var object2=new Trainee({id:c+1,Name:name,type:"Individual",Email:email,Password:await bcrypt.hash(password, await salt)});
                 object.save(function(err,result1){
                     object2.save(function(err,result){
                         
