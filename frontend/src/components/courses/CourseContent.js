@@ -167,13 +167,6 @@ function CourseContent(props) {
 
   const [view , setView] = useState("");
 
-  const [traineeRate,setTraineeRate] = useState("")
-
-  const handleChangeRate = (event , newValue)=>{
-    rateCourse( location.state.id,Number(newValue))
-    setTraineeRate(newValue)
-}
-//const [selectedRadioValue,setSelectedRadioValue] = useState('a')
 
 const [showPaymentDiv,setShowPaymentDiv] = useState(false);
 

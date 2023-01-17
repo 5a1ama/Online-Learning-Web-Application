@@ -30,7 +30,7 @@ function Admin() {
   }
   return (
     <div className="Admin">
-            <Navbar items={["Home","Control Panel","Reports"]} select="Home" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={()=>{} }  />
+            <Navbar admin={true} items={["Home","Control Panel","Reports"]} select="Home" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={()=>{} }  />
     <div className="Admin-Content">
 
     </div>

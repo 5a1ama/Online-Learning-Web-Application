@@ -15,6 +15,7 @@ const PDFDocument=require('pdfkit')
 const fs =require('fs');
 const { use } = require("./commonRoutes");
 const RefundRequest = require("../Models/RefundRequest");
+const Admin = require("../Models/Admin");
 dotenv.config()
 
 function tokenVerify(req,res,next){
@@ -132,8 +133,8 @@ router.post("/updateEmail/:name/:token",tokenVerify,async function(req,res){
     var user=jwt.verify(token,process.env.ACCESSTOKEN);
     var id=user.id;
     var newname=req.params.name;
-    await Trainee.findOneAndUpdate({id:id},{Email:newname});
-    await User.findOneAndUpdate({id:id},{Email:newname});
+    await Trainee.findOneAndUpdate({id:id},{Email:newname.toLowerCase()});
+    await User.findOneAndUpdate({id:id},{Email:newname.toLowerCase()});
     res.json("ok")
 
 })
@@ -184,15 +185,26 @@ router.post("/updatePass2/:oldPass/:pass/:token",tokenVerify,async function(req,
 
     }
     else{
-        await User.findOneAndUpdate({id:id},{Password:newhashed});
-        if(result.Job=="Instructor"){
-         await Instructor.findOneAndUpdate({id:id},{Password:newhashed})
-    
-        }else if(result.Job=="Trainee"){
-         await Trainee.findOneAndUpdate({id:id},{Password:newhashed})
-     
-        }
-        res.json("ok")
+        var passwordTrue=bcrypt.compare(req.params.pass,result[0].Password);
+            if(passwordTrue){
+
+                await User.findOneAndUpdate({id:id},{Password:newhashed});
+                console.log(id  )
+                if(result.Job=="Instructor"){
+                 await Instructor.findOneAndUpdate({id:id},{Password:newhashed})
+            
+                }else if(result.Job=="Trainee"){
+                 await Trainee.findOneAndUpdate({id:id},{Password:newhashed})
+             
+                }else if(result.Job=="Admin"){
+                    await Admin.findOneAndUpdate({id:id},{Password:newhashed})
+
+                }
+                res.json("ok")
+            }else{
+                res.json("error");
+            }
+        
 
     }
  

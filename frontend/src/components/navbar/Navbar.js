@@ -203,7 +203,12 @@ function Navbar(props) {
 
             <div className={settingMenu?"SettingMenu":"nonSettingMenu"}>
                 <div className="SettingItem">
-                    <button  onClick={()=>{props.inst&&navigate('/instructorProfile')}}>
+                    <button  onClick={()=>{if(props.inst){navigate('/instructorProfile')}
+                else if(props.trainee){
+                    navigate('/traineeProfile')
+                }else{
+                    navigate('/AdminProfile')
+                }}}>
                         
                         <BsPerson className="icon" style={{transform:"translate(-10px,3.5px)"}} ></BsPerson>My Profile
                     </button>

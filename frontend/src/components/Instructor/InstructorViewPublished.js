@@ -265,12 +265,12 @@ const handleAddPrevVid=()=>{
         return array;
         }
 
-        handleInstNames();
         const [reviews,setreviews] = useState([])
         useEffect(()=>{
-        setreviews(location.state)
-    },[location.state])
-
+            setreviews(location.state)
+        },[location.state])
+        
+        handleInstNames();
     
 const Issues = [
 {
@@ -454,6 +454,7 @@ return (
                                 <a href="/InstructorProfile" className='flexRow' >
                                     <img alt="." src={InstImg} style={{width:"40px",height:"40px" ,transform:"translate(0px,3px)"}}></img> 
                                     <h3>{name}</h3>
+                                    <h2>=================</h2>
                                 </a>                
                                 </div>
                         )}

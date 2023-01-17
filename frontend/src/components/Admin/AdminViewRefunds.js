@@ -61,7 +61,7 @@ export function AdminViewRefunds(){
     }
     return(
         <div>
-        <Navbar items={["Home","Control Panel","Reports"]} select="" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={()=>{} }  />
+        <Navbar admin={true} items={["Home","Control Panel","Reports"]} select="" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={()=>{} }  />
      
         <div className="AdminViewRequestsMainDiv">
             <h1>All Refunds Requests</h1>

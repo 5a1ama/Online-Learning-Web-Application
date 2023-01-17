@@ -11,6 +11,7 @@ const Excercise = require("../Models/Excercise");
 const { route } = require("./commonRoutes");
 dotenv.config()
 const bcrypt=require("bcrypt");
+const Admin = require("../Models/Admin");
 const salt=bcrypt.genSalt(10);
 
 router.get("/getinstructorTraineeDetails/:id",async function(req,res){
@@ -213,7 +214,10 @@ router.post("/uploadSubtitleVideo",async function(req,res){
     var array=result.subtitles;
     for(var i=0;i<array.length;i++){
         if(array[i].title==subtitle.title){
+            if(link!="-1")
             array[i].video=[link];
+            
+            if(description!="-1")
             array[i].description=description;
         }
     }
@@ -265,22 +269,31 @@ router.post("/updatePass2/:oldPass/:pass/:token",async function(req,res){
         var id=user.id;
         var oldhashed=await bcrypt.hash(req.params.oldPass, await salt)
         var newhashed=await bcrypt.hash(req.params.pass, await salt)
-        var result=await User.find({id:id ,Password:oldhashed});
+        var result=await User.find({id:id});
         if(result.length==0){
             res.json("error")
     
         }
         else{
-            await User.findOneAndUpdate({id:id},{Password:newhashed});
-            console.log(id  )
-            if(result.Job=="Instructor"){
-             await Instructor.findOneAndUpdate({id:id},{Password:newhashed})
-        
-            }else if(result.Job=="Trainee"){
-             await Trainee.findOneAndUpdate({id:id},{Password:newhashed})
-         
+           var passwordTrue=bcrypt.compare(req.params.pass,result[0].Password);
+            if(passwordTrue){
+
+                await User.findOneAndUpdate({id:id},{Password:newhashed});
+                console.log(id  )
+                if(result.Job=="Instructor"){
+                 await Instructor.findOneAndUpdate({id:id},{Password:newhashed})
+            
+                }else if(result.Job=="Trainee"){
+                 await Trainee.findOneAndUpdate({id:id},{Password:newhashed})
+             
+                }else if(result.Job=="Admin"){
+                    await Admin.findOneAndUpdate({id:id},{Password:newhashed})
+
+                }
+                res.json("ok")
+            }else{
+                res.json("error");
             }
-            res.json("ok")
     
         }
     
@@ -303,6 +316,21 @@ router.post("/updateName/:name/:token",async function(req,res){
     }
     
 })
+
+router.post("/updateEmail/:name/:token",async function(req,res){
+    var token=req.params.token;
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
+        var id=user.id;
+        var newname=req.params.name;
+        await Instructor.findOneAndUpdate({id:id},{Email:newname.toLowerCase()});
+        await User.findOneAndUpdate({id:id},{Email:newname.toLowerCase()});
+        res.json("ok")    
+    }
+    catch{
+        res.json("error")
+    }
+})
 router.post("/updateBio/:name/:token",async function(req,res){
     var token=req.params.token;
     try{
@@ -314,20 +342,6 @@ router.post("/updateBio/:name/:token",async function(req,res){
         res.json("ok")
     
     }catch{
-        res.json("error")
-    }
-})
-router.post("/updateEmail/:name/:token",async function(req,res){
-    var token=req.params.token;
-    try{
-        var user=jwt.verify(token,process.env.ACCESSTOKEN);
-        var id=user.id;
-        var newname=req.params.name;
-        await Instructor.findOneAndUpdate({id:id},{Email:newname});
-        await User.findOneAndUpdate({id:id},{Email:newname});
-        res.json("ok")    
-    }
-    catch{
         res.json("error")
     }
 })
@@ -417,6 +431,9 @@ router.post("/createExercise/:token/:courseid/:title",async function(req,res){
         
         var excerciesid= ((await Excercise.find({})).map((exe)=>exe.id));
         var max=excerciesid[0];
+        if(!max){
+            max=0;
+        }
         for(var i=0;i<excerciesid.length;i++){
             if(excerciesid[i]>max){
                 max=excerciesid[i]
