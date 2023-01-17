@@ -50,6 +50,7 @@ function ControlPanel(props) {
         }else{
             alert("username already exists")
         }
+        handleFlip()
     }
     const [Instuser,setInstUser]=useState("");
     const [Instpass,setInstPass]=useState("");
@@ -67,6 +68,7 @@ function ControlPanel(props) {
         }else{
             alert("username already exists")
         }
+        handleFlipInst()
     }
     const [traineeuser,setTraineeUser]=useState("");
     const [traineepass,setTraineePass]=useState("");
@@ -85,6 +87,7 @@ function ControlPanel(props) {
         }else{
             alert("username already exists")
         }
+        handleFlipTrainee();
     }
 
 
