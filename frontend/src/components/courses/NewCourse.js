@@ -104,13 +104,13 @@ export function NewCourse(props) {
         <div className={courseDetails? "newCourse-After-Content":"newCourse-content"}>
       
          { 
-       (props.course.discount.amount>0) &&  props.Trainee!=="Corporate" && !props.Corporate && 
+       (props.course.discount.amount>0) && props.Trainee&& props.Trainee!=="Corporate" && !props.Corporate && 
        <div className="DivForDiscount_NewCourse">
         <CountdownTimer targetDate={dateTimeAfterThreeDays} id={props.course.id}/>
         </div>
          }
          { 
-       (props.Trainee!=="Corporate" && !props.Corporate &&
+       (props.Trainee&&props.Trainee!=="Corporate" && !props.Corporate &&
         (props.course.discount.amount>0) && 
         (expiredTime>0) 
          
@@ -121,7 +121,7 @@ export function NewCourse(props) {
               <h3 >{props.course.title}</h3>
           </div>
           
-                { props.Trainee!=="Corporate" && !props.Corporate &&<div className="NewCourse_Prices">
+                {props.Trainee&& props.Trainee!=="Corporate" && !props.Corporate &&<div className="NewCourse_Prices">
                  {
                  (props.course.discount.amount&&props.course.discount.amount>0
                   &&expiredTime>0
