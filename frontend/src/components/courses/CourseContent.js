@@ -27,7 +27,7 @@ import Footer from '../footer/Footer';
 import Subtitle from './subtitles/Subtitle';
 import Rating from '@mui/material/Rating';
 import { alertClasses, Avatar } from '@mui/material';
-import { courseEnroll, getTraineeCourseProg, myCourseRate, myInstructorRate, rateCourse } from '../../API/TraineeAPI';
+import { courseEnroll, getTraineeCourseProg, myCourseRate, myInstructorRate, rateCourse, requestAccessToCourse } from '../../API/TraineeAPI';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import CountdownTimer from '../countdown/CountDown';
 import CourseHighlights from './coursehighlights/CourseHighlights';
@@ -301,6 +301,16 @@ getUser();
      if(user&&user.type=="trainee"){
        intial();}
 
+       const RequestAccess = async()=>{
+        const x = requestAccessToCourse(location.state.id);
+       }
+       const handleRequestAccess =()=>{
+        try{
+          RequestAccess();
+        }catch(e){
+          alert("unexpected error happened")
+        }
+       }
   return (
         
     
@@ -344,11 +354,17 @@ getUser();
             {details[0]&&stars(details[0].rating.value).map((num)=> <img className="starImg2" style={{width:'40px'}} src={starImg} alt="."/>)}
         </div>
 
-        <button className="CourseContent_button_Enroll" onClick={localStorage.getItem("token")?
-          ()=>setShowPaymentDiv(true) : ()=>window.scrollTo({top:10000 ,behavior: 'smooth'})
-          } >
+        {location.state.Type=="Corporate" ?
+                    <button className="CourseContent_button_Enroll" onClick={handleRequestAccess} >
+                        Request Access 
+                    </button>
+                    :
+                  <button className="CourseContent_button_Enroll" onClick={localStorage.getItem("token")?
+                    ()=>setShowPaymentDiv(true) : ()=>window.scrollTo({top:10000 ,behavior: 'smooth'})
+                    } >
                         Enroll now 
                     </button>
+                    }
                     { 
           
 
@@ -365,24 +381,15 @@ getUser();
                     <CountdownTimer  targetDate={dateTimeAfterThreeDays} />
                     </div>
                     }
-                  
-                 
          </>
-         
          :
                   <div>
-                    </div>
-                    
+                    </div>        
                   }
           
-
     </div>
-
-
-
               {localStorage.getItem("token")&&  <>
                   {showPaymentDiv &&   <div className="PaymentsOptionsDivShadow"> <div className="PaymentsOptionsDiv">
-
                   <List className="paymentsOptionList" sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                   <ListItem>
                   <ListItemAvatar>

@@ -37,7 +37,6 @@ router.get("/TraineeMyCourse/:token",async function(req,res){
     var array=[];
     if(query){
          array = query.courses
-
     }
     
     var arrayCourse = []

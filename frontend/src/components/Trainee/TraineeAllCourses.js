@@ -193,7 +193,7 @@ export function TraineeAllCourses(){
               if(found)
                 return <NewCourse guest={false} course={course} Trainee={details&&details.type} handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>
               else
-                return <NewCourse  course={course} handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>
+                return <NewCourse  course={course} Corporate={details&&details.type=="Corporate"} handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>
 
               }) 
             }

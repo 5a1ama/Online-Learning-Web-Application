@@ -90,12 +90,12 @@ export function TraineeHome (){
         <Avatar className="TraineeAvatar"
        sx={{ backgroundColor: '#0277bd' ,width: 100, height: 100 ,fontSize:55}}
         >
-          { details && details.Name.substring(0,1) }
+          { details.Name && details.Name.substring(0,1) }
             {/* {instructor && instructor.Name.substring(0,1)+instructor.Name.split(" ")[1].substring(0,1)} */}
             
         </Avatar>
-           <h5 className="traineeName">{details && details.Name}</h5>
-           <h5 className="traineeEmail">{details && details.Email}</h5>
+           <h5 className="traineeName">{details.Name && details.Name}</h5>
+           <h5 className="traineeEmail">{details.Email && details.Email}</h5>
            <button className="traineeAccountCircleButton" onClick={() => navigate('/TraineeProfile')}>
        <AccountCircleIcon  color="primary" sx={{ fontSize: 35  }} className="AccountIconClick"/>
        </button>

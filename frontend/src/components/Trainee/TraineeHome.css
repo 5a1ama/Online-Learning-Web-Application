@@ -137,9 +137,9 @@
     100%{background-position:14% 0%}
 }
 .traineeAccountCircleButton{
-    position: relative;
-    top:-60% ;
-    left: 40%;
+    position: absolute;
+    top:3% ;
+    left: 85%;
     height: 10%;
     width: 5%;
     background:transparent;

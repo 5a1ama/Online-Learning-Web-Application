@@ -408,16 +408,15 @@ const handleDeletePreview =async()=>{
 }
 const handleDeleteCourse = ()=>{
     DeleteCourse2();
+    alert("This Course is now Closed, no new students can enroll to it")
+    setShowDeleteDiv(false);
     
 }
 const DeleteCourse2 =async ()=>{
     const x = await closeCourse(location.state.id);
-    alert("This Course is now Closed, no new students can enroll to it")
 }
 
-    const handlePublish =async()=>{
-        const x = await PublishCourse(location.state.id);
-    }
+   
 return (
     
    <div className="CourseItems">

@@ -104,13 +104,13 @@ export function NewCourse(props) {
         <div className={courseDetails? "newCourse-After-Content":"newCourse-content"}>
       
          { 
-       (props.course.discount.amount>0) && 
+       (props.course.discount.amount>0) &&  props.Trainee!=="Corporate" && !props.Corporate && 
        <div className="DivForDiscount_NewCourse">
         <CountdownTimer targetDate={dateTimeAfterThreeDays} id={props.course.id}/>
         </div>
          }
          { 
-       (
+       (props.Trainee!=="Corporate" && !props.Corporate &&
         (props.course.discount.amount>0) && 
         (expiredTime>0) 
          
@@ -121,7 +121,7 @@ export function NewCourse(props) {
               <h3 >{props.course.title}</h3>
           </div>
           
-                { props.Trainee!=="Corporate" &&<div className="NewCourse_Prices">
+                { props.Trainee!=="Corporate" && !props.Corporate &&<div className="NewCourse_Prices">
                  {
                  (props.course.discount.amount&&props.course.discount.amount>0
                   &&expiredTime>0
@@ -196,8 +196,10 @@ export function NewCourse(props) {
      
       <button className="NewCourse-button-OpenCourse" style={{marginRight: '1rem' ,width:"100px",height:"60px",transform:"translate(1rem,1.7rem)" }} 
       onClick={()=>{
-        if(props.Trainee){
-          navigate("/CourseItems",{state:{id:props.course.id,View:"Overview"}})
+        if(props.Trainee&&props.Trainee=="Indvidual"){
+          navigate("/CourseItems",{state:{id:props.course.id,View:"Overview",Type:"Indvidual"}})
+         } else if((props.Trainee&&props.Trainee=="Corporate") || props.Corporate){
+          navigate("/CourseContent",{state:{id:props.course.id,View:"Overview",Type:"Corporate"}})
           
         }else if(props.inst){
           if(props.course.published==false)

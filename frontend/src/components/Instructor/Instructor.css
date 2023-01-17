@@ -55,9 +55,9 @@
     
 }
 .AccountCircleButton{
-    position: relative;
-    top:-90% ;
-    left: 43%;
+    position: absolute;
+    top:3% ;
+    left: 85%;
     height: 10%;
     width: 5%;
     background:transparent;

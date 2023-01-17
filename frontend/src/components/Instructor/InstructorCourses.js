@@ -14,7 +14,8 @@ import Slider from '@mui/material/Slider';
 import { Checkbox } from '@mui/material';
 import { verify } from '../../API/LoginAPI';
 import Loading from '../loading/Loading';
-
+import sadFace from "../../assets/sadFace.png"
+import { getMaxPrice } from '../../API/CourseAPI';
 
 export function InstructorCourses(){
   const navigate=useNavigate();
@@ -45,15 +46,23 @@ export function InstructorCourses(){
         setSubject(event.target.value)
       }
    
-      
+      const [maxPriceValue,setMaxPriceValue]=useState(30000);
+      const getMaxPriceValue = async () =>{
+        setMaxPriceValue ((await getMaxPrice()));
+      }
+   
   
       const [newPriceRatio,setNewPriceRatio]= useState();
       const handleNewPriceRatio = (x) => {
         setNewPriceRatio(x);
       }
       var minPrice= (newPriceRatio&&Math.floor(0*newPriceRatio))||0;
-       var maxPrice= (newPriceRatio&&Math.floor(30000*newPriceRatio))||30000;
+      var maxPrice= (newPriceRatio&&Math.floor(maxPriceValue*newPriceRatio))||maxPriceValue;
+            
       const [value,setValue]=useState([minPrice,maxPrice]);
+      const handleValue = () =>{
+        setValue([minPrice,maxPrice]);
+      }
 
       const [FilterBar,setFilterBar] = useState(false)
       const handleFilterBar = () => setFilterBar(!FilterBar)
@@ -63,12 +72,16 @@ export function InstructorCourses(){
       async function Filter(){
         if(FilterBar){
           setFirst(1)
-          setCourses((await FilterMyCourse(value[0],value[1],searchSubject) ))
+          const x = await FilterMyCourse( Math.floor(value[0]/newPriceRatio), Math.floor(value[1]/newPriceRatio),searchSubject)
+          if(x.length>0)
+          setCourses(x);
+          else
+          setCourses([-1]);
         }
       }      
       Filter();
    
-  },[subject,value])
+  },[subject,value,FilterBar,searchSubject,newPriceRatio])
 
   const[freePrice,SetFreePrice]=useState(false)
   const handleFreePrice = () =>{
@@ -90,7 +103,7 @@ export function InstructorCourses(){
       const handleFilter2=async()=>{
         setFirst(1)
         
-        setCourses((await FilterMyCourse(value[0],value[1],searchSubject) ))
+        setCourses((await FilterMyCourse(Math.floor(value[0]/newPriceRatio), Math.floor(value[1]/newPriceRatio),searchSubject) ))
       
       }
       const valuetext=(value)=> {
@@ -111,9 +124,18 @@ export function InstructorCourses(){
         setCourses((await SearchMyCourse(localStorage.getItem("token"),search)))
         setFirst(1);
       }
+  
+
       const [courses,setCourses] = useState([]);
       const getCourses = async () =>{
-        setCourses ((await getMycourses(localStorage.getItem("token"))));
+        const x = await getMycourses(localStorage.getItem("token"))
+        if(x.length>0)
+        setCourses (x);
+        else{
+          setCourses([-2])
+        }
+        getMaxPriceValue();
+        handleValue();
       }
      
       if(first==0){
@@ -135,6 +157,7 @@ export function InstructorCourses(){
         document.getElementById("CheckBoxInstructorCourses").click();
         getCourses();
       }
+     
 
     return(
         <div>
@@ -149,7 +172,18 @@ export function InstructorCourses(){
                   <div className="InstructorCourses_newCourse" onClick={()=> navigate('/addCourse')} >
                   <h1> ADD NEW COURSE</h1>
               </div>
-            {courses.map((course)=><NewCourse inst={true} course={course}   handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>)}
+              
+            {courses.length==0?
+            <Loading></Loading>
+            :
+            courses.length==1 && courses[0] == -1 ||courses[0]==-2 ? 
+            <div className="flexCol" style={{alignItems:'center',justifyContent:'center'}}>
+              <img alt="." src={sadFace} style={{width:'200px'}}/> 
+              <h2 style={{color:'#888',fontWeight:'500'}}>{courses[0]==-1 ? "No courses found for the given filters" : "You don't have any courses"}</h2>
+              </div>
+            :
+            courses.map((course)=><NewCourse inst={true} course={course}   handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>)}
+              
                 </div>
                 <div>
                 <form className="search-instrutor-courses">
@@ -178,11 +212,11 @@ export function InstructorCourses(){
                   getAriaValueText={valuetext}
                   min={0}
                   
-                  max={Math.floor(5000*newPriceRatio)} />
-                        </Box>
+                  max={Math.floor(maxPriceValue*newPriceRatio)+1} />
+                  </Box>
                         <div className="InstructorCourses-Slider_div_check">
                     <Checkbox className='InstructorCourses-Slider_Checkbox' id="CheckBoxInstructorCourses" onClick={handleFreePrice} style={{color:'#fff'}} ></Checkbox>
-                    <h3>Free</h3>
+                    <h3 style={{transform:'translate(30px,5px)'}}>Free</h3>
                         </div>
           </div>
           <h1 className='InstructorCourses-Subject'>By Subject:</h1>

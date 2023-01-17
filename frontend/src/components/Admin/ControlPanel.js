@@ -10,7 +10,7 @@ import AdminAv from '../../assets/adminAV.png'
 import InstructorAV from '../../assets/instructorAV.png'
 import TraineeAv from '../../assets/traineeAV.png'
 import {AiOutlineClose} from 'react-icons/ai'
-function ControlPanel() {
+function ControlPanel(props) {
     const navigate = useNavigate(); 
   const [first2,setFirst2]=useState(0);
   const begin=async()=>{
@@ -94,7 +94,7 @@ function ControlPanel() {
   
   return (
     <div className="controlPanel">
-            <Navbar items={["Home","Control Panel","Reports"]} select="Control Panel" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={()=>{} }  />
+            <Navbar items={["Home","Control Panel","Reports"]} select="Control Panel" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={props.handleCountryNumber}  />
         <div className="controlPanel_content">
             <div className="controlPanel_content4horizontal">
                 

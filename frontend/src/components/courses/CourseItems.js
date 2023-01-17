@@ -18,6 +18,10 @@ import MenuItem from '@mui/material/MenuItem';
 import { addReviewToCourse, alreadyUnenrollRequested, getTraineeCourseProg, myCourseRate, rateCourse, requestRefund } from '../../API/TraineeAPI';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import { addReport } from '../../API/InstructorAPI';
+import { MdOutlineRateReview } from 'react-icons/md';
+import { BsFlag } from 'react-icons/bs';
+import { IoLogOutSharp } from 'react-icons/io5';
+import { AiOutlineSetting } from 'react-icons/ai';
 
 
 function CourseItems() {
@@ -185,6 +189,10 @@ function CourseItems() {
 
         handleInstNames();
         // getRate();
+        const [SettingMenu,setSettingMenu]= useState(false);
+        const handleSettingMenu =()=> {
+            setSettingMenu(!SettingMenu)
+        }
 
   return (
     
@@ -206,7 +214,17 @@ function CourseItems() {
             
             <div className='CoureItems_OnVideo'>
                 {details[0]&&<h1>{details[0].title}</h1>}
-            
+
+                <AiOutlineSetting color={SettingMenu?"var(--primary-light)":"#fff"} size="30px" className='SettingButton' style={{transform:'translateY(1.2rem)'}} onClick={handleSettingMenu}></AiOutlineSetting>
+
+             {/* ====================== Setting Menu ======================= */}
+             { SettingMenu &&<div className='InstsettingMenu'  style={{transform:'translateY(1.5rem)'}}>
+                    <button className='InstSettingItem' onClick={()=>setShowReviewDiv(true)}><MdOutlineRateReview className="Menuicon" color="rgb(30,200,0)" size="23px" ></MdOutlineRateReview>Review Course</button>
+                    <button className='InstSettingItem' onClick={()=>setShowReportDiv(true)}><BsFlag className="Menuicon" color="rgb(230,200,0)" size="23px" ></BsFlag>Report Issue</button>
+                {progress<50 && alreadyUnenrolled==false &&<button className='InstSettingItem' onClick={handleUnenroll}><IoLogOutSharp className="Menuicon" color="#888" size="23px" ></IoLogOutSharp>Unenroll</button>}
+                    
+                </div>}
+
                 <div className="CourseItems_Content_Stars">
                     
                     <div className="CourseItems_InstNames">
@@ -223,13 +241,7 @@ function CourseItems() {
                     {details[0]&&stars(details[0].rating.value).map((num)=> <img className="starImg2" style={{width:'40px'}} src={starImg} alt="."/>)}
                 </div>
 
-                <button className='reportButtonTrainee' onClick={()=>setShowReportDiv(true)}>
-                    Report issue
-                </button>
-                <br></br>
-                <button className='reportButtonTrainee' onClick={()=>setShowReviewDiv(true)}>
-                    Add A Review
-                </button>
+                
 
 
             </div>
@@ -302,7 +314,7 @@ function CourseItems() {
             {/* progress bar */                                                                 }
             {alreadyUnenrolled==true && <h4 className='CIunenrollLABEL'>Your UnEnrolling request is being processed</h4>}
 
-            {progress<50 && alreadyUnenrolled==false &&  <button className='CourseItemsUnenrollbtn' onClick={handleUnenroll}>UnEnroll</button>}
+            {/* {progress<50 && alreadyUnenrolled==false &&  <button className='CourseItemsUnenrollbtn' onClick={handleUnenroll}>UnEnroll</button>} */}
             <div className='CourseItems_ProgressBar'> 
                 <h2>Course Progress</h2>
              {

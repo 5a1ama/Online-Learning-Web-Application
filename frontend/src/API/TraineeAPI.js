@@ -369,9 +369,11 @@ export const requestAccessToCourse=async(courseid)=>{
             alert("you must login first")
             window.location.href="/login"
 
+        }else if (j=="already requested"){
+            alert("you already requested access to this course ,we're currently reviewing your request");
         }else{
+            alert(j)
           return j
-
         }
 }
 export const solveExcersice=async(courseid,excerId,answers)=>{

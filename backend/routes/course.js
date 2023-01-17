@@ -30,7 +30,7 @@ router.get("/getMaxPrice", async function(req,res)
 // @ts-ignore
 router.get("/",function(req,res){
     
-    var query=Course.find({published:true});
+    var query=Course.find({published:true,closed:false});
     // @ts-ignore
     query.exec(function(err,result){
         
@@ -145,10 +145,12 @@ router.get("/search/:search",async function(req,res){
     var query=await Course.find({});
     var array=[];
 
-    var query2=await User.find({Name:search,Job:"Instructor"})
+    var query2=await Instructor.find({})
     var id=-1;
-    if(query2.length!=0){
-        id=query2[0].id;
+    for(var i=0;i<query2.length;i++){
+        if((query2[i].Name).toLowerCase().includes(search.toLowerCase())){
+            id = query2[i].id;
+        }
     }
     for(var i=0;i<query.length;i++){
         // console.log(query[i].title)
@@ -283,7 +285,7 @@ router.get("/PopularCourses",async function(req,res){
     res.json(finalCourses)
 })
 router.get("/allPromoted", async function(req,res){
-    var query= await Course.find({Published,closed:false});
+    var query= await Course.find({published:true,closed:false});
     // @ts-ignore
     var array= [];
     for(i=0;i<query.length;i++){

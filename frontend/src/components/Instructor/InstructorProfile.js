@@ -5,7 +5,16 @@ import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
 import Navbar from '../navbar/Navbar';
 import "./InstructorProfile.css"
-import { getInstructorDetails, salaryPerMonth, updateInstructorBio, updateInstructorEmail, updateInstructorName, updateInstructorPass, updateInstructorSpec } from '../../API/InstructorAPI';
+import {
+    getInstructorDetails,
+    salaryPerMonth,
+    updateInstructorBio,
+    updateInstructorEmail,
+    updateInstructorName,
+    updateInstructorPass,
+    updateInstructorSpec,
+    getMycourses
+} from '../../API/InstructorAPI';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import List from '@mui/material/List';
@@ -18,6 +27,7 @@ import * as React from 'react';
 import { TextField } from '@mui/material';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { verify } from '../../API/LoginAPI';
+import { useEffect } from 'react';
 
 
 
@@ -150,6 +160,7 @@ export function InstructorProfile(){
     }
     intial()
 
+        
     return(
       <div className='instructorProfileMaindiv'>
         <div>

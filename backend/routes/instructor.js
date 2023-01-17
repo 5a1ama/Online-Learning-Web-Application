@@ -112,9 +112,24 @@ router.get("/myCourses-price-subject/:minprice/:maxprice/:subject/:token",async 
         }
         var final=[];
         for(var i=0;i<array.length;i++){
-            if((subject!="-1" && array[i].price>=minprice && array[i].price<=maxprice && array[i].subject.includes(subject)) || (subject=="-1" &&
-            array[i].price>=minprice && array[i].price<=maxprice )){
-                final=final.concat([array[i]])
+
+            var d1 = new Date();
+            if(array[i].discount.amount>0&&array[i].discount.EndDate){
+                var d2 = new Date(array[i].discount.EndDate)
+                if(d2.getTime()>d1.getTime()){
+                    var newPrice =array[i].price-(array[i].price*(array[i].discount.amount/100))
+                    if((subject!="-1" &&newPrice>=minprice && newPrice<=maxprice && array[i].subject.includes(subject)) || (subject=="-1" &&
+                    newPrice>=minprice && newPrice<=maxprice )){
+                        final=final.concat([array[i]])
+                    
+                    }
+                }
+            }else{
+
+                if((subject!="-1" && array[i].price>=minprice && array[i].price<=maxprice && array[i].subject.includes(subject)) || (subject=="-1" &&
+                array[i].price>=minprice && array[i].price<=maxprice )){
+                    final=final.concat([array[i]])
+                }
             }
         }
         res.send(final);
@@ -452,7 +467,7 @@ router.post("/changeTokenToTrainee/:token",async function(req,res){
         if(inst.length==0){
             res.json("error2");
         }else{
-            user.type="Trainee";
+            user.job="Trainee";
             
             var token=jwt.sign(user,process.env.ACCESSTOKEN);
             res.json(token);

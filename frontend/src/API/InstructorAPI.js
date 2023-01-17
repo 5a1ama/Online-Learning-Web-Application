@@ -513,7 +513,11 @@ export const PublishCourse=async(id)=>{
         }
 }
 export const closeCourse=async(courseid)=>{
-    const result=await fetch(`http://localhost:8000/instructor/closeCourse/${localStorage.getItem("token")}/${courseid}`)
+    const result=await fetch(`http://localhost:8000/instructor/closeCourse/${localStorage.getItem("token")}/${courseid}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
     const j=await result.json();
     if(j=="error"){
 

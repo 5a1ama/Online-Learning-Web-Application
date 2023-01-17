@@ -9,7 +9,7 @@ import Rating from '@mui/material/Rating';
 import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
 import { Navigate, useNavigate } from "react-router-dom";
-import { getInstructorDetails } from "../../API/InstructorAPI";
+import { getInstructorDetails, getMycourses } from '../../API/InstructorAPI';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
@@ -62,7 +62,20 @@ export function InstructorHome(){
     const handleCountryNumber = (x) =>{
       setCountryNumber(x);
     }
-    
+    const[Course,setCourse]=useState([]);
+    useEffect(()=>{
+        async function getCourse (){
+            const x = await getMycourses(localStorage.getItem("token"));
+            x.forEach(Course => {
+                if(Course.published==false){
+                    setCourse(Course);
+                    return;
+                }
+            });
+        }
+        getCourse();
+    })
+
     return(
 <div className = "divcenter">
    
@@ -88,8 +101,11 @@ export function InstructorHome(){
         </Avatar>
            <h5 className="instructorname">{instructor.Name && instructor.Name}</h5>
            <h5 className="instructorEmail">{instructor.Email && instructor.Email}</h5>
-          {instructor.rating && <Rating className="instructorRating"
-       name="half-rating-read" defaultValue={instructor.rating.value && ((instructor.rating.value >Math.floor(instructor.rating.value) && instructor.rating.value<(Math.floor(instructor.rating.value)+0.5))? Math.floor(instructor.rating.value):Math.floor(instructor.rating.value)+0.5)} precision={0.5} readOnly />}
+          {instructor.rating ? <Rating className="instructorRating"
+       name="half-rating-read" defaultValue={instructor.rating.value && ((instructor.rating.value >Math.floor(instructor.rating.value) && instructor.rating.value<(Math.floor(instructor.rating.value)+0.5))? Math.floor(instructor.rating.value):Math.floor(instructor.rating.value)+0.5)} precision={0.5} readOnly />
+      :
+      <h5 style={{color:'#888',fontWeight:'400'}}> no ratings yet</h5>
+      }
 
        <Button className="reviewsButton"   variant="text" onClick={()=>{instructor.reviews&&navigate("/instructorReviews",{state:instructor.reviews})}}>{'Reviews>>'} </Button>
        <button className="AccountCircleButton" onClick={() => navigate('/instructorProfile')}>

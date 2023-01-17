@@ -10,6 +10,7 @@ import { Checkbox } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import { verify } from "../../API/LoginAPI";
 import Loading from "../loading/Loading";
+import sadFace from "../../assets/sadFace.png"
 
 export function InstAllCourses(){
   const [first,setFirst]=useState(0);
@@ -130,7 +131,11 @@ export function InstAllCourses(){
         async function Filter(){
           if(FilterBar){
             setFirst(1)
-            setCourses((await FilterAllCourse2(rate,subject,Math.floor(value[0]/newPriceRatio),Math.floor(value[1]/newPriceRatio))))
+            const x = await FilterAllCourse2(rate,subject,Math.floor(value[0]/newPriceRatio),Math.floor(value[1]/newPriceRatio))
+            if(x.length>0)
+            setCourses(x);
+            else
+            setCourses([-1]);
           }
         }      
         Filter();
@@ -161,7 +166,16 @@ export function InstAllCourses(){
     </div>
 <div className='AllCourses'>
             <h1 className="heading">Our Courses</h1>
-            {courses.length!=0?
+            {courses.length==0?
+                <Loading></Loading>
+              :
+              courses.length==1 && courses[0]==-1?
+              <div className="flexCol" style={{alignItems:'center',justifyContent:'center',margin:'8rem'}}>
+              <img alt="." src={sadFace} style={{width:'200px'}}/> 
+              <h2 style={{color:'#888',fontWeight:'500'}}>No courses found for the given filters</h2>
+              </div>
+              :
+
             <>
             {courses.map((course) =>{
               var found=false;
@@ -177,9 +191,7 @@ export function InstAllCourses(){
               return <NewCourse course={course} instNo={true} handleNewPriceRatio={handleNewPriceRatio}   country={countryNumber}/>
             } )}
             </>
-            :
-            <Loading></Loading>}
-
+        }
             </div>
 
             <button className='AllCourses-FilterBarButton' onClick={handleFilterBar}>Filter Courses</button>
