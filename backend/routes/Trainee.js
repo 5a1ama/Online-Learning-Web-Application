@@ -729,8 +729,9 @@ router.post("/enrollCourseWallet/:courseID/:token",tokenVerify,async function(re
     var traineeCourses = trainee.courses
     if(trainee.wallet>=(course.price-course.discount.amount)){
         traineeCourses.push({id:courseID,progress:0,enrollDate:new Date(),notes:[]})
+        var wallet=trainee.wallet-course.price+course.discount.amount
         await Course.findOneAndUpdate({id:courseID},{enrolledStudents:enrolledStudent})
-        await Trainee.findOneAndUpdate({id:user.id},{courses:traineeCourses})
+        await Trainee.findOneAndUpdate({id:user.id},{courses:traineeCourses,wallet:wallet})
         res.json("ok")
     }else{
         res.json("error2");
