@@ -169,7 +169,7 @@ export function InstructorEditExercise (props){
    {/* {questionsArr.map((questions,i)=><QuestionDiv num={i}  /> )}
    <label>{questionsArr}</label> */}
     {/* <QuestionsDiv handleChoice2={handleChoice} handleQuestion2={handleQuestion} arr1={questionsArr} arr2={choicesArr}  /> */}
-    <form onSubmit={handleSubmit}>
+   { question && question!=""&&<form onSubmit={handleSubmit}>
     <div className="questionDiv">
             <TextField required
 
@@ -260,7 +260,9 @@ export function InstructorEditExercise (props){
 
     <button className="submitbtnExcer" type="submit">Submit</button>
 
-    </form>
+    </form>}
+    {!question || question=="" && <label>Loading your Excercise
+        </label>}
 </div>
 
         </div>

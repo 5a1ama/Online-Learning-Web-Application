@@ -21,13 +21,14 @@ export function TraineeAddCardToPay(){
         if(localStorage.getItem("token")){
             try{
                 var user=await verify(localStorage.getItem("token"));
-                if(user.type!="Trainee" && user.job!="Trainee"){
+                if(user.type && user.type!="Trainee" && user.job!="Trainee"){
                   alert("login as trainee first")
                     navigate("/login")
                 }
-            }catch{
-                alert("login as trainee first")
-                navigate("/login")
+            }catch(error){
+                
+            //     alert(error.message)
+            //     navigate("/login")
             }
         }else{
             alert("login as Trainee first")
@@ -73,7 +74,11 @@ export function TraineeAddCardToPay(){
    
     
     } 
+    
+    const handleCancelCardButton =()=>{
+        navigate("/CourseContent",{state:{id:location.state.id,View:"Overview",Type:"Individual"}})
 
+    }
     return(
         <div className="TraineeAddNewCardMainToPay">
             <div className='TraineeAddNewCardDivToPay'>
@@ -95,7 +100,7 @@ export function TraineeAddCardToPay(){
                 <TextField  className='CardHolderTextFieldToPay' label="Card Holder" placeholder='Card Holder' onChange={handleCardHolder}/>
                 <div className='CardDiv'>
 
-                <button className='CancelCardSubmitButtonToPay' onClick={()=>navigate("/CourseContent",{state:{id:location.state.id,View:""}})}>
+                <button className='CancelCardSubmitButtonToPay' onClick={handleCancelCardButton}>
                     Cancel
                 </button>
                 <button className='AddCardSubmitButtonToPay' onClick={handleAdd}>
