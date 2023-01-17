@@ -41,9 +41,7 @@ function Register(){
     const [userName,setUserName] = useState("");
     const handleUserName = (event) => { setUserName(event.target.value)}
     
-    const [name,setName] = useState("");
-    const handleName = () => { setName(firstName+" "+lastName)}
-    
+
     const [email,setEmail] = useState("");
     const handleEmail = (event) => { setEmail(event.target.value)}
     
@@ -83,8 +81,8 @@ function Register(){
     const handleRegister= async(event)=>{
     
       event.preventDefault();
-
-       var created = await CreateUser(name,email,password,userName,gender)
+      
+       var created = await CreateUser(firstName+" "+lastName,email,password,userName,gender)
        if(created=="ok"){
         setSuccess(3);
       }else if(created=="Username Taken"){
@@ -172,14 +170,14 @@ function Register(){
             <div className='flexCol'>
                 <h3 >First Name: </h3> 
                 <div className = "Register-formHalf " >
-                    <input type = "text"  placeholder = "first name" onChange={(e)=>{handleFirstName(e);handleName()}} required={true}/>
+                    <input type = "text"  placeholder = "first name" onChange={(e)=>{handleFirstName(e)}} required={true}/>
                 </div>
             </div>
             
             <div className='flexCol'>
                 <h3 >Last Name: </h3> 
                 <div className = "Register-formHalf " >
-                    <input type = "text"  placeholder = "last name" onChange={(e)=>{handleLastName(e);handleName()}} required={true}/>
+                    <input type = "text"  placeholder = "last name" onChange={(e)=>{handleLastName(e);}} required={true}/>
                 </div>
             </div>
          </div>
