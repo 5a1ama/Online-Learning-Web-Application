@@ -211,7 +211,7 @@ const handleSelectall = () =>{
 
    return (
     <div className="adminPromotions">
-    <Navbar items={["Home","Control Panel","Reports"]} select="" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={handleCountryNumber}  />
+    <Navbar admin={true} items={["Home","Control Panel","Reports"]} select="" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={handleCountryNumber}  />
       <div className='adminPromotions_content'>
         <div className='flexRow'>
         <img alt="." src={View=="Active"?ActivePromo2:ActivePromo} onClick={()=>{setView("Active");getCourses();}} className="ActivePromotions" />
