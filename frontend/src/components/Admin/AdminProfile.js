@@ -28,6 +28,7 @@ import { TextField } from '@mui/material';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { verify } from '../../API/LoginAPI';
 import { useEffect } from 'react';
+import { getAdminDetails, updateAdminEmail, updateAdminName, updateAdminPass } from '../../API/AdminAPI';
 
 
 
@@ -59,7 +60,7 @@ export function AdminProfile(){
         if(localStorage.getItem("token")){
             try{
                 var user=await verify(localStorage.getItem("token"));
-                if(user.job!="Instructor"){
+                if(user.job!="Admin"){
                     alert("login as Admin first")
                     navigate("/login")
                 }
@@ -110,11 +111,15 @@ export function AdminProfile(){
     }
 
     const handleUpdate=async ()=>{
+        if(newName && newName!=""){
+
+            await updateAdminName(newName);
+        }
+        if(newEmail && newEmail!=""){
+
+            await updateAdminEmail(newEmail);
+        }
         
-        await updateInstructorName(newName);
-        await updateInstructorEmail(newEmail);
-        await updateInstructorSpec(newSpec);
-        await updateInstructorBio(newBio);
        setShowDiv(false)
     }
     const [changePass,setChangePass]=useState(false);
@@ -126,7 +131,7 @@ export function AdminProfile(){
             alert("password does not match")
         }
         else{
-            const x=await updateInstructorPass(oldPass,newPass)
+            const x=await updateAdminPass(oldPass,newPass)
             if(x=="error"){
                 alert("Old password is not found")
             }
@@ -140,13 +145,12 @@ export function AdminProfile(){
 
     }
     const intial = async()=>{
-        setinstructor(await getInstructorDetails())
+        setinstructor(await getAdminDetails())
         if(first==0){
             
             setNewEmail(instructor.Email)
             setNewName(instructor.Name)
-            setNewSpec(instructor.specialization)
-            setNewBio(instructor.bio)
+           
             setFirst(1)
 
         }
@@ -165,8 +169,7 @@ export function AdminProfile(){
     return(
       <div className='instructorProfileMaindiv'>
         <div>
-        <Navbar admin={true} items={["Home","My Courses","All Courses"]}     handleCountryNumber={handleCountryNumber}
-            select="" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]}  scroll={["","",""]}  />
+        <Navbar admin={true} items={["Home","Control Panel","Reports"]} select="" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={()=>{} }  />
         </div>
       {!showDiv2&&  <div className="instructorDetailsProfile">
         
@@ -202,41 +205,13 @@ export function AdminProfile(){
                </div>
 
                <Divider/>
-               <div className='dataDivNext'>
-               <label className='specializationLabel'>
-                specialization
-               </label>
-               <label className='EditInstructorValue' >{instructor && instructor.specialization}</label>
-               </div>
-               <Divider/>
-               <div className='dataDivNext'>
-               <label className='specializationLabel'>
-                Bio
-               </label>
-               <label className='EditInstructorValue' >{instructor && instructor.bio}</label>
-               </div>
-
                 <button  className='editProfileButton1' onClick={()=> {setShowDiv(true);}}>
                         <ModeEditOutlineIcon color="primary"/>
                     </button>
                     
                     
                 </div>}
-                <div className='InstProfOwedMoneyDiv'>
-                            <label>View Owed Money</label>
-                            <TextField onChange={handleDateChange}
-                            type={"month"}
-                    className='OwedMoneyMonthText'
-                     id="outlined-basic" 
-                     label=""
-                      variant="outlined"
-                      
-                      
-                      />
-                      
-                      <button onClick={handleShowMoney}>View Money</button>
-                      {showMoney && <label>The Amount is: {owedMoney}</label>}
-                        </div>
+                
                 
                 </div>
 
@@ -256,19 +231,8 @@ export function AdminProfile(){
                  className='NameLabel2'
                  onChange={handleNewEmail}/>
 
-                <TextField 
-                id="filled-basic" 
-                defaultValue={instructor && instructor.specialization} 
-                variant="standard"
-                 className='NameLabel2'
-                 onChange={handleNewSpec}/>
+               
 
-                 <TextField 
-                id="filled-basic" 
-                defaultValue={instructor && instructor.bio} 
-                variant="standard"
-                 className='NameLabel2'
-                 onChange={handleNewBio}/>
 
                    
 

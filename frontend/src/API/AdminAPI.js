@@ -161,3 +161,21 @@ export const updateAdminPass=async(oldPass,pass)=>{
 
         }
 }
+export const getAdminDetails= async()=>{
+    if(localStorage.getItem("token")){
+        var result = await fetch(`http://localhost:8000/admin/getAdmin/${localStorage.getItem("token")}`)
+    var j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
+    }else{
+        return ""
+    }
+    
+}

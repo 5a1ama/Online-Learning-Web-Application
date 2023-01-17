@@ -156,4 +156,18 @@ router.post("/updateEmail/:name/:token",async function(req,res){
         res.json("error")
     }
 })
+router.get("/getAdmin/:token",async function(req,res){
+    var token=req.params.token;
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN)
+        var id = user.id
+    
+        var query = await Instructor.findOne({id:id})
+        
+        res.json(query)
+    
+    }catch{
+        res.json("error")
+    }
+})
 module.exports=router;
