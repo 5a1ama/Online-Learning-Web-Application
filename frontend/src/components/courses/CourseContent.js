@@ -57,11 +57,6 @@ import Loading from './../loading/Loading';
 import { verify } from './../../API/LoginAPI';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import WalletIcon from '@mui/icons-material/Wallet';
-import { TextField } from '@mui/material';
-import { addCreditCard } from '../../API/TraineeAPI';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-
-
 
 function CourseContent(props) {
   const[type,setType]=useState("");
@@ -88,52 +83,7 @@ function CourseContent(props) {
 
    const x = await courseEnroll(location.state.id)
  }
-
-
-///////////////////////////////////////////////////////////////////////////////////////
-const [showCreditCardDivToPay,setShowCreditCardDivToPay] = useState(false);
- const [cardNumber,setCardNumber] = useState("");
- const handleCardnumber = (event) => {
-     setCardNumber(event.target.value);
- }
-
-
-
- const [expDate , setExpDate] = useState("");
- const handleChange = (event) => {
-     if(event.target.value.length==3 && !event.target.value.includes("/")){
-         setExpDate(event.target.value.substring(0,2)+"/"+event.target.value.substring(2))
-     }else{
-         setExpDate(event.target.value)
-
-     }
- };
- 
- const [cvv,setCvv] = useState("");
- const handleCVV = (event) => {
-     setCvv(event.target.value);
- }
-
- const [cardHolder , setCardHolder] = useState("");
- const handleCardHolder = (event) => {
-     setCardHolder(event.target.value);
- }
-
- const handleAdd = async ()=>{
-  alert("the payment is succ.")
-  enroll()
- navigate("/CourseItems",{state:{id:location.state.id,View:"Overview"}})
-  
-
- 
- } 
- 
- const handleCancelCardButton =()=>{
-     navigate("/CourseContent",{state:{id:location.state.id,View:"Overview",Type:"Individual"}})
-
-
- }
- //////////////////////////////////////////////////////////////////////////////////////////////
+ const[showPayButton ,setShowPayButton] = useState(false);
   
 
 
@@ -178,8 +128,8 @@ const [showCreditCardDivToPay,setShowCreditCardDivToPay] = useState(false);
       
   } 
 
-  const update = async()=>{
-    await intial()
+  const update = ()=>{
+    intial()
    }
     const MyCards = (props) =>{
         const handledeleteCard = async()=>{
@@ -211,6 +161,7 @@ const [showCreditCardDivToPay,setShowCreditCardDivToPay] = useState(false);
             </div>
         )
     } 
+    const [showAddCardToPay,setAddCardToPay] = useState(false);
   
   const [first,setFirst] = useState(0);
   const location=useLocation();
@@ -510,6 +461,7 @@ getUser();
               <button className="paymentsOptionCancel" onClick={()=>setShowPaymentDiv(false)}>
                   Cancel
               </button>
+              
 
 
                       </div> </div>}
@@ -564,37 +516,6 @@ getUser();
 
                     </>}
 
-                    { showCreditCardDivToPay&&  <div className="TraineeAddNewCardMainToPay">
-            <div className='TraineeAddNewCardDivToPay'>
-                <h1 className='addNewCardLabelToPay'>
-                    Add new card
-                </h1>
-                <br></br>
-                <Divider className='DividerCardToPay' variant="middle"/>
-                <TextField  className='CardNumberTextFieldToPay' label="Card Number" placeholder='0000 0000 0000 0000' onChange={handleCardnumber}/>
-                <CreditCardIcon className='CreditCardIconToPay'/>
-                <div  className='ExpCardDateToPay'>
-                
-                <TextField value={expDate} placeholder='MM/YY EXP' inputProps={{maxLength:5}} onChange={handleChange} />
-                <button className='infoIconToPay'>
-                <InfoOutlinedIcon color='primary'/>
-                </button>
-                <TextField inputProps={{maxLength:3}}  placeholder='CVV' className='CVVTEXT' onChange={handleCVV}/>    
-                </div>
-                <TextField  className='CardHolderTextFieldToPay' label="Card Holder" placeholder='Card Holder' onChange={handleCardHolder}/>
-                <div className='CardDiv'>
-
-                <button className='CancelCardSubmitButtonToPay' onClick={setShowCreditCardDivToPay(false)}>
-                    Cancel
-                </button>
-                <button className='AddCardSubmitButtonToPay' onClick={handleAdd}>
-                    Add/Pay
-                </button>
-                
-                </div>
-             </div>
-        </div>
-}
    
     {/* Second Part */                                                                  }
 
