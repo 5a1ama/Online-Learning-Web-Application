@@ -17,7 +17,7 @@ router.post("/login",async function(req,res){
     var username=req.body.username;
     var password=req.body.password;
     // console.log(username)
-    var query=await User.find({Email:username,Password:password});  //await bcrypt.hash(password, await salt)
+    var query=await User.find({Email:username,Password:await bcrypt.hash(password, await salt)});  //await bcrypt.hash(password, await salt)
     if(query.length != 0){
         var user={username:username,password:password,id:query[0].id,job:query[0].Job,country:""}
     var token=jwt.sign(user,process.env.ACCESSTOKEN,{
@@ -152,9 +152,9 @@ router.get("/sendEmailAttach/:token/:courseName",async function(req,res){
 })
 router.get("/resetPass/:email/:pass",async function(req,res){
    var result=await User.findOne({Email:req.params.email});
-   await User.findOneAndUpdate({Email:req.params.email},{Password:req.params.email});//await bcrypt.hash(req.params.pass, await salt)
+   await User.findOneAndUpdate({Email:req.params.email},{Password:await bcrypt.hash(password, await salt)});//await bcrypt.hash(req.params.pass, await salt)
    if(result.Job=="Instructor"){
-    await Instructor.findOneAndUpdate({Email:req.params.email},{Password:req.params.email})
+    await Instructor.findOneAndUpdate({Email:req.params.email},{Password:await bcrypt.hash(password, await salt)})
    }else if(result.Job=="Trainee"){
     await Trainee.findOneAndUpdate({Email:req.params.email},{Password:req.params.email})
 
@@ -175,8 +175,8 @@ router.post('/CreateUser' ,(req,res)=>{
         }else{
 
             if(query.length==0){                                             //await bcrypt.hash(password, await salt)
-                var object = new User({id:c+1,Name:name,Email:email,Password:password,Username:username,Job:"Trainee",Gender:gender})
-                var object2=new Trainee({id:c+1,Name:name,type:"Individual"});
+                var object = new User({id:c+1,Name:name,Email:email,Password:await bcrypt.hash(password, await salt),Username:username,Job:"Trainee",Gender:gender})
+                var object2=new Trainee({id:c+1,Name:name,type:"Individual",Email:email,Password:await bcrypt.hash(password, await salt)});
                 object.save(function(err,result1){
                     object2.save(function(err,result){
                         
