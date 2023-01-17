@@ -109,3 +109,55 @@ export const updateFollowUpState=async(reportId,state,followup)=>{
     }    
 })
 }
+export const updateAdminName=async(name)=>{
+    var result=await fetch(`http://localhost:8000/admin/updateName/${name}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
+}
+export const updateAdminEmail=async(name)=>{
+    var result=await fetch(`http://localhost:8000/admin/updateEmail/${name}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
+}
+
+export const updateAdminPass=async(oldPass,pass)=>{
+    var result=await fetch(`http://localhost:8000/admin/updatePass2/${oldPass}/${pass}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
+}

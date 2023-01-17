@@ -17,15 +17,22 @@ router.post("/login",async function(req,res){
     var username=req.body.username;
     var password=req.body.password;
     // console.log(username)
-    var query=await User.find({Email:username,Password:await bcrypt.hash(password, await salt)});  //await bcrypt.hash(password, await salt)
+    var query=await User.find({Email:username});
+    //await bcrypt.hash(password, await salt)
+    var passwordData=false;
     if(query.length != 0){
-        var user={username:username,password:password,id:query[0].id,job:query[0].Job,country:""}
-    var token=jwt.sign(user,process.env.ACCESSTOKEN,{
-        expiresIn: "2h",
-      })
-    // @ts-ignore
-    res.json(token)
-    }else{
+        passwordData= await bcrypt.compare(password,query[0].Password) 
+    }    
+        if(passwordData==true){
+
+            var user={username:username,password:password,id:query[0].id,job:query[0].Job,country:""}
+        var token=jwt.sign(user,process.env.ACCESSTOKEN,{
+            expiresIn: "2h",
+          })
+        // @ts-ignore
+        res.json(token)
+        
+        }else{
         
         var query=await User.find({Email:username});
         if(query.length!=0)

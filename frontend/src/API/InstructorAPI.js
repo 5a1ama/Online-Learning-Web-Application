@@ -129,8 +129,9 @@ export const updateInstructorEmail=async(name)=>{
 
         }
 }
-export const updateInstructorBio=async(name)=>{
-    var result=await fetch(`http://localhost:8000/instructor/updateBio/${name}/${localStorage.getItem("token")}`,{method: "POST",
+
+export const updateInstructorPass=async(oldPass,pass)=>{
+    var result=await fetch(`http://localhost:8000/instructor/updatePass2/${oldPass}/${pass}/${localStorage.getItem("token")}`,{method: "POST",
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     }
@@ -146,8 +147,8 @@ export const updateInstructorBio=async(name)=>{
 
         }
 }
-export const updateInstructorPass=async(oldPass,pass)=>{
-    var result=await fetch(`http://localhost:8000/instructor/updatePass2/${oldPass}/${pass}/${localStorage.getItem("token")}`,{method: "POST",
+export const updateInstructorBio=async(name)=>{
+    var result=await fetch(`http://localhost:8000/instructor/updateBio/${name}/${localStorage.getItem("token")}`,{method: "POST",
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     }
