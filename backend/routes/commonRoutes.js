@@ -159,11 +159,11 @@ router.get("/sendEmailAttach/:token/:courseName",async function(req,res){
 })
 router.get("/resetPass/:email/:pass",async function(req,res){
    var result=await User.findOne({Email:req.params.email.toLowerCase()});
-   await User.findOneAndUpdate({Email:req.params.email.toLowerCase()},{Password:await bcrypt.hash(password, await salt)});//await bcrypt.hash(req.params.pass, await salt)
+   await User.findOneAndUpdate({Email:req.params.email.toLowerCase()},{Password:await bcrypt.hash(req.params.pass, await salt)});//await bcrypt.hash(req.params.pass, await salt)
    if(result.Job=="Instructor"){
-    await Instructor.findOneAndUpdate({Email:req.params.email.toLowerCase()},{Password:await bcrypt.hash(password, await salt)})
+    await Instructor.findOneAndUpdate({Email:req.params.email.toLowerCase()},{Password:await bcrypt.hash(req.params.pass, await salt)})
    }else if(result.Job=="Trainee"){
-    await Trainee.findOneAndUpdate({Email:req.params.email.toLowerCase()},{Password:req.params.email})
+    await Trainee.findOneAndUpdate({Email:req.params.email.toLowerCase()},{Password:await bcrypt.hash(req.params.pass, await salt)})
 
    }
 })

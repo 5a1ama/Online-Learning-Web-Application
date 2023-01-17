@@ -12,11 +12,11 @@ router.post("/addAdministrator",function(req,res){
     console.log(req.body.name+" "+req.body.email)
     User.find({}).exec(async function(err,result){
         var c=result.length;
-        var query=await User.find({Email:req.body.email});
+        var query=await User.find({Email:req.body.email.toLowerCase()});
         if(query.length==0){
         var hashedPass=await bcrypt.hash(req.body.password,await salt)
-        var object=new User({id:c+1,Email:req.body.email,Password:hashedPass,Job:"Admin"})
-        var object2=new Admin({id:c+1,Email:req.body.email,Password:hashedPass});
+        var object=new User({id:c+1,Email:req.body.email.toLowerCase(),Password:hashedPass,Job:"Admin"})
+        var object2=new Admin({id:c+1,Email:req.body.email.toLowerCase(),Password:hashedPass});
         object.save(function(err,result1){
             object2.save(function(err,result){})
 
@@ -37,8 +37,8 @@ router.post("/addInstructor",function(req,res){
         var query=await User.find({Email:req.body.email});
         if(query.length==0){
             var hashedPass=await bcrypt.hash(req.body.password,await salt)
-            var object=new User({id:c+1,Email:req.body.email,Password:hashedPass,Job:"Instructor"});
-        var object2=new Instructor({id:c+1,Email:req.body.email,Password:hashedPass});
+            var object=new User({id:c+1,Email:req.body.email.toLowerCase(),Password:hashedPass,Job:"Instructor"});
+        var object2=new Instructor({id:c+1,Email:req.body.email.toLowerCase(),Password:hashedPass});
         object.save(function(err,result1){
             object2.save(function(err,result){})
         })
@@ -56,12 +56,12 @@ router.post("/addCorporateTrainee",async function(req,res){
     
     User.find({}).exec(async function(err,result){
         var c=result.length;
-        var query=await User.find({Email:req.body.email});
+        var query=await User.find({Email:req.body.email.toLowerCase()});
         if(query.length==0){
             var hashedPass=await bcrypt.hash(req.body.password,await salt)
 
-            var object=new User({id:c+1,Email:req.body.email,Password:hashedPass,Job:"Trainee"})
-        var object2=new Trainee({id:c+1,Email:req.body.email,Password:hashedPass,type:"Corporate"});
+            var object=new User({id:c+1,Email:req.body.email.toLowerCase(),Password:hashedPass,Job:"Trainee"})
+        var object2=new Trainee({id:c+1,Email:req.body.email.toLowerCase(),Password:hashedPass,type:"Corporate"});
         object.save(function(err,result1){
             object2.save(function(err,result){})
 
@@ -79,12 +79,12 @@ router.post("/addIndividualTrainee",function(req,res){
     
     User.find({}).exec(async function(err,result){
         var c=result.length;
-        var query=await User.find({Email:req.body.email});
+        var query=await User.find({Email:req.body.email.toLowerCase()});
         if(query.length==0){
             var hashedPass=await bcrypt.hash(req.body.password,await salt)
 
-            var object=new User({id:c+1,Email:req.body.email,Password:hashedPass,Job:"Trainee"})
-        var object2=new Trainee({id:c+1,Email:req.body.email,Password:hashedPass,type:"Individual"});
+            var object=new User({id:c+1,Email:req.body.email.toLowerCase(),Password:hashedPass,Job:"Trainee"})
+        var object2=new Trainee({id:c+1,Email:req.body.email.toLowerCase(),Password:hashedPass,type:"Individual"});
         object.save(function(err,result1){
             object2.save(function(err,result){})
 
