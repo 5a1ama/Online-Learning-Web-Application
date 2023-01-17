@@ -28,6 +28,7 @@ router.post("/login",async function(req,res){
             if(query[0].Job=="Trainee"){
                 var type=(await Trainee.find({Email:username.toLowerCase()}))[0].type;
                 user.traineeType=type;
+                
             }else{
                 user.traineeType=""
             }
