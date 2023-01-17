@@ -90,9 +90,15 @@ export function TraineeProfile(){
     const[traineeWallet,setTraineeWallet] = useState();
 
     const handleUpdate=async ()=>{
-       
-        const y = await updateTraineeName(newName);
+       if(newName != ""){      
+           const y = await updateTraineeName(newName);
+       }
+
+
+    if(newEmail != ""){
         const z = await updateTraineeEmail(newEmail);
+
+    }
 
          setShowDiv1(false)
          
@@ -146,7 +152,7 @@ export function TraineeProfile(){
                 </h1>
 
                 <h2 className="ammount">
-                    {traineeWallet} 
+                    {Math.ceil( traineeWallet)} 
                 </h2>
 
 

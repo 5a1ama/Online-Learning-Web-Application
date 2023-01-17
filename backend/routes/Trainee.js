@@ -28,7 +28,7 @@ function tokenVerify(req,res,next){
    
 }
 
-router.get("/TraineeMyCourse/:token",async function(req,res){
+router.get("/TraineeMyCourse/:token",tokenVerify,async function(req,res){
 
     var Token = req.params.token
     const user = jwt.verify(Token,process.env.ACCESSTOKEN)
