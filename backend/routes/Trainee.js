@@ -175,18 +175,21 @@ router.post("/updatePass2/:oldPass/:pass/:token",tokenVerify,async function(req,
 
     var user=jwt.verify(token,process.env.ACCESSTOKEN);
     var id=user.id;
-    var result=await User.find({id:id ,Password:req.params.oldPass});
+    var oldhashed=await bcrypt.hash(req.params.oldPass, await salt)
+    var newhashed=await bcrypt.hash(req.params.pass, await salt)
+
+    var result=await User.find({id:id ,Password:oldhashed});
     if(result.length==0){
         res.json("error")
 
     }
     else{
-        await User.findOneAndUpdate({id:id},{Password:req.params.pass});
+        await User.findOneAndUpdate({id:id},{Password:newhashed});
         if(result.Job=="Instructor"){
-         await Instructor.findOneAndUpdate({id:id},{Password:req.params.pass})
+         await Instructor.findOneAndUpdate({id:id},{Password:newhashed})
     
         }else if(result.Job=="Trainee"){
-         await Trainee.findOneAndUpdate({id:id},{Password:req.params.pass})
+         await Trainee.findOneAndUpdate({id:id},{Password:newhashed})
      
         }
         res.json("ok")

@@ -10,6 +10,8 @@ var Trainee=require("../Models/Trainee");
 const Excercise = require("../Models/Excercise");
 const { route } = require("./commonRoutes");
 dotenv.config()
+const bcrypt=require("bcrypt");
+const salt=bcrypt.genSalt(10);
 
 router.get("/getinstructorTraineeDetails/:id",async function(req,res){
 
@@ -261,19 +263,21 @@ router.post("/updatePass2/:oldPass/:pass/:token",async function(req,res){
     try{
         var user=jwt.verify(token,process.env.ACCESSTOKEN);
         var id=user.id;
-        var result=await User.find({id:id ,Password:req.params.oldPass});
+        var oldhashed=await bcrypt.hash(req.params.oldPass, await salt)
+        var newhashed=await bcrypt.hash(req.params.pass, await salt)
+        var result=await User.find({id:id ,Password:oldhashed});
         if(result.length==0){
             res.json("error")
     
         }
         else{
-            await User.findOneAndUpdate({id:id},{Password:req.params.pass});
+            await User.findOneAndUpdate({id:id},{Password:newhashed});
             console.log(id  )
             if(result.Job=="Instructor"){
-             await Instructor.findOneAndUpdate({id:id},{Password:req.params.pass})
+             await Instructor.findOneAndUpdate({id:id},{Password:newhashed})
         
             }else if(result.Job=="Trainee"){
-             await Trainee.findOneAndUpdate({id:id},{Password:req.params.pass})
+             await Trainee.findOneAndUpdate({id:id},{Password:newhashed})
          
             }
             res.json("ok")
