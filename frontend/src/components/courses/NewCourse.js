@@ -227,6 +227,8 @@ export function NewCourse(props) {
         navigate("/CourseContent",{state:{id:props.course.id,View:"Overview",Type:"Individual"}})
       else if(user.traineeType=="Corporate")
         navigate("/CourseContent",{state:{id:props.course.id,View:"Overview",Type:"Corporate"}})
+        else if(user.job=="Admin")
+        navigate("/AdminViewPublished",{state:{id:props.course.id,View:"Overview"}})
       else
       navigate("/CourseContent",{state:{id:props.course.id,View:""}})
     }

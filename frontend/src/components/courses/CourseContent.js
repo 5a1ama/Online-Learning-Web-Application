@@ -115,6 +115,7 @@ function CourseContent(props) {
 
   const [showDivMyCards,setShowDivMyCards] = useState(false);
   const [allCards,setAllCards] = useState();
+
   const intial = async()=>{
     setAllCards(await getAllCards())
   }
@@ -303,8 +304,9 @@ getUser();
       const currency = ['LE','$','UAE','£','€'];
       var CourseHours ="Approx. " + (details[0]? details[0].hours:-1) + " hours to complete"; 
 
-     if(user&&user.type=="trainee"){
-       intial();}
+     if(user&&user.job=="Trainee"){
+       intial();
+      }
 
        const RequestAccess = async()=>{
         const x = requestAccessToCourse(location.state.id);
@@ -317,7 +319,6 @@ getUser();
         }
        }
 
-       intial()
   return (
         
     
