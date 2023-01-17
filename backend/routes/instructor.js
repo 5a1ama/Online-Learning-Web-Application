@@ -11,6 +11,7 @@ const Excercise = require("../Models/Excercise");
 const { route } = require("./commonRoutes");
 dotenv.config()
 const bcrypt=require("bcrypt");
+const Admin = require("../Models/Admin");
 const salt=bcrypt.genSalt(10);
 
 router.get("/getinstructorTraineeDetails/:id",async function(req,res){
@@ -265,22 +266,31 @@ router.post("/updatePass2/:oldPass/:pass/:token",async function(req,res){
         var id=user.id;
         var oldhashed=await bcrypt.hash(req.params.oldPass, await salt)
         var newhashed=await bcrypt.hash(req.params.pass, await salt)
-        var result=await User.find({id:id ,Password:oldhashed});
+        var result=await User.find({id:id});
         if(result.length==0){
             res.json("error")
     
         }
         else{
-            await User.findOneAndUpdate({id:id},{Password:newhashed});
-            console.log(id  )
-            if(result.Job=="Instructor"){
-             await Instructor.findOneAndUpdate({id:id},{Password:newhashed})
-        
-            }else if(result.Job=="Trainee"){
-             await Trainee.findOneAndUpdate({id:id},{Password:newhashed})
-         
+           var passwordTrue=bcrypt.compare(req.params.pass,result[0].Password);
+            if(passwordTrue){
+
+                await User.findOneAndUpdate({id:id},{Password:newhashed});
+                console.log(id  )
+                if(result.Job=="Instructor"){
+                 await Instructor.findOneAndUpdate({id:id},{Password:newhashed})
+            
+                }else if(result.Job=="Trainee"){
+                 await Trainee.findOneAndUpdate({id:id},{Password:newhashed})
+             
+                }else if(result.Job=="Admin"){
+                    await Admin.findOneAndUpdate({id:id},{Password:newhashed})
+
+                }
+                res.json("ok")
+            }else{
+                res.json("error");
             }
-            res.json("ok")
     
         }
     
@@ -303,20 +313,7 @@ router.post("/updateName/:name/:token",async function(req,res){
     }
     
 })
-router.post("/updateBio/:name/:token",async function(req,res){
-    var token=req.params.token;
-    try{
-        var user=jwt.verify(token,process.env.ACCESSTOKEN);
-        var id=user.id;
-        var newname=req.params.name;
-        await Instructor.findOneAndUpdate({id:id},{bio:newname});
-        // await User.findOneAndUpdate({id:id},{bio:newname});
-        res.json("ok")
-    
-    }catch{
-        res.json("error")
-    }
-})
+
 router.post("/updateEmail/:name/:token",async function(req,res){
     var token=req.params.token;
     try{
@@ -328,6 +325,20 @@ router.post("/updateEmail/:name/:token",async function(req,res){
         res.json("ok")    
     }
     catch{
+        res.json("error")
+    }
+})
+router.post("/updateBio/:name/:token",async function(req,res){
+    var token=req.params.token;
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN);
+        var id=user.id;
+        var newname=req.params.name;
+        await Instructor.findOneAndUpdate({id:id},{bio:newname});
+        // await User.findOneAndUpdate({id:id},{bio:newname});
+        res.json("ok")
+    
+    }catch{
         res.json("error")
     }
 })
