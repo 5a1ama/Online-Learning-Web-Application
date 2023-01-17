@@ -27,7 +27,7 @@ import Footer from '../footer/Footer';
 import Subtitle from './subtitles/Subtitle';
 import Rating from '@mui/material/Rating';
 import { alertClasses, Avatar } from '@mui/material';
-import { courseEnroll, getTraineeCourseProg, myCourseRate, myInstructorRate, rateCourse, requestAccessToCourse } from '../../API/TraineeAPI';
+import { courseEnroll, courseEnrollWallet, getTraineeCourseProg, myCourseRate, myInstructorRate, rateCourse, requestAccessToCourse } from '../../API/TraineeAPI';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import CountdownTimer from '../countdown/CountDown';
 import CourseHighlights from './coursehighlights/CourseHighlights';
@@ -55,8 +55,11 @@ import CheckIcon from '@mui/icons-material/Check';
 import SaveIcon from '@mui/icons-material/Save';
 import Loading from './../loading/Loading';
 import { verify } from './../../API/LoginAPI';
+import AddCardIcon from '@mui/icons-material/AddCard';
+import WalletIcon from '@mui/icons-material/Wallet';
 
 function CourseContent(props) {
+  const[type,setType]=useState("");
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -78,7 +81,7 @@ function CourseContent(props) {
   }, []);
  const enroll = async ()=>{
 
-  const x = await courseEnroll(location.state.id)
+   const x = await courseEnroll(location.state.id)
  }
  const[showPayButton ,setShowPayButton] = useState(false);
   
@@ -97,7 +100,7 @@ function CourseContent(props) {
           setSuccess(true);
           setLoading(false);
           alert("the payment is succ.")
-          enroll()
+           enroll()
           navigate("/CourseItems",{state:{id:location.state.id,View:"Overview"}})
           
         }, 2000);
@@ -118,7 +121,12 @@ function CourseContent(props) {
 
   const intial = async()=>{
     setAllCards(await getAllCards())
+    setType(await verify(localStorage.getItem("token")));
   }
+  const handlePayWithWallet = async ()=>{
+      const x = await courseEnrollWallet(location.state.id);
+      
+  } 
 
   const update = ()=>{
     intial()
@@ -194,12 +202,16 @@ const [MyRate,setMyRate] = useState(0)
   //     setDetails((await getCourseDetails(location.state.id)));
   //     setFirst(1);
   // }
+  const reload=()=>{
+    window.location.reload();
+
+  }
   useEffect(()=>{
     async function getDetails(){
-      setDetails((await getCourseDetails(location.state.id)));      
-      setFirst(1)
+      setDetails((await getCourseDetails(location.state.id)));
+      
+      // setFirst(1)
     }
- 
     getDetails();
 
   })
@@ -257,9 +269,9 @@ getUser();
           }
 
       useEffect(()=>{
+        handleInstNames();
 
           // getDetails();
-          handleInstNames();
 
         })
       const [countryNumber,setCountryNumber]=useState();
@@ -327,7 +339,7 @@ getUser();
       <>
         {!localStorage.getItem("token")&&<Navbar items={["Home","Courses","About Us","‎ ‎ ‎  ‎  ‎ Join Us"]} select="‎ ‎ ‎  ‎  ‎ Join Us" nav={["/","/","/","/signUp"]} scroll={["","",""]} handleCountryNumber={props.handleCountryNumber}   />
         }
-        {localStorage.getItem("token")&&<Navbar items={["Home","My Courses","All Courses"]}
+        {localStorage.getItem("token")&&<Navbar inst={type.job=="Instructor"} trainee={type.job=="Trainee"} admin={type.job=="Admin"} items={["Home","My Courses","All Courses"]}
                handleCountryNumber={handleCountryNumber}
                select="Home" nav={["/TraineeHome","/TraineeCourses","/TraineeAllCourses"]} scroll={["","",""]}  />
               }
@@ -415,17 +427,32 @@ getUser();
                 <ListItem>
                   <ListItemAvatar>
                     <Avatar>
-                      <PaymentsIcon color="primary"/>
-                    {/* <Avatar src={paypalIcon}/> */}
+                      <WalletIcon color="primary"/>
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary="Other Payment Options"/>
-                  <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} >
+                
+                  <ListItemText primary="Pay with your wallet"/>
+
+
+
+                  <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} onClick={handlePayWithWallet} >
                   <ArrowForwardIosIcon/>
                               </IconButton>
                 </ListItem>
 
-              
+
+                <Divider variant="fullWidth" />
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <PaymentsIcon color="primary"/>
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary="Other Payment Options"/>
+                  <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} onClick={()=>navigate('/pay')} >
+                  <ArrowForwardIosIcon/>
+                              </IconButton>
+                </ListItem>
                 <Divider variant="fullWidth" />
 
 
@@ -442,14 +469,22 @@ getUser();
                       <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} onClick={()=>setShowDivMyCards(false)} >
                   <ArrowBackIcon fontSize='large'/>
                               </IconButton>
+                              
 
                       {allCards&&allCards.map((card,i)=><MyCards id={i}  card={card}/>)}
+                      <div className='AddCardToPayDiv' onClick={()=>navigate('/TraineeAddCardToPay',{state:{id:location.state.id}})}>
+            Add Card
 
-                      <button className="addCardButtonCourse" onClick={()=>navigate('/TraineeAddCardToPay',{state:{id:location.state.id}})}>
-                        Add Card
-                      </button> 
+          </div>
 
-        {allCards&&allCards.length !=0&&  <Box sx={{ m: 1, position: 'relative' ,left:"20%" }}>
+                      
+
+        {allCards&&allCards.length !=0&&  <Box sx={{ m: 1, position: 'relative' ,left:"75%" }}>
+
+        
+
+
+
                   <Button
                     variant="contained"
                     sx={buttonSx}
@@ -466,10 +501,10 @@ getUser();
                       sx={{
                         color: green[500],
                         position: 'absolute',
-                        top: '50%',
-                        left: '83%',
-                        marginTop: '-12px',
-                        marginLeft: '-12px',
+                        top: '25%',
+                        left: '10%',
+                        marginTop: '-7px',
+                        marginLeft: '-10px',
                       }}
                     />
                   )}
@@ -478,6 +513,38 @@ getUser();
                       </div>}
 
                     </>}
+
+                    {   <div className="TraineeAddNewCardMainToPay">
+            <div className='TraineeAddNewCardDivToPay'>
+                <h1 className='addNewCardLabelToPay'>
+                    Add new card
+                </h1>
+                <br></br>
+                <Divider className='DividerCardToPay' variant="middle"/>
+                <TextField  className='CardNumberTextFieldToPay' label="Card Number" placeholder='0000 0000 0000 0000' onChange={handleCardnumber}/>
+                <CreditCardIcon className='CreditCardIconToPay'/>
+                <div  className='ExpCardDateToPay'>
+                
+                <TextField value={expDate} placeholder='MM/YY EXP' inputProps={{maxLength:5}} onChange={handleChange} />
+                <button className='infoIconToPay'>
+                <InfoOutlinedIcon color='primary'/>
+                </button>
+                <TextField inputProps={{maxLength:3}}  placeholder='CVV' className='CVVTEXT' onChange={handleCVV}/>    
+                </div>
+                <TextField  className='CardHolderTextFieldToPay' label="Card Holder" placeholder='Card Holder' onChange={handleCardHolder}/>
+                <div className='CardDiv'>
+
+                <button className='CancelCardSubmitButtonToPay' onClick={handleCancelCardButton}>
+                    Cancel
+                </button>
+                <button className='AddCardSubmitButtonToPay' onClick={handleAdd}>
+                    Add/Pay
+                </button>
+                
+                </div>
+             </div>
+        </div>
+}
    
     {/* Second Part */                                                                  }
 
