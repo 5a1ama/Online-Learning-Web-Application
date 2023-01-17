@@ -11,6 +11,7 @@ import Gift from "../../assets/gift.png"
 import GiftTop from "../../assets/giftTop.png"
 import GiftTop2 from "../../assets/giftTop2.png"
 import CountdownTimer from '../countdown/CountDown';
+import { verify } from '../../API/LoginAPI';
 
 export function NewCourse(props) {
     const navigate = useNavigate();
@@ -48,6 +49,15 @@ export function NewCourse(props) {
         return Math.round(diff);
       }
       
+      const [user,setUser]=useState("");
+
+      useEffect(()=>{
+        async function getUser (){
+          setUser(await verify(localStorage.getItem("token")))
+        }
+
+        getUser();
+      })
   
 
       const NOW_IN_MS = new Date().getTime(); 
@@ -104,13 +114,13 @@ export function NewCourse(props) {
         <div className={courseDetails? "newCourse-After-Content":"newCourse-content"}>
       
          { 
-       (props.course.discount.amount>0) && props.Trainee&& props.Trainee!=="Corporate" && !props.Corporate && 
+       (props.course.discount.amount>0) &&(user.job!="Trainee" || (props.Trainee&& props.Trainee!=="Corporate" && !props.Corporate) ) && 
        <div className="DivForDiscount_NewCourse">
         <CountdownTimer targetDate={dateTimeAfterThreeDays} id={props.course.id}/>
         </div>
          }
          { 
-       (props.Trainee&&props.Trainee!=="Corporate" && !props.Corporate &&
+       ((user.job!="Trainee" || (props.Trainee&& props.Trainee!=="Corporate" && !props.Corporate) )&&
         (props.course.discount.amount>0) && 
         (expiredTime>0) 
          
@@ -121,7 +131,8 @@ export function NewCourse(props) {
               <h3 >{props.course.title}</h3>
           </div>
           
-                {props.Trainee&& props.Trainee!=="Corporate" && !props.Corporate &&<div className="NewCourse_Prices">
+                { (user.job!="Trainee" || (props.Trainee&& props.Trainee!=="Corporate" && !props.Corporate) ) &&
+                <div className="NewCourse_Prices">
                  {
                  (props.course.discount.amount&&props.course.discount.amount>0
                   &&expiredTime>0

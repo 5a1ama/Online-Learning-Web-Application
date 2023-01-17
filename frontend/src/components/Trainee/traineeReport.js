@@ -62,7 +62,7 @@ export function MyTraineeReports(){
     }
 
     const handleFollowUpCommentMethod = async ()=>{
-       const x = followupReport(followUpComment,reportFollowID)
+       const x = await followupReport(followUpComment,reportFollowID)
     //    setAllInstReports(await getAllReport())
     //    for(var i =0;i<allInstReports.length;i++){
     //     if(allInstReports[i].id== reportFollowID){

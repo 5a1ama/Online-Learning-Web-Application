@@ -189,14 +189,43 @@ export const uploadCourseVideo=async(id,link)=>{
     },
     body: JSON.stringify({courseID:id,link:link,token:localStorage.getItem("token")})
 })
+const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const uploadSubtitleVideo=async(id,link,subtitle,description)=>{
+    var link2 = link
+    var description2 = description
+    if(link2==""){
+        link2 = "-1" 
+    }
+    if(description2==""){
+        description2="-1"
+    }
     const result=await fetch(`http://localhost:8000/instructor/uploadSubtitleVideo`,{method: "POST",
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     },
-    body: JSON.stringify({courseID:id,link:link,subtitle:subtitle,description:description,token:localStorage.getItem("token")})
+    body: JSON.stringify({courseID:id,link:link2,subtitle:subtitle,description:description2,token:localStorage.getItem("token")})
+
 })
+const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else{
+          return j
+
+        }
 }
 export const definePromotion=async(id,amount,duration)=>{
     const result=await fetch(`http://localhost:8000/instructor/coursePromotion`,{method: "POST",
@@ -505,7 +534,6 @@ export const PublishCourse=async(id)=>{
         }else if(j=="subtitle"){
             alert("Please add at least one subtitle for your course")
         }else if(j=="ok"){
-            alert('tmam')
             return j
         }
         else{
