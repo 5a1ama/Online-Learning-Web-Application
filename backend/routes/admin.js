@@ -13,6 +13,9 @@ const Reports=require("../Models/Reports");
 const CourseRequest=require("../Models/CourseRequest");
 const RefundRequest = require("../Models/RefundRequest");
 const Admin = require("../Models/Admin");
+const bcrypt=require("bcrypt")
+const salt=bcrypt.genSalt(10);
+
 router.get("/getAllReports",async function(req,res){
     var result=await Reports.find({});
     res.json(result);
@@ -96,13 +99,12 @@ router.post("/updatePass2/:oldPass/:pass/:token",async function(req,res){
         var newhashed=await bcrypt.hash(req.params.pass, await salt)
         var result=await User.find({id:id});
         if(result.length==0){
-            res.json("error")
-    
+            res.json("no user")
         }
         else{
-           var passwordTrue=bcrypt.compare(req.params.pass,result[0].Password);
+           var passwordTrue=await bcrypt.compare(req.params.oldPass,result[0].Password);
             if(passwordTrue){
-
+                console.log("true")
                 await User.findOneAndUpdate({id:id},{Password:newhashed});
                 console.log(id  )
                 if(result.Job=="Instructor"){
@@ -117,13 +119,14 @@ router.post("/updatePass2/:oldPass/:pass/:token",async function(req,res){
                 }
                 res.json("ok")
             }else{
-                res.json("error");
+                
+                res.json("wrong password");
             }
     
         }
     
-    }catch{
-        res.json("error")
+    }catch(error){
+        res.json(error.message)
     }
  
 })
@@ -162,7 +165,7 @@ router.get("/getAdmin/:token",async function(req,res){
         var user=jwt.verify(token,process.env.ACCESSTOKEN)
         var id = user.id
     
-        var query = await Instructor.findOne({id:id})
+        var query = await Admin.findOne({id:id})
         
         res.json(query)
     

@@ -122,7 +122,13 @@
   height: 100%;
   background: rgba(0, 0,0, 0.5);
 }
-
+.buttonFady{
+  background-color: transparent;
+  width: auto;
+}
+.buttonFady:hover{
+  background-color: transparent;
+}
 .IssusList{
     position: relative;
     top: 8%;

@@ -50,6 +50,7 @@ import { InstructorViewPublished } from './components/Instructor/InstructorViewP
 import CourseContentInst from './components/courses/CourseContentInst';
 import { TraineeAddCardToPay } from './components/courses/TraineeAddCardToPay';
 import { AdminViewPublished } from './components/Instructor/AdminViewPublished';
+import { AdminProfile } from './components/Admin/AdminProfile';
 
 
 
@@ -119,8 +120,7 @@ export default function App() {
           <Route path="/TraineeGradingExercise" element={<TraineeGradingExercise/>}/>
           <Route path="/InstructorEditExcer" element={<InstructorEditExercise/>}/>
           <Route path='/AdminViewPublished' element={<AdminViewPublished handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
-
-
+          <Route path="/AdminProfile" element={<AdminProfile/>}/>
         </Routes>
       
     

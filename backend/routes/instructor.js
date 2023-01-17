@@ -271,11 +271,11 @@ router.post("/updatePass2/:oldPass/:pass/:token",async function(req,res){
         var newhashed=await bcrypt.hash(req.params.pass, await salt)
         var result=await User.find({id:id});
         if(result.length==0){
-            res.json("error")
+            res.json("no user")
     
         }
         else{
-           var passwordTrue=bcrypt.compare(req.params.pass,result[0].Password);
+           var passwordTrue=await bcrypt.compare(req.params.oldPass,result[0].Password);
             if(passwordTrue){
 
                 await User.findOneAndUpdate({id:id},{Password:newhashed});
@@ -292,13 +292,13 @@ router.post("/updatePass2/:oldPass/:pass/:token",async function(req,res){
                 }
                 res.json("ok")
             }else{
-                res.json("error");
+                res.json("wrong password");
             }
     
         }
     
-    }catch{
-        res.json("error")
+    }catch(error){
+        res.json(error.message)
     }
  
 })

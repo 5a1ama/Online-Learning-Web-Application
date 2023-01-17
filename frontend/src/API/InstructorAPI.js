@@ -535,6 +535,7 @@ export const PublishCourse=async(id)=>{
             alert("Please add at least one subtitle for your course")
         }else if(j=="ok"){
             return j
+
         }
         else{
             alert("There is data missing in subtitle : " + j)

@@ -48,7 +48,10 @@ import Subtitle from './../courses/subtitles/Subtitle';
     export function InstructorViewCourse() {
         const navigate=useNavigate();
         const location=useLocation();
-   
+        const refreshPage=()=>{
+            window.location.reload();
+          }
+
         const [first2,setFirst2]=useState(0);
         
         const begin=async()=>{
@@ -102,9 +105,9 @@ import Subtitle from './../courses/subtitles/Subtitle';
             
             if(location.state && new Date()<new Date(duration)){
                 const x=await definePromotion(location.state.id,discountamount,duration)
-                await getDetails();
+                // await getDetails();
                 setShowDiscountDiv(false);
-
+                refreshPage();
             }else{
                 alert("enter a future date")
             }
@@ -119,7 +122,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
             if(location.state){
                 
                 const x=await deleteSubTitle(title,location.state.id)
-                await getDetails();
+                // await getDetails();
             }
         }
 
@@ -127,7 +130,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
             if(location.state){
 
                 const x=await updateSubtitle(location.state.id,oldtitle,title,hours,link,desc)
-                await getDetails();
+                // await getDetails();
             }
         }
 
@@ -163,7 +166,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
                 
                 const x=await addNewSubToCourse(location.state.id,Sub,hours)
                 setSubHoursChecked(true)
-                await getDetails();
+                // await getDetails();
                 
             }
         }
@@ -171,7 +174,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
     const handleAddPrevVid=async()=>{
         setFirst(0)
         await uploadCourseVideo(location.state.id,prevVidLink)
-        await getDetails();
+        // await getDetails();
         }
 
         const [details,setDetails] = useState([]);
@@ -215,7 +218,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
         const handleSubmitVid = async(sub)=>{
                 const x= await uploadSubtitleVideo(location.state.id,addedVideoLink,sub,vidDescription);
                 alert("loading");
-               await getDetails();
+            //    await getDetails();
             
         }
       
@@ -374,9 +377,10 @@ import Subtitle from './../courses/subtitles/Subtitle';
    const deleteSummary = async () => {
     setSummary("");
     await SummaryDeletion();
+    // refreshPage();
     }
     const SummaryDeletion = async()=>{
-        const z = await updateCourseSummary(" ",location.state.id);
+        const zz = await updateCourseSummary(" ",location.state.id);
 
     }
    
@@ -389,7 +393,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
         setPrevVidLink("");
         setFirst(0)
         await uploadCourseVideo(location.state.id,prevVidLink)
-        getDetails();
+        // getDetails();
     }
     const handleDeleteCourse = async()=>{
         const x = await DeleteCourse(location.state.id);
@@ -399,8 +403,11 @@ import Subtitle from './../courses/subtitles/Subtitle';
 
         const handlePublish =async()=>{
             const x = await PublishCourse(location.state.id);
-            navigate("/InstructorViewPublished",{state:{id:location.state.id,View:"Overview"}})
+            if(x=="ok"){
+                navigate("/InstructorViewPublished",{state:{id:location.state.id,View:"Overview"}})
+            }
         }
+        
    return (
         
        <div className="CourseItems">
@@ -617,7 +624,9 @@ import Subtitle from './../courses/subtitles/Subtitle';
                                                      <div className='flexRow'>
                                                         <h4>{details[0]&&details[0].summary}
                                                         <BiEdit onClick={handleAddsummaryDiv} className='Inst_BiEdit' size="20px"></BiEdit>
-                                                        <BsTrash size='20px' onClick={deleteSummary} className='Inst_BsTrash'></BsTrash>
+                                                        <button className='buttonFady' onClick={deleteSummary}>
+                                                            <BsTrash size='20px'  className='Inst_BsTrash'></BsTrash>
+                                                            </button>
                                                         </h4>
                                                      </div>
                                                     :

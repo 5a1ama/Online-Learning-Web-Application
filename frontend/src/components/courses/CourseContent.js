@@ -212,8 +212,8 @@ const [MyRate,setMyRate] = useState(0)
   useEffect(()=>{
     async function getDetails(){
       setDetails((await getCourseDetails(location.state.id)));
-      
-      // setFirst(1)
+
+      setFirst(1)
     }
     getDetails();
 
@@ -222,15 +222,7 @@ const [MyRate,setMyRate] = useState(0)
   
 
   if(first===0){
-      // getDetails();
-      if(location.state.View==="Syllabus"){
-          bottomRef.current.scrollIntoView({behavior: 'smooth'});
-      }else{
-        window.scrollTo({top:0 ,behavior: 'smooth'});
-      }
-      
-
-      
+       window.scrollTo({top:0 ,behavior: 'smooth'});   
   }
 
   const InstNamesLen = () =>
