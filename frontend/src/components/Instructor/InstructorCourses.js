@@ -103,7 +103,11 @@ export function InstructorCourses(){
       const handleFilter2=async()=>{
         setFirst(1)
         
-        setCourses((await FilterMyCourse(Math.floor(value[0]/newPriceRatio), Math.floor(value[1]/newPriceRatio),searchSubject) ))
+        const x = await FilterMyCourse(Math.floor(value[0]/newPriceRatio), Math.floor(value[1]/newPriceRatio),searchSubject)
+        if(x.length>0)
+          setCourses(x);
+          else
+          setCourses([-1]);
       
       }
       const valuetext=(value)=> {
