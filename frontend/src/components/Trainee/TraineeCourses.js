@@ -10,6 +10,10 @@ import {FilterMyCourses, getTraineeCourses, getTraineeDetails, searchMyCourses} 
 import "./TraineeHome.css";
 import { NewCourse } from '../courses/NewCourse';
 import { verify } from "../../API/LoginAPI";
+import { Checkbox } from "@mui/material";
+import { getMaxPrice } from "../../API/CourseAPI";
+import { Loading } from '../loading/Loading';
+import sadFace from "../../assets/sadFace.png"
 
 
 
@@ -53,28 +57,27 @@ export function TraineeCourses() {
       setCourses(await searchMyCourses(search) )
     }
     const getCourses = async () =>{ 
-    setCourses ((await getTraineeCourses(localStorage.getItem("token"))));
-    // alert(courses);
+    const x = await getTraineeCourses(localStorage.getItem("token"));
+    if(x.length>0)
+        setCourses (x);
+        else{
+          setCourses([-2])
+        }
+        getMaxPriceValue();
+        handleValue();
   }
+
   if(first==0){
     getCourses();
     setFirst(1);
   }
   
-    const [value,setValue]=useState([1000,50000]);
-    const valuetext=(value)=> {
-        return `${value}°C`;
-      }
       const handleChange = (event, newValue) => {
         setValue(newValue);
         
       }
-      const handleReset =()=>{
+   
 
-      }
-      const handleFilter=async ()=>{
-        setCourses(await FilterMyCourses(Math.floor(value[0]/newPriceRatio),Math.floor(value[1]/newPriceRatio),subject))
-      }
       const [countryNumber,setCountryNumber]=useState();
       const handleCountryNumber = (x) =>{
         setCountryNumber(x);
@@ -90,7 +93,73 @@ export function TraineeCourses() {
         }
         getDetails();
       })
+      const [maxPriceValue,setMaxPriceValue]=useState(30000);
+      const getMaxPriceValue = async () =>{
+        setMaxPriceValue ((await getMaxPrice()));
+      }
+   
+  
+      var minPrice= (newPriceRatio&&Math.floor(0*newPriceRatio))||0;
+      var maxPrice= (newPriceRatio&&Math.floor(maxPriceValue*newPriceRatio))||maxPriceValue;
+            
+      const [value,setValue]=useState([minPrice,maxPrice]);
+      const handleValue = () =>{
+        setValue([minPrice,maxPrice]);
+      }
+      const [FilterBar,setFilterBar] = useState(false)
+      const handleFilterBar = () => setFilterBar(!FilterBar)
+
+      const[freePrice,SetFreePrice]=useState(false)
+      const handleFreePrice = () =>{
+        SetFreePrice(!freePrice);
+        
+        if(!freePrice){
+          minPrice=0;
+          maxPrice=0;
+        }else{
+           minPrice= (newPriceRatio&&Math.floor(0*newPriceRatio))||0;
+           maxPrice= (newPriceRatio&&Math.floor(30000*newPriceRatio))||30000;
+    
+          }
+          setValue([minPrice,maxPrice])
+      }
+      const valuetext=(value)=> {
+        return `${value}°C`;
+      }
+    //   useEffect(()=>{
+    //     async function Filter(){
+    //       if(FilterBar){
+    //         setFirst(1)
+    //         const x = await FilterMyCourses( Math.floor(value[0]/newPriceRatio), Math.floor(value[1]/newPriceRatio),subject)
+    //         if(x.length>0)
+    //         setCourses(x);
+    //         else
+    //         setCourses([-1]);
+    //       }
+    //     }      
+    //     Filter();
      
+    // },[subject,value,FilterBar,newPriceRatio])
+
+    const handleFilter2=async()=>{
+      setFirst(1)
+      
+      const x = await FilterMyCourses(Math.floor(value[0]/newPriceRatio), Math.floor(value[1]/newPriceRatio),subject)
+      if(x.length>0)
+        setCourses(x);
+        else
+        setCourses([-1]);    
+    }
+    const handleReset= (event)=>{
+      setSubject('');
+      setValue([minPrice,maxPrice]);
+      SetFreePrice(false);
+      document.getElementById("TextFieldForSubject").value="";
+      if(document.getElementById("CheckBoxInstructorCourses").checked==true)
+      document.getElementById("CheckBoxInstructorCourses").click();
+      getCourses();
+    }
+    
 return(
     <div className = "TraineeHomeMain2">
     
@@ -102,50 +171,64 @@ return(
     </div>
     <div>
       <div className="TraineeCourses_CoursesDiv">
-      {courses.map((course) => <NewCourse course={course} Trainee={details&&details.type} handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>)}
+      {courses.length==0?
+            <div style={{transform:'translate(20rem,0rem)'}}>
+            <Loading ></Loading>
+              </div>
+            :
+            courses.length==1 && (courses[0] == -1 ||courses[0]==-2) ? 
+            <div className="flexCol" style={{alignItems:'center',justifyContent:'center',margin:'10rem'}}>
+              <img alt="." src={sadFace} style={{width:'200px'}}/> 
+              <h2 style={{color:'#888',fontWeight:'500'}}>{courses[0]==-1 ? "No courses found for the given filters" : "You don't have any courses"}</h2>
+              </div>
+            :
+      courses.map((course) => <NewCourse course={course} Trainee={details&&details.type} handleNewPriceRatio={handleNewPriceRatio} country={countryNumber}/>)}
       </div>
-    <form className="search-Trainee-courses">
+      <form className="search-instrutor-courses">
             <div>
-                <input onChange={handleSearch} type="text" placeholder="Enter Course name"/>
+                <input type="text" onChange={handleSearch} placeholder="Enter Course name"/>
             </div>
-        <div>
-            <button onClick={handleSearchClick}><AiOutlineSearch className='icon'/></button>
+        <div className="InstructorCourses_SearchButton">
+            <button onClick={handleSearchClick}><AiOutlineSearch  className='icon'/></button>
         </div>
         </form>
-    <div className='Trainee-Filter-Box'>
-      <h2 className='Filter-by-label-Traineecourse'>
-        Filter
-      </h2>
-      <h3 className='Filter-by-label-Traineecourse-price'>
-        Price :
-      </h3>
-      <h3 className='Filter-by-label-Traineecourse-subject'>
-        Subject :
-      </h3>
-      <input type="text" onChange={handleSubject} placeholder="Enter Subject Name" 
-      className='TraineeSubjectNameFilter'/>
 
-      <button className='TraineeReatFilterButton'>
-        Reset Filter
-      </button>
-      <button onClick={handleFilter} className='TraineeApplyFilterButton'>
-        Apply
-      </button>
-      <div className='TraineeSliderfilterCourse'>
-      <Box sx={{ width: 300 }}>
-              <Slider getAriaLabel={() => 'Price Range'}
-        value={value}
-        onChange={handleChange}
-        valueLabelDisplay="auto"
-        getAriaValueText={valuetext}
-        min={0}
-        max={Math.floor(5000*newPriceRatio)} />
+        <button className='InstructorCourses-FilterBarButton' onClick={handleFilterBar}>Filter Courses</button>
 
-              </Box>
-      </div>
-      
+        <div className={FilterBar? 'InstructorCourses-FilterDiv' : 'InstructorCourses-nonFilterDiv'}>
+       { details && details.type!="Corporate" ? <>
+          <h1 className = 'InstructorCourses-Price'>By Price:</h1>
+          <div className ='InstructorCourses-Slider'>
+              <Box sx={{ width: 300 }}>
+                       {<Slider disabled={freePrice}  getAriaLabel={() => 'Price Range'}
+                  value={value}
+                  onChange={handleChange}
+                  valueLabelDisplay="auto"
+                  getAriaValueText={valuetext}
+                  min={0}
+                  
+                  max={Math.floor(maxPriceValue*newPriceRatio)+1} />
+                }
+                  </Box>
+                        <div className="InstructorCourses-Slider_div_check">
+                    <Checkbox className='InstructorCourses-Slider_Checkbox' id="CheckBoxInstructorCourses" onClick={handleFreePrice} style={{color:'#fff'}} ></Checkbox>
+                    <h3 style={{transform:'translate(30px,5px)'}}>Free</h3>
+                        </div>
+          </div>
+                </> : 
+                <div style={{minHeight:'20%'}}>
+                  </div>
+                }
+          <h1 className='InstructorCourses-Subject'>By Subject:</h1>
+          <input className = 'InstructorCourses-TextField' placeholder='Enter Subject' onChange={handleSubject} id="TextFieldForSubject"/>
+          <button className ='InstructorCourses-Apply' onClick={handleFilter2}>Apply</button>
+          
+          <button onClick={handleReset} className='InstructorCourses_ReatFilterButton'>
+              Reset Filters
+            </button>
+          </div>
+    
 
-    </div>
     </div>
     </div>
 );
