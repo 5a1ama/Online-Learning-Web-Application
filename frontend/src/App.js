@@ -48,8 +48,8 @@ import { MyTraineeReports } from './components/Trainee/traineeReport';
 
 import { InstructorViewPublished } from './components/Instructor/InstructorViewPublished';
 import CourseContentInst from './components/courses/CourseContentInst';
-import { AdminProfile } from './components/Admin/AdminProfile';
 import { TraineeAddCardToPay } from './components/courses/TraineeAddCardToPay';
+import { AdminViewPublished } from './components/Instructor/AdminViewPublished';
 
 
 
@@ -81,8 +81,8 @@ export default function App() {
           <Route path="/instructorProfile" element={<InstructorProfile handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
           <Route path='/instructorViewCourse' element={<InstructorViewCourse handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
           <Route path='/InstructorViewPublished' element={<InstructorViewPublished handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
+
           <Route path='/CourseContentInst' element={<CourseContentInst handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
-          <Route path="/AdminProfile" element={<AdminProfile handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
 
           <Route path="/instructorHome" element={<InstructorHome handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/> 
           <Route path="/instructorReviews" element={<InstructorReviews handleCountryNumber={handleCountryNumber} country={countryNumber}/>}/>
@@ -118,6 +118,9 @@ export default function App() {
           <Route path="/TraineeCourseExercise" element={<TraineeCourseExcer/>}/>
           <Route path="/TraineeGradingExercise" element={<TraineeGradingExercise/>}/>
           <Route path="/InstructorEditExcer" element={<InstructorEditExercise/>}/>
+          <Route path='/AdminViewPublished' element={<AdminViewPublished handleCountryNumber={handleCountryNumber} country={countryNumber}/>}></Route>
+
+
         </Routes>
       
     

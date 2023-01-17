@@ -46,7 +46,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
 import { HiOutlineLockClosed } from 'react-icons/hi';
 
 
-export function InstructorViewPublished() {
+export function AdminViewPublished() {
     const navigate=useNavigate();
     const location=useLocation();
 
@@ -56,8 +56,8 @@ export function InstructorViewPublished() {
         if(localStorage.getItem("token")){
             try{
                 var user=await verify(localStorage.getItem("token"));
-                if(user.job!="Instructor"){
-                    alert("login as instructor first")
+                if(user.job!="Admin"){
+                    alert("login as Admin first")
                     navigate("/login")
                 }
             }
@@ -423,9 +423,9 @@ return (
    {details[0]?
             <>
 
-            <Navbar items={["Home","My Courses","All Courses"]}     handleCountryNumber={handleCountryNumber}
-            select="" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]} inst={true} scroll={["","",""]}  />
-            
+    <Navbar admin={true} items={["Home","Control Panel","Reports"]} select="Control Panel" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]} 
+    handleCountryNumber={handleCountryNumber}  />
+
     <div className="CourseItems_Video">
                 <video autoPlay loop muted id='video'>
                 <source src={video} type='video/mp4' />
@@ -441,7 +441,6 @@ return (
                 {/* ====================== Setting Menu ======================= */}
                 { SettingMenu &&<div className='InstsettingMenu2'>
                     <button className='InstSettingItem' onClick={()=>setShowDiscountDiv(true)}><TbDiscount2 className="Menuicon" color="grey" size="23px" ></TbDiscount2>{(details[0]&&details[0].discount.amount>0) && (expiredTime>0)?"Edit Discount":"Add Discount"}</button>
-                    <button className='InstSettingItem' onClick={()=>setShowReportDiv(true)}><BsFlag className="Menuicon" color="rgb(230,200,0)" size="23px" ></BsFlag>Report Issue</button>
                     <button className='InstSettingItem' onClick={()=>setShowDeleteDiv(true)}><HiOutlineLockClosed className="Menuicon" color="#888" size="23px" ></HiOutlineLockClosed>Close Course</button>
                     
                 </div>}
@@ -454,7 +453,7 @@ return (
                                 <a href="/InstructorProfile" className='flexRow' >
                                     <img alt="." src={InstImg} style={{width:"40px",height:"40px" ,transform:"translate(0px,3px)"}}></img> 
                                     <h3>{name}</h3>
-                                </a>                
+                                                                    </a>                
                                 </div>
                         )}
                     </div>
