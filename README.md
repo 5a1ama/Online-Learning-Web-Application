@@ -2,6 +2,11 @@
 
 <br></br>
 
+# Motivation :
+### Our motivation was that we wanted to make a website that makes online learing easy were students can learn many different courses and increase their experience by making new projects. Also they can communicate with the instructors and ask them for help. So we started to make this web application to help people
+
+<br></br>
+
 # Description:
 
 ### Our project is a learning website were individual trainee can register in it and access any course and start learining. 
