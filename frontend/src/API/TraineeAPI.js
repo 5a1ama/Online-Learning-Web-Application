@@ -553,6 +553,7 @@ export const courseEnrollWallet = async(courseId)=>{
           alert("Your Wallet is not enough")
 
         }else{
+            alert("Successfully enrolled")
             return j
         }
 }

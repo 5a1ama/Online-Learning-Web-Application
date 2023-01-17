@@ -21,7 +21,7 @@ export function TraineePay(){
         if(localStorage.getItem("token")){
             try{
                 var user=await verify(localStorage.getItem("token"));
-                if(user.type!="Trainee" && user.job!="Trainee"){
+                if(user.type &&user.type!="Trainee" && user.job!="Trainee"){
                   alert("login as trainee first")
                     navigate("/login")
                 }
@@ -66,8 +66,15 @@ export function TraineePay(){
     }
 
     const handleAdd = async ()=>{
+        if(cardNumber.length !=16){
+            alert("invalid card number")
+        }
+        else if(cardNumber != "" && cardHolder != "" && cvv != "" && expDate!="" ){
      const x =   await addCreditCard(cardNumber,cardHolder,cvv,expDate);
      navigate("/TraineePayments")
+        }else{
+            alert("pleas fill the empty space")
+        }
     
     } 
 

@@ -14,7 +14,7 @@ export function TraineeGradingExercise(){
         if(localStorage.getItem("token")){
             try{
                 var user=await verify(localStorage.getItem("token"));
-                if(user.type!="Trainee" && user.job!="Trainee"){
+                if(user.type &&user.type!="Trainee" && user.job!="Trainee"){
                   alert("login as trainee first")
                     navigate("/login")
                 }

@@ -1,15 +1,15 @@
 
 import dayjs from 'dayjs';
-import { Divider, TextField } from '@mui/material';
 import './TraineeAddCardToPay.css' 
+import { Divider, TextField } from '@mui/material';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
+import { addCreditCard, courseEnroll } from '../../API/TraineeAPI';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useState } from 'react';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { addCreditCard, courseEnroll } from '../../API/TraineeAPI';
 import {useLocation, useNavigate} from 'react-router-dom';
 import { verify } from '../../API/LoginAPI';
 
@@ -21,13 +21,14 @@ export function TraineeAddCardToPay(){
         if(localStorage.getItem("token")){
             try{
                 var user=await verify(localStorage.getItem("token"));
-                if(user.type!="Trainee" && user.job!="Trainee"){
+                if(user.type && user.type!="Trainee" && user.job!="Trainee"){
                   alert("login as trainee first")
                     navigate("/login")
                 }
-            }catch{
-                alert("login as trainee first")
-                navigate("/login")
+            }catch(error){
+                
+            //     alert(error.message)
+            //     navigate("/login")
             }
         }else{
             alert("login as Trainee first")
@@ -67,13 +68,25 @@ export function TraineeAddCardToPay(){
     }
 
     const handleAdd = async ()=>{
-     const x =   await addCreditCard(cardNumber,cardHolder,cvv,expDate);
-     courseEnroll(await location.state.id)
-     navigate("/CourseItems",{state:{id:location.state.id,View:"Overview",Type:"Individual"}})
-   
-    
-    } 
+        if(cardNumber.length !=16){
+            alert("invalid card number")
+        }
+        else if(cardNumber != "" && cardHolder != "" && cvv != "" && expDate!="" ){
 
+            const x =   await addCreditCard(cardNumber,cardHolder,cvv,expDate);
+            courseEnroll(await location.state.id)
+            navigate("/CourseItems",{state:{id:location.state.id,View:"Overview",Type:"Individual"}})
+        }else{
+            alert("pleas fill the empty space")
+        }
+            
+            
+        } 
+        
+        const handleCancelCardButton =()=>{
+        navigate("/CourseContent",{state:{id:location.state.id,View:"Overview",Type:"Individual"}})
+
+    }
     return(
         <div className="TraineeAddNewCardMainToPay">
             <div className='TraineeAddNewCardDivToPay'>
@@ -95,7 +108,7 @@ export function TraineeAddCardToPay(){
                 <TextField  className='CardHolderTextFieldToPay' label="Card Holder" placeholder='Card Holder' onChange={handleCardHolder}/>
                 <div className='CardDiv'>
 
-                <button className='CancelCardSubmitButtonToPay' onClick={()=>navigate("/CourseContent",{state:{id:location.state.id,View:""}})}>
+                <button className='CancelCardSubmitButtonToPay' onClick={handleCancelCardButton}>
                     Cancel
                 </button>
                 <button className='AddCardSubmitButtonToPay' onClick={handleAdd}>
