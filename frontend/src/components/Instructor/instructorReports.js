@@ -11,16 +11,40 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { Await } from "react-router-dom";
+import { Await, useNavigate } from "react-router-dom";
 import { followupReport, getAllReport } from "../../API/InstructorAPI";
 import FlagIcon from '@mui/icons-material/Flag';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import TextField from '@mui/material/TextField';
+import { verify } from "../../API/LoginAPI";
 
 
 
 
 export function MyInstructorReports(){
+    const navigate=useNavigate();
+  const [first2,setFirst2]=useState(0);
+    const begin=async()=>{
+        if(localStorage.getItem("token")){
+            try{
+                var user=await verify(localStorage.getItem("token"));
+                if(user.job!="Instructor"){
+                  
+                    alert("login as instructor first")
+                    navigate("/login")
+                }
+            }catch{
+
+            }
+        }else{
+            alert("login as instructor first")
+            navigate("/login")
+        }
+    }
+    if(first2==0){
+        begin();
+        setFirst2(1)
+    }
     const [countryNumber,setCountryNumber]=useState();
     const handleCountryNumber = (x) =>{
       setCountryNumber(x);

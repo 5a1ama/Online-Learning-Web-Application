@@ -5,7 +5,6 @@ import "./TraineeCongrats.css"
 import myImage from "../../assets/graduateIcon.png"
 import Navbar from "../navbar/Navbar";
 import { downloadCertificate, sendEmailAttach } from "../../API/CommonAPI";
-
 export function TraineeCongrats(){
     const location=useLocation();
     const intial=async()=>{
@@ -31,7 +30,7 @@ export function TraineeCongrats(){
 
             }
         }else{
-            alert("login as instructor first")
+            alert("login as Trainee first")
             navigate("/login")
         }
     }

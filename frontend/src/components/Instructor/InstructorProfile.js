@@ -22,6 +22,7 @@ import { verify } from '../../API/LoginAPI';
 
 
 export function InstructorProfile(){
+    
     const navigate=useNavigate();
     const [first2,setFirst2]=useState(0);
     const [first,setFirst]=useState(0);

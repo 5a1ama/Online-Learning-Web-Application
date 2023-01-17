@@ -6,6 +6,7 @@ import Navbar from "../navbar/Navbar";
 import "./AdminViewRequests.css"
 
 export function AdminViewRefunds(){
+    
     const navigate = useNavigate(); 
     const [first2,setFirst2]=useState(0);
     const [requests,setRequests]=useState([]);
@@ -49,7 +50,7 @@ export function AdminViewRefunds(){
   
             }
         }else{
-            alert("login as instructor first")
+            alert("login as Admin first")
             navigate("/login")
         }
     }

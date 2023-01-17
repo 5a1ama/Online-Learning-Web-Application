@@ -24,7 +24,7 @@ export function TraineeAllCourses(){
         if(localStorage.getItem("token")){
             try{
                 var user=await verify(localStorage.getItem("token"));
-                if(user.type!="Trainee"&&user.job!="Trainee"){
+                if(user.type!="Trainee" && user.job!="Trainee"){
                   alert("login as trainee first")
                     navigate("/login")
                 }
@@ -32,7 +32,7 @@ export function TraineeAllCourses(){
 
             }
         }else{
-            alert("login as instructor first")
+            alert("login as Trainee first")
             navigate("/login")
         }
     }

@@ -6,6 +6,7 @@ import Navbar from "../navbar/Navbar";
 import "./AdminViewReports.css"
 
 export function AdminViewReports(){
+    
     const navigate = useNavigate(); 
     const [first2,setFirst2]=useState(0);
     const [reports,setReports]=useState([]);
@@ -71,7 +72,7 @@ export function AdminViewReports(){
   
             }
         }else{
-            alert("login as instructor first")
+            alert("login as Admin first")
             navigate("/login")
         }
     }

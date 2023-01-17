@@ -10,10 +10,33 @@ import { NewDiv } from "./NewDiv";
 import { createExercise, updateExercise } from "../../API/InstructorAPI";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getExcerciseChoices, getExcerciseQuestions, getExcerciseSolution } from "../../API/TraineeAPI";
+import { verify } from "../../API/LoginAPI";
 
 export function InstructorEditExercise (props){
-    const location=useLocation()
     const navigate=useNavigate();
+  const [first2,setFirst2]=useState(0);
+    const begin=async()=>{
+        if(localStorage.getItem("token")){
+            try{
+                var user=await verify(localStorage.getItem("token"));
+                if(user.job!="Instructor"){
+                  
+                    alert("login as instructor first")
+                    navigate("/login")
+                }
+            }catch{
+
+            }
+        }else{
+            alert("login as instructor first")
+            navigate("/login")
+        }
+    }
+    if(first2==0){
+        begin();
+        setFirst2(1)
+    }
+    const location=useLocation()
     const [questionsArr,setQuestionsArr]=useState([]);
     const [choicesArr,setChoicesArr]=useState([]);
     const [update,setUpdate]=useState("")
