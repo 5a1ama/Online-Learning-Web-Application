@@ -9,8 +9,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useState } from 'react';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { addCreditCard } from '../../API/TraineeAPI';
-import {useNavigate} from 'react-router-dom';
+import { addCreditCard, courseEnroll } from '../../API/TraineeAPI';
+import {useLocation, useNavigate} from 'react-router-dom';
 import { verify } from '../../API/LoginAPI';
 
 
@@ -42,6 +42,7 @@ export function TraineeAddCardToPay(){
     const handleCardnumber = (event) => {
         setCardNumber(event.target.value);
     }
+    const location = useLocation();
 
 
 
@@ -67,36 +68,38 @@ export function TraineeAddCardToPay(){
 
     const handleAdd = async ()=>{
      const x =   await addCreditCard(cardNumber,cardHolder,cvv,expDate);
-     navigate("/")
+     courseEnroll(await location.state.id)
+     navigate("/CourseItems",{state:{id:location.state.id,View:"Overview",Type:"Individual"}})
+   
     
     } 
 
     return(
-        <div className="TraineeAddNewCardMain">
-            <div className='TraineeAddNewCardDiv'>
-                <h1 className='addNewCardLabel'>
+        <div className="TraineeAddNewCardMainToPay">
+            <div className='TraineeAddNewCardDivToPay'>
+                <h1 className='addNewCardLabelToPay'>
                     Add new card
                 </h1>
                 <br></br>
-                <Divider className='DividerCard' variant="middle"/>
-                <TextField  className='CardNumberTextField' label="Card Number" placeholder='0000 0000 0000 0000' onChange={handleCardnumber}/>
-                <CreditCardIcon className='CreditCardIcon'/>
-                <div  className='ExpCardDate'>
+                <Divider className='DividerCardToPay' variant="middle"/>
+                <TextField  className='CardNumberTextFieldToPay' label="Card Number" placeholder='0000 0000 0000 0000' onChange={handleCardnumber}/>
+                <CreditCardIcon className='CreditCardIconToPay'/>
+                <div  className='ExpCardDateToPay'>
                 
                 <TextField value={expDate} placeholder='MM/YY EXP' inputProps={{maxLength:5}} onChange={handleChange} />
-                <button className='infoIcon'>
+                <button className='infoIconToPay'>
                 <InfoOutlinedIcon color='primary'/>
                 </button>
                 <TextField inputProps={{maxLength:3}}  placeholder='CVV' className='CVVTEXT' onChange={handleCVV}/>    
                 </div>
-                <TextField  className='CardHolderTextField' label="Card Holder" placeholder='Card Holder' onChange={handleCardHolder}/>
+                <TextField  className='CardHolderTextFieldToPay' label="Card Holder" placeholder='Card Holder' onChange={handleCardHolder}/>
                 <div className='CardDiv'>
 
-                <button className='CancelCardSubmitButton' onClick={()=>navigate("/TraineePayments")}>
+                <button className='CancelCardSubmitButtonToPay' onClick={()=>navigate("/CourseContent",{state:{id:location.state.id,View:""}})}>
                     Cancel
                 </button>
-                <button className='AddCardSubmitButton' onClick={handleAdd}>
-                    Add
+                <button className='AddCardSubmitButtonToPay' onClick={handleAdd}>
+                    Add/Pay
                 </button>
                 
                 </div>

@@ -85,7 +85,10 @@ function CourseContent(props) {
 
 
   const handlePayButtonClick = () => {
-    if(allCards.length != 0){
+    if(selectedRadioValue == "a" && allCards.length != 0){
+      alert("Select Card First")
+    }
+    else if(allCards.length != 0 ){
 
       if (!loading) {
         setSuccess(false);
@@ -105,7 +108,7 @@ function CourseContent(props) {
     }
    };
 
-  const [selectedRadioValue, setSelectedRadioValue] =useState('a');
+  const [selectedRadioValue, setSelectedRadioValue] =useState("a");
 
   const handleChangeradio = (event) => {
   setSelectedRadioValue(event.target.value);}
@@ -313,6 +316,8 @@ getUser();
           alert("unexpected error happened")
         }
        }
+
+       intial()
   return (
         
     
@@ -436,10 +441,10 @@ getUser();
                       <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} onClick={()=>setShowDivMyCards(false)} >
                   <ArrowBackIcon fontSize='large'/>
                               </IconButton>
-                              
+
                       {allCards&&allCards.map((card,i)=><MyCards id={i}  card={card}/>)}
 
-                      <button className="addCardButtonCourse" onClick={()=>alert(" nlgnegf")}>
+                      <button className="addCardButtonCourse" onClick={()=>navigate('/TraineeAddCardToPay',{state:{id:location.state.id}})}>
                         Add Card
                       </button> 
 

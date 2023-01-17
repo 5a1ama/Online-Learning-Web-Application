@@ -1,11 +1,11 @@
-.TraineeAddNewCardMain{
+.TraineeAddNewCardMainToPay{
     height: 100vh;
     background-color:rgb(203, 215, 215);
     align-items: center;
     display: flex;
     flex-direction: column;
 }
-.TraineeAddNewCardDiv{
+.TraineeAddNewCardDivToPay{
     position: relative;
     top: 12%;
     background-color: rgb(255, 255, 255);
@@ -17,61 +17,61 @@
     border-bottom-right-radius: 2%;
     align-items: center;
 }
-.addNewCardLabel{
+.addNewCardLabelToPay{
     position: relative; 
     top: 3%;
     left: 3%;
     font-size: 30px;
 }
-.CardNumberTextField{
+.CardNumberTextFieldToPay{
     position: relative;
     top: 13%;
     left: 15%;
     width: 67%;
 }
-.CreditCardIcon{
+.CreditCardIconToPay{
     position: relative; 
     top: 16%;
     left: 9%;
 }
-.ExpCardDate{
+.ExpCardDateToPay{
     position: relative;
     top: 17%;
     left:15%;
 
 }
-.CVVTEXT{
+.CVVTEXTToPay{
     position: relative;
     left: 10%;
     width: 20%;
 }
-.CardHolderTextField{
+.CardHolderTextFieldToPay{
     position: relative;
     top: 22%;
     left: 15%;
     width: 67%;
 }
-.AddCardSubmitButton{
+.AddCardSubmitButtonToPay{
     position: relative;
     top: 44%;
     left: -8%;
     width: 30%;
 }
-.CancelCardSubmitButton{
+.CancelCardSubmitButtonToPay{
     position: relative;
     width: 30%;
     left: -15%;
     background-color: red;
 }
-.CardDiv{
+.CardDivToPay{
     position: relative;
     top: 28%;
     left: 30%;
 }
-.CancelCardSubmitButton:hover{
+.CancelCardSubmitButtonToPay:hover{
     background-color: rgb(244, 61, 61);
 }
-.infoIcon{
+.infoIconToPay{
     position: absolute;
     left: 65%;
     top: 12%;
@@ -79,6 +79,6 @@
     height: 2vh;
     background-color: transparent;
 }
-.infoIcon:hover{
+.infoIconToPay:hover{
     background-color: transparent;
 }
