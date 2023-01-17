@@ -207,8 +207,8 @@ export function NewCourse(props) {
      
       <button className="NewCourse-button-OpenCourse" style={{marginRight: '1rem' ,width:"100px",height:"60px",transform:"translate(1rem,1.7rem)" }} 
       onClick={()=>{
-        if(props.Trainee&&props.Trainee=="Indvidual"){
-          navigate("/CourseItems",{state:{id:props.course.id,View:"Overview",Type:"Indvidual"}})
+        if(props.Trainee&&props.Trainee=="Individual"){
+          navigate("/CourseItems",{state:{id:props.course.id,View:"Overview",Type:"Individual"}})
          } else if((props.Trainee&&props.Trainee=="Corporate") || props.Corporate){
           navigate("/CourseContent",{state:{id:props.course.id,View:"Overview",Type:"Corporate"}})
           
