@@ -66,8 +66,15 @@ export function TraineePay(){
     }
 
     const handleAdd = async ()=>{
+        if(cardNumber.length !=16){
+            alert("invalid card number")
+        }
+        else if(cardNumber != "" && cardHolder != "" && cvv != "" && expDate!="" ){
      const x =   await addCreditCard(cardNumber,cardHolder,cvv,expDate);
      navigate("/TraineePayments")
+        }else{
+            alert("pleas fill the empty space")
+        }
     
     } 
 

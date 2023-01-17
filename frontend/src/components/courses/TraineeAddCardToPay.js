@@ -68,14 +68,22 @@ export function TraineeAddCardToPay(){
     }
 
     const handleAdd = async ()=>{
-     const x =   await addCreditCard(cardNumber,cardHolder,cvv,expDate);
-     courseEnroll(await location.state.id)
-     navigate("/CourseItems",{state:{id:location.state.id,View:"Overview",Type:"Individual"}})
-   
-    
-    } 
-    
-    const handleCancelCardButton =()=>{
+        if(cardNumber.length !=16){
+            alert("invalid card number")
+        }
+        else if(cardNumber != "" && cardHolder != "" && cvv != "" && expDate!="" ){
+
+            const x =   await addCreditCard(cardNumber,cardHolder,cvv,expDate);
+            courseEnroll(await location.state.id)
+            navigate("/CourseItems",{state:{id:location.state.id,View:"Overview",Type:"Individual"}})
+        }else{
+            alert("pleas fill the empty space")
+        }
+            
+            
+        } 
+        
+        const handleCancelCardButton =()=>{
         navigate("/CourseContent",{state:{id:location.state.id,View:"Overview",Type:"Individual"}})
 
     }
