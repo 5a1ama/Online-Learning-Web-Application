@@ -61,8 +61,8 @@ function CourseItems() {
 
     const [traineeRate,setTraineeRate] = useState("")
 
-    const handleChangeRate = (event , newValue)=>{
-      rateCourse( location.state.id,Number(newValue))
+    const handleChangeRate = async (event , newValue)=>{
+      const x=await rateCourse( location.state.id,Number(newValue))
       setTraineeRate(newValue)
   }
 
