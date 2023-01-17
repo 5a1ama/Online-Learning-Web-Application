@@ -80,21 +80,30 @@ function CourseContent(props) {
 
   const x = await courseEnroll(location.state.id)
  }
-  const handleButtonClick = () => {
-    if (!loading) {
-      setSuccess(false);
-      setLoading(true);
-      timer.current = window.setTimeout(() => {
-        setSuccess(true);
-        setLoading(false);
-        alert("the payment is succ.")
-        enroll()
-        navigate("/CourseItems",{state:{id:location.state.id,View:"Overview"}})
+ const[showPayButton ,setShowPayButton] = useState(false);
+  
+
+
+  const handlePayButtonClick = () => {
+    if(allCards.length != 0){
+
+      if (!loading) {
+        setSuccess(false);
+        setLoading(true);
+        timer.current = window.setTimeout(() => {
+          setSuccess(true);
+          setLoading(false);
+          alert("the payment is succ.")
+          enroll()
+          navigate("/CourseItems",{state:{id:location.state.id,View:"Overview"}})
+          
+        }, 2000);
+      }
       
-      }, 2000);
+    }else{
+      alert("You have to add card first")
     }
-    
-  };
+   };
 
   const [selectedRadioValue, setSelectedRadioValue] =useState('a');
 
@@ -158,13 +167,6 @@ function CourseContent(props) {
 
   const [view , setView] = useState("");
 
-  const [traineeRate,setTraineeRate] = useState("")
-
-  const handleChangeRate = (event , newValue)=>{
-    rateCourse( location.state.id,Number(newValue))
-    setTraineeRate(newValue)
-}
-//const [selectedRadioValue,setSelectedRadioValue] = useState('a')
 
 const [showPaymentDiv,setShowPaymentDiv] = useState(false);
 
@@ -434,18 +436,19 @@ getUser();
                       <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} onClick={()=>setShowDivMyCards(false)} >
                   <ArrowBackIcon fontSize='large'/>
                               </IconButton>
+                              
                       {allCards&&allCards.map((card,i)=><MyCards id={i}  card={card}/>)}
 
-                      {/* <button className="PayButton" onClick={()=>aler}>
-                        Pay
-                      </button> */}
+                      <button className="addCardButtonCourse" onClick={()=>alert(" nlgnegf")}>
+                        Add Card
+                      </button> 
 
-          <Box sx={{ m: 1, position: 'relative' }}>
+        {allCards&&allCards.length !=0&&  <Box sx={{ m: 1, position: 'relative' }}>
                   <Button
                     variant="contained"
                     sx={buttonSx}
                     disabled={loading}
-                    onClick={handleButtonClick}
+                    onClick={handlePayButtonClick}
                     className="PayButton"
                     
                   >
@@ -464,7 +467,7 @@ getUser();
                       }}
                     />
                   )}
-                </Box>
+                </Box>}
 
                       </div>}
 

@@ -117,6 +117,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
 
         const handleDelete=async(title)=>{
             if(location.state){
+                
                 const x=await deleteSubTitle(title,location.state.id)
                 getDetails();
             }
@@ -150,7 +151,6 @@ import Subtitle from './../courses/subtitles/Subtitle';
         const handleAddedPrevVid=(event)=>{
         setPrevVidLink(event.target.value);
 
-
     }
     const [subChecked,setSubChecked]=useState();
     const HandleSubCheck=()=>{
@@ -162,20 +162,18 @@ import Subtitle from './../courses/subtitles/Subtitle';
             if(location.state){
                 
                 const x=await addNewSubToCourse(location.state.id,Sub,hours)
-                getDetails();
                 setSubHoursChecked(true)
+                getDetails();
                 
             }
         }
-        const handleAddPrevVidAsync = async()=>{
-            setFirst(0)
-            await uploadCourseVideo(location.state.id,prevVidLink)
-            getDetails();
 
+    const handleAddPrevVid=async()=>{
+        setFirst(0)
+        await uploadCourseVideo(location.state.id,prevVidLink)
+        getDetails();
         }
-    const handleAddPrevVid=()=>{
-        handleAddPrevVidAsync();
-    }
+
         const [details,setDetails] = useState([]);
         
         
@@ -214,25 +212,13 @@ import Subtitle from './../courses/subtitles/Subtitle';
       
 
 
-        const handleSubmitVid =(sub)=>{
-            submitVideo(sub);
+        const handleSubmitVid = async(sub)=>{
+                const x= await uploadSubtitleVideo(location.state.id,addedVideoLink,sub,vidDescription);
+            
+            getDetails();
             
         }
-        const submitVideo = async(sub)=>{
-            if(addedVideoLink!=""&&vidDescription!=""){
-                const x= await uploadSubtitleVideo(location.state.id,addedVideoLink,sub,vidDescription);
-            }else if(addedVideoLink==""){
-                const x= await uploadSubtitleVideo(location.state.id,sub.video,sub,vidDescription);
-
-            }else if(vidDescription==""){
-                const x= await uploadSubtitleVideo(location.state.id,addedVideoLink,sub,sub.description);
-
-            }else{
-                const x= await uploadSubtitleVideo(location.state.id,sub.video,sub,sub.description);
-
-            }
-            getDetails();
-        }
+      
 
         if(first===0 && location.state){
             getDetails();
@@ -301,8 +287,8 @@ import Subtitle from './../courses/subtitles/Subtitle';
     const handleChangeIssueWords = (event)=>{
         setIssueWords(event.target.value)
     }
-    const handleSubmitReport = ()=>{
-        addReport(location.state.id,issueType,issuewords)
+    const handleSubmitReport = async ()=>{
+        await addReport(location.state.id,issueType,issuewords)
         setShowReportDiv(false)
     }
 
@@ -377,17 +363,17 @@ import Subtitle from './../courses/subtitles/Subtitle';
     setSummary(event.target.value);
    }
 
-   const handleSubmitSummary = ()=>{
-    SummaryAddition();
+   const handleSubmitSummary = async ()=>{
+    await SummaryAddition();
     setAddSummaryDiv(false);    
 }
     const SummaryAddition = async()=>{
         const z = await updateCourseSummary(summary,location.state.id);
 
     }
-   const deleteSummary = () => {
+   const deleteSummary = async () => {
     setSummary("");
-    SummaryDeletion();
+    await SummaryDeletion();
     }
     const SummaryDeletion = async()=>{
         const z = await updateCourseSummary(" ",location.state.id);
@@ -405,17 +391,15 @@ import Subtitle from './../courses/subtitles/Subtitle';
         await uploadCourseVideo(location.state.id,prevVidLink)
         getDetails();
     }
-    const handleDeleteCourse = ()=>{
-        DeleteCourse2();
-        
-    }
-    const DeleteCourse2 =async ()=>{
+    const handleDeleteCourse = async()=>{
         const x = await DeleteCourse(location.state.id);
-        navigate('/InstructorCourses')
+        navigate('/InstructorCourses')        
     }
+ 
 
         const handlePublish =async()=>{
             const x = await PublishCourse(location.state.id);
+            navigate("/InstructorViewPublished",{state:{id:location.state.id,View:"Overview"}})
         }
    return (
         

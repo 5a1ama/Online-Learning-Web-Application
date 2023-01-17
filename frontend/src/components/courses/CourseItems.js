@@ -150,8 +150,8 @@ function CourseItems() {
     const handleChangeIssueWords = (event)=>{
         setIssueWords(event.target.value)
     }
-    const handleSubmitReport = ()=>{
-        addReport(location.state.id,issueType,issuewords)
+    const handleSubmitReport = async()=>{
+        await addReport(location.state.id,issueType,issuewords)
         setShowReportDiv(false)
     }
 

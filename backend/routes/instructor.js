@@ -214,7 +214,10 @@ router.post("/uploadSubtitleVideo",async function(req,res){
     var array=result.subtitles;
     for(var i=0;i<array.length;i++){
         if(array[i].title==subtitle.title){
+            if(link!="-1")
             array[i].video=[link];
+            
+            if(description!="-1")
             array[i].description=description;
         }
     }
@@ -428,6 +431,9 @@ router.post("/createExercise/:token/:courseid/:title",async function(req,res){
         
         var excerciesid= ((await Excercise.find({})).map((exe)=>exe.id));
         var max=excerciesid[0];
+        if(!max){
+            max=0;
+        }
         for(var i=0;i<excerciesid.length;i++){
             if(excerciesid[i]>max){
                 max=excerciesid[i]

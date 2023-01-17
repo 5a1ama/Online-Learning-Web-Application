@@ -126,7 +126,7 @@ router.post("/addCourseSub/:subtitle/:hours/:id",async function(req,res){
     var id=req.params.id;
     var course=await Course.findOne({id:id});
     
-    var subtitles=course.subtitles.concat([{video:[""],lesson:"",description:"",title:subtitle,hours:hours}])
+    var subtitles=course.subtitles.concat([{video:[""],lesson:"",description:"",title:subtitle,hours:hours,excerciseId:""}])
     
     await Course.findOneAndUpdate({id:id},{subtitles:subtitles,hours:Number(course.hours)+hours})
     res.json("ok")

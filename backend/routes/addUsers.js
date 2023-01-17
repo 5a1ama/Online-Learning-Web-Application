@@ -35,8 +35,9 @@ router.post("/addInstructor",function(req,res){
     User.find({}).exec(async function(err,result){
         var c=result.length;
         var query=await User.find({Email:req.body.email});
-        if(query.length==0){var object=new User({id:c+1,Email:req.body.email,Password:hashedPass,Job:"Instructor"});
-        var hashedPass=await bcrypt.hash(req.body.password,await salt)
+        if(query.length==0){
+            var hashedPass=await bcrypt.hash(req.body.password,await salt)
+            var object=new User({id:c+1,Email:req.body.email,Password:hashedPass,Job:"Instructor"});
         var object2=new Instructor({id:c+1,Email:req.body.email,Password:hashedPass});
         object.save(function(err,result1){
             object2.save(function(err,result){})
