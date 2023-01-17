@@ -286,15 +286,41 @@
 }
 
 /* ///////////////////////////////////////////////// */
-.TraineeAddCardToPay{
-  position: relative;
-    top: 12%;
+.confirmingWalletPay{
+  position: fixed;
+    top: 32%;
+    left: 32%;
     background-color: rgb(255, 255, 255);
-    height: 490px;
-    width: 600px;
-    border-top-left-radius: 2%;
-    border-top-right-radius: 2%;
-    border-bottom-left-radius: 2%;
-    border-bottom-right-radius: 2%;
+    height: 150px;
+    width: 500px;
+    border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
     align-items: center;
+    z-index: 3;
+}
+.confirmWalletPaylabel{
+  position: absolute;
+  left: 4%;
+  top:8%;
+  font-weight: 300;
+  font-size: 1.6rem;
+  
+}
+.ConfirmWalletPay{
+  position: absolute;
+  left: 60%;
+  top: 60%;
+  width: 35%;
+}
+.cancelWalletPay{
+  background-color: red;
+  position: absolute;
+  left: 20%;
+  top: 60%;
+  width: 35%;
+}
+.cancelWalletPay:hover{
+  background-color: rgb(244, 81, 81);
 }
