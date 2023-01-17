@@ -24,8 +24,13 @@ router.post("/login",async function(req,res){
         passwordData= await bcrypt.compare(password,query[0].Password) 
     }    
         if(passwordData==true){
-
             var user={username:username,password:password,id:query[0].id,job:query[0].Job,country:""}
+            if(query[0].Job=="Trainee"){
+                var type=(await Trainee.find({Email:username.toLowerCase()}))[0].type;
+                user.traineeType=type;
+            }else{
+                user.traineeType=""
+            }
         var token=jwt.sign(user,process.env.ACCESSTOKEN,{
             expiresIn: "2h",
           })

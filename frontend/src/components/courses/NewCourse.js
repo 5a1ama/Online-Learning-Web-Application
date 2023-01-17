@@ -114,13 +114,13 @@ export function NewCourse(props) {
         <div className={courseDetails? "newCourse-After-Content":"newCourse-content"}>
       
          { 
-       (props.course.discount.amount>0) &&(user.job!="Trainee" || (props.Trainee&& props.Trainee!=="Corporate" && !props.Corporate) ) && 
+       (props.course.discount.amount>0) &&((user.job=="Admin"||user.job=="Instructor") || (props.Trainee&& props.Trainee!=="Corporate" && !props.Corporate) ) && 
        <div className="DivForDiscount_NewCourse">
         <CountdownTimer targetDate={dateTimeAfterThreeDays} id={props.course.id}/>
         </div>
          }
          { 
-       ((user.job!="Trainee" || (props.Trainee&& props.Trainee!=="Corporate" && !props.Corporate) )&&
+       (((user.job=="Admin"||user.job=="Instructor") || (props.Trainee&& props.Trainee!=="Corporate" && !props.Corporate) )&&
         (props.course.discount.amount>0) && 
         (expiredTime>0) 
          
@@ -131,7 +131,7 @@ export function NewCourse(props) {
               <h3 >{props.course.title}</h3>
           </div>
           
-                { (user.job!="Trainee" || (props.Trainee&& props.Trainee!=="Corporate" && !props.Corporate) ) &&
+                { ( (user.job=="Admin"||user.job=="Instructor") || (props.Trainee&& props.Trainee!=="Corporate" && !props.Corporate) ) &&
                 <div className="NewCourse_Prices">
                  {
                  (props.course.discount.amount&&props.course.discount.amount>0
@@ -207,20 +207,27 @@ export function NewCourse(props) {
      
       <button className="NewCourse-button-OpenCourse" style={{marginRight: '1rem' ,width:"100px",height:"60px",transform:"translate(1rem,1.7rem)" }} 
       onClick={()=>{
-        if(props.Trainee&&props.Trainee=="Individual"){
+       if(props.Trainee){
+        if(user.traineeType=="Individual")
           navigate("/CourseItems",{state:{id:props.course.id,View:"Overview",Type:"Individual"}})
-         } else if((props.Trainee&&props.Trainee=="Corporate") || props.Corporate){
-          navigate("/CourseContent",{state:{id:props.course.id,View:"Overview",Type:"Corporate"}})
-          
-        }else if(props.inst){
+         else if(user.traineeType=="Corporate"){
+          navigate("/CourseItems",{state:{id:props.course.id,View:"Overview",Type:"Corporate"}})
+         }
+        }
+        else if(props.inst){
           if(props.course.published==false)
-      navigate("/instructorViewCourse",{state:{id:props.course.id,View:"Overview"}})
-      else 
-      navigate("/InstructorViewPublished",{state:{id:props.course.id,View:"Overview"}})
+        navigate("/instructorViewCourse",{state:{id:props.course.id,View:"Overview"}})
+        else 
+        navigate("/InstructorViewPublished",{state:{id:props.course.id,View:"Overview"}})
          } else if(props.instNo){
           navigate("/CourseContentInst",{state:{id:props.course.id,View:"Overview"}})
           
     }else{
+      if(user.traineeType=="Individual")
+        navigate("/CourseContent",{state:{id:props.course.id,View:"Overview",Type:"Individual"}})
+      else if(user.traineeType=="Corporate")
+        navigate("/CourseContent",{state:{id:props.course.id,View:"Overview",Type:"Corporate"}})
+      else
       navigate("/CourseContent",{state:{id:props.course.id,View:""}})
     }
     }}>Open Course</button>

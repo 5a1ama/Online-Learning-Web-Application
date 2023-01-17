@@ -9,7 +9,12 @@ import Rating from '@mui/material/Rating';
 import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
 import { Navigate, useNavigate } from "react-router-dom";
-import { getInstructorDetails, getMycourses } from '../../API/InstructorAPI';
+import {
+    getInstructorDetails,
+    getMycourses,
+    updateInstructorName,
+    updateInstructorSpec
+} from '../../API/InstructorAPI';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
@@ -20,6 +25,7 @@ import AddIcon from '@mui/icons-material/Add';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { verify } from "../../API/LoginAPI";
 import Loading from './../loading/Loading';
+import { TextField } from "@mui/material";
 
 
 export function InstructorHome(){
@@ -75,7 +81,25 @@ export function InstructorHome(){
         }
         getCourse();
     })
-
+    const [instName,setInstName] = useState("");
+    const handleInstName = (event)=>{
+      setInstName(event.target.value)
+    }
+    const [instSpec,setInstSpec] = useState("");
+    const handleInstSpec = (event)=>{
+      setInstSpec(event.target.value)
+    }
+    const handleSubmitInstData = async()=>{
+      const x = await updateInstructorName(instName)
+      const y = await updateInstructorSpec(instSpec)
+      alert("Thank you, your account is now ready")
+    }
+    const handleLogOut = () => {
+      localStorage.clear();
+     //  Cookies.remove('Token');
+      navigate("/Login");
+      
+     }
     return(
 <div className = "divcenter">
    
@@ -87,6 +111,43 @@ export function InstructorHome(){
     select="Home" nav={["/instructorHome","/InstructorCourses","/InstAllCourses"]} inst={true} scroll={["","",""]}  />
 
         </div>
+        {instructor && !instructor.Name && <div className="InstHome_Overlay"></div>}
+
+        { instructor && !instructor.Name && 
+                 <div className="reportInstructorDivShadowHome" >
+                       <div className="ShowPriceDiv" style={{transform:'translate(0rem,-60px)'}}>
+                            <h1 className="ShowPriceLabel" style={{fontSize:'15px',margin:'1rem'}}>please complete your data to initialize your profile</h1>
+                            <Divider className='' variant="middle"/>
+
+                            <TextField
+                            className="PriceTextField"
+                            sx={{width:'70%',margin:'1rem'}}
+                            id="outlined-multiline-flexible"
+                            label="Your name"
+                            // defaultValue={details[0]&&Math.floor(details[0].price*fares[chosenCountry])}
+                            multiline
+                            maxRows={7}
+                            onChange={handleInstName}
+                            />
+                              <TextField
+                            className="PriceTextField"
+                            sx={{width:'70%',margin:'1rem'}}
+                            id="outlined-multiline-flexible"
+                            label="Your Specialization"
+                            // defaultValue={details[0]&&Math.floor(details[0].price*fares[chosenCountry])}
+                            multiline
+                            maxRows={7}
+                            onChange={handleInstSpec}
+                            />
+                            <div className='flexCol FromButtonsAddPrice'>
+                                    <button className="Inst_SetPrice" onClick={handleSubmitInstData} style={{margin:'0.5rem'}}> Submit</button>
+                                  
+                                    <button className="Inst_SetPrice" style={{backgroundColor:'#888',margin:'0.5rem'}} onClick={handleLogOut}> Logout</button>
+                                   
+                            </div>
+                        </div> 
+        </div>
+        }
         {instructor?
   <>
         <div className="instructorDitails">
@@ -237,6 +298,7 @@ export function InstructorHome(){
       </ul>
 
         </div>
+
         </>
       :
       <Loading></Loading>

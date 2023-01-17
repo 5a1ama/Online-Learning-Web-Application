@@ -154,7 +154,7 @@ function Navbar(props) {
             {(token===null || token.length<20) ? 
             (<BsPerson className="icon" onClick={()=> navigate('/login')}   /> )
             :
-            (<AiOutlineMenu className="icon" onClick={()=>{handleAll();handleSettingMenu()}} style={settingMenu?{color:"rgb(10,138,218)",borderRadius:"5px",zIndex:"1"}:{color:"fff"}}/>)}
+            (<AiOutlineMenu className="icon" onClick={()=>{handleAll();handleSettingMenu()}} style={settingMenu?{color:"rgb(10,138,218)",borderRadius:"5px",zIndex:"4"}:{color:"fff",zIndex:"4"}}/>)}
 
         </div>
             <div className="hamburger" onClick={handleNav}>
