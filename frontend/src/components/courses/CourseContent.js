@@ -57,6 +57,11 @@ import Loading from './../loading/Loading';
 import { verify } from './../../API/LoginAPI';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import WalletIcon from '@mui/icons-material/Wallet';
+import { TextField } from '@mui/material';
+import { addCreditCard } from '../../API/TraineeAPI';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+
+
 
 function CourseContent(props) {
   const[type,setType]=useState("");
@@ -83,7 +88,52 @@ function CourseContent(props) {
 
    const x = await courseEnroll(location.state.id)
  }
- const[showPayButton ,setShowPayButton] = useState(false);
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+const [showCreditCardDivToPay,setShowCreditCardDivToPay] = useState(false);
+ const [cardNumber,setCardNumber] = useState("");
+ const handleCardnumber = (event) => {
+     setCardNumber(event.target.value);
+ }
+
+
+
+ const [expDate , setExpDate] = useState("");
+ const handleChange = (event) => {
+     if(event.target.value.length==3 && !event.target.value.includes("/")){
+         setExpDate(event.target.value.substring(0,2)+"/"+event.target.value.substring(2))
+     }else{
+         setExpDate(event.target.value)
+
+     }
+ };
+ 
+ const [cvv,setCvv] = useState("");
+ const handleCVV = (event) => {
+     setCvv(event.target.value);
+ }
+
+ const [cardHolder , setCardHolder] = useState("");
+ const handleCardHolder = (event) => {
+     setCardHolder(event.target.value);
+ }
+
+ const handleAdd = async ()=>{
+  alert("the payment is succ.")
+  enroll()
+ navigate("/CourseItems",{state:{id:location.state.id,View:"Overview"}})
+  
+
+ 
+ } 
+ 
+ const handleCancelCardButton =()=>{
+     navigate("/CourseContent",{state:{id:location.state.id,View:"Overview",Type:"Individual"}})
+
+
+ }
+ //////////////////////////////////////////////////////////////////////////////////////////////
   
 
 
@@ -514,7 +564,7 @@ getUser();
 
                     </>}
 
-                    {   <div className="TraineeAddNewCardMainToPay">
+                    { showCreditCardDivToPay&&  <div className="TraineeAddNewCardMainToPay">
             <div className='TraineeAddNewCardDivToPay'>
                 <h1 className='addNewCardLabelToPay'>
                     Add new card
@@ -534,7 +584,7 @@ getUser();
                 <TextField  className='CardHolderTextFieldToPay' label="Card Holder" placeholder='Card Holder' onChange={handleCardHolder}/>
                 <div className='CardDiv'>
 
-                <button className='CancelCardSubmitButtonToPay' onClick={handleCancelCardButton}>
+                <button className='CancelCardSubmitButtonToPay' onClick={setShowCreditCardDivToPay(false)}>
                     Cancel
                 </button>
                 <button className='AddCardSubmitButtonToPay' onClick={handleAdd}>
