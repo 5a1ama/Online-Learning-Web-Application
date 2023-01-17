@@ -5,11 +5,13 @@ import { IoIosArrowDown, IoIosPaper } from 'react-icons/io'
 import{MdSecurityUpdate, MdSlowMotionVideo}  from 'react-icons/md'
 import { Navigate, useNavigate } from 'react-router-dom';
 import { addNewSubToCourse, uploadSubtitleVideo } from '../../../API/InstructorAPI';
-import {TextField} from "@mui/material";
+import {Button, TextField} from "@mui/material";
 import "./Subtitle.css"
 import "./InstructorSubtitle.css"
 import { BiEdit } from 'react-icons/bi';
 import { MyGrade } from '../../../API/TraineeAPI';
+
+
 function InstructorSubtitle(props) {
     const navigate = useNavigate();
     const[update,setUpdate]=useState(props.sub.video[0])
@@ -123,13 +125,13 @@ function InstructorSubtitle(props) {
                 {addVideo && <div className='excerciseVideo'> 
                 <input onChange={props.handleAddVidChange} className="textBox_Instructor" placeholder='Enter video link'/> 
                 <input onChange={props.handleVidDescChange} className="textBox_Instructor" placeholder="Enter video Description"/>
-                 <button onClick={()=>{props.handleSubmitVid(props.sub); setAddvideo(false)}} className="addVideo_Inst">Add Video</button> 
+                 <Button onClick={()=>{props.handleSubmitVid(props.sub); setAddvideo(false)}} className="addVideo_Inst">Add Video</Button> 
                  </div>}
                  
                  {editVideo && <div className='excerciseVideo'> 
                 <input onChange={props.handleAddVidChange} className="textBox_Instructor"  defaultValue={props.sub.video}/> 
                 <input onChange={props.handleVidDescChange} className="textBox_Instructor"  defaultValue={props.sub.description}/>
-                 <button onClick={()=>{props.handleSubmitVid(props.sub); handleEditVideo()}} className="addVideo_Inst">Edit Video</button> 
+                 <Button onClick={()=>{props.handleSubmitVid(props.sub); handleEditVideo()}} className="addVideo_Inst">Edit Video</Button> 
                  </div>}
                  
                  {/* div for lessons  */}

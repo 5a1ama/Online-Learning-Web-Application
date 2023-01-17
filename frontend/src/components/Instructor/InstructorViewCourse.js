@@ -102,7 +102,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
             
             if(location.state && new Date()<new Date(duration)){
                 const x=await definePromotion(location.state.id,discountamount,duration)
-                getDetails();
+                await getDetails();
                 setShowDiscountDiv(false);
 
             }else{
@@ -119,7 +119,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
             if(location.state){
                 
                 const x=await deleteSubTitle(title,location.state.id)
-                getDetails();
+                await getDetails();
             }
         }
 
@@ -127,7 +127,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
             if(location.state){
 
                 const x=await updateSubtitle(location.state.id,oldtitle,title,hours,link,desc)
-                getDetails();
+                await getDetails();
             }
         }
 
@@ -163,7 +163,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
                 
                 const x=await addNewSubToCourse(location.state.id,Sub,hours)
                 setSubHoursChecked(true)
-                getDetails();
+                await getDetails();
                 
             }
         }
@@ -171,7 +171,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
     const handleAddPrevVid=async()=>{
         setFirst(0)
         await uploadCourseVideo(location.state.id,prevVidLink)
-        getDetails();
+        await getDetails();
         }
 
         const [details,setDetails] = useState([]);
@@ -214,8 +214,8 @@ import Subtitle from './../courses/subtitles/Subtitle';
 
         const handleSubmitVid = async(sub)=>{
                 const x= await uploadSubtitleVideo(location.state.id,addedVideoLink,sub,vidDescription);
-            
-            getDetails();
+                alert("loading");
+               await getDetails();
             
         }
       

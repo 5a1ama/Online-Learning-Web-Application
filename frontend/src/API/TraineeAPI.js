@@ -537,3 +537,22 @@ export const courseEnroll = async(courseId)=>{
 
         }
 }
+export const courseEnrollWallet = async(courseId)=>{
+    const result = await fetch(`http://localhost:8000/Trainee/enrollCourseWallet/${courseId}/${localStorage.getItem("token")}`,{method: "POST",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
+    const j=await result.json();
+        if(j=="error"){
+
+            alert("you must login first")
+            window.location.href="/login"
+
+        }else if(j=="error2"){
+          alert("Your Wallet is not enough")
+
+        }else{
+            return j
+        }
+}
