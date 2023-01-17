@@ -449,7 +449,7 @@ getUser();
                         Add Card
                       </button> 
 
-        {allCards&&allCards.length !=0&&  <Box sx={{ m: 1, position: 'relative' }}>
+        {allCards&&allCards.length !=0&&  <Box sx={{ m: 1, position: 'relative' ,left:"20%" }}>
                   <Button
                     variant="contained"
                     sx={buttonSx}
