@@ -151,13 +151,13 @@ export const updateAdminPass=async(oldPass,pass)=>{
     }
     })
     const j=await result.json();
-        if(j=="error"){
+        if(j.includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
 
         }else{
-          alert(j)
+          return j
 
         }
 }
