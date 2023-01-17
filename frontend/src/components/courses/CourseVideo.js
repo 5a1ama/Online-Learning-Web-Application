@@ -49,7 +49,7 @@ function CourseVideo() {
   }
 
   
-    const[Oldnotes,setOldNotes]=useState("");
+    const[Oldnotes,setOldNotes]=useState(" ");
 
   useEffect(()=>{
     async function handleOldNotes (){
@@ -86,7 +86,7 @@ function CourseVideo() {
                                       {noteAdded&&  <h3 className='noteAddedSuccess'>note added successfully</h3>}
         {Oldnotes&&<textarea className="CourseVideo_Input" onChange={handleNotes} >{Oldnotes}</textarea>}
         <button className="PlusButton" onClick={handleSubmitNotes}><AiOutlinePlus size="30px"></AiOutlinePlus></button>
-        <button className="CourseVideo_DownloadNotes" onClick={()=>downloadNotes(location.state.CourseId,location.state.Prop.title)}>Download Notes</button>
+        <button className="CourseVideo_DownloadNotes" onClick={async()=>await downloadNotes(location.state.CourseId,location.state.Prop.title)}>Download Notes</button>
                                         </div>
       </div>
   )
