@@ -1,11 +1,36 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getExcerciseChoices, getExcerciseQuestions, getExcerciseSolution, getMyExcerciseSolution, MyGrade } from "../../API/TraineeAPI";
 import Navbar from "../navbar/Navbar";
 import "./TraineeGradingExcercise.css"
 import correct from "../../assets/correctcheckIcon.png"
 import wrong from "../../assets/wrongcheckIcon.png"
+import { verify } from "../../API/LoginAPI";
+
 export function TraineeGradingExercise(){
+    const navigate = useNavigate(); 
+    const [first2,setFirst2]=useState(0);
+    const begin=async()=>{
+        if(localStorage.getItem("token")){
+            try{
+                var user=await verify(localStorage.getItem("token"));
+                if(user.type!="Trainee" && user.job!="Trainee"){
+                  alert("login as trainee first")
+                    navigate("/login")
+                }
+            }catch{
+                alert("login as trainee first")
+                navigate("/login")
+            }
+        }else{
+            alert("login as Trainee first")
+            navigate("/login")
+        }
+    }
+    if(first2==0){
+        begin();
+        setFirst2(1)
+    }
     const location=useLocation()
     const [first,setFirst]=useState(0)
     const [countryNumber,setCountryNumber]=useState();

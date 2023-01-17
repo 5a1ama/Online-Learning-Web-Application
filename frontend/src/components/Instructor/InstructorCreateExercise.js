@@ -9,10 +9,33 @@ import { QuestionsDiv } from "./QuestionsDiv";
 import { NewDiv } from "./NewDiv";
 import { createExercise } from "../../API/InstructorAPI";
 import { useLocation, useNavigate } from "react-router-dom";
+import { verify } from "../../API/LoginAPI";
 
 export function InstructorCreateExercise (){
-    const location=useLocation()
     const navigate=useNavigate();
+  const [first,setFirst]=useState(0);
+    const begin=async()=>{
+        if(localStorage.getItem("token")){
+            try{
+                var user=await verify(localStorage.getItem("token"));
+                if(user.job!="Instructor"){
+                  
+                    alert("login as instructor first")
+                    navigate("/login")
+                }
+            }catch{
+
+            }
+        }else{
+            alert("login as instructor first")
+            navigate("/login")
+        }
+    }
+    if(first==0){
+        begin();
+        setFirst(1)
+    }
+    const location=useLocation()
     const [questionsArr,setQuestionsArr]=useState([]);
     const [choicesArr,setChoicesArr]=useState([]);
     const [update,setUpdate]=useState("")

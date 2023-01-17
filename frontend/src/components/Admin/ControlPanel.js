@@ -25,7 +25,7 @@ function ControlPanel(props) {
 
           }
       }else{
-          alert("login as instructor first")
+          alert("login as Admin first")
           navigate("/login")
       }
   }
@@ -61,7 +61,12 @@ function ControlPanel(props) {
     }
     const handleInst=async (event)=>{
         event.preventDefault();
-        await AddInstructor(Instuser,Instpass);
+        const result= await AddInstructor(Instuser,Instpass);
+        if(result=="ok"){
+            alert("successfully added user")
+        }else{
+            alert("username already exists")
+        }
     }
     const [traineeuser,setTraineeUser]=useState("");
     const [traineepass,setTraineePass]=useState("");
@@ -74,7 +79,12 @@ function ControlPanel(props) {
     const handleTrainee=async (event)=>{
         event.preventDefault();
         
-        await AddTrainee(traineeuser,traineepass);
+        const result=await AddTrainee(traineeuser,traineepass);
+        if(result=="ok"){
+            alert("successfully added user")
+        }else{
+            alert("username already exists")
+        }
     }
 
 

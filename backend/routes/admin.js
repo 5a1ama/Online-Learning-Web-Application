@@ -35,7 +35,7 @@ router.post("/grantAccess/:corporateId/:courseid",async function(req,res){
     var corpId=req.params.corporateId;
     var courseId=req.params.courseid;
     await CourseRequest.deleteOne({requesterId:corpId,courseId:courseId});
-    var trainee=await Trainee.findOneAndUpdate({id:corpId});
+    var trainee=await Trainee.findOne({id:corpId});
     var courses=trainee.courses;
     courses.push({id:courseId,progress:0,enrollDate:new Date(),notes:[]});
     await Trainee.findOneAndUpdate({id:corpId},{courses:courses})

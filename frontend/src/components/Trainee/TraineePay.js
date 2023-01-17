@@ -11,10 +11,33 @@ import { useState } from 'react';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { addCreditCard } from '../../API/TraineeAPI';
 import {useNavigate} from 'react-router-dom';
+import { verify } from '../../API/LoginAPI';
 
 
 export function TraineePay(){
     const navigate = useNavigate(); 
+    const [first2,setFirst2]=useState(0);
+    const begin=async()=>{
+        if(localStorage.getItem("token")){
+            try{
+                var user=await verify(localStorage.getItem("token"));
+                if(user.type!="Trainee" && user.job!="Trainee"){
+                  alert("login as trainee first")
+                    navigate("/login")
+                }
+            }catch{
+                alert("login as trainee first")
+                navigate("/login")
+            }
+        }else{
+            alert("login as Trainee first")
+            navigate("/login")
+        }
+    }
+    if(first2==0){
+        begin();
+        setFirst2(1)
+    }
     const [cardNumber,setCardNumber] = useState("");
     const handleCardnumber = (event) => {
         setCardNumber(event.target.value);

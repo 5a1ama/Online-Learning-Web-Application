@@ -20,7 +20,7 @@ function Admin() {
 
           }
       }else{
-          alert("login as instructor first")
+          alert("login as Admin first")
           navigate("/login")
       }
   }

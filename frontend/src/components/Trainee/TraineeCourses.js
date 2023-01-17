@@ -30,7 +30,7 @@ export function TraineeCourses() {
 
             }
         }else{
-            alert("login as instructor first")
+            alert("login as Trainee first")
             navigate("/login")
         }
     }

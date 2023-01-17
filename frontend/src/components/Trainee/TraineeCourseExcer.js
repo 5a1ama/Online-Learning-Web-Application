@@ -1,14 +1,38 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { verify } from "../../API/LoginAPI";
 import { getExcerciseChoices, getExcerciseQuestions, getTraineeCourseProg, solveExcersice } from "../../API/TraineeAPI";
 import Navbar from "../navbar/Navbar"
 import "./TraineeCourseExcer.css"
+
 export function TraineeCourseExcer(){
+    const navigate = useNavigate(); 
+    const [first2,setFirst2]=useState(0);
+    const begin=async()=>{
+        if(localStorage.getItem("token")){
+            try{
+                var user=await verify(localStorage.getItem("token"));
+                if(user.type!="Trainee" && user.job!="Trainee"){
+                  alert("login as trainee first")
+                    navigate("/login")
+                }
+            }catch{
+                alert("login as trainee first")
+                navigate("/login")
+            }
+        }else{
+            alert("login as Trainee first")
+            navigate("/login")
+        }
+    }
+    if(first2==0){
+        begin();
+        setFirst2(1)
+    }
     const [countryNumber,setCountryNumber]=useState();
       const handleCountryNumber = (x) =>{
         setCountryNumber(x);
       }
-      const navigate=useNavigate();
     const location=useLocation();
     const [questions,setQuestion]=useState([]);
     const [choices,setChoices]=useState([]);

@@ -47,7 +47,7 @@ export function AdminViewRequests(){
   
             }
         }else{
-            alert("login as instructor first")
+            alert("login as Admin first")
             navigate("/login")
         }
     }
