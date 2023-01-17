@@ -148,11 +148,25 @@ router.post("/updateEmail/:name/:token",async function(req,res){
         var user=jwt.verify(token,process.env.ACCESSTOKEN);
         var id=user.id;
         var newname=req.params.name;
-        await User.findOneAndUpdate({id:id},{Email:newname});
-        await Admin.findOneAndUpdate({id:id},{Email:newname});
+        await User.findOneAndUpdate({id:id},{Email:newname.toLowerCase()});
+        await Admin.findOneAndUpdate({id:id},{Email:newname.toLowerCase()});
         res.json("ok")    
     }
     catch{
+        res.json("error")
+    }
+})
+router.get("/getAdmin/:token",async function(req,res){
+    var token=req.params.token;
+    try{
+        var user=jwt.verify(token,process.env.ACCESSTOKEN)
+        var id = user.id
+    
+        var query = await Instructor.findOne({id:id})
+        
+        res.json(query)
+    
+    }catch{
         res.json("error")
     }
 })

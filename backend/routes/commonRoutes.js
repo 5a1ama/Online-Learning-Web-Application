@@ -17,7 +17,7 @@ router.post("/login",async function(req,res){
     var username=req.body.username;
     var password=req.body.password;
     // console.log(username)
-    var query=await User.find({Email:username});
+    var query=await User.find({Email:username.toLowerCase()});
     //await bcrypt.hash(password, await salt)
     var passwordData=false;
     if(query.length != 0){
@@ -83,7 +83,7 @@ router.post("/selectCountry/:x/:token",function(req,res){
 })
 router.get("/findEmail/:email",async function(req,res){
     var email=req.params.email;
-    var query=await User.find({Email:email});
+    var query=await User.find({Email:email.toLowerCase()});
     if(query.length==0){
         res.json("no")
     }else{
@@ -158,12 +158,12 @@ router.get("/sendEmailAttach/:token/:courseName",async function(req,res){
     
 })
 router.get("/resetPass/:email/:pass",async function(req,res){
-   var result=await User.findOne({Email:req.params.email});
-   await User.findOneAndUpdate({Email:req.params.email},{Password:await bcrypt.hash(password, await salt)});//await bcrypt.hash(req.params.pass, await salt)
+   var result=await User.findOne({Email:req.params.email.toLowerCase()});
+   await User.findOneAndUpdate({Email:req.params.email.toLowerCase()},{Password:await bcrypt.hash(password, await salt)});//await bcrypt.hash(req.params.pass, await salt)
    if(result.Job=="Instructor"){
-    await Instructor.findOneAndUpdate({Email:req.params.email},{Password:await bcrypt.hash(password, await salt)})
+    await Instructor.findOneAndUpdate({Email:req.params.email.toLowerCase()},{Password:await bcrypt.hash(password, await salt)})
    }else if(result.Job=="Trainee"){
-    await Trainee.findOneAndUpdate({Email:req.params.email},{Password:req.params.email})
+    await Trainee.findOneAndUpdate({Email:req.params.email.toLowerCase()},{Password:req.params.email})
 
    }
 })
@@ -175,15 +175,15 @@ router.post('/CreateUser' ,(req,res)=>{
     var gender = req.body.gender    
     User.find({}).exec(async function(err,result){
         var c=result.length;
-        var query=await User.find({Email:email});
+        var query=await User.find({Email:email.toLowerCase()});
         var query2 = await User.find({Username:username})
         if(query2.length!==0){
             res.json("Username Taken")
         }else{
 
             if(query.length==0){                                             //await bcrypt.hash(password, await salt)
-                var object = new User({id:c+1,Name:name,Email:email,Password:await bcrypt.hash(password, await salt),Username:username,Job:"Trainee",Gender:gender})
-                var object2=new Trainee({id:c+1,Name:name,type:"Individual",Email:email,Password:await bcrypt.hash(password, await salt)});
+                var object = new User({id:c+1,Name:name,Email:email.toLowerCase(),Password:await bcrypt.hash(password, await salt),Username:username,Job:"Trainee",Gender:gender})
+                var object2=new Trainee({id:c+1,Name:name,type:"Individual",Email:email.toLowerCase(),Password:await bcrypt.hash(password, await salt)});
                 object.save(function(err,result1){
                     object2.save(function(err,result){
                         

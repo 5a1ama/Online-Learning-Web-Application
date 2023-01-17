@@ -104,7 +104,7 @@ function ControlPanel(props) {
   
   return (
     <div className="controlPanel">
-            <Navbar items={["Home","Control Panel","Reports"]} select="Control Panel" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={props.handleCountryNumber}  />
+            <Navbar admin={true} items={["Home","Control Panel","Reports"]} select="Control Panel" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={props.handleCountryNumber}  />
         <div className="controlPanel_content">
             <div className="controlPanel_content4horizontal">
                 

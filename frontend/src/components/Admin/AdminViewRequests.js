@@ -58,7 +58,7 @@ export function AdminViewRequests(){
     }
     return(
         <div>
-        <Navbar items={["Home","Control Panel","Reports"]} select="" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={()=>{} }  />
+        <Navbar admin={true} items={["Home","Control Panel","Reports"]} select="" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={()=>{} }  />
      
         <div className="AdminViewRequestsMainDiv">
             <h1>All Access Requests</h1>
