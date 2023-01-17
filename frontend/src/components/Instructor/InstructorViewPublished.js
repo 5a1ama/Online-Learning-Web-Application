@@ -16,7 +16,7 @@ import { saveAs } from 'file-saver'
 import { GetInstructorName } from './../../API/CourseAPI';
 import Footer from '../footer/Footer';
 import InstructorSubtitle from '.././courses/subtitles/InstructorSubtitle';
-import { definePromotion, deleteSubTitle, PublishCourse, updateCourseSummary, updateSubtitle, uploadCourseVideo } from '../../API/InstructorAPI';
+import { closeCourse, definePromotion, deleteSubTitle, PublishCourse, updateCourseSummary, updateSubtitle, uploadCourseVideo } from '../../API/InstructorAPI';
 import { addNewSubToCourse, uploadSubtitleVideo } from '../../API/InstructorAPI';
 import {TextField} from "@mui/material";
 import "../courses/subtitles/Subtitle.css"
@@ -411,8 +411,8 @@ const handleDeleteCourse = ()=>{
     
 }
 const DeleteCourse2 =async ()=>{
-    const x = await DeleteCourse(location.state.id);
-    navigate('/InstructorCourses')
+    const x = await closeCourse(location.state.id);
+    alert("This Course is now Closed, no new students can enroll to it")
 }
 
     const handlePublish =async()=>{

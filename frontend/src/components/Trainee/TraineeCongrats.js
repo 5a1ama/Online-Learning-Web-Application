@@ -23,7 +23,7 @@ export function TraineeCongrats(){
         if(localStorage.getItem("token")){
             try{
                 var user=await verify(localStorage.getItem("token"));
-                if(user.job!="Trainee"){
+                if(user.type!="Trainee"&&user.job!="Trainee"){
                     alert("login as trainee first")
                     navigate("/login")
                 }

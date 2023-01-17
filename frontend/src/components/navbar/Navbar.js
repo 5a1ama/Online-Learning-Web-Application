@@ -17,6 +17,7 @@ import UsaFlag from "../../assets/Usa.jpg"
 import './navbar.css'
 import {Link} from 'react-scroll'
 import { selectCountry } from '../../API/CommonAPI';
+import { getInstructorDetails, changeTokenToTrainee } from './../../API/InstructorAPI';
 
 
 export {default as Navbar} from './Navbar';
@@ -92,6 +93,21 @@ function Navbar(props) {
     }
 
     const navigate = useNavigate();
+    
+    const [instructor,setInstructor]=useState();
+    const getInst = async()=>{
+        setInstructor(await getInstructorDetails());
+    }
+
+    if (props.inst){
+        getInst();    
+    }
+    
+
+    const switchTrainee = async ()=>{
+        await changeTokenToTrainee();
+        navigate('/TraineeHome')
+       }
 
   return (
     
@@ -121,6 +137,12 @@ function Navbar(props) {
           
         </ul>
         <div className="nav-icons">
+          {props.inst  && instructor && instructor.switch==true &&
+          <button className='switchToTrainee' onClick={switchTrainee}>
+             <BsPerson className="icon" style={{transform:"translate(-10px,5px)"}}></BsPerson> switch to trainee
+          </button>
+                        
+                }
             <div className="nav-Country-icons">
                 <img src={chosenCountry} alt="." width="30px" height="20px" onClick={()=>{handleAll();handleCountryBar()}}
                 style={{borderRadius:'5px',marginRight:'0.5rem',cursor:'pointer'}} ></img>
@@ -161,7 +183,7 @@ function Navbar(props) {
                 </div>
             </div>
 
-
+            
             <div className={countryBar?"CountryBar":"nonCountryBar"}>
                 <div className="CountryBar-content">
 
@@ -204,6 +226,7 @@ function Navbar(props) {
                         My Reports
                     </button>   
                 </div>}
+                
                 {props.trainee && <div className="SettingItem">
                     <button onClick={()=>navigate('/traineeReport')}>
                         <FiHelpCircle className="icon" style={{transform:"translate(-10px,3.5px)"}}></FiHelpCircle>

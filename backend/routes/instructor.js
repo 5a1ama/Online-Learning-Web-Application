@@ -453,6 +453,7 @@ router.post("/changeTokenToTrainee/:token",async function(req,res){
             res.json("error2");
         }else{
             user.type="Trainee";
+            
             var token=jwt.sign(user,process.env.ACCESSTOKEN);
             res.json(token);
         }

@@ -308,3 +308,15 @@ li {
     
     }
 }
+.switchToTrainee{
+    position: absolute;
+    left: 75%;
+    background-color:transparent;
+    height: 20px;
+    width: 250px;
+    transform: translate(0,-15px);
+    
+}
+.switchToTrainee:hover{
+    background-color: transparent;
+}
