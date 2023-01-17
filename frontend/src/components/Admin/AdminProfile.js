@@ -37,29 +37,12 @@ export function AdminProfile(){
     const navigate=useNavigate();
     const [first2,setFirst2]=useState(0);
     const [first,setFirst]=useState(0);
-    const [owedMoney,setOwedMoney]=useState(0);
-    const [showMoney,setShowMoney]=useState(false);
-    const [month,setMonth]=useState("");
-    const [year,setYear]=useState("");
-    const handleDateChange=(event)=>{
-        setMonth(event.target.value.split("-")[1])
-        setYear(event.target.value.split("-")[0])
-    }
-    const handleMonthChange=(event)=>{
-        setMonth(event.target.value);
-    }
-    const handleYearChange=(event)=>{
-        setYear(event.target.value);
-    }
-    const handleShowMoney=async ()=>{
-        
-        setShowMoney(true);
-        setOwedMoney(await salaryPerMonth(month,year))
-    }
+   
     const begin=async()=>{
         if(localStorage.getItem("token")){
             try{
                 var user=await verify(localStorage.getItem("token"));
+                
                 if(user.job!="Admin"){
                     alert("login as Admin first")
                     navigate("/login")
@@ -100,15 +83,6 @@ export function AdminProfile(){
         setNewEmail(event.target.value)
     }
 
-    const [newSpec,setNewSpec]=useState("");
-    const handleNewSpec =(event)=>{
-        setNewSpec(event.target.value)
-    }
-
-    const [newBio,setNewBio]=useState("");
-    const handleNewBio =(event)=>{
-        setNewBio(event.target.value)
-    }
 
     const handleUpdate=async ()=>{
         if(newName && newName!=""){
@@ -147,14 +121,14 @@ export function AdminProfile(){
     const intial = async()=>{
         setinstructor(await getAdminDetails())
         if(first==0){
-            
+            if(instructor.Email)
             setNewEmail(instructor.Email)
+            if(instructor.Name)
             setNewName(instructor.Name)
            
             setFirst(1)
 
-        }
-       
+        }   
     }
     const [showDiv,setShowDiv] =useState(false);
     const [showDiv2 ,setShowDiv2]=useState(false)
@@ -164,8 +138,7 @@ export function AdminProfile(){
       setCountryNumber(x);
     }
     intial()
-
-        
+    
     return(
       <div className='instructorProfileMaindiv'>
         <div>
@@ -178,11 +151,11 @@ export function AdminProfile(){
        className="avatar"
        sx={{ backgroundColor: '#0277bd' ,width: 100, height: 100 ,fontSize:55}}
        >
-            {instructor && instructor.Name.substring(0,1)} 
+            {instructor && instructor.Name&& instructor.Name.substring(0,1)} 
            
        </Avatar>
-          <h5 className="instructorname">{instructor && instructor.Name}</h5>
-          <h5 className="instructorEmail">{instructor && instructor.Email}</h5>
+         {instructor && instructor.Name && <h5 className="instructorname">{ instructor.Name}</h5>}
+          {instructor && instructor.Email &&<h5 className="instructorEmail">{instructor.Email}</h5>}
           <button  className='' onClick={()=> {setShowDiv2(true);}}>
                         Change Password
                     </button>
@@ -194,14 +167,14 @@ export function AdminProfile(){
                <label className='NameLabel'>
                 Name
                </label>
-               <label className='EditInstructorValue'>{instructor && instructor.Name}</label>
+               {instructor && instructor.Name && <label className='EditInstructorValue'>{instructor && instructor.Name}</label>}
                 </div>
                <Divider/>
                <div className='dataDivNext'>
                <label className='EmailLabel'>
                 Mail
                </label >
-               <label className='EditInstructorValue'>{instructor && instructor.Email}</label>
+              {instructor && instructor.Email&& <label className='EditInstructorValue'>{instructor && instructor.Email}</label>}
                </div>
 
                <Divider/>

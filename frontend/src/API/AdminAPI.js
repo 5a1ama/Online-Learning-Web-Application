@@ -157,7 +157,7 @@ export const updateAdminPass=async(oldPass,pass)=>{
             window.location.href="/login"
 
         }else{
-          return j
+          alert(j)
 
         }
 }
