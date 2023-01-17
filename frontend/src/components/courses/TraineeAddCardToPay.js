@@ -1,15 +1,15 @@
 
 import dayjs from 'dayjs';
-import { Divider, TextField } from '@mui/material';
 import './TraineeAddCardToPay.css' 
+import { Divider, TextField } from '@mui/material';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
+import { addCreditCard, courseEnroll } from '../../API/TraineeAPI';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useState } from 'react';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { addCreditCard, courseEnroll } from '../../API/TraineeAPI';
 import {useLocation, useNavigate} from 'react-router-dom';
 import { verify } from '../../API/LoginAPI';
 
