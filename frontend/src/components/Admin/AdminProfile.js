@@ -106,7 +106,7 @@ export function AdminProfile(){
         }
         else{
             const x=await updateAdminPass(oldPass,newPass)
-            if(x=="error"){
+            if(x=="wrong password"){
                 alert("Old password is not found")
             }
             else{
