@@ -148,8 +148,8 @@ router.post("/updateEmail/:name/:token",async function(req,res){
         var user=jwt.verify(token,process.env.ACCESSTOKEN);
         var id=user.id;
         var newname=req.params.name;
-        await User.findOneAndUpdate({id:id},{Email:newname});
-        await Admin.findOneAndUpdate({id:id},{Email:newname});
+        await User.findOneAndUpdate({id:id},{Email:newname.toLowerCase()});
+        await Admin.findOneAndUpdate({id:id},{Email:newname.toLowerCase()});
         res.json("ok")    
     }
     catch{
