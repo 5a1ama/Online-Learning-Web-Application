@@ -718,5 +718,23 @@ router.post("/enrollCourse/:courseID/:token",tokenVerify,async function(req,res)
     await Trainee.findOneAndUpdate({id:user.id},{courses:traineeCourses})
     res.json("ok")
 })
-
+router.post("/enrollCourseWallet/:courseID/:token",tokenVerify,async function(req,res){
+    var token = req.params.token;
+    var user=jwt.verify(token,process.env.ACCESSTOKEN);
+    var courseID = req.params.courseID
+    var course = await Course.findOne({id:courseID})
+    var enrolledStudent = course.enrolledStudents
+    enrolledStudent +=1
+    var trainee = await Trainee.findOne({id:user.id})
+    var traineeCourses = trainee.courses
+    if(trainee.wallet>=(course.price-course.discount.amount)){
+        traineeCourses.push({id:courseID,progress:0,enrollDate:new Date(),notes:[]})
+        await Course.findOneAndUpdate({id:courseID},{enrolledStudents:enrolledStudent})
+        await Trainee.findOneAndUpdate({id:user.id},{courses:traineeCourses})
+        res.json("ok")
+    }else{
+        res.json("error2");
+    }
+    
+})
 module.exports = router
