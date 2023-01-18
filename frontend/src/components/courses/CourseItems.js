@@ -115,6 +115,15 @@ function CourseItems() {
 
         
     }
+    useEffect(()=>{
+        const x=setInterval(()=>{
+          
+          if((details.length==0)){
+            window.location.reload();
+          }
+        },1000)
+        clearInterval(x);
+       })
 
     const InstNamesLen = () =>
     {

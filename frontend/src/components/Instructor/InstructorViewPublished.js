@@ -61,7 +61,12 @@ export function InstructorViewPublished() {
                     navigate("/login")
                 }
             }
-            catch{}
+            catch(err){
+                if(err.message.includes("jwt")){
+                    alert("login as Instructor first")
+                    navigate("/login")
+                }
+              }
         }else{
             alert("login as instructor first")
             navigate("/login")
@@ -203,7 +208,18 @@ const handleAddPrevVid=()=>{
         setDetails((await getCourseDetails(location.state.id)));
         setFirst(1);
     }
-    
+    useEffect(()=>{
+        const x=setInterval(()=>{
+          
+          if((details.length==0 || instNames.length==0)){
+            window.location.reload();
+          }
+          
+        },1000)
+        clearInterval(x)
+       })
+       
+
     useEffect(()=>{ 
         async function getdetails () {
             setDetails((await getCourseDetails(location.state.id)));
@@ -457,6 +473,7 @@ return (
                                 </a>                
                                 </div>
                         )}
+                        {instNames.length==0 && <Loading position="absolute" top="-400%" left="-45%"></Loading>}
                     </div>
                         
                     {details[0]&&stars(details[0].rating.value).map((num)=> <img className="starImg2" style={{width:'40px'}} src={starImg} alt="."/>)}

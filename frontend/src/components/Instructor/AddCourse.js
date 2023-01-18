@@ -26,9 +26,12 @@ export function AddCourse(){
                     alert("login as instructor first")
                     navigate("/login")
                 }
-            }catch{
-
-            }
+            }catch(err){
+                if(err.message.includes("jwt")){
+                    alert("login as Instructor first")
+                    navigate("/login")
+                }
+              }
         }else{
             alert("login as instructor first")
             navigate("/login")

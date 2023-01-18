@@ -139,8 +139,8 @@ router.post("/updateName/:name/:token",async function(req,res){
     await User.findOneAndUpdate({id:id},{Name:newname});
     await Admin.findOneAndUpdate({id:id},{Name:newname});
     res.json("ok")
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
     
 })
@@ -155,8 +155,8 @@ router.post("/updateEmail/:name/:token",async function(req,res){
         await Admin.findOneAndUpdate({id:id},{Email:newname.toLowerCase()});
         res.json("ok")    
     }
-    catch{
-        res.json("error")
+    catch(err){
+        res.json(err.message)
     }
 })
 router.get("/getAdmin/:token",async function(req,res){
@@ -169,8 +169,8 @@ router.get("/getAdmin/:token",async function(req,res){
         
         res.json(query)
     
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
 })
 module.exports=router;

@@ -17,7 +17,7 @@ export function TraineeCourseExcer(){
                     navigate("/login")
                 }
             }catch(err){
-                if(err.includes("jwt")){
+                if(err.message.includes("jwt")){
 
                     alert("login as trainee first")
                     navigate("/login")
@@ -82,6 +82,16 @@ export function TraineeCourseExcer(){
         getQuestions();
         setFirst(1);
     }
+    useEffect(()=>{
+        const x=setInterval(()=>{
+          
+          if((questions.length==0)){
+            window.location.reload();
+          }
+        },1000)
+        clearInterval(x)
+
+       })
     
     return(
         <div>

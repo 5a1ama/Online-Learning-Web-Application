@@ -23,8 +23,8 @@ function tokenVerify(req,res,next){
     try{
         var user=jwt.verify(token,process.env.ACCESSTOKEN)
         next();
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
    
 }
@@ -264,8 +264,7 @@ router.get("/myCourseRate/:ratedID/:token",tokenVerify,async function(req,res){
             
     }
     catch(err){
-        console.log(err.message);
-        res.json("error");
+        res.json(err.message);
     }
 
 })
@@ -447,7 +446,7 @@ router.get("/deleteDownloadedFile/:filename",function(req,res){
         fs.unlinkSync(filename);
       
         // console.log("Delete File successfully.");
-      } catch (error) {
+      } catch(err) {
         // console.log(error);
       }
 })
@@ -503,8 +502,8 @@ router.get("/alreadyRequestedRefund/:courseid/:token",async function(req,res){
     }else{
         res.json(true);
     }
-   } catch{
-    res.json("error");
+   } catch(err){
+    res.json(err.message);
    }
 })
 router.post("/removeRefund/:traineeId/:courseid",async function(req,res){
@@ -527,8 +526,8 @@ router.post("/addReviewToInst/:token/:instId/:review",async function(req,res){
         reviews.push(review);
         await Instructor.findOneAndUpdate({id:instid},{reviews:reviews});
         res.json("ok")
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
 })
 router.post("/addReviewToCourse/:token/:courseId/:review",async function(req,res){
@@ -547,8 +546,8 @@ router.post("/addReviewToCourse/:token/:courseId/:review",async function(req,res
         reviews.push(review);
         await Course.findOneAndUpdate({id:courseId},{reviews:reviews});
         res.json("ok")
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
 })
 router.post("/getRefund/:traineeId/:courseid",async function(req,res){

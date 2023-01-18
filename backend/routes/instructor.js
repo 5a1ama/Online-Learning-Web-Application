@@ -38,8 +38,8 @@ router.get("/myCourses/:token",async function(req,res){
         }
         res.json(array)
     
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
 })
 router.get("/myCourses-Titles",async function(req,res){
@@ -138,8 +138,8 @@ router.get("/myCourses-price-subject/:minprice/:maxprice/:subject/:token",async 
         res.send(final);
     
     
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
 
 })
@@ -193,8 +193,8 @@ router.get("/myCourses-search/:search/:token",async function(req,res){
         }
         res.json(final)
     
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
 })
 router.post("/uploadCourseVideo", async function(req,res){
@@ -222,7 +222,7 @@ router.post("/uploadSubtitleVideo",async function(req,res){
         }
     }
     await Course.findOneAndUpdate({id:courseid},{subtitles:array});
-    res.json(array)
+    res.json("ok")
 })
 router.post("/coursePromotion",async function(req,res){
     var token=req.body.token;
@@ -237,8 +237,8 @@ router.post("/coursePromotion",async function(req,res){
 
         res.json("ok")
     
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
 })
 router.post("/coursePromotion2",async function(req,res){
@@ -258,8 +258,8 @@ router.get("/getInstructor/:token",async function(req,res){
         
         res.json(query)
     
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
 })
 router.post("/updatePass2/:oldPass/:pass/:token",async function(req,res){
@@ -311,8 +311,8 @@ router.post("/updateName/:name/:token",async function(req,res){
     await Instructor.findOneAndUpdate({id:id},{Name:newname});
     await User.findOneAndUpdate({id:id},{Name:newname});
     res.json("ok")
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
     
 })
@@ -327,8 +327,8 @@ router.post("/updateEmail/:name/:token",async function(req,res){
         await User.findOneAndUpdate({id:id},{Email:newname.toLowerCase()});
         res.json("ok")    
     }
-    catch{
-        res.json("error")
+    catch(err){
+        res.json(err.message)
     }
 })
 router.post("/updateBio/:name/:token",async function(req,res){
@@ -341,8 +341,8 @@ router.post("/updateBio/:name/:token",async function(req,res){
         // await User.findOneAndUpdate({id:id},{bio:newname});
         res.json("ok")
     
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
 })
 router.post("/updateSpec/:name/:token",async function(req,res){
@@ -354,8 +354,8 @@ router.post("/updateSpec/:name/:token",async function(req,res){
     await Instructor.findOneAndUpdate({id:id},{specialization:newname});
     // await User.findOneAndUpdate({id:id},{specialization:newname});
     res.json("ok")
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
     
 
@@ -392,8 +392,8 @@ router.post("/salaryPerMonth/:year/:month/:token",async function(req,res){
         res.json(sum)
     
     
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
 })
 router.post("/followUpReport/:token/:reportId/:question",async function(req,res){
@@ -407,8 +407,8 @@ router.post("/followUpReport/:token/:reportId/:question",async function(req,res)
         followup=followup.concat([{question:question,answer:""}]);
         await Reports.findOneAndUpdate({id:reportid},{followup:followup});
         res.json("ok")
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
 
     
@@ -459,8 +459,8 @@ router.post("/createExercise/:token/:courseid/:title",async function(req,res){
         })
     
     
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
 
 })
@@ -475,8 +475,8 @@ router.post("/SwitchToTrainee/:token",async function(req,res){
             res.json("ok")
         })
        
-    }catch{
-        res.json("error");
+    }catch(err){
+        res.json(err.message);
     }
 
 })
@@ -494,8 +494,8 @@ router.post("/changeTokenToTrainee/:token",async function(req,res){
             res.json(token);
         }
 
-    }catch{
-        res.json("error");
+    }catch(err){
+        res.json(err.message);
     }
 })
 router.post("/closeCourse/:token/:courseId",async function(req,res){
@@ -505,8 +505,8 @@ router.post("/closeCourse/:token/:courseId",async function(req,res){
         var courseId=req.params.courseId;
     await Course.findOneAndUpdate({id:courseId},{closed:true})
     res.json("ok")
-    }catch{
-        res.json("error");
+    }catch(err){
+        res.json(err.message);
     }
     
 })
@@ -531,8 +531,8 @@ router.post("/updateExercise/:token/:courseid/:title/:excerid",async function(re
         
     
     
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
 
 })
@@ -546,8 +546,8 @@ router.post("/UpdatePrice/:price/:courseid/:token",async function(req,res){
 
     await Course.findOneAndUpdate({id:courseId},{price:price});
     res.json("ok")
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
     
 })
@@ -563,8 +563,8 @@ router.post("/UpdateSummary/:Summary/:courseid/:token",async function(req,res){
     await Course.findOneAndUpdate({id:courseId},{summary:Summary1});
     res.json("ok")
 
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
 
     }
     
@@ -579,8 +579,8 @@ router.post("/DeleteCourse/:courseid/:token",async function(req,res){
     await Course.deleteOne({id:courseId});
     res.json("ok")
 
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
 
     }
     
@@ -592,8 +592,8 @@ router.post("/PublishCourse/:courseid/:token",async function(req,res){
         var user=jwt.verify(token,process.env.ACCESSTOKEN);
     var id=user.id;
     }
-    catch{
-        res.json("error");
+    catch(err){
+        res.json(err.message);
 
     }
     var courseId=req.params.courseid;

@@ -10,6 +10,7 @@ import {useNavigate} from 'react-router-dom';
 import { Checkbox } from "@mui/material";
 import { getTraineeCourses, getTraineeDetails } from "../../API/TraineeAPI";
 import { verify } from "../../API/LoginAPI";
+import Loading from "../loading/Loading";
 
 
 
@@ -28,8 +29,11 @@ export function TraineeAllCourses(){
                   alert("login as trainee first")
                     navigate("/login")
                 }
-            }catch{
-
+            }catch(err){
+              if(err.message.includes("jwt")){
+                  alert("login as Trainee first")
+                  navigate("/login")
+              }
             }
         }else{
             alert("login as Trainee first")
@@ -120,6 +124,22 @@ export function TraineeAllCourses(){
       getMyCourses();
       setFirst(1);
     }
+    useEffect(()=>{
+      getCourses();
+      getMyCourses();
+
+    })
+    useEffect(()=>{
+      const x=setInterval(()=>{
+        
+        if((courses.length==0)){
+          window.location.reload();
+        }
+      },1000)
+      clearInterval(x)
+
+     })
+    
     const [FilterBar,setFilterBar] = useState(false)
     const handleFilterBar = () => setFilterBar(!FilterBar)
     // const navigate2 = useNavigate();
@@ -180,7 +200,7 @@ export function TraineeAllCourses(){
         </div>
 <div className='AllCourses'>
             <h1 className="heading">Our Courses</h1>
-            {courses&&courses.map((course) =>{
+            {courses && courses.length>0 &&courses.map((course) =>{
               var found=false;
               
               for(var i=0;i<myCourses.length;i++){
@@ -197,6 +217,7 @@ export function TraineeAllCourses(){
 
               }) 
             }
+            {courses && courses.length==0 && <Loading></Loading>}
           
             </div>
 

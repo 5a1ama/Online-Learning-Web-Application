@@ -31,7 +31,15 @@ function Courses(props) {
   }
   getCourses();
 })
-
+useEffect(()=>{
+  const x=setInterval(()=>{
+    
+    if((courses.length==0)){
+      window.location.reload();
+    }
+  },1000)
+  clearInterval(x);
+ })
   return (
     <div name="courses" className="Courses">
 

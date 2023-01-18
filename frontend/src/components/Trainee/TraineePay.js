@@ -25,10 +25,12 @@ export function TraineePay(){
                   alert("login as trainee first")
                     navigate("/login")
                 }
-            }catch{
-                alert("login as trainee first")
-                navigate("/login")
-            }
+            }catch(err){
+                if(err.message.includes("jwt")){
+                    alert("login as Trainee first")
+                    navigate("/login")
+                }
+              }
         }else{
             alert("login as Trainee first")
             navigate("/login")

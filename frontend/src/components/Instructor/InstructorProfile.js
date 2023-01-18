@@ -63,9 +63,12 @@ export function InstructorProfile(){
                     alert("login as instructor first")
                     navigate("/login")
                 }
-            }catch{
-
-            }
+            }catch(err){
+                if(err.message.includes("jwt")){
+                    alert("login as Instructor first")
+                    navigate("/login")
+                }
+              }
         }else{
             alert("login as instructor first")
             navigate("/login")
@@ -152,6 +155,16 @@ export function InstructorProfile(){
         }
        
     }
+    useEffect(()=>{
+        const x=setInterval(()=>{
+          
+          if((instructor=="")){
+            window.location.reload();
+          }
+        },1000)
+        clearInterval(x)
+
+       })
     const [showDiv,setShowDiv] =useState(false);
     const [showDiv2 ,setShowDiv2]=useState(false)
 

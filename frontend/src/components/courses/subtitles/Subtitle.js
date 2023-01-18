@@ -66,6 +66,7 @@ function Subtitle(props) {
         getGrade();
         setFirst(1);
     }
+    
     const handleGuestClick = () =>{
         window.scrollTo({top:10000 ,behavior: 'smooth'});
 

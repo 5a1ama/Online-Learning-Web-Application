@@ -218,6 +218,15 @@ const [MyRate,setMyRate] = useState(0)
     getDetails();
 
   })
+  useEffect(()=>{
+    const x=setInterval(()=>{
+      
+      if((details.length==0)){
+        window.location.reload();
+      }
+    },1000)
+    clearInterval(x);
+   })
   
   
 
@@ -325,7 +334,7 @@ getUser();
           alert("unexpected error happened")
         }
        }
-
+       
   return (
         
     

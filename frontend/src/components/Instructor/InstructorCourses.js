@@ -30,8 +30,11 @@ export function InstructorCourses(){
                 
                   navigate("/login")
               }
-          }catch{
-
+          }catch(err){
+            if(err.message.includes("jwt")){
+                alert("login as Instructor first")
+                navigate("/login")
+            }
           }
       }else{
           alert("login as instructor first")
@@ -147,6 +150,14 @@ export function InstructorCourses(){
         getCourses();
         setFirst(1);
       }
+      useEffect(()=>{
+        const x=setInterval(()=>{
+          if((courses.length==0)){
+            window.location.reload();
+          }
+        },1000)
+        clearInterval(x)
+       })
       
       const [countryNumber,setCountryNumber]=useState();
       const handleCountryNumber = (x) =>{

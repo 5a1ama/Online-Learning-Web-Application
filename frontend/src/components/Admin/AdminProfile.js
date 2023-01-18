@@ -47,9 +47,12 @@ export function AdminProfile(){
                     alert("login as Admin first")
                     navigate("/login")
                 }
-            }catch{
-
-            }
+            }catch(err){
+                if(err.message.includes("jwt")){
+                    alert("login as Admin first")
+                    navigate("/login")
+                }
+              }
         }else{
             alert("login as Admin first")
             navigate("/login")

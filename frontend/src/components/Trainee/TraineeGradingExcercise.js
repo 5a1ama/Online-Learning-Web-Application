@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getExcerciseChoices, getExcerciseQuestions, getExcerciseSolution, getMyExcerciseSolution, MyGrade } from "../../API/TraineeAPI";
 import Navbar from "../navbar/Navbar";
@@ -18,9 +18,11 @@ export function TraineeGradingExercise(){
                   alert("login as trainee first")
                     navigate("/login")
                 }
-            }catch{
-                alert("login as trainee first")
-                navigate("/login")
+            }catch(err){
+              if(err.message.includes("jwt")){
+                  alert("login as Trainee first")
+                  navigate("/login")
+              }
             }
         }else{
             alert("login as Trainee first")
@@ -66,6 +68,16 @@ export function TraineeGradingExercise(){
       getMyGrade()
       setFirst(1);
       }
+      useEffect(()=>{
+        const x=setInterval(()=>{
+          
+          if((excerciseQuestions.length==0 || Grade=="")){
+            window.location.reload();
+          }
+        },1000)
+        clearInterval(x)
+
+       })
       
     //    alert(location.state.courseId)
     return(

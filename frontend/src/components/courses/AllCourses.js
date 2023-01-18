@@ -76,6 +76,16 @@ function AllCourses() {
       getCourses();
       setFirst(1);
     }
+    useEffect(()=>{
+      const x=setInterval(()=>{
+        
+        if((courses.length==0)){
+          window.location.reload();
+        }
+        
+      },1000)
+      clearInterval(x)
+     })
     
     var minPrice= (newPriceRatio&&Math.floor(0*newPriceRatio))||0;
     var maxPrice= (newPriceRatio&&Math.floor(maxPriceValue*newPriceRatio))||maxPriceValue;

@@ -17,9 +17,12 @@ export function InstructorReviews(props){
                     alert("login as instructor first")
                     navigate("/login")
                 }
-            }catch{
-
-            }
+            }catch(err){
+                if(err.message.includes("jwt")){
+                    alert("login as Instructor first")
+                    navigate("/login")
+                }
+              }
         }else{
             alert("login as instructor first")
             navigate("/login")
@@ -35,6 +38,16 @@ export function InstructorReviews(props){
         setreviews(location.state)
 
     })
+    useEffect(()=>{
+        const x=setInterval(()=>{
+          
+          if((reviews.length==0)){
+            window.location.reload();
+          }
+        },1000)
+        clearInterval(x)
+
+       })
     const ReviewDiv = (props )=>{
         return(
             <div className="reviewsDiv">

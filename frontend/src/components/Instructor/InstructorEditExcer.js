@@ -11,6 +11,7 @@ import { createExercise, updateExercise } from "../../API/InstructorAPI";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getExcerciseChoices, getExcerciseQuestions, getExcerciseSolution } from "../../API/TraineeAPI";
 import { verify } from "../../API/LoginAPI";
+import Loading from "../loading/Loading";
 
 export function InstructorEditExercise (props){
     const navigate=useNavigate();
@@ -24,9 +25,12 @@ export function InstructorEditExercise (props){
                     alert("login as instructor first")
                     navigate("/login")
                 }
-            }catch{
-
-            }
+            }catch(err){
+                if(err.message.includes("jwt")){
+                    alert("login as Instructor first")
+                    navigate("/login")
+                }
+              }
         }else{
             alert("login as instructor first")
             navigate("/login")
@@ -151,6 +155,16 @@ export function InstructorEditExercise (props){
         initial();
         setFirst(1)
     }
+    useEffect(()=>{
+        const x=setInterval(()=>{
+          
+          if((question=="")){
+            window.location.reload();
+          }
+        },1000)
+        clearInterval(x)
+
+       })
 
     return(
         <div>
@@ -261,8 +275,7 @@ export function InstructorEditExercise (props){
     <button className="submitbtnExcer" type="submit">Submit</button>
 
     </form>}
-    {!question || question=="" && <label>Loading your Excercise
-        </label>}
+    {!question || question=="" && <Loading></Loading>}
 </div>
 
         </div>

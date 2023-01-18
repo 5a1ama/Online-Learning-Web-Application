@@ -1,3 +1,4 @@
+import axios from "axios";
 import { verify } from "./LoginAPI";
 
 const api="http://localhost:8000"
@@ -5,7 +6,7 @@ const api="http://localhost:8000"
 export const getMycourses=async (token)=>{
     const response=await fetch(`http://localhost:8000/instructor/myCourses/${token}`);
     const j=await response.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -19,7 +20,7 @@ export const getMycourses=async (token)=>{
 export const SearchMyCourse=async(token,search)=>{
     const response=await fetch(`http://localhost:8000/instructor/myCourses-search/${search}/${token}`);
     const j=await response.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -48,7 +49,7 @@ export const FilterMyCourse=async(min,max,subject)=>{
     if(subject==""){
         const response=await fetch(`${api}/instructor/myCourses-price-subject/${min}/${max}/-1/${localStorage.getItem("token")}`)
         const j=await response.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -64,7 +65,7 @@ export const FilterMyCourse=async(min,max,subject)=>{
         const response=await fetch(`${api}/instructor/myCourses-price-subject/${min}/${max}/${subject}/${localStorage.getItem("token")}`)
         
         const j=await response.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -81,7 +82,7 @@ export const getInstructorDetails= async()=>{
     if(localStorage.getItem("token")){
         var result = await fetch(`http://localhost:8000/instructor/getInstructor/${localStorage.getItem("token")}`)
     var j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -102,7 +103,7 @@ export const updateInstructorName=async(name)=>{
     }
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -119,7 +120,7 @@ export const updateInstructorEmail=async(name)=>{
     }
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -137,7 +138,7 @@ export const updateInstructorPass=async(oldPass,pass)=>{
     }
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -154,7 +155,7 @@ export const updateInstructorBio=async(name)=>{
     }
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -172,7 +173,7 @@ export const updateInstructorSpec=async(name)=>{
     }
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -188,9 +189,10 @@ export const uploadCourseVideo=async(id,link)=>{
         "Content-type": "application/json; charset=UTF-8"
     },
     body: JSON.stringify({courseID:id,link:link,token:localStorage.getItem("token")})
+    
 })
 const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -217,11 +219,13 @@ export const uploadSubtitleVideo=async(id,link,subtitle,description)=>{
 
 })
 const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
 
+        }else if(String(j).toLowerCase().includes("failed to fetch")){
+            alert("!2")
         }else{
           return j
 
@@ -235,7 +239,7 @@ export const definePromotion=async(id,amount,duration)=>{
     body: JSON.stringify({courseID:id,amount:amount,duration:duration,token:localStorage.getItem("token")})
 })
 const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -253,7 +257,7 @@ export const definePromotion2=async(id,amount)=>{
     body: JSON.stringify({courseID:id,amount:amount})
 })
 const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -272,7 +276,7 @@ export const addNewSubToCourse=async(courseid,subtitle,hours)=>{
     
 })
 const j=await result.json();
-if(j.includes("jwt")){
+if(String(j).includes("jwt")){
 
     alert("you must login first")
     window.location.href="/login"
@@ -290,7 +294,7 @@ export const deleteSubTitle=async (title,id)=>{
     }    
 })
 const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -304,7 +308,7 @@ const j=await result.json();
 export const getinstructorTraineeDetails = async(id) =>{
     const result = await fetch(`http://localhost:8000/instructor/getinstructorTraineeDetails/${id}`)
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -347,7 +351,7 @@ export const updateSubtitle=async(id,oldtitle,title,hours,link,desc)=>{
     }    
 })
 const j=await result.json();
-if(j.includes("jwt")){
+if(String(j).includes("jwt")){
 
     alert("you must login first")
     window.location.href="/login"
@@ -365,7 +369,7 @@ export const salaryPerMonth=async(month,year)=>{
     }
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -386,7 +390,7 @@ export const addReport=async(courseId,reporttype,details)=>{
 export const getAllReport=async()=>{
     const result=await fetch(`http://localhost:8000/trainee/myReports/${localStorage.getItem("token")}`)
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -403,7 +407,7 @@ export const followupReport=async(question,id)=>{
     }
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -424,7 +428,7 @@ export const createExercise=async(questions,choices,courseid,title,answers)=>{
 
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -444,7 +448,7 @@ export const updateExercise=async(questions,choices,courseid,title,answers,excer
 
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -461,7 +465,7 @@ export const updateCoursePrice=async(price,id)=>{
     }
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -479,7 +483,7 @@ export const updateCourseSummary=async(Summary,id)=>{
     })
 
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -499,7 +503,7 @@ export const DeleteCourse=async(id)=>{
     })
 
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -518,7 +522,7 @@ export const PublishCourse=async(id)=>{
     })
 
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -549,7 +553,7 @@ export const closeCourse=async(courseid)=>{
     }
     })
     const j=await result.json();
-    if(j.includes("jwt")){
+    if(String(j).includes("jwt")){
 
         alert("you must login first")
         window.location.href="/login"
@@ -570,7 +574,7 @@ export const SwitchToTrainee=async()=>{
     })
     const j=await result.json();
     
-    if(j.includes("jwt")){
+    if(String(j).includes("jwt")){
 
         alert("you must login first")
         window.location.href="/login"

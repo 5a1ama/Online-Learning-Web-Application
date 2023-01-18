@@ -24,9 +24,12 @@ export function TraineeProfile(){
                     alert("login as trainee first")
                     navigate("/login")
                 }
-            }catch{
-
-            }
+            }catch(err){
+                if(err.message.includes("jwt")){
+                    alert("login as Trainee first")
+                    navigate("/login")
+                }
+              }
         }else{
             alert("login as Trainee first")
             navigate("/login")
@@ -115,6 +118,16 @@ export function TraineeProfile(){
             setFirst(1)
         }
     }
+    useEffect(()=>{
+        const x=setInterval(()=>{
+          
+          if((Trainee.length=="")){
+            window.location.reload();
+          }
+        },1000)
+        clearInterval(x)
+
+       })
 
 
     intial()    

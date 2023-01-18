@@ -57,7 +57,15 @@ function CourseVideo() {
     }
     handleOldNotes();
   });
-
+  useEffect(()=>{
+    const x=setInterval(()=>{
+      
+      if((Oldnotes==" ")){
+        window.location.reload();
+      }
+    },1000)
+    clearInterval(x);
+   })
 
   return (
     <div className ="CourseVideo">

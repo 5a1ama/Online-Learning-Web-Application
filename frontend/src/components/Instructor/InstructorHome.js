@@ -39,8 +39,11 @@ export function InstructorHome(){
                     alert("login as instructor first")
                     navigate("/login")
                 }
-            }catch{
-
+            }catch(err){
+              if(err.message.includes("jwt")){
+                  alert("login as Instructor first")
+                  navigate("/login")
+              }
             }
         }else{
             alert("login as instructor first")
@@ -100,6 +103,16 @@ export function InstructorHome(){
       navigate("/Login");
       
      }
+     useEffect(()=>{
+      const x=setInterval(()=>{
+        
+        if((Course.length==0 || instructor=="")){
+          window.location.reload();
+        }
+      },1000)
+      clearInterval(x)
+
+     })
     return(
 <div className = "divcenter">
    

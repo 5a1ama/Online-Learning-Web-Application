@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Navbar from '../navbar/Navbar';
 import "../Instructor/InstructorProfile.css"
 import { getInstructorDetails, getinstructorTraineeDetails, updateInstructorEmail, updateInstructorName, updateInstructorPass, updateInstructorSpec } from '../../API/InstructorAPI';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -41,8 +41,11 @@ export function TraineeViewInstructor(){
                 alert("login as trainee first")
                   navigate("/login")
               }
-          }catch{
-
+          }catch(err){
+            if(err.message.includes("jwt")){
+                alert("login as Trainee first")
+                navigate("/login")
+            }
           }
       }else{
           alert("login as Trainee first")
@@ -79,6 +82,15 @@ export function TraineeViewInstructor(){
         setMyRate(await myInstructorRate(location.state))
     }
     getDetails()
+    useEffect(()=>{
+      const x=setInterval(()=>{
+        
+        if((instructor.length=="")){
+          window.location.reload();
+        }
+      },1000)
+      clearInterval(x)
+     })
     React.useEffect(()=>{
       getRate()
 

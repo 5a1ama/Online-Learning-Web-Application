@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllReport, getAllRequestAccess, grantAccess, rejectAccess, updateFollowUpState, updateReportState } from "../../API/AdminAPI";
 import { verify } from "../../API/LoginAPI";
@@ -43,9 +43,12 @@ export function AdminViewRequests(){
                     alert("login as Admin first")
                     navigate("/login")
                 }
-            }catch{
-  
-            }
+            }catch(err){
+                if(err.message.includes("jwt")){
+                    alert("login as Admin first")
+                    navigate("/login")
+                }
+              }
         }else{
             alert("login as Admin first")
             navigate("/login")
@@ -56,6 +59,15 @@ export function AdminViewRequests(){
         getAllRequests();
         setFirst2(1)
     }
+    useEffect(()=>{
+        const x=setInterval(()=>{
+          
+          if((requests.length==0)){
+            window.location.reload();
+          }
+        },1000)
+        clearInterval(x);
+       })
     return(
         <div>
         <Navbar admin={true} items={["Home","Control Panel","Reports"]} select="" nav={["/AdminHome","/AdminControlPanel","/AdminReports"]} scroll={["","",""]}  handleCountryNumber={()=>{} }  />

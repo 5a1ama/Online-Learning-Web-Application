@@ -58,7 +58,7 @@ router.post("/verifyToken",function(req,res){
     
         }
         catch(err){
-                throw new Error("aaa")
+                throw new Error(err.message)
             
         }
     
@@ -77,8 +77,8 @@ router.post("/selectCountry/:x/:token",function(req,res){
             user.country=country;
             const token=jwt.sign(user,process.env.ACCESSTOKEN);
             res.json(token)
-            }catch{
-                res.json("error")
+            }catch(err){
+                res.json(err.message)
             }
             
         }else{
@@ -158,8 +158,8 @@ router.get("/sendEmailAttach/:token/:courseName",async function(req,res){
         }
     });
     res.json("ok");
-    }catch{
-        res.json("error");
+    }catch(err){
+        res.json(err.message);
     }
     
 })

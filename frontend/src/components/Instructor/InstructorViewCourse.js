@@ -63,7 +63,12 @@ import Subtitle from './../courses/subtitles/Subtitle';
                         navigate("/login")
                     }
                 }
-                catch{}
+                catch(err){
+                    if(err.message.includes("jwt")){
+                        alert("login as Instructor first")
+                        navigate("/login")
+                    }
+                  }
             }else{
                 alert("login as instructor first")
                 navigate("/login")
@@ -104,8 +109,11 @@ import Subtitle from './../courses/subtitles/Subtitle';
 
             
             if(location.state && new Date()<new Date(duration)){
-                const x=await definePromotion(location.state.id,discountamount,duration)
-                await getDetails();
+                const x=definePromotion(location.state.id,discountamount,duration)
+                x.catch(()=>{
+                    handleAddDiscount();
+                })
+                //await getDetails();
                 setShowDiscountDiv(false);
                 refreshPage();
             }else{
@@ -120,16 +128,21 @@ import Subtitle from './../courses/subtitles/Subtitle';
 
         const handleDelete=async(title)=>{
             if(location.state){
-                
-                const x=await deleteSubTitle(title,location.state.id)
+                var title=title
+                const x=deleteSubTitle(title,location.state.id)
+                x.catch(()=>{
+                    handleDelete(title);
+                })
                 await getDetails();
             }
         }
 
         const handleEdit=async(oldtitle,title,hours,link,desc)=>{
             if(location.state){
-
-                const x=await updateSubtitle(location.state.id,oldtitle,title,hours,link,desc)
+                const x=updateSubtitle(location.state.id,oldtitle,title,hours,link,desc)
+                x.catch(()=>{
+                    handleEdit(oldtitle,title,hours,link,desc)
+                })
                 await getDetails();
             }
         }
@@ -164,7 +177,10 @@ import Subtitle from './../courses/subtitles/Subtitle';
     const handleAddNewSub =async()=>{
             if(location.state){
                 
-                const x=await addNewSubToCourse(location.state.id,Sub,hours)
+                const x=addNewSubToCourse(location.state.id,Sub,hours)
+                x.catch(()=>{
+                    handleAddNewSub()
+                })
                 setSubHoursChecked(true)
                 await getDetails();
                 
@@ -172,9 +188,15 @@ import Subtitle from './../courses/subtitles/Subtitle';
         }
 
     const handleAddPrevVid=async()=>{
-        setFirst(0)
-        await uploadCourseVideo(location.state.id,prevVidLink)
-        await getDetails();
+        //setFirst(0)
+        const x=uploadCourseVideo(location.state.id,prevVidLink)
+        x.catch(async()=>{
+            //alert("again")
+             handleAddPrevVid();
+        })
+        //await getDetails();
+        //navigate("/InstrutorViewCourse",{state:{}})
+        window.location.reload();
         }
 
         const [details,setDetails] = useState([]);
@@ -214,13 +236,27 @@ import Subtitle from './../courses/subtitles/Subtitle';
             }
             getdetails();
         })
-    
+        useEffect(()=>{
+            const x=setInterval(()=>{
+              
+              if((details.length==0)){
+                window.location.reload();
+              }
+            },1000)
+            clearInterval(x)
+
+           })
       
 
 
         const handleSubmitVid = async(sub)=>{
-                const x= await uploadSubtitleVideo(location.state.id,addedVideoLink,sub,vidDescription);
-               await getDetails();
+                var y=sub;
+                const x= uploadSubtitleVideo(location.state.id,addedVideoLink,sub,vidDescription);
+                x.catch(()=>{
+                    handleSubmitVid(y);
+                })
+                
+                //await getDetails();
             
         }
       
@@ -293,7 +329,10 @@ import Subtitle from './../courses/subtitles/Subtitle';
         setIssueWords(event.target.value)
     }
     const handleSubmitReport = async ()=>{
-        await addReport(location.state.id,issueType,issuewords)
+        const x= addReport(location.state.id,issueType,issuewords)
+        x.catch(()=>{
+            handleSubmitReport();
+        })
         setShowReportDiv(false)
     }
 
@@ -330,7 +369,10 @@ import Subtitle from './../courses/subtitles/Subtitle';
         
     }
     const handleSubmitPrice = async()=>{
-        const x = await updateCoursePrice(price/fares[chosenCountry],location.state.id);
+        const x = updateCoursePrice(price/fares[chosenCountry],location.state.id);
+        x.catch(()=>{
+            handleSubmitPrice();
+        })
         setShowPriceDiv(false);
     }
 
@@ -370,10 +412,14 @@ import Subtitle from './../courses/subtitles/Subtitle';
 
    const handleSubmitSummary = async ()=>{
     await SummaryAddition();
+    
     setAddSummaryDiv(false);    
 }
     const SummaryAddition = async()=>{
-        const z = await updateCourseSummary(summary,location.state.id);
+        const z = updateCourseSummary(summary,location.state.id);
+        z.catch(()=>{
+            SummaryAddition();
+        })
 
     }
    const deleteSummary = async () => {
@@ -382,7 +428,10 @@ import Subtitle from './../courses/subtitles/Subtitle';
     // refreshPage();
     }
     const SummaryDeletion = async()=>{
-        const zz = await updateCourseSummary(" ",location.state.id);
+        const zz =  updateCourseSummary(" ",location.state.id);
+        zz.catch(()=>{
+            SummaryDeletion();
+        })
 
     }
    
@@ -392,13 +441,21 @@ import Subtitle from './../courses/subtitles/Subtitle';
         setEditPreveiw(!editPreview);
     }
     const handleDeletePreview =async()=>{
+        //setFirst(0)
+        const x=uploadCourseVideo(location.state.id,"")
         setPrevVidLink("");
-        setFirst(0)
-        await uploadCourseVideo(location.state.id,prevVidLink)
+        x.catch(()=>{
+            handleDeletePreview()
+        })
+
+        window.location.reload()
         getDetails();
     }
     const handleDeleteCourse = async()=>{
-        const x = await DeleteCourse(location.state.id);
+        const x = DeleteCourse(location.state.id);
+        x.catch(()=>{
+            handleDeleteCourse();
+        })
         navigate('/InstructorCourses')        
     }
  

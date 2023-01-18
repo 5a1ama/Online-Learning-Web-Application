@@ -4,12 +4,16 @@ export const getTraineeCourses= async(token)=>{
     
     var result = await fetch(`http://localhost:8000/Trainee/TraineeMyCourse/${token}`)
     var j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
 
-        }else{
+        }else if(String(j).toLowerCase().includes("failed to fetch")){
+            alert("11")
+            
+        }
+        else{
           return j
 
         }
@@ -19,11 +23,14 @@ export const getTraineeCourses= async(token)=>{
 export const getTraineeDetails=async()=>{
     var result =await fetch(`http://localhost:8000/Trainee/Details/${localStorage.getItem("token")}`)
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
 
+        }else if(String(j).toLowerCase().includes("failed to fetch")){
+            alert("11")
+            
         }else{
           return j
 
@@ -34,7 +41,7 @@ export const FilterMyCourses=async(min,max,subject)=>{
     if(subject != ""){
         const result=await fetch(`http://localhost:8000/Trainee/FilterMyCourse/${localStorage.getItem("token")}/${min}/${max}/${subject}`)
         const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -46,7 +53,7 @@ export const FilterMyCourses=async(min,max,subject)=>{
     }else{
         const result=await fetch(`http://localhost:8000/Trainee/FilterMyCourse/${localStorage.getItem("token")}/${min}/${max}/-1`)
         const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -61,7 +68,7 @@ export const FilterMyCourses=async(min,max,subject)=>{
 export const searchMyCourses=async(search)=>{
     const result=await fetch(`http://localhost:8000/Trainee/searchMyCourse/${search}/${localStorage.getItem("token")}`)
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -78,7 +85,7 @@ export const updateTraineeName=async(name)=>{
     }
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -96,7 +103,7 @@ export const updateTraineeEmail=async(name)=>{
     }
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -114,7 +121,7 @@ export const updateTraineePass=async(oldPass,pass)=>{
     }
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -127,7 +134,7 @@ export const updateTraineePass=async(oldPass,pass)=>{
 export const rateInstructor=async(instId,rate)=>{
     var result=await fetch(`http://localhost:8000/trainee/rateInstructor/${rate}/${instId}/${localStorage.getItem("token")}`)
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -140,7 +147,7 @@ export const rateInstructor=async(instId,rate)=>{
 export const rateCourse=async(courseId,rate)=>{
     var result=await fetch(`http://localhost:8000/trainee/rateCourse/${rate}/${courseId}/${localStorage.getItem("token")}`)
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -153,7 +160,7 @@ export const rateCourse=async(courseId,rate)=>{
 export const myInstructorRate = async(ratedID)=>{
     var result = await fetch(`http://localhost:8000/trainee/myInstructorRate/${ratedID}/${localStorage.getItem('token')}`)
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -167,7 +174,7 @@ export const myInstructorRate = async(ratedID)=>{
 export const myCourseRate = async(ratedID)=>{
     var result = await fetch(`http://localhost:8000/trainee/myCourseRate/${ratedID}/${localStorage.getItem('token')}`)
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -189,7 +196,7 @@ export const addCreditCard=async(cardNumber,cardHolder,cardCvv,cardDate)=>{
         })
       })
       const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -202,7 +209,7 @@ export const addCreditCard=async(cardNumber,cardHolder,cardCvv,cardDate)=>{
 export const getAllCards=async()=>{
     const result=await fetch(`http://localhost:8000/trainee/myCards/${localStorage.getItem("token")}`)
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -220,7 +227,7 @@ export const deleteCard=async(cardNumber)=>{
         },
       })
       const j=await result.json();
-      if(j.includes("jwt")){
+      if(String(j).includes("jwt")){
 
           alert("you must login first")
           window.location.href="/login"
@@ -233,7 +240,7 @@ export const deleteCard=async(cardNumber)=>{
 export const getTraineeCourseProg=async(courseId)=>{
     const result=await fetch(`http://localhost:8000/trainee/courseProgress/${localStorage.getItem("token")}/${courseId}`)
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -251,7 +258,7 @@ export const addNotes=async(id,title,notes)=>{
     }
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -305,7 +312,7 @@ export const getRefund=async(traineeId,id)=>{
     }
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -322,7 +329,7 @@ export const rejectMyRefund=async(traineeId,id)=>{
     }
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -348,7 +355,7 @@ export const alreadyUnenrollRequested=async(courseid)=>{
 export const showWallet=async()=>{
     const result=await fetch(`http://localhost:8000/trainee/viewWallet/${localStorage.getItem("token")}`);
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -365,7 +372,7 @@ export const requestAccessToCourse=async(courseid)=>{
     }
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -384,7 +391,7 @@ export const solveExcersice=async(courseid,excerId,answers)=>{
     }
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -401,7 +408,7 @@ export const addReviewToCourse=async(courseId,review)=>{
     }
     })
     const j=await result.json();
-    if(j.includes("jwt")){
+    if(String(j).includes("jwt")){
 
         alert("you must login first")
         window.location.href="/login"
@@ -418,7 +425,7 @@ export const addReviewToInst=async(instId,review)=>{
     }
     })
     const j=await result.json();
-    if(j.includes("jwt")){
+    if(String(j).includes("jwt")){
 
         alert("you must login first")
         window.location.href="/login"
@@ -431,7 +438,7 @@ export const addReviewToInst=async(instId,review)=>{
 export const getMyCompletedExce=async()=>{
     const result=await fetch(`http://localhost:8000/trainee/myCompleted/${localStorage.getItem("token")}`)
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -445,7 +452,7 @@ export const getMyCompletedExce=async()=>{
 export const getMyExcerciseSolution=async(excerId,courseId)=>{
     const result=await fetch(`http://localhost:8000/trainee/mySolutions/${excerId}/${courseId}/${localStorage.getItem("token")}`)
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -458,7 +465,7 @@ export const getMyExcerciseSolution=async(excerId,courseId)=>{
 export const getExcerciseSolution=async(id)=>{
     const result=await fetch(`http://localhost:8000/Trainee/excerciseSolution/${id}`);
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -472,7 +479,7 @@ export const getExcerciseSolution=async(id)=>{
 export const getExcerciseQuestions=async(id)=>{
     const result=await fetch(`http://localhost:8000/Trainee/excerciseQuestions/${id}`)
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -485,7 +492,7 @@ export const getExcerciseQuestions=async(id)=>{
 export const getExcerciseChoices=async(id)=>{
     const result=await fetch(`http://localhost:8000/Trainee/excerciseChoices/${id}`)
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -498,7 +505,7 @@ export const getExcerciseChoices=async(id)=>{
 export const getTraineeNotes =async(id,sub)=>{
     const result=await fetch(`http://localhost:8000/trainee/myNotes/${id}/${sub}/${localStorage.getItem("token")}`);
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -511,7 +518,7 @@ export const getTraineeNotes =async(id,sub)=>{
 export const MyGrade=async(excerid)=>{
     const result=await fetch(`http://localhost:8000/trainee/myGrade/${excerid}/${localStorage.getItem("token")}`)
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -528,7 +535,7 @@ export const courseEnroll = async(courseId)=>{
     }
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -545,7 +552,7 @@ export const courseEnrollWallet = async(courseId)=>{
     }
     })
     const j=await result.json();
-        if(j.includes("jwt")){
+        if(String(j).includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"

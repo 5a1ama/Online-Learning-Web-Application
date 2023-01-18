@@ -115,8 +115,8 @@ router.post("/create/:token",function(req,res){
         })
         res.json(object)
     })
-    }catch{
-        res.json("error")
+    }catch(err){
+        res.json(err.message)
     }
     
 })
