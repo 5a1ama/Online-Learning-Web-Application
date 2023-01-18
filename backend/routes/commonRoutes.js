@@ -63,7 +63,7 @@ router.post("/verifyToken",function(req,res){
         }
     
     }else{
-        res.json("12")
+        res.json("guest")
 
     }
 
