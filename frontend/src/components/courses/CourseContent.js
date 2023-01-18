@@ -124,7 +124,9 @@ function CourseContent(props) {
     setType(await verify(localStorage.getItem("token")));
   }
   const handlePayWithWallet = async ()=>{
-      const x = await courseEnrollWallet(location.state.id);
+    const x = await courseEnrollWallet(location.state.id);
+    alert("the payment is succ.")
+   navigate("/CourseItems",{state:{id:location.state.id,View:"Overview"}})
       
   } 
 
@@ -161,7 +163,7 @@ function CourseContent(props) {
             </div>
         )
     } 
-    const [showAddCardToPay,setAddCardToPay] = useState(false);
+    const [showConfirmWalletPay,setShowConfirmWalletPay] = useState(false);
   
   const [first,setFirst] = useState(0);
   const location=useLocation();
@@ -428,7 +430,7 @@ getUser();
 
 
 
-                  <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} onClick={handlePayWithWallet} >
+                  <IconButton edge="end" aria-label="delete" sx={{color:"#658ADA"}} onClick={()=>setShowConfirmWalletPay(true)} >
                   <ArrowForwardIosIcon/>
                               </IconButton>
                 </ListItem>
@@ -453,10 +455,31 @@ getUser();
               <button className="paymentsOptionCancel" onClick={()=>setShowPaymentDiv(false)}>
                   Cancel
               </button>
+
+              
               
 
 
                       </div> </div>}
+
+                   {showConfirmWalletPay&& <div className='PaymentsOptionsDivShadow'>
+
+
+                      <div className='confirmingWalletPay'>
+                        <h2 className='confirmWalletPaylabel'>
+                          Pleas confirm Payment
+                        </h2>
+                        <button className='ConfirmWalletPay' onClick={handlePayWithWallet}>
+                          confirm
+                        </button>
+                        <button className='cancelWalletPay' onClick={()=>setShowConfirmWalletPay(false)}>
+                          Cancel
+                        </button>
+
+                      </div>
+
+                    </div>}
+
 
                       { showDivMyCards && <div className="MycardsToPay">
 
