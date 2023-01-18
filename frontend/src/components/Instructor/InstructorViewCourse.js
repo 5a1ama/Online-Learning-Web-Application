@@ -105,7 +105,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
             
             if(location.state && new Date()<new Date(duration)){
                 const x=await definePromotion(location.state.id,discountamount,duration)
-                // await getDetails();
+                await getDetails();
                 setShowDiscountDiv(false);
                 refreshPage();
             }else{
@@ -122,7 +122,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
             if(location.state){
                 
                 const x=await deleteSubTitle(title,location.state.id)
-                // await getDetails();
+                await getDetails();
             }
         }
 
@@ -130,7 +130,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
             if(location.state){
 
                 const x=await updateSubtitle(location.state.id,oldtitle,title,hours,link,desc)
-                // await getDetails();
+                await getDetails();
             }
         }
 
@@ -166,7 +166,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
                 
                 const x=await addNewSubToCourse(location.state.id,Sub,hours)
                 setSubHoursChecked(true)
-                // await getDetails();
+                await getDetails();
                 
             }
         }
@@ -174,7 +174,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
     const handleAddPrevVid=async()=>{
         setFirst(0)
         await uploadCourseVideo(location.state.id,prevVidLink)
-        // await getDetails();
+        await getDetails();
         }
 
         const [details,setDetails] = useState([]);
@@ -192,12 +192,15 @@ import Subtitle from './../courses/subtitles/Subtitle';
         
         const bottomRef = useRef(null);
 
-        useEffect(()=>{ 
-            if(location.state && first===0){
-                handleView(location.state.View)
-            }
+        // useEffect(()=>{ 
+        //     if(location.state && first===0){
+        //         handleView(location.state.View)
+        //     }
             
-        })
+        // })
+        useEffect(()=>{ 
+            handleView(location.state.View)
+            },[location.state.View])
 
         const getDetails = async () => {
             setDetails((await getCourseDetails(location.state.id)));
@@ -217,20 +220,20 @@ import Subtitle from './../courses/subtitles/Subtitle';
 
         const handleSubmitVid = async(sub)=>{
                 const x= await uploadSubtitleVideo(location.state.id,addedVideoLink,sub,vidDescription);
-                alert("loading");
-            //    await getDetails();
+
+               await getDetails();
             
         }
       
 
-        if(first===0 && location.state){
-            getDetails();
+        if(first===0 && location.state.View){
             if(view==="Syllabus"){
-                bottomRef.current?.scrollIntoView({behavior: 'smooth'});
-                
+                bottomRef.current && bottomRef.current.scrollIntoView({behavior: 'smooth'});   
             }
-        
         }
+        if(first==0)
+            getDetails();
+        
         
         const [instNames,setInstNames] = useState([])
 
@@ -393,7 +396,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
         setPrevVidLink("");
         setFirst(0)
         await uploadCourseVideo(location.state.id,prevVidLink)
-        // getDetails();
+        getDetails();
     }
     const handleDeleteCourse = async()=>{
         const x = await DeleteCourse(location.state.id);
@@ -404,7 +407,8 @@ import Subtitle from './../courses/subtitles/Subtitle';
         const handlePublish =async()=>{
             const x = await PublishCourse(location.state.id);
             if(x=="ok"){
-                navigate("/InstructorViewPublished",{state:{id:location.state.id,View:"Overview"}})
+                            navigate("/InstructorViewPublished",{state:{id:location.state.id,View:"Overview"}})
+
             }
         }
         

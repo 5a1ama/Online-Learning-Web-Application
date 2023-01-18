@@ -18,7 +18,7 @@ router.get("/allTitles",function(req,res){
 })
 router.get("/getMaxPrice", async function(req,res)
 {
-    var query= await Course.find({published:true,closed:false})
+    var query= await Course.find({})
     var max = 0;
     for (var i = 0 ; i<query.length; i++){
         if(query[i].price>max){

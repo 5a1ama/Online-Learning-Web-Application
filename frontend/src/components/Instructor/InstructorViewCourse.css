@@ -123,6 +123,7 @@
   background: rgba(0, 0,0, 0.5);
 }
 .buttonFady{
+  width:5px;
   background-color: transparent;
   width: auto;
 }
