@@ -48,7 +48,10 @@ import Subtitle from './../courses/subtitles/Subtitle';
     export function InstructorViewCourse() {
         const navigate=useNavigate();
         const location=useLocation();
-   
+        const refreshPage=()=>{
+            window.location.reload();
+          }
+
         const [first2,setFirst2]=useState(0);
         
         const begin=async()=>{
@@ -104,7 +107,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
                 const x=await definePromotion(location.state.id,discountamount,duration)
                 await getDetails();
                 setShowDiscountDiv(false);
-
+                refreshPage();
             }else{
                 alert("enter a future date")
             }
@@ -189,12 +192,15 @@ import Subtitle from './../courses/subtitles/Subtitle';
         
         const bottomRef = useRef(null);
 
-        useEffect(()=>{ 
-            if(location.state && first===0){
-                handleView(location.state.View)
-            }
+        // useEffect(()=>{ 
+        //     if(location.state && first===0){
+        //         handleView(location.state.View)
+        //     }
             
-        })
+        // })
+        useEffect(()=>{ 
+            handleView(location.state.View)
+            },[location.state.View])
 
         const getDetails = async () => {
             setDetails((await getCourseDetails(location.state.id)));
@@ -219,14 +225,14 @@ import Subtitle from './../courses/subtitles/Subtitle';
         }
       
 
-        if(first===0 && location.state){
-            getDetails();
+        if(first===0 && location.state.View){
             if(view==="Syllabus"){
-                bottomRef.current?.scrollIntoView({behavior: 'smooth'});
-                
+                bottomRef.current && bottomRef.current.scrollIntoView({behavior: 'smooth'});   
             }
-        
         }
+        if(first==0)
+            getDetails();
+        
         
         const [instNames,setInstNames] = useState([])
 
@@ -373,9 +379,10 @@ import Subtitle from './../courses/subtitles/Subtitle';
    const deleteSummary = async () => {
     setSummary("");
     await SummaryDeletion();
+    // refreshPage();
     }
     const SummaryDeletion = async()=>{
-        const z = await updateCourseSummary(" ",location.state.id);
+        const zz = await updateCourseSummary(" ",location.state.id);
 
     }
    
@@ -398,8 +405,12 @@ import Subtitle from './../courses/subtitles/Subtitle';
 
         const handlePublish =async()=>{
             const x = await PublishCourse(location.state.id);
-            navigate("/InstructorViewPublished",{state:{id:location.state.id,View:"Overview"}})
+            if(x=="ok"){
+                            navigate("/InstructorViewPublished",{state:{id:location.state.id,View:"Overview"}})
+
+            }
         }
+        
    return (
         
        <div className="CourseItems">
@@ -616,7 +627,9 @@ import Subtitle from './../courses/subtitles/Subtitle';
                                                      <div className='flexRow'>
                                                         <h4>{details[0]&&details[0].summary}
                                                         <BiEdit onClick={handleAddsummaryDiv} className='Inst_BiEdit' size="20px"></BiEdit>
-                                                        <BsTrash size='20px' onClick={deleteSummary} className='Inst_BsTrash'></BsTrash>
+                                                        <button className='buttonFady' onClick={deleteSummary}>
+                                                            <BsTrash size='20px'  className='Inst_BsTrash'></BsTrash>
+                                                            </button>
                                                         </h4>
                                                      </div>
                                                     :

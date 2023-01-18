@@ -131,7 +131,7 @@ export function NewCourse(props) {
               <h3 >{props.course.title}</h3>
           </div>
           
-                { ( (user.job=="Admin"||user.job=="Instructor") || (props.Trainee&& props.Trainee!=="Corporate" && !props.Corporate) ) &&
+                { ( (user.job=="Admin"||user.job=="Instructor")|| (user.job=="Trainee"&& !props.Corporate) ) &&
                 <div className="NewCourse_Prices">
                  {
                  (props.course.discount.amount&&props.course.discount.amount>0

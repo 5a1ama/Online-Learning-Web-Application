@@ -125,13 +125,13 @@ function InstructorSubtitle(props) {
                 {addVideo && <div className='excerciseVideo'> 
                 <input onChange={props.handleAddVidChange} className="textBox_Instructor" placeholder='Enter video link'/> 
                 <input onChange={props.handleVidDescChange} className="textBox_Instructor" placeholder="Enter video Description"/>
-                 <Button onClick={()=>{props.handleSubmitVid(props.sub); setAddvideo(false)}} className="addVideo_Inst">Add Video</Button> 
+                 <button onClick={()=>{props.handleSubmitVid(props.sub); setAddvideo(false)}} className="addVideo_Inst">Add Video</button> 
                  </div>}
                  
                  {editVideo && <div className='excerciseVideo'> 
                 <input onChange={props.handleAddVidChange} className="textBox_Instructor"  defaultValue={props.sub.video}/> 
                 <input onChange={props.handleVidDescChange} className="textBox_Instructor"  defaultValue={props.sub.description}/>
-                 <Button onClick={()=>{props.handleSubmitVid(props.sub); handleEditVideo()}} className="addVideo_Inst">Edit Video</Button> 
+                 <button onClick={()=>{props.handleSubmitVid(props.sub); handleEditVideo()}} className="addVideo_Inst">Edit Video</button> 
                  </div>}
                  
                  {/* div for lessons  */}
