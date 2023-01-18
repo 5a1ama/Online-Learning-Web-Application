@@ -843,4 +843,5 @@ import Subtitle from './../courses/subtitles/Subtitle';
                                 
     )
     }
+}
 
