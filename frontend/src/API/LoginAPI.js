@@ -30,7 +30,7 @@ export const verify =async(token)=>{
         })
       })
       const j=await response.json();
-        if(j=="error"){
+        if(j.includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"

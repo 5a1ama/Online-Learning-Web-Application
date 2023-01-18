@@ -320,10 +320,15 @@ router.get("/courseProgress/:token/:id",tokenVerify,async function(req,res){
     
     for(var i=0;i<traineeCourse.length;i++){
         if(traineeCourse[i].id==courseId){
+            if(traineeCourse[i].progress)
             res.json(traineeCourse[i].progress)
+            else{
+                res.json("0")
+            }
             break;
         }
     }
+    //res.json("0")
 })
 router.get("/excerciseQuestions/:id",async function(req,res){
     var id=req.params.id;
@@ -452,7 +457,7 @@ router.post("/reportProblem/:token/:courseId/:reporttype/:details",tokenVerify,a
     var user=jwt.verify(token,process.env.ACCESSTOKEN);
     var object=new Reports({id:c+1,ReporterId:user.id,courseId:req.params.courseId,type:req.params.reporttype,details:req.params.details,})
     object.save(function(err,result){
-
+        res.json("ok")
     })
 
 })
@@ -638,7 +643,7 @@ router.post("/solveExcersice/:token/:courseid/:excerId/:answers",tokenVerify,asy
         if(courses[i].id==courseid){
             var total=(await Course.findOne({id:courseid})).excercises.length;
             progress=(completed.length*1.0/total)*100
-            if(trueAnswer>=(excerSol.length/2)){
+            if(trueAnswer>=(excerSol.length*1.0/2)){
                 courses[i].progress=Math.ceil(progress);       
             }
             break;
@@ -714,8 +719,8 @@ router.post("/enrollCourse/:courseID/:token",tokenVerify,async function(req,res)
     var trainee = await Trainee.findOne({id:user.id})
     var traineeCourses = trainee.courses
     traineeCourses.push({id:courseID,progress:0,enrollDate:new Date(),notes:[]})
-    await Course.findOneAndUpdate({id:courseID},{enrolledStudents:enrolledStudent})
     await Trainee.findOneAndUpdate({id:user.id},{courses:traineeCourses})
+    await Course.findOneAndUpdate({id:courseID},{enrolledStudents:enrolledStudent})
     res.json("ok")
 })
 router.post("/enrollCourseWallet/:courseID/:token",tokenVerify,async function(req,res){

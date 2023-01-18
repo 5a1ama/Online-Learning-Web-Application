@@ -110,7 +110,7 @@ export function AdminProfile(){
                 alert("Old password is not found")
             }
             else{
-                
+                alert("password changed successfully")
                 setShowDiv2(false)
             }
           

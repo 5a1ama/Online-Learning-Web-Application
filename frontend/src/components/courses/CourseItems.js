@@ -151,7 +151,8 @@ function CourseItems() {
         setIssueWords(event.target.value)
     }
     const handleSubmitReport = async()=>{
-        await addReport(location.state.id,issueType,issuewords)
+        const x=await addReport(location.state.id,issueType,issuewords)
+        alert("Sucessfully submited");
         setShowReportDiv(false)
     }
 
@@ -288,7 +289,7 @@ function CourseItems() {
                         </div>}
                 {reviewDiv && <div className='reportTraineeDivShadow'>
                     <div className='reportTraineeDiv'>
-                    <h1 className="ReportLabel"> Report</h1>
+                    <h1 className="ReportLabel"> Review</h1>
                             <Divider className='DividerCard' variant="middle"/>
 
                             <TextField

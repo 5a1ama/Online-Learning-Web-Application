@@ -107,7 +107,7 @@ export const createCourse=async (title,subtitle,hours,price,summary,subjects)=>{
   body:JSON.stringify({title:title,subtitles:subtitle,price:price,summary:summary,hours:hours,subject:subjects})
   });
   const j=await response.json();
-        if(j=="error"){
+        if(j.includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"

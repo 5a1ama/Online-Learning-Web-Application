@@ -10,7 +10,7 @@ export const selectCountry = async (country)=>{
         }
         });
         const j=await result.json();
-        if(j=="error"){
+        if(j.includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
@@ -41,7 +41,7 @@ export const sendEmail=async (to,link)=>{
 export const sendEmailAttach=async(title)=>{
     const result=await fetch(`http://localhost:8000/sendEmailAttach/${localStorage.getItem("token")}/${title}`);
     const j=await result.json();
-        if(j=="error"){
+        if(j.includes("jwt")){
 
             alert("you must login first")
             window.location.href="/login"
