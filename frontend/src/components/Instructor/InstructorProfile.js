@@ -127,11 +127,11 @@ export function InstructorProfile(){
         }
         else{
             const x=await updateInstructorPass(oldPass,newPass)
-            if(x=="error"){
+            if(x=="wrong password"){
                 alert("Old password is not found")
             }
             else{
-                
+                alert("password changed successfully")
                 setShowDiv2(false)
             }
           

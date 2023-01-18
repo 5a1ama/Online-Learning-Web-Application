@@ -218,7 +218,6 @@ import Subtitle from './../courses/subtitles/Subtitle';
 
         const handleSubmitVid = async(sub)=>{
                 const x= await uploadSubtitleVideo(location.state.id,addedVideoLink,sub,vidDescription);
-
                await getDetails();
             
         }
