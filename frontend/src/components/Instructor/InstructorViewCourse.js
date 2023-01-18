@@ -172,21 +172,20 @@ import Subtitle from './../courses/subtitles/Subtitle';
     const HandleSubCheck=()=>{
         setSubChecked(true);
     }
-    const[SubHoursChecked,setSubHoursChecked]=useState();
+    const[SubHoursChecked,setSubHoursChecked]=useState(false);
 
     const handleAddNewSub =async()=>{
             if(location.state){
-                
                 const x=addNewSubToCourse(location.state.id,Sub,hours)
                 x.catch(()=>{
                     handleAddNewSub()
                 })
-                setSubHoursChecked(true)
+                //setSubHoursChecked(true)
                 await getDetails();
                 
             
         }
-
+    }
     const handleAddPrevVid=async()=>{
         //setFirst(0)
         const x=uploadCourseVideo(location.state.id,prevVidLink)
@@ -843,5 +842,4 @@ import Subtitle from './../courses/subtitles/Subtitle';
                                 
     )
     }
-}
 
