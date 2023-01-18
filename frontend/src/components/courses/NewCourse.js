@@ -114,13 +114,13 @@ export function NewCourse(props) {
         <div className={courseDetails? "newCourse-After-Content":"newCourse-content"}>
       
          { 
-       (props.course.discount.amount>0) &&((user.job=="Admin"||user.job=="Instructor") || (props.Trainee&& props.Trainee!=="Corporate" && !props.Corporate) ) && 
+       (props.course.discount.amount>0) &&((user=="guest"||user.job=="Admin"||user.job=="Instructor") ||  (user.job=="Trainee"&& !props.Corporate) ) && 
        <div className="DivForDiscount_NewCourse">
         <CountdownTimer targetDate={dateTimeAfterThreeDays} id={props.course.id}/>
         </div>
          }
          { 
-       (((user.job=="Admin"||user.job=="Instructor") || (props.Trainee&& props.Trainee!=="Corporate" && !props.Corporate) )&&
+       (((user=="guest"||user.job=="Admin"||user.job=="Instructor") || (user.job=="Trainee"&& !props.Corporate) )&&
         (props.course.discount.amount>0) && 
         (expiredTime>0) 
          
@@ -131,7 +131,7 @@ export function NewCourse(props) {
               <h3 >{props.course.title}</h3>
           </div>
           
-                { ( (user.job=="Admin"||user.job=="Instructor")|| (user.job=="Trainee"&& !props.Corporate) ) &&
+                { ( (user=="guest"||user.job=="Admin"||user.job=="Instructor")|| (user.job=="Trainee"&& !props.Corporate) ) &&
                 <div className="NewCourse_Prices">
                  {
                  (props.course.discount.amount&&props.course.discount.amount>0
@@ -164,7 +164,7 @@ export function NewCourse(props) {
           
 
         <div className={courseDetails?"Large-NewData-NewCourse":"nonNewData-NewCourse"}>
-              <div class="vl2"></div>
+              <div className="vl2"></div>
             <div style={{display:"flex" , flexDirection:"row"}}>
 
             <h3 style={{fontSize:"20px"}}>Course Content :</h3>
@@ -180,11 +180,11 @@ export function NewCourse(props) {
             <div className="Course-subTitles">
                  {props.course.subtitles.map((sub,i)=>  <h4 > {sub.hours} Hours</h4>)}
             </div>
-            <div class="vl"></div>
+            <div className="vl"></div>
 
 
             <div className="Course-subTitles">
-                  {props.course.excercises.map((exe,i)=>  <h4 >Exercise {exe} </h4>)}
+                  {props.course.excercises.map((exe,i)=>  <h4>Exercise {exe} </h4>)}
             </div>
             
         </div>

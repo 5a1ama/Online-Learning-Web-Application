@@ -172,15 +172,11 @@ router.get("/CourseItems/:id",async function(req,res)
 )
 router.get("/InstructorOfCourse/:InstId",async function(req,res)
 {
-    var InstId = req.params.InstId;
-    var query = Instructor.find({id:InstId});
-    query.exec(function(err,result){
-        if(result.length!=0){
-            res.json({name:result[0].Name});
-        }
-
+    var instId = req.params.InstId;
+    var query = await Instructor.findOne({id:instId});
+            res.json({name:query.Name});
         
-    })
+    
     }
 )
 

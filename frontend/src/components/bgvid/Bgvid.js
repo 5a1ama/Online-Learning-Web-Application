@@ -21,7 +21,7 @@ function Bgvid() {
     }
 
   return (
-    <div Name='home' className="Bgvid">
+    <div name='home' className="Bgvid">
      
         <video autoPlay loop muted id='video'>
         <source src={video} type='video/mp4' />

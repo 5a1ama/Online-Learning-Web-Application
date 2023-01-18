@@ -226,7 +226,9 @@ const handleAddPrevVid=()=>{
             
         }
         getdetails();
-    })
+        handleInstNames();
+
+    },[location.state.id,handleInstNames])
 
   
 
@@ -286,7 +288,6 @@ const handleAddPrevVid=()=>{
             setreviews(location.state)
         },[location.state])
         
-        handleInstNames();
     
 const Issues = [
 {
@@ -615,8 +616,8 @@ return (
                                                 
                                             {(details[0] && details[0].previewVideo)
                                             && <iframe  src={details[0]&&details[0].previewVideo} className="CourseItems_SecondPart_View_OverView_video" 
-                                            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen></iframe>
+                                            title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay;fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen></iframe>
                                             }
                                         
                                         {addDiscount && <div style={{position:"relative",left:"110%",top:"-25vw", width:"30%",display: "flex",flexDirection: "column",rowGap: "0.5vw"}}>

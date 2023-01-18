@@ -205,10 +205,10 @@ const j=await result.json();
 export const uploadSubtitleVideo=async(id,link,subtitle,description)=>{
     var link2 = link
     var description2 = description
-    if(link2==""){
+    if(link==""){
         link2 = "-1" 
     }
-    if(description2==""){
+    if(description==""){
         description2="-1"
     }
     const result=await fetch(`http://localhost:8000/instructor/uploadSubtitleVideo`,{method: "POST",
@@ -479,6 +479,7 @@ export const updateCourseSummary=async(Summary,id)=>{
     var result=await fetch(`http://localhost:8000/instructor/UpdateSummary/${Summary}/${id}/${localStorage.getItem("token")}`,{method: "POST",
     headers: {
         "Content-type": "application/json; charset=UTF-8"
+
     }
     })
 

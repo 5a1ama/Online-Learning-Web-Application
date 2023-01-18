@@ -184,7 +184,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
                 setSubHoursChecked(true)
                 await getDetails();
                 
-            }
+            
         }
 
     const handleAddPrevVid=async()=>{
@@ -684,9 +684,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
                                                      <div className='flexRow'>
                                                         <h4>{details[0]&&details[0].summary}
                                                         <BiEdit onClick={handleAddsummaryDiv} className='Inst_BiEdit' size="20px"></BiEdit>
-                                                        <button className='buttonFady' onClick={deleteSummary}>
-                                                            <BsTrash size='20px'  className='Inst_BsTrash'></BsTrash>
-                                                            </button>
+                                                            <BsTrash size='20px' onClick={deleteSummary} className='Inst_BsTrash'></BsTrash>
                                                         </h4>
                                                      </div>
                                                     :
@@ -766,7 +764,7 @@ import Subtitle from './../courses/subtitles/Subtitle';
                                             {addSub
                                             ? 
                                                 <>
-                                                <input type="text" className='newSubtitleInput' placeholder="Enter new Subtitle" onChange={handleSub} onClick={()=>{setSubChecked(false);SubHoursChecked(false)}}></input>
+                                                <input type="text" className='newSubtitleInput' placeholder="Enter new Subtitle" onChange={handleSub} onClick={()=>{setSubChecked(false);setSubHoursChecked(false)}}></input>
                                                 <IoCheckmarkDoneCircleOutline className="Instructor_checkmark1" color={subChecked?"rgb(0,200,0)":"grey"} size="25px" onClick={HandleSubCheck}></IoCheckmarkDoneCircleOutline>                                                                     
                                                 
                                                     {subChecked?

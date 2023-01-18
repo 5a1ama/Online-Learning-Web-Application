@@ -99,7 +99,7 @@ function Navbar(props) {
         setInstructor(await getInstructorDetails());
     }
 
-    if (props.inst){
+    if (props.inst&&!instructor){
         getInst();    
     }
     

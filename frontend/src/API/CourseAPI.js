@@ -22,7 +22,11 @@ export const getAllCourses=async()=>{
   //   return j
   // }
   export const getCourseDetails=async (id)=>{
-    const result=await fetch(`http://localhost:8000/course/CourseItems/${id}`)
+    const result=await fetch(`http://localhost:8000/course/CourseItems/${id}`,{method: "GET",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+    })
     const j=await result.json();
     return j
   }
@@ -121,7 +125,7 @@ export const createCourse=async (title,subtitle,hours,price,summary,subjects)=>{
 export const GetInstructorName = async(InstId)=>{
   const result=await fetch(`http://localhost:8000/course/InstructorOfCourse/${InstId}`)
   const j=await result.json();
-  return j
+  return await j
 }    
 export const isEnrolled = async(CourseId,UserId)=>{
   const result=await fetch(`http://localhost:8000/course/CourseisEnrolled/${CourseId}/${UserId}`)
