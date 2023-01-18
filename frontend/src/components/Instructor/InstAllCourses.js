@@ -86,13 +86,11 @@ export function InstAllCourses(){
     }
     useEffect(()=>{
       const x=setInterval(()=>{
-        
         if((courses.length==0)){
           window.location.reload();
         }
       },1000)
       clearInterval(x)
-
      })
     const[rate,setRate]=useState([]);
 
