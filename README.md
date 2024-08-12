@@ -48,9 +48,10 @@
 <br></br>
 
 # Credits :
-### We are a team of 5 members :
+### We are a team of 6 members :
 ### Ziad Ayman Hegazy ,  https://github.com/ZiadHegazy
 ### Hazem Khaled Elhegazy , https://github.com/HazemHegazy1
 ### Peter Lotfy Ghatas , https://github.com/peterghatas
+### Mohamed Ahmed Salama , https://github.com/5a1ama
 ### Omar Atef Abdelrazek , https://github.com/OmarAteff
 ### Hala Mohamed Mansour , https://github.com/HalaMansour02
